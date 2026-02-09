@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+
+# Environment variables (segredos)
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data local
+**/data/input/*
+**/data/output/*
+!**/data/input/.gitkeep
+!**/data/output/.gitkeep
+
+# Storage (tokens JWT locais)
+storage/
+
+# Scripts auxiliares de debug/teste
+*.sql

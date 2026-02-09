@@ -1,0 +1,476 @@
+"""Router com endpoints para o fluxo de extração de assuntos via webscraping"""
+
+from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import func
+from typing import Optional
+from math import ceil
+from loguru import logger
+
+from ..database import get_db, get_pg_db
+from ..database.models import QuestaoModel, DisciplinaModel, AnoModel
+from ..database.pg_models import QuestaoAssuntoModel
+from ..services.enunciado_cleaner import tratar_enunciado
+from .extracao_schemas import (
+    QuestaoAssuntoSchema,
+    QuestaoAssuntoListResponse,
+    ProximaQuestaoResponse,
+    SalvarAssuntoRequest,
+    SalvarAssuntoResponse,
+    ExtracaoStatsResponse,
+    LimparEnunciadoRequest,
+    LimparEnunciadoResponse,
+)
+
+router = APIRouter(prefix="/extracao", tags=["Extração de Assuntos"])
+
+# ========================
+# LIMPAR ENUNCIADO COM IA
+# ========================
+_SYSTEM_PROMPT_LIMPAR = """Você é um extrator de enunciados de questões de provas.
+O texto que você receberá é um enunciado de questão de prova que pode conter:
+- Referências bibliográficas (autor, título, ano, editora, disponível em, acesso em)
+- Nomes de obras de arte, livros, poemas
+- Créditos de imagens
+- Trechos de textos de apoio (fragmentos literários, históricos, jornais)
+- O enunciado real da questão (o comando que o aluno deve responder)
+
+Sua tarefa:
+1. Identifique o ENUNCIADO REAL da questão (o comando/pergunta que o aluno deve responder)
+2. Se houver um texto de apoio importante que dá contexto à questão, inclua-o também
+3. REMOVA: referências bibliográficas, créditos, "Disponível em", "Acesso em", nomes de autores isolados
+
+Responda APENAS com o texto limpo, sem explicações."""
+
+
+@router.post(
+    "/limpar-enunciado",
+    response_model=LimparEnunciadoResponse,
+    summary="🧹 Limpar enunciado com IA",
+)
+async def limpar_enunciado(request: LimparEnunciadoRequest):
+    """
+    Usa OpenAI para extrair apenas o enunciado real de questões
+    que contêm referências de imagens, créditos e lixo textual.
+    """
+    from ..services.openai_client import OpenAIClient
+
+    if not request.enunciado or len(request.enunciado.strip()) < 10:
+        return LimparEnunciadoResponse(
+            enunciado_limpo=request.enunciado or "",
+            sucesso=False,
+            mensagem="Enunciado muito curto",
+        )
+
+    try:
+        client = OpenAIClient()
+        result = client.create_completion(
+            messages=[
+                {"role": "system", "content": _SYSTEM_PROMPT_LIMPAR},
+                {"role": "user", "content": request.enunciado},
+            ],
+            max_tokens=300,
+            temperature=0.0,
+        )
+        enunciado_limpo = result.get("content", "").strip()
+
+        if not enunciado_limpo:
+            return LimparEnunciadoResponse(
+                enunciado_limpo=request.enunciado,
+                sucesso=False,
+                mensagem="IA retornou vazio",
+            )
+
+        logger.debug(
+            f"Enunciado limpo pela IA: {len(request.enunciado)} -> {len(enunciado_limpo)} chars"
+        )
+        return LimparEnunciadoResponse(
+            enunciado_limpo=enunciado_limpo,
+            sucesso=True,
+        )
+
+    except Exception as e:
+        logger.error(f"Erro ao limpar enunciado com IA: {e}")
+        return LimparEnunciadoResponse(
+            enunciado_limpo=request.enunciado,
+            sucesso=False,
+            mensagem=str(e),
+        )
+
+
+# ========================
+# PRÓXIMA QUESTÃO PARA EXTRAIR
+# ========================
+@router.get(
+    "/proxima",
+    response_model=ProximaQuestaoResponse,
+    summary="🔍 Próxima questão para extração",
+    response_description="Retorna a próxima questão não processada para webscraping",
+)
+async def proxima_questao(
+    disciplina_id: int = Query(..., description="ID da disciplina para filtrar"),
+    ano_id: Optional[int] = Query(
+        3, description="ID do ano/nível (3=Ensino Médio). None=todos"
+    ),
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+):
+    """
+    Retorna a próxima questão que ainda não teve extração de assunto tentada.
+
+    **Fluxo:**
+    1. Busca questões da disciplina no MySQL
+    2. Filtra as que já possuem registro no PostgreSQL (já tentadas)
+    3. Pega a primeira pendente em ordem de ID
+    4. Trata o enunciado (remove HTML, decodifica entities)
+    5. Se contém imagem, registra automaticamente como "pulada" e busca a próxima
+    6. Retorna a questão com enunciado limpo pronto para webscraping
+
+    - **disciplina_id**: ID da disciplina (obrigatório)
+    """
+    # Busca IDs já processados no PostgreSQL (banco separado)
+    ids_processados_rows = pg_db.query(QuestaoAssuntoModel.questao_id).all()
+    ids_processados = {row[0] for row in ids_processados_rows}
+
+    MAX_SKIP = 100  # Limite de pulos por enunciado vazio
+
+    for _ in range(MAX_SKIP):
+        # Busca próxima questão não processada no MySQL
+        query = (
+            db.query(QuestaoModel)
+            .options(
+                joinedload(QuestaoModel.disciplina),
+                joinedload(QuestaoModel.ano),
+            )
+            .filter(QuestaoModel.disciplina_id == disciplina_id)
+        )
+
+        # Filtra por ano/nível (default: Ensino Médio)
+        if ano_id is not None:
+            query = query.filter(QuestaoModel.ano_id == ano_id)
+
+        # Filtra os já processados (se houver)
+        if ids_processados:
+            query = query.filter(~QuestaoModel.id.in_(ids_processados))
+
+        questao = query.order_by(QuestaoModel.id).first()
+
+        if not questao:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Nenhuma questão pendente para disciplina_id={disciplina_id}",
+            )
+
+        # Trata o enunciado (remove <img>, limpa HTML)
+        enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(
+            questao.enunciado
+        )
+
+        disc_nome = questao.disciplina.descricao if questao.disciplina else None
+        ano_nome = questao.ano.descricao if questao.ano else None
+
+        if motivo_erro:
+            # Enunciado vazio após tratamento (só imagem sem texto, ou vazio)
+            # Registra como pulada e continua para a próxima
+            registro = QuestaoAssuntoModel(
+                questao_id=questao.id,
+                questao_id_str=questao.questao_id,
+                disciplina_id=questao.disciplina_id,
+                disciplina_nome=disc_nome,
+                classificacoes=[],
+                enunciado_original=questao.enunciado,
+                enunciado_tratado=enunciado_tratado or None,
+                extracao_feita=False,
+                contem_imagem=contem_imagem,
+                motivo_erro=motivo_erro,
+            )
+            pg_db.add(registro)
+            pg_db.commit()
+            ids_processados.add(questao.id)
+            logger.info(f"Questão {questao.id} pulada: {motivo_erro}")
+            continue
+
+        # Questão válida (pode ter imagem mas tem texto suficiente)
+        return ProximaQuestaoResponse(
+            id=questao.id,
+            questao_id=questao.questao_id,
+            enunciado_original=questao.enunciado,
+            enunciado_tratado=enunciado_tratado,
+            disciplina_id=questao.disciplina_id,
+            disciplina_nome=disc_nome,
+            ano_id=questao.ano_id,
+            ano_nome=ano_nome,
+            contem_imagem=contem_imagem,
+            motivo_erro=None,
+        )
+
+    raise HTTPException(
+        status_code=404,
+        detail=f"Puladas {MAX_SKIP} questões consecutivas sem texto. Verifique a disciplina {disciplina_id}.",
+    )
+
+
+# ========================
+# SALVAR RESULTADO DA EXTRAÇÃO
+# ========================
+@router.post(
+    "/salvar",
+    response_model=SalvarAssuntoResponse,
+    summary="💾 Salvar resultado da extração",
+    response_description="Salva as classificações de assunto extraídas via webscraping",
+)
+async def salvar_extracao(
+    request: SalvarAssuntoRequest,
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+):
+    """
+    Salva o resultado da extração de assunto de uma questão.
+
+    **Exemplo de request:**
+    ```json
+    {
+        "questao_id": 1,
+        "classificacoes": [
+            "História > Brasil > Sistema Colonial > Relações Socioeconômicas e Culturais",
+            "História > Brasil > Escravidão"
+        ]
+    }
+    ```
+    """
+    # Verifica se a questão existe no MySQL
+    questao = (
+        db.query(QuestaoModel)
+        .options(joinedload(QuestaoModel.disciplina))
+        .filter(QuestaoModel.id == request.questao_id)
+        .first()
+    )
+    if not questao:
+        raise HTTPException(status_code=404, detail="Questão não encontrada no banco")
+
+    # Verifica se já existe registro no PostgreSQL
+    existente = (
+        pg_db.query(QuestaoAssuntoModel)
+        .filter(QuestaoAssuntoModel.questao_id == request.questao_id)
+        .first()
+    )
+
+    disc_nome = questao.disciplina.descricao if questao.disciplina else None
+    enunciado_tratado, _, _ = tratar_enunciado(questao.enunciado)
+
+    # Se o agent enviou enunciado limpo pela IA, usar esse
+    if request.enunciado_tratado and len(request.enunciado_tratado.strip()) >= 20:
+        enunciado_tratado = request.enunciado_tratado
+
+    if existente:
+        # Atualiza o registro existente
+        existente.classificacoes = request.classificacoes
+        existente.extracao_feita = True
+        existente.motivo_erro = None
+        existente.enunciado_tratado = enunciado_tratado or existente.enunciado_tratado
+        if request.superpro_id:
+            existente.superpro_id = request.superpro_id
+        pg_db.commit()
+        logger.success(
+            f"Questão {request.questao_id} atualizada com {len(request.classificacoes)} classificações"
+        )
+    else:
+        # Cria novo registro
+        registro = QuestaoAssuntoModel(
+            questao_id=questao.id,
+            questao_id_str=questao.questao_id,
+            superpro_id=request.superpro_id,
+            disciplina_id=questao.disciplina_id,
+            disciplina_nome=disc_nome,
+            classificacoes=request.classificacoes,
+            enunciado_original=questao.enunciado,
+            enunciado_tratado=enunciado_tratado,
+            extracao_feita=True,
+            contem_imagem=False,
+            motivo_erro=None,
+        )
+        pg_db.add(registro)
+        pg_db.commit()
+        logger.success(
+            f"Questão {request.questao_id} salva com {len(request.classificacoes)} classificações"
+        )
+
+    return SalvarAssuntoResponse(
+        success=True,
+        questao_id=request.questao_id,
+        classificacoes=request.classificacoes,
+        message=f"Extração salva com {len(request.classificacoes)} classificação(ões)",
+    )
+
+
+# ========================
+# LISTAR ASSUNTOS EXTRAÍDOS
+# ========================
+@router.get(
+    "/assuntos",
+    response_model=QuestaoAssuntoListResponse,
+    summary="📋 Listar assuntos extraídos",
+)
+async def listar_assuntos(
+    page: int = Query(1, ge=1, description="Página"),
+    per_page: int = Query(20, ge=1, le=100, description="Itens por página"),
+    disciplina_id: Optional[int] = Query(None, description="Filtrar por disciplina"),
+    apenas_extraidas: bool = Query(
+        False, description="Apenas com extração bem sucedida"
+    ),
+    apenas_com_imagem: bool = Query(False, description="Apenas questões com imagem"),
+    pg_db: Session = Depends(get_pg_db),
+):
+    """Lista os registros de assuntos com paginação e filtros."""
+    query = pg_db.query(QuestaoAssuntoModel)
+
+    if disciplina_id:
+        query = query.filter(QuestaoAssuntoModel.disciplina_id == disciplina_id)
+    if apenas_extraidas:
+        query = query.filter(QuestaoAssuntoModel.extracao_feita == True)
+    if apenas_com_imagem:
+        query = query.filter(QuestaoAssuntoModel.contem_imagem == True)
+
+    total = query.count()
+    pages = ceil(total / per_page) if total > 0 else 1
+    offset = (page - 1) * per_page
+
+    registros = (
+        query.order_by(QuestaoAssuntoModel.id).offset(offset).limit(per_page).all()
+    )
+
+    return QuestaoAssuntoListResponse(
+        data=[QuestaoAssuntoSchema.model_validate(r) for r in registros],
+        total=total,
+        page=page,
+        per_page=per_page,
+        pages=pages,
+    )
+
+
+# ========================
+# BUSCAR ASSUNTO POR QUESTÃO
+# ========================
+@router.get(
+    "/assuntos/{questao_id}",
+    response_model=QuestaoAssuntoSchema,
+    summary="🔎 Buscar assunto de uma questão",
+)
+async def buscar_assunto(questao_id: int, pg_db: Session = Depends(get_pg_db)):
+    """Retorna o registro de assunto de uma questão específica."""
+    registro = (
+        pg_db.query(QuestaoAssuntoModel)
+        .filter(QuestaoAssuntoModel.questao_id == questao_id)
+        .first()
+    )
+    if not registro:
+        raise HTTPException(
+            status_code=404, detail="Assunto não encontrado para esta questão"
+        )
+    return QuestaoAssuntoSchema.model_validate(registro)
+
+
+# ========================
+# ESTATÍSTICAS DE EXTRAÇÃO
+# ========================
+@router.get(
+    "/stats",
+    response_model=list[ExtracaoStatsResponse],
+    summary="📊 Estatísticas de extração",
+    response_description="Progresso da extração por disciplina",
+)
+async def estatisticas_extracao(
+    ano_id: Optional[int] = Query(
+        3, description="ID do ano/nível (3=Ensino Médio). None=todos"
+    ),
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+):
+    """
+    Retorna estatísticas detalhadas do progresso de extração
+    agrupadas por disciplina.
+    """
+    # Total de questões por disciplina no MySQL
+    disciplinas = db.query(DisciplinaModel).order_by(DisciplinaModel.id).all()
+
+    stats = []
+    for disc in disciplinas:
+        total_query = db.query(QuestaoModel).filter(
+            QuestaoModel.disciplina_id == disc.id
+        )
+        if ano_id is not None:
+            total_query = total_query.filter(QuestaoModel.ano_id == ano_id)
+        total = total_query.count()
+
+        extraidas = (
+            pg_db.query(QuestaoAssuntoModel)
+            .filter(
+                QuestaoAssuntoModel.disciplina_id == disc.id,
+                QuestaoAssuntoModel.extracao_feita == True,
+            )
+            .count()
+        )
+
+        com_imagem = (
+            pg_db.query(QuestaoAssuntoModel)
+            .filter(
+                QuestaoAssuntoModel.disciplina_id == disc.id,
+                QuestaoAssuntoModel.contem_imagem == True,
+            )
+            .count()
+        )
+
+        com_erro = (
+            pg_db.query(QuestaoAssuntoModel)
+            .filter(
+                QuestaoAssuntoModel.disciplina_id == disc.id,
+                QuestaoAssuntoModel.extracao_feita == False,
+                QuestaoAssuntoModel.contem_imagem == False,
+            )
+            .count()
+        )
+
+        processadas = extraidas + com_imagem + com_erro
+        pendentes = total - processadas
+        percentual = (processadas / total * 100) if total > 0 else 0
+
+        stats.append(
+            ExtracaoStatsResponse(
+                disciplina_id=disc.id,
+                disciplina_nome=disc.descricao,
+                total_questoes=total,
+                extraidas=extraidas,
+                com_imagem=com_imagem,
+                com_erro=com_erro,
+                pendentes=pendentes,
+                percentual_concluido=round(percentual, 2),
+            )
+        )
+
+    return stats
+
+
+# ========================
+# RESET - LIMPAR BANCO DE EXTRAÇÃO
+# ========================
+@router.delete(
+    "/reset",
+    summary="🗑️ Resetar banco de extração",
+    response_description="Remove todos os registros de extração do PostgreSQL",
+)
+async def reset_extracao(
+    pg_db: Session = Depends(get_pg_db),
+):
+    """
+    Remove TODOS os registros da tabela questao_assuntos no PostgreSQL.
+    Use com cuidado — essa operação é irreversível.
+    """
+    count = pg_db.query(QuestaoAssuntoModel).count()
+    pg_db.query(QuestaoAssuntoModel).delete()
+    pg_db.commit()
+    logger.warning(f"🗑️ RESET: {count} registros removidos de questao_assuntos")
+    return {
+        "success": True,
+        "deleted": count,
+        "message": f"{count} registros removidos",
+    }

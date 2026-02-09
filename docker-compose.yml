@@ -1,0 +1,88 @@
+version: "3.8"
+
+services:
+  # ── PostgreSQL ──────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: pluri-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PG_USER:-pluri}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-pluri123}
+      POSTGRES_DB: ${PG_NAME:-pluri_assuntos}
+    ports:
+      - "${PG_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-pluri}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── API de Classificação (FastAPI - porta 8000) ─────────────
+  api:
+    image: ghcr.io/thsethub/pluri-extracao/api:latest
+    container_name: pluri-api
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - api-logs:/app/logs
+      - api-data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    labels:
+      - "com.centurylinklabs.watchtower.scope=pluri"
+
+  # ── Webscraping Agent (Painel Web - porta 8501) ─────────────
+  webscraping:
+    image: ghcr.io/thsethub/pluri-extracao/webscraping:latest
+    container_name: pluri-webscraping
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - API_BASE_URL=http://api:8000
+      - HEADLESS=true
+    ports:
+      - "8501:8501"
+    volumes:
+      - ws-logs:/app/logs
+      - ws-storage:/app/storage
+    depends_on:
+      api:
+        condition: service_healthy
+    labels:
+      - "com.centurylinklabs.watchtower.scope=pluri"
+
+  # ── Watchtower (auto-update das imagens) ────────────────────
+  watchtower:
+    image: containrrr/watchtower
+    container_name: pluri-watchtower
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=300
+      - WATCHTOWER_LABEL_ENABLE=false
+      - WATCHTOWER_SCOPE=pluri
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.docker/config.json:/config.json:ro
+    command: --scope pluri --interval 300
+    labels:
+      - "com.centurylinklabs.watchtower.scope=pluri"
+
+volumes:
+  pgdata:
+  api-logs:
+  api-data:
+  ws-logs:
+  ws-storage:

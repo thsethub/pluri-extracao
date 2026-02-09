@@ -1,0 +1,96 @@
+{
+  "História": [
+    {
+      "id": "3a2d956d-bc60-4a88-a346-81066dd17a38",
+      "sigla": "",
+      "habilidade": "História da Arte Brasileira - Arte no Período Colonial",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "1b2cbbab-36ab-4bb1-85fe-6aaa6331f623",
+      "sigla": "",
+      "habilidade": "História da Arte Brasileira - Arte no Período Monárquico",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "1ad25f98-cfb5-4c4c-a812-0dbd204413c2",
+      "sigla": "",
+      "habilidade": "História da Arte Brasileira - Arte no Período Republicano",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "0891f9be-4a71-4732-ab10-158190c8059f",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Antiguidade",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "3982bfd0-37bd-4d9e-abf7-aed556ee68aa",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Arte Moderna",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "9a42c013-ea6a-4d26-a51a-6af6339fb639",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Arte Moderna Russa",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "e3fe079f-d8bb-4b05-8dce-6d14419614d2",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Arte na Idade Média",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "81402441-f7d8-49b7-9dcc-f4edf6c6bdbc",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Arte Norte-Americana",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "b3a8ed00-9be0-4e26-b90e-9e3d80b834d0",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Conceitos",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "dfa4f6b2-4596-4e86-b02f-e3699f0271a6",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Contextos",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "326707cb-8710-467c-aa28-26a4911826ef",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Período Pré-Moderno",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "cef8bd92-40be-496a-9498-086a34d2fd1a",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Renascimento",
+      "ano": "Ensino Médio"
+    },
+    {
+      "id": "7727c8b2-53af-4fe8-92b2-28f4d46156aa",
+      "sigla": "",
+      "habilidade": "História Geral da Arte - Vanguardas Modernas",
+      "ano": "Ensino Médio"
+    }
+  ],
+  "Matemática": [],
+  "Química": [],
+  "Física": [],
+  "Biologia": [],
+  "Geografia": [],
+  "Língua Portuguesa": [],
+  "Língua Inglesa": [],
+  "Filosofia": [],
+  "Sociologia": [],
+  "Artes": [],
+  "Educação Física": [],
+  "Ciências": [],
+  "Natureza e Sociedade": [],
+  "Espanhol": []
+}

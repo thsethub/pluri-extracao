@@ -1,0 +1,108 @@
+"""Schemas Pydantic para os endpoints de extração de assuntos"""
+
+from pydantic import BaseModel, Field
+from typing import List, Optional
+from datetime import datetime
+
+
+class QuestaoAssuntoSchema(BaseModel):
+    """Schema de um registro de assunto extraído"""
+
+    id: int
+    questao_id: int
+    questao_id_str: str
+    superpro_id: Optional[int] = None
+    disciplina_id: Optional[int] = None
+    disciplina_nome: Optional[str] = None
+    classificacoes: List[str] = []
+    enunciado_original: Optional[str] = None
+    enunciado_tratado: Optional[str] = None
+    extracao_feita: bool = False
+    contem_imagem: bool = False
+    motivo_erro: Optional[str] = None
+    created_at: Optional[datetime] = None
+
+    model_config = {"from_attributes": True}
+
+
+class QuestaoAssuntoListResponse(BaseModel):
+    data: List[QuestaoAssuntoSchema]
+    total: int
+    page: int
+    per_page: int
+    pages: int
+
+
+class ProximaQuestaoResponse(BaseModel):
+    """Response da próxima questão a ser extraída"""
+
+    id: int = Field(..., description="ID da questão no banco")
+    questao_id: str = Field(..., description="questao_id (string UUID)")
+    enunciado_original: Optional[str] = Field(None, description="Enunciado bruto")
+    enunciado_tratado: str = Field(..., description="Enunciado limpo (sem HTML)")
+    disciplina_id: Optional[int] = None
+    disciplina_nome: Optional[str] = None
+    ano_id: Optional[int] = None
+    ano_nome: Optional[str] = None
+    contem_imagem: bool = Field(False, description="Se contém imagem e foi pulada")
+    motivo_erro: Optional[str] = Field(
+        None, description="Motivo caso tenha sido pulada"
+    )
+
+    model_config = {"from_attributes": True}
+
+
+class SalvarAssuntoRequest(BaseModel):
+    """Request para salvar o resultado da extração de assunto"""
+
+    questao_id: int = Field(..., description="ID da questão no banco MySQL")
+    superpro_id: Optional[int] = Field(
+        None, description="ID da questão no SuperProfessor"
+    )
+    classificacoes: List[str] = Field(
+        ...,
+        description="Array de classificações extraídas. Ex: ['História > Brasil > Escravidão']",
+    )
+    enunciado_tratado: Optional[str] = Field(
+        None,
+        description="Enunciado limpo pela IA (sobrescreve o enunciado_tratado do banco)",
+    )
+
+
+class SalvarAssuntoResponse(BaseModel):
+    """Response após salvar a extração"""
+
+    success: bool
+    questao_id: int
+    classificacoes: List[str]
+    message: str
+
+
+class ExtracaoStatsResponse(BaseModel):
+    """Estatísticas de extração por disciplina"""
+
+    disciplina_id: Optional[int] = None
+    disciplina_nome: Optional[str] = None
+    total_questoes: int = 0
+    extraidas: int = 0
+    com_imagem: int = 0
+    com_erro: int = 0
+    pendentes: int = 0
+
+
+class LimparEnunciadoRequest(BaseModel):
+    """Request para limpar enunciado com imagem usando IA"""
+
+    enunciado: str = Field(
+        ...,
+        description="Enunciado bruto (já tratado de HTML, mas com lixo de referências de imagem)",
+    )
+
+
+class LimparEnunciadoResponse(BaseModel):
+    """Response com o enunciado limpo pela IA"""
+
+    enunciado_limpo: str = Field(..., description="Apenas o enunciado da questão")
+    sucesso: bool = True
+    mensagem: Optional[str] = None
+    percentual_concluido: float = 0.0
