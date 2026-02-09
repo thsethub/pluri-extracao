@@ -36,8 +36,8 @@ jobs:
         env:
           BUILDKIT_PROGRESS: plain
         with:
-          context: ./Agende de Classificação
-          file: ./Agende de Classificação/Dockerfile
+          context: ./agente-classificacao
+          file: ./agente-classificacao/Dockerfile
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.REPO }}/api:latest
