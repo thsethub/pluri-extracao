@@ -1,5 +1,5 @@
 # ── API de Classificação ──────────────────────────────────────
-FROM python:3.13-slim AS base
+FROM python:3.12-slim AS base
 
 # Evitar prompts interativos e bytecode solto
 ENV PYTHONDONTWRITEBYTECODE=1 \
