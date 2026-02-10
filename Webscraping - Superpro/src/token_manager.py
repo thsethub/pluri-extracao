@@ -101,8 +101,24 @@ class TokenManager:
         from playwright.async_api import async_playwright
         from .config import settings
 
+        email = settings.SUPERPRO_EMAIL
+        password = settings.SUPERPRO_PASSWORD
+        if not email or not password:
+            logger.error(
+                f"Credenciais não configuradas! SUPERPRO_EMAIL={'definido' if email else 'VAZIO'}, "
+                f"SUPERPRO_PASSWORD={'definido' if password else 'VAZIO'}"
+            )
+            raise RuntimeError("SUPERPRO_EMAIL e/ou SUPERPRO_PASSWORD não definidos")
+
+        logger.info(
+            f"Credenciais: email={email[:3]}***@***, headless={settings.HEADLESS}"
+        )
+
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=settings.HEADLESS)
+            browser = await p.chromium.launch(
+                headless=settings.HEADLESS,
+                args=["--no-sandbox", "--disable-dev-shm-usage"],
+            )
 
             # Tentar restaurar sessão existente
             if self.browser_state_file.exists():
@@ -141,13 +157,33 @@ class TokenManager:
 
             # Se não capturou token, fazer login
             if not captured_token:
-                logger.info("Fazendo login...")
+                logger.info(f"Fazendo login em {settings.LOGIN_URL}...")
                 await page.goto(settings.LOGIN_URL, wait_until="domcontentloaded")
-                await page.wait_for_timeout(2000)
+                logger.info(f"Página carregada. URL atual: {page.url}")
+
+                # Aguardar campo de email renderizar (SPA pode demorar)
+                try:
+                    await page.wait_for_selector(
+                        'input[type="email"]', state="visible", timeout=60000
+                    )
+                    logger.info("Campo de email encontrado")
+                except Exception:
+                    # Screenshot para diagnóstico
+                    screenshot_path = self.storage_dir / "login_error.png"
+                    await page.screenshot(path=str(screenshot_path), full_page=True)
+                    page_title = await page.title()
+                    logger.error(
+                        f"Campo de email não encontrado após 60s. "
+                        f"URL: {page.url} | Título: {page_title} | "
+                        f"Screenshot salvo em: {screenshot_path}"
+                    )
+                    await browser.close()
+                    raise RuntimeError("Página de login não carregou o formulário")
 
                 # Preencher credenciais
-                await page.fill('input[type="email"]', settings.SUPERPRO_EMAIL)
-                await page.fill('input[type="password"]', settings.SUPERPRO_PASSWORD)
+                await page.fill('input[type="email"]', email)
+                await page.fill('input[type="password"]', password)
+                logger.info("Credenciais preenchidas, submetendo...")
 
                 # Submeter
                 await page.click('button[type="submit"]')

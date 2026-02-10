@@ -66,10 +66,13 @@ services:
     image: ghcr.io/thsethub/pluri-extracao/webscraping:latest
     container_name: pluri-webscraping
     restart: unless-stopped
+    shm_size: "2gb"
     environment:
       - API_BASE_URL=http://api:8000
       - HEADLESS=true
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - SUPERPRO_EMAIL=${SUPERPRO_EMAIL}
+      - SUPERPRO_PASSWORD=${SUPERPRO_PASSWORD}
     ports:
       - "${WS_PORT:-8501}:8501"
     volumes:
