@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: ${PG_PASSWORD:-pluri123}
       POSTGRES_DB: ${PG_NAME:-pluri_assuntos}
     ports:
-      - "${PG_PORT:-5433}:5432"
+      - "${PG_PORT:-5434}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -25,9 +25,27 @@ services:
     image: ghcr.io/thsethub/pluri-extracao/api:latest
     container_name: pluri-api
     restart: unless-stopped
-    env_file: .env
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-3.5-turbo}
+      - OPENAI_MAX_TOKENS=${OPENAI_MAX_TOKENS:-500}
+      - OPENAI_TEMPERATURE=${OPENAI_TEMPERATURE:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - MAX_RETRIES=${MAX_RETRIES:-3}
+      - RETRY_DELAY=${RETRY_DELAY:-1}
+      - DISCIPLINES=${DISCIPLINES:-Artes,Biologia,Ciências,Educação Física,Espanhol,Filosofia,Física,Geografia,História,Língua Inglesa,Língua Portuguesa,Matemática,Natureza e Sociedade,Química,Sociologia}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME:-trieduc}
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_USER=${PG_USER:-pluri}
+      - PG_PASSWORD=${PG_PASSWORD:-pluri123}
+      - PG_NAME=${PG_NAME:-pluri_assuntos}
     ports:
-      - "8000:8000"
+      - "${API_PORT:-8989}:8000"
     volumes:
       - api-logs:/app/logs
       - api-data:/app/data
@@ -35,7 +53,7 @@ services:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -48,12 +66,12 @@ services:
     image: ghcr.io/thsethub/pluri-extracao/webscraping:latest
     container_name: pluri-webscraping
     restart: unless-stopped
-    env_file: .env
     environment:
       - API_BASE_URL=http://api:8000
       - HEADLESS=true
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
     ports:
-      - "8501:8501"
+      - "${WS_PORT:-8501}:8501"
     volumes:
       - ws-logs:/app/logs
       - ws-storage:/app/storage
@@ -75,7 +93,6 @@ services:
       - WATCHTOWER_SCOPE=pluri
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.docker/config.json:/config.json:ro
     command: --scope pluri --interval 300
     labels:
       - "com.centurylinklabs.watchtower.scope=pluri"

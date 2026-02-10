@@ -15,6 +15,8 @@ from collections import deque
 from datetime import datetime
 from pathlib import Path
 
+import os
+
 import httpx
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, StreamingResponse
@@ -32,7 +34,8 @@ _state = {
 }
 _logs: deque[str] = deque(maxlen=500)
 
-API_BASE = "http://localhost:8000"
+API_BASE = os.getenv("API_BASE_URL", "http://localhost:8000").rstrip("/")
+logger.info(f"API_BASE configurado: {API_BASE}")
 
 
 # ── Endpoints de dados (proxy para API local) ───────────────────────
@@ -203,11 +206,15 @@ def _read_output(proc: subprocess.Popen):
             line = line.rstrip()
             if line:
                 _logs.append(line)
+                # Exibir no stdout do container para visibilidade nos logs
+                print(line, flush=True)
     except Exception:
         pass
     finally:
         proc.wait()
-        _logs.append(f"[{_now()}] Processo encerrado (exit code: {proc.returncode})")
+        msg = f"[{_now()}] Processo encerrado (exit code: {proc.returncode})"
+        _logs.append(msg)
+        print(msg, flush=True)
         _state["running"] = False
         _state["process"] = None
 
@@ -640,5 +647,6 @@ init();
 if __name__ == "__main__":
     import uvicorn
 
-    print("🌐 Interface disponível em: http://localhost:8501")
-    uvicorn.run(app, host="0.0.0.0", port=8501, log_level="warning")
+    print(f"🌐 Interface disponível em: http://localhost:8501")
+    print(f"📡 API backend: {API_BASE}")
+    uvicorn.run(app, host="0.0.0.0", port=8501, log_level="info")
