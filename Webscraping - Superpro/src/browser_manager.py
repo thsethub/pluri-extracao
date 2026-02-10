@@ -85,6 +85,15 @@ class BrowserManager:
 
         self._page = await self._context.new_page()
 
+        # Stealth: remover marcadores de automação
+        await self._page.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+            Object.defineProperty(navigator, 'languages', { get: () => ['pt-BR', 'pt', 'en-US', 'en'] });
+            Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+            window.chrome = { runtime: {} };
+            Object.defineProperty(navigator, 'maxTouchPoints', { get: () => 0 });
+        """)
+
         # Intercepta e bloqueia recursos pesados (imagens, fontes, analytics)
         await self._page.route(
             "**/*.{png,jpg,jpeg,gif,svg,webp,woff,woff2,ttf,eot}",
@@ -122,19 +131,18 @@ class BrowserManager:
                 settings.LOGIN_URL, wait_until="domcontentloaded", timeout=60000
             )
 
-            # Aguarda o formulário de login carregar (Next.js pode demorar)
+            # Aguarda o formulário de login carregar (SPA pode demorar)
             await self._page.wait_for_selector(
-                'input[type="email"], input[name="email"], input[placeholder*="mail"]',
-                timeout=30000,
+                'input[name="login"]',
+                state="visible",
+                timeout=60000,
             )
 
             # Fecha cookie banner se existir
             await self._dismiss_cookie_banner()
 
             # Preenche o email
-            email_input = self._page.locator(
-                'input[type="email"], input[name="email"], input[placeholder*="mail"]'
-            ).first
+            email_input = self._page.locator('input[name="login"]').first
             await email_input.click()
             await asyncio.sleep(0.3)
             await email_input.fill(settings.SUPERPRO_EMAIL)
@@ -144,7 +152,7 @@ class BrowserManager:
             await asyncio.sleep(random.uniform(0.5, 1.5))
 
             # Preenche a senha
-            password_input = self._page.locator('input[type="password"]').first
+            password_input = self._page.locator('input[name="senha"]').first
             await password_input.click()
             await asyncio.sleep(0.3)
             await password_input.fill(settings.SUPERPRO_PASSWORD)

@@ -117,22 +117,47 @@ class TokenManager:
         async with async_playwright() as p:
             browser = await p.chromium.launch(
                 headless=settings.HEADLESS,
-                args=["--no-sandbox", "--disable-dev-shm-usage"],
+                args=[
+                    "--no-sandbox",
+                    "--disable-dev-shm-usage",
+                    "--disable-blink-features=AutomationControlled",
+                ],
             )
+
+            # Contexto com fingerprint realista para evitar reCAPTCHA
+            context_opts = {
+                "viewport": {"width": 1366, "height": 768},
+                "user_agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/125.0.0.0 Safari/537.36"
+                ),
+                "locale": "pt-BR",
+                "timezone_id": "America/Sao_Paulo",
+            }
 
             # Tentar restaurar sessão existente
             if self.browser_state_file.exists():
                 try:
-                    context = await browser.new_context(
-                        storage_state=str(self.browser_state_file)
-                    )
+                    context_opts["storage_state"] = str(self.browser_state_file)
+                    context = await browser.new_context(**context_opts)
                     logger.info("Sessão existente restaurada")
                 except Exception:
-                    context = await browser.new_context()
+                    del context_opts["storage_state"]
+                    context = await browser.new_context(**context_opts)
             else:
-                context = await browser.new_context()
+                context = await browser.new_context(**context_opts)
 
             page = await context.new_page()
+
+            # Stealth: remover marcadores de automação
+            await page.add_init_script("""
+                Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+                Object.defineProperty(navigator, 'languages', { get: () => ['pt-BR', 'pt', 'en-US', 'en'] });
+                Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+                window.chrome = { runtime: {} };
+                Object.defineProperty(navigator, 'maxTouchPoints', { get: () => 0 });
+            """)
 
             # Interceptar response do validate-token para capturar JWT
             captured_token = {}
@@ -149,52 +174,103 @@ class TokenManager:
 
             page.on("response", on_response)
 
-            # Navegar para a home (com sessão deve redirecionar logado)
-            await page.goto(
-                "https://interno.superprofessor.com.br", wait_until="domcontentloaded"
-            )
-            await page.wait_for_timeout(3000)
+            # Se temos sessão salva, testar restauração
+            if self.browser_state_file.exists():
+                await page.goto(
+                    "https://interno.superprofessor.com.br",
+                    wait_until="domcontentloaded",
+                )
+                await page.wait_for_timeout(5000)
 
-            # Se não capturou token, fazer login
+            # Se não capturou token via sessão, fazer login
             if not captured_token:
                 logger.info(f"Fazendo login em {settings.LOGIN_URL}...")
-                await page.goto(settings.LOGIN_URL, wait_until="domcontentloaded")
+                await page.goto(
+                    settings.LOGIN_URL,
+                    wait_until="domcontentloaded",
+                    timeout=60000,
+                )
                 logger.info(f"Página carregada. URL atual: {page.url}")
 
-                # Aguardar campo de email renderizar (SPA pode demorar)
+                # Aguardar campo de login renderizar (SPA pode demorar)
                 try:
                     await page.wait_for_selector(
-                        'input[type="email"]', state="visible", timeout=60000
+                        'input[name="login"]', state="visible", timeout=60000
                     )
-                    logger.info("Campo de email encontrado")
+                    logger.info("Campo de login encontrado")
                 except Exception:
-                    # Screenshot para diagnóstico
                     screenshot_path = self.storage_dir / "login_error.png"
                     await page.screenshot(path=str(screenshot_path), full_page=True)
                     page_title = await page.title()
                     logger.error(
-                        f"Campo de email não encontrado após 60s. "
+                        f"Campo de login não encontrado após 60s. "
                         f"URL: {page.url} | Título: {page_title} | "
                         f"Screenshot salvo em: {screenshot_path}"
                     )
                     await browser.close()
                     raise RuntimeError("Página de login não carregou o formulário")
 
-                # Preencher credenciais
-                await page.fill('input[type="email"]', email)
-                await page.fill('input[type="password"]', password)
+                # Fechar banner de cookies se existir
+                try:
+                    accept_btn = page.locator(
+                        'button:has-text("Aceitar"), button:has-text("Aceito")'
+                    ).first
+                    if await accept_btn.is_visible(timeout=3000):
+                        await accept_btn.click()
+                        logger.debug("Banner de cookies fechado")
+                        await page.wait_for_timeout(500)
+                except Exception:
+                    pass
+
+                # Preencher credenciais com comportamento humanizado
+                import asyncio as _asyncio
+                import random
+
+                email_input = page.locator('input[name="login"]').first
+                await email_input.click()
+                await _asyncio.sleep(random.uniform(0.3, 0.8))
+                await email_input.fill(email)
+
+                await _asyncio.sleep(random.uniform(0.5, 1.0))
+
+                password_input = page.locator('input[name="senha"]').first
+                await password_input.click()
+                await _asyncio.sleep(random.uniform(0.3, 0.8))
+                await password_input.fill(password)
+
                 logger.info("Credenciais preenchidas, submetendo...")
+                await _asyncio.sleep(random.uniform(0.5, 1.0))
 
                 # Submeter
                 await page.click('button[type="submit"]')
+
+                # Aguardar redirecionamento pós-login (URL sai do /acesso-professor)
+                try:
+                    await page.wait_for_url(
+                        lambda url: "acesso-professor" not in url,
+                        timeout=30000,
+                    )
+                    logger.info(f"Redirecionado para: {page.url}")
+                except Exception:
+                    # Screenshot para ver o que aconteceu
+                    screenshot_path = self.storage_dir / "login_submit_error.png"
+                    await page.screenshot(path=str(screenshot_path), full_page=True)
+                    logger.warning(
+                        f"URL não mudou após submit. URL: {page.url} | "
+                        f"Screenshot: {screenshot_path}"
+                    )
+
+                # Aguardar interceptação do token
                 await page.wait_for_timeout(5000)
 
-                # Navegar para montar-prova para garantir que o token é emitido
-                await page.goto(
-                    "https://interno.superprofessor.com.br/montar-prova",
-                    wait_until="domcontentloaded",
-                )
-                await page.wait_for_timeout(3000)
+                # Se ainda não capturou, navegar para interno para forçar validate-token
+                if not captured_token:
+                    logger.info("Token não capturado, navegando para interno...")
+                    await page.goto(
+                        "https://interno.superprofessor.com.br",
+                        wait_until="domcontentloaded",
+                    )
+                    await page.wait_for_timeout(5000)
 
             if captured_token:
                 self.save_token(captured_token)
