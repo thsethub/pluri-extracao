@@ -33,25 +33,19 @@ def _is_server_error(exc: BaseException) -> bool:
 
 def _sanitize_text_for_api(texto: str) -> str:
     """
-    Normalização GENERALISTA de Unicode antes de enviar à API.
+    Normalização de texto antes de enviar à API do SuperProfessor.
 
-    Usa NFKC (Compatibility Decomposition + Canonical Composition) que
-    resolve automaticamente centenas de caracteres problemáticos:
-      - Ligaturas tipográficas:  ﬁ→fi  ﬂ→fl  ﬃ→ffi  ﬄ→ffl  ﬀ→ff
-      - Fullwidth chars:  Ａ→A  １→1  （→(
-      - Sobrescrito/subscrito:  ²→2  ₃→3  ⁿ→n
-      - Frações:  ½→1⁄2  ¼→1⁄4
-      - Romanos compat.:  ⅰ→i  Ⅳ→IV
-      - Símbolos:  ™→TM  ℃→°C  №→No
-      - E qualquer outro mapeamento de compatibilidade Unicode
-
-    Depois normaliza espaços, traços, aspas e remove controle invisível.
+    Inclui:
+      - NFKC: ligaturas, fullwidth, sobrescrito, frações, etc.
+      - Espaços, traços, aspas Unicode → ASCII
+      - Combining marks → removidos
+      - Notação matemática (DÂB→DAB, DĈB→DCB, macron, símbolos, gregas)
+      - Catch-all: remove qualquer char fora do range Latin-1
     """
     if not texto:
         return texto
 
     # 1. NFKC: decomposição de compatibilidade + composição canônica
-    #    Resolve ligaturas, fullwidth, sobrescrito, etc. automaticamente
     texto = unicodedata.normalize("NFKC", texto)
 
     # 2. Espaços Unicode remanescentes -> espaço ASCII
@@ -76,8 +70,7 @@ def _sanitize_text_for_api(texto: str) -> str:
         r"[\u2022\u2023\u2043\u204c\u204d\u25aa\u25cf\u25e6\u2619]", "-", texto
     )
 
-    # 7. Remover combining marks decorativos (sublinhado, sobrelinhas, etc.)
-    #    Range U+0300-U+036F = combining diacritical marks
+    # 7. Remover combining marks decorativos
     texto = re.sub(r"[\u0300-\u036f]", "", texto)
 
     # 8. Remover caracteres de controle invisíveis (exceto \n \r \t)
@@ -86,11 +79,77 @@ def _sanitize_text_for_api(texto: str) -> str:
     # 9. Remover variation selectors e outros zero-width
     texto = re.sub(r"[\ufe00-\ufe0f\u200c-\u200f\u202a-\u202e]", "", texto)
 
-    # 10. CATCH-ALL: remover qualquer char exótico remanescente
-    #     Mantém: ASCII (U+0020-U+007E), Latin-1 Supplement (U+00A0-U+00FF),
-    #     Latin Extended-A/B (U+0100-U+024F), e espaços/newlines (\n\r\t)
-    #     Remove: Cirílico, Grego, símbolos matemáticos, etc.
-    texto = re.sub(r"[^\x09\x0a\x0d\x20-\x7e\u00a0-\u024f]", "", texto)
+    # ── 10. Limpeza de notação matemática ──────────────────────────────
+    # 10a. Letras maiúsculas precompostas com diacríticos em contexto
+    #      matemático (ex: DÂB → DAB, DĈB → DCB)
+    def _strip_diacritics(char: str) -> str:
+        decomposed = unicodedata.normalize("NFD", char)
+        return "".join(c for c in decomposed if unicodedata.category(c) != "Mn")
+
+    texto = re.sub(
+        r"(?<=[A-Z])([À-ÖØ-ÞĀ-Ŀƀ-Ɏ])(?=[A-Z\b\s=\d])",
+        lambda m: _strip_diacritics(m.group(1)),
+        texto,
+    )
+
+    # 10b. Macron/overline (¯ U+00AF, ‾ U+203E)
+    texto = re.sub(r"[\u00af\u203e]", "", texto)
+
+    # 10c. Símbolos matemáticos comuns → texto ou remoção
+    _MATH_REPLACEMENTS = {
+        "√": "raiz de ",
+        "∑": "soma",
+        "∫": "integral",
+        "∞": "infinito",
+        "≤": "<=",
+        "≥": ">=",
+        "≠": "!=",
+        "≈": "~=",
+        "±": "+/-",
+        "×": "x",
+        "÷": "/",
+        "∈": "pertence a",
+        "∉": "nao pertence a",
+        "⊂": "contido em",
+        "⊃": "contem",
+        "∩": "intersecao",
+        "∪": "uniao",
+        "∅": "vazio",
+        "∀": "para todo",
+        "∃": "existe",
+        "∆": "delta",
+        "∂": "d",
+    }
+    for symbol, replacement in _MATH_REPLACEMENTS.items():
+        texto = texto.replace(symbol, replacement)
+
+    # 10d. Letras gregas → nome
+    _GREEK_MAP = {
+        "α": "alfa", "β": "beta", "γ": "gama", "δ": "delta",
+        "ε": "epsilon", "ζ": "zeta", "η": "eta", "θ": "teta",
+        "ι": "iota", "κ": "kappa", "λ": "lambda", "μ": "mi",
+        "ν": "ni", "ξ": "csi", "π": "pi", "ρ": "ro",
+        "σ": "sigma", "τ": "tau", "υ": "ipsilon", "φ": "fi",
+        "χ": "qui", "ψ": "psi", "ω": "omega",
+        "Α": "Alfa", "Β": "Beta", "Γ": "Gama", "Δ": "Delta",
+        "Θ": "Teta", "Λ": "Lambda", "Π": "Pi", "Σ": "Sigma",
+        "Φ": "Fi", "Ψ": "Psi", "Ω": "Omega",
+    }
+    for greek, name in _GREEK_MAP.items():
+        texto = texto.replace(greek, name)
+
+    # 10e. Setas Unicode → texto
+    texto = re.sub(r"[→⇒⟶⟹➜➝➞]", "->", texto)
+    texto = re.sub(r"[←⇐⟵⟸]", "<-", texto)
+    texto = re.sub(r"[↔⇔⟷⟺]", "<->", texto)
+
+    # 10f. Sobrescritos/subscritos numéricos remanescentes
+    _SUPER_MAP = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
+    _SUB_MAP = str.maketrans("₀₁₂₃₄₅₆₇₈₉", "0123456789")
+    texto = texto.translate(_SUPER_MAP).translate(_SUB_MAP)
+
+    # 11. CATCH-ALL: remover qualquer char fora de ASCII + Latin-1
+    texto = re.sub(r"[^\x09\x0a\x0d\x20-\x7e\u00a0-\u00ff]", "", texto)
 
     return texto
 

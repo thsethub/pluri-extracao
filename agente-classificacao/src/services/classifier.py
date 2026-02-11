@@ -31,6 +31,10 @@ class QuestionClassifier:
         system_message = """Você é um especialista em classificação de questões educacionais.
 Sua tarefa é analisar a questão fornecida e classificá-la nas categorias mais apropriadas.
 
+IMPORTANTE sobre caracteres especiais:
+- O texto pode conter caracteres Unicode corrompidos, acentos estranhos em letras maiúsculas (ex: DÂB, DĈB), símbolos matemáticos ou caracteres malformados.
+- IGNORE esses caracteres e foque no conteúdo semântico da questão para classificá-la corretamente.
+
 Responda APENAS com um JSON no seguinte formato:
 {
   "categories": ["categoria1", "categoria2"],
@@ -73,6 +77,10 @@ Classifique esta questão."""
         """
         system_message = """Você é um especialista em classificação de questões educacionais.
 Sua tarefa é analisar a questão fornecida e identificar a habilidade mais apropriada.
+
+IMPORTANTE sobre caracteres especiais:
+- O texto pode conter caracteres Unicode corrompidos, acentos estranhos em letras maiúsculas (ex: DÂB, DĈB), símbolos matemáticos ou caracteres malformados.
+- IGNORE esses caracteres e foque no conteúdo semântico da questão para classificá-la corretamente.
 
 Responda APENAS com um JSON no seguinte formato:
 {

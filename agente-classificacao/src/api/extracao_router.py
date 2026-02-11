@@ -20,6 +20,8 @@ from .extracao_schemas import (
     ExtracaoStatsResponse,
     LimparEnunciadoRequest,
     LimparEnunciadoResponse,
+    TratarEnunciadoRequest,
+    TratarEnunciadoResponse,
 )
 
 router = APIRouter(prefix="/extracao", tags=["Extração de Assuntos"])
@@ -34,11 +36,18 @@ O texto que você receberá é um enunciado de questão de prova que pode conter
 - Créditos de imagens
 - Trechos de textos de apoio (fragmentos literários, históricos, jornais)
 - O enunciado real da questão (o comando que o aluno deve responder)
+- Caracteres especiais ou Unicode corrompidos (acentos duplicados, símbolos matemáticos, letras gregas, macron, overline, combining marks, etc.)
 
 Sua tarefa:
 1. Identifique o ENUNCIADO REAL da questão (o comando/pergunta que o aluno deve responder)
 2. Se houver um texto de apoio importante que dá contexto à questão, inclua-o também
 3. REMOVA: referências bibliográficas, créditos, "Disponível em", "Acesso em", nomes de autores isolados
+4. REMOVA ou NORMALIZE caracteres especiais problemáticos:
+   - Caracteres Unicode corrompidos ou malformados → remova-os
+   - Letras com acentos estranhos em contexto matemático (ex: DÂB, DĈB) → normalize para letras simples (DAB, DCB)
+   - Símbolos matemáticos Unicode (√, ∑, ∫, ≤, ≥, π, etc.) → converta para texto descritivo quando possível
+   - Macron/overline (¯) sobre letras → remova
+   - Qualquer caractere que não seja texto legível em português → remova
 
 Responda APENAS com o texto limpo, sem explicações."""
 
@@ -95,6 +104,66 @@ async def limpar_enunciado(request: LimparEnunciadoRequest):
             enunciado_limpo=request.enunciado,
             sucesso=False,
             mensagem=str(e),
+        )
+
+
+# ========================
+# TRATAR ENUNCIADO (limpeza programática, sem IA)
+# ========================
+@router.post(
+    "/tratar-enunciado",
+    response_model=TratarEnunciadoResponse,
+    summary="🔤 Tratar enunciado - remover HTML, Unicode e caracteres especiais",
+)
+async def tratar_enunciado_endpoint(request: TratarEnunciadoRequest):
+    """
+    Limpa o enunciado de forma **programática** (sem chamar IA).
+
+    Remove:
+    - Tags HTML (`<p>`, `<img>`, `<br>`, etc.)
+    - URLs de imagens
+    - Caracteres Unicode problemáticos (combining marks, macron, overline)
+    - Notação matemática com diacríticos (DÂB → DAB, DĈB → DCB)
+    - Símbolos matemáticos Unicode (√, ≤, ≥, π, ∞, etc.)
+    - Letras gregas (α → alfa, β → beta, etc.)
+    - Referências bibliográficas e créditos
+    - Espaços duplicados e linhas em branco
+
+    Preserva:
+    - Acentos normais do português (á, â, ã, é, ê, í, ó, ô, õ, ú, ç)
+    - Texto legível em português
+    """
+    if not request.enunciado or len(request.enunciado.strip()) < 5:
+        return TratarEnunciadoResponse(
+            enunciado_original=request.enunciado or "",
+            enunciado_tratado="",
+            sucesso=False,
+            motivo_erro="Enunciado muito curto ou vazio",
+        )
+
+    try:
+        enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(
+            request.enunciado
+        )
+
+        chars_removidos = len(request.enunciado) - len(enunciado_tratado)
+
+        return TratarEnunciadoResponse(
+            enunciado_original=request.enunciado,
+            enunciado_tratado=enunciado_tratado,
+            contem_imagem=contem_imagem,
+            caracteres_removidos=max(0, chars_removidos),
+            sucesso=motivo_erro is None,
+            motivo_erro=motivo_erro,
+        )
+
+    except Exception as e:
+        logger.error(f"Erro ao tratar enunciado: {e}")
+        return TratarEnunciadoResponse(
+            enunciado_original=request.enunciado,
+            enunciado_tratado=request.enunciado,
+            sucesso=False,
+            motivo_erro=str(e),
         )
 
 

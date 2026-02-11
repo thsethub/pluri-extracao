@@ -106,3 +106,30 @@ class LimparEnunciadoResponse(BaseModel):
     sucesso: bool = True
     mensagem: Optional[str] = None
     percentual_concluido: float = 0.0
+
+
+class TratarEnunciadoRequest(BaseModel):
+    """Request para tratar enunciado - remoção de HTML, Unicode e caracteres especiais"""
+
+    enunciado: str = Field(
+        ...,
+        description="Enunciado bruto com HTML, Unicode e caracteres especiais",
+    )
+
+
+class TratarEnunciadoResponse(BaseModel):
+    """Response com o enunciado tratado programaticamente (sem IA)"""
+
+    enunciado_original: str = Field(..., description="Enunciado original recebido")
+    enunciado_tratado: str = Field(
+        ..., description="Enunciado limpo (sem HTML, sem caracteres especiais)"
+    )
+    contem_imagem: bool = Field(
+        False, description="Se o enunciado original contém imagens"
+    )
+    caracteres_removidos: int = Field(
+        0, description="Quantidade de caracteres removidos na limpeza"
+    )
+    sucesso: bool = True
+    motivo_erro: Optional[str] = None
+
