@@ -224,10 +224,7 @@ def tratar_enunciado(enunciado: str | None) -> Tuple[str, bool, str | None]:
     # 5. Limpa referências bibliográficas e créditos
     texto = _limpar_referencias(texto)
 
-    # 6. Remove ruído de enunciado ("Texto I", "Analise a figura", etc.)
-    texto = _limpar_ruido_enunciado(texto)
-
-    # 7. Limpa espaços extras
+    # 6. Limpa espaços extras
     texto = _limpar_espacos(texto)
 
     if not texto.strip():
@@ -321,17 +318,3 @@ def _limpar_espacos(texto: str) -> str:
     return texto.strip()
 
 
-def _limpar_ruido_enunciado(texto: str) -> str:
-    """Remove marcadores de texto e comandos genéricos que poluem a busca."""
-    # "Texto I", "Texto II", "Texto 1", "Texto 2" etc. (qualquer posição)
-    texto = re.sub(
-        r"Texto\s+(?:[IVX]+|\d+)\s*[:\-]?\s*", "", texto, flags=re.IGNORECASE
-    )
-    # "Analise a/o figura/imagem/quadro/mapa/texto/gráfico a seguir/abaixo"
-    texto = re.sub(
-        r"Analise\s+(?:a|o|as|os)\s+(?:figura|imagem|quadro|mapa|texto|trecho|gr[aá]fico|tabela|charge|tirinha)s?\s*(?:a\s+seguir|abaixo|seguinte)?[.:\s]*",
-        "",
-        texto,
-        flags=re.IGNORECASE,
-    )
-    return texto

@@ -17,8 +17,11 @@ class QuestaoAssuntoSchema(BaseModel):
     classificacoes: List[str] = []
     enunciado_original: Optional[str] = None
     enunciado_tratado: Optional[str] = None
+    similaridade: Optional[float] = None
     extracao_feita: bool = False
     contem_imagem: bool = False
+    precisa_verificar: bool = False
+    enunciado_superpro: Optional[str] = None
     motivo_erro: Optional[str] = None
     created_at: Optional[datetime] = None
 
@@ -42,6 +45,7 @@ class ProximaQuestaoResponse(BaseModel):
     enunciado_tratado: str = Field(..., description="Enunciado limpo (sem HTML)")
     disciplina_id: Optional[int] = None
     disciplina_nome: Optional[str] = None
+    habilidade_id: Optional[int] = None
     ano_id: Optional[int] = None
     ano_nome: Optional[str] = None
     contem_imagem: bool = Field(False, description="Se contém imagem e foi pulada")
@@ -63,9 +67,16 @@ class SalvarAssuntoRequest(BaseModel):
         ...,
         description="Array de classificações extraídas. Ex: ['História > Brasil > Escravidão']",
     )
+    similaridade: Optional[float] = Field(
+        None, description="Taxa de similaridade do match (0.0 a 1.0)"
+    )
     enunciado_tratado: Optional[str] = Field(
         None,
         description="Enunciado limpo pela IA (sobrescreve o enunciado_tratado do banco)",
+    )
+    enunciado_superpro: Optional[str] = Field(
+        None,
+        description="Enunciado completo da questão encontrada no SuperProfessor",
     )
 
 

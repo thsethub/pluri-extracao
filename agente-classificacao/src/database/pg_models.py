@@ -1,6 +1,6 @@
 """Modelo SQLAlchemy para a tabela questao_assuntos no PostgreSQL"""
 
-from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime
+from sqlalchemy import Column, Integer, Float, String, Text, Boolean, DateTime
 from sqlalchemy.dialects.postgresql import JSONB
 from datetime import datetime, timezone
 from ..database import PgBase
@@ -31,8 +31,11 @@ class QuestaoAssuntoModel(PgBase):
     classificacoes = Column(JSONB, nullable=True, default=[])
     enunciado_original = Column(Text, nullable=True)
     enunciado_tratado = Column(Text, nullable=True)
+    similaridade = Column(Float, nullable=True)
     extracao_feita = Column(Boolean, nullable=False, default=False)
     contem_imagem = Column(Boolean, nullable=False, default=False)
+    precisa_verificar = Column(Boolean, nullable=False, default=False)
+    enunciado_superpro = Column(Text, nullable=True)
     motivo_erro = Column(String(255), nullable=True)
     created_at = Column(
         DateTime, nullable=False, default=lambda: datetime.now(timezone.utc)

@@ -212,6 +212,7 @@ async def proxima_questao(
                 joinedload(QuestaoModel.ano),
             )
             .filter(QuestaoModel.disciplina_id == disciplina_id)
+            .filter(QuestaoModel.habilidade_id.isnot(None))
         )
 
         # Filtra por ano/nível (default: Ensino Médio)
@@ -267,6 +268,7 @@ async def proxima_questao(
             enunciado_tratado=enunciado_tratado,
             disciplina_id=questao.disciplina_id,
             disciplina_nome=disc_nome,
+            habilidade_id=questao.habilidade_id,
             ano_id=questao.ano_id,
             ano_nome=ano_nome,
             contem_imagem=contem_imagem,
@@ -336,9 +338,14 @@ async def salvar_extracao(
         existente.classificacoes = request.classificacoes
         existente.extracao_feita = True
         existente.motivo_erro = None
+        existente.precisa_verificar = False
         existente.enunciado_tratado = enunciado_tratado or existente.enunciado_tratado
         if request.superpro_id:
             existente.superpro_id = request.superpro_id
+        if request.similaridade is not None:
+            existente.similaridade = request.similaridade
+        if request.enunciado_superpro:
+            existente.enunciado_superpro = request.enunciado_superpro
         pg_db.commit()
         logger.success(
             f"Questão {request.questao_id} atualizada com {len(request.classificacoes)} classificações"
@@ -354,8 +361,11 @@ async def salvar_extracao(
             classificacoes=request.classificacoes,
             enunciado_original=questao.enunciado,
             enunciado_tratado=enunciado_tratado,
+            similaridade=request.similaridade,
             extracao_feita=True,
             contem_imagem=False,
+            precisa_verificar=False,
+            enunciado_superpro=request.enunciado_superpro,
             motivo_erro=None,
         )
         pg_db.add(registro)
@@ -388,6 +398,12 @@ async def listar_assuntos(
         False, description="Apenas com extração bem sucedida"
     ),
     apenas_com_imagem: bool = Query(False, description="Apenas questões com imagem"),
+    precisa_verificar: Optional[bool] = Query(
+        None, description="Filtrar por precisa_verificar (True/False)"
+    ),
+    tem_classificacao: Optional[bool] = Query(
+        None, description="Filtrar por presença de classificação"
+    ),
     pg_db: Session = Depends(get_pg_db),
 ):
     """Lista os registros de assuntos com paginação e filtros."""
@@ -399,6 +415,20 @@ async def listar_assuntos(
         query = query.filter(QuestaoAssuntoModel.extracao_feita == True)
     if apenas_com_imagem:
         query = query.filter(QuestaoAssuntoModel.contem_imagem == True)
+    if precisa_verificar is not None:
+        query = query.filter(QuestaoAssuntoModel.precisa_verificar == precisa_verificar)
+    
+    if tem_classificacao is not None:
+        if tem_classificacao:
+            query = query.filter(
+                QuestaoAssuntoModel.classificacoes.isnot(None),
+                func.jsonb_array_length(QuestaoAssuntoModel.classificacoes) > 0
+            )
+        else:
+            query = query.filter(
+                (QuestaoAssuntoModel.classificacoes.is_(None)) | 
+                (func.jsonb_array_length(QuestaoAssuntoModel.classificacoes) == 0)
+            )
 
     total = query.count()
     pages = ceil(total / per_page) if total > 0 else 1
@@ -465,7 +495,8 @@ async def estatisticas_extracao(
     stats = []
     for disc in disciplinas:
         total_query = db.query(QuestaoModel).filter(
-            QuestaoModel.disciplina_id == disc.id
+            QuestaoModel.disciplina_id == disc.id,
+            QuestaoModel.habilidade_id.isnot(None),
         )
         if ano_id is not None:
             total_query = total_query.filter(QuestaoModel.ano_id == ano_id)
