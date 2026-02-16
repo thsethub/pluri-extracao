@@ -319,19 +319,7 @@ class SuperProClient:
     # Limpeza e extração de termos
     # ------------------------------------------------------------------
 
-    # Prefixos comuns que poluem a busca (case-insensitive)
-    _NOISE_PREFIXES = re.compile(
-        r"^\s*"
-        r"(?:"
-        r"TEXTO\s+[IVX]+\s*[:\-]?\s*"
-        r"|Leia\s+(?:o\s+)?(?:texto|trecho|fragmento|excerto)s?\s*(?:abaixo|a\s+seguir)?[.:\s]*"
-        r"|Observe\s+(?:o|a|os|as)?\s*(?:texto|imagem|mapa|quadro|tabela|gráfico|figura)s?\s*(?:abaixo|a\s+seguir)?[.:\s]*"
-        r"|Considere\s+o\s+texto\s*(?:abaixo|a\s+seguir)?[.:\s]*"
-        r"|Analise\s+(?:o|a|os|as)\s+(?:texto|trecho|figura|imagem|quadro|mapa|gr[aá]fico|tabela|charge|tirinha)s?\s*(?:a\s+seguir|abaixo|seguinte)?[.:\s]*"
-        r")",
-        re.IGNORECASE,
-    )
-
+    # Prefixos de referência bibliográfica
     _REFERENCE_PATTERNS = re.compile(
         r"(?:"
         r"Dispon[ií]vel\s+em:?\s*\S+\.?\s*"
@@ -343,22 +331,10 @@ class SuperProClient:
 
     @classmethod
     def clean_enunciado(cls, text: str) -> str:
-        """Remove prefixos genéricos, referências bibliográficas e Unicode problemático."""
-        # PRIMEIRO: normalizar Unicode (ligaturas, espaços especiais, etc.)
+        """Remove referências bibliográficas e normaliza Unicode."""
+        # Normalizar Unicode (ligaturas, espaços especiais, etc.)
         cleaned = _sanitize_text_for_api(text)
-        cleaned = cls._NOISE_PREFIXES.sub("", cleaned).strip()
         cleaned = cls._REFERENCE_PATTERNS.sub("", cleaned).strip()
-        # "Texto I", "Texto II", "Texto 1" etc. em qualquer posição
-        cleaned = re.sub(
-            r"Texto\s+(?:[IVX]+|\d+)\s*[:\-]?\s*", "", cleaned, flags=re.IGNORECASE
-        ).strip()
-        # Créditos de imagem no início
-        cleaned = re.sub(
-            r"^\s*(?:Charge|Foto|Imagem|Ilustra[cç]ão|Gravura)\s*(?:an[oô]nima)?[.:,]?\s*",
-            "",
-            cleaned,
-            flags=re.IGNORECASE,
-        ).strip()
         # Se removeu quase tudo, voltar ao original
         return cleaned if len(cleaned) > 20 else text.strip()
 
@@ -435,37 +411,29 @@ class SuperProClient:
         self,
         enunciado: str,
         nosso_disc_id: int | None = None,
-        min_similarity: float = 0.35,
+        min_similarity: float = 0.95,
     ) -> dict | None:
         """
         Busca uma questão no SuperProfessor e retorna sua classificação.
 
-        Estratégias (em ordem):
+        Estratégias (em ordem, apenas com filtro de disciplina):
         1. disc + frase1 (primeira frase limpa com disciplina)
         2. disc + 7 palavras (fallback mais curto com disciplina)
-        3. sem_disc + frase1
-        4. sem_disc + 7 palavras
-        5. sem_disc + última frase (pergunta real em textos longos)
-        6. sem_disc + 5 palavras (busca mais ampla possível)
 
         Returns:
-            Dict com 'sp_id', 'similarity', 'classificacoes',
+            Dict com 'sp_id', 'similarity', 'classificacoes', 'enunciado_superpro',
             ou {'api_error': True} se a API está fora do ar,
             ou None se não encontrar
         """
         if not enunciado or len(enunciado.strip()) < 20:
             return None
 
-        # Limpar prefixos inúteis (TEXTO I, Leia o texto, etc)
+        # Limpar referências bibliográficas
         cleaned = self.clean_enunciado(enunciado)
 
         # Preparar termos de busca a partir do texto limpo
         frase1 = self.extract_first_sentence(cleaned, max_sentences=1)
         terms_7w = self.extract_search_terms(cleaned, max_words=7)
-        terms_5w = self.extract_search_terms(cleaned, max_words=5)
-
-        # Última frase (onde geralmente fica a pergunta em textos longos)
-        last_sent = self.extract_last_sentence(cleaned)
 
         # Precisa de um mínimo de texto para buscar
         if len(frase1) < 8 and len(terms_7w) < 8:
@@ -473,7 +441,14 @@ class SuperProClient:
 
         sp_materia_id = DISC_MAP.get(nosso_disc_id) if nosso_disc_id else None
 
-        # Montar set de termos já usados para evitar duplicatas
+        # Se não houver mapeamento de disciplina, não buscar
+        if not sp_materia_id:
+            logger.debug(
+                f"Disciplina {nosso_disc_id} sem mapeamento no SuperProfessor, pulando"
+            )
+            return None
+
+        # Montar estratégias (somente com disciplina)
         used_terms = set()
         strategies = []
 
@@ -482,21 +457,8 @@ class SuperProClient:
                 strategies.append((name, terms, materia, mode))
                 used_terms.add(terms)
 
-        # Com disciplina
-        if sp_materia_id:
-            add_strategy("disc+frase1", frase1, sp_materia_id, "EVERY")
-            add_strategy("disc+7words", terms_7w, sp_materia_id, "EVERY")
-
-        # Sem disciplina
-        add_strategy("sem_disc+frase1", frase1, None, "EVERY")
-        add_strategy("sem_disc+7words", terms_7w, None, "EVERY")
-
-        # Última frase (captura perguntas no final de textos longos)
-        if last_sent and last_sent != frase1:
-            add_strategy("sem_disc+ultima", last_sent, None, "EVERY")
-
-        # Fallback mais amplo
-        add_strategy("sem_disc+5words", terms_5w, None, "EVERY")
+        add_strategy("disc+frase1", frase1, sp_materia_id, "EVERY")
+        add_strategy("disc+7words", terms_7w, sp_materia_id, "EVERY")
 
         server_errors = 0
 
@@ -568,6 +530,7 @@ class SuperProClient:
                         "strategy": name,
                         "classificacoes": formatted,
                         "raw_classificacoes": classifs,
+                        "enunciado_superpro": best_match.get("TEXTO_QUESTAO", ""),
                     }
                 else:
                     logger.debug(

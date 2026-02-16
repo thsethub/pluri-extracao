@@ -54,6 +54,8 @@ class LocalApiClient:
         classificacoes: list[str],
         superpro_id: int | None = None,
         enunciado_tratado: str | None = None,
+        similaridade: float | None = None,
+        enunciado_superpro: str | None = None,
     ) -> bool:
         """Salva o resultado da extração."""
         try:
@@ -65,6 +67,10 @@ class LocalApiClient:
                 payload["superpro_id"] = superpro_id
             if enunciado_tratado:
                 payload["enunciado_tratado"] = enunciado_tratado
+            if similaridade is not None:
+                payload["similaridade"] = similaridade
+            if enunciado_superpro:
+                payload["enunciado_superpro"] = enunciado_superpro
             resp = await self._client.post(
                 "/extracao/salvar",
                 json=payload,

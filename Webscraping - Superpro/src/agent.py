@@ -140,7 +140,7 @@ class ExtractionAgent:
         result = await self.superpro.find_and_classify(
             enunciado=enunciado,
             nosso_disc_id=disc_id,
-            min_similarity=0.35,
+            min_similarity=0.95,
         )
 
         if result and result.get("api_error"):
@@ -157,9 +157,15 @@ class ExtractionAgent:
                 f"{' | '.join(classificacoes[:3])}"
             )
 
-            # Salvar com superpro_id e enunciado limpo (se IA foi usada)
+            # Salvar com superpro_id, enunciado limpo (se IA foi usada),
+            # similaridade e enunciado do SuperPro
             ok = await self.local_api.salvar_extracao(
-                qid, classificacoes, superpro_id=sp_id, enunciado_tratado=enunciado_ia
+                qid,
+                classificacoes,
+                superpro_id=sp_id,
+                enunciado_tratado=enunciado_ia,
+                similaridade=sim,
+                enunciado_superpro=result.get("enunciado_superpro"),
             )
             if ok:
                 self.stats["saved"] += 1

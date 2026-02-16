@@ -50,7 +50,7 @@ async def get_disciplinas():
 
 @app.get("/api/stats")
 async def get_stats():
-    async with httpx.AsyncClient(timeout=10) as c:
+    async with httpx.AsyncClient(timeout=60) as c:
         r = await c.get(f"{API_BASE}/extracao/stats", params={"ano_id": 3})
         return r.json()
 
@@ -59,6 +59,33 @@ async def get_stats():
 async def reset_db():
     async with httpx.AsyncClient(timeout=15) as c:
         r = await c.delete(f"{API_BASE}/extracao/reset")
+        return r.json()
+
+
+@app.get("/api/conferencia")
+async def get_conferencia(
+    page: int = 1,
+    per_page: int = 20,
+    disciplina_id: int | None = None,
+    apenas_extraidas: bool = True,
+    precisa_verificar: bool | None = None,
+    tem_classificacao: bool | None = None,
+):
+    """Proxy para listar assuntos extraídos com filtros."""
+    params = {
+        "page": page,
+        "per_page": per_page,
+        "apenas_extraidas": apenas_extraidas,
+    }
+    if disciplina_id:
+        params["disciplina_id"] = disciplina_id
+    if precisa_verificar is not None:
+        params["precisa_verificar"] = precisa_verificar
+    if tem_classificacao is not None:
+        params["tem_classificacao"] = tem_classificacao
+
+    async with httpx.AsyncClient(timeout=60) as c:
+        r = await c.get(f"{API_BASE}/extracao/assuntos", params=params)
         return r.json()
 
 
@@ -190,6 +217,11 @@ async def stream_logs():
 @app.get("/", response_class=HTMLResponse)
 async def index():
     return HTML_PAGE
+
+
+@app.get("/conferencia", response_class=HTMLResponse)
+async def conferencia_page():
+    return HTML_CONFERENCIA
 
 
 # ── Helpers ──────────────────────────────────────────────────────────
@@ -350,6 +382,7 @@ HTML_PAGE = """<!DOCTYPE html>
   <header>
     <h1>🤖 <span>Extração</span> SuperProfessor</h1>
     <div>
+      <a href="/conferencia" style="color:var(--accent); text-decoration:none; font-size:13px; margin-right:16px; padding:5px 12px; border:1px solid var(--accent); border-radius:6px;">🔎 Conferência</a>
       <span class="elapsed" id="elapsed"></span>
       <span id="status-badge" class="badge-idle">Parado</span>
     </div>
@@ -635,6 +668,462 @@ function showMsg(msg, color) {
   const el = document.getElementById('ctrl-msg');
   el.textContent = msg;
   el.style.color = color || 'var(--text)';
+}
+
+init();
+</script>
+</body>
+</html>
+"""
+
+
+# ── HTML da Página de Conferência ────────────────────────────────────
+
+HTML_CONFERENCIA = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conferência — Extração SuperProfessor</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #8b8d97;
+    --accent: #6366f1;
+    --accent-hover: #818cf8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --cyan: #06b6d4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  }
+  header h1 { font-size: 22px; font-weight: 600; }
+  header h1 span { color: var(--accent); }
+  .nav-link {
+    color: var(--accent); text-decoration: none; font-size: 14px;
+    padding: 6px 14px; border: 1px solid var(--accent); border-radius: 8px;
+    transition: all .15s;
+  }
+  .nav-link:hover { background: var(--accent); color: #fff; }
+
+  /* ── Filtros ── */
+  .match-low { background:#ff4d4d; color:#fff; }
+    
+  .text-col { font-size: 11px; line-height: 1.3; max-width: 250px; }
+  .text-col div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    
+  .filters {
+    display:flex; gap:10px; margin-bottom:15px; align-items:center; flex-wrap:wrap;
+    padding: 16px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px;
+  }
+  .filters label { font-size: 13px; color: var(--muted); }
+  .filters select, .filters input {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    padding: 8px 12px; border-radius: 6px; font-size: 13px;
+  }
+  .filters select:focus, .filters input:focus { outline: none; border-color: var(--accent); }
+  .btn-filter {
+    padding: 8px 18px; border: none; border-radius: 6px; font-size: 13px;
+    font-weight: 600; cursor: pointer; background: var(--accent); color: #fff;
+    transition: all .15s;
+  }
+  .btn-filter:hover { background: var(--accent-hover); }
+
+  /* ── Tabela ── */
+  .table-wrap {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden;
+  }
+  .conf-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .conf-table th {
+    text-align: left; padding: 12px 14px; color: var(--muted); font-weight: 500;
+    border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase;
+    background: rgba(99,102,241,.04);
+  }
+  .conf-table td {
+    padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.04);
+    vertical-align: middle;
+  }
+  .conf-table tr:hover { background: rgba(99,102,241,.06); cursor: pointer; }
+  .conf-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* ── Match badge ── */
+  .match-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 12px; font-weight: 600;
+  }
+  .match-high { background: rgba(34,197,94,.15); color: var(--green); }
+  .match-mid { background: rgba(234,179,8,.15); color: var(--yellow); }
+  .match-low { background: rgba(239,68,68,.15); color: var(--red); }
+  .match-none { background: var(--border); color: var(--muted); }
+
+  /* ── Enunciado truncado ── */
+  .enunciado-preview {
+    max-width: 350px; overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; font-size: 12px; color: var(--muted);
+  }
+
+  /* ── Paginação ── */
+  .pagination {
+    display: flex; gap: 8px; justify-content: center; align-items: center;
+    margin-top: 20px; padding: 16px;
+  }
+  .page-btn {
+    padding: 6px 14px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--card); color: var(--text); font-size: 13px; cursor: pointer;
+    transition: all .15s;
+  }
+  .page-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .page-btn:disabled { opacity: .4; cursor: not-allowed; }
+  .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .page-info { color: var(--muted); font-size: 13px; }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,.7); z-index: 100; justify-content: center;
+    align-items: center; backdrop-filter: blur(4px);
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    width: 95%; max-width: 1100px; max-height: 90vh; overflow-y: auto;
+    padding: 28px; position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 14px; right: 18px; background: none;
+    border: none; color: var(--muted); font-size: 22px; cursor: pointer;
+    transition: color .15s;
+  }
+  .modal-close:hover { color: var(--text); }
+
+  .modal h2 { font-size: 18px; margin-bottom: 8px; }
+  .modal-meta {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;
+    font-size: 13px; color: var(--muted);
+  }
+  .modal-meta strong { color: var(--text); }
+
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
+  }
+  .compare-col {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px;
+  }
+  .compare-col h3 {
+    font-size: 12px; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 10px; letter-spacing: .5px;
+  }
+  .compare-col .text-content {
+    font-size: 13px; line-height: 1.7; white-space: pre-wrap;
+    word-break: break-word; max-height: 350px; overflow-y: auto;
+  }
+
+  .match-bar-wrap {
+    margin-bottom: 20px; padding: 12px 16px;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  }
+  .match-bar-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .match-bar {
+    width: 100%; height: 10px; background: var(--border); border-radius: 5px;
+    overflow: hidden;
+  }
+  .match-bar-fill { height: 100%; border-radius: 5px; transition: width .5s; }
+  .match-bar-value {
+    font-size: 22px; font-weight: 700; margin-top: 6px;
+  }
+
+  .classif-list {
+    list-style: none; padding: 0;
+  }
+  .classif-list li {
+    padding: 8px 12px; margin-bottom: 4px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 6px; font-size: 12px;
+  }
+
+  .empty-state {
+    text-align: center; padding: 60px 20px; color: var(--muted); font-size: 15px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>🔎 <span>Conferência</span> de Classificações</h1>
+    <a href="/" class="nav-link">← Painel de Controle</a>
+  </header>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <label>Disciplina:</label>
+    <select id="filter-disc" onchange="loadData(1)">
+      <option value="">Todas</option>
+    </select>
+
+    <label>Verificação:</label>
+    <select id="filter-verif" onchange="loadData(1)">
+      <option value="">Todas</option>
+      <option value="true">Pendente ⚠️</option>
+      <option value="false">OK ✅</option>
+    </select>
+
+    <label>Classificada:</label>
+    <select id="filter-classified" onchange="loadData(1)">
+      <option value="">Todas</option>
+      <option value="true">Sim</option>
+      <option value="false">Não</option>
+    </select>
+
+    <label>Items:</label>
+    <select id="filter-perpage" onchange="loadData(1)">
+      <option value="10">10</option>
+      <option value="20" selected>20</option>
+      <option value="50">50</option>
+    </select>
+    <button class="btn-filter" onclick="loadData(1)">Atualizar</button>
+    <span class="page-info" id="results-info"></span>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-wrap">
+    <table class="conf-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Disciplina</th>
+          <th>Match %</th>
+          <th>Simil.</th>
+          <th>SP ID</th>
+          <th>Status</th>
+          <th>Classificação</th>
+          <th>Enunciado (nosso)</th>
+        </tr>
+      </thead>
+      <tbody id="conf-body">
+        <tr><td colspan="6" class="empty-state">Carregando...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginação -->
+  <div class="pagination" id="pagination"></div>
+
+</div>
+
+<!-- Modal de detalhe -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2 id="modal-title">Questão #—</h2>
+    <div class="modal-meta" id="modal-meta"></div>
+
+    <div class="match-bar-wrap">
+      <div class="match-bar-label">Taxa de Similaridade</div>
+      <div class="match-bar"><div class="match-bar-fill" id="modal-match-bar"></div></div>
+      <div class="match-bar-value" id="modal-match-value">—</div>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h3>📝 Nosso Enunciado (tratado)</h3>
+        <div class="text-content" id="modal-nosso"></div>
+      </div>
+      <div class="compare-col">
+        <h3>🔗 Enunciado SuperProfessor</h3>
+        <div class="text-content" id="modal-superpro"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px; color:var(--muted); text-transform:uppercase; margin-bottom:8px;">Classificações Extraídas</h3>
+    <ul class="classif-list" id="modal-classifs"></ul>
+  </div>
+</div>
+
+<script>
+let currentPage = 1;
+let allData = [];
+
+async function init() {
+  await loadDisciplinas();
+  await loadData(1);
+}
+
+async function loadDisciplinas() {
+  try {
+    const r = await fetch('/api/stats');
+    const stats = await r.json();
+    const sel = document.getElementById('filter-disc');
+    stats.forEach(d => {
+      if (d.disciplina_id && d.extraidas > 0) {
+        const opt = document.createElement('option');
+        opt.value = d.disciplina_id;
+        opt.textContent = d.disciplina_nome;
+        sel.appendChild(opt);
+      }
+    });
+  } catch(e) { console.error(e); }
+}
+
+async function loadData(page) {
+  currentPage = page;
+  const discId = document.getElementById('filter-disc').value;
+  const verif = document.getElementById('filter-verif').value;
+  const classified = document.getElementById('filter-classified').value;
+  const perPage = document.getElementById('filter-perpage').value;
+
+  const params = new URLSearchParams({
+    page, per_page: perPage, apenas_extraidas: true
+  });
+  if (discId) params.set('disciplina_id', discId);
+  if (verif) params.set('precisa_verificar', verif);
+  if (classified) params.set('tem_classificacao', classified);
+
+  try {
+    const r = await fetch(`/api/conferencia?${params}`);
+    const data = await r.json();
+    allData = data.data || [];
+    renderTable(allData);
+    renderPagination(data.page, data.pages, data.total);
+    document.getElementById('results-info').textContent =
+      `${data.total} resultado(s)`;
+  } catch(e) {
+    console.error(e);
+    document.getElementById('conf-body').innerHTML =
+      '<tr><td colspan="6" class="empty-state">Erro ao carregar dados</td></tr>';
+  }
+}
+
+function renderTable(items) {
+  const tbody = document.getElementById('conf-body');
+  if (!items.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Nenhuma questão encontrada</td></tr>';
+    return;
+  }
+  tbody.innerHTML = items.map((q, i) => {
+    const sim = q.similaridade;
+    const pct = sim != null ? (sim * 100).toFixed(1) + '%' : '—';
+    const cls = sim == null ? 'match-none'
+      : sim >= 0.95 ? 'match-high'
+      : sim >= 0.80 ? 'match-mid'
+      : 'match-low';
+    const enun = (q.enunciado_tratado || q.enunciado_original || '').substring(0, 80);
+    
+    // Formata classificações como lista HTML
+    let classifHtml = '';
+    if (q.classificacoes && q.classificacoes.length > 0) {
+      classifHtml = q.classificacoes.map(c => `<div style="font-size:11px; margin-bottom:4px;">${c}</div>`).join('');
+    } else {
+      classifHtml = '<span style="color:#666">-</span>';
+    }
+
+    const verifIcon = q.precisa_verificar ? '⚠️' : '✅';
+    const similRaw = q.similaridade ? q.similaridade.toFixed(4) : '-';
+    
+    return `<tr onclick="openModal(${i})">
+      <td>${q.questao_id}</td>
+      <td>${q.disciplina_nome || '—'}</td>
+      <td><span class="match-badge ${cls}">${pct}</span></td>
+      <td class="num">${similRaw}</td>
+      <td class="num">${q.superpro_id || '—'}</td>
+      <td style="text-align:center">${verifIcon}</td>
+      <td class="text-col">${classifHtml}</td>
+      <td><div class="enunciado-preview">${escHtml(enun)}</div></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderPagination(page, pages, total) {
+  const div = document.getElementById('pagination');
+  if (pages <= 1) { div.innerHTML = ''; return; }
+  let html = '';
+  html += `<button class="page-btn" onclick="loadData(${page-1})" ${page<=1?'disabled':''}>←</button>`;
+  const start = Math.max(1, page - 3);
+  const end = Math.min(pages, page + 3);
+  if (start > 1) html += `<button class="page-btn" onclick="loadData(1)">1</button>`;
+  if (start > 2) html += `<span class="page-info">...</span>`;
+  for (let i = start; i <= end; i++) {
+    html += `<button class="page-btn ${i===page?'active':''}" onclick="loadData(${i})">${i}</button>`;
+  }
+  if (end < pages - 1) html += `<span class="page-info">...</span>`;
+  if (end < pages) html += `<button class="page-btn" onclick="loadData(${pages})">${pages}</button>`;
+  html += `<button class="page-btn" onclick="loadData(${page+1})" ${page>=pages?'disabled':''}>→</button>`;
+  div.innerHTML = html;
+}
+
+function openModal(idx) {
+  const q = allData[idx];
+  if (!q) return;
+
+  document.getElementById('modal-title').textContent = `Questão #${q.questao_id}`;
+
+  const meta = document.getElementById('modal-meta');
+  meta.innerHTML = `
+    <span>Disciplina: <strong>${q.disciplina_nome || '—'}</strong></span>
+    <span>SuperPro ID: <strong>${q.superpro_id || '—'}</strong></span>
+    <span>Verificação: <strong>${q.precisa_verificar ? '⚠️ Pendente' : '✅ OK'}</strong></span>
+  `;
+
+  const sim = q.similaridade;
+  const pct = sim != null ? (sim * 100).toFixed(1) : 0;
+  const bar = document.getElementById('modal-match-bar');
+  bar.style.width = (sim != null ? pct : 0) + '%';
+  bar.style.background = sim == null ? 'var(--border)'
+    : sim >= 0.95 ? 'var(--green)'
+    : sim >= 0.80 ? 'var(--yellow)'
+    : 'var(--red)';
+  const val = document.getElementById('modal-match-value');
+  val.textContent = sim != null ? pct + '%' : 'Sem dados';
+  val.style.color = sim == null ? 'var(--muted)'
+    : sim >= 0.95 ? 'var(--green)'
+    : sim >= 0.80 ? 'var(--yellow)'
+    : 'var(--red)';
+
+  document.getElementById('modal-nosso').textContent =
+    q.enunciado_tratado || q.enunciado_original || '(sem enunciado)';
+  document.getElementById('modal-superpro').textContent =
+    q.enunciado_superpro || '(sem enunciado do SuperProfessor)';
+
+  const classifUl = document.getElementById('modal-classifs');
+  const classifs = q.classificacoes || [];
+  classifUl.innerHTML = classifs.length
+    ? classifs.map(c => `<li>${escHtml(c)}</li>`).join('')
+    : '<li style="color:var(--muted)">Nenhuma classificação</li>';
+
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
 }
 
 init();
