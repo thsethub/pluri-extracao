@@ -56,12 +56,14 @@ class LocalApiClient:
         enunciado_tratado: str | None = None,
         similaridade: float | None = None,
         enunciado_superpro: str | None = None,
+        classificacao_nao_enquadrada: list[str] = [],
     ) -> bool:
         """Salva o resultado da extração."""
         try:
             payload = {
                 "questao_id": questao_id,
                 "classificacoes": classificacoes,
+                "classificacao_nao_enquadrada": classificacao_nao_enquadrada,
             }
             if superpro_id:
                 payload["superpro_id"] = superpro_id

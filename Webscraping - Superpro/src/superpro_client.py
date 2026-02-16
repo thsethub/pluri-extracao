@@ -411,7 +411,7 @@ class SuperProClient:
         self,
         enunciado: str,
         nosso_disc_id: int | None = None,
-        min_similarity: float = 0.95,
+        min_similarity: float = 0.80,
     ) -> dict | None:
         """
         Busca uma questão no SuperProfessor e retorna sua classificação.
@@ -423,7 +423,7 @@ class SuperProClient:
         Returns:
             Dict com 'sp_id', 'similarity', 'classificacoes', 'enunciado_superpro',
             ou {'api_error': True} se a API está fora do ar,
-            ou None se não encontrar
+            ou None se não encontrar nada.
         """
         if not enunciado or len(enunciado.strip()) < 20:
             return None
@@ -461,6 +461,9 @@ class SuperProClient:
         add_strategy("disc+7words", terms_7w, sp_materia_id, "EVERY")
 
         server_errors = 0
+        global_best_match = None
+        global_best_ratio = 0.0
+        global_best_strategy = ""
 
         for name, terms, materia, mode in strategies:
             # Short-circuit: se servidor já falhou 2x, não tentar mais
@@ -491,9 +494,6 @@ class SuperProClient:
                     )
                     continue
 
-                best_match = None
-                best_ratio = 0.0
-
                 for sq in specs:
                     if not isinstance(sq, dict):
                         continue
@@ -502,41 +502,20 @@ class SuperProClient:
                         continue
                     ratio = self.compare_texts(enunciado, sp_text)
 
-                    if ratio > best_ratio:
-                        best_ratio = ratio
-                        best_match = sq
+                    if ratio > global_best_ratio:
+                        global_best_ratio = ratio
+                        global_best_match = sq
+                        global_best_strategy = name
 
-                if best_match and best_ratio >= min_similarity:
-                    sp_id = best_match.get("ID_BCO_QUESTAO", best_match.get("id", 0))
-                    classifs = best_match.get("CLASSIFICACAO_QUESTAO", [])
+                    # Short-circuit se o match for excelente
+                    if ratio >= 0.98:
+                        break
 
-                    if isinstance(classifs, list):
-                        formatted = [
-                            self.format_classification(c)
-                            for c in classifs
-                            if isinstance(c, dict)
-                        ]
-                    else:
-                        formatted = []
-
-                    logger.info(
-                        f"MATCH [{name}] SP_ID={sp_id} "
-                        f"sim={best_ratio:.0%} classifs={len(classifs)}"
-                    )
-
-                    return {
-                        "sp_id": sp_id,
-                        "similarity": best_ratio,
-                        "strategy": name,
-                        "classificacoes": formatted,
-                        "raw_classificacoes": classifs,
-                        "enunciado_superpro": best_match.get("TEXTO_QUESTAO", ""),
-                    }
-                else:
-                    logger.debug(
-                        f"[{name}] Sem match suficiente. "
-                        f"Melhor ratio={best_ratio:.2f}, specs={len(specs)}"
-                    )
+                # Se já temos algo que supera o threshold, podemos antecipar o retorno.
+                # O usuário disse que aceita >= min_similarity como match oficial.
+                # Se excedeu o min_similarity, retornamos logo.
+                if global_best_ratio >= min_similarity:
+                    break
 
             except httpx.HTTPStatusError as e:
                 if e.response.status_code == 401:
@@ -546,7 +525,7 @@ class SuperProClient:
                     continue
                 if e.response.status_code >= 500:
                     server_errors += 1
-                logger.warning(f"Erro HTTP [{name}]: {e.response.status_code}")
+                logger.warning(f"Erro HTTP [{name}] status={e.response.status_code}")
             except (httpx.TimeoutException, httpx.ConnectError) as e:
                 server_errors += 1
                 logger.warning(f"Erro conexão [{name}]: {type(e).__name__}")
@@ -565,7 +544,34 @@ class SuperProClient:
                 logger.warning(f"Erro parsing [{name}]: {type(e).__name__}: {e}")
 
         # Se houve erros de servidor (inclusive short-circuit), sinalizar
-        if server_errors >= 2:
+        if server_errors >= 2 and not global_best_match:
             return {"api_error": True, "error_count": server_errors}
+
+        if global_best_match:
+            sp_id = global_best_match.get("ID_BCO_QUESTAO", global_best_match.get("id", 0))
+            classifs = global_best_match.get("CLASSIFICACAO_QUESTAO", [])
+
+            if isinstance(classifs, list):
+                formatted = [
+                    self.format_classification(c)
+                    for c in classifs
+                    if isinstance(c, dict)
+                ]
+            else:
+                formatted = []
+
+            logger.info(
+                f"BEST CANDIDATE SP_ID={sp_id} sim={global_best_ratio:.0%} "
+                f"thresh={min_similarity:.0%} strategy={global_best_strategy}"
+            )
+
+            return {
+                "sp_id": sp_id,
+                "similarity": global_best_ratio,
+                "strategy": global_best_strategy,
+                "classificacoes": formatted,
+                "raw_classificacoes": classifs,
+                "enunciado_superpro": global_best_match.get("TEXTO_QUESTAO", ""),
+            }
 
         return None

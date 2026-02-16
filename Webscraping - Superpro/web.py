@@ -70,6 +70,10 @@ async def get_conferencia(
     apenas_extraidas: bool = True,
     precisa_verificar: bool | None = None,
     tem_classificacao: bool | None = None,
+    questao_id: int | None = None,
+    superpro_id: int | None = None,
+    data_inicio: str | None = None,
+    data_fim: str | None = None,
 ):
     """Proxy para listar assuntos extraídos com filtros."""
     params = {
@@ -83,6 +87,14 @@ async def get_conferencia(
         params["precisa_verificar"] = precisa_verificar
     if tem_classificacao is not None:
         params["tem_classificacao"] = tem_classificacao
+    if questao_id:
+        params["questao_id"] = questao_id
+    if superpro_id:
+        params["superpro_id"] = superpro_id
+    if data_inicio:
+        params["data_inicio"] = data_inicio
+    if data_fim:
+        params["data_fim"] = data_fim
 
     async with httpx.AsyncClient(timeout=60) as c:
         r = await c.get(f"{API_BASE}/extracao/assuntos", params=params)
@@ -890,14 +902,29 @@ HTML_CONFERENCIA = """<!DOCTYPE html>
       <option value="false">Não</option>
     </select>
 
-    <label>Items:</label>
+    <label>QID:</label>
+    <input type="number" id="filter-qid" style="width: 80px;" placeholder="ID">
+
+    <label>SPID:</label>
+    <input type="number" id="filter-spid" style="width: 80px;" placeholder="SP ID">
+
+    <label>Início:</label>
+    <input type="date" id="filter-date-start">
+
+    <label>Fim:</label>
+    <input type="date" id="filter-date-end">
+
+    <label>Itens:</label>
     <select id="filter-perpage" onchange="loadData(1)">
       <option value="10">10</option>
       <option value="20" selected>20</option>
       <option value="50">50</option>
     </select>
+
     <button class="btn-filter" onclick="loadData(1)">Atualizar</button>
+
     <span class="page-info" id="results-info"></span>
+
   </div>
 
   <!-- Tabela -->
@@ -985,6 +1012,10 @@ async function loadData(page) {
   const discId = document.getElementById('filter-disc').value;
   const verif = document.getElementById('filter-verif').value;
   const classified = document.getElementById('filter-classified').value;
+  const qid = document.getElementById('filter-qid').value;
+  const spid = document.getElementById('filter-spid').value;
+  const dateStart = document.getElementById('filter-date-start').value;
+  const dateEnd = document.getElementById('filter-date-end').value;
   const perPage = document.getElementById('filter-perpage').value;
 
   const params = new URLSearchParams({
@@ -993,6 +1024,10 @@ async function loadData(page) {
   if (discId) params.set('disciplina_id', discId);
   if (verif) params.set('precisa_verificar', verif);
   if (classified) params.set('tem_classificacao', classified);
+  if (qid) params.set('questao_id', qid);
+  if (spid) params.set('superpro_id', spid);
+  if (dateStart) params.set('data_inicio', dateStart);
+  if (dateEnd) params.set('data_fim', dateEnd);
 
   try {
     const r = await fetch(`/api/conferencia?${params}`);
@@ -1026,8 +1061,13 @@ function renderTable(items) {
     
     // Formata classificações como lista HTML
     let classifHtml = '';
-    if (q.classificacoes && q.classificacoes.length > 0) {
+    const hasOfficial = q.classificacoes && q.classificacoes.length > 0;
+    const hasLowMatch = q.classificacao_nao_enquadrada && q.classificacao_nao_enquadrada.length > 0;
+    
+    if (hasOfficial) {
       classifHtml = q.classificacoes.map(c => `<div style="font-size:11px; margin-bottom:4px;">${c}</div>`).join('');
+    } else if (hasLowMatch) {
+      classifHtml = q.classificacao_nao_enquadrada.map(c => `<div style="font-size:11px; margin-bottom:4px; opacity:0.6;">(Low) ${c}</div>`).join('');
     } else {
       classifHtml = '<span style="color:#666">-</span>';
     }

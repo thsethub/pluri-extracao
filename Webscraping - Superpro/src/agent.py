@@ -140,7 +140,7 @@ class ExtractionAgent:
         result = await self.superpro.find_and_classify(
             enunciado=enunciado,
             nosso_disc_id=disc_id,
-            min_similarity=0.95,
+            min_similarity=0.80,
         )
 
         if result and result.get("api_error"):
@@ -148,28 +148,38 @@ class ExtractionAgent:
             return "api_error"
 
         if result and result.get("sp_id"):
-            classificacoes = result["classificacoes"]
             sp_id = result["sp_id"]
             sim = result["similarity"]
+            raw_classifs = result["classificacoes"]
 
-            logger.success(
-                f"Q#{qid} -> SP#{sp_id} ({sim:.0%}) | "
-                f"{' | '.join(classificacoes[:3])}"
+            # Se match >= 80%, salvar como oficial. Caso contrário, salvar em "não enquadrada"
+            classificacoes_oficiais = []
+            classificacoes_nao_enquadradas = []
+
+            if sim >= 0.80:
+                classificacoes_oficiais = raw_classifs
+                status_msg = "FOUND"
+            else:
+                classificacoes_nao_enquadradas = raw_classifs
+                status_msg = "LOW_MATCH"
+
+            logger.info(
+                f"Q#{qid} -> SP#{sp_id} ({sim:.0%}) [{status_msg}] | "
+                f"{' | '.join(raw_classifs[:3])}"
             )
 
-            # Salvar com superpro_id, enunciado limpo (se IA foi usada),
-            # similaridade e enunciado do SuperPro
             ok = await self.local_api.salvar_extracao(
                 qid,
-                classificacoes,
+                classificacoes_oficiais,
                 superpro_id=sp_id,
                 enunciado_tratado=enunciado_ia,
                 similaridade=sim,
                 enunciado_superpro=result.get("enunciado_superpro"),
+                classificacao_nao_enquadrada=classificacoes_nao_enquadradas
             )
             if ok:
                 self.stats["saved"] += 1
-            return "found"
+            return "found" if sim >= 0.80 else "low_match"
         else:
             logger.info(f"Q#{qid}: Não encontrada no SuperProfessor")
             # Salvar como não encontrada (array vazio)

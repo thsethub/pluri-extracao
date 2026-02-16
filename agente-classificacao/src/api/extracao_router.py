@@ -336,6 +336,7 @@ async def salvar_extracao(
     if existente:
         # Atualiza o registro existente
         existente.classificacoes = request.classificacoes
+        existente.classificacao_nao_enquadrada = request.classificacao_nao_enquadrada
         existente.extracao_feita = True
         existente.motivo_erro = None
         existente.precisa_verificar = False
@@ -348,7 +349,7 @@ async def salvar_extracao(
             existente.enunciado_superpro = request.enunciado_superpro
         pg_db.commit()
         logger.success(
-            f"Questão {request.questao_id} atualizada com {len(request.classificacoes)} classificações"
+            f"Questão {request.questao_id} atualizada. Classif: {len(request.classificacoes)}, Não Enquadrada: {len(request.classificacao_nao_enquadrada)}"
         )
     else:
         # Cria novo registro
@@ -359,6 +360,7 @@ async def salvar_extracao(
             disciplina_id=questao.disciplina_id,
             disciplina_nome=disc_nome,
             classificacoes=request.classificacoes,
+            classificacao_nao_enquadrada=request.classificacao_nao_enquadrada,
             enunciado_original=questao.enunciado,
             enunciado_tratado=enunciado_tratado,
             similaridade=request.similaridade,
@@ -371,7 +373,7 @@ async def salvar_extracao(
         pg_db.add(registro)
         pg_db.commit()
         logger.success(
-            f"Questão {request.questao_id} salva com {len(request.classificacoes)} classificações"
+            f"Questão {request.questao_id} salva. Classif: {len(request.classificacoes)}, Não Enquadrada: {len(request.classificacao_nao_enquadrada)}"
         )
 
     return SalvarAssuntoResponse(
@@ -404,6 +406,10 @@ async def listar_assuntos(
     tem_classificacao: Optional[bool] = Query(
         None, description="Filtrar por presença de classificação"
     ),
+    questao_id: Optional[int] = Query(None, description="Filtrar por ID da questão"),
+    superpro_id: Optional[int] = Query(None, description="Filtrar por ID SuperProfessor"),
+    data_inicio: Optional[str] = Query(None, description="Data início (YYYY-MM-DD)"),
+    data_fim: Optional[str] = Query(None, description="Data fim (YYYY-MM-DD)"),
     pg_db: Session = Depends(get_pg_db),
 ):
     """Lista os registros de assuntos com paginação e filtros."""
@@ -417,6 +423,25 @@ async def listar_assuntos(
         query = query.filter(QuestaoAssuntoModel.contem_imagem == True)
     if precisa_verificar is not None:
         query = query.filter(QuestaoAssuntoModel.precisa_verificar == precisa_verificar)
+    
+    if questao_id:
+        query = query.filter(QuestaoAssuntoModel.questao_id == questao_id)
+    if superpro_id:
+        query = query.filter(QuestaoAssuntoModel.superpro_id == superpro_id)
+
+    if data_inicio:
+        try:
+            dt_inicio = datetime.strptime(data_inicio, "%Y-%m-%d")
+            query = query.filter(QuestaoAssuntoModel.criado_em >= dt_inicio)
+        except ValueError:
+            pass
+    if data_fim:
+        try:
+            dt_fim = datetime.strptime(data_fim, "%Y-%m-%d")
+            # Adiciona 1 dia para incluir o dia final completo
+            query = query.filter(QuestaoAssuntoModel.criado_em <= dt_fim)
+        except ValueError:
+            pass
     
     if tem_classificacao is not None:
         if tem_classificacao:

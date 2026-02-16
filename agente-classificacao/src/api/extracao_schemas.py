@@ -24,6 +24,8 @@ class QuestaoAssuntoSchema(BaseModel):
     enunciado_superpro: Optional[str] = None
     motivo_erro: Optional[str] = None
     created_at: Optional[datetime] = None
+    criado_em: Optional[datetime] = None
+    classificacao_nao_enquadrada: List[str] = []
 
     model_config = {"from_attributes": True}
 
@@ -77,6 +79,10 @@ class SalvarAssuntoRequest(BaseModel):
     enunciado_superpro: Optional[str] = Field(
         None,
         description="Enunciado completo da questão encontrada no SuperProfessor",
+    )
+    classificacao_nao_enquadrada: List[str] = Field(
+        [],
+        description="Classificações que não atingiram o match mínimo (80%%)",
     )
 
 

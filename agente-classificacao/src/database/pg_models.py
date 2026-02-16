@@ -1,6 +1,6 @@
 """Modelo SQLAlchemy para a tabela questao_assuntos no PostgreSQL"""
 
-from sqlalchemy import Column, Integer, Float, String, Text, Boolean, DateTime
+from sqlalchemy import Column, Integer, Float, String, Text, Boolean, DateTime, func
 from sqlalchemy.dialects.postgresql import JSONB
 from datetime import datetime, timezone
 from ..database import PgBase
@@ -29,6 +29,7 @@ class QuestaoAssuntoModel(PgBase):
     disciplina_id = Column(Integer, nullable=True)
     disciplina_nome = Column(String(100), nullable=True)
     classificacoes = Column(JSONB, nullable=True, default=[])
+    classificacao_nao_enquadrada = Column(JSONB, nullable=True, default=[]) # Added column
     enunciado_original = Column(Text, nullable=True)
     enunciado_tratado = Column(Text, nullable=True)
     similaridade = Column(Float, nullable=True)
@@ -40,3 +41,4 @@ class QuestaoAssuntoModel(PgBase):
     created_at = Column(
         DateTime, nullable=False, default=lambda: datetime.now(timezone.utc)
     )
+    criado_em = Column(DateTime(timezone=True), server_default=func.now()) # Added column
