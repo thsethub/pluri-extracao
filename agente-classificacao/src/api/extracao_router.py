@@ -265,7 +265,8 @@ async def proxima_questao(
         # Preparar alternativas se for múltipla escolha
         alternativas_resp = []
         if questao.tipo == "Múltipla Escolha" and questao.alternativas:
-            for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
+            letras = "abcdefghij"
+            for idx, alt in enumerate(sorted(questao.alternativas, key=lambda a: a.ordem or 0)):
                 conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
                 alternativas_resp.append(
                     AlternativaSchema(
@@ -274,6 +275,10 @@ async def proxima_questao(
                         correta=bool(alt.correta),
                     )
                 )
+            # Concatenar alternativas ao enunciado_tratado (formato SuperPro)
+            if alternativas_resp:
+                partes = [f"{letras[i]}) {a.conteudo}" for i, a in enumerate(alternativas_resp)]
+                enunciado_tratado = enunciado_tratado + " " + " ".join(partes)
 
         # Questão válida (pode ter imagem mas tem texto suficiente)
         return ProximaQuestaoResponse(
@@ -360,7 +365,8 @@ async def proxima_questao_verificar(
     # Preparar alternativas se for múltipla escolha
     alternativas_resp = []
     if questao.tipo == "Múltipla Escolha" and questao.alternativas:
-        for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
+        letras = "abcdefghij"
+        for idx, alt in enumerate(sorted(questao.alternativas, key=lambda a: a.ordem or 0)):
             conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
             alternativas_resp.append(
                 AlternativaSchema(
@@ -369,6 +375,10 @@ async def proxima_questao_verificar(
                     correta=bool(alt.correta),
                 )
             )
+        # Concatenar alternativas ao enunciado_tratado (formato SuperPro)
+        if alternativas_resp:
+            partes = [f"{letras[i]}) {a.conteudo}" for i, a in enumerate(alternativas_resp)]
+            enunciado_tratado = (enunciado_tratado or "") + " " + " ".join(partes)
 
     return ProximaQuestaoResponse(
         id=questao.id,

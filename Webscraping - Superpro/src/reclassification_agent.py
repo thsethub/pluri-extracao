@@ -122,17 +122,6 @@ class ReclassificationAgent:
             await self.local_api.salvar_extracao(qid, [])
             return "not_found"
 
-        # Se for múltipla escolha, concatenar alternativas ao enunciado
-        if questao.get("tipo") == "Múltipla Escolha":
-            letras = "abcdefghij"
-            alts = questao.get("alternativas", [])
-            if alts:
-                partes = [f"{letras[i]}) {a['conteudo']}" for i, a in enumerate(alts)]
-                enunciado = enunciado + " " + " ".join(partes)
-                logger.debug(
-                    f"Q#{qid}: Múltipla Escolha - {len(alts)} alternativas concatenadas"
-                )
-
         # Buscar no SuperProfessor
         result = await self.superpro.find_and_classify(
             enunciado=enunciado,
