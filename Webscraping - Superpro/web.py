@@ -394,7 +394,8 @@ HTML_PAGE = """<!DOCTYPE html>
   <header>
     <h1>🤖 <span>Extração</span> SuperProfessor</h1>
     <div>
-      <a href="/conferencia" style="color:var(--accent); text-decoration:none; font-size:13px; margin-right:16px; padding:5px 12px; border:1px solid var(--accent); border-radius:6px;">🔎 Conferência</a>
+      <a href="/conferencia" style="color:var(--accent); text-decoration:none; font-size:13px; margin-right:8px; padding:5px 12px; border:1px solid var(--accent); border-radius:6px;">🔎 Conferência</a>
+      <a href="/verificacao" style="color:var(--orange,#f97316); text-decoration:none; font-size:13px; margin-right:16px; padding:5px 12px; border:1px solid var(--orange,#f97316); border-radius:6px;">🔄 Verificação</a>
       <span class="elapsed" id="elapsed"></span>
       <span id="status-badge" class="badge-idle">Parado</span>
     </div>
@@ -1173,9 +1174,545 @@ init();
 """
 
 
+# ── HTML da Página de Verificação ────────────────────────────────────
+
+@app.get("/verificacao", response_class=HTMLResponse)
+async def verificacao_page():
+    return HTML_VERIFICACAO
+
+
+@app.get("/api/verificacao")
+async def get_verificacao(
+    page: int = 1,
+    per_page: int = 20,
+    disciplina_id: int | None = None,
+):
+    """Proxy para listar questões com precisa_verificar=True."""
+    params = {
+        "page": page,
+        "per_page": per_page,
+        "apenas_extraidas": True,
+        "precisa_verificar": True,
+    }
+    if disciplina_id:
+        params["disciplina_id"] = disciplina_id
+
+    async with httpx.AsyncClient(timeout=60) as c:
+        r = await c.get(f"{API_BASE}/extracao/assuntos", params=params)
+        return r.json()
+
+
+# ── Controle do agente de reclassificação ──
+
+_reclass_state = {
+    "running": False,
+    "process": None,
+    "started_at": None,
+    "max_questions": 0,
+}
+_reclass_logs: deque[str] = deque(maxlen=500)
+
+
+@app.post("/api/start-reclassificar")
+async def start_reclassification(request: Request):
+    if _reclass_state["running"]:
+        return {"ok": False, "error": "Reclassificação já está rodando"}
+
+    body = await request.json()
+    max_q = body.get("max_questions", 0)
+
+    cmd = [
+        sys.executable,
+        "main.py",
+        "--reclassificar",
+    ]
+    if max_q and max_q > 0:
+        cmd.extend(["--max", str(max_q)])
+
+    _reclass_logs.clear()
+    _reclass_logs.append(
+        f"[{_now()}] Iniciando reclassificação: max={max_q or '∞'}"
+    )
+
+    proc = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        cwd=str(Path(__file__).parent),
+        bufsize=1,
+    )
+
+    _reclass_state["running"] = True
+    _reclass_state["process"] = proc
+    _reclass_state["started_at"] = time.time()
+    _reclass_state["max_questions"] = max_q
+
+    asyncio.get_event_loop().run_in_executor(None, _read_reclass_output, proc)
+
+    return {"ok": True, "pid": proc.pid}
+
+
+@app.post("/api/stop-reclassificar")
+async def stop_reclassification():
+    if not _reclass_state["running"] or not _reclass_state["process"]:
+        return {"ok": False, "error": "Reclassificação não está rodando"}
+
+    proc = _reclass_state["process"]
+    proc.terminate()
+    _reclass_logs.append(f"[{_now()}] ⏹ Parando reclassificação (PID {proc.pid})...")
+
+    try:
+        proc.wait(timeout=10)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+
+    _reclass_state["running"] = False
+    _reclass_state["process"] = None
+    _reclass_logs.append(f"[{_now()}] Reclassificação parada.")
+
+    return {"ok": True}
+
+
+@app.get("/api/reclass-status")
+async def get_reclass_status():
+    elapsed = ""
+    if _reclass_state["started_at"] and _reclass_state["running"]:
+        delta = time.time() - _reclass_state["started_at"]
+        h, rem = divmod(int(delta), 3600)
+        m, s = divmod(rem, 60)
+        elapsed = f"{h}h{m:02d}m{s:02d}s"
+
+    return {
+        "running": _reclass_state["running"],
+        "elapsed": elapsed,
+        "max_questions": _reclass_state["max_questions"],
+    }
+
+
+@app.get("/api/reclass-logs")
+async def get_reclass_logs(after: int = 0):
+    all_logs = list(_reclass_logs)
+    return {"logs": all_logs[after:], "total": len(all_logs)}
+
+
+def _read_reclass_output(proc: subprocess.Popen):
+    """Lê stdout do processo de reclassificação."""
+    try:
+        for line in proc.stdout:
+            line = line.rstrip()
+            if line:
+                _reclass_logs.append(line)
+                print(line, flush=True)
+    except Exception:
+        pass
+    finally:
+        proc.wait()
+        msg = f"[{_now()}] Reclassificação encerrada (exit code: {proc.returncode})"
+        _reclass_logs.append(msg)
+        print(msg, flush=True)
+        _reclass_state["running"] = False
+        _reclass_state["process"] = None
+
+
+HTML_VERIFICACAO = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verificação — Extração SuperProfessor</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #8b8d97;
+    --accent: #6366f1;
+    --accent-hover: #818cf8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --cyan: #06b6d4;
+    --orange: #f97316;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  }
+  header h1 { font-size: 22px; font-weight: 600; }
+  header h1 span { color: var(--orange); }
+  .nav-links { display: flex; gap: 10px; align-items: center; }
+  .nav-link {
+    color: var(--accent); text-decoration: none; font-size: 13px;
+    padding: 6px 14px; border: 1px solid var(--accent); border-radius: 8px;
+    transition: all .15s;
+  }
+  .nav-link:hover { background: var(--accent); color: #fff; }
+
+  /* ── Stats ── */
+  .stats-bar {
+    display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .stat-box {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 20px; text-align: center; flex: 1; min-width: 120px;
+  }
+  .stat-box .val { font-size: 22px; font-weight: 700; }
+  .stat-box .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+  .stat-orange .val { color: var(--orange); }
+  .stat-green .val { color: var(--green); }
+
+  /* ── Controles ── */
+  .controls-bar {
+    display: flex; gap: 12px; align-items: center; margin-bottom: 20px;
+    flex-wrap: wrap;
+    padding: 16px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px;
+  }
+  .btn {
+    padding: 10px 24px; border: none; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: all .15s;
+  }
+  .btn-reclass { background: var(--orange); color: #fff; }
+  .btn-reclass:hover { background: #ea580c; }
+  .btn-reclass:disabled { opacity: .4; cursor: not-allowed; }
+  .btn-stop { background: var(--red); color: #fff; }
+  .btn-stop:hover { background: #dc2626; }
+  .btn-stop:disabled { opacity: .4; cursor: not-allowed; }
+  .input-max {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 14px; border-radius: 8px; width: 130px; font-size: 14px;
+  }
+  .input-max:focus { outline: none; border-color: var(--accent); }
+  .input-max::placeholder { color: var(--muted); }
+  #reclass-badge {
+    padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
+  }
+  .badge-idle { background: var(--border); color: var(--muted); }
+  .badge-running { background: rgba(249,115,22,.15); color: var(--orange); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.6; } }
+  .elapsed { color: var(--muted); font-size: 13px; }
+
+  /* ── Console ── */
+  #reclass-console {
+    background: #0a0c10; border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px; height: 200px; overflow-y: auto; font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 12px; line-height: 1.7; color: #a1a1aa; margin-bottom: 20px;
+  }
+  #reclass-console .log-success { color: var(--green); }
+  #reclass-console .log-warning { color: var(--yellow); }
+  #reclass-console .log-error { color: var(--red); }
+  #reclass-console .log-info { color: var(--cyan); }
+  #reclass-console .log-match { color: #a78bfa; font-weight: 500; }
+
+  /* ── Tabela ── */
+  .table-wrap {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden;
+  }
+  .v-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .v-table th {
+    text-align: left; padding: 12px 14px; color: var(--muted); font-weight: 500;
+    border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase;
+    background: rgba(249,115,22,.04);
+  }
+  .v-table td {
+    padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.04);
+    vertical-align: middle;
+  }
+  .v-table tr:hover { background: rgba(249,115,22,.06); }
+  .v-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .match-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 12px; font-weight: 600;
+  }
+  .match-high { background: rgba(34,197,94,.15); color: var(--green); }
+  .match-mid { background: rgba(234,179,8,.15); color: var(--yellow); }
+  .match-low { background: rgba(239,68,68,.15); color: var(--red); }
+  .match-none { background: var(--border); color: var(--muted); }
+
+  .enunciado-preview {
+    max-width: 300px; overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; font-size: 12px; color: var(--muted);
+  }
+
+  .classif-list { font-size: 11px; line-height: 1.4; }
+  .classif-list div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 280px; }
+
+  /* ── Paginação ── */
+  .pagination {
+    display: flex; gap: 8px; justify-content: center; align-items: center;
+    margin-top: 20px; padding: 16px;
+  }
+  .page-btn {
+    padding: 6px 14px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--card); color: var(--text); font-size: 13px; cursor: pointer;
+  }
+  .page-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .page-btn:disabled { opacity: .4; cursor: not-allowed; }
+  .page-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .page-info { color: var(--muted); font-size: 13px; }
+
+  #ctrl-msg { margin-top: 8px; font-size: 13px; min-height: 16px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>🔄 <span>Verificação</span> — Reclassificação</h1>
+    <div class="nav-links">
+      <a class="nav-link" href="/">🤖 Extração</a>
+      <a class="nav-link" href="/conferencia">🔎 Conferência</a>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-box stat-orange"><div class="val" id="st-total">—</div><div class="lbl">Pendentes</div></div>
+    <div class="stat-box stat-green"><div class="val" id="st-done">—</div><div class="lbl">Total Questões</div></div>
+  </div>
+
+  <!-- Controles de reclassificação -->
+  <div class="controls-bar">
+    <label style="font-size:13px; color:var(--muted);">Limite:</label>
+    <input type="number" class="input-max" id="max-reclass" value="0" min="0" placeholder="0=todos">
+    <button class="btn btn-reclass" id="btn-reclass" onclick="startReclass()">🔄 Iniciar Reclassificação</button>
+    <button class="btn btn-stop" id="btn-stop-reclass" onclick="stopReclass()" disabled>⏹ Parar</button>
+    <span class="elapsed" id="reclass-elapsed"></span>
+    <span id="reclass-badge" class="badge-idle">Parado</span>
+    <div id="ctrl-msg"></div>
+  </div>
+
+  <!-- Console de logs -->
+  <div id="reclass-console"><span style="color:var(--muted)">Aguardando...</span></div>
+
+  <!-- Tabela de questões precisa_verificar -->
+  <div class="table-wrap">
+    <table class="v-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Questão</th>
+          <th>Disciplina</th>
+          <th>SP ID</th>
+          <th>Match</th>
+          <th>Enunciado</th>
+          <th>Classificações</th>
+        </tr>
+      </thead>
+      <tbody id="verificacao-body"><tr><td colspan="7" style="text-align:center; color:var(--muted); padding:30px;">Carregando...</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<script>
+let vPage = 1;
+let vTotal = 0;
+let reclassRunning = false;
+let reclassPolling = null;
+let reclassLogIndex = 0;
+
+async function init() {
+  await loadVerificacao();
+  checkReclassStatus();
+  setInterval(checkReclassStatus, 3000);
+}
+
+// ── Carregar questões ──
+async function loadVerificacao(page = 1) {
+  vPage = page;
+  try {
+    const r = await fetch(`/api/verificacao?page=${page}&per_page=20`);
+    const data = await r.json();
+    renderTable(data.items || []);
+    renderPagination(data.page || 1, data.pages || 1, data.total || 0);
+    document.getElementById('st-total').textContent = fmt(data.total || 0);
+    document.getElementById('st-done').textContent = fmt((data.total || 0));
+  } catch(e) {
+    console.error('Erro:', e);
+    document.getElementById('verificacao-body').innerHTML =
+      '<tr><td colspan="7" style="text-align:center; color:var(--red); padding:30px;">Erro ao carregar</td></tr>';
+  }
+}
+
+function renderTable(items) {
+  const tbody = document.getElementById('verificacao-body');
+  if (!items.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--green); padding:30px;">✅ Nenhuma questão pendente de verificação!</td></tr>';
+    return;
+  }
+  tbody.innerHTML = items.map(q => {
+    const sim = q.similaridade;
+    let matchCls = 'match-none', matchTxt = '—';
+    if (sim != null) {
+      const pct = (sim * 100).toFixed(0);
+      matchTxt = pct + '%';
+      matchCls = sim >= 0.9 ? 'match-high' : sim >= 0.8 ? 'match-mid' : 'match-low';
+    }
+    const classifs = (q.classificacoes || []).slice(0, 3);
+    const classifsHtml = classifs.map(c => `<div title="${escHtml(c)}">${escHtml(c)}</div>`).join('');
+    const enunciado = (q.enunciado_tratado || '').substring(0, 80);
+
+    return `<tr>
+      <td class="num">${q.questao_id}</td>
+      <td class="num">${q.questao_id_str || ''}</td>
+      <td>${q.disciplina_nome || '—'}</td>
+      <td class="num">${q.superpro_id || '—'}</td>
+      <td><span class="match-badge ${matchCls}">${matchTxt}</span></td>
+      <td><div class="enunciado-preview" title="${escHtml(q.enunciado_tratado || '')}">${escHtml(enunciado)}</div></td>
+      <td><div class="classif-list">${classifsHtml || '<span style="color:var(--muted)">—</span>'}</div></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderPagination(current, total, count) {
+  const div = document.getElementById('pagination');
+  if (total <= 1) { div.innerHTML = ''; return; }
+  let html = `<button class="page-btn" onclick="loadVerificacao(${current-1})" ${current<=1?'disabled':''}>← Anterior</button>`;
+  html += `<span class="page-info">Página ${current} de ${total} (${fmt(count)} questões)</span>`;
+  html += `<button class="page-btn" onclick="loadVerificacao(${current+1})" ${current>=total?'disabled':''}>Próxima →</button>`;
+  div.innerHTML = html;
+}
+
+// ── Controle reclassificação ──
+async function startReclass() {
+  const maxQ = +document.getElementById('max-reclass').value || 0;
+  document.getElementById('btn-reclass').disabled = true;
+  showMsg('Iniciando reclassificação...', 'var(--yellow)');
+
+  try {
+    const r = await fetch('/api/start-reclassificar', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ max_questions: maxQ })
+    });
+    const data = await r.json();
+    if (data.ok) {
+      showMsg(`Reclassificação iniciada (PID ${data.pid})`, 'var(--green)');
+      setReclassRunning(true);
+      reclassLogIndex = 0;
+      document.getElementById('reclass-console').innerHTML = '';
+      startReclassPolling();
+    } else {
+      showMsg(data.error, 'var(--red)');
+      document.getElementById('btn-reclass').disabled = false;
+    }
+  } catch(e) {
+    showMsg('Erro ao conectar', 'var(--red)');
+    document.getElementById('btn-reclass').disabled = false;
+  }
+}
+
+async function stopReclass() {
+  document.getElementById('btn-stop-reclass').disabled = true;
+  showMsg('Parando...', 'var(--yellow)');
+  try {
+    const r = await fetch('/api/stop-reclassificar', { method: 'POST' });
+    const data = await r.json();
+    showMsg(data.ok ? 'Reclassificação parada' : data.error, data.ok ? 'var(--green)' : 'var(--red)');
+  } catch(e) { showMsg('Erro', 'var(--red)'); }
+}
+
+async function checkReclassStatus() {
+  try {
+    const r = await fetch('/api/reclass-status');
+    const data = await r.json();
+    const badge = document.getElementById('reclass-badge');
+    const elapsed = document.getElementById('reclass-elapsed');
+
+    if (data.running) {
+      badge.textContent = 'Rodando';
+      badge.className = 'badge-running';
+      elapsed.textContent = data.elapsed;
+      if (!reclassRunning) { setReclassRunning(true); startReclassPolling(); }
+    } else {
+      badge.textContent = 'Parado';
+      badge.className = 'badge-idle';
+      elapsed.textContent = '';
+      if (reclassRunning) {
+        setReclassRunning(false);
+        loadVerificacao(vPage); // Refresh table
+      }
+    }
+  } catch(e) {}
+}
+
+function setReclassRunning(v) {
+  reclassRunning = v;
+  document.getElementById('btn-reclass').disabled = v;
+  document.getElementById('btn-stop-reclass').disabled = !v;
+  if (!v && reclassPolling) { clearInterval(reclassPolling); reclassPolling = null; }
+}
+
+function startReclassPolling() {
+  if (reclassPolling) clearInterval(reclassPolling);
+  reclassPolling = setInterval(pollReclassLogs, 800);
+}
+
+async function pollReclassLogs() {
+  try {
+    const r = await fetch(`/api/reclass-logs?after=${reclassLogIndex}`);
+    const data = await r.json();
+    if (data.logs.length) {
+      const con = document.getElementById('reclass-console');
+      data.logs.forEach(line => {
+        const div = document.createElement('div');
+        div.className = getLogClass(line);
+        div.textContent = line;
+        con.appendChild(div);
+      });
+      con.scrollTop = con.scrollHeight;
+      reclassLogIndex = data.total;
+    }
+  } catch(e) {}
+}
+
+function getLogClass(line) {
+  if (line.includes('RECLASS') || line.includes('✅') || line.includes('MATCH')) return 'log-match';
+  if (line.includes('WARNING') || line.includes('⚠')) return 'log-warning';
+  if (line.includes('ERROR') || line.includes('❌')) return 'log-error';
+  if (line.includes('INFO')) return 'log-info';
+  return '';
+}
+
+// ── Helpers ──
+function fmt(n) { return n != null ? n.toLocaleString('pt-BR') : '—'; }
+function showMsg(msg, color) {
+  const el = document.getElementById('ctrl-msg');
+  el.textContent = msg;
+  el.style.color = color || 'var(--text)';
+}
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+init();
+</script>
+</body>
+</html>
+"""
+
+
 if __name__ == "__main__":
     import uvicorn
 
     print(f"🌐 Interface disponível em: http://localhost:8501")
     print(f"📡 API backend: {API_BASE}")
     uvicorn.run(app, host="0.0.0.0", port=8501, log_level="info")
+

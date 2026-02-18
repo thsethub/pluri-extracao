@@ -48,6 +48,18 @@ class LocalApiClient:
             logger.error(f"Erro ao buscar próxima questão: {e.response.status_code}")
             return None
 
+    async def proxima_questao_verificar(self) -> dict | None:
+        """Obtém a próxima questão com precisa_verificar=True para re-classificação."""
+        try:
+            resp = await self._client.get("/extracao/proxima-verificar")
+            if resp.status_code == 404:
+                return None  # Nenhuma questão pendente
+            resp.raise_for_status()
+            return resp.json()
+        except httpx.HTTPStatusError as e:
+            logger.error(f"Erro ao buscar questão para verificar: {e.response.status_code}")
+            return None
+
     async def salvar_extracao(
         self,
         questao_id: int,

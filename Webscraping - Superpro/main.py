@@ -9,6 +9,8 @@ Uso:
     python main.py --run --disc 12               Apenas Matemática
     python main.py --run --disc 12 2 11          Matemática, Biologia e Português
     python main.py --run --max 100               Processar no máximo 100 questões
+    python main.py --reclassificar               Re-classifica questões precisa_verificar
+    python main.py --reclassificar --max 50      Re-classifica no máximo 50 questões
     python main.py --list-disciplinas            Lista disciplinas e progresso
     python main.py --stats                       Mostra estatísticas gerais
     python main.py --login                       Renova token JWT via browser
@@ -24,6 +26,7 @@ from rich.table import Table
 from src.config import settings
 from src.local_api_client import LocalApiClient
 from src.agent import ExtractionAgent
+from src.reclassification_agent import ReclassificationAgent
 from src.token_manager import TokenManager
 
 console = Console()
@@ -139,6 +142,12 @@ async def run_agent(disc_ids: list[int] | None, max_questions: int, headless: bo
     await agent.run(max_questions=max_questions)
 
 
+async def run_reclassification(max_questions: int):
+    """Executa o agente de reclassificação para questões precisa_verificar."""
+    agent = ReclassificationAgent()
+    await agent.run(max_questions=max_questions)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="🤖 Agente de Extração de Classificações - Super Professor (API Direta)",
@@ -149,6 +158,8 @@ Exemplos:
   python main.py --run --disc 12             Apenas Matemática
   python main.py --run --disc 12 2 11        Matemática, Bio e Port
   python main.py --run --max 50              Processa no máximo 50 questões
+  python main.py --reclassificar             Re-classifica precisa_verificar
+  python main.py --reclassificar --max 20    Re-classifica no máximo 20
   python main.py --list-disciplinas          Lista disciplinas e progresso
   python main.py --stats                     Estatísticas gerais
   python main.py --login                     Renova token JWT
@@ -156,6 +167,10 @@ Exemplos:
     )
 
     parser.add_argument("--run", action="store_true", help="Inicia extração")
+    parser.add_argument(
+        "--reclassificar", action="store_true",
+        help="Re-classifica questões com precisa_verificar"
+    )
     parser.add_argument(
         "--disc", type=int, nargs="+", help="IDs das disciplinas (ex: 12 2 11)"
     )
@@ -181,6 +196,8 @@ Exemplos:
         asyncio.run(renew_token())
     elif args.run:
         asyncio.run(run_agent(args.disc, args.max, args.headless))
+    elif args.reclassificar:
+        asyncio.run(run_reclassification(args.max))
     else:
         parser.print_help()
         console.print("\n[yellow]💡 Use --run para iniciar a extração[/yellow]")

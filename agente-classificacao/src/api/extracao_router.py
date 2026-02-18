@@ -8,10 +8,11 @@ from math import ceil
 from loguru import logger
 
 from ..database import get_db, get_pg_db
-from ..database.models import QuestaoModel, DisciplinaModel, AnoModel
+from ..database.models import QuestaoModel, QuestaoAlternativaModel, DisciplinaModel, AnoModel
 from ..database.pg_models import QuestaoAssuntoModel
 from ..services.enunciado_cleaner import tratar_enunciado
 from .extracao_schemas import (
+    AlternativaSchema,
     QuestaoAssuntoSchema,
     QuestaoAssuntoListResponse,
     ProximaQuestaoResponse,
@@ -210,6 +211,7 @@ async def proxima_questao(
             .options(
                 joinedload(QuestaoModel.disciplina),
                 joinedload(QuestaoModel.ano),
+                joinedload(QuestaoModel.alternativas),
             )
             .filter(QuestaoModel.disciplina_id == disciplina_id)
             .filter(QuestaoModel.habilidade_id.isnot(None))
@@ -260,6 +262,19 @@ async def proxima_questao(
             logger.info(f"Questão {questao.id} pulada: {motivo_erro}")
             continue
 
+        # Preparar alternativas se for múltipla escolha
+        alternativas_resp = []
+        if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+            for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
+                conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
+                alternativas_resp.append(
+                    AlternativaSchema(
+                        ordem=alt.ordem or 0,
+                        conteudo=conteudo_limpo,
+                        correta=bool(alt.correta),
+                    )
+                )
+
         # Questão válida (pode ter imagem mas tem texto suficiente)
         return ProximaQuestaoResponse(
             id=questao.id,
@@ -271,6 +286,8 @@ async def proxima_questao(
             habilidade_id=questao.habilidade_id,
             ano_id=questao.ano_id,
             ano_nome=ano_nome,
+            tipo=questao.tipo,
+            alternativas=alternativas_resp,
             contem_imagem=contem_imagem,
             motivo_erro=None,
         )
@@ -278,6 +295,95 @@ async def proxima_questao(
     raise HTTPException(
         status_code=404,
         detail=f"Puladas {MAX_SKIP} questões consecutivas sem texto. Verifique a disciplina {disciplina_id}.",
+    )
+
+
+# ========================
+# PRÓXIMA QUESTÃO PARA RE-CLASSIFICAR (precisa_verificar)
+# ========================
+@router.get(
+    "/proxima-verificar",
+    response_model=ProximaQuestaoResponse,
+    summary="🔄 Próxima questão para re-classificação",
+    response_description="Retorna a próxima questão com precisa_verificar=True",
+)
+async def proxima_questao_verificar(
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+):
+    """
+    Retorna a próxima questão que está marcada como `precisa_verificar=True`
+    no PostgreSQL, com dados completos do MySQL (incluindo alternativas).
+
+    Usada pelo agente de reclassificação para re-processar questões duvidosas.
+    """
+    # Buscar próxima questão com precisa_verificar=True no PostgreSQL
+    registro_pg = (
+        pg_db.query(QuestaoAssuntoModel)
+        .filter(QuestaoAssuntoModel.precisa_verificar == True)
+        .order_by(QuestaoAssuntoModel.id)
+        .first()
+    )
+
+    if not registro_pg:
+        raise HTTPException(
+            status_code=404,
+            detail="Nenhuma questão com precisa_verificar pendente",
+        )
+
+    # Buscar dados completos no MySQL (com alternativas)
+    questao = (
+        db.query(QuestaoModel)
+        .options(
+            joinedload(QuestaoModel.disciplina),
+            joinedload(QuestaoModel.ano),
+            joinedload(QuestaoModel.alternativas),
+        )
+        .filter(QuestaoModel.id == registro_pg.questao_id)
+        .first()
+    )
+
+    if not questao:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Questão {registro_pg.questao_id} não encontrada no MySQL",
+        )
+
+    # Tratar enunciado
+    enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(
+        questao.enunciado
+    )
+
+    disc_nome = questao.disciplina.descricao if questao.disciplina else None
+    ano_nome = questao.ano.descricao if questao.ano else None
+
+    # Preparar alternativas se for múltipla escolha
+    alternativas_resp = []
+    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+        for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
+            conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
+            alternativas_resp.append(
+                AlternativaSchema(
+                    ordem=alt.ordem or 0,
+                    conteudo=conteudo_limpo,
+                    correta=bool(alt.correta),
+                )
+            )
+
+    return ProximaQuestaoResponse(
+        id=questao.id,
+        questao_id=questao.questao_id,
+        enunciado_original=questao.enunciado,
+        enunciado_tratado=enunciado_tratado or "",
+        disciplina_id=questao.disciplina_id,
+        disciplina_nome=disc_nome,
+        habilidade_id=questao.habilidade_id,
+        ano_id=questao.ano_id,
+        ano_nome=ano_nome,
+        tipo=questao.tipo,
+        alternativas=alternativas_resp,
+        contem_imagem=contem_imagem,
+        motivo_erro=motivo_erro,
     )
 
 

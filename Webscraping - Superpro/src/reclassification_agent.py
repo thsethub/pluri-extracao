@@ -1,13 +1,16 @@
 """
-Agente de extração de classificações do SuperProfessor.
+Agente de reclassificação de questões com precisa_verificar=True.
 
-Orquestra o fluxo completo:
-1. Busca questão pendente na API local
-2. Pesquisa no SuperProfessor via API direta (sem browser)
+Orquestra o fluxo:
+1. Busca questão marcada como precisa_verificar na API local
+2. Pesquisa no SuperProfessor via API direta
 3. Compara textos para validar match
-4. Salva classificação encontrada
+4. Salva nova classificação (sobrescreve anterior)
+5. Para quando não houver mais questões pendentes
 
-Projetado para rodar por longas horas sem problemas.
+Uso:
+    python main.py --reclassificar
+    python main.py --reclassificar --max 50
 """
 
 import asyncio
@@ -22,29 +25,14 @@ from .superpro_client import SuperProClient
 from .local_api_client import LocalApiClient
 
 
-class ExtractionAgent:
-    """Agente autônomo de extração de classificações."""
+class ReclassificationAgent:
+    """Agente dedicado para re-classificar questões com precisa_verificar."""
 
-    def __init__(self, disciplina_ids: list[int] | None = None):
-        self.disciplina_ids = disciplina_ids or [
-            12,
-            2,
-            11,
-            7,
-            14,
-            6,
-            8,
-            9,
-            15,
-            10,
-            5,
-            1,
-        ]
+    def __init__(self):
         self.token_manager = TokenManager(settings.STORAGE_DIR)
         self.superpro = SuperProClient(self.token_manager)
         self.local_api = LocalApiClient()
 
-        # Estatísticas
         self.stats = {
             "started_at": None,
             "total_processed": 0,
@@ -53,8 +41,6 @@ class ExtractionAgent:
             "errors": 0,
             "saved": 0,
             "consecutive_errors": 0,
-            "server_down_rounds": 0,
-            "current_discipline": None,
         }
 
     async def start(self):
@@ -62,14 +48,14 @@ class ExtractionAgent:
         await self.local_api.start()
         await self.superpro.start()
         self.stats["started_at"] = datetime.now()
-        logger.info("=== Agente de extração iniciado ===")
+        logger.info("=== Agente de reclassificação iniciado ===")
 
     async def stop(self):
         """Encerra os clientes."""
         await self.superpro.close()
         await self.local_api.close()
         self._print_stats()
-        logger.info("=== Agente de extração encerrado ===")
+        logger.info("=== Agente de reclassificação encerrado ===")
 
     def _print_stats(self):
         """Imprime estatísticas do agente."""
@@ -85,7 +71,7 @@ class ExtractionAgent:
 
         logger.info(
             f"\n{'='*50}\n"
-            f"  ESTATÍSTICAS DA SESSÃO\n"
+            f"  RECLASSIFICAÇÃO - ESTATÍSTICAS\n"
             f"{'='*50}\n"
             f"  Tempo: {elapsed}\n"
             f"  Processadas: {s['total_processed']}\n"
@@ -98,10 +84,10 @@ class ExtractionAgent:
 
     async def _process_question(self, questao: dict) -> str:
         """
-        Processa uma questão: busca no SuperProfessor e salva classificação.
+        Re-processa uma questão: busca no SuperProfessor e salva classificação.
 
         Returns:
-            'found', 'not_found', ou 'api_error'
+            'found', 'not_found', 'low_match', ou 'api_error'
         """
         qid = questao["id"]
         disc_id = questao.get("disciplina_id")
@@ -137,7 +123,6 @@ class ExtractionAgent:
             return "not_found"
 
         # Se for múltipla escolha, concatenar alternativas ao enunciado
-        # para ficar coerente com o formato do SuperProfessor (TEXTO_QUESTAO)
         if questao.get("tipo") == "Múltipla Escolha":
             letras = "abcdefghij"
             alts = questao.get("alternativas", [])
@@ -164,7 +149,6 @@ class ExtractionAgent:
             sim = result["similarity"]
             raw_classifs = result["classificacoes"]
 
-            # Se match >= 80%, salvar como oficial. Caso contrário, salvar em "não enquadrada"
             classificacoes_oficiais = []
             classificacoes_nao_enquadradas = []
 
@@ -176,7 +160,7 @@ class ExtractionAgent:
                 status_msg = "LOW_MATCH"
 
             logger.info(
-                f"Q#{qid} -> SP#{sp_id} ({sim:.0%}) [{status_msg}] | "
+                f"[RECLASS] Q#{qid} -> SP#{sp_id} ({sim:.0%}) [{status_msg}] | "
                 f"{' | '.join(raw_classifs[:3])}"
             )
 
@@ -187,14 +171,13 @@ class ExtractionAgent:
                 enunciado_tratado=enunciado_ia,
                 similaridade=sim,
                 enunciado_superpro=result.get("enunciado_superpro"),
-                classificacao_nao_enquadrada=classificacoes_nao_enquadradas
+                classificacao_nao_enquadrada=classificacoes_nao_enquadradas,
             )
             if ok:
                 self.stats["saved"] += 1
             return "found" if sim >= 0.80 else "low_match"
         else:
-            logger.info(f"Q#{qid}: Não encontrada no SuperProfessor")
-            # Salvar como não encontrada (array vazio)
+            logger.info(f"[RECLASS] Q#{qid}: Não encontrada no SuperProfessor")
             await self.local_api.salvar_extracao(qid, [])
             return "not_found"
 
@@ -204,18 +187,15 @@ class ExtractionAgent:
         delay_range: tuple[float, float] = (0.5, 1.5),
     ):
         """
-        Loop principal do agente.
+        Loop principal do agente de reclassificação.
 
         Args:
-            max_questions: Máximo de questões a processar (0 = infinito)
+            max_questions: Máximo de questões a processar (0 = todas)
             delay_range: Intervalo de delay entre questões (min, max) em segundos
         """
         await self.start()
 
         try:
-            disc_index = 0
-            empty_rounds = 0
-
             while True:
                 # Verificar limite
                 if max_questions > 0 and self.stats["total_processed"] >= max_questions:
@@ -224,54 +204,30 @@ class ExtractionAgent:
 
                 # Verificar erros consecutivos
                 if self.stats["consecutive_errors"] >= settings.MAX_CONSECUTIVE_ERRORS:
-                    self.stats["server_down_rounds"] += 1
-                    rounds = self.stats["server_down_rounds"]
-                    max_rounds = settings.MAX_SERVER_DOWN_ROUNDS
-
-                    if rounds > max_rounds:
-                        logger.error(
-                            f"❌ API instável por {rounds} rodadas consecutivas. "
-                            f"Encerrando agente automaticamente."
-                        )
-                        break
-
-                    # Pausa escalonada: 2min, 4min, 6min... (máx 10min)
-                    pause = min(settings.LONG_PAUSE_SECONDS * rounds, 600)
+                    pause = min(settings.LONG_PAUSE_SECONDS * 2, 600)
                     logger.warning(
-                        f"⚠️ {self.stats['consecutive_errors']} erros consecutivos "
-                        f"(rodada {rounds}/{max_rounds}). "
-                        f"Pausando {pause}s ({pause//60}min)..."
+                        f"⚠️ {self.stats['consecutive_errors']} erros consecutivos. "
+                        f"Pausando {pause}s..."
                     )
                     await asyncio.sleep(pause)
                     self.stats["consecutive_errors"] = 0
 
-                # Rotacionar disciplinas
-                disc_id = self.disciplina_ids[disc_index % len(self.disciplina_ids)]
-                self.stats["current_discipline"] = disc_id
-
-                # Buscar próxima questão
+                # Buscar próxima questão para verificar
                 try:
-                    questao = await self.local_api.proxima_questao(disc_id)
+                    questao = await self.local_api.proxima_questao_verificar()
                 except Exception as e:
-                    logger.error(f"Erro ao buscar próxima questão: {e}")
+                    logger.error(f"Erro ao buscar questão para verificar: {e}")
                     self.stats["consecutive_errors"] += 1
                     self.stats["errors"] += 1
-                    disc_index += 1
                     await asyncio.sleep(5)
                     continue
 
                 if not questao:
-                    logger.debug(f"Disciplina {disc_id}: sem questões pendentes")
-                    disc_index += 1
-                    empty_rounds += 1
+                    logger.info(
+                        "✅ Todas as questões precisa_verificar foram re-classificadas!"
+                    )
+                    break
 
-                    if empty_rounds >= len(self.disciplina_ids):
-                        logger.info("Todas as disciplinas sem questões pendentes!")
-                        break
-
-                    continue
-
-                empty_rounds = 0  # Reset
                 self.stats["total_processed"] += 1
 
                 # Processar
@@ -281,23 +237,19 @@ class ExtractionAgent:
                     if status == "found":
                         self.stats["found"] += 1
                         self.stats["consecutive_errors"] = 0
-                        self.stats["server_down_rounds"] = 0  # Reset rodadas
                     elif status == "api_error":
-                        # API fora do ar — NÃO marcar como processada,
-                        # incrementar erros consecutivos para trigger de pausa
                         self.stats["errors"] += 1
                         self.stats["consecutive_errors"] += 1
-                        self.stats["total_processed"] -= 1  # Não contar como processada
+                        self.stats["total_processed"] -= 1
                         logger.warning(
-                            f"API instável — aguardando 30s antes de continuar... "
-                            f"(erros: {self.stats['consecutive_errors']}/{settings.MAX_CONSECUTIVE_ERRORS})"
+                            f"API instável — aguardando 30s... "
+                            f"(erros: {self.stats['consecutive_errors']})"
                         )
-                        await asyncio.sleep(30)  # Pausa extra quando API está fora
+                        await asyncio.sleep(30)
                         continue
                     else:
                         self.stats["not_found"] += 1
                         self.stats["consecutive_errors"] = 0
-                        self.stats["server_down_rounds"] = 0  # Reset rodadas
 
                 except asyncio.CancelledError:
                     logger.info("Tarefa cancelada")
@@ -307,17 +259,13 @@ class ExtractionAgent:
                     self.stats["errors"] += 1
                     self.stats["consecutive_errors"] += 1
 
-                # Delay aleatório (ser gentil com a API)
+                # Delay aleatório
                 delay = random.uniform(*delay_range)
                 await asyncio.sleep(delay)
 
                 # Log periódico (a cada 10 questões)
                 if self.stats["total_processed"] % 10 == 0:
                     self._print_stats()
-
-                # Rotacionar disciplina a cada 10 questões
-                if self.stats["total_processed"] % 10 == 0:
-                    disc_index += 1
 
         except (KeyboardInterrupt, asyncio.CancelledError):
             logger.info("Interrompido pelo usuário")

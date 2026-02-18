@@ -38,6 +38,14 @@ class QuestaoAssuntoListResponse(BaseModel):
     pages: int
 
 
+class AlternativaSchema(BaseModel):
+    """Schema de uma alternativa de questão"""
+
+    ordem: int = Field(0, description="Ordem da alternativa (1, 2, 3...)")
+    conteudo: str = Field("", description="Conteúdo da alternativa (sem HTML)")
+    correta: bool = Field(False, description="Se é a alternativa correta")
+
+
 class ProximaQuestaoResponse(BaseModel):
     """Response da próxima questão a ser extraída"""
 
@@ -50,6 +58,8 @@ class ProximaQuestaoResponse(BaseModel):
     habilidade_id: Optional[int] = None
     ano_id: Optional[int] = None
     ano_nome: Optional[str] = None
+    tipo: Optional[str] = Field(None, description="Tipo da questão (ex: 'Múltipla Escolha')")
+    alternativas: List[AlternativaSchema] = Field([], description="Alternativas (se Múltipla Escolha)")
     contem_imagem: bool = Field(False, description="Se contém imagem e foi pulada")
     motivo_erro: Optional[str] = Field(
         None, description="Motivo caso tenha sido pulada"
