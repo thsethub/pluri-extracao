@@ -102,6 +102,7 @@ class ReclassificationAgent:
             return "not_found"
 
         # Se contém imagem, usar IA para extrair o enunciado real
+        # Nota: enunciado aqui NÃO contém alternativas, apenas o texto do enunciado
         enunciado_ia = None
         if contem_imagem:
             logger.debug(f"Q#{qid}: Contém imagem, limpando com IA...")
@@ -122,9 +123,21 @@ class ReclassificationAgent:
             await self.local_api.salvar_extracao(qid, [])
             return "not_found"
 
+        # Construir texto de busca: enunciado + alternativas (formato SuperPro)
+        # As alternativas são separadas do enunciado_tratado pela API
+        texto_busca = enunciado
+        alternativas = questao.get("alternativas", [])
+        if alternativas:
+            letras = "abcdefghij"
+            partes = [
+                f"{letras[i]}) {alt.get('conteudo', '')}"
+                for i, alt in enumerate(alternativas)
+            ]
+            texto_busca = enunciado + " " + " ".join(partes)
+
         # Buscar no SuperProfessor
         result = await self.superpro.find_and_classify(
-            enunciado=enunciado,
+            enunciado=texto_busca,
             nosso_disc_id=disc_id,
             min_similarity=0.80,
         )

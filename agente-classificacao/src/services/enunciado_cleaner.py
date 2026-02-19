@@ -279,7 +279,7 @@ def _remover_tags_html(texto: str) -> str:
     # Substitui <br>, <br/>, <p>, </p> por espaço/quebra
     texto = re.sub(r"<br\s*/?>", " ", texto, flags=re.IGNORECASE)
     texto = re.sub(r"</p>", " ", texto, flags=re.IGNORECASE)
-    texto = re.sub(r"<p[^>]*>", "", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"<p[^>]*>", " ", texto, flags=re.IGNORECASE)
 
     # Remove todas as demais tags HTML
     texto = re.sub(r"<[^>]+>", "", texto)

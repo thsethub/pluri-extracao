@@ -116,6 +116,7 @@ class ExtractionAgent:
             return "not_found"
 
         # Se contém imagem, usar IA para extrair o enunciado real
+        # Nota: enunciado aqui NÃO contém alternativas, apenas o texto do enunciado
         enunciado_ia = None
         if contem_imagem:
             logger.debug(f"Q#{qid}: Contém imagem, limpando com IA...")
@@ -136,9 +137,21 @@ class ExtractionAgent:
             await self.local_api.salvar_extracao(qid, [])
             return "not_found"
 
+        # Construir texto de busca: enunciado + alternativas (formato SuperPro)
+        # As alternativas são separadas do enunciado_tratado pela API
+        texto_busca = enunciado
+        alternativas = questao.get("alternativas", [])
+        if alternativas:
+            letras = "abcdefghij"
+            partes = [
+                f"{letras[i]}) {alt.get('conteudo', '')}"
+                for i, alt in enumerate(alternativas)
+            ]
+            texto_busca = enunciado + " " + " ".join(partes)
+
         # Buscar no SuperProfessor
         result = await self.superpro.find_and_classify(
-            enunciado=enunciado,
+            enunciado=texto_busca,
             nosso_disc_id=disc_id,
             min_similarity=0.80,
         )
@@ -190,15 +203,54 @@ class ExtractionAgent:
         self,
         max_questions: int = 0,
         delay_range: tuple[float, float] = (0.5, 1.5),
+        max_workers: int = 2,
     ):
         """
-        Loop principal do agente.
+        Loop principal do agente com processamento paralelo.
 
         Args:
             max_questions: Máximo de questões a processar (0 = infinito)
             delay_range: Intervalo de delay entre questões (min, max) em segundos
+            max_workers: Número de questões processadas em paralelo (default: 2)
         """
         await self.start()
+        semaphore = asyncio.Semaphore(max_workers)
+        logger.info(f"Paralelismo: {max_workers} workers")
+
+        async def _worker(questao: dict):
+            """Worker que processa uma questão com semáforo de concorrência."""
+            async with semaphore:
+                qid = questao["id"]
+                try:
+                    status = await self._process_question(questao)
+
+                    if status == "found":
+                        self.stats["found"] += 1
+                        self.stats["consecutive_errors"] = 0
+                        self.stats["server_down_rounds"] = 0
+                    elif status == "api_error":
+                        self.stats["errors"] += 1
+                        self.stats["consecutive_errors"] += 1
+                        self.stats["total_processed"] -= 1
+                        logger.warning(
+                            f"API instável — "
+                            f"(erros: {self.stats['consecutive_errors']}/{settings.MAX_CONSECUTIVE_ERRORS})"
+                        )
+                    else:
+                        self.stats["not_found"] += 1
+                        self.stats["consecutive_errors"] = 0
+                        self.stats["server_down_rounds"] = 0
+
+                except asyncio.CancelledError:
+                    raise
+                except Exception as e:
+                    logger.error(f"Erro ao processar Q#{qid}: {e}")
+                    self.stats["errors"] += 1
+                    self.stats["consecutive_errors"] += 1
+
+                # Delay aleatório por worker (ser gentil com a API)
+                delay = random.uniform(*delay_range)
+                await asyncio.sleep(delay)
 
         try:
             disc_index = 0
@@ -223,7 +275,6 @@ class ExtractionAgent:
                         )
                         break
 
-                    # Pausa escalonada: 2min, 4min, 6min... (máx 10min)
                     pause = min(settings.LONG_PAUSE_SECONDS * rounds, 600)
                     logger.warning(
                         f"⚠️ {self.stats['consecutive_errors']} erros consecutivos "
@@ -233,79 +284,57 @@ class ExtractionAgent:
                     await asyncio.sleep(pause)
                     self.stats["consecutive_errors"] = 0
 
-                # Rotacionar disciplinas
-                disc_id = self.disciplina_ids[disc_index % len(self.disciplina_ids)]
-                self.stats["current_discipline"] = disc_id
+                # ── Fase 1: Coletar um lote de questões (serial) ──
+                batch = []
+                disciplines_tried = 0
 
-                # Buscar próxima questão
-                try:
-                    questao = await self.local_api.proxima_questao(disc_id)
-                except Exception as e:
-                    logger.error(f"Erro ao buscar próxima questão: {e}")
-                    self.stats["consecutive_errors"] += 1
-                    self.stats["errors"] += 1
+                while len(batch) < max_workers and disciplines_tried < len(self.disciplina_ids):
+                    if max_questions > 0 and (self.stats["total_processed"] + len(batch)) >= max_questions:
+                        break
+
+                    disc_id = self.disciplina_ids[disc_index % len(self.disciplina_ids)]
+                    self.stats["current_discipline"] = disc_id
+
+                    try:
+                        questao = await self.local_api.proxima_questao(disc_id)
+                    except Exception as e:
+                        logger.error(f"Erro ao buscar próxima questão (disc {disc_id}): {e}")
+                        self.stats["consecutive_errors"] += 1
+                        self.stats["errors"] += 1
+                        disc_index += 1
+                        disciplines_tried += 1
+                        continue
+
+                    if not questao:
+                        logger.debug(f"Disciplina {disc_id}: sem questões pendentes")
+                        disc_index += 1
+                        disciplines_tried += 1
+                        empty_rounds += 1
+                        continue
+
+                    empty_rounds = 0
+                    batch.append(questao)
                     disc_index += 1
-                    await asyncio.sleep(5)
-                    continue
+                    disciplines_tried += 1
 
-                if not questao:
-                    logger.debug(f"Disciplina {disc_id}: sem questões pendentes")
-                    disc_index += 1
-                    empty_rounds += 1
-
+                # Nenhuma questão encontrada em nenhuma disciplina
+                if not batch:
                     if empty_rounds >= len(self.disciplina_ids):
                         logger.info("Todas as disciplinas sem questões pendentes!")
                         break
-
+                    await asyncio.sleep(5)
                     continue
 
-                empty_rounds = 0  # Reset
-                self.stats["total_processed"] += 1
+                # ── Fase 2: Processar o lote em paralelo ──
+                self.stats["total_processed"] += len(batch)
+                logger.debug(f"Processando lote de {len(batch)} questão(ões) em paralelo")
 
-                # Processar
-                try:
-                    status = await self._process_question(questao)
-
-                    if status == "found":
-                        self.stats["found"] += 1
-                        self.stats["consecutive_errors"] = 0
-                        self.stats["server_down_rounds"] = 0  # Reset rodadas
-                    elif status == "api_error":
-                        # API fora do ar — NÃO marcar como processada,
-                        # incrementar erros consecutivos para trigger de pausa
-                        self.stats["errors"] += 1
-                        self.stats["consecutive_errors"] += 1
-                        self.stats["total_processed"] -= 1  # Não contar como processada
-                        logger.warning(
-                            f"API instável — aguardando 30s antes de continuar... "
-                            f"(erros: {self.stats['consecutive_errors']}/{settings.MAX_CONSECUTIVE_ERRORS})"
-                        )
-                        await asyncio.sleep(30)  # Pausa extra quando API está fora
-                        continue
-                    else:
-                        self.stats["not_found"] += 1
-                        self.stats["consecutive_errors"] = 0
-                        self.stats["server_down_rounds"] = 0  # Reset rodadas
-
-                except asyncio.CancelledError:
-                    logger.info("Tarefa cancelada")
-                    break
-                except Exception as e:
-                    logger.error(f"Erro ao processar Q#{questao['id']}: {e}")
-                    self.stats["errors"] += 1
-                    self.stats["consecutive_errors"] += 1
-
-                # Delay aleatório (ser gentil com a API)
-                delay = random.uniform(*delay_range)
-                await asyncio.sleep(delay)
+                tasks = [asyncio.create_task(_worker(q)) for q in batch]
+                await asyncio.gather(*tasks, return_exceptions=True)
 
                 # Log periódico (a cada 10 questões)
                 if self.stats["total_processed"] % 10 == 0:
                     self._print_stats()
-
-                # Rotacionar disciplina a cada 10 questões
-                if self.stats["total_processed"] % 10 == 0:
-                    disc_index += 1
 
         except (KeyboardInterrupt, asyncio.CancelledError):
             logger.info("Interrompido pelo usuário")
@@ -313,3 +342,4 @@ class ExtractionAgent:
             logger.error(f"Erro inesperado no loop principal: {e}")
         finally:
             await self.stop()
+

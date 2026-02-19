@@ -133,13 +133,13 @@ async def renew_token():
         console.print("[red]Falha ao renovar token[/red]")
 
 
-async def run_agent(disc_ids: list[int] | None, max_questions: int, headless: bool):
+async def run_agent(disc_ids: list[int] | None, max_questions: int, headless: bool, max_workers: int = 2):
     """Executa o agente de extração."""
     if headless:
         settings.HEADLESS = True
 
     agent = ExtractionAgent(disciplina_ids=disc_ids)
-    await agent.run(max_questions=max_questions)
+    await agent.run(max_questions=max_questions, max_workers=max_workers)
 
 
 async def run_reclassification(max_questions: int):
@@ -185,6 +185,10 @@ Exemplos:
         "--login", action="store_true", help="Renova token JWT via browser"
     )
     parser.add_argument("--headless", action="store_true", help="Browser sem interface")
+    parser.add_argument(
+        "--workers", type=int, default=2,
+        help="Número de questões processadas em paralelo (default: 2)"
+    )
 
     args = parser.parse_args()
 
@@ -195,7 +199,7 @@ Exemplos:
     elif args.login:
         asyncio.run(renew_token())
     elif args.run:
-        asyncio.run(run_agent(args.disc, args.max, args.headless))
+        asyncio.run(run_agent(args.disc, args.max, args.headless, args.workers))
     elif args.reclassificar:
         asyncio.run(run_reclassification(args.max))
     else:
