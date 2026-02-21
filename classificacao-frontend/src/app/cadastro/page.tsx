@@ -62,7 +62,7 @@ export default function CadastroPage() {
         <div className={styles.container}>
             <div className={`${styles.card} glass fade-in`}>
                 <div className={styles.header}>
-                    <h1>Educação</h1>
+                    <h1>Classsificador</h1>
                     <p>Cadastro de Professor</p>
                 </div>
 
