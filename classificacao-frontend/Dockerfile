@@ -8,6 +8,8 @@ RUN npm install
 
 # Copiar código e buildar
 COPY . .
+# Criar diretório public se não existir para evitar falha no estágio runner
+RUN mkdir -p public
 # Ignorar lints no build para evitar quebras por avisos
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
@@ -21,6 +23,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 # Copiar apenas o necessário
 COPY --from=builder /app/next.config.ts ./
+# Copiar o diretório public (se existir e não estiver vazio)
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
