@@ -112,9 +112,10 @@ app = FastAPI(
 )
 
 # Configuração de CORS
+# Em produção, permitimos as origens do domínio thsethub.com.br
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Em produção, especificar origens permitidas
+    allow_origin_regex=r"https?://.*\.thsethub\.com\.br|https?://localhost:\d+",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
