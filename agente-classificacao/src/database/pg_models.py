@@ -36,6 +36,7 @@ class QuestaoAssuntoModel(PgBase):
     extracao_feita = Column(Boolean, nullable=False, default=False)
     contem_imagem = Column(Boolean, nullable=False, default=False)
     precisa_verificar = Column(Boolean, nullable=False, default=False)
+    classificado_manualmente = Column(Boolean, nullable=False, default=False)
     enunciado_superpro = Column(Text, nullable=True)
     motivo_erro = Column(String(255), nullable=True)
     created_at = Column(

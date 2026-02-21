@@ -1,0 +1,132 @@
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background-color: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+}
+
+.logo h1 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 0.1rem;
+}
+
+.logo p {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background-color: var(--primary-light);
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.userInfo {
+    overflow: hidden;
+}
+
+.userInfo h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.userInfo span {
+    font-size: 0.7rem;
+    color: var(--primary);
+    font-weight: 600;
+    display: block;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+}
+
+.navLink {
+    padding: 0.7rem 0.8rem;
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: all 0.2s ease;
+}
+
+.navLink:hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+.navLink.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout {
+    margin-top: auto;
+    padding: 0.7rem 0.8rem;
+    background: none;
+    border: none;
+    border-radius: var(--radius);
+    color: var(--error);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: all 0.2s ease;
+    width: 100%;
+    cursor: pointer;
+}
+
+.logout:hover {
+    background-color: rgba(229, 62, 62, 0.08);
+}

@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+}
+
+.content {
+    flex: 1;
+    margin-left: 220px;
+    /* New sidebar width */
+    min-height: 100vh;
+    padding: 1.5rem 2rem;
+    background-color: var(--background);
+}

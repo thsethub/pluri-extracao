@@ -1,0 +1,7 @@
+﻿
+=== Contagem de M¾dulos por ┴rea ===
+┴rea: Linguagens      | M¾dulos: 267
+┴rea: Natureza        | M¾dulos: 809
+┴rea: Matemßtica      | M¾dulos: 250
+┴rea: Humanas         | M¾dulos: 712
+Erro ao verificar m¾dulos: 'charmap' codec can't encode character '\u2705' in position 2: character maps to <undefined>

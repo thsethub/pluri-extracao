@@ -1,0 +1,2210 @@
+[
+  {
+    "id": 1,
+    "descricao": "História da Arte Brasileira - Arte no Período Colonial"
+  },
+  {
+    "id": 2,
+    "descricao": "História da Arte Brasileira - Arte no Período Monárquico"
+  },
+  {
+    "id": 3,
+    "descricao": "História da Arte Brasileira - Arte no Período Republicano"
+  },
+  {
+    "id": 4,
+    "descricao": "História Geral da Arte - Antiguidade"
+  },
+  {
+    "id": 5,
+    "descricao": "História Geral da Arte - Arte Moderna"
+  },
+  {
+    "id": 6,
+    "descricao": "História Geral da Arte - Arte Moderna Russa"
+  },
+  {
+    "id": 7,
+    "descricao": "História Geral da Arte - Arte na Idade Média"
+  },
+  {
+    "id": 8,
+    "descricao": "História Geral da Arte - Arte Norte-Americana"
+  },
+  {
+    "id": 9,
+    "descricao": "História Geral da Arte - Conceitos"
+  },
+  {
+    "id": 10,
+    "descricao": "História Geral da Arte - Contextos"
+  },
+  {
+    "id": 11,
+    "descricao": "História Geral da Arte - Período Pré-Moderno"
+  },
+  {
+    "id": 12,
+    "descricao": "História Geral da Arte - Renascimento"
+  },
+  {
+    "id": 13,
+    "descricao": "História Geral da Arte - Vanguardas Modernas"
+  },
+  {
+    "id": 14,
+    "descricao": "Vida e evolução - Bioquímica"
+  },
+  {
+    "id": 15,
+    "descricao": "Vida e evolução - Ecologia"
+  },
+  {
+    "id": 16,
+    "descricao": "Vida e evolução - Evolução"
+  },
+  {
+    "id": 17,
+    "descricao": "Vida e evolução - Genética"
+  },
+  {
+    "id": 18,
+    "descricao": "Vida e evolução - Seres vivos"
+  },
+  {
+    "id": 19,
+    "descricao": "Citologia - Bioenergética"
+  },
+  {
+    "id": 20,
+    "descricao": "Citologia - Bioquímica"
+  },
+  {
+    "id": 21,
+    "descricao": "Citologia - Divisão celular"
+  },
+  {
+    "id": 22,
+    "descricao": "Citologia - Leis da Citologia"
+  },
+  {
+    "id": 23,
+    "descricao": "Citologia - Níveis de Organização em Citologia Animal e Vegetal"
+  },
+  {
+    "id": 24,
+    "descricao": "Citologia - Organização Estrutural dos Seres Vivos"
+  },
+  {
+    "id": 25,
+    "descricao": "Ecologia - Biomas"
+  },
+  {
+    "id": 26,
+    "descricao": "Ecologia - Cadeias e teias alimentares"
+  },
+  {
+    "id": 27,
+    "descricao": "Ecologia - Ciclos biogeoquímicos"
+  },
+  {
+    "id": 28,
+    "descricao": "Ecologia - Desequilíbrio em ecossistemas"
+  },
+  {
+    "id": 29,
+    "descricao": "Ecologia - Dinâmica das Populações"
+  },
+  {
+    "id": 30,
+    "descricao": "Ecologia - Ecossistemas aquáticos"
+  },
+  {
+    "id": 31,
+    "descricao": "Ecologia - Introdução ao estudo da ecologia"
+  },
+  {
+    "id": 32,
+    "descricao": "Ecologia - Relações ecológicas"
+  },
+  {
+    "id": 33,
+    "descricao": "Ecologia - Sucessão ecológica e comunidades clímax"
+  },
+  {
+    "id": 34,
+    "descricao": "Embriologia - Anexos embrionários"
+  },
+  {
+    "id": 35,
+    "descricao": "Embriologia - Embriogênese humana"
+  },
+  {
+    "id": 36,
+    "descricao": "Embriologia - Fases do desenvolvimento embrionário"
+  },
+  {
+    "id": 37,
+    "descricao": "Embriologia - Tipos de ovo "
+  },
+  {
+    "id": 38,
+    "descricao": "Evolução - Bases genéticas"
+  },
+  {
+    "id": 39,
+    "descricao": "Evolução - Especiação"
+  },
+  {
+    "id": 40,
+    "descricao": "Evolução - Evidências da Evolução Biológica"
+  },
+  {
+    "id": 41,
+    "descricao": "Evolução - Evolução dos primatas"
+  },
+  {
+    "id": 42,
+    "descricao": "Evolução - Fatores evolutivos"
+  },
+  {
+    "id": 43,
+    "descricao": "Evolução - Noções de filogenética"
+  },
+  {
+    "id": 44,
+    "descricao": "Evolução - Origem e evolução da vida na Terra"
+  },
+  {
+    "id": 45,
+    "descricao": "Evolução - Teorias evolutivas"
+  },
+  {
+    "id": 46,
+    "descricao": "Fisiologia - Sistema cardiovascular"
+  },
+  {
+    "id": 47,
+    "descricao": "Fisiologia - Sistema digestório"
+  },
+  {
+    "id": 48,
+    "descricao": "Fisiologia - Sistema endócrino"
+  },
+  {
+    "id": 49,
+    "descricao": "Fisiologia - Sistema Excretório"
+  },
+  {
+    "id": 50,
+    "descricao": "Fisiologia - Sistema genital"
+  },
+  {
+    "id": 51,
+    "descricao": "Fisiologia - Sistema imune"
+  },
+  {
+    "id": 52,
+    "descricao": "Fisiologia - Sistema nervoso"
+  },
+  {
+    "id": 53,
+    "descricao": "Fisiologia - Sistema respiratório"
+  },
+  {
+    "id": 54,
+    "descricao": "Genética - Aspectos genéticos do funcionamento do corpo humano"
+  },
+  {
+    "id": 55,
+    "descricao": "Genética - Biologia molecular"
+  },
+  {
+    "id": 56,
+    "descricao": "Genética - Biotecnologia"
+  },
+  {
+    "id": 57,
+    "descricao": "Genética - Conceitos básicos de genética"
+  },
+  {
+    "id": 58,
+    "descricao": "Genética - Grupos sanguíneos"
+  },
+  {
+    "id": 59,
+    "descricao": "Genética - Herança dos cromossomos sexuais"
+  },
+  {
+    "id": 60,
+    "descricao": "Genética - Interação gênica"
+  },
+  {
+    "id": 61,
+    "descricao": "Genética - Lei da segregação "
+  },
+  {
+    "id": 62,
+    "descricao": "Genética - Lei da segregação independente"
+  },
+  {
+    "id": 63,
+    "descricao": "Genética - Mutações"
+  },
+  {
+    "id": 64,
+    "descricao": "Histologia - Introdução à histologia"
+  },
+  {
+    "id": 65,
+    "descricao": "Histologia - Tecido conjuntivo"
+  },
+  {
+    "id": 66,
+    "descricao": "Histologia - Tecido Epitelial"
+  },
+  {
+    "id": 67,
+    "descricao": "Histologia - Tecido muscular"
+  },
+  {
+    "id": 68,
+    "descricao": "Histologia - Tecido nervoso"
+  },
+  {
+    "id": 69,
+    "descricao": "Introdução à Biologia - Características gerais dos seres vivos"
+  },
+  {
+    "id": 70,
+    "descricao": "Introdução à Biologia - Método científico"
+  },
+  {
+    "id": 71,
+    "descricao": "Introdução à Biologia - Níveis de organização dos seres vivos"
+  },
+  {
+    "id": 72,
+    "descricao": "Reinos - Reino Animalia "
+  },
+  {
+    "id": 73,
+    "descricao": "Reinos - Reino Fungi"
+  },
+  {
+    "id": 74,
+    "descricao": "Reinos - Reino Monera"
+  },
+  {
+    "id": 75,
+    "descricao": "Reinos - Reino Plantae"
+  },
+  {
+    "id": 76,
+    "descricao": "Reinos - Reino Protoctista"
+  },
+  {
+    "id": 77,
+    "descricao": "Reprodução  - Reprodução Humana"
+  },
+  {
+    "id": 78,
+    "descricao": "Reprodução - Tipos de reprodução"
+  },
+  {
+    "id": 79,
+    "descricao": "Vírus - Características"
+  },
+  {
+    "id": 80,
+    "descricao": "Vírus - Doenças causadas por vírus (viroses)"
+  },
+  {
+    "id": 81,
+    "descricao": "Vírus - Outros agentes infecciosos acelulares"
+  },
+  {
+    "id": 82,
+    "descricao": "Vírus - Reprodução viral"
+  },
+  {
+    "id": 83,
+    "descricao": "Vírus - Tipos de vírus"
+  },
+  {
+    "id": 84,
+    "descricao": "Matéria e Energia - Calor"
+  },
+  {
+    "id": 85,
+    "descricao": "Matéria e Energia - Energia"
+  },
+  {
+    "id": 86,
+    "descricao": "Matéria e Energia - Materiais"
+  },
+  {
+    "id": 87,
+    "descricao": "Matéria e Energia - Movimentos e causas"
+  },
+  {
+    "id": 88,
+    "descricao": "Matéria e Energia - Óptica"
+  },
+  {
+    "id": 89,
+    "descricao": "Terra e Universo - Terra"
+  },
+  {
+    "id": 90,
+    "descricao": "Terra e Universo - Universo"
+  },
+  {
+    "id": 91,
+    "descricao": "Vida e evolução - Corpo humano"
+  },
+  {
+    "id": 92,
+    "descricao": "Vida e evolução - Reprodução"
+  },
+  {
+    "id": 93,
+    "descricao": "Vida e evolução - Saúde e Tecnologia"
+  },
+  {
+    "id": 94,
+    "descricao": "Danças e Ginásticas - Danças"
+  },
+  {
+    "id": 95,
+    "descricao": "Danças e Ginásticas - Ginástica"
+  },
+  {
+    "id": 96,
+    "descricao": "Elementos Articuladores - Cultura Corporal e Corpo"
+  },
+  {
+    "id": 97,
+    "descricao": "Elementos Articuladores - Cultura Corporal e Desportivização"
+  },
+  {
+    "id": 98,
+    "descricao": "Elementos Articuladores - Cultura Corporal e Saúde"
+  },
+  {
+    "id": 99,
+    "descricao": "Esportes - Esportes Coletivos"
+  },
+  {
+    "id": 100,
+    "descricao": "Esportes - Esportes Individuais"
+  },
+  {
+    "id": 101,
+    "descricao": "Lutas e Jogos - Jogos"
+  },
+  {
+    "id": 102,
+    "descricao": "Estudio del texto - Aspectos generales"
+  },
+  {
+    "id": 103,
+    "descricao": "Estudio del texto - Elementos de la comunicación"
+  },
+  {
+    "id": 104,
+    "descricao": "Estudio del texto - Tipos de texto"
+  },
+  {
+    "id": 105,
+    "descricao": "Fonética - Acentuación"
+  },
+  {
+    "id": 106,
+    "descricao": "Fonética - Fonología"
+  },
+  {
+    "id": 107,
+    "descricao": "Fonética - Ortografía"
+  },
+  {
+    "id": 108,
+    "descricao": "Morfología - Clases de palabras"
+  },
+  {
+    "id": 109,
+    "descricao": "Semántica - Expresiones idiomáticas/Frases hechas"
+  },
+  {
+    "id": 110,
+    "descricao": "Semántica - Léxico"
+  },
+  {
+    "id": 111,
+    "descricao": "Semántica - Palabras heterosemánticas / Falsos amigos"
+  },
+  {
+    "id": 112,
+    "descricao": "Áreas e temas - Ciência"
+  },
+  {
+    "id": 113,
+    "descricao": "Áreas e temas - Conceito de Filosofia"
+  },
+  {
+    "id": 114,
+    "descricao": "Áreas e temas - Conhecimento"
+  },
+  {
+    "id": 115,
+    "descricao": "Áreas e temas - Cultura e sociedade"
+  },
+  {
+    "id": 116,
+    "descricao": "Áreas e temas - Direitos humanos e sociais"
+  },
+  {
+    "id": 117,
+    "descricao": "Áreas e temas - Estado natural e estado civil"
+  },
+  {
+    "id": 118,
+    "descricao": "Áreas e temas - Estética"
+  },
+  {
+    "id": 119,
+    "descricao": "Áreas e temas - Ética"
+  },
+  {
+    "id": 120,
+    "descricao": "Áreas e temas - Filosofia e o Direito"
+  },
+  {
+    "id": 121,
+    "descricao": "Áreas e temas - História e Filosofia"
+  },
+  {
+    "id": 122,
+    "descricao": "Áreas e temas - Ideologia"
+  },
+  {
+    "id": 123,
+    "descricao": "Áreas e temas - Indivíduo e sociedade"
+  },
+  {
+    "id": 124,
+    "descricao": "Áreas e temas - Liberdade"
+  },
+  {
+    "id": 125,
+    "descricao": "Áreas e temas - Linguagem"
+  },
+  {
+    "id": 126,
+    "descricao": "Áreas e temas - Lógica"
+  },
+  {
+    "id": 127,
+    "descricao": "Áreas e temas - Metafísica"
+  },
+  {
+    "id": 128,
+    "descricao": "Áreas e temas - Morte"
+  },
+  {
+    "id": 129,
+    "descricao": "Áreas e temas - O ser humano"
+  },
+  {
+    "id": 130,
+    "descricao": "Áreas e temas - Regimes políticos"
+  },
+  {
+    "id": 131,
+    "descricao": "Áreas e temas - Religião"
+  },
+  {
+    "id": 132,
+    "descricao": "História da Filosofia - Filosofia antiga"
+  },
+  {
+    "id": 133,
+    "descricao": "História da Filosofia - Filosofia contemporânea"
+  },
+  {
+    "id": 134,
+    "descricao": "História da Filosofia - Filosofia medieval"
+  },
+  {
+    "id": 135,
+    "descricao": "História da Filosofia - Filosofia moderna"
+  },
+  {
+    "id": 136,
+    "descricao": "Acústica - Características do som"
+  },
+  {
+    "id": 137,
+    "descricao": "Acústica - Efeito Doppler"
+  },
+  {
+    "id": 138,
+    "descricao": "Acústica - Efeitos sonoros"
+  },
+  {
+    "id": 139,
+    "descricao": "Acústica - Nível sonoro"
+  },
+  {
+    "id": 140,
+    "descricao": "Acústica - Ondas sonoras"
+  },
+  {
+    "id": 141,
+    "descricao": "Acústica - Tubos sonoros"
+  },
+  {
+    "id": 142,
+    "descricao": "Análise dimensional - Expressões dimensionais"
+  },
+  {
+    "id": 143,
+    "descricao": "Análise dimensional - Grandezas escalares e vetoriais"
+  },
+  {
+    "id": 144,
+    "descricao": "Análise dimensional - Grandezas físicas e unidades"
+  },
+  {
+    "id": 145,
+    "descricao": "Análise dimensional - Notação científica e ordem de grandeza"
+  },
+  {
+    "id": 146,
+    "descricao": "Cinemática - Cinemática vetorial"
+  },
+  {
+    "id": 147,
+    "descricao": "Cinemática - Conceitos de cinemática"
+  },
+  {
+    "id": 148,
+    "descricao": "Cinemática - Movimento circular ou curvilíneo"
+  },
+  {
+    "id": 149,
+    "descricao": "Cinemática - Movimento uniforme"
+  },
+  {
+    "id": 150,
+    "descricao": "Cinemática - Movimento uniformemente variado"
+  },
+  {
+    "id": 151,
+    "descricao": "Cinemática - Movimentos bidimensionais"
+  },
+  {
+    "id": 152,
+    "descricao": "Dinâmica - Energia mecânica e sua conservação"
+  },
+  {
+    "id": 153,
+    "descricao": "Dinâmica - Força de atrito"
+  },
+  {
+    "id": 154,
+    "descricao": "Dinâmica - Força elástica"
+  },
+  {
+    "id": 155,
+    "descricao": "Dinâmica - Força em trajetória circular"
+  },
+  {
+    "id": 156,
+    "descricao": "Dinâmica - Gravitação universal"
+  },
+  {
+    "id": 157,
+    "descricao": "Dinâmica - Impulso e quantidade de movimento"
+  },
+  {
+    "id": 158,
+    "descricao": "Dinâmica - Leis de Newton"
+  },
+  {
+    "id": 159,
+    "descricao": "Dinâmica - Máquina simples"
+  },
+  {
+    "id": 160,
+    "descricao": "Dinâmica - Potência e rendimento"
+  },
+  {
+    "id": 161,
+    "descricao": "Dinâmica - Princípios da dinâmica"
+  },
+  {
+    "id": 162,
+    "descricao": "Dinâmica - Relação trabalho e energia"
+  },
+  {
+    "id": 163,
+    "descricao": "Dinâmica - Trabalho de uma força"
+  },
+  {
+    "id": 164,
+    "descricao": "Eletrodinâmica - Circuito elétrico"
+  },
+  {
+    "id": 165,
+    "descricao": "Eletrodinâmica - Circuitos especiais"
+  },
+  {
+    "id": 166,
+    "descricao": "Eletrodinâmica - Corrente elétrica e seus efeitos"
+  },
+  {
+    "id": 167,
+    "descricao": "Eletrodinâmica - Energia elétrica e suas fontes"
+  },
+  {
+    "id": 168,
+    "descricao": "Eletrodinâmica - Fusível e disjuntor"
+  },
+  {
+    "id": 169,
+    "descricao": "Eletrodinâmica - Geradores elétricos"
+  },
+  {
+    "id": 170,
+    "descricao": "Eletrodinâmica - Instrumentos de medida"
+  },
+  {
+    "id": 171,
+    "descricao": "Eletrodinâmica - Leis de Ohm"
+  },
+  {
+    "id": 172,
+    "descricao": "Eletrodinâmica - Potência elétrica"
+  },
+  {
+    "id": 173,
+    "descricao": "Eletrodinâmica - Receptores elétricos"
+  },
+  {
+    "id": 174,
+    "descricao": "Eletrodinâmica - Resistores elétricos"
+  },
+  {
+    "id": 175,
+    "descricao": "Eletrostática - Campo elétrico"
+  },
+  {
+    "id": 176,
+    "descricao": "Eletrostática - Capacitância elétrica"
+  },
+  {
+    "id": 177,
+    "descricao": "Eletrostática - Corpo neutro e corpo eletrizado"
+  },
+  {
+    "id": 178,
+    "descricao": "Eletrostática - Força eletrostática"
+  },
+  {
+    "id": 179,
+    "descricao": "Eletrostática - Gaiola de Faraday"
+  },
+  {
+    "id": 180,
+    "descricao": "Eletrostática - Potencial elétrico e DDP"
+  },
+  {
+    "id": 181,
+    "descricao": "Eletrostática - Princípios de eletrostática"
+  },
+  {
+    "id": 182,
+    "descricao": "Eletrostática - Processos de eletrização"
+  },
+  {
+    "id": 183,
+    "descricao": "Eletrostática - Trabalho da força elétrica"
+  },
+  {
+    "id": 184,
+    "descricao": "Estática - Centro de gravidade / centro de massa"
+  },
+  {
+    "id": 185,
+    "descricao": "Estática - Decomposição de vetores"
+  },
+  {
+    "id": 186,
+    "descricao": "Estática - Equilíbrio de um corpo extenso"
+  },
+  {
+    "id": 187,
+    "descricao": "Estática - Equilíbrio de um ponto material"
+  },
+  {
+    "id": 188,
+    "descricao": "Estática - Hidrostática"
+  },
+  {
+    "id": 189,
+    "descricao": "Física Moderna - Física Quântica"
+  },
+  {
+    "id": 190,
+    "descricao": "Física Moderna - Física Relativista"
+  },
+  {
+    "id": 191,
+    "descricao": "Gases perfeitos - Equação de Clapeyron"
+  },
+  {
+    "id": 192,
+    "descricao": "Gases perfeitos - Gráficos"
+  },
+  {
+    "id": 193,
+    "descricao": "Gases perfeitos - Teoria cinética dos gases"
+  },
+  {
+    "id": 194,
+    "descricao": "Gases perfeitos - Trabalho realizado por um gás"
+  },
+  {
+    "id": 195,
+    "descricao": "Gases perfeitos - Transformações gasosas"
+  },
+  {
+    "id": 196,
+    "descricao": "Magnetismo e eletromagnetismo - Campo magnético gerado por corrente elétrica"
+  },
+  {
+    "id": 197,
+    "descricao": "Magnetismo e eletromagnetismo - Fenômenos magnéticos"
+  },
+  {
+    "id": 198,
+    "descricao": "Magnetismo e eletromagnetismo - Força magnética"
+  },
+  {
+    "id": 199,
+    "descricao": "Magnetismo e eletromagnetismo - Ímã"
+  },
+  {
+    "id": 200,
+    "descricao": "Magnetismo e eletromagnetismo - Substâncias magnéticas e não magnéticas"
+  },
+  {
+    "id": 201,
+    "descricao": "Magnetismo e eletromagnetismo - Transformadores"
+  },
+  {
+    "id": 202,
+    "descricao": "Ondulatória - Conceitos de ondulatória"
+  },
+  {
+    "id": 203,
+    "descricao": "Ondulatória - Equação de onda"
+  },
+  {
+    "id": 204,
+    "descricao": "Ondulatória - Fenômenos ondulatórios"
+  },
+  {
+    "id": 205,
+    "descricao": "Ondulatória - Interferência de ondas"
+  },
+  {
+    "id": 206,
+    "descricao": "Ondulatória - Movimento harmônico simples"
+  },
+  {
+    "id": 207,
+    "descricao": "Ondulatória - Movimentos oscilatórios e periódicos"
+  },
+  {
+    "id": 208,
+    "descricao": "Ondulatória - Onda estacionária"
+  },
+  {
+    "id": 209,
+    "descricao": "Ondulatória - Ondas periódicas"
+  },
+  {
+    "id": 210,
+    "descricao": "Ondulatória - Pêndulo simples"
+  },
+  {
+    "id": 211,
+    "descricao": "Ondulatória - Velocidade da onda"
+  },
+  {
+    "id": 212,
+    "descricao": "Óptica - Ametropias ou defeitos da visão"
+  },
+  {
+    "id": 213,
+    "descricao": "Óptica - Aplicações da óptica geométrica"
+  },
+  {
+    "id": 214,
+    "descricao": "Óptica - Câmara escura de orifício"
+  },
+  {
+    "id": 215,
+    "descricao": "Óptica - Conceitos de óptica"
+  },
+  {
+    "id": 216,
+    "descricao": "Óptica - Cor dos corpos"
+  },
+  {
+    "id": 217,
+    "descricao": "Óptica - Instrumentos ópticos"
+  },
+  {
+    "id": 218,
+    "descricao": "Óptica - Lentes esféricas"
+  },
+  {
+    "id": 219,
+    "descricao": "Óptica - Princípios da óptica"
+  },
+  {
+    "id": 220,
+    "descricao": "Óptica - Reflexão da luz"
+  },
+  {
+    "id": 221,
+    "descricao": "Óptica - Refração da luz"
+  },
+  {
+    "id": 222,
+    "descricao": "Termodinâmica - Análise de gráficos"
+  },
+  {
+    "id": 223,
+    "descricao": "Termodinâmica - Ciclo de Carnot"
+  },
+  {
+    "id": 224,
+    "descricao": "Termodinâmica - Máquinas frigoríficas"
+  },
+  {
+    "id": 225,
+    "descricao": "Termodinâmica - Máquinas térmicas"
+  },
+  {
+    "id": 226,
+    "descricao": "Termodinâmica - Segunda lei da termodinâmica"
+  },
+  {
+    "id": 227,
+    "descricao": "Termodinâmica - Transformações cíclicas e acíclicas"
+  },
+  {
+    "id": 228,
+    "descricao": "Termometria e calorimetria - Calor específico e capacidade térmica"
+  },
+  {
+    "id": 229,
+    "descricao": "Termometria e calorimetria - Calor latente"
+  },
+  {
+    "id": 230,
+    "descricao": "Termometria e calorimetria - Calor sensível"
+  },
+  {
+    "id": 231,
+    "descricao": "Termometria e calorimetria - Dilatação térmica dos corpos"
+  },
+  {
+    "id": 232,
+    "descricao": "Termometria e calorimetria - Mudança de fase"
+  },
+  {
+    "id": 233,
+    "descricao": "Termometria e calorimetria - Potência térmica"
+  },
+  {
+    "id": 234,
+    "descricao": "Termometria e calorimetria - Propagação de calor"
+  },
+  {
+    "id": 235,
+    "descricao": "Termometria e calorimetria - Temperatura e escalas termométricas"
+  },
+  {
+    "id": 236,
+    "descricao": "Termometria e calorimetria - Trocas de calor"
+  },
+  {
+    "id": 237,
+    "descricao": "Natureza e vida humana - Campo e cidade"
+  },
+  {
+    "id": 238,
+    "descricao": "Natureza e vida humana - Migrações internacionais"
+  },
+  {
+    "id": 239,
+    "descricao": "Natureza e vida humana - Mundo do trabalho"
+  },
+  {
+    "id": 240,
+    "descricao": "Natureza e vida humana - Paisagens"
+  },
+  {
+    "id": 241,
+    "descricao": "Natureza e vida humana - População"
+  },
+  {
+    "id": 242,
+    "descricao": "Natureza e vida humana - Questões ambientais"
+  },
+  {
+    "id": 243,
+    "descricao": "Natureza e vida humana - Sistema Solar"
+  },
+  {
+    "id": 244,
+    "descricao": "Pensamento espacial - Formas de representação do espaço geográfico"
+  },
+  {
+    "id": 245,
+    "descricao": "Conceitos fundamentais - Espaço geográfico"
+  },
+  {
+    "id": 246,
+    "descricao": "Conceitos fundamentais - Natureza"
+  },
+  {
+    "id": 247,
+    "descricao": "Conceitos fundamentais - O ofício dos geógrafos"
+  },
+  {
+    "id": 248,
+    "descricao": "Conceitos fundamentais - Paisagem"
+  },
+  {
+    "id": 249,
+    "descricao": "Conceitos fundamentais - Região"
+  },
+  {
+    "id": 250,
+    "descricao": "Geografia física - A origem do Universo e do planeta Terra"
+  },
+  {
+    "id": 251,
+    "descricao": "Geografia física - Atmosfera e sua dinâmica"
+  },
+  {
+    "id": 252,
+    "descricao": "Geografia física - Cartografia"
+  },
+  {
+    "id": 253,
+    "descricao": "Geografia física - Climatologia"
+  },
+  {
+    "id": 254,
+    "descricao": "Geografia física - Estrutura geológica da Terra"
+  },
+  {
+    "id": 255,
+    "descricao": "Geografia física - Geologia"
+  },
+  {
+    "id": 256,
+    "descricao": "Geografia física - Os movimentos da Terra"
+  },
+  {
+    "id": 257,
+    "descricao": "Geografia física - Recursos naturais"
+  },
+  {
+    "id": 258,
+    "descricao": "Geografia física - Território, paisagem, espaço, região e lugar"
+  },
+  {
+    "id": 259,
+    "descricao": "Geografia física do Brasil - Climas"
+  },
+  {
+    "id": 260,
+    "descricao": "Geografia física do Brasil - Domínios morfoclimáticos brasileiros"
+  },
+  {
+    "id": 261,
+    "descricao": "Geografia física do Brasil - Estrutura geológica brasileira"
+  },
+  {
+    "id": 262,
+    "descricao": "Geografia física do Brasil - Fontes de energia"
+  },
+  {
+    "id": 263,
+    "descricao": "Geografia física do Brasil - Geomorfologia"
+  },
+  {
+    "id": 264,
+    "descricao": "Geografia física do Brasil - Hidrografia"
+  },
+  {
+    "id": 265,
+    "descricao": "Geografia física do Brasil - Localização do Brasil"
+  },
+  {
+    "id": 266,
+    "descricao": "Geografia física do Brasil - Questões ambientais"
+  },
+  {
+    "id": 267,
+    "descricao": "Geografia física do Brasil - Recursos minerais"
+  },
+  {
+    "id": 268,
+    "descricao": "Geografia física do Brasil - Vegetações do Brasil"
+  },
+  {
+    "id": 269,
+    "descricao": "Geografia humana - Agricultura e pecuária"
+  },
+  {
+    "id": 270,
+    "descricao": "Geografia humana - Blocos econômicos"
+  },
+  {
+    "id": 271,
+    "descricao": "Geografia humana - Comércio e transporte mundiais"
+  },
+  {
+    "id": 272,
+    "descricao": "Geografia humana - Conceitos e objetivos da Geografia"
+  },
+  {
+    "id": 273,
+    "descricao": "Geografia humana - Conflitos mundiais"
+  },
+  {
+    "id": 274,
+    "descricao": "Geografia humana - Conflitos regionais e suas conexões globais"
+  },
+  {
+    "id": 275,
+    "descricao": "Geografia humana - Demografia"
+  },
+  {
+    "id": 276,
+    "descricao": "Geografia humana - Desenvolvimento mundial"
+  },
+  {
+    "id": 277,
+    "descricao": "Geografia humana - Diversidade geográfica e socioeconômica"
+  },
+  {
+    "id": 278,
+    "descricao": "Geografia humana - Geopolítica e geoeconomia"
+  },
+  {
+    "id": 279,
+    "descricao": "Geografia humana - Globalização"
+  },
+  {
+    "id": 280,
+    "descricao": "Geografia humana - Grandes centros econômicos e sua organização territorial"
+  },
+  {
+    "id": 281,
+    "descricao": "Geografia humana - Guerra Fria"
+  },
+  {
+    "id": 282,
+    "descricao": "Geografia humana - Indústrias"
+  },
+  {
+    "id": 283,
+    "descricao": "Geografia humana - Nova ordem Mundial"
+  },
+  {
+    "id": 284,
+    "descricao": "Geografia humana - O terceiro setor"
+  },
+  {
+    "id": 285,
+    "descricao": "Geografia humana - O terrorismo internacional"
+  },
+  {
+    "id": 286,
+    "descricao": "Geografia humana - Os sistemas socialista e capitalista"
+  },
+  {
+    "id": 287,
+    "descricao": "Geografia humana - Países em desenvolvimento"
+  },
+  {
+    "id": 288,
+    "descricao": "Geografia humana - Redes de transporte"
+  },
+  {
+    "id": 289,
+    "descricao": "Geografia humana - Sistema financeiro mundial"
+  },
+  {
+    "id": 290,
+    "descricao": "Geografia humana do Brasil - Atividades econômicas no Brasil"
+  },
+  {
+    "id": 291,
+    "descricao": "Geografia humana do Brasil - Comércio no Brasil"
+  },
+  {
+    "id": 292,
+    "descricao": "Geografia humana do Brasil - Demografia brasileira"
+  },
+  {
+    "id": 293,
+    "descricao": "Geografia humana do Brasil - Espaço rural"
+  },
+  {
+    "id": 294,
+    "descricao": "Geografia humana do Brasil - História da economia brasileira"
+  },
+  {
+    "id": 295,
+    "descricao": "Geografia humana do Brasil - O Brasil e a globalização"
+  },
+  {
+    "id": 296,
+    "descricao": "Geografia humana do Brasil - Organização político-administrativo do Brasil"
+  },
+  {
+    "id": 297,
+    "descricao": "Geografia humana do Brasil - Problemas sociais"
+  },
+  {
+    "id": 298,
+    "descricao": "Geografia humana do Brasil - Regionalização do território brasileiro"
+  },
+  {
+    "id": 299,
+    "descricao": "Geografia humana do Brasil - Relações internacionais"
+  },
+  {
+    "id": 300,
+    "descricao": "Geografia humana do Brasil - Transporte no Brasil"
+  },
+  {
+    "id": 301,
+    "descricao": "Geografia humana do Brasil - Turismo"
+  },
+  {
+    "id": 302,
+    "descricao": "Geografia humana do Brasil - Urbanização"
+  },
+  {
+    "id": 303,
+    "descricao": "História da América - Os processos de independência e conflito nas Américas"
+  },
+  {
+    "id": 304,
+    "descricao": "História do Brasil - O Brasil Imperial"
+  },
+  {
+    "id": 305,
+    "descricao": "História do Brasil - Período republicano"
+  },
+  {
+    "id": 306,
+    "descricao": "História do Brasil - Pré-Colônia e Colônia"
+  },
+  {
+    "id": 307,
+    "descricao": "História do Brasil - Redemocratização pós-ditadura"
+  },
+  {
+    "id": 308,
+    "descricao": "História Geral - Idade contemporânea"
+  },
+  {
+    "id": 309,
+    "descricao": "História Geral - Idade Moderna"
+  },
+  {
+    "id": 310,
+    "descricao": "Introdução ao estudos históricos - Conhecimento da História"
+  },
+  {
+    "id": 311,
+    "descricao": "História da América - América Colonial"
+  },
+  {
+    "id": 312,
+    "descricao": "História da América - América Latina no século XX"
+  },
+  {
+    "id": 313,
+    "descricao": "História da América - América Pré-Colombiana"
+  },
+  {
+    "id": 314,
+    "descricao": "História da América - Descolonização da América"
+  },
+  {
+    "id": 315,
+    "descricao": "História do Brasil - Brasil colonial"
+  },
+  {
+    "id": 316,
+    "descricao": "História do Brasil - Brasil Império"
+  },
+  {
+    "id": 317,
+    "descricao": "História do Brasil - Brasil pré-colonial"
+  },
+  {
+    "id": 318,
+    "descricao": "História do Brasil - Brasil Republicano"
+  },
+  {
+    "id": 319,
+    "descricao": "História do Brasil - Era Vargas"
+  },
+  {
+    "id": 320,
+    "descricao": "História do Brasil - Escravidão"
+  },
+  {
+    "id": 321,
+    "descricao": "História do Brasil - Golpe civil-militar"
+  },
+  {
+    "id": 322,
+    "descricao": "História do Brasil - Redemocratização pós-Era Vargas"
+  },
+  {
+    "id": 323,
+    "descricao": "História do Brasil - República Nova"
+  },
+  {
+    "id": 324,
+    "descricao": "História Moderna - África: reinos e impérios"
+  },
+  {
+    "id": 325,
+    "descricao": "História Moderna - Consolidação das monarquias na Europa Moderna"
+  },
+  {
+    "id": 326,
+    "descricao": "História Moderna - Expansão ultramarina e mercantilismo"
+  },
+  {
+    "id": 327,
+    "descricao": "História Moderna - Iluminismo"
+  },
+  {
+    "id": 328,
+    "descricao": "História Moderna - Independência dos Estados Unidos"
+  },
+  {
+    "id": 329,
+    "descricao": "História Moderna - Reformas religiosas"
+  },
+  {
+    "id": 330,
+    "descricao": "História Moderna - Renascimento cultural e científico"
+  },
+  {
+    "id": 331,
+    "descricao": "História Moderna - Revolução Francesa"
+  },
+  {
+    "id": 332,
+    "descricao": "História Moderna - Revoluções inglesas"
+  },
+  {
+    "id": 333,
+    "descricao": "Idade Antiga - A origem do homem"
+  },
+  {
+    "id": 334,
+    "descricao": "Idade Antiga - A pré-história americana"
+  },
+  {
+    "id": 335,
+    "descricao": "Idade Antiga - Civilizações"
+  },
+  {
+    "id": 336,
+    "descricao": "Idade Antiga - Grécia"
+  },
+  {
+    "id": 337,
+    "descricao": "Idade Antiga - Mesopotâmia, Egito e Reino de Cuxe"
+  },
+  {
+    "id": 338,
+    "descricao": "Idade Antiga - Nascimento das primeiras organizações sociais"
+  },
+  {
+    "id": 339,
+    "descricao": "Idade Antiga - Roma"
+  },
+  {
+    "id": 340,
+    "descricao": "Idade contemporânea - A África do Sul e o Apartheid"
+  },
+  {
+    "id": 341,
+    "descricao": "Idade contemporânea - A crise de 29"
+  },
+  {
+    "id": 342,
+    "descricao": "Idade contemporânea - A quebra da Bolsa de Valores de Nova Iorque"
+  },
+  {
+    "id": 343,
+    "descricao": "Idade contemporânea - Ascensão de regimes autoritários"
+  },
+  {
+    "id": 344,
+    "descricao": "Idade contemporânea - Descolonização da África"
+  },
+  {
+    "id": 345,
+    "descricao": "Idade contemporânea - Descolonização da Ásia"
+  },
+  {
+    "id": 346,
+    "descricao": "Idade contemporânea - Era Napoleônica"
+  },
+  {
+    "id": 347,
+    "descricao": "Idade contemporânea - EUA no século XIX"
+  },
+  {
+    "id": 348,
+    "descricao": "Idade contemporânea - Fim da Guerra Fria"
+  },
+  {
+    "id": 349,
+    "descricao": "Idade contemporânea - Grande Depressão"
+  },
+  {
+    "id": 350,
+    "descricao": "Idade contemporânea - Guerra Fria"
+  },
+  {
+    "id": 351,
+    "descricao": "Idade contemporânea - Imperialismo e Neocolonialismo"
+  },
+  {
+    "id": 352,
+    "descricao": "Idade contemporânea - Movimento operário e o advento do socialismo"
+  },
+  {
+    "id": 353,
+    "descricao": "Idade contemporânea - Mundo no século XXI"
+  },
+  {
+    "id": 354,
+    "descricao": "Idade contemporânea - Primeira Guerra Mundial"
+  },
+  {
+    "id": 355,
+    "descricao": "Idade contemporânea - Revolução Industrial"
+  },
+  {
+    "id": 356,
+    "descricao": "Idade contemporânea - Revolução Russa"
+  },
+  {
+    "id": 357,
+    "descricao": "Idade contemporânea - Revoluções liberais e nacionalismos"
+  },
+  {
+    "id": 358,
+    "descricao": "Idade contemporânea - Segunda Guerra Mundial"
+  },
+  {
+    "id": 359,
+    "descricao": "Idade Média - Alta Idade Média"
+  },
+  {
+    "id": 360,
+    "descricao": "Idade Média - Baixa Idade Média"
+  },
+  {
+    "id": 361,
+    "descricao": "Idade Média - Civilização bizantina"
+  },
+  {
+    "id": 362,
+    "descricao": "Idade Média - O nascimento do islã"
+  },
+  {
+    "id": 363,
+    "descricao": "Idade Média - Os Reinos Africanos"
+  },
+  {
+    "id": 364,
+    "descricao": "Questões conceituais e de método - Fontes históricas e o ofício do historiador"
+  },
+  {
+    "id": 365,
+    "descricao": "Questões conceituais e de método - História e ciências sociais"
+  },
+  {
+    "id": 366,
+    "descricao": "Questões conceituais e de método - História e memória"
+  },
+  {
+    "id": 367,
+    "descricao": "Questões conceituais e de método - Historiografia"
+  },
+  {
+    "id": 368,
+    "descricao": "Questões conceituais e de método - O que é história"
+  },
+  {
+    "id": 369,
+    "descricao": "Questões conceituais e de método - Objetos da história"
+  },
+  {
+    "id": 370,
+    "descricao": "A língua estrangeira moderna no ENEM - Competências e habilidades"
+  },
+  {
+    "id": 371,
+    "descricao": "A língua estrangeira moderna no ENEM - H5 - Associar vocábulos e expressões de um texto em LEM ao seu tema. "
+  },
+  {
+    "id": 372,
+    "descricao": "A língua estrangeira moderna no ENEM - H6 - Utilizar os conhecimentos da LEM e de seus mecanismos como meio de ampliar as possibilidades de acesso a informações, tecnologias e culturas."
+  },
+  {
+    "id": 373,
+    "descricao": "A língua estrangeira moderna no ENEM - H7 - Relacionar um texto em LEM, as estruturas linguísticas, sua função e seu uso social."
+  },
+  {
+    "id": 374,
+    "descricao": "A língua estrangeira moderna no ENEM - Interpretação de texto"
+  },
+  {
+    "id": 375,
+    "descricao": "Grammar - Adjectives"
+  },
+  {
+    "id": 376,
+    "descricao": "Grammar - Adverbs"
+  },
+  {
+    "id": 377,
+    "descricao": "Grammar - Articles"
+  },
+  {
+    "id": 378,
+    "descricao": "Grammar - Connectives"
+  },
+  {
+    "id": 379,
+    "descricao": "Grammar - Connectors"
+  },
+  {
+    "id": 380,
+    "descricao": "Grammar - Indefinites"
+  },
+  {
+    "id": 381,
+    "descricao": "Grammar - Passive voice"
+  },
+  {
+    "id": 382,
+    "descricao": "Grammar - Pronouns"
+  },
+  {
+    "id": 383,
+    "descricao": "Grammar - Question words"
+  },
+  {
+    "id": 384,
+    "descricao": "Grammar - Relative clauses"
+  },
+  {
+    "id": 385,
+    "descricao": "Grammar - Verbs"
+  },
+  {
+    "id": 386,
+    "descricao": "Text genres - Article "
+  },
+  {
+    "id": 387,
+    "descricao": "Text genres - Book cover"
+  },
+  {
+    "id": 388,
+    "descricao": "Text genres - Cartoon"
+  },
+  {
+    "id": 389,
+    "descricao": "Text genres - Comic strip"
+  },
+  {
+    "id": 390,
+    "descricao": "Text genres - Infographic"
+  },
+  {
+    "id": 391,
+    "descricao": "Text genres - Institutional poster"
+  },
+  {
+    "id": 392,
+    "descricao": "Text genres - News"
+  },
+  {
+    "id": 393,
+    "descricao": "Text genres - Photographic essay"
+  },
+  {
+    "id": 394,
+    "descricao": "Text genres - Poem"
+  },
+  {
+    "id": 395,
+    "descricao": "Text genres - Site"
+  },
+  {
+    "id": 396,
+    "descricao": "Text genres - Song lyrics"
+  },
+  {
+    "id": 397,
+    "descricao": "Text genres - Synopsis"
+  },
+  {
+    "id": 398,
+    "descricao": "Vocabulary - Lexical ambiguity"
+  },
+  {
+    "id": 399,
+    "descricao": "Leitura e compreensão - Gêneros textuais"
+  },
+  {
+    "id": 400,
+    "descricao": "Análise linguística - Elementos notacionais da escrita"
+  },
+  {
+    "id": 401,
+    "descricao": "Análise linguística - Morfossintaxe"
+  },
+  {
+    "id": 402,
+    "descricao": "Análise linguística - Semântica"
+  },
+  {
+    "id": 403,
+    "descricao": "Análise linguística - Sintaxe"
+  },
+  {
+    "id": 404,
+    "descricao": "Análise linguística - Variação linguística"
+  },
+  {
+    "id": 405,
+    "descricao": "Leitura - Gêneros textuais"
+  },
+  {
+    "id": 406,
+    "descricao": "Leitura - Interpretação textual"
+  },
+  {
+    "id": 407,
+    "descricao": "Leitura - Tipos textuais"
+  },
+  {
+    "id": 408,
+    "descricao": "Gramática - Estilística"
+  },
+  {
+    "id": 409,
+    "descricao": "Gramática - Fonologia"
+  },
+  {
+    "id": 410,
+    "descricao": "Gramática - Introdução à Gramatica"
+  },
+  {
+    "id": 411,
+    "descricao": "Gramática - Morfossintaxe"
+  },
+  {
+    "id": 412,
+    "descricao": "Gramática - Ortografia"
+  },
+  {
+    "id": 413,
+    "descricao": "Gramática - Semântica"
+  },
+  {
+    "id": 414,
+    "descricao": "Interpretação textual - Competência leitora"
+  },
+  {
+    "id": 415,
+    "descricao": "Interpretação textual - Competência linguística"
+  },
+  {
+    "id": 416,
+    "descricao": "Interpretação textual - Elementos da comunicação"
+  },
+  {
+    "id": 417,
+    "descricao": "Interpretação textual - Situação comunicativa"
+  },
+  {
+    "id": 418,
+    "descricao": "Literatura - Ciência da Literatura"
+  },
+  {
+    "id": 419,
+    "descricao": "Literatura - Literatura brasileira"
+  },
+  {
+    "id": 420,
+    "descricao": "Literatura - Literatura Portuguesa"
+  },
+  {
+    "id": 421,
+    "descricao": "Redação - Coesão e coerência textuais"
+  },
+  {
+    "id": 422,
+    "descricao": "Redação - Elaboração do projeto de texto"
+  },
+  {
+    "id": 423,
+    "descricao": "Redação - Enunciados"
+  },
+  {
+    "id": 424,
+    "descricao": "Redação - Gêneros textuais"
+  },
+  {
+    "id": 425,
+    "descricao": "Redação - Pontuação"
+  },
+  {
+    "id": 426,
+    "descricao": "Redação - Práticas de produção textual"
+  },
+  {
+    "id": 427,
+    "descricao": "Redação - Sequências textuais"
+  },
+  {
+    "id": 428,
+    "descricao": "Álgebra - Equações"
+  },
+  {
+    "id": 429,
+    "descricao": "Álgebra - Funções"
+  },
+  {
+    "id": 430,
+    "descricao": "Álgebra - Plano cartesiano"
+  },
+  {
+    "id": 431,
+    "descricao": "Álgebra - Produtos notáveis e fatoração"
+  },
+  {
+    "id": 432,
+    "descricao": "Álgebra - Razão e proporção"
+  },
+  {
+    "id": 433,
+    "descricao": "Álgebra - Sequências"
+  },
+  {
+    "id": 434,
+    "descricao": "Álgebra - Sistemas"
+  },
+  {
+    "id": 435,
+    "descricao": "Geometria - Ângulos"
+  },
+  {
+    "id": 436,
+    "descricao": "Geometria - Elementos fundamentais da geometria"
+  },
+  {
+    "id": 437,
+    "descricao": "Geometria - Geometria espacial"
+  },
+  {
+    "id": 438,
+    "descricao": "Geometria - Geometria no plano cartesiano"
+  },
+  {
+    "id": 439,
+    "descricao": "Geometria - Geometria plana"
+  },
+  {
+    "id": 440,
+    "descricao": "Geometria - Ponto, reta e plano"
+  },
+  {
+    "id": 441,
+    "descricao": "Geometria - Simetria de translação, rotação e reflexão"
+  },
+  {
+    "id": 442,
+    "descricao": "Grandezas e medidas - Conceito de grandeza"
+  },
+  {
+    "id": 443,
+    "descricao": "Grandezas e medidas - Conversão entre unidades de medida"
+  },
+  {
+    "id": 444,
+    "descricao": "Grandezas e medidas - Medidas de grandeza"
+  },
+  {
+    "id": 445,
+    "descricao": "Grandezas e medidas - Plantas baixas e vistas aéreas"
+  },
+  {
+    "id": 446,
+    "descricao": "Grandezas e medidas - Problemas envolvendo grandezas e medidas"
+  },
+  {
+    "id": 447,
+    "descricao": "Números - Conjuntos numéricos"
+  },
+  {
+    "id": 448,
+    "descricao": "Números - Matemática financeira"
+  },
+  {
+    "id": 449,
+    "descricao": "Números - Números inteiros"
+  },
+  {
+    "id": 450,
+    "descricao": "Números - Números naturais"
+  },
+  {
+    "id": 451,
+    "descricao": "Números - Números racionais"
+  },
+  {
+    "id": 452,
+    "descricao": "Números - Números reais"
+  },
+  {
+    "id": 453,
+    "descricao": "Números - Porcentagem"
+  },
+  {
+    "id": 454,
+    "descricao": "Números - Potenciação e radiciação"
+  },
+  {
+    "id": 455,
+    "descricao": "Números - Princípio multiplicativo da contagem"
+  },
+  {
+    "id": 456,
+    "descricao": "Números - Sistemas de numeração"
+  },
+  {
+    "id": 457,
+    "descricao": "Probabilidade e estatística - Estatística"
+  },
+  {
+    "id": 458,
+    "descricao": "Probabilidade e estatística - Probabilidade"
+  },
+  {
+    "id": 459,
+    "descricao": "Álgebra - Análise"
+  },
+  {
+    "id": 460,
+    "descricao": "Álgebra - Análise combinatória"
+  },
+  {
+    "id": 461,
+    "descricao": "Álgebra - Determinante"
+  },
+  {
+    "id": 462,
+    "descricao": "Álgebra - Logaritmo"
+  },
+  {
+    "id": 463,
+    "descricao": "Álgebra - Matriz"
+  },
+  {
+    "id": 464,
+    "descricao": "Álgebra - Números e operações"
+  },
+  {
+    "id": 465,
+    "descricao": "Aritmética - Conjuntos"
+  },
+  {
+    "id": 466,
+    "descricao": "Aritmética - Conjuntos numéricos"
+  },
+  {
+    "id": 467,
+    "descricao": "Aritmética - Divisibilidade"
+  },
+  {
+    "id": 468,
+    "descricao": "Aritmética - Juros"
+  },
+  {
+    "id": 469,
+    "descricao": "Aritmética - MDC"
+  },
+  {
+    "id": 470,
+    "descricao": "Aritmética - Números inteiros"
+  },
+  {
+    "id": 471,
+    "descricao": "Aritmética - Porcentagem"
+  },
+  {
+    "id": 472,
+    "descricao": "Aritmética - Potenciação"
+  },
+  {
+    "id": 473,
+    "descricao": "Aritmética - Sistemas de numeração"
+  },
+  {
+    "id": 474,
+    "descricao": "Geometria - Arcos e ângulos na circunferência"
+  },
+  {
+    "id": 475,
+    "descricao": "Geometria - Equações trigonométricas"
+  },
+  {
+    "id": 476,
+    "descricao": "Geometria - Figuras geométricas planas e espaciais"
+  },
+  {
+    "id": 477,
+    "descricao": "Geometria - Funções trigonométricas"
+  },
+  {
+    "id": 478,
+    "descricao": "Geometria - Geometria Analítica"
+  },
+  {
+    "id": 479,
+    "descricao": "Geometria - Geometria Espacial"
+  },
+  {
+    "id": 480,
+    "descricao": "Geometria - Geometria Plana"
+  },
+  {
+    "id": 481,
+    "descricao": "Geometria - Relações trigonométricas"
+  },
+  {
+    "id": 482,
+    "descricao": "Geometria - Relações Trigonométricas em um Triângulo Qualquer"
+  },
+  {
+    "id": 483,
+    "descricao": "Geometria - Sequências"
+  },
+  {
+    "id": 484,
+    "descricao": "Geometria - Sistemas de Medidas"
+  },
+  {
+    "id": 485,
+    "descricao": "Geometria - Transformações geométricas"
+  },
+  {
+    "id": 486,
+    "descricao": "Geometria - Transformações trigonométricas"
+  },
+  {
+    "id": 487,
+    "descricao": "Geometria - Trigonometria no Triângulo Retângulo"
+  },
+  {
+    "id": 488,
+    "descricao": "Físico-química - Cinética química"
+  },
+  {
+    "id": 489,
+    "descricao": "Físico-química - Dispersões"
+  },
+  {
+    "id": 490,
+    "descricao": "Físico-química - Eletroquímica"
+  },
+  {
+    "id": 491,
+    "descricao": "Físico-química - Equilíbrio iônico"
+  },
+  {
+    "id": 492,
+    "descricao": "Físico-química - Equilíbrio químico"
+  },
+  {
+    "id": 493,
+    "descricao": "Físico-química - Meio ambiente"
+  },
+  {
+    "id": 494,
+    "descricao": "Físico-química - Metalurgia"
+  },
+  {
+    "id": 495,
+    "descricao": "Físico-química - Propriedades coligativas"
+  },
+  {
+    "id": 496,
+    "descricao": "Físico-química - Radioatividade"
+  },
+  {
+    "id": 497,
+    "descricao": "Físico-química - Termoquímica"
+  },
+  {
+    "id": 498,
+    "descricao": "Química geral - Atomística"
+  },
+  {
+    "id": 499,
+    "descricao": "Química geral - Cálculos estequiométricos"
+  },
+  {
+    "id": 500,
+    "descricao": "Química geral - Cálculos químicos"
+  },
+  {
+    "id": 501,
+    "descricao": "Química geral - Funções inorgâncias"
+  },
+  {
+    "id": 502,
+    "descricao": "Química geral - Gases"
+  },
+  {
+    "id": 503,
+    "descricao": "Química geral - Introdução à Química"
+  },
+  {
+    "id": 504,
+    "descricao": "Química geral - Leis ponderais"
+  },
+  {
+    "id": 505,
+    "descricao": "Química geral - Matéria e energia"
+  },
+  {
+    "id": 506,
+    "descricao": "Química geral - Métodos de balanceamento de equações químicas"
+  },
+  {
+    "id": 507,
+    "descricao": "Química geral - Número de oxidação"
+  },
+  {
+    "id": 508,
+    "descricao": "Química geral - Oxirredução"
+  },
+  {
+    "id": 509,
+    "descricao": "Química geral - Reações químicas inorgânicas"
+  },
+  {
+    "id": 510,
+    "descricao": "Química geral - Teorias sobre ácidos e bases"
+  },
+  {
+    "id": 511,
+    "descricao": "Química orgânica - Biomassa e biocombustíveis"
+  },
+  {
+    "id": 512,
+    "descricao": "Química orgânica - Cadeias carbônicas"
+  },
+  {
+    "id": 513,
+    "descricao": "Química orgânica - Classificação do carbono"
+  },
+  {
+    "id": 514,
+    "descricao": "Química orgânica - Compostos bioquímicos"
+  },
+  {
+    "id": 515,
+    "descricao": "Química orgânica - Compostos orgânicos de uso cotidiano"
+  },
+  {
+    "id": 516,
+    "descricao": "Química orgânica - Estudo das funções orgânicas"
+  },
+  {
+    "id": 517,
+    "descricao": "Química orgânica - Hibridização do carbono"
+  },
+  {
+    "id": 518,
+    "descricao": "Química orgânica - Identificação de funções orgânicas"
+  },
+  {
+    "id": 519,
+    "descricao": "Química orgânica - Impactos ambientais dos combustíveis"
+  },
+  {
+    "id": 520,
+    "descricao": "Química orgânica - Introdução à Química Orgânica"
+  },
+  {
+    "id": 521,
+    "descricao": "Química orgânica - Isomeria"
+  },
+  {
+    "id": 522,
+    "descricao": "Química orgânica - Petróleo e outros combustíveis fósseis"
+  },
+  {
+    "id": 523,
+    "descricao": "Química orgânica - Polímeros"
+  },
+  {
+    "id": 524,
+    "descricao": "Química orgânica - Propriedades dos compostos orgânicos"
+  },
+  {
+    "id": 525,
+    "descricao": "Química orgânica - Química dos alimentos"
+  },
+  {
+    "id": 526,
+    "descricao": "Química orgânica - Reações orgânicas"
+  },
+  {
+    "id": 527,
+    "descricao": "Sociologia brasileira - Sérgio Buarque de Holanda"
+  },
+  {
+    "id": 528,
+    "descricao": "Sociologia clássica - As primeiras teorizações sociológicas"
+  },
+  {
+    "id": 529,
+    "descricao": "Sociologia contemporânea - Construtivismo"
+  },
+  {
+    "id": 530,
+    "descricao": "Surgimento da Sociologia - Produção social do conhecimento"
+  },
+  {
+    "id": 531,
+    "descricao": "Surgimento da Sociologia - Teóricos clássicos"
+  },
+  {
+    "id": 532,
+    "descricao": "Temas gerais - Análise sociológica da religião"
+  },
+  {
+    "id": 533,
+    "descricao": "Temas gerais - Brasil"
+  },
+  {
+    "id": 534,
+    "descricao": "Temas gerais - Cidadania e democracia"
+  },
+  {
+    "id": 535,
+    "descricao": "Temas gerais - Cultura e sociedade"
+  },
+  {
+    "id": 536,
+    "descricao": "Temas gerais - Direito, cidadania e movimentos sociais"
+  },
+  {
+    "id": 537,
+    "descricao": "Temas gerais - Direitos dos animais e da natureza"
+  },
+  {
+    "id": 538,
+    "descricao": "Temas gerais - Educação e pobreza na América Latina"
+  },
+  {
+    "id": 539,
+    "descricao": "Temas gerais - Estrutura social e desigualdade"
+  },
+  {
+    "id": 540,
+    "descricao": "Temas gerais - Feminismo"
+  },
+  {
+    "id": 541,
+    "descricao": "Temas gerais - Identidade na modernidade"
+  },
+  {
+    "id": 542,
+    "descricao": "Temas gerais - Indivíduo e sociedade"
+  },
+  {
+    "id": 543,
+    "descricao": "Temas gerais - Meio ambiente e desenvolvimento sustentável"
+  },
+  {
+    "id": 544,
+    "descricao": "Temas gerais - Meios de comunicação"
+  },
+  {
+    "id": 545,
+    "descricao": "Temas gerais - O espaço rural e a reforma agrária"
+  },
+  {
+    "id": 546,
+    "descricao": "Temas gerais - Política e Estado"
+  },
+  {
+    "id": 547,
+    "descricao": "Temas gerais - Problemas globais, perspectivas locais"
+  },
+  {
+    "id": 548,
+    "descricao": "Temas gerais - Sociologia do conhecimento"
+  },
+  {
+    "id": 549,
+    "descricao": "Temas gerais - Sociologia urbana"
+  },
+  {
+    "id": 550,
+    "descricao": "Temas gerais - Terrorismo e crise migratória"
+  },
+  {
+    "id": 551,
+    "descricao": "Temas gerais - Trabalho e sociedade"
+  },
+  {
+    "id": 552,
+    "descricao": "Temas gerais - Violência"
+  }
+]

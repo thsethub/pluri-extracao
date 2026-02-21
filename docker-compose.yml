@@ -84,6 +84,21 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.scope=pluri"
 
+  # ── Classificacao Frontend (Porta 9595) ──────────────────────
+  frontend:
+    image: ghcr.io/thsethub/pluri-extracao/frontend:latest
+    container_name: pluri-frontend
+    restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8989/classificacao}
+    ports:
+      - "9595:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    labels:
+      - "com.centurylinklabs.watchtower.scope=pluri"
+
   # ── Watchtower (auto-update das imagens) ────────────────────
   watchtower:
     image: containrrr/watchtower

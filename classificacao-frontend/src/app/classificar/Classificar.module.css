@@ -1,0 +1,343 @@
+.header {
+    margin-bottom: 1rem;
+}
+
+.header h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.1rem;
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 1.2rem;
+    align-items: start;
+}
+
+.questaoCard {
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.questaoMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.tag {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.habTag {
+    background-color: #f0fff4;
+    color: #276749;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 800;
+}
+
+.idTag {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.enunciado {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.enunciado img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 4px;
+}
+
+.alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.altItem {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    gap: 0.8rem;
+    background-color: var(--background);
+    font-size: 0.9rem;
+    align-items: flex-start;
+}
+
+.altItem img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0.5rem 0;
+}
+
+.altCorreta {
+    border-color: var(--success);
+    background-color: rgba(56, 161, 105, 0.03);
+}
+
+.altLetra {
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.moduloCard {
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 150px);
+}
+
+.moduloHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.3rem;
+    color: var(--primary);
+}
+
+.moduloHeader h3 {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.moduloHint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.moduloList {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    padding: 4px 6px 4px 2px;
+}
+
+.moduloItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    background-color: var(--surface);
+}
+
+.moduloItem:hover {
+    border-color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+.moduloSelected {
+    border-color: var(--primary);
+    background-color: var(--primary-light);
+    box-shadow: 0 0 0 1px var(--primary), 0 4px 12px rgba(43, 108, 176, 0.1);
+}
+
+/* Custom Radio Button */
+.moduloItem input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    margin-top: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    cursor: pointer;
+    background: white;
+}
+
+.moduloItem:hover input[type="radio"] {
+    border-color: var(--primary);
+}
+
+.moduloSelected input[type="radio"] {
+    border-color: var(--primary);
+}
+
+.moduloSelected input[type="radio"]::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    display: block;
+}
+
+.moduloText {
+    flex: 1;
+}
+
+.moduloText strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+    line-height: 1.3;
+}
+
+.moduloText span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    display: block;
+}
+
+.actionArea {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.actionArea textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    resize: none;
+    height: 60px;
+    outline: none;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 0.8rem;
+}
+
+.skipBtn,
+.saveBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.skipBtn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.skipBtn:hover {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.saveBtn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    font-weight: 700;
+}
+
+.saveBtn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.saveBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.loading,
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 350px;
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    color: var(--text-muted);
+    gap: 1rem;
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--primary-light);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.empty p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.empty button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}

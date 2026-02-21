@@ -1,0 +1,66 @@
+.filterBar {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    background-color: var(--surface);
+    box-shadow: var(--shadow);
+    align-items: center;
+    position: relative;
+    z-index: 50;
+    /* Baixo o suficiente para sidebar mas alto o suficiente para conteúdo */
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 220px;
+}
+
+.filterGroup label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filterGroup select {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    outline: none;
+    background-color: white;
+}
+
+.filterGroup select:focus {
+    border-color: var(--primary);
+}
+
+.info {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: right;
+    border-left: 1px solid var(--border);
+    padding-left: 1.5rem;
+    height: 40px;
+}
+
+.info p {
+    font-size: 0.85rem;
+    color: var(--text);
+    margin: 0;
+    font-weight: 500;
+}
+
+.info span {
+    font-size: 0.7rem;
+    color: var(--primary);
+    font-weight: 700;
+}

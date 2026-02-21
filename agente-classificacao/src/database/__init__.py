@@ -55,5 +55,7 @@ def get_pg_db():
 def init_pg_tables():
     """Cria as tabelas no PostgreSQL se não existirem"""
     from .pg_models import QuestaoAssuntoModel  # noqa: F401
+    from .pg_modulo_models import HabilidadeModuloModel  # noqa: F401
+    from .pg_usuario_models import UsuarioModel, ClassificacaoUsuarioModel  # noqa: F401
 
     PgBase.metadata.create_all(bind=pg_engine)

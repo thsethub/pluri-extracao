@@ -1,0 +1,127 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top left, #ebf8ff, #ffffff 70%);
+    padding: 1rem;
+    overflow: hidden;
+    /* Evitar scroll na tela inteira */
+}
+
+.card {
+    width: 100%;
+    max-width: 440px;
+    padding: 1.5rem 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    background-color: var(--surface);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: visible;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.header h1 {
+    color: var(--primary);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.error {
+    background-color: rgba(229, 62, 62, 0.1);
+    color: var(--error);
+    padding: 0.8rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.inputGroup label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inputGroup input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s;
+    background-color: #fcfcfc;
+}
+
+.inputGroup input:focus {
+    border-color: var(--primary);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.05);
+}
+
+.button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 0.8rem;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(43, 108, 176, 0.2);
+}
+
+.button:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.footer a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}

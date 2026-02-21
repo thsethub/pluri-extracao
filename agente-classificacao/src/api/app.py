@@ -21,6 +21,7 @@ from .schemas import (
 )
 from .db_router import router as db_router
 from .extracao_router import router as extracao_router
+from .classificacao_router import router as classificacao_router
 
 # Setup do logger
 setup_logger(settings.log_level)
@@ -103,6 +104,10 @@ app = FastAPI(
             "name": "Database",
             "description": "Endpoints de consulta ao banco de dados (anos, disciplinas, habilidades, questões)",
         },
+        {
+            "name": "Classificação Manual",
+            "description": "Sistema de classificação manual por professores com autenticação JWT",
+        },
     ],
 )
 
@@ -118,6 +123,7 @@ app.add_middleware(
 # Registra os routers
 app.include_router(db_router)
 app.include_router(extracao_router)
+app.include_router(classificacao_router)
 
 # Inicializa o classificador (singleton)
 classifier = QuestionClassifier()
