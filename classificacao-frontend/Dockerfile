@@ -12,6 +12,11 @@ COPY . .
 RUN mkdir -p public
 # Ignorar lints no build para evitar quebras por avisos
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Receber URL da API como argumento de build (Next.js baka variáveis NEXT_PUBLIC no build)
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 RUN npm run build
 
 # Estágio de Produção
