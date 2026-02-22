@@ -8,13 +8,15 @@ import Dropdown from './Dropdown';
 import styles from './FilterBar.module.css';
 
 interface FilterBarProps {
-    onFilterChange: (area: string, disciplinaId: string) => void;
+    onFilterChange: (area: string, disciplinaId: string, habilidadeId: string) => void;
 }
 
 export default function FilterBar({ onFilterChange }: FilterBarProps) {
     const [area, setArea] = useState('');
     const [disciplinaId, setDisciplinaId] = useState('');
+    const [habilidadeId, setHabilidadeId] = useState('');
     const [areasMapping, setAreasMapping] = useState<Record<string, string[]>>({});
+    const [habilidades, setHabilidades] = useState<{ habilidade_id: number, habilidade_descricao: string }[]>([]);
     const usuario = getUsuario();
 
     useEffect(() => {
@@ -45,11 +47,34 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
         loadFilters();
     }, []);
 
+    // Carrega assuntos (habilidades) quando a disciplina muda
+    useEffect(() => {
+        async function loadHabilidades() {
+            if (!disciplinaId) {
+                setHabilidades([]);
+                setHabilidadeId('');
+                return;
+            }
+
+            try {
+                const params = new URLSearchParams();
+                if (area) params.append('area', area);
+                if (disciplinaId) params.append('disciplina', disciplinaId);
+
+                const data = await apiRequest(`/habilidades?${params.toString()}`);
+                setHabilidades(data.habilidades || []);
+            } catch (err) {
+                console.error('Erro ao carregar habilidades:', err);
+                setHabilidades([]);
+            }
+        }
+        loadHabilidades();
+    }, [area, disciplinaId]);
+
     // Notifica o pai quando os filtros mudam
     useEffect(() => {
-        // Só dispara se houver pelo menos área ou se for flexível
-        onFilterChange(area, disciplinaId);
-    }, [area, disciplinaId]);
+        onFilterChange(area, disciplinaId, habilidadeId);
+    }, [area, disciplinaId, habilidadeId]);
 
     // Disciplinas dentro da área atual
     const disciplinasDaArea = area ? (areasMapping[area] || []) : [];
@@ -72,6 +97,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
                         if (!usuario?.disciplina || usuario.is_admin) {
                             setArea(val);
                             setDisciplinaId('');
+                            setHabilidadeId('');
                         }
                     }}
                     placeholder="Selecione a Área"
@@ -83,8 +109,22 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
                     label="Filtrar por Disciplina"
                     options={disciplinaOptions}
                     value={disciplinaId}
-                    onChange={(val: any) => setDisciplinaId(val)}
+                    onChange={(val: any) => {
+                        setDisciplinaId(val);
+                        setHabilidadeId(''); // Reseta o assunto ao mudar disciplina
+                    }}
                     placeholder="Todas as disciplinas da área"
+                />
+            </div>
+
+            <div className={styles.filterGroup}>
+                <Dropdown
+                    label="Assunto"
+                    options={habilidades.map(h => ({ value: h.habilidade_id.toString(), label: h.habilidade_descricao }))}
+                    value={habilidadeId}
+                    onChange={(val: any) => setHabilidadeId(val)}
+                    placeholder="Todos os assuntos"
+                    disabled={!disciplinaId || habilidades.length === 0}
                 />
             </div>
 

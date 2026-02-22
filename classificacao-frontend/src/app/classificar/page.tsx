@@ -14,11 +14,12 @@ export default function ClassificarPage() {
     const usuario = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('usuario') || '{}') : null;
     const [area, setArea] = useState(usuario?.disciplina || '');
     const [disciplinaFiltro, setDisciplinaFiltro] = useState('');
+    const [habilidadeFiltro, setHabilidadeFiltro] = useState('');
     const [saving, setSaving] = useState(false);
     const [observacao, setObservacao] = useState('');
     const [moduloSelecionado, setModuloSelecionado] = useState<any>(null);
 
-    const fetchProxima = async (areaFiltro?: string, discFiltro?: string) => {
+    const fetchProxima = async (areaFiltro?: string, discFiltro?: string, habFiltro?: string) => {
         setLoading(true);
         setError('');
         setQuestao(null);
@@ -29,6 +30,7 @@ export default function ClassificarPage() {
             const query = new URLSearchParams();
             if (areaFiltro) query.append('area', areaFiltro);
             if (discFiltro) query.append('disciplina_id', discFiltro);
+            if (habFiltro) query.append('habilidade_id', habFiltro);
 
             const params = query.toString() ? `?${query.toString()}` : '';
             const data = await apiRequest(`/proxima${params}`);
@@ -41,8 +43,8 @@ export default function ClassificarPage() {
     };
 
     useEffect(() => {
-        fetchProxima(area, disciplinaFiltro);
-    }, [area, disciplinaFiltro]);
+        fetchProxima(area, disciplinaFiltro, habilidadeFiltro);
+    }, [area, disciplinaFiltro, habilidadeFiltro]);
 
     const handleSalvar = async () => {
         if (!moduloSelecionado) return;
@@ -61,7 +63,7 @@ export default function ClassificarPage() {
                     observacao
                 })
             });
-            fetchProxima(area, disciplinaFiltro);
+            fetchProxima(area, disciplinaFiltro, habilidadeFiltro);
         } catch (err: any) {
             alert(err.message);
         } finally {
@@ -78,9 +80,10 @@ export default function ClassificarPage() {
                 </div>
             </div>
 
-            <FilterBar onFilterChange={(a, d) => {
+            <FilterBar onFilterChange={(a, d, h) => {
                 setArea(a);
                 setDisciplinaFiltro(d);
+                setHabilidadeFiltro(h);
             }} />
 
             {loading ? (
@@ -92,7 +95,7 @@ export default function ClassificarPage() {
                 <div className={styles.empty}>
                     <AlertCircle size={48} color="var(--primary)" />
                     <p>{error}</p>
-                    <button onClick={() => fetchProxima(area, disciplinaFiltro)}>Tentar Novamente</button>
+                    <button onClick={() => fetchProxima(area, disciplinaFiltro, habilidadeFiltro)}>Tentar Novamente</button>
                 </div>
             ) : questao && (
                 <div className={styles.content}>
@@ -155,7 +158,7 @@ export default function ClassificarPage() {
                             />
                             <div className={styles.buttons}>
                                 <button
-                                    onClick={() => fetchProxima(area, disciplinaFiltro)}
+                                    onClick={() => fetchProxima(area, disciplinaFiltro, habilidadeFiltro)}
                                     className={styles.skipBtn}
                                 >
                                     <FastForward size={18} />

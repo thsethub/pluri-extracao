@@ -68,6 +68,18 @@ class ModulosResponse(BaseModel):
     total: int
 
 
+class HabilidadeFiltroSchema(BaseModel):
+    """Schema para item no dropdown de filtro de assuntos"""
+    habilidade_id: int
+    habilidade_descricao: str
+
+
+class HabilidadesFiltroResponse(BaseModel):
+    """Response com lista de assuntos para filtro"""
+    habilidades: List[HabilidadeFiltroSchema]
+    total: int
+
+
 # ========================
 # QUESTÃO PARA CLASSIFICAR
 # ========================

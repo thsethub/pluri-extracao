@@ -29,6 +29,8 @@ from .classificacao_schemas import (
     UsuarioSchema,
     HabilidadeModuloSchema,
     ModulosResponse,
+    HabilidadeFiltroSchema,
+    HabilidadesFiltroResponse,
     AlternativaClassifSchema,
     QuestaoClassifResponse,
     SalvarClassificacaoRequest,
@@ -221,6 +223,45 @@ async def listar_disciplinas():
     }
 
 
+@router.get(
+    "/habilidades",
+    response_model=HabilidadesFiltroResponse,
+    summary="🔍 Listar assuntos (habilidades) para filtro",
+)
+async def listar_habilidades_filtro(
+    area: Optional[str] = Query(None, description="Filtrar por área"),
+    disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
+    pg_db: Session = Depends(get_pg_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """
+    Retorna a lista de assuntos únicos (habilidade_id + habilidade_descricao)
+    para popular o dropdown de filtros no frontend.
+    """
+    query = pg_db.query(
+        HabilidadeModuloModel.habilidade_id,
+        HabilidadeModuloModel.habilidade_descricao
+    ).distinct()
+
+    if area:
+        query = query.filter(HabilidadeModuloModel.area == area)
+    if disciplina:
+        query = query.filter(HabilidadeModuloModel.disciplina == disciplina)
+
+    # Ordenar por descrição para facilitar a busca do usuário
+    results = query.order_by(HabilidadeModuloModel.habilidade_descricao).all()
+
+    habilidades = [
+        HabilidadeFiltroSchema(
+            habilidade_id=r.habilidade_id,
+            habilidade_descricao=r.habilidade_descricao
+        )
+        for r in results if r.habilidade_id is not None
+    ]
+
+    return HabilidadesFiltroResponse(habilidades=habilidades, total=len(habilidades))
+
+
 # ========================
 # MÓDULOS (consulta)
 # ========================
@@ -262,6 +303,7 @@ async def listar_modulos_por_habilidade(
 async def proxima_questao_classificar(
     area: Optional[str] = Query(None, description="Filtrar por área (Humanas, Linguagens, Matemática, Natureza)"),
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
+    habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
@@ -273,6 +315,7 @@ async def proxima_questao_classificar(
     Filtros:
     - **area**: "Humanas", "Linguagens", "Matemática", "Natureza"
     - **disciplina_id**: ID numérico da disciplina
+    - **habilidade_id**: ID da habilidade TRIEDUC
     """
     # IDs a excluir (já classificadas por este usuário OU já possuem classificação no sistema)
     # Forçar área do usuário se não enviada
@@ -300,6 +343,9 @@ async def proxima_questao_classificar(
         .filter(QuestaoModel.habilidade_id.isnot(None))
         .filter(QuestaoModel.ano_id == 3) # Ensino Médio
     )
+    
+    if habilidade_id:
+        candidate_query = candidate_query.filter(QuestaoModel.habilidade_id == habilidade_id)
     
     if disciplina_id:
         if str(disciplina_id).isdigit():
@@ -480,6 +526,7 @@ async def proxima_questao_classificar(
 async def proxima_questao_verificar(
     area: Optional[str] = Query(None, description="Filtrar por área"),
     disciplina_id: Optional[int] = Query(None, description="ID da disciplina"),
+    habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
@@ -513,6 +560,9 @@ async def proxima_questao_verificar(
         QuestaoAssuntoModel.extracao_feita == True,
         QuestaoAssuntoModel.classificacoes.isnot(None)
     )
+
+    if habilidade_id:
+        query_pg = query_pg.filter(QuestaoAssuntoModel.habilidade_id == habilidade_id)
 
     if ids_verificadas:
         query_pg = query_pg.filter(~QuestaoAssuntoModel.questao_id.in_(ids_verificadas))
@@ -642,6 +692,7 @@ async def proxima_questao_verificar(
 async def proxima_questao_low_match(
     area: Optional[str] = Query(None, description="Filtrar por área"),
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
+    habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
@@ -676,6 +727,9 @@ async def proxima_questao_low_match(
         func.jsonb_array_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0,
         QuestaoAssuntoModel.classificado_manualmente == False,
     )
+
+    if habilidade_id:
+        query_pg = query_pg.filter(QuestaoAssuntoModel.habilidade_id == habilidade_id)
 
     if ids_verificadas:
         query_pg = query_pg.filter(~QuestaoAssuntoModel.questao_id.in_(ids_verificadas))

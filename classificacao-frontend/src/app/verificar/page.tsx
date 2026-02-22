@@ -45,12 +45,13 @@ export default function VerificarPage() {
     const usuario = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('usuario') || '{}') : null;
     const [area, setArea] = useState(usuario?.disciplina || '');
     const [disciplinaFiltro, setDisciplinaFiltro] = useState('');
+    const [habilidadeFiltro, setHabilidadeFiltro] = useState('');
     const [saving, setSaving] = useState(false);
     const [observacao, setObservacao] = useState('');
     const [moduloSelecionado, setModuloSelecionado] = useState<any>(null);
     const [isCorrecting, setIsCorrecting] = useState(false);
 
-    const fetchProxima = async (areaFiltro?: string, discFiltro?: string) => {
+    const fetchProxima = async (areaFiltro?: string, discFiltro?: string, habFiltro?: string) => {
         setLoading(true);
         setError('');
         setQuestao(null);
@@ -62,6 +63,7 @@ export default function VerificarPage() {
             const query = new URLSearchParams();
             if (areaFiltro) query.append('area', areaFiltro);
             if (discFiltro) query.append('disciplina_id', discFiltro);
+            if (habFiltro) query.append('habilidade_id', habFiltro);
 
             const params = query.toString() ? `?${query.toString()}` : '';
             const data = await apiRequest(`/proxima-low-match${params}`);
@@ -74,8 +76,8 @@ export default function VerificarPage() {
     };
 
     useEffect(() => {
-        fetchProxima(area, disciplinaFiltro);
-    }, [area, disciplinaFiltro]);
+        fetchProxima(area, disciplinaFiltro, habilidadeFiltro);
+    }, [area, disciplinaFiltro, habilidadeFiltro]);
 
     const handleConfirmar = async () => {
         setSaving(true);
@@ -88,7 +90,7 @@ export default function VerificarPage() {
                     observacao
                 })
             });
-            fetchProxima(area, disciplinaFiltro);
+            fetchProxima(area, disciplinaFiltro, habilidadeFiltro);
         } catch (err: any) {
             alert(err.message);
         } finally {
@@ -112,7 +114,7 @@ export default function VerificarPage() {
                     observacao
                 })
             });
-            fetchProxima(area, disciplinaFiltro);
+            fetchProxima(area, disciplinaFiltro, habilidadeFiltro);
         } catch (err: any) {
             alert(err.message);
         } finally {
@@ -131,9 +133,10 @@ export default function VerificarPage() {
                 </div>
             </div>
 
-            <FilterBar onFilterChange={(a, d) => {
+            <FilterBar onFilterChange={(a, d, h) => {
                 setArea(a);
                 setDisciplinaFiltro(d);
+                setHabilidadeFiltro(h);
             }} />
 
             {loading ? (
@@ -145,7 +148,7 @@ export default function VerificarPage() {
                 <div className={styles.empty}>
                     <CheckCircle size={48} color="var(--success)" />
                     <p>{error}</p>
-                    <button onClick={() => fetchProxima(area, disciplinaFiltro)}>Tentar Novamente</button>
+                    <button onClick={() => fetchProxima(area, disciplinaFiltro, habilidadeFiltro)}>Tentar Novamente</button>
                 </div>
             ) : questao && (
                 <div className={styles.content}>
@@ -231,7 +234,7 @@ export default function VerificarPage() {
                                     />
                                     <div className={styles.buttons}>
                                         <button
-                                            onClick={() => fetchProxima(area, disciplinaFiltro)}
+                                            onClick={() => fetchProxima(area, disciplinaFiltro, habilidadeFiltro)}
                                             className={styles.skipBtn}
                                         >
                                             <FastForward size={18} />

@@ -15,9 +15,17 @@ interface DropdownProps {
     value: string | number;
     onChange: (value: any) => void;
     placeholder?: string;
+    disabled?: boolean;
 }
 
-export default function Dropdown({ label, options, value, onChange, placeholder = 'Selecione...' }: DropdownProps) {
+export default function Dropdown({
+    label,
+    options,
+    value,
+    onChange,
+    placeholder = 'Selecione...',
+    disabled = false
+}: DropdownProps) {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -37,8 +45,8 @@ export default function Dropdown({ label, options, value, onChange, placeholder 
         <div className={styles.container} ref={dropdownRef}>
             {label && <label className={styles.label}>{label}</label>}
             <div
-                className={`${styles.select} ${isOpen ? styles.active : ''}`}
-                onClick={() => setIsOpen(!isOpen)}
+                className={`${styles.select} ${isOpen ? styles.active : ''} ${disabled ? styles.disabled : ''}`}
+                onClick={() => !disabled && setIsOpen(!isOpen)}
             >
                 <span className={selectedOption ? styles.value : styles.placeholder}>
                     {selectedOption ? selectedOption.label : placeholder}
