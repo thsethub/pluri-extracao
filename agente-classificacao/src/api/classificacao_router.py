@@ -17,7 +17,7 @@ from jose import JWTError, jwt
 import bcrypt
 
 from ..database import get_db, get_pg_db
-from ..database.models import QuestaoModel, HabilidadeModel
+from ..database.models import QuestaoModel, HabilidadeModel, DisciplinaModel
 from ..database.pg_models import QuestaoAssuntoModel
 from ..database.pg_modulo_models import HabilidadeModuloModel
 from ..database.pg_usuario_models import UsuarioModel, ClassificacaoUsuarioModel
@@ -59,15 +59,25 @@ router = APIRouter(prefix="/classificacao", tags=["Classificação Manual"])
 DISCIPLINAS_VALIDAS = [
     "Artes", "Biologia", "Ciências", "Educação Física", "Espanhol",
     "Filosofia", "Física", "Geografia", "História", "Língua Inglesa",
-    "Língua Portuguesa", "Matemática", "Natureza e Sociedade", "Química", "Sociologia",
+    "Língua Portuguesa", "Literatura", "Matemática", "Natureza e Sociedade", 
+    "Química", "Redação", "Sociologia",
     # Áreas
     "Humanas", "Linguagens", "Natureza"
 ]
 
+# Mapeamento para o MySQL (onde os nomes podem ser diferentes do Postgres/Planilha)
+MAP_DISCIPLINAS_MYSQL = {
+    "Artes": "Artes",
+    "Língua Inglesa": "Língua Inglesa",
+    "Língua Portuguesa": "Língua Portuguesa",
+    "Literatura": None, # Não existe no MySQL
+    "Redação": None,    # Não existe no MySQL
+}
+
 # Mapeamento de áreas para filtro
 AREAS_DISCIPLINAS = {
     "Humanas": ["Filosofia", "Geografia", "História", "Sociologia"],
-    "Linguagens": ["Artes", "Educação Física", "Espanhol", "Língua Inglesa", "Língua Portuguesa"],
+    "Linguagens": ["Artes", "Educação Física", "Espanhol", "Língua Inglesa", "Língua Portuguesa", "Literatura", "Redação"],
     "Matemática": ["Matemática"],
     "Natureza": ["Biologia", "Ciências", "Física", "Natureza e Sociedade", "Química"],
 }
@@ -332,10 +342,11 @@ async def proxima_questao_classificar(
     if not area:
         area = usuario.disciplina
 
+    logger.info(f"Busca Próxima: usuario={usuario.nome}, area={area}, disciplina={disciplina_id}, habilidade={habilidade_id}")
+
     # Resolver filtro de área → disciplinas (Otimizado: apenas IDs)
     disciplina_ids_filtro = None
     if area and area in AREAS_DISCIPLINAS:
-        from ..database.models import DisciplinaModel
         nomes = AREAS_DISCIPLINAS[area]
         discs_ids = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao.in_(nomes)).all()
         disciplina_ids_filtro = [d[0] for d in discs_ids]
@@ -361,10 +372,29 @@ async def proxima_questao_classificar(
         if str(disciplina_id).isdigit():
             candidate_query = candidate_query.filter(QuestaoModel.disciplina_id == int(disciplina_id))
         else:
-            from ..database.models import DisciplinaModel
-            disc_id_row = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao == disciplina_id).first()
-            if disc_id_row:
-                candidate_query = candidate_query.filter(QuestaoModel.disciplina_id == disc_id_row[0])
+            # Tentar mapeamento para MySQL
+            mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina_id, disciplina_id)
+            
+            if mysql_name:
+                disc_id_row = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao == mysql_name).first()
+                if disc_id_row:
+                    candidate_query = candidate_query.filter(QuestaoModel.disciplina_id == disc_id_row[0])
+                else:
+                    # Se nome exato não existe no MySQL, falhar para não mostrar tudo
+                    candidate_query = candidate_query.filter(QuestaoModel.id == -1)
+            else:
+                # Disciplina Virtual (Literatura/Redação): Buscar IDs de habilidade no Postgres
+                habilidade_ids_custom = [
+                    row[0] for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
+                    .filter(HabilidadeModuloModel.disciplina == disciplina_id)
+                    .filter(HabilidadeModuloModel.habilidade_id.isnot(None))
+                    .distinct()
+                    .all()
+                ]
+                if habilidade_ids_custom:
+                    candidate_query = candidate_query.filter(QuestaoModel.habilidade_id.in_(habilidade_ids_custom))
+                else:
+                    candidate_query = candidate_query.filter(QuestaoModel.id == -1)
     elif disciplina_ids_filtro:
         candidate_query = candidate_query.filter(QuestaoModel.disciplina_id.in_(disciplina_ids_filtro))
 
@@ -467,6 +497,10 @@ async def proxima_questao_classificar(
     # Re-use details
     questao = questao_final
     enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
+    
+    texto_base_tratado = None
+    if questao.texto_base:
+        texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
 
     # Check for suggested extraction to display
     extracao = (
@@ -482,7 +516,6 @@ async def proxima_questao_classificar(
     # Módulos possíveis
     modulos = []
     if questao.habilidade_id:
-        from ..database.pg_modulo_models import HabilidadeModuloModel
         from .classificacao_schemas import HabilidadeModuloSchema
 
         modulos_q = (
@@ -495,7 +528,6 @@ async def proxima_questao_classificar(
 
         # FALLBACK: Se não achou módulos por ID, tenta por descrição (Case Insensitive)
         if not modulos and hab_descricao:
-            from sqlalchemy import func
             modulos_q = (
                 pg_db.query(HabilidadeModuloModel)
                 .filter(func.lower(HabilidadeModuloModel.habilidade_descricao) == hab_descricao.lower())
@@ -524,6 +556,8 @@ async def proxima_questao_classificar(
         questao_id=questao.questao_id,
         enunciado=enunciado_tratado,
         enunciado_html=questao.enunciado,
+        texto_base=texto_base_tratado,
+        texto_base_html=questao.texto_base,
         disciplina_id=questao.disciplina_id,
         disciplina_nome=disc_nome,
         habilidade_id=questao.habilidade_id,
@@ -543,7 +577,7 @@ async def proxima_questao_classificar(
 )
 async def proxima_questao_verificar(
     area: Optional[str] = Query(None, description="Filtrar por área"),
-    disciplina_id: Optional[int] = Query(None, description="ID da disciplina"),
+    disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
     pg_db: Session = Depends(get_pg_db),
@@ -586,17 +620,37 @@ async def proxima_questao_verificar(
         query_pg = query_pg.filter(~QuestaoAssuntoModel.questao_id.in_(ids_verificadas))
 
     if disciplina_id:
-        disc_target_id = None
         if str(disciplina_id).isdigit():
-            disc_target_id = int(disciplina_id)
+            query_pg = query_pg.filter(QuestaoAssuntoModel.disciplina_id == int(disciplina_id))
         else:
-            from ..database.models import DisciplinaModel
-            disc = db.query(DisciplinaModel).filter(DisciplinaModel.descricao == disciplina_id).first()
-            if disc:
-                disc_target_id = disc.id
-        
-        if disc_target_id:
-            query_pg = query_pg.filter(QuestaoAssuntoModel.disciplina_id == disc_target_id)
+            # Tentar mapeamento para MySQL
+            mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina_id, disciplina_id)
+            
+            disc_target_id = None
+            if mysql_name:
+                disc = db.query(DisciplinaModel).filter(DisciplinaModel.descricao == mysql_name).first()
+                if disc:
+                    disc_target_id = disc.id
+            
+            if disc_target_id:
+                query_pg = query_pg.filter(QuestaoAssuntoModel.disciplina_id == disc_target_id)
+            else:
+                # Disciplina Virtual (Literatura/Redação): Buscar IDs de habilidade no Postgres
+                habilidade_ids_custom = [
+                    row[0] for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
+                    .filter(HabilidadeModuloModel.disciplina == disciplina_id)
+                    .filter(HabilidadeModuloModel.habilidade_id.isnot(None))
+                    .distinct()
+                    .all()
+                ]
+                if habilidade_ids_custom:
+                    # No QuestaoAssuntoModel, habilidade_id pode não estar preenchido se veio do scraping
+                    # Mas se tivermos o ID TRIEDUC no MySQL (QuestaoModel), podemos filtrar lá.
+                    # No entanto, a query base é sobre QuestaoAssuntoModel. 
+                    # Se salvamos a extração, populamos habilidade_id? Geralmente sim.
+                    query_pg = query_pg.filter(QuestaoAssuntoModel.habilidade_id.in_(habilidade_ids_custom))
+                else:
+                    query_pg = query_pg.filter(QuestaoAssuntoModel.id == -1)
     elif disciplina_ids_filtro:
         query_pg = query_pg.filter(QuestaoAssuntoModel.disciplina_id.in_(disciplina_ids_filtro))
 
@@ -636,6 +690,10 @@ async def proxima_questao_verificar(
 
     # Tratar enunciado
     enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
+    
+    texto_base_tratado = None
+    if questao.texto_base:
+        texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
 
     # Módulos possíveis
     modulos = []
@@ -686,6 +744,8 @@ async def proxima_questao_verificar(
         questao_id=questao.questao_id,
         enunciado=enunciado_tratado or "",
         enunciado_html=questao.enunciado,
+        texto_base=texto_base_tratado,
+        texto_base_html=questao.texto_base,
         disciplina_id=questao.disciplina_id,
         disciplina_nome=disc_nome,
         habilidade_id=questao.habilidade_id,
@@ -797,6 +857,10 @@ async def proxima_questao_low_match(
 
     # Tratar enunciado
     enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
+    
+    texto_base_tratado = None
+    if questao.texto_base:
+        texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
 
     # Módulos possíveis
     modulos = []
@@ -846,6 +910,8 @@ async def proxima_questao_low_match(
         questao_id=questao.questao_id,
         enunciado=enunciado_tratado or "",
         enunciado_html=questao.enunciado,
+        texto_base=texto_base_tratado,
+        texto_base_html=questao.texto_base,
         disciplina_id=questao.disciplina_id,
         disciplina_nome=disc_nome,
         habilidade_id=questao.habilidade_id,
@@ -1052,17 +1118,40 @@ async def proxima_questao_pendente(
         if str(disciplina_id).isdigit():
             query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id == int(disciplina_id))
         else:
-            from ..database.models import DisciplinaModel
-            disc_id_row = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao == disciplina_id).first()
-            if disc_id_row:
-                query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id == disc_id_row[0])
+            # Tentar mapeamento para MySQL
+            mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina_id, disciplina_id)
+            
+            if mysql_name:
+                disc_id_row = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao == mysql_name).first()
+                if disc_id_row:
+                    query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id == disc_id_row[0])
+                else:
+                    # Se não existe no MySQL, falhar filtro
+                    query_puladas = query_puladas.filter(QuestaoPuladaModel.id == -1)
+            else:
+                # Disciplina Virtual (Literatura/Redação): Buscar IDs de habilidade no Postgres
+                habilidade_ids_custom = [
+                    row[0] for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
+                    .filter(HabilidadeModuloModel.disciplina == disciplina_id)
+                    .filter(HabilidadeModuloModel.habilidade_id.isnot(None))
+                    .distinct()
+                    .all()
+                ]
+                if habilidade_ids_custom:
+                    query_puladas = query_puladas.filter(QuestaoPuladaModel.habilidade_id.in_(habilidade_ids_custom))
+                else:
+                    query_puladas = query_puladas.filter(QuestaoPuladaModel.id == -1)
     elif area and area in AREAS_DISCIPLINAS:
-        from ..database.models import DisciplinaModel
         nomes = AREAS_DISCIPLINAS[area]
         discs_ids = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao.in_(nomes)).all()
         disciplina_ids_filtro = [d[0] for d in discs_ids]
         if disciplina_ids_filtro:
             query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id.in_(disciplina_ids_filtro))
+
+    # LOG para depuração
+    logger.info(f"Filtro Pendentes: usuario={usuario.nome}, area={area}, disciplina={disciplina_id}")
+    count_antes = query_puladas.count()
+    logger.info(f"Total pendentes com filtros aplicados: {count_antes}")
 
     # IDs já classificadas por este usuário (excluir das pendentes)
     ids_classificadas = {
@@ -1103,6 +1192,10 @@ async def proxima_questao_pendente(
 
     # Tratar enunciado
     enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
+    
+    texto_base_tratado = None
+    if questao.texto_base:
+        texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
 
     # Verificar classificação existente
     extracao = (
@@ -1158,6 +1251,8 @@ async def proxima_questao_pendente(
         questao_id=questao.questao_id,
         enunciado=enunciado_tratado or "",
         enunciado_html=questao.enunciado,
+        texto_base=texto_base_tratado,
+        texto_base_html=questao.texto_base,
         disciplina_id=questao.disciplina_id,
         disciplina_nome=disc_nome,
         habilidade_id=questao.habilidade_id,

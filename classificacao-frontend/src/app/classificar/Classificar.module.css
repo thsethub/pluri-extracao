@@ -63,6 +63,26 @@
     font-weight: 600;
 }
 
+.textoBase {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    font-style: italic;
+    padding-left: 1rem;
+    border-left: 3px solid var(--primary-light);
+    overflow-wrap: break-word;
+}
+
+.textoBase img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 4px;
+}
+
 .enunciado {
     font-size: 0.95rem;
     color: var(--text);

@@ -141,6 +141,13 @@ export default function ClassificarPage() {
                             <span className={styles.idTag}>ID: {questao.id}</span>
                         </div>
 
+                        {questao.texto_base && (
+                            <div
+                                className={styles.textoBase}
+                                dangerouslySetInnerHTML={{ __html: questao.texto_base_html || questao.texto_base }}
+                            />
+                        )}
+
                         <div
                             className={styles.enunciado}
                             dangerouslySetInnerHTML={{ __html: questao.enunciado_html || questao.enunciado }}

@@ -98,6 +98,8 @@ class QuestaoClassifResponse(BaseModel):
     questao_id: str = Field(..., description="questao_id (string UUID)")
     enunciado: str = Field(..., description="Enunciado tratado")
     enunciado_html: Optional[str] = Field(None, description="Enunciado original (HTML)")
+    texto_base: Optional[str] = Field(None, description="Texto base tratado (contexto)")
+    texto_base_html: Optional[str] = Field(None, description="Texto base original (HTML)")
     disciplina_id: Optional[int] = None
     disciplina_nome: Optional[str] = None
     habilidade_id: Optional[int] = None

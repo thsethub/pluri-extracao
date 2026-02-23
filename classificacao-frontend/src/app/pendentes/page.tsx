@@ -33,9 +33,13 @@ export default function PendentesPage() {
             if (habFiltro) query.append('habilidade_id', habFiltro);
 
             const params = query.toString() ? `?${query.toString()}` : '';
+            console.log(`Buscando pendentes: /proxima-pendente${params}`);
+
             const data = await apiRequest(`/proxima-pendente${params}`);
+            console.log('Dados pendentes recebidos:', data);
             setQuestao(data);
         } catch (err: any) {
+            console.error('Erro ao buscar pendentes:', err);
             setError(err.message || 'Nenhuma questão pendente encontrada.');
         } finally {
             setLoading(false);
@@ -122,6 +126,13 @@ export default function PendentesPage() {
                             <span className={styles.habTag}>{questao.habilidade_descricao}</span>
                             <span className={styles.idTag}>ID: {questao.id}</span>
                         </div>
+
+                        {questao.texto_base && (
+                            <div
+                                className={styles.textoBase}
+                                dangerouslySetInnerHTML={{ __html: questao.texto_base_html || questao.texto_base }}
+                            />
+                        )}
 
                         <div
                             className={styles.enunciado}
