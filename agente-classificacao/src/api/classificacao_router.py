@@ -249,7 +249,14 @@ async def listar_habilidades_filtro(
     if area:
         query = query.filter(HabilidadeModuloModel.area == area)
     if disciplina:
-        query = query.filter(HabilidadeModuloModel.disciplina == disciplina)
+        # Mapeamento para lidar com divergências entre nomes na TriEduc e no banco de módulos
+        mapping = {
+            "Artes": ["Artes", "Arte"],
+            "Língua Inglesa": ["Língua Inglesa", "Inglês"],
+            "Língua Portuguesa": ["Língua Portuguesa", "Lingua Portuguesa", "Literatura", "Redação"],
+        }
+        mapped_names = mapping.get(disciplina, [disciplina])
+        query = query.filter(HabilidadeModuloModel.disciplina.in_(mapped_names))
 
     # Ordenar por descrição para facilitar a busca do usuário
     results = query.order_by(HabilidadeModuloModel.habilidade_descricao).all()
