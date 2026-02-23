@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Search } from 'lucide-react';
 import styles from './Dropdown.module.css';
 
 interface Option {
@@ -16,6 +16,7 @@ interface DropdownProps {
     onChange: (value: any) => void;
     placeholder?: string;
     disabled?: boolean;
+    searchable?: boolean;
 }
 
 export default function Dropdown({
@@ -24,22 +25,39 @@ export default function Dropdown({
     value,
     onChange,
     placeholder = 'Selecione...',
-    disabled = false
+    disabled = false,
+    searchable = false
 }: DropdownProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
     const selectedOption = options.find(opt => opt.value === value);
+
+    const filteredOptions = searchable && searchTerm
+        ? options.filter(opt => opt.label.toLowerCase().includes(searchTerm.toLowerCase()))
+        : options;
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setIsOpen(false);
+                setSearchTerm('');
             }
         }
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    useEffect(() => {
+        if (isOpen && searchable && searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
+        if (!isOpen) {
+            setSearchTerm('');
+        }
+    }, [isOpen, searchable]);
 
     return (
         <div className={styles.container} ref={dropdownRef}>
@@ -56,19 +74,40 @@ export default function Dropdown({
 
             {isOpen && (
                 <div className={styles.menu}>
-                    {options.map((option) => (
-                        <div
-                            key={option.value}
-                            className={`${styles.option} ${value === option.value ? styles.selected : ''}`}
-                            onClick={() => {
-                                onChange(option.value);
-                                setIsOpen(false);
-                            }}
-                        >
-                            {option.label}
+                    {searchable && (
+                        <div className={styles.searchContainer}>
+                            <Search size={14} className={styles.searchIcon} />
+                            <input
+                                ref={searchInputRef}
+                                type="text"
+                                className={styles.searchInput}
+                                placeholder="Buscar..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onClick={(e) => e.stopPropagation()}
+                            />
                         </div>
-                    ))}
-                    {options.length === 0 && <div className={styles.noOptions}>Nenhuma opção disponível</div>}
+                    )}
+                    <div className={searchable ? styles.optionsList : undefined}>
+                        {filteredOptions.map((option) => (
+                            <div
+                                key={option.value}
+                                className={`${styles.option} ${value === option.value ? styles.selected : ''}`}
+                                onClick={() => {
+                                    onChange(option.value);
+                                    setIsOpen(false);
+                                    setSearchTerm('');
+                                }}
+                            >
+                                {option.label}
+                            </div>
+                        ))}
+                        {filteredOptions.length === 0 && (
+                            <div className={styles.noOptions}>
+                                {searchTerm ? 'Nenhum resultado encontrado' : 'Nenhuma opção disponível'}
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
         </div>

@@ -48,14 +48,14 @@ export default function VerificarPage() {
     const [habilidadeFiltro, setHabilidadeFiltro] = useState('');
     const [saving, setSaving] = useState(false);
     const [observacao, setObservacao] = useState('');
-    const [moduloSelecionado, setModuloSelecionado] = useState<any>(null);
+    const [modulosSelecionados, setModulosSelecionados] = useState<any[]>([]);
     const [isCorrecting, setIsCorrecting] = useState(false);
 
     const fetchProxima = async (areaFiltro?: string, discFiltro?: string, habFiltro?: string) => {
         setLoading(true);
         setError('');
         setQuestao(null);
-        setModuloSelecionado(null);
+        setModulosSelecionados([]);
         setObservacao('');
         setIsCorrecting(false);
 
@@ -98,18 +98,35 @@ export default function VerificarPage() {
         }
     };
 
+    const toggleModulo = (modulo: any) => {
+        setModulosSelecionados(prev => {
+            const isSelected = prev.some(m => m.id === modulo.id);
+            if (isSelected) {
+                return prev.filter(m => m.id !== modulo.id);
+            } else {
+                return [...prev, modulo];
+            }
+        });
+    };
+
     const handleSalvarCorrecao = async () => {
-        if (!moduloSelecionado) return;
+        if (modulosSelecionados.length === 0) return;
         setSaving(true);
         try {
             await apiRequest('/salvar', {
                 method: 'POST',
                 body: JSON.stringify({
                     questao_id: questao.id,
-                    habilidade_modulo_id: moduloSelecionado.id,
-                    modulo_escolhido: moduloSelecionado.modulo,
-                    classificacao_trieduc: moduloSelecionado.habilidade_descricao,
-                    descricao_assunto: moduloSelecionado.descricao,
+                    // Campos múltiplos (novos)
+                    habilidade_modulo_ids: modulosSelecionados.map(m => m.id),
+                    modulos_escolhidos: modulosSelecionados.map(m => m.modulo),
+                    classificacoes_trieduc: modulosSelecionados.map(m => m.habilidade_descricao),
+                    descricoes_assunto: modulosSelecionados.map(m => m.descricao),
+                    // Campos legados (primeiro selecionado para retrocompatibilidade)
+                    habilidade_modulo_id: modulosSelecionados[0].id,
+                    modulo_escolhido: modulosSelecionados[0].modulo,
+                    classificacao_trieduc: modulosSelecionados[0].habilidade_descricao,
+                    descricao_assunto: modulosSelecionados[0].descricao,
                     tipo_acao: 'correcao',
                     observacao
                 })
@@ -264,18 +281,25 @@ export default function VerificarPage() {
                                     <Pencil size={18} />
                                     <h3>Corrigir Classificação</h3>
                                 </div>
-                                <p className={styles.moduloHint}>Selecione o módulo correto abaixo:</p>
+                                <p className={styles.moduloHint}>
+                                    Selecione um ou mais módulos corretos:
+                                    {modulosSelecionados.length > 0 && (
+                                        <span className={styles.selectedCount}>
+                                            {modulosSelecionados.length} selecionado{modulosSelecionados.length > 1 ? 's' : ''}
+                                        </span>
+                                    )}
+                                </p>
                                 <div className={styles.moduloList}>
                                     {questao.modulos_possiveis.map((m: any) => (
                                         <label
                                             key={m.id}
-                                            className={`${styles.moduloItem} ${moduloSelecionado?.id === m.id ? styles.moduloSelected : ''}`}
+                                            className={`${styles.moduloItem} ${modulosSelecionados.some((s: any) => s.id === m.id) ? styles.moduloSelected : ''}`}
                                         >
                                             <input
-                                                type="radio"
+                                                type="checkbox"
                                                 name="modulo"
-                                                checked={moduloSelecionado?.id === m.id}
-                                                onChange={() => setModuloSelecionado(m)}
+                                                checked={modulosSelecionados.some((s: any) => s.id === m.id)}
+                                                onChange={() => toggleModulo(m)}
                                             />
                                             <div className={styles.moduloText}>
                                                 <strong>{m.modulo}</strong>
@@ -298,7 +322,7 @@ export default function VerificarPage() {
                                         </button>
                                         <button
                                             onClick={handleSalvarCorrecao}
-                                            disabled={!moduloSelecionado || saving}
+                                            disabled={modulosSelecionados.length === 0 || saving}
                                             className={styles.saveBtn}
                                         >
                                             <Save size={18} />

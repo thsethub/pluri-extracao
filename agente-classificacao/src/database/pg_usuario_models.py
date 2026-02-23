@@ -41,11 +41,17 @@ class ClassificacaoUsuarioModel(PgBase):
     questao_id = Column(Integer, nullable=False, index=True)  # FK → questoes.id (MySQL)
     habilidade_id = Column(Integer, nullable=True)  # habilidade TriEduc da questão
 
-    # Classificação escolhida pelo usuário
+    # Classificação escolhida pelo usuário (campos legados - single)
     modulo_escolhido = Column(String(255), nullable=True)
     classificacao_trieduc = Column(String(255), nullable=True)
     descricao_assunto = Column(String(500), nullable=True)  # Descrição detalhada do assunto/módulo
     habilidade_modulo_id = Column(Integer, nullable=True)  # FK → habilidade_modulos.id
+
+    # Classificação múltipla (novos campos JSONB)
+    modulos_escolhidos = Column(JSONB, nullable=True)  # Lista de nomes dos módulos
+    classificacoes_trieduc_list = Column(JSONB, nullable=True)  # Lista de classificações TRIEDUC
+    descricoes_assunto_list = Column(JSONB, nullable=True)  # Lista de descrições
+    habilidade_modulo_ids = Column(JSONB, nullable=True)  # Lista de IDs de habilidade_modulos
 
     # Classificação da extração automática (para comparação no ML)
     classificacao_extracao = Column(JSONB, nullable=True)

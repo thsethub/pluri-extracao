@@ -21,6 +21,7 @@ from ..database.models import QuestaoModel, HabilidadeModel
 from ..database.pg_models import QuestaoAssuntoModel
 from ..database.pg_modulo_models import HabilidadeModuloModel
 from ..database.pg_usuario_models import UsuarioModel, ClassificacaoUsuarioModel
+from ..database.pg_pular_models import QuestaoPuladaModel
 from ..services.enunciado_cleaner import tratar_enunciado
 from .classificacao_schemas import (
     CadastroRequest,
@@ -35,6 +36,8 @@ from .classificacao_schemas import (
     QuestaoClassifResponse,
     SalvarClassificacaoRequest,
     SalvarClassificacaoResponse,
+    PularQuestaoRequest,
+    PularQuestaoResponse,
     ClassificacaoStatsResponse,
     ClassificacaoHistoricoSchema,
     HistoricoListResponse,
@@ -391,8 +394,16 @@ async def proxima_questao_classificar(
             )
             .all()
         }
+
+        # 3. Already skipped by this user (pendentes)
+        skipped_by_user = {
+            row[0] for row in pg_db.query(QuestaoPuladaModel.questao_id)
+            .filter(QuestaoPuladaModel.questao_id.in_(candidate_ids))
+            .filter(QuestaoPuladaModel.usuario_id == usuario.id)
+            .all()
+        }
         
-        ids_excluir = classified_by_user.union(classified_in_system)
+        ids_excluir = classified_by_user.union(classified_in_system).union(skipped_by_user)
         
         # Find first candidate not in exclude set
         valid_id = None
@@ -906,28 +917,249 @@ async def salvar_classificacao(
         usuario_id=usuario.id,
         questao_id=request.questao_id,
         habilidade_id=questao_data.habilidade_id,
+        # Campos legados (single) - retrocompatibilidade
         modulo_escolhido=request.modulo_escolhido,
         classificacao_trieduc=request.classificacao_trieduc,
         descricao_assunto=request.descricao_assunto,
         habilidade_modulo_id=request.habilidade_modulo_id,
+        # Campos novos (múltiplos módulos JSONB)
+        modulos_escolhidos=request.modulos_escolhidos,
+        classificacoes_trieduc_list=request.classificacoes_trieduc,
+        descricoes_assunto_list=request.descricoes_assunto,
+        habilidade_modulo_ids=request.habilidade_modulo_ids,
+        # Extração e metadados
         classificacao_extracao=extracao.classificacoes if extracao else None,
         tipo_acao=request.tipo_acao,
         observacao=request.observacao,
     )
     pg_db.add(classificacao)
+
+    # Auto-remover da lista de questões puladas (se existir)
+    pg_db.query(QuestaoPuladaModel).filter(
+        QuestaoPuladaModel.usuario_id == usuario.id,
+        QuestaoPuladaModel.questao_id == request.questao_id,
+    ).delete()
+
     pg_db.commit()
 
+    modulos_info = request.modulos_escolhidos or [request.modulo_escolhido] if request.modulo_escolhido else []
     logger.info(
         f"Classificação salva: usuario={usuario.nome}, questao={request.questao_id}, "
-        f"acao={request.tipo_acao}, modulo={request.modulo_escolhido}"
+        f"acao={request.tipo_acao}, modulos={modulos_info}"
     )
 
     return SalvarClassificacaoResponse(
         success=True,
-        id=classificacao.id, # O ID já está disponível após o commit sem precisar de refresh
+        id=classificacao.id,
         questao_id=request.questao_id,
         tipo_acao=request.tipo_acao,
         message=f"Classificação ({request.tipo_acao}) salva com sucesso",
+    )
+
+
+# ========================
+# PULAR QUESTÃO (PENDENTES)
+# ========================
+
+@router.post(
+    "/pular",
+    response_model=PularQuestaoResponse,
+    summary="⏭️ Pular questão (marcar como pendente)",
+)
+async def pular_questao(
+    request: PularQuestaoRequest,
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """
+    Marca uma questão como pulada pelo usuário.
+    A questão aparecerá na aba 'Pendentes' para classificação posterior.
+    """
+    # Verificar se a questão existe
+    questao_data = db.query(
+        QuestaoModel.id, QuestaoModel.disciplina_id, QuestaoModel.habilidade_id
+    ).filter(QuestaoModel.id == request.questao_id).first()
+
+    if not questao_data:
+        raise HTTPException(status_code=404, detail="Questão não encontrada")
+
+    # Verificar se já foi pulada (evitar duplicata)
+    existente = pg_db.query(QuestaoPuladaModel).filter(
+        QuestaoPuladaModel.usuario_id == usuario.id,
+        QuestaoPuladaModel.questao_id == request.questao_id,
+    ).first()
+
+    if existente:
+        return PularQuestaoResponse(
+            success=True,
+            message="Questão já estava marcada como pendente",
+        )
+
+    # Registrar como pulada
+    pulada = QuestaoPuladaModel(
+        usuario_id=usuario.id,
+        questao_id=request.questao_id,
+        area=usuario.disciplina,
+        disciplina_id=questao_data.disciplina_id,
+        habilidade_id=questao_data.habilidade_id,
+    )
+    pg_db.add(pulada)
+    pg_db.commit()
+
+    logger.info(f"Questão pulada: usuario={usuario.nome}, questao={request.questao_id}")
+
+    return PularQuestaoResponse(
+        success=True,
+        message="Questão marcada como pendente",
+    )
+
+
+@router.get(
+    "/proxima-pendente",
+    response_model=QuestaoClassifResponse,
+    summary="📋 Próxima questão pendente (pulada)",
+)
+async def proxima_questao_pendente(
+    area: Optional[str] = Query(None, description="Filtrar por área"),
+    disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
+    habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """
+    Retorna a próxima questão que foi pulada pelo usuário (da aba Pendentes).
+    Mesmos filtros do /proxima, mas restrito às questões puladas.
+    """
+    # Base query: questões puladas por este usuário
+    query_puladas = pg_db.query(QuestaoPuladaModel).filter(
+        QuestaoPuladaModel.usuario_id == usuario.id,
+    )
+
+    # Aplicar filtros
+    if habilidade_id:
+        query_puladas = query_puladas.filter(QuestaoPuladaModel.habilidade_id == habilidade_id)
+
+    if disciplina_id:
+        if str(disciplina_id).isdigit():
+            query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id == int(disciplina_id))
+        else:
+            from ..database.models import DisciplinaModel
+            disc_id_row = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao == disciplina_id).first()
+            if disc_id_row:
+                query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id == disc_id_row[0])
+    elif area and area in AREAS_DISCIPLINAS:
+        from ..database.models import DisciplinaModel
+        nomes = AREAS_DISCIPLINAS[area]
+        discs_ids = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao.in_(nomes)).all()
+        disciplina_ids_filtro = [d[0] for d in discs_ids]
+        if disciplina_ids_filtro:
+            query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id.in_(disciplina_ids_filtro))
+
+    # IDs já classificadas por este usuário (excluir das pendentes)
+    ids_classificadas = {
+        row[0] for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.usuario_id == usuario.id)
+        .all()
+    }
+
+    if ids_classificadas:
+        query_puladas = query_puladas.filter(~QuestaoPuladaModel.questao_id.in_(ids_classificadas))
+
+    # Buscar próxima pendente (ordem de inserção)
+    registro_pulado = query_puladas.order_by(QuestaoPuladaModel.id).first()
+
+    if not registro_pulado:
+        raise HTTPException(
+            status_code=404,
+            detail="Nenhuma questão pendente encontrada com os filtros aplicados.",
+        )
+
+    # Carregar detalhes completos da questão do MySQL
+    questao = (
+        db.query(QuestaoModel)
+        .options(
+            joinedload(QuestaoModel.disciplina),
+            joinedload(QuestaoModel.habilidade),
+            joinedload(QuestaoModel.alternativas),
+        )
+        .filter(QuestaoModel.id == registro_pulado.questao_id)
+        .first()
+    )
+
+    if not questao:
+        # Questão não existe mais no MySQL, remover da lista de puladas
+        pg_db.delete(registro_pulado)
+        pg_db.commit()
+        raise HTTPException(status_code=404, detail="Questão pendente não encontrada no banco de dados.")
+
+    # Tratar enunciado
+    enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
+
+    # Verificar classificação existente
+    extracao = (
+        pg_db.query(QuestaoAssuntoModel)
+        .filter(QuestaoAssuntoModel.questao_id == questao.id)
+        .first()
+    )
+
+    hab_descricao = None
+    if questao.habilidade:
+        hab_descricao = questao.habilidade.descricao
+
+    # Módulos possíveis
+    modulos = []
+    if questao.habilidade_id:
+        modulos_q = (
+            pg_db.query(HabilidadeModuloModel)
+            .filter(HabilidadeModuloModel.habilidade_id == questao.habilidade_id)
+            .order_by(HabilidadeModuloModel.modulo)
+            .all()
+        )
+        modulos = [HabilidadeModuloSchema.model_validate(m) for m in modulos_q]
+
+        # FALLBACK por descrição
+        if not modulos and hab_descricao:
+            from sqlalchemy import func as sqlfunc
+            modulos_q = (
+                pg_db.query(HabilidadeModuloModel)
+                .filter(sqlfunc.lower(HabilidadeModuloModel.habilidade_descricao) == hab_descricao.lower())
+                .order_by(HabilidadeModuloModel.modulo)
+                .all()
+            )
+            modulos = [HabilidadeModuloSchema.model_validate(m) for m in modulos_q]
+
+    # Alternativas
+    alternativas = []
+    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+        for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
+            conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
+            alternativas.append(
+                AlternativaClassifSchema(
+                    ordem=alt.ordem or 0,
+                    conteudo=conteudo_limpo,
+                    conteudo_html=alt.conteudo,
+                    correta=bool(alt.correta),
+                )
+            )
+
+    disc_nome = questao.disciplina.descricao if questao.disciplina else None
+
+    return QuestaoClassifResponse(
+        id=questao.id,
+        questao_id=questao.questao_id,
+        enunciado=enunciado_tratado or "",
+        enunciado_html=questao.enunciado,
+        disciplina_id=questao.disciplina_id,
+        disciplina_nome=disc_nome,
+        habilidade_id=questao.habilidade_id,
+        habilidade_descricao=hab_descricao,
+        tipo=questao.tipo,
+        alternativas=alternativas,
+        classificacao_extracao=extracao.classificacoes if extracao and extracao.extracao_feita else None,
+        tem_extracao=bool(extracao and extracao.extracao_feita and extracao.classificacoes),
+        modulos_possiveis=modulos,
     )
 
 

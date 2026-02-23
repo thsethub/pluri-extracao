@@ -6,6 +6,7 @@ import {
     CheckCircle2,
     BarChart3,
     LogOut,
+    Clock,
     User as UserIcon
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
@@ -28,6 +29,7 @@ export default function Sidebar() {
     const menuItems = [
         { name: 'Classificar', path: '/classificar', icon: <PencilLine size={20} /> },
         { name: 'Verificar', path: '/verificar', icon: <CheckCircle2 size={20} /> },
+        { name: 'Pendentes', path: '/pendentes', icon: <Clock size={20} /> },
         { name: 'Estatísticas', path: '/stats', icon: <BarChart3 size={20} /> },
     ];
 

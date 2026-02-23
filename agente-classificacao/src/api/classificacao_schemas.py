@@ -122,14 +122,28 @@ class QuestaoClassifResponse(BaseModel):
 class SalvarClassificacaoRequest(BaseModel):
     """Request para salvar decisão do usuário"""
     questao_id: int = Field(..., description="ID da questão no MySQL")
+    # Campos legados (single module) - retrocompatibilidade
     habilidade_modulo_id: Optional[int] = Field(
-        None, description="ID do registro em habilidade_modulos escolhido"
+        None, description="ID do registro em habilidade_modulos escolhido (legado)"
     )
-    modulo_escolhido: Optional[str] = Field(None, description="Nome do módulo escolhido")
+    modulo_escolhido: Optional[str] = Field(None, description="Nome do módulo escolhido (legado)")
     classificacao_trieduc: Optional[str] = Field(
-        None, description="Texto da classificação TRIEDUC escolhida"
+        None, description="Texto da classificação TRIEDUC escolhida (legado)"
     )
-    descricao_assunto: Optional[str] = Field(None, description="Descrição detalhada do assunto")
+    descricao_assunto: Optional[str] = Field(None, description="Descrição detalhada do assunto (legado)")
+    # Campos novos (múltiplos módulos)
+    habilidade_modulo_ids: Optional[List[int]] = Field(
+        None, description="Lista de IDs dos registros em habilidade_modulos escolhidos"
+    )
+    modulos_escolhidos: Optional[List[str]] = Field(
+        None, description="Lista de nomes dos módulos escolhidos"
+    )
+    classificacoes_trieduc: Optional[List[str]] = Field(
+        None, description="Lista de classificações TRIEDUC escolhidas"
+    )
+    descricoes_assunto: Optional[List[str]] = Field(
+        None, description="Lista de descrições detalhadas dos assuntos"
+    )
     tipo_acao: str = Field(
         ..., description="Tipo: 'classificacao_nova', 'confirmacao', 'correcao'"
     )
@@ -142,6 +156,17 @@ class SalvarClassificacaoResponse(BaseModel):
     id: int
     questao_id: int
     tipo_acao: str
+    message: str
+
+
+class PularQuestaoRequest(BaseModel):
+    """Request para pular/marcar questão como pendente"""
+    questao_id: int = Field(..., description="ID da questão no MySQL")
+
+
+class PularQuestaoResponse(BaseModel):
+    """Response após pular questão"""
+    success: bool
     message: str
 
 

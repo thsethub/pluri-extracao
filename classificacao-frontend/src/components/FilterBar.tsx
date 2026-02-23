@@ -125,6 +125,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
                     onChange={(val: any) => setHabilidadeId(val)}
                     placeholder="Todos os assuntos"
                     disabled={!disciplinaId || habilidades.length === 0}
+                    searchable={true}
                 />
             </div>
 

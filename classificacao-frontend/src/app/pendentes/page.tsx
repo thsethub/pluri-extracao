@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { apiRequest } from '@/lib/api';
 import AppLayout from '@/components/AppLayout';
 import FilterBar from '@/components/FilterBar';
-import { FastForward, Save, Info, AlertCircle } from 'lucide-react';
-import styles from './Classificar.module.css';
+import { FastForward, Save, Info, AlertCircle, Clock } from 'lucide-react';
+import styles from '../classificar/Classificar.module.css';
 
-export default function ClassificarPage() {
+export default function PendentesPage() {
     const [questao, setQuestao] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -16,7 +16,6 @@ export default function ClassificarPage() {
     const [disciplinaFiltro, setDisciplinaFiltro] = useState('');
     const [habilidadeFiltro, setHabilidadeFiltro] = useState('');
     const [saving, setSaving] = useState(false);
-    const [skipping, setSkipping] = useState(false);
     const [observacao, setObservacao] = useState('');
     const [modulosSelecionados, setModulosSelecionados] = useState<any[]>([]);
 
@@ -34,10 +33,10 @@ export default function ClassificarPage() {
             if (habFiltro) query.append('habilidade_id', habFiltro);
 
             const params = query.toString() ? `?${query.toString()}` : '';
-            const data = await apiRequest(`/proxima${params}`);
+            const data = await apiRequest(`/proxima-pendente${params}`);
             setQuestao(data);
         } catch (err: any) {
-            setError(err.message || 'Nenhuma questão encontrada com esses filtros.');
+            setError(err.message || 'Nenhuma questão pendente encontrada.');
         } finally {
             setLoading(false);
         }
@@ -89,29 +88,12 @@ export default function ClassificarPage() {
         }
     };
 
-    const handlePular = async () => {
-        if (!questao) return;
-        setSkipping(true);
-
-        try {
-            await apiRequest('/pular', {
-                method: 'POST',
-                body: JSON.stringify({ questao_id: questao.id })
-            });
-            fetchProxima(area, disciplinaFiltro, habilidadeFiltro);
-        } catch (err: any) {
-            alert(err.message);
-        } finally {
-            setSkipping(false);
-        }
-    };
-
     return (
         <AppLayout>
             <div className={styles.header}>
                 <div className={styles.headerInfo}>
-                    <h1>Classificação Manual</h1>
-                    <p>Associe a questão ao módulo educacional correto</p>
+                    <h1>Questões Pendentes</h1>
+                    <p>Classifique as questões que foram puladas anteriormente</p>
                 </div>
             </div>
 
@@ -124,11 +106,11 @@ export default function ClassificarPage() {
             {loading ? (
                 <div className={styles.loading}>
                     <div className={styles.spinner}></div>
-                    <span>Carregando próxima questão...</span>
+                    <span>Buscando questão pendente...</span>
                 </div>
             ) : error ? (
                 <div className={styles.empty}>
-                    <AlertCircle size={48} color="var(--primary)" />
+                    <Clock size={48} color="var(--primary)" />
                     <p>{error}</p>
                     <button onClick={() => fetchProxima(area, disciplinaFiltro, habilidadeFiltro)}>Tentar Novamente</button>
                 </div>
@@ -200,12 +182,11 @@ export default function ClassificarPage() {
                             />
                             <div className={styles.buttons}>
                                 <button
-                                    onClick={handlePular}
-                                    disabled={skipping}
+                                    onClick={() => fetchProxima(area, disciplinaFiltro, habilidadeFiltro)}
                                     className={styles.skipBtn}
                                 >
                                     <FastForward size={18} />
-                                    {skipping ? 'Pulando...' : 'Pular'}
+                                    Pular
                                 </button>
                                 <button
                                     onClick={handleSalvar}
