@@ -94,6 +94,10 @@ class SalvarAssuntoRequest(BaseModel):
         [],
         description="Classificações que não atingiram o match mínimo (80%%)",
     )
+    precisa_verificar: Optional[bool] = Field(
+        None,
+        description="Flag para forçar o status de verificação. Se None, o backend decide.",
+    )
 
 
 class SalvarAssuntoResponse(BaseModel):

@@ -152,19 +152,23 @@ class ReclassificationAgent:
             raw_classifs = result["classificacoes"]
 
             classificacoes_oficiais = []
-            classificacoes_nao_enquadradas = []
+            classificacao_nao_enquadrada = []
 
+            # 80% é o nosso limiar de confiança
             if sim >= 0.80:
                 classificacoes_oficiais = raw_classifs
                 status_msg = "FOUND"
+                logger.info(
+                    f"[RECLASS] Q#{qid} -> SP#{sp_id} ({sim:.0%}) [{status_msg}] | "
+                    f"{' | '.join(raw_classifs[:3])}"
+                )
             else:
-                classificacoes_nao_enquadradas = raw_classifs
+                # Match baixo: Vai para a fila de conferência manual (Next.js)
+                classificacao_nao_enquadrada = raw_classifs
                 status_msg = "LOW_MATCH"
-
-            logger.info(
-                f"[RECLASS] Q#{qid} -> SP#{sp_id} ({sim:.0%}) [{status_msg}] | "
-                f"{' | '.join(raw_classifs[:3])}"
-            )
+                logger.warning(
+                    f"[RECLASS] Q#{qid} -> SP#{sp_id} ({sim:.0%}) [{status_msg}] - Movendo para conferência manual"
+                )
 
             ok = await self.local_api.salvar_extracao(
                 qid,
@@ -173,14 +177,17 @@ class ReclassificationAgent:
                 enunciado_tratado=enunciado_ia,
                 similaridade=sim,
                 enunciado_superpro=result.get("enunciado_superpro"),
-                classificacao_nao_enquadrada=classificacoes_nao_enquadradas,
+                classificacao_nao_enquadrada=classificacao_nao_enquadrada,
+                precisa_verificar=False,  # Retira da fila do robô
             )
             if ok:
                 self.stats["saved"] += 1
             return "found" if sim >= 0.80 else "low_match"
         else:
             logger.info(f"[RECLASS] Q#{qid}: Não encontrada no SuperProfessor")
-            await self.local_api.salvar_extracao(qid, [])
+            # Deixa precisa_verificar=False para sair da fila do robô.
+            # Como classificacoes=[] e nao_enquadrada=[], ela ficará "limpa" para ação manual se necessário
+            await self.local_api.salvar_extracao(qid, [], precisa_verificar=False)
             return "not_found"
 
     async def run(

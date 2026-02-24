@@ -386,6 +386,25 @@ HTML_PAGE = """<!DOCTYPE html>
   #log-console .log-match { color: #a78bfa; font-weight: 500; }
 
   .elapsed { color: var(--muted); font-size: 13px; }
+
+  /* ── Toast ── */
+  #toast-container {
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .toast {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 20px; color: var(--text); font-size: 14px; min-width: 250px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); animation: toast-in 0.3s ease-out;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .toast.error { border-left: 4px solid var(--red); }
+  .toast.success { border-left: 4px solid var(--green); }
+  .toast.warning { border-left: 4px solid var(--yellow); }
+  @keyframes toast-in {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
 </style>
 </head>
 <body>
@@ -466,6 +485,7 @@ HTML_PAGE = """<!DOCTYPE html>
     </div>
   </div>
 
+  <div id="toast-container"></div>
 </div>
 
 <script>
@@ -490,7 +510,11 @@ async function loadStats() {
     statsData = await r.json();
     renderDisciplinas(statsData);
     renderSummary(statsData);
-  } catch(e) { console.error('Stats error:', e); }
+    renderSummary(statsData);
+  } catch(e) { 
+    console.error('Stats error:', e); 
+    toast('API indisponível: Erro ao carregar estatísticas', 'error');
+  }
 }
 
 function renderDisciplinas(data) {
@@ -571,6 +595,7 @@ async function startAgent() {
     }
   } catch(e) {
     showMsg('Erro ao conectar', 'var(--red)');
+    toast('API de extração indisponível', 'error');
     document.getElementById('btn-start').disabled = false;
   }
 }
@@ -681,6 +706,22 @@ function showMsg(msg, color) {
   const el = document.getElementById('ctrl-msg');
   el.textContent = msg;
   el.style.color = color || 'var(--text)';
+}
+
+// ── Toast ──
+function toast(msg, type = 'error') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${msg}</span>`;
+  container.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(-10px)';
+    el.style.transition = 'all 0.3s';
+    setTimeout(() => el.remove(), 300);
+  }, 4000);
 }
 
 init();
@@ -872,6 +913,22 @@ HTML_CONFERENCIA = """<!DOCTYPE html>
   .empty-state {
     text-align: center; padding: 60px 20px; color: var(--muted); font-size: 15px;
   }
+    
+  /* ── Toast ── */
+  #toast-container {
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .toast {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 20px; color: var(--text); font-size: 14px; min-width: 250px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); animation: toast-in 0.3s ease-out;
+  }
+  .toast.error { border-left: 4px solid var(--red); }
+  @keyframes toast-in {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
 </style>
 </head>
 <body>
@@ -981,6 +1038,7 @@ HTML_CONFERENCIA = """<!DOCTYPE html>
     <h3 style="font-size:13px; color:var(--muted); text-transform:uppercase; margin-bottom:8px;">Classificações Extraídas</h3>
     <ul class="classif-list" id="modal-classifs"></ul>
   </div>
+  <div id="toast-container"></div>
 </div>
 
 <script>
@@ -1042,6 +1100,7 @@ async function loadData(page) {
     console.error(e);
     document.getElementById('conf-body').innerHTML =
       '<tr><td colspan="6" class="empty-state">Erro ao carregar dados</td></tr>';
+    toast('API indisponível: Erro ao carregar conferência');
   }
 }
 
@@ -1068,9 +1127,9 @@ function renderTable(items) {
     if (hasOfficial) {
       classifHtml = q.classificacoes.map(c => `<div style="font-size:11px; margin-bottom:4px;">${c}</div>`).join('');
     } else if (hasLowMatch) {
-      classifHtml = q.classificacao_nao_enquadrada.map(c => `<div style="font-size:11px; margin-bottom:4px; opacity:0.6;">(Low) ${c}</div>`).join('');
+      classifHtml = q.classificacao_nao_enquadrada.map(c => `<div style="font-size:11px; margin-bottom:4px; color:var(--yellow); font-style:italic;">Low: ${c}</div>`).join('');
     } else {
-      classifHtml = '<span style="color:#666">-</span>';
+      classifHtml = '<span style="color:var(--muted)">-</span>';
     }
 
     const verifIcon = q.precisa_verificar ? '⚠️' : '✅';
@@ -1165,6 +1224,21 @@ function escHtml(s) {
   const d = document.createElement('div');
   d.textContent = s;
   return d.innerHTML;
+}
+
+// ── Toast ──
+function toast(msg, type = 'error') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${msg}</span>`;
+  container.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transition = 'all 0.3s';
+    setTimeout(() => el.remove(), 300);
+  }, 4000);
 }
 
 init();
@@ -1465,6 +1539,22 @@ HTML_VERIFICACAO = """<!DOCTYPE html>
   .page-info { color: var(--muted); font-size: 13px; }
 
   #ctrl-msg { margin-top: 8px; font-size: 13px; min-height: 16px; }
+
+  /* ── Toast ── */
+  #toast-container {
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .toast {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 20px; color: var(--text); font-size: 14px; min-width: 250px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); animation: toast-in 0.3s ease-out;
+  }
+  .toast.error { border-left: 4px solid var(--red); }
+  @keyframes toast-in {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
 </style>
 </head>
 <body>
@@ -1517,6 +1607,7 @@ HTML_VERIFICACAO = """<!DOCTYPE html>
   </div>
 
   <div class="pagination" id="pagination"></div>
+  <div id="toast-container"></div>
 </div>
 
 <script>
@@ -1546,6 +1637,7 @@ async function loadVerificacao(page = 1) {
     console.error('Erro:', e);
     document.getElementById('verificacao-body').innerHTML =
       '<tr><td colspan="7" style="text-align:center; color:var(--red); padding:30px;">Erro ao carregar</td></tr>';
+    toast('API indisponível: Erro ao carregar verificação');
   }
 }
 
@@ -1700,6 +1792,21 @@ function escHtml(s) {
   const d = document.createElement('div');
   d.textContent = s;
   return d.innerHTML;
+}
+
+// ── Toast ──
+function toast(msg, type = 'error') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${msg}</span>`;
+  container.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transition = 'all 0.3s';
+    setTimeout(() => el.remove(), 300);
+  }, 4000);
 }
 
 init();

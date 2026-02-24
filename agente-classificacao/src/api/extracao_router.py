@@ -447,7 +447,12 @@ async def salvar_extracao(
         existente.classificacao_nao_enquadrada = request.classificacao_nao_enquadrada
         existente.extracao_feita = True
         existente.motivo_erro = None
-        existente.precisa_verificar = False
+        # Se veio no request, usa. Se não, False (padrão de fim de extração)
+        if request.precisa_verificar is not None:
+            existente.precisa_verificar = request.precisa_verificar
+        else:
+            existente.precisa_verificar = False
+        
         existente.enunciado_tratado = enunciado_tratado or existente.enunciado_tratado
         if request.superpro_id:
             existente.superpro_id = request.superpro_id
@@ -474,7 +479,7 @@ async def salvar_extracao(
             similaridade=request.similaridade,
             extracao_feita=True,
             contem_imagem=False,
-            precisa_verificar=False,
+            precisa_verificar=request.precisa_verificar if request.precisa_verificar is not None else False,
             enunciado_superpro=request.enunciado_superpro,
             motivo_erro=None,
         )
