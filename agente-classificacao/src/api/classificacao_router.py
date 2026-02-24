@@ -1292,26 +1292,88 @@ async def estatisticas_classificacao(
     ).count()
     usuarios_ativos = pg_db.query(UsuarioModel).filter(UsuarioModel.ativo == True).count()
 
-    # Total de questões únicas classificadas manualmente
-    total_manuais = pg_db.query(func.count(func.distinct(ClassificacaoUsuarioModel.questao_id))).scalar()
+    # Filtro Base: Ensino Médio + Habilidade ID
+    # Join com DisciplinaModel para garantir integridade (opcional mas mantido para consistência)
+    from ..database.models import DisciplinaModel
+    
+    em_query = db.query(QuestaoModel.id).filter(
+        QuestaoModel.ano_id == 3,
+        QuestaoModel.habilidade_id.isnot(None)
+    )
+    em_ids = [r[0] for r in em_query.all()]
+    total_sistema = len(em_ids)
 
-    # Total pendente para Ensino Médio (Simplificado: as que não estão no PG como já classificadas)
-    # Primeiro contamos as elegíveis no MySQL
-    total_elegiveis = db.query(QuestaoModel).filter(
-        QuestaoModel.habilidade_id.isnot(None),
-        QuestaoModel.ano_id == 3
-    ).count()
+    if not em_ids:
+        return ClassificacaoStatsResponse(total_sistema=0, por_usuario={}, por_disciplina={})
 
-    # Agora as que já "saíram da fila" no PG
-    processadas = pg_db.query(QuestaoAssuntoModel).filter(
-        (QuestaoAssuntoModel.classificado_manualmente == True) |
-        ((QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != [])) |
-        (QuestaoAssuntoModel.precisa_verificar == True)
-    ).count()
+    # Métricas no Postgres restringindo aos IDs do Ensino Médio
+    # Usamos o set para contagem rápida em Python se preferir, ou in_ no SQL
+    # Para 48k, in_ no Postgres funciona mas pode ser lento. Dividir em chunks ou usar temporary table seria melhor, 
+    # mas aqui usaremos in_ simplificado primeiro.
+    
+    total_manuais = pg_db.query(func.count(func.distinct(ClassificacaoUsuarioModel.questao_id)))\
+        .filter(ClassificacaoUsuarioModel.questao_id.in_(em_ids)).scalar() or 0
 
-    total_pendentes = max(0, total_elegiveis - processadas)
+    # Total que ainda precisa verificar (Match Baixo < 80%)
+    total_precisa_verificar = pg_db.query(QuestaoAssuntoModel)\
+        .filter(QuestaoAssuntoModel.questao_id.in_(em_ids))\
+        .filter(
+            QuestaoAssuntoModel.similaridade < 0.8,
+            QuestaoAssuntoModel.similaridade > 0,
+            QuestaoAssuntoModel.classificado_manualmente == False
+        ).count()
 
-    # Por usuário
+    total_auto_superpro = pg_db.query(QuestaoAssuntoModel)\
+        .filter(QuestaoAssuntoModel.questao_id.in_(em_ids))\
+        .filter(
+            (QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != []),
+            QuestaoAssuntoModel.classificado_manualmente == False,
+            QuestaoAssuntoModel.precisa_verificar == False
+        ).count()
+
+    # Puladas (Global - Únicas)
+    from ..database.pg_pular_models import QuestaoPuladaModel
+    total_puladas = pg_db.query(func.count(func.distinct(QuestaoPuladaModel.questao_id)))\
+        .filter(QuestaoPuladaModel.questao_id.in_(em_ids)).scalar() or 0
+
+    # Pendentes (Elegíveis - Processadas)
+    processadas = pg_db.query(QuestaoAssuntoModel.id)\
+        .filter(QuestaoAssuntoModel.questao_id.in_(em_ids))\
+        .filter(
+            (QuestaoAssuntoModel.classificado_manualmente == True) |
+            ((QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != [])) |
+            (QuestaoAssuntoModel.precisa_verificar == True)
+        ).count()
+    total_pendentes = max(0, total_sistema - processadas)
+
+    # Por disciplina (Dashboard style)
+    mysql_rows = db.query(QuestaoModel.disciplina_id, func.count(QuestaoModel.id))\
+        .filter(QuestaoModel.ano_id == 3, QuestaoModel.habilidade_id.isnot(None))\
+        .group_by(QuestaoModel.disciplina_id).all()
+    mysql_counts = {r[0]: r[1] for r in mysql_rows}
+    
+    pg_rows = pg_db.query(QuestaoAssuntoModel.disciplina_id, func.count(QuestaoAssuntoModel.id))\
+        .filter(QuestaoAssuntoModel.questao_id.in_(em_ids))\
+        .filter(
+            (QuestaoAssuntoModel.classificado_manualmente == True) |
+            ((QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != []))
+        ).filter(QuestaoAssuntoModel.precisa_verificar == False).group_by(QuestaoAssuntoModel.disciplina_id).all()
+    pg_counts = {r[0]: r[1] for r in pg_rows}
+    
+    disc_names = {d.id: d.descricao for d in db.query(DisciplinaModel).all()}
+    
+    por_disciplina = {}
+    for d_id, total_mysql in mysql_counts.items():
+        if d_id is None: continue
+        nome = disc_names.get(d_id, f"ID {d_id}")
+        feitas = pg_counts.get(d_id, 0)
+        por_disciplina[nome] = {
+            "total": total_mysql,
+            "feitas": feitas,
+            "faltam": max(0, total_mysql - feitas)
+        }
+
+    # Por usuário (Atividades Recentes)
     por_usuario_rows = (
         pg_db.query(
             UsuarioModel.nome,
@@ -1324,13 +1386,18 @@ async def estatisticas_classificacao(
     por_usuario = {row[0]: row[1] for row in por_usuario_rows}
 
     return ClassificacaoStatsResponse(
-        total_classificacoes=total,
+        total_classificacoes=total_sistema, # Agora total_classificacoes reflete o total do sistema filtrado
         classificacoes_novas=novas,
         confirmacoes=confirmacoes,
         correcoes=correcoes,
         usuarios_ativos=usuarios_ativos,
-        total_manuais=total_manuais or 0,
+        total_manuais=total_manuais,
         total_pendentes=total_pendentes,
+        total_sistema=total_sistema,
+        total_precisa_verificar=total_precisa_verificar,
+        total_auto_superpro=total_auto_superpro,
+        total_puladas=total_puladas,
+        por_disciplina=por_disciplina,
         por_usuario=por_usuario,
     )
 

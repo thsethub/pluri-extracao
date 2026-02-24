@@ -185,6 +185,10 @@ class ClassificacaoStatsResponse(BaseModel):
     usuarios_ativos: int = 0
     total_manuais: int = 0
     total_pendentes: int = 0
+    total_sistema: int = 0
+    total_precisa_verificar: int = 0
+    total_auto_superpro: int = 0
+    total_puladas: int = 0
     por_disciplina: dict = {}
     por_usuario: dict = {}
 
