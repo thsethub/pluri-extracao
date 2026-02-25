@@ -43,6 +43,23 @@ from .classificacao_schemas import (
     HistoricoListResponse,
 )
 
+import time
+
+# ========================
+# CACHE EM MEMÓRIA (TTL)
+# ========================
+_api_cache = {}
+
+def get_from_cache(key: str, ttl: int = 300):
+    if key in _api_cache:
+        val, ts = _api_cache[key]
+        if time.time() - ts < ttl:
+            return val
+    return None
+
+def set_to_cache(key: str, val):
+    _api_cache[key] = (val, time.time())
+
 # ========================
 # CONFIG
 # ========================
@@ -245,12 +262,19 @@ async def listar_habilidades_filtro(
     area: Optional[str] = Query(None, description="Filtrar por área"),
     disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
     pg_db: Session = Depends(get_pg_db),
+    db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
     Retorna a lista de assuntos únicos (habilidade_id + habilidade_descricao)
     para popular o dropdown de filtros no frontend.
+    Inclui quantidade de pendentes (cacheado por 5m).
     """
+    cache_key = f"habilidades_filtro_{area}_{disciplina}_{usuario.id}"
+    cached_data = get_from_cache(cache_key, ttl=300)
+    if cached_data:
+        return cached_data
+
     query = pg_db.query(
         HabilidadeModuloModel.habilidade_id,
         HabilidadeModuloModel.habilidade_descricao
@@ -259,7 +283,6 @@ async def listar_habilidades_filtro(
     if area:
         query = query.filter(HabilidadeModuloModel.area == area)
     if disciplina:
-        # Mapeamento para lidar com divergências entre nomes na TriEduc e no banco de módulos
         mapping = {
             "Artes": ["Artes", "Arte"],
             "Língua Inglesa": ["Língua Inglesa", "Inglês"],
@@ -268,18 +291,56 @@ async def listar_habilidades_filtro(
         mapped_names = mapping.get(disciplina, [disciplina])
         query = query.filter(HabilidadeModuloModel.disciplina.in_(mapped_names))
 
-    # Ordenar por descrição para facilitar a busca do usuário
     results = query.order_by(HabilidadeModuloModel.habilidade_descricao).all()
-
-    habilidades = [
-        HabilidadeFiltroSchema(
-            habilidade_id=r.habilidade_id,
-            habilidade_descricao=r.habilidade_descricao
+    
+    # Montar mapa de habilidades válidas
+    hab_ids = [r.habilidade_id for r in results if r.habilidade_id is not None]
+    
+    counts_map = {}
+    if hab_ids:
+        # Calcular pendentes no MySQL cruzando exclusão com o PG
+        ids_excluir = set()
+        for r in pg_db.query(ClassificacaoUsuarioModel.questao_id).filter(ClassificacaoUsuarioModel.usuario_id == usuario.id).all():
+            ids_excluir.add(r[0])
+            
+        for r in pg_db.query(QuestaoAssuntoModel.questao_id).filter(
+            (QuestaoAssuntoModel.classificado_manualmente == True) |
+            ((QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != [])) |
+            ((QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) & (func.jsonb_array_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0))
+        ).all():
+            ids_excluir.add(r[0])
+            
+        for r in pg_db.query(QuestaoPuladaModel.questao_id).filter(QuestaoPuladaModel.usuario_id == usuario.id).all():
+            ids_excluir.add(r[0])
+            
+        # Agrupar count mysql
+        mysql_q = db.query(
+            QuestaoModel.habilidade_id,
+            func.count(QuestaoModel.id).label("total")
+        ).filter(
+            QuestaoModel.habilidade_id.in_(hab_ids),
+            QuestaoModel.ano_id == 3
         )
-        for r in results if r.habilidade_id is not None
-    ]
+        if ids_excluir:
+            mysql_q = mysql_q.filter(~QuestaoModel.id.in_(list(ids_excluir)))
+            
+        counts = mysql_q.group_by(QuestaoModel.habilidade_id).all()
+        counts_map = {row[0]: row[1] for row in counts}
 
-    return HabilidadesFiltroResponse(habilidades=habilidades, total=len(habilidades))
+    habilidades = []
+    for r in results:
+        if r.habilidade_id is not None:
+            pendentes = counts_map.get(r.habilidade_id, 0)
+            if pendentes > 0:
+                habilidades.append(HabilidadeFiltroSchema(
+                    habilidade_id=r.habilidade_id,
+                    habilidade_descricao=r.habilidade_descricao,
+                    pendentes=pendentes
+                ))
+
+    res = HabilidadesFiltroResponse(habilidades=habilidades, total=len(habilidades))
+    set_to_cache(cache_key, res)
+    return res
 
 
 # ========================
@@ -422,12 +483,15 @@ async def proxima_questao_classificar(
         }
         
         # 2. Already has manual or automatic classification in PG
+        # Excluir também as de baixa similaridade (classificacao_nao_enquadrada existe),
+        # pois essas devem ir exclusivamente para a tela de Verificar (/proxima-low-match).
         classified_in_system = {
             row[0] for row in pg_db.query(QuestaoAssuntoModel.questao_id)
             .filter(QuestaoAssuntoModel.questao_id.in_(candidate_ids))
             .filter(
                 (QuestaoAssuntoModel.classificado_manualmente == True) |
-                ((QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != []))
+                ((QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != [])) |
+                ((QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) & (func.jsonb_array_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0))
             )
             .all()
         }
@@ -1279,7 +1343,12 @@ async def estatisticas_classificacao(
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
-    """Retorna estatísticas do sistema de classificação manual."""
+    """Retorna estatísticas do sistema de classificação manual (Cache 5m)."""
+    cache_key = "estatisticas_gerais"
+    cached_data = get_from_cache(cache_key, ttl=300)
+    if cached_data:
+        return cached_data
+
     total = pg_db.query(ClassificacaoUsuarioModel).count()
     novas = pg_db.query(ClassificacaoUsuarioModel).filter(
         ClassificacaoUsuarioModel.tipo_acao == "classificacao_nova"
@@ -1304,7 +1373,9 @@ async def estatisticas_classificacao(
     total_sistema = len(em_ids)
 
     if not em_ids:
-        return ClassificacaoStatsResponse(total_sistema=0, por_usuario={}, por_disciplina={})
+        res = ClassificacaoStatsResponse(total_sistema=0, por_usuario={}, por_disciplina={})
+        set_to_cache(cache_key, res)
+        return res
 
     # 1. Manual (Prioridade Máxima)
     manuais_ids = {r[0] for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)\
@@ -1380,7 +1451,7 @@ async def estatisticas_classificacao(
     )
     por_usuario = {row[0]: row[1] for row in por_usuario_rows}
 
-    return ClassificacaoStatsResponse(
+    res = ClassificacaoStatsResponse(
         total_classificacoes=total_sistema,
         classificacoes_novas=novas,
         confirmacoes=confirmacoes,
@@ -1395,6 +1466,8 @@ async def estatisticas_classificacao(
         por_disciplina=por_disciplina,
         por_usuario=por_usuario,
     )
+    set_to_cache(cache_key, res)
+    return res
 
 
 # ========================

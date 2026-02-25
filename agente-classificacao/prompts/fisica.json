@@ -1,0 +1,365 @@
+{
+  "disciplina": "Física",
+  "instrucao_geral": "Classifique pelo processo ou fenômeno físico principal abordado na questão, garantindo que o foco esteja no conceito central e não em contextos secundários.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de duas áreas distintas para ser resolvida. Contextos secundários ou superficiais não justificam a atribuição de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "Acústica",
+      "escopo": "Este módulo abrange o estudo das ondas sonoras, incluindo suas propriedades como frequência, amplitude e velocidade. Explora fenômenos como o efeito Doppler, interferência e ressonância sonora, além de qualidades fisiológicas do som e a propagação em diferentes meios. Também aborda a potência e intensidade sonora e o funcionamento de tubos sonoros.",
+      "incluir_quando": "Classificar aqui quando a questão envolve o cálculo da frequência de uma onda sonora, a análise do efeito Doppler em situações práticas, a determinação da intensidade sonora em decibéis, a explicação de fenômenos de ressonância em instrumentos musicais ou a descrição das qualidades do som como altura e timbre.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de ondas eletromagnéticas (usar módulo 'Ondas'), fenômenos de refração ou reflexão de luz (usar módulo 'Príncipios da Óptica Geométrica'), ou quando aborda conceitos de energia mecânica (usar módulo 'Energia mecânica e sua conservação').",
+      "diferenciador": "Focado exclusivamente em fenômenos e propriedades das ondas sonoras e suas aplicações.",
+      "palavras_chave": [
+        "ondas sonoras",
+        "efeito Doppler",
+        "ressonância",
+        "intensidade sonora",
+        "tubos sonoros"
+      ]
+    },
+    {
+      "nome": "Associação de resistores",
+      "escopo": "Este módulo cobre a análise de circuitos elétricos com resistores associados em série, paralelo e misto. Inclui o uso de medidores elétricos para determinar a resistência equivalente e a corrente em diferentes partes do circuito. Explora também a aplicação das Leis de Ohm em circuitos complexos.",
+      "incluir_quando": "Classificar aqui quando a questão envolve o cálculo da resistência equivalente em circuitos com resistores em série ou paralelo, a análise de circuitos mistos, a utilização de medidores como voltímetros e amperímetros, ou a aplicação das Leis de Ohm para determinar tensões e correntes.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de capacitores (usar módulo 'Capacitores'), circuitos com geradores e receptores (usar módulo 'Geradores e receptores elétricos'), ou fenômenos de indução eletromagnética (usar módulo 'Indução eletromagnética').",
+      "diferenciador": "Focado na análise de circuitos elétricos com resistores em diferentes associações.",
+      "palavras_chave": [
+        "resistores em série",
+        "resistores em paralelo",
+        "resistência equivalente",
+        "circuitos elétricos",
+        "medidores elétricos"
+      ]
+    },
+    {
+      "nome": "Calorimetria",
+      "escopo": "Este módulo aborda o estudo das trocas de calor entre corpos, incluindo conceitos de calor sensível e latente, capacidade térmica e calor específico. Explora as mudanças de estado físico e as curvas de fusão, vaporização e sublimação, além de diagramas de fases e pontos críticos.",
+      "incluir_quando": "Classificar aqui quando a questão envolve o cálculo de calor trocado em processos de mudança de estado, a determinação de calor específico ou capacidade térmica, a análise de diagramas de fases, ou a descrição de processos de fusão e vaporização.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de dilatação térmica (usar módulo 'Dilatação térmica'), propagação de calor (usar módulo 'Propagação do calor'), ou transformações gasosas (usar módulo 'Termodinâmica').",
+      "diferenciador": "Focado nas trocas de calor e mudanças de estado físico dos materiais.",
+      "palavras_chave": [
+        "calor sensível",
+        "calor latente",
+        "capacidade térmica",
+        "mudança de estado",
+        "diagrama de fases"
+      ]
+    },
+    {
+      "nome": "Campos magnéticos",
+      "escopo": "Este módulo explora a geração e características dos campos magnéticos, incluindo aqueles criados por condutores retilíneos, espiras circulares, solenoides e eletroímãs. Inclui a experiência de Oersted e a análise de linhas de campo magnético.",
+      "incluir_quando": "Classificar aqui quando a questão envolve o cálculo do campo magnético gerado por correntes elétricas, a análise de solenoides e eletroímãs, a descrição da experiência de Oersted, ou a representação de linhas de campo magnético.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de força magnética sobre cargas ou condutores (usar módulo 'Força magnética'), indução eletromagnética (usar módulo 'Indução eletromagnética'), ou propriedades de ímãs permanentes (usar módulo 'Introdução ao eletromagnetismo').",
+      "diferenciador": "Focado na geração e características dos campos magnéticos associados a correntes elétricas.",
+      "palavras_chave": [
+        "campo magnético",
+        "solenoide",
+        "eletroímã",
+        "condutor retilíneo",
+        "experiência de Oersted"
+      ]
+    },
+    {
+      "nome": "Capacitores",
+      "escopo": "Este módulo cobre o estudo dos capacitores, incluindo sua capacitância e o comportamento em circuitos elétricos. Explora a energia armazenada em capacitores e suas aplicações em circuitos de corrente contínua e alternada.",
+      "incluir_quando": "Classificar aqui quando a questão envolve o cálculo da capacitância de capacitores, a análise de circuitos com capacitores, a determinação da energia armazenada em capacitores, ou a descrição de suas aplicações práticas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de resistores (usar módulo 'Associação de resistores'), indutores (usar módulo 'Indução eletromagnética'), ou circuitos com geradores e receptores (usar módulo 'Geradores e receptores elétricos').",
+      "diferenciador": "Focado exclusivamente no estudo dos capacitores e sua capacitância em circuitos elétricos.",
+      "palavras_chave": [
+        "capacitor",
+        "capacitância",
+        "energia armazenada",
+        "circuitos elétricos",
+        "corrente contínua"
+      ]
+    },
+    {
+      "nome": "Estudo dos gases",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Carga elétrica e processos de eletrização",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Corrente, tensão e resistência elétrica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Gravitação",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Estática dos fluidos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Cinemática vetorial",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Potencial elétrico e trabalho da força elétrica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Ondas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Trabalho e potência mecânica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Movimento uniforme (MU)",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Energia mecânica e sua conservação",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Introdução à Física",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Movimento Harmônico Simples (MHS)",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Estática dos sólidos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Física Moderna",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Movimento uniformemente variado (MUV)",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Energia e potência elétrica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Príncipios da Óptica Geométrica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Quantidade de movimento e sua convervação",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Refração da luz",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geradores e receptores elétricos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Fenômenos ondulatórios",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Instrumentos Ópticos e Visão",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Indução eletromagnética",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Lentes esféricas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Força elétrica e campo elétrico",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Termometria",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Introdução ao eletromagnetismo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Introdução à cinemática escalar",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Força magnética",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Propagação do calor",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Termodinâmica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Dilatação térmica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Princípios da Dinâmica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Forças da mecânica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Trajetórias curvas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+{
+  "disciplina": "Arte",
+  "instrucao_geral": "Classifique pelo período histórico e movimento artístico principal, não pelo contexto geográfico ou secundário.",
+  "regras_multi_modulo": "Atribua múltiplos módulos somente quando a questão exigir conhecimento de duas áreas distintas para ser respondida. Contextos secundários não justificam um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "A arte grega: do despertar ao período helenístico",
+      "escopo": "Este módulo cobre o desenvolvimento da arte grega desde seu surgimento até o período helenístico, incluindo a influência das pólis e a expansão cultural grega. Exemplos incluem a escultura clássica e a arquitetura de templos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a evolução da escultura grega, a arquitetura de templos como o Partenon, a influência das pólis na arte, ou a expansão cultural grega durante o período helenístico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte romana (usar módulo 'Arte romana: poder, sociedade e cultura'), arte egípcia (usar módulo 'Egito e Mesopotâmia: arte, religião e poder'), ou arte pré-histórica (usar módulo 'Arte pré-histórica: paleolítico e neolítico').",
+      "diferenciador": "Foco na evolução da arte grega desde seu surgimento até o período helenístico.",
+      "palavras_chave": [
+        "escultura grega",
+        "pólis",
+        "helenístico",
+        "arquitetura grega",
+        "expansão cultural"
+      ]
+    },
+    {
+      "nome": "A arte no mundo pós-segunda guerra mundial",
+      "escopo": "Este módulo aborda a crise da arte na Europa após a Segunda Guerra Mundial e o surgimento do expressionismo abstrato nos Estados Unidos. Inclui a análise de movimentos artísticos que refletem a mudança de hegemonia cultural para os EUA.",
+      "incluir_quando": "Classificar aqui quando a questão trata do impacto da Segunda Guerra Mundial na arte europeia, do surgimento do expressionismo abstrato, ou da mudança de hegemonia cultural para os EUA.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte contemporânea brasileira (usar módulo 'Arte contemporânea no Brasil'), ou minimalismo (usar módulo 'Minimalismo e arte conceitual').",
+      "diferenciador": "Foco na transição cultural e artística do pós-guerra, com ênfase no expressionismo abstrato.",
+      "palavras_chave": [
+        "pós-guerra",
+        "expressionismo abstrato",
+        "arte americana",
+        "crise da arte",
+        "hegemonia cultural"
+      ]
+    },
+    {
+      "nome": "Arte contemporânea no Brasil",
+      "escopo": "Este módulo cobre o desenvolvimento da arte brasileira dos anos 1940 aos 1980, incluindo o projeto construtivo brasileiro e as exposições experimentais e conceituais dos anos 1970.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o projeto construtivo brasileiro, exposições experimentais dos anos 1970, ou a evolução da arte brasileira entre 1940 e 1980.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte moderna europeia (usar módulo 'Vanguardas europeias: crise da representação e novas tendências'), ou arte do período colonial brasileiro (usar módulo 'Do Barroco ao Rococó: arte dos séculos XVII e XVIII').",
+      "diferenciador": "Foco na evolução da arte brasileira entre 1940 e 1980, com ênfase em projetos construtivos e arte conceitual.",
+      "palavras_chave": [
+        "arte brasileira",
+        "projeto construtivo",
+        "anos 1970",
+        "arte conceitual",
+        "exposições experimentais"
+      ]
+    },
+    {
+      "nome": "Arte cristã e islâmica na Antiguidade Tardia",
+      "escopo": "Este módulo explora a arte bizantina e sua relação com o Império Romano, além de influências islâmicas na Antiguidade Tardia. Exemplos incluem mosaicos bizantinos e arquitetura religiosa.",
+      "incluir_quando": "Classificar aqui quando a questão aborda mosaicos bizantinos, arquitetura religiosa bizantina, ou influências islâmicas na arte da Antiguidade Tardia.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte românica (usar módulo 'Arte e militância: o estilo românico'), ou arte gótica (usar módulo 'O estilo gótico').",
+      "diferenciador": "Foco na arte bizantina e islâmica durante a Antiguidade Tardia.",
+      "palavras_chave": [
+        "arte bizantina",
+        "mosaicos",
+        "arquitetura religiosa",
+        "Império Romano",
+        "influências islâmicas"
+      ]
+    },
+    {
+      "nome": "Arte e militância: o estilo românico",
+      "escopo": "Este módulo cobre a escultura, pintura e arquitetura românicas, destacando a construção de complexos arquitetônicos com fins religiosos e sociais durante a Idade Média.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a escultura românica, a construção de igrejas românicas, ou as artes pictóricas do período românico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte gótica (usar módulo 'O estilo gótico'), ou arte bizantina (usar módulo 'Arte cristã e islâmica na Antiguidade Tardia').",
+      "diferenciador": "Foco na escultura, pintura e arquitetura românicas durante a Idade Média.",
+      "palavras_chave": [
+        "escultura românica",
+        "arquitetura românica",
+        "Idade Média",
+        "artes pictóricas",
+        "complexos arquitetônicos"
+      ]
+    },
+    {
+      "nome": "Arte no Brasil da pré-história",
+      "escopo": "Este módulo explora as expressões artísticas e estéticas no Brasil pré-histórico, incluindo a arte indígena e as descobertas arqueológicas que revelam a cultura visual dessa época.",
+      "incluir_quando": "Classificar aqui quando a questão trata de arte indígena no Brasil, descobertas arqueológicas pré-históricas, ou expressões artísticas do Brasil pré-histórico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte pré-histórica fora do Brasil (usar módulo 'Arte pré-histórica: paleolítico e neolítico'), ou arte colonial brasileira (usar módulo 'Do Barroco ao Rococó: arte dos séculos XVII e XVIII').",
+      "diferenciador": "Foco nas expressões artísticas e estéticas do Brasil pré-histórico.",
+      "palavras_chave": [
+        "arte indígena",
+        "pré-história",
+        "arqueologia",
+        "expressões artísticas",
+        "Brasil"
+      ]
+    },
+    {
+      "nome": "Arte pré-histórica: paleolítico e neolítico",
+      "escopo": "Este módulo cobre a arte das eras paleolítica e neolítica, incluindo as primeiras manifestações artísticas humanas, como pinturas rupestres e esculturas primitivas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda pinturas rupestres, esculturas primitivas, ou a transição artística do paleolítico para o neolítico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte pré-histórica no Brasil (usar módulo 'Arte no Brasil da pré-história'), ou arte egípcia (usar módulo 'Egito e Mesopotâmia: arte, religião e poder').",
+      "diferenciador": "Foco nas manifestações artísticas das eras paleolítica e neolítica.",
+      "palavras_chave": [
+        "paleolítico",
+        "neolítico",
+        "pinturas rupestres",
+        "esculturas primitivas",
+        "arte pré-histórica"
+      ]
+    },
+    {
+      "nome": "Arte romana: poder, sociedade e cultura",
+      "escopo": "Este módulo explora a arte e arquitetura romanas, destacando seu papel na representação do poder e cultura de Roma, incluindo o legado arquitetônico como aquedutos e anfiteatros.",
+      "incluir_quando": "Classificar aqui quando a questão aborda aquedutos romanos, anfiteatros, ou a representação do poder na arte romana.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte grega (usar módulo 'A arte grega: do despertar ao período helenístico'), ou arte bizantina (usar módulo 'Arte cristã e islâmica na Antiguidade Tardia').",
+      "diferenciador": "Foco na arte e arquitetura romanas como representação de poder e cultura.",
+      "palavras_chave": [
+        "arte romana",
+        "arquitetura romana",
+        "poder",
+        "cultura",
+        "anfiteatros"
+      ]
+    },
+    {
+      "nome": "Da observação à expressão: realismo, impressionismo e simbolismo",
+      "escopo": "Este módulo cobre a transição do realismo ao simbolismo, incluindo o impressionismo e a Art Nouveau, com foco nas tendências artísticas do final do século XIX.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o realismo, impressionismo, simbolismo, ou a Art Nouveau.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte moderna (usar módulo 'Vanguardas europeias: crise da representação e novas tendências'), ou arte romântica (usar módulo 'O Romantismo e o século XIX').",
+      "diferenciador": "Foco na transição do realismo ao simbolismo, incluindo impressionismo e Art Nouveau.",
+      "palavras_chave": [
+        "realismo",
+        "impressionismo",
+        "simbolismo",
+        "Art Nouveau",
+        "século XIX"
+      ]
+    },
+    {
+      "nome": "Do Barroco ao Rococó: arte dos séculos XVII e XVIII",
+      "escopo": "Este módulo explora a arte barroca e rococó, incluindo suas origens e desenvolvimento na América portuguesa, com foco na pintura e arquitetura.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a arte barroca, rococó, ou a arquitetura na América portuguesa.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte renascentista (usar módulo 'O Renascimento e a arte dos séculos XIV a XVI'), ou arte moderna brasileira (usar módulo 'O moderno no Brasil').",
+      "diferenciador": "Foco na arte barroca e rococó dos séculos XVII e XVIII, especialmente na América portuguesa.",
+      "palavras_chave": [
+        "barroco",
+        "rococó",
+        "arquitetura",
+        "América portuguesa",
+        "século XVII"
+      ]
+    },
+    {
+      "nome": "Egito e Mesopotâmia: arte, religião e poder",
+      "escopo": "Este módulo cobre a arte das civilizações egípcia e mesopotâmica, destacando a relação entre arte, religião e poder, incluindo arquitetura monumental e artefatos religiosos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda pirâmides egípcias, zigurates mesopotâmicos, ou a relação entre arte e religião nessas civilizações.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte grega (usar módulo 'A arte grega: do despertar ao período helenístico'), ou arte romana (usar módulo 'Arte romana: poder, sociedade e cultura').",
+      "diferenciador": "Foco na relação entre arte, religião e poder nas civilizações egípcia e mesopotâmica.",
+      "palavras_chave": [
+        "Egito",
+        "Mesopotâmia",
+        "pirâmides",
+        "zigurates",
+        "artefatos religiosos"
+      ]
+    },
+    {
+      "nome": "Figuração e movimento na arte dos anos 1960-1970",
+      "escopo": "Este módulo explora as novas concepções artísticas dos anos 1960 e 1970, incluindo a figuração e o movimento, com foco em como essas tendências refletiram mudanças sociais e culturais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a figuração nos anos 1960, o movimento artístico dos anos 1970, ou as mudanças culturais refletidas na arte desse período.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda minimalismo (usar módulo 'Minimalismo e arte conceitual'), ou arte conceitual brasileira (usar módulo 'Arte contemporânea no Brasil').",
+      "diferenciador": "Foco na figuração e movimento artístico dos anos 1960 e 1970.",
+      "palavras_chave": [
+        "figuração",
+        "movimento",
+        "anos 1960",
+        "anos 1970",
+        "mudanças culturais"
+      ]
+    },
+    {
+      "nome": "Minimalismo e arte conceitual",
+      "escopo": "Este módulo cobre o minimalismo e a arte conceitual, destacando a transição da obra de arte tradicional para o objeto e a ideia como foco principal.",
+      "incluir_quando": "Classificar aqui quando a questão aborda minimalismo, arte conceitual, ou a transição da obra de arte tradicional para o objeto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte abstrata (usar módulo 'A arte no mundo pós-segunda guerra mundial'), ou arte experimental dos anos 1970 (usar módulo 'Arte contemporânea no Brasil').",
+      "diferenciador": "Foco no minimalismo e na arte conceitual como transição da obra de arte tradicional.",
+      "palavras_chave": [
+        "minimalismo",
+        "arte conceitual",
+        "objeto",
+        "ideia",
+        "transição"
+      ]
+    },
+    {
+      "nome": "Novas tendências",
+      "escopo": "Este módulo explora as novas tendências artísticas contemporâneas e pós-modernas, incluindo a relação entre arte e mídia, e a expansão do campo artístico.",
+      "incluir_quando": "Classificar aqui quando a questão aborda arte e mídia, tendências pós-modernas, ou a expansão do campo artístico contemporâneo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte conceitual (usar módulo 'Minimalismo e arte conceitual'), ou arte moderna brasileira (usar módulo 'O moderno no Brasil').",
+      "diferenciador": "Foco nas novas tendências artísticas contemporâneas e pós-modernas.",
+      "palavras_chave": [
+        "arte e mídia",
+        "pós-moderno",
+        "expansão artística",
+        "contemporâneo",
+        "tendências"
+      ]
+    },
+    {
+      "nome": "O Renascimento e a arte dos séculos XIV a XVI",
+      "escopo": "Este módulo cobre o Renascimento na arte e arquitetura, destacando a harmonia e tensão na Itália quinhentista e a expansão do movimento fora da Itália.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o Renascimento italiano, a arquitetura renascentista, ou a expansão do Renascimento para fora da Itália.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte barroca (usar módulo 'Do Barroco ao Rococó: arte dos séculos XVII e XVIII'), ou arte medieval (usar módulo 'O estilo gótico').",
+      "diferenciador": "Foco no Renascimento na arte e arquitetura dos séculos XIV a XVI.",
+      "palavras_chave": [
+        "Renascimento",
+        "arquitetura renascentista",
+        "Itália",
+        "século XIV",
+        "expansão"
+      ]
+    },
+    {
+      "nome": "O Romantismo e o século XIX",
+      "escopo": "Este módulo explora o Romantismo nas artes, incluindo sua expressão no Brasil e o sentimento romântico que permeou as produções artísticas do século XIX.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o Romantismo no Brasil, o sentimento romântico nas artes, ou produções artísticas do século XIX.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda realismo (usar módulo 'Da observação à expressão: realismo, impressionismo e simbolismo'), ou arte moderna (usar módulo 'Vanguardas europeias: crise da representação e novas tendências').",
+      "diferenciador": "Foco no Romantismo e sua expressão artística no século XIX.",
+      "palavras_chave": [
+        "Romantismo",
+        "século XIX",
+        "sentimento romântico",
+        "Brasil",
+        "artes"
+      ]
+    },
+    {
+      "nome": "O estilo gótico",
+      "escopo": "Este módulo cobre a arte gótica, destacando suas características visuais e o contexto cultural da Idade Média, incluindo a arquitetura de catedrais e vitrais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda arquitetura gótica, catedrais, ou vitrais da Idade Média.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte românica (usar módulo 'Arte e militância: o estilo românico'), ou arte renascentista (usar módulo 'O Renascimento e a arte dos séculos XIV a XVI').",
+      "diferenciador": "Foco na arte gótica e suas características visuais e culturais.",
+      "palavras_chave": [
+        "gótico",
+        "arquitetura",
+        "catedrais",
+        "vitrais",
+        "Idade Média"
+      ]
+    },
+    {
+      "nome": "O moderno no Brasil",
+      "escopo": "Este módulo explora o modernismo brasileiro, incluindo a Semana de Arte Moderna e a consolidação do movimento, destacando a ruptura com tradições anteriores.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a Semana de Arte Moderna, o modernismo brasileiro, ou a ruptura com tradições artísticas anteriores.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte contemporânea (usar módulo 'Arte contemporânea no Brasil'), ou arte barroca (usar módulo 'Do Barroco ao Rococó: arte dos séculos XVII e XVIII').",
+      "diferenciador": "Foco no modernismo brasileiro e sua ruptura com tradições artísticas.",
+      "palavras_chave": [
+        "modernismo",
+        "Semana de Arte Moderna",
+        "Brasil",
+        "ruptura",
+        "consolidação"
+      ]
+    },
+    {
+      "nome": "Um olhar sobre a arte",
+      "escopo": "Este módulo aborda a interpretação da linguagem artística, investigando materiais, técnicas e o papel da história da arte na compreensão do que é arte.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a interpretação da linguagem artística, materiais e técnicas, ou o papel da história da arte.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda movimentos artísticos específicos (usar módulo correspondente), ou períodos históricos específicos (usar módulo correspondente).",
+      "diferenciador": "Foco na interpretação da linguagem artística e no papel da história da arte.",
+      "palavras_chave": [
+        "interpretação",
+        "linguagem artística",
+        "materiais",
+        "técnicas",
+        "história da arte"
+      ]
+    },
+    {
+      "nome": "Vanguardas europeias: crise da representação e novas tendências",
+      "escopo": "Este módulo cobre as vanguardas europeias, incluindo o cubismo, futurismo, e outras tendências que questionaram a forma e representação na arte moderna.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cubismo, futurismo, ou a crise da representação nas vanguardas europeias.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão aborda arte contemporânea (usar módulo 'Novas tendências'), ou minimalismo (usar módulo 'Minimalismo e arte conceitual').",
+      "diferenciador": "Foco nas vanguardas europeias e a crise da representação na arte moderna.",
+      "palavras_chave": [
+        "vanguardas",
+        "cubismo",
+        "futurismo",
+        "crise da representação",
+        "arte moderna"
+      ]
+    }
+  ]
+}

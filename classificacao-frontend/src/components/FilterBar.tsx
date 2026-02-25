@@ -16,7 +16,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
     const [disciplinaId, setDisciplinaId] = useState('');
     const [habilidadeId, setHabilidadeId] = useState('');
     const [areasMapping, setAreasMapping] = useState<Record<string, string[]>>({});
-    const [habilidades, setHabilidades] = useState<{ habilidade_id: number, habilidade_descricao: string }[]>([]);
+    const [habilidades, setHabilidades] = useState<{ habilidade_id: number, habilidade_descricao: string, pendentes?: number }[]>([]);
     const usuario = getUsuario();
 
     useEffect(() => {
@@ -120,7 +120,10 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
             <div className={styles.filterGroup}>
                 <Dropdown
                     label="Assunto"
-                    options={habilidades.map(h => ({ value: h.habilidade_id.toString(), label: h.habilidade_descricao }))}
+                    options={habilidades.map(h => ({
+                        value: h.habilidade_id.toString(),
+                        label: h.pendentes ? `${h.habilidade_descricao} (${h.pendentes})` : h.habilidade_descricao
+                    }))}
                     value={habilidadeId}
                     onChange={(val: any) => setHabilidadeId(val)}
                     placeholder="Todos os assuntos"

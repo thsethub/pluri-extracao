@@ -1,0 +1,35 @@
+{
+  "disciplina": "Inglês",
+  "instrucao_geral": "Classifique pelo foco principal da questão, seja ele a compreensão textual ou o uso gramatical, sem se deixar influenciar por contextos secundários.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir explicitamente a aplicação de conhecimentos de leitura e gramática simultaneamente para ser resolvida.",
+  "modulos": [
+    {
+      "nome": "Leitura e interpretação de textos",
+      "escopo": "Este módulo abrange a compreensão e interpretação de textos em inglês, incluindo a identificação de gêneros textuais como artigos, capas de livros, tirinhas e infográficos. Envolve o uso de estratégias de leitura para entender o significado implícito e explícito dos textos. Também cobre a habilidade de relacionar estruturas linguísticas com suas funções e usos dentro de um texto.",
+      "incluir_quando": "Classificar aqui quando a questão envolve: 1) Identificação do gênero textual de um artigo ou infográfico; 2) Interpretação de uma tirinha ou cartoon; 3) Compreensão de ideias principais e secundárias em um texto; 4) Uso de estratégias de leitura para inferir significados; 5) Relacionamento de estruturas linguísticas com suas funções no texto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando: 1) A questão foca na identificação de adjetivos ou advérbios (usar módulo 'Língua e gramática'); 2) A questão pede para transformar frases para voz passiva (usar módulo 'Língua e gramática'); 3) A questão envolve a escolha correta de conectivos em frases isoladas (usar módulo 'Língua e gramática').",
+      "diferenciador": "Foco na compreensão e interpretação de textos em inglês, incluindo a identificação de gêneros textuais.",
+      "palavras_chave": [
+        "compreensão",
+        "interpretação",
+        "gêneros textuais",
+        "estratégias de leitura",
+        "inferência"
+      ]
+    },
+    {
+      "nome": "Língua e gramática",
+      "escopo": "Este módulo cobre o uso e a compreensão de elementos gramaticais da língua inglesa, incluindo adjetivos, advérbios, artigos, conectivos, pronomes e voz passiva. Envolve a aplicação de regras gramaticais para formar frases corretas e a associação de vocabulário ao tema de um texto.",
+      "incluir_quando": "Classificar aqui quando a questão envolve: 1) Identificação e uso correto de adjetivos e advérbios; 2) Transformação de frases para a voz passiva; 3) Escolha de artigos e pronomes adequados; 4) Uso de conectivos para ligar ideias; 5) Associação de vocabulário específico ao tema de um texto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando: 1) A questão requer interpretação de um infográfico ou cartoon (usar módulo 'Leitura e interpretação de textos'); 2) A questão envolve estratégias de leitura para inferir significados (usar módulo 'Leitura e interpretação de textos'); 3) A questão pede para identificar o gênero textual de um artigo (usar módulo 'Leitura e interpretação de textos').",
+      "diferenciador": "Foco no uso e compreensão de elementos gramaticais da língua inglesa.",
+      "palavras_chave": [
+        "gramática",
+        "adjetivos",
+        "advérbios",
+        "voz passiva",
+        "conectivos"
+      ]
+    }
+  ]
+}

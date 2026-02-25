@@ -1,0 +1,203 @@
+{
+  "disciplina": "Literatura",
+  "instrucao_geral": "Classifique pelo movimento literário principal e suas características centrais, não pelo contexto histórico secundário.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de dois movimentos literários distintos para ser respondida. Contextos históricos ou culturais secundários não justificam a inclusão de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "A primeira geração modernista",
+      "escopo": "Este módulo cobre a geração de 1922, focando nos desdobramentos da Semana de Arte Moderna e na ruptura estética promovida por essa geração. Explora a linguagem inovadora e os principais autores que marcaram o início do Modernismo no Brasil.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a Semana de Arte Moderna, menciona autores como Mário de Andrade ou Oswald de Andrade, discute a ruptura com o passado literário, ou analisa a linguagem inovadora da época.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do regionalismo da década de 1930 (usar 'A segunda geração modernista: prosa e poesia'), ou quando foca em autores do Pré-Modernismo (usar 'Pré-Modernismo').",
+      "diferenciador": "Foco na ruptura estética e linguística da geração de 1922.",
+      "palavras_chave": [
+        "Semana de Arte Moderna",
+        "ruptura",
+        "Mário de Andrade",
+        "Oswald de Andrade",
+        "1922"
+      ]
+    },
+    {
+      "nome": "A segunda geração modernista: prosa e poesia",
+      "escopo": "Este módulo aborda a década de 1930, destacando a crise social e o regionalismo presentes na prosa e poesia da segunda geração modernista. Analisa os principais autores e temas que emergiram nesse período.",
+      "incluir_quando": "Classificar aqui quando a questão menciona o regionalismo, discute a crise social dos anos 1930, ou analisa obras de autores como Graciliano Ramos ou Jorge Amado.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata da geração de 1945 (usar 'A terceira geração modernista: prosa, poesia e teatro') ou quando foca na ruptura de 1922 (usar 'A primeira geração modernista').",
+      "diferenciador": "Enfoque no regionalismo e na crise social da década de 1930.",
+      "palavras_chave": [
+        "regionalismo",
+        "crise social",
+        "Graciliano Ramos",
+        "Jorge Amado",
+        "1930"
+      ]
+    },
+    {
+      "nome": "A terceira geração modernista: prosa, poesia e teatro",
+      "escopo": "Este módulo explora a geração de 1945, analisando o contexto histórico e o projeto estético dessa fase. Inclui a produção em prosa, poesia e teatro, destacando autores e obras significativas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o contexto histórico de 1945, discute o projeto estético da época, ou menciona autores como Clarice Lispector ou João Cabral de Melo Neto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do regionalismo dos anos 1930 (usar 'A segunda geração modernista: prosa e poesia') ou da ruptura de 1922 (usar 'A primeira geração modernista').",
+      "diferenciador": "Foco no projeto estético e na diversidade de gêneros da geração de 1945.",
+      "palavras_chave": [
+        "1945",
+        "projeto estético",
+        "Clarice Lispector",
+        "João Cabral de Melo Neto",
+        "teatro"
+      ]
+    },
+    {
+      "nome": "Classicismo",
+      "escopo": "Este módulo cobre o Classicismo português, com ênfase na poesia épica de Camões e nas características do Renascimento. Explora a contextualização histórica e as influências clássicas na literatura.",
+      "incluir_quando": "Classificar aqui quando a questão menciona Camões, discute o Renascimento em Portugal, ou analisa características clássicas na literatura.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Barroco (usar 'Do Quinhentismo ao Barroco: os primórdios da literatura luso-brasileira') ou do Humanismo (usar 'Humanismo').",
+      "diferenciador": "Ênfase na poesia épica e nas influências clássicas do Renascimento.",
+      "palavras_chave": [
+        "Camões",
+        "Renascimento",
+        "poesia épica",
+        "Portugal",
+        "clássico"
+      ]
+    },
+    {
+      "nome": "Do Quinhentismo ao Barroco: os primórdios da literatura luso-brasileira",
+      "escopo": "Este módulo aborda a estética barroca na literatura luso-brasileira, incluindo o Quinhentismo. Explora as características e a evolução literária desde os primeiros registros até o Barroco.",
+      "incluir_quando": "Classificar aqui quando a questão discute a estética barroca, menciona o Quinhentismo, ou analisa a transição literária entre esses períodos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Classicismo (usar 'Classicismo') ou do Arcadismo (usar 'O Arcadismo em Portugal e no Brasil').",
+      "diferenciador": "Foco na transição e evolução literária do Quinhentismo ao Barroco.",
+      "palavras_chave": [
+        "Barroco",
+        "Quinhentismo",
+        "literatura luso-brasileira",
+        "estética",
+        "transição"
+      ]
+    },
+    {
+      "nome": "Gêneros e momentos literários",
+      "escopo": "Este módulo explora os gêneros literários e sua relação com o contexto histórico. Discute o conceito de literatura e como os momentos históricos influenciam a produção literária.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a definição de gêneros literários, discute a relação entre literatura e contexto histórico, ou analisa o conceito de literatura.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de um movimento literário específico, como o Modernismo (usar 'Modernismo em Portugal e no Brasil') ou o Romantismo (usar 'Romantismo em Portugal e no Brasil').",
+      "diferenciador": "Foco na definição e análise de gêneros literários em relação ao contexto histórico.",
+      "palavras_chave": [
+        "gêneros literários",
+        "contexto histórico",
+        "conceito de literatura",
+        "análise",
+        "influência"
+      ]
+    },
+    {
+      "nome": "Humanismo",
+      "escopo": "Este módulo cobre o Humanismo português, com ênfase na poesia palaciana e no teatro de Gil Vicente. Explora as características e o contexto histórico do Humanismo em Portugal.",
+      "incluir_quando": "Classificar aqui quando a questão menciona Gil Vicente, discute a poesia palaciana, ou analisa o contexto histórico do Humanismo em Portugal.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Classicismo (usar 'Classicismo') ou do Trovadorismo (usar 'Trovadorismo').",
+      "diferenciador": "Ênfase na poesia palaciana e no teatro de Gil Vicente durante o Humanismo.",
+      "palavras_chave": [
+        "Humanismo",
+        "Gil Vicente",
+        "poesia palaciana",
+        "Portugal",
+        "teatro"
+      ]
+    },
+    {
+      "nome": "Modernismo em Portugal e no Brasil",
+      "escopo": "Este módulo aborda o Modernismo tanto em Portugal quanto no Brasil, com destaque para a poesia de Fernando Pessoa e outros autores modernistas. Explora as características e influências do Modernismo nos dois países.",
+      "incluir_quando": "Classificar aqui quando a questão menciona Fernando Pessoa, discute o Modernismo em Portugal ou no Brasil, ou analisa as influências modernistas nos dois países.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata exclusivamente do Modernismo brasileiro de 1922 (usar 'A primeira geração modernista') ou do Modernismo português sem relação com o Brasil (usar 'Classicismo').",
+      "diferenciador": "Foco na análise comparativa do Modernismo em Portugal e no Brasil.",
+      "palavras_chave": [
+        "Modernismo",
+        "Fernando Pessoa",
+        "Portugal",
+        "Brasil",
+        "influências"
+      ]
+    },
+    {
+      "nome": "O Arcadismo em Portugal e no Brasil",
+      "escopo": "Este módulo explora o Arcadismo tanto em Portugal quanto no Brasil, destacando suas características e principais autores. Analisa a influência do Arcadismo na literatura dos dois países.",
+      "incluir_quando": "Classificar aqui quando a questão discute o Arcadismo, menciona autores árcades, ou analisa as características do movimento nos dois países.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Barroco (usar 'Do Quinhentismo ao Barroco: os primórdios da literatura luso-brasileira') ou do Romantismo (usar 'Romantismo em Portugal e no Brasil').",
+      "diferenciador": "Foco na análise das características e influências do Arcadismo em Portugal e no Brasil.",
+      "palavras_chave": [
+        "Arcadismo",
+        "Portugal",
+        "Brasil",
+        "características",
+        "autores"
+      ]
+    },
+    {
+      "nome": "Pré-Modernismo",
+      "escopo": "Este módulo cobre o Pré-Modernismo no Brasil, destacando seus autores e características. Explora o contexto histórico e cultural do início do século XX que influenciou esse movimento.",
+      "incluir_quando": "Classificar aqui quando a questão menciona autores pré-modernistas, discute o contexto histórico do início do século XX, ou analisa as características do Pré-Modernismo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Modernismo de 1922 (usar 'A primeira geração modernista') ou do Realismo (usar 'Realismo e Naturalismo em Portugal e no Brasil').",
+      "diferenciador": "Foco nas características e no contexto histórico do Pré-Modernismo no Brasil.",
+      "palavras_chave": [
+        "Pré-Modernismo",
+        "início do século XX",
+        "Brasil",
+        "autores",
+        "características"
+      ]
+    },
+    {
+      "nome": "Realismo e Naturalismo em Portugal e no Brasil",
+      "escopo": "Este módulo aborda o Realismo e o Naturalismo em Portugal e no Brasil, destacando autores, contexto, características e crítica social. Explora como esses movimentos literários refletiram as transformações do mundo.",
+      "incluir_quando": "Classificar aqui quando a questão discute o Realismo ou o Naturalismo, menciona autores como Eça de Queirós ou Aluísio Azevedo, ou analisa a crítica social presente nesses movimentos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Romantismo (usar 'Romantismo em Portugal e no Brasil') ou do Modernismo (usar 'Modernismo em Portugal e no Brasil').",
+      "diferenciador": "Foco na crítica social e nas características do Realismo e Naturalismo em Portugal e no Brasil.",
+      "palavras_chave": [
+        "Realismo",
+        "Naturalismo",
+        "Eça de Queirós",
+        "Aluísio Azevedo",
+        "crítica social"
+      ]
+    },
+    {
+      "nome": "Romantismo em Portugal e no Brasil",
+      "escopo": "Este módulo cobre o Romantismo em Portugal e no Brasil, destacando a poesia, prosa e teatro românticos. Explora as características do movimento e seus principais representantes nos dois países.",
+      "incluir_quando": "Classificar aqui quando a questão discute o Romantismo, menciona autores românticos, ou analisa as características do movimento em Portugal e no Brasil.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Realismo (usar 'Realismo e Naturalismo em Portugal e no Brasil') ou do Arcadismo (usar 'O Arcadismo em Portugal e no Brasil').",
+      "diferenciador": "Foco nas características e nos principais representantes do Romantismo em Portugal e no Brasil.",
+      "palavras_chave": [
+        "Romantismo",
+        "poesia",
+        "prosa",
+        "teatro",
+        "representantes"
+      ]
+    },
+    {
+      "nome": "Tendências contemporâneas",
+      "escopo": "Este módulo explora a literatura contemporânea em Portugal e no Brasil, incluindo poesia e prosa. Analisa as tendências atuais e como elas refletem as questões contemporâneas nos dois países.",
+      "incluir_quando": "Classificar aqui quando a questão discute a literatura contemporânea, menciona autores atuais, ou analisa tendências literárias contemporâneas em Portugal e no Brasil.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de movimentos literários históricos, como o Modernismo (usar 'Modernismo em Portugal e no Brasil') ou o Romantismo (usar 'Romantismo em Portugal e no Brasil').",
+      "diferenciador": "Foco nas tendências e questões da literatura contemporânea em Portugal e no Brasil.",
+      "palavras_chave": [
+        "contemporâneo",
+        "tendências",
+        "Portugal",
+        "Brasil",
+        "atual"
+      ]
+    },
+    {
+      "nome": "Trovadorismo",
+      "escopo": "Este módulo cobre o Trovadorismo em Portugal, explorando seu contexto e manifestações literárias. Analisa as características das cantigas e a influência do Trovadorismo na literatura portuguesa.",
+      "incluir_quando": "Classificar aqui quando a questão discute o Trovadorismo, menciona cantigas, ou analisa o contexto histórico e literário do Trovadorismo em Portugal.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Humanismo (usar 'Humanismo') ou do Classicismo (usar 'Classicismo').",
+      "diferenciador": "Foco nas características e manifestações literárias do Trovadorismo em Portugal.",
+      "palavras_chave": [
+        "Trovadorismo",
+        "cantigas",
+        "Portugal",
+        "contexto",
+        "manifestações"
+      ]
+    }
+  ]
+}

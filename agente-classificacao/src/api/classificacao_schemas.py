@@ -72,6 +72,7 @@ class HabilidadeFiltroSchema(BaseModel):
     """Schema para item no dropdown de filtro de assuntos"""
     habilidade_id: int
     habilidade_descricao: str
+    pendentes: Optional[int] = 0
 
 
 class HabilidadesFiltroResponse(BaseModel):

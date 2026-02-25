@@ -1,0 +1,349 @@
+{
+  "disciplina": "Química",
+  "instrucao_geral": "Classifique pelo processo/fenômeno principal, não pelo contexto secundário. Priorize a identificação do conceito central abordado na questão.",
+  "regras_multi_modulo": "Atribua múltiplos módulos somente quando a questão exigir conhecimento de duas áreas distintas para ser respondida. Contextos secundários não justificam a inclusão de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "Bioquímica",
+      "escopo": "Este módulo cobre a estrutura e função de biomoléculas como aminoácidos, carboidratos, lipídeos, proteínas, vitaminas e coenzimas. Inclui também a química do DNA, RNA e enzimas, além da importância da água e sais minerais nas funções químicas do organismo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a estrutura de proteínas, a função de enzimas, a composição química do DNA ou a importância de vitaminas e sais minerais.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de reações químicas gerais (usar 'Reações Orgânicas'), ou de impactos ambientais de compostos orgânicos (usar 'Química Ambiental').",
+      "diferenciador": "Foco na estrutura e função de biomoléculas e sua importância biológica.",
+      "palavras_chave": [
+        "aminoácidos",
+        "enzimas",
+        "DNA",
+        "proteínas",
+        "vitaminas"
+      ]
+    },
+    {
+      "nome": "Cinética Química",
+      "escopo": "Este módulo aborda os fatores que influenciam a velocidade das reações químicas, incluindo a teoria das colisões, energia de ativação e o papel dos catalisadores. Também cobre a lei da velocidade, ordem de reação e condições de espontaneidade.",
+      "incluir_quando": "Classificar aqui quando a questão discute a velocidade de uma reação, o efeito de catalisadores ou a energia de ativação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de equilíbrio químico (usar 'Equílibrio Químico') ou de reações de oxirredução (usar 'Reações redox e número de oxidação (NOX)').",
+      "diferenciador": "Foco na velocidade das reações e nos fatores que a influenciam.",
+      "palavras_chave": [
+        "velocidade de reação",
+        "catalisador",
+        "energia de ativação",
+        "teoria das colisões",
+        "ordem de reação"
+      ]
+    },
+    {
+      "nome": "Combustíveis Fósseis e Petroquímica",
+      "escopo": "Este módulo cobre a composição química, refino e destilação do petróleo, além de biocombustíveis e derivados como gasolina e gás natural. Inclui também o craqueamento e a octanagem.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o processo de refino do petróleo, a composição de combustíveis fósseis ou a produção de biocombustíveis.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de reações químicas orgânicas (usar 'Reações Orgânicas') ou de impactos ambientais (usar 'Química Ambiental').",
+      "diferenciador": "Foco na composição e processos de transformação de combustíveis fósseis e biocombustíveis.",
+      "palavras_chave": [
+        "petróleo",
+        "biocombustíveis",
+        "craqueamento",
+        "octanagem",
+        "refino"
+      ]
+    },
+    {
+      "nome": "Compostos Inorgânicos",
+      "escopo": "Este módulo aborda as funções inorgânicas, incluindo ácidos, bases, sais e óxidos, além das escalas de pH e pOH. Cobre também a aplicação desses compostos no cotidiano.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a identificação de ácidos, bases ou sais, ou discute o pH de soluções.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de compostos orgânicos (usar 'Química Orgânica: Conceitos Iniciais') ou de reações de oxirredução (usar 'Reações redox e número de oxidação (NOX)').",
+      "diferenciador": "Foco nas funções inorgânicas e suas aplicações práticas.",
+      "palavras_chave": [
+        "ácidos",
+        "bases",
+        "sais",
+        "óxidos",
+        "pH"
+      ]
+    },
+    {
+      "nome": "Cálculo Estequiométrico",
+      "escopo": "Este módulo cobre o balanceamento de equações químicas e cálculos relacionados à pureza dos reagentes, reagentes em excesso e limitantes, e rendimento de reações. Inclui também as leis ponderais e o uso do mol.",
+      "incluir_quando": "Classificar aqui quando a questão envolve cálculos de quantidade de matéria, rendimento de reações ou balanceamento de equações.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de propriedades coligativas (usar 'Propriedades Coligativas') ou de equilíbrio químico (usar 'Equílibrio Químico').",
+      "diferenciador": "Foco em cálculos quantitativos relacionados a reações químicas.",
+      "palavras_chave": [
+        "balanceamento",
+        "rendimento",
+        "mol",
+        "leis ponderais",
+        "reagentes"
+      ]
+    },
+    {
+      "nome": "Eletrólise",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Funções Orgânicas Nitrogenadas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações Inorgânicas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Hidrocarbonetos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações orgânicas de Substituição",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Propriedades Coligativas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Equílibrio Químico",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Equílibrio Iônico",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Isomeria Plana ou Constitucional",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Grandezas Químicas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Polímeros",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Funções Halogenadas, Sulfuradas e Outras Funções Orgânicas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Radiotividade",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Tabela Periódica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Química, Tecnologia e Saúde no Cotidiano",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações orgânicas de Adição",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Isomeria Óptica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações específicas de grupos funcionais",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Termoquímica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações Orgânicas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações orgânicas de Eliminação",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Ligações Químicas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Isomeria Geométrica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Funções Orgânicas Oxigenadas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Eletroquímica: Pilhas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Química Ambiental",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações de Oxirredução em compostos orgânicos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Teoria dos Gases",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Dispersões",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Introdução ao Átomo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações redox e número de oxidação (NOX)",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Substâncias, Misturas e Transformações",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Química Orgânica: Conceitos Iniciais",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Soluções e Suas Unidades de Concentração",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    }
+  ]
+}

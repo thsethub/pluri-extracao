@@ -1,0 +1,63 @@
+{
+  "disciplina": "Espanhol",
+  "instrucao_geral": "Classifique pelo foco principal do conteúdo, seja ele cultural, textual, lexical ou gramatical, garantindo que o contexto secundário não desvie a classificação do módulo correto.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento profundo e simultâneo de duas áreas distintas, como cultura e gramática, para ser respondida corretamente.",
+  "modulos": [
+    {
+      "nome": "Cultura do Mundo Hispânico",
+      "escopo": "Este módulo abrange as manifestações culturais dos países hispânicos, incluindo tradições, festivais, música, dança e arte. Explora expressões idiomáticas e frases feitas que refletem a cultura e o modo de vida hispânico. Analisa o impacto histórico e social dessas manifestações na identidade cultural dos países de língua espanhola.",
+      "incluir_quando": "Classificar aqui quando a questão aborda festivais tradicionais como o Dia de los Muertos, expressões idiomáticas culturais, a influência da música flamenca na cultura espanhola, ou o impacto da colonização na arte hispânica.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão se concentra na compreensão de um texto literário (usar módulo Estudo de textos), ou quando aborda falsos cognatos em um contexto de vocabulário (usar módulo Léxico).",
+      "diferenciador": "Foco exclusivo em manifestações culturais e expressões idiomáticas do mundo hispânico.",
+      "palavras_chave": [
+        "cultura",
+        "tradições",
+        "festivais",
+        "expressões idiomáticas",
+        "arte"
+      ]
+    },
+    {
+      "nome": "Estudo de textos",
+      "escopo": "Este módulo foca na compreensão e análise de textos em espanhol, abordando elementos da comunicação e estratégias de leitura. Inclui a identificação de tipos de texto, como narrativos, descritivos e argumentativos, e a interpretação de mensagens implícitas e explícitas.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a interpretação de um artigo de jornal em espanhol, análise de um poema, identificação de elementos de comunicação em um diálogo, ou estratégias de leitura para entender um texto acadêmico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de expressões idiomáticas culturais (usar módulo Cultura do Mundo Hispânico) ou quando foca em regras gramaticais específicas (usar módulo Língua e gramática).",
+      "diferenciador": "Análise e compreensão de textos escritos em espanhol, focando em elementos de comunicação.",
+      "palavras_chave": [
+        "compreensão de texto",
+        "estratégias de leitura",
+        "elementos da comunicação",
+        "tipos de texto",
+        "interpretação"
+      ]
+    },
+    {
+      "nome": "Léxico",
+      "escopo": "Este módulo cobre o vocabulário contextual em espanhol, com ênfase em falsos amigos e palavras heterosemânticas. Explora como o significado das palavras pode variar em diferentes contextos e como evitar confusões comuns entre o espanhol e o português.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a identificação de falsos cognatos, compreensão de vocabulário em um contexto específico, ou a distinção entre palavras semelhantes em espanhol e português.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão se concentra em expressões idiomáticas culturais (usar módulo Cultura do Mundo Hispânico) ou na análise de um texto literário (usar módulo Estudo de textos).",
+      "diferenciador": "Foco em vocabulário contextual e falsos amigos entre espanhol e português.",
+      "palavras_chave": [
+        "vocabulário",
+        "falsos amigos",
+        "heterosemânticas",
+        "contexto",
+        "palavras"
+      ]
+    },
+    {
+      "nome": "Língua e gramática",
+      "escopo": "Este módulo abrange as estruturas gramaticais do espanhol, incluindo acentuação, fonologia e ortografia. Explora as classes de palavras e suas funções dentro da frase, além de regras específicas de acentuação e pronúncia.",
+      "incluir_quando": "Classificar aqui quando a questão aborda regras de acentuação em espanhol, identificação de classes de palavras, correção ortográfica de frases, ou análise de estruturas gramaticais complexas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão envolve a interpretação de um texto (usar módulo Estudo de textos) ou quando foca em expressões culturais (usar módulo Cultura do Mundo Hispânico).",
+      "diferenciador": "Análise das estruturas gramaticais e regras de acentuação do espanhol.",
+      "palavras_chave": [
+        "gramática",
+        "acentuação",
+        "ortografia",
+        "fonologia",
+        "classes de palavras"
+      ]
+    }
+  ]
+}

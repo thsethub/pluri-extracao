@@ -40,3 +40,8 @@ storage/
 
 # Scripts auxiliares de debug/teste
 *.sql
+
+# Modelos IA Antigos
+models/
+*.joblib
+*.pkl

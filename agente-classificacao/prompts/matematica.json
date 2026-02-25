@@ -1,0 +1,285 @@
+{
+  "disciplina": "Matemática",
+  "instrucao_geral": "Classifique pelo processo ou conceito matemático principal abordado na questão, não pelo contexto ou aplicação secundária.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de duas áreas matemáticas distintas para ser resolvida. Contextos secundários ou aplicações não justificam a atribuição de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "Análise Combinatória",
+      "escopo": "Este módulo cobre os princípios fundamentais de contagem, incluindo arranjos, combinações e permutações. Explora o uso de fatorial em cálculos combinatórios e aborda permutações circulares e com elementos repetidos. Exemplos incluem problemas de organização de objetos e seleção de grupos.",
+      "incluir_quando": "Classificar aqui quando a questão envolve calcular o número de maneiras de organizar ou selecionar itens, como arranjar livros em uma prateleira, formar comitês de pessoas, ou determinar a ordem de chegada em uma corrida.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão envolve probabilidade (usar módulo de Probabilidade), ou quando se trata de sequências numéricas (usar módulo de Progressão Aritmética ou Geométrica).",
+      "diferenciador": "Foca na contagem de maneiras de organizar ou selecionar itens sem considerar a ordem dos eventos.",
+      "palavras_chave": [
+        "arranjo",
+        "combinação",
+        "permutações",
+        "fatorial",
+        "contagem"
+      ]
+    },
+    {
+      "nome": "Circunferência e Círculo",
+      "escopo": "Este módulo aborda os elementos e propriedades da circunferência e do círculo, incluindo arcos, setores e segmentos circulares. Explora as relações métricas e posições relativas entre retas e circunferências. Exemplos incluem cálculos de comprimento de arco e área de setores.",
+      "incluir_quando": "Classificar aqui quando a questão envolve calcular o comprimento de um arco, a área de um setor circular, ou determinar a posição de uma reta em relação a uma circunferência.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão envolve apenas ângulos internos de polígonos (usar módulo de Geometria Plana: Polígonos) ou quando se trata de trigonometria em triângulos (usar módulo de Relações Métricas no Triângulo).",
+      "diferenciador": "Foca nas propriedades e relações métricas específicas da circunferência e do círculo.",
+      "palavras_chave": [
+        "circunferência",
+        "círculo",
+        "arco",
+        "setor",
+        "segmento"
+      ]
+    },
+    {
+      "nome": "Conjuntos",
+      "escopo": "Este módulo cobre os conceitos fundamentais de conjuntos, incluindo operações como união, interseção e diferença. Utiliza diagramas de Venn para representar relações entre conjuntos e explora conjuntos numéricos específicos. Exemplos incluem problemas de classificação e organização de dados.",
+      "incluir_quando": "Classificar aqui quando a questão envolve operações com conjuntos, como união ou interseção, ou quando utiliza diagramas de Venn para resolver problemas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão envolve apenas números inteiros sem operações de conjuntos (usar módulo de Números e Operações Fundamentais) ou quando se trata de funções (usar módulo de Funções).",
+      "diferenciador": "Foca nas operações e representações gráficas de conjuntos e suas relações.",
+      "palavras_chave": [
+        "conjuntos",
+        "união",
+        "interseção",
+        "diagrama de Venn",
+        "subconjunto"
+      ]
+    },
+    {
+      "nome": "Função Exponencial",
+      "escopo": "Este módulo aborda as propriedades e características das funções exponenciais, incluindo seu comportamento gráfico e aplicações. Explora o crescimento e decrescimento exponencial e suas representações matemáticas. Exemplos incluem modelagem de crescimento populacional e decaimento radioativo.",
+      "incluir_quando": "Classificar aqui quando a questão envolve o gráfico de uma função exponencial, ou quando se trata de crescimento ou decrescimento exponencial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão envolve logaritmos (usar módulo de Função Logarítmica) ou quando se trata de funções polinomiais (usar módulo de Funções Polinomiais do 1º e 2º Graus).",
+      "diferenciador": "Foca no comportamento e aplicações de funções com base exponencial.",
+      "palavras_chave": [
+        "exponencial",
+        "crescimento",
+        "decaimento",
+        "gráfico",
+        "base"
+      ]
+    },
+    {
+      "nome": "Função Logarítmica",
+      "escopo": "Este módulo cobre as propriedades e características das funções logarítmicas, incluindo seu comportamento gráfico e a relação com funções exponenciais. Explora logaritmos decimais e mudanças de base. Exemplos incluem cálculos de pH e intensidade sonora.",
+      "incluir_quando": "Classificar aqui quando a questão envolve o gráfico de uma função logarítmica, ou quando se trata de cálculos de logaritmos e suas propriedades.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão envolve apenas funções exponenciais (usar módulo de Função Exponencial) ou quando se trata de equações polinomiais (usar módulo de Funções Polinomiais do 1º e 2º Graus).",
+      "diferenciador": "Foca nas propriedades e aplicações de funções logarítmicas e sua relação com exponenciais.",
+      "palavras_chave": [
+        "logarítmica",
+        "logaritmo",
+        "base",
+        "gráfico",
+        "propriedades"
+      ]
+    },
+    {
+      "nome": "Funções",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Trigonometria",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Quadriláteros Notáveis",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Progressão Geométrica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Espacial: Prismas e Pirâmides",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Plana: Conceitos Iniciais e Ângulos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Função Trigonométrica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Porcentagens",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Progressão Aritmética",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Logaritmo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Plana: Triângulos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Espacial: Posições e Sólidos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Números e Operações Fundamentais",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Introdução à Trigonometria",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Áreas de Figuras Planas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Espacial: Cilindros e Cones",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Funções Polinomiais do 1º e 2º Graus",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Plana: Polígonos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Analítica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Matrizes e Determinantes",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Relações Métricas no Triângulo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Função Modular",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Teorema de Tales e Semelhança de Triângulos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Plana: Retas e Planos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Espacial: Poliedros",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geometria Espacial: Esferas e Sólidos Semelhantes",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    }
+  ]
+}

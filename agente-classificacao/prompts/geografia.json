@@ -1,0 +1,365 @@
+{
+  "disciplina": "Geografia",
+  "instrucao_geral": "Classifique pelo processo/fenômeno principal, não pelo contexto secundário. A ênfase deve ser dada aos conceitos centrais e às dinâmicas geográficas específicas abordadas em cada módulo.",
+  "regras_multi_modulo": "Atribua múltiplos módulos somente quando a questão exigir conhecimento de duas áreas distintas para ser respondida. Contextos secundários ou menções superficiais não justificam a inclusão de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "A estrutura fundiária brasileira",
+      "escopo": "Este módulo aborda a distribuição e concentração de terras no Brasil, a agricultura familiar, e os conflitos no meio rural. Inclui a análise da reforma agrária e dos movimentos sociais no campo, além das relações de trabalho no meio rural ao longo do último século.",
+      "incluir_quando": "Classificar aqui quando a questão envolver a concentração de terras no Brasil, discutir a reforma agrária, abordar conflitos agrários e movimentos sociais no campo, ou tratar das relações de trabalho no meio rural.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão tratar de produção agrícola no contexto do agronegócio (usar módulo 'Agricultura e pecuária no agronegócio do Brasil'), ou quando focar em práticas agrícolas globais (usar módulo 'Agricultura no mundo').",
+      "diferenciador": "Foco na distribuição de terras e conflitos agrários no Brasil.",
+      "palavras_chave": [
+        "concentração de terras",
+        "reforma agrária",
+        "movimentos sociais",
+        "conflitos rurais",
+        "agricultura familiar"
+      ]
+    },
+    {
+      "nome": "A guerra fria e o mundo bipolar",
+      "escopo": "Este módulo cobre a origem e desenvolvimento da Guerra Fria, incluindo a corrida armamentista, a era atômica, e a corrida espacial. Explora a descolonização afro-asiática, a guerra de espionagem e propaganda, e o controle dos Estados-satélites.",
+      "incluir_quando": "Classificar aqui quando a questão abordar a corrida armamentista, a descolonização afro-asiática, a espionagem durante a Guerra Fria, ou o controle dos Estados-satélites.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão tratar do fim da Guerra Fria e a nova ordem mundial (usar módulo 'A nova ordem mundial'), ou quando focar em conflitos regionais pós-Guerra Fria (usar módulo 'Geopolítica no pós-II guerra mundial').",
+      "diferenciador": "Foco na dinâmica bipolar e conflitos indiretos da Guerra Fria.",
+      "palavras_chave": [
+        "Guerra Fria",
+        "corrida armamentista",
+        "descolonização",
+        "espionagem",
+        "Estados-satélites"
+      ]
+    },
+    {
+      "nome": "A nova ordem mundial",
+      "escopo": "Este módulo discute o fim da Guerra Fria e a transição para uma nova ordem mundial, incluindo a queda do Muro de Berlim e a derrocada do império soviético sob Gorbachev. Explora as mudanças geopolíticas e econômicas globais subsequentes.",
+      "incluir_quando": "Classificar aqui quando a questão abordar o fim da Guerra Fria, a queda do Muro de Berlim, as reformas de Gorbachev, ou a transição para a nova ordem mundial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão tratar de conflitos específicos durante a Guerra Fria (usar módulo 'A guerra fria e o mundo bipolar') ou de geopolítica pós-Guerra Fria em regiões específicas (usar módulo 'Geopolítica no pós-II guerra mundial').",
+      "diferenciador": "Foco na transição geopolítica e econômica global pós-Guerra Fria.",
+      "palavras_chave": [
+        "nova ordem mundial",
+        "queda do Muro de Berlim",
+        "Gorbachev",
+        "fim da Guerra Fria",
+        "transição global"
+      ]
+    },
+    {
+      "nome": "Agricultura e pecuária no agronegócio do Brasil",
+      "escopo": "Este módulo explora o agronegócio no Brasil, incluindo a produção agrícola e o impacto do novo código florestal brasileiro. Analisa as dinâmicas econômicas e ambientais associadas ao agronegócio.",
+      "incluir_quando": "Classificar aqui quando a questão tratar do agronegócio no Brasil, discutir o novo código florestal, ou abordar a produção agrícola brasileira no contexto econômico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão focar em práticas agrícolas globais (usar módulo 'Agricultura no mundo') ou em conflitos fundiários e reforma agrária (usar módulo 'A estrutura fundiária brasileira').",
+      "diferenciador": "Foco no agronegócio e suas implicações econômicas e ambientais no Brasil.",
+      "palavras_chave": [
+        "agronegócio",
+        "código florestal",
+        "produção agrícola",
+        "economia rural",
+        "impacto ambiental"
+      ]
+    },
+    {
+      "nome": "Agricultura no mundo",
+      "escopo": "Este módulo aborda a agricultura no contexto global, incluindo práticas agrícolas no capitalismo industrial, financeiro e comercial. Discute o comércio de alimentos e modelos de reforma agrária em diferentes países.",
+      "incluir_quando": "Classificar aqui quando a questão tratar de práticas agrícolas globais, discutir o comércio internacional de alimentos, ou abordar modelos de reforma agrária em diferentes países.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão focar no agronegócio brasileiro (usar módulo 'Agricultura e pecuária no agronegócio do Brasil') ou em conflitos fundiários no Brasil (usar módulo 'A estrutura fundiária brasileira').",
+      "diferenciador": "Foco nas práticas agrícolas e comércio de alimentos em um contexto global.",
+      "palavras_chave": [
+        "agricultura global",
+        "comércio de alimentos",
+        "reforma agrária",
+        "capitalismo agrícola",
+        "práticas agrícolas"
+      ]
+    },
+    {
+      "nome": "Geologia e Mineração no Brasil",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Industrialização: evolução e panorama atual",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Pedologia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Sistemas de orientação e localização geográfica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Hidrografia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Espaço Natural e Dinâmicas Socioambientais",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geologia: dinâmica da terra e estruturas geológicas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Industrialização Brasileira",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Comercio exterior brasileiro",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Formações vegetais",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Impactos ambientais da agropecuária",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "As grandes potências industriais e a Russia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Fontes energéticas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Fontes energéticas no Brasil",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Problemas ambientais no mundo atual",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Linguagem Cartográfica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Dinâmica Populacional Brasileira",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Globalização e Economia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Produção Econômica e a Dinâmica Socioespacial",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Domínios Morfoclimáticos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geopolítica na África e na América",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Os dois sistemas econômicos do século XX",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geopolítica no pós-II guerra mundial",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Tecnologias de informação e comunicação (TIC)",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Meios de transporte",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geografia do Brasil e Organização do Espaço Brasileiro",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Conferências e acordos do meio ambiente",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Dinâmica Populacional e Demografia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Energial mundial e combustíveis fósseis",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Astronomia e Representações Espaciais",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Continentes e suas características",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Urbanização no território brasileiro",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Urbanização: processos e dinâmicas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Clima e formações vegetais no Brasil",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Geomorfologia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Climatologia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    }
+  ]
+}

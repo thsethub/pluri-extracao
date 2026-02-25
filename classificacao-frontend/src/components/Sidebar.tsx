@@ -7,7 +7,8 @@ import {
     BarChart3,
     LogOut,
     Clock,
-    User as UserIcon
+    User as UserIcon,
+    Cpu
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { useEffect, useState } from 'react';
@@ -32,6 +33,10 @@ export default function Sidebar() {
         { name: 'Pendentes', path: '/pendentes', icon: <Clock size={20} /> },
         { name: 'Estatísticas', path: '/stats', icon: <BarChart3 size={20} /> },
     ];
+
+    if (usuario?.is_admin) {
+        menuItems.push({ name: 'Agente IA', path: '/agente-ia', icon: <Cpu size={20} /> });
+    }
 
     if (!usuario) return null;
 

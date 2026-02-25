@@ -1,19 +1,22 @@
 import { showToast } from "@/components/Toast";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/classificacao";
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/classificacao";
 
-export async function apiRequest(endpoint: string, options: RequestInit = {}) {
+export async function apiRequest(endpoint: string, options: RequestInit & { customBaseUrl?: string } = {}) {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
+    const { customBaseUrl, ...fetchOptions } = options;
+    const baseUrl = customBaseUrl !== undefined ? customBaseUrl : API_BASE_URL;
 
     const headers = {
         'Content-Type': 'application/json',
         ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
-        ...options.headers,
+        ...fetchOptions.headers,
     };
 
     try {
-        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-            ...options,
+        const response = await fetch(`${baseUrl}${endpoint}`, {
+            ...fetchOptions,
             headers,
         });
 

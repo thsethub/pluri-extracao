@@ -1,0 +1,217 @@
+{
+  "disciplina": "Redação",
+  "instrucao_geral": "Classifique pelo processo ou fenômeno textual principal abordado na questão, priorizando a habilidade central exigida para a produção ou análise textual.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de duas áreas distintas de produção ou análise textual para ser respondida. Contextos secundários ou superficiais não justificam a atribuição de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "Argumentação",
+      "escopo": "Este módulo aborda as estratégias argumentativas utilizadas na construção de textos, incluindo a identificação de argumentos, contra-argumentos e a estruturação lógica de ideias. Exemplos incluem o uso de dados, citações e exemplos para sustentar uma tese.",
+      "incluir_quando": "Classificar aqui quando a questão envolve identificar ou construir argumentos em um texto, analisar a eficácia de estratégias argumentativas, ou discutir a lógica de uma argumentação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata da estrutura de uma carta argumentativa (usar módulo 'Carta argumentativa') ou quando se foca na coesão entre ideias (usar módulo 'Coesão').",
+      "diferenciador": "Foco na construção e análise de argumentos e estratégias argumentativas.",
+      "palavras_chave": [
+        "argumento",
+        "tese",
+        "contra-argumento",
+        "evidência",
+        "persuasão"
+      ]
+    },
+    {
+      "nome": "Carta argumentativa",
+      "escopo": "Este módulo cobre a estrutura e as estratégias argumentativas específicas da carta argumentativa, incluindo a saudação, introdução, desenvolvimento e conclusão. Enfatiza a adaptação do discurso ao destinatário.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a estruturação de uma carta argumentativa, análise de estratégias de persuasão em cartas, ou a adequação do discurso ao destinatário.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de argumentação em textos dissertativos (usar módulo 'Argumentação') ou de coesão textual (usar módulo 'Coesão').",
+      "diferenciador": "Foco na estrutura e estratégias argumentativas específicas da carta argumentativa.",
+      "palavras_chave": [
+        "carta",
+        "destinatário",
+        "saudação",
+        "conclusão",
+        "persuasão"
+      ]
+    },
+    {
+      "nome": "Coerência",
+      "escopo": "Este módulo aborda a coerência textual, que é a relação lógica e semântica entre as partes de um texto. Inclui tipos de coerência, como temporal, espacial e causal, e como elas contribuem para o significado global do texto.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise da coerência de um texto, identificação de falhas de coerência, ou discussão sobre a construção de sentido em um texto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de coesão textual (usar módulo 'Coesão') ou de interpretação de temas (usar módulo 'Como interpretar o tema da redação').",
+      "diferenciador": "Foco na relação lógica e semântica entre as partes de um texto para a construção de sentido.",
+      "palavras_chave": [
+        "coerência",
+        "lógica",
+        "significado",
+        "consistência",
+        "sentido"
+      ]
+    },
+    {
+      "nome": "Coesão",
+      "escopo": "Este módulo foca na coesão textual, que é a ligação entre ideias em um texto através de elementos linguísticos como conjunções, pronomes e elipses. Discute os tipos de coesão, como referencial, sequencial e lexical.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise de elementos de ligação entre ideias, identificação de falhas de coesão, ou discussão sobre o uso de conectivos em um texto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de coerência textual (usar módulo 'Coerência') ou de estratégias argumentativas (usar módulo 'Argumentação').",
+      "diferenciador": "Foco na ligação entre ideias em um texto através de elementos linguísticos.",
+      "palavras_chave": [
+        "coesão",
+        "conectivos",
+        "pronomes",
+        "elipses",
+        "ligação"
+      ]
+    },
+    {
+      "nome": "Como interpretar o tema da redação",
+      "escopo": "Este módulo cobre a interpretação do tema da redação, especialmente no contexto do Enem, e como essa interpretação guia a organização e desenvolvimento do texto. Inclui a análise do enunciado e a elaboração do projeto de texto.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a interpretação de temas de redação, análise de enunciados do Enem, ou a organização inicial de ideias para a redação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de competências específicas do Enem (usar módulo 'Competências para a Redação') ou de estratégias argumentativas (usar módulo 'Argumentação').",
+      "diferenciador": "Foco na interpretação do tema e organização inicial do texto no contexto do Enem.",
+      "palavras_chave": [
+        "tema",
+        "enunciado",
+        "interpretação",
+        "organização",
+        "projeto de texto"
+      ]
+    },
+    {
+      "nome": "Competências para a Redação",
+      "escopo": "Este módulo aborda as cinco competências avaliadas na redação do Enem, que incluem domínio da norma padrão, compreensão do tema, organização do texto, uso de recursos coesivos e elaboração de proposta de intervenção.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise ou aplicação das competências do Enem, discussão sobre critérios de avaliação, ou estratégias para atender a essas competências.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de interpretação de temas (usar módulo 'Como interpretar o tema da redação') ou de estratégias argumentativas (usar módulo 'Argumentação').",
+      "diferenciador": "Foco nas cinco competências específicas avaliadas na redação do Enem.",
+      "palavras_chave": [
+        "competências",
+        "Enem",
+        "avaliação",
+        "norma padrão",
+        "intervenção"
+      ]
+    },
+    {
+      "nome": "Conto, crônica e estrutura narrativa",
+      "escopo": "Este módulo explora a narrativa, incluindo conceitos e estrutura de contos e crônicas. Discute as fases da estrutura narrativa, como introdução, desenvolvimento e desfecho, e as características específicas de cada gênero.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise de estrutura narrativa, identificação de características de contos ou crônicas, ou discussão sobre elementos narrativos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de descrição (usar módulo 'Descrição') ou de estratégias argumentativas (usar módulo 'Argumentação').",
+      "diferenciador": "Foco na estrutura e características de contos e crônicas dentro da narrativa.",
+      "palavras_chave": [
+        "narrativa",
+        "conto",
+        "crônica",
+        "estrutura",
+        "desenvolvimento"
+      ]
+    },
+    {
+      "nome": "Descrição",
+      "escopo": "Este módulo aborda a descrição textual, incluindo a objetividade, subjetividade e o movimento na descrição. Discute como descrever ambientes, personagens e ações de forma detalhada e envolvente.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise de descrições em textos, identificação de técnicas descritivas, ou discussão sobre a objetividade e subjetividade na descrição.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de estrutura narrativa (usar módulo 'Conto, crônica e estrutura narrativa') ou de coesão textual (usar módulo 'Coesão').",
+      "diferenciador": "Foco na descrição detalhada e envolvente de ambientes, personagens e ações.",
+      "palavras_chave": [
+        "descrição",
+        "objetividade",
+        "subjetividade",
+        "detalhe",
+        "ambiente"
+      ]
+    },
+    {
+      "nome": "Dissertação",
+      "escopo": "Este módulo cobre a análise e construção de textos dissertativos, com foco na persuasão e estrutura lógica. Inclui a revisão de elementos narrativos e descritivos que podem ser integrados ao texto dissertativo.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise de textos dissertativos, construção de argumentos persuasivos, ou discussão sobre a estrutura de introdução, desenvolvimento e conclusão.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de textos dissertativo-argumentativos específicos (usar módulo 'O texto dissertativo-argumentativo') ou de estratégias argumentativas gerais (usar módulo 'Argumentação').",
+      "diferenciador": "Foco na construção e análise de textos dissertativos com ênfase em persuasão.",
+      "palavras_chave": [
+        "dissertação",
+        "persuasão",
+        "introdução",
+        "desenvolvimento",
+        "conclusão"
+      ]
+    },
+    {
+      "nome": "Interpretação Textual",
+      "escopo": "Este módulo aborda a interpretação de textos, incluindo a inferência de informações e a paráfrase. Discute como extrair e reformular informações de um texto de forma clara e precisa.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a interpretação de informações em um texto, realização de inferências, ou a prática de paráfrase.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de coesão textual (usar módulo 'Coesão') ou de pressupostos e ambiguidade (usar módulo 'Pressupostos e ambiguidade').",
+      "diferenciador": "Foco na interpretação e reformulação de informações textuais.",
+      "palavras_chave": [
+        "interpretação",
+        "inferência",
+        "paráfrase",
+        "compreensão",
+        "texto"
+      ]
+    },
+    {
+      "nome": "O texto dissertativo-argumentativo",
+      "escopo": "Este módulo cobre a estrutura e características do texto dissertativo-argumentativo, incluindo a introdução, desenvolvimento e conclusão. Discute como articular argumentos de forma lógica e persuasiva.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise ou construção de textos dissertativo-argumentativos, discussão sobre a articulação de argumentos, ou a estrutura de introdução, desenvolvimento e conclusão.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de dissertação geral (usar módulo 'Dissertação') ou de estratégias argumentativas específicas (usar módulo 'Argumentação').",
+      "diferenciador": "Foco na estrutura e articulação de argumentos em textos dissertativo-argumentativos.",
+      "palavras_chave": [
+        "dissertativo-argumentativo",
+        "introdução",
+        "desenvolvimento",
+        "conclusão",
+        "argumentos"
+      ]
+    },
+    {
+      "nome": "Paródia",
+      "escopo": "Este módulo aborda a paródia como um desvio de sentido e efeito de linguagem, discutindo como a paródia subverte textos originais para criar novos significados e efeitos humorísticos ou críticos.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise de paródias, identificação de desvios de sentido, ou discussão sobre os efeitos de linguagem criados pela paródia.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de pressupostos e ambiguidade (usar módulo 'Pressupostos e ambiguidade') ou de interpretação textual (usar módulo 'Interpretação Textual').",
+      "diferenciador": "Foco na subversão de textos originais para criar novos significados através da paródia.",
+      "palavras_chave": [
+        "paródia",
+        "desvio",
+        "humor",
+        "crítica",
+        "subversão"
+      ]
+    },
+    {
+      "nome": "Pressupostos e ambiguidade",
+      "escopo": "Este módulo cobre a análise de pressupostos e ambiguidades em textos, discutindo como inferências e subentendidos afetam a interpretação e compreensão textual.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a identificação de pressupostos, análise de ambiguidades, ou discussão sobre inferências e subentendidos em textos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de interpretação textual geral (usar módulo 'Interpretação Textual') ou de paródia (usar módulo 'Paródia').",
+      "diferenciador": "Foco na análise de pressupostos, ambiguidades e subentendidos em textos.",
+      "palavras_chave": [
+        "pressuposto",
+        "ambiguidade",
+        "inferência",
+        "subentendido",
+        "interpretação"
+      ]
+    },
+    {
+      "nome": "Resenha",
+      "escopo": "Este módulo aborda a estrutura e características da resenha crítica, discutindo como avaliar e sintetizar obras literárias, artísticas ou científicas de forma crítica e informativa.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise ou construção de resenhas críticas, discussão sobre a avaliação de obras, ou a síntese de informações.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de resumo (usar módulo 'Resumo') ou de gêneros narrativos (usar módulo 'Conto, crônica e estrutura narrativa').",
+      "diferenciador": "Foco na avaliação crítica e síntese de obras em resenhas.",
+      "palavras_chave": [
+        "resenha",
+        "crítica",
+        "avaliação",
+        "síntese",
+        "obra"
+      ]
+    },
+    {
+      "nome": "Resumo",
+      "escopo": "Este módulo cobre as estratégias de resumo, discutindo como condensar informações de um texto de forma clara e objetiva, mantendo a essência e as ideias principais.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a construção de resumos, identificação de ideias principais, ou discussão sobre a condensação de informações.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de resenha crítica (usar módulo 'Resenha') ou de interpretação textual (usar módulo 'Interpretação Textual').",
+      "diferenciador": "Foco na condensação clara e objetiva de informações textuais em resumos.",
+      "palavras_chave": [
+        "resumo",
+        "condensação",
+        "ideias principais",
+        "objetividade",
+        "síntese"
+      ]
+    }
+  ]
+}

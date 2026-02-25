@@ -1,0 +1,405 @@
+{
+  "disciplina": "História",
+  "instrucao_geral": "Classifique pelo processo histórico principal, focando em eventos, transformações sociais e políticas, e impactos culturais, sem se prender a contextos secundários.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de duas áreas históricas distintas para ser respondida. Contextos secundários ou detalhes não justificam a atribuição de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "Absolutismo e Antigo Regime",
+      "escopo": "Este módulo cobre o apogeu do absolutismo na Europa, com foco na França de Luís XIV, as críticas e limites do absolutismo, a economia do Antigo Regime, e as estruturas políticas absolutistas. Inclui também os fundamentos do absolutismo monárquico e os diferentes modelos de absolutismo na Europa.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a centralização do poder monárquico na França, as críticas filosóficas ao absolutismo, a economia baseada no mercantilismo, ou as estruturas sociais do Antigo Regime.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de revoluções que derrubaram regimes absolutistas (usar 'Revolução Francesa'), ou quando aborda a formação de estados nacionais modernos (usar 'Idade Moderna').",
+      "diferenciador": "Foco na centralização do poder monárquico e na estrutura política e econômica do Antigo Regime na Europa.",
+      "palavras_chave": [
+        "absolutismo",
+        "Antigo Regime",
+        "Luís XIV",
+        "monarquia",
+        "mercantilismo"
+      ]
+    },
+    {
+      "nome": "Américas Independentes",
+      "escopo": "Este módulo aborda a crise do domínio espanhol e as tensões do início do século XIX, as causas e consequências das independências na América Espanhola, os modelos políticos pós-independência na América Latina, e a Revolução do Haiti.",
+      "incluir_quando": "Classificar aqui quando a questão discute as lideranças das independências na América Latina, as influências externas nos processos de independência, ou as consequências políticas e sociais das independências.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata da colonização inicial das Américas (usar 'Conquista e Colonização da América') ou das revoluções no século XX (usar 'Revoluções do Século XX').",
+      "diferenciador": "Foco na descolonização e formação de estados independentes na América Latina no início do século XIX.",
+      "palavras_chave": [
+        "independência",
+        "América Espanhola",
+        "Revolução do Haiti",
+        "Simón Bolívar",
+        "José de San Martín"
+      ]
+    },
+    {
+      "nome": "Antiguidade Clássica",
+      "escopo": "Este módulo cobre a política e sociedade de Atenas e Esparta, a formação e expansão do mundo grego, a cultura, filosofia e arte grega, e o Império Romano, incluindo suas transformações e o cristianismo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a democracia ateniense, as guerras persas, a filosofia grega, ou a expansão e queda do Império Romano.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de civilizações orientais antigas (usar 'Antiguidade Oriental') ou do período medieval europeu (usar 'Idade Média').",
+      "diferenciador": "Foco nas civilizações grega e romana, suas estruturas sociais, políticas e culturais.",
+      "palavras_chave": [
+        "Atenas",
+        "Esparta",
+        "Império Romano",
+        "filosofia grega",
+        "democracia"
+      ]
+    },
+    {
+      "nome": "Antiguidade Oriental",
+      "escopo": "Este módulo abrange as civilizações do Crescente Fértil, incluindo Mesopotâmia, Egito e Reino de Cuxe, suas estruturas sociais, políticas e econômicas, além de suas religiões, mitologias e práticas culturais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a escrita cuneiforme, o código de Hamurabi, as pirâmides egípcias, ou as religiões politeístas do Oriente Próximo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata das civilizações clássicas da Grécia e Roma (usar 'Antiguidade Clássica') ou da pré-história (usar 'Pré-História').",
+      "diferenciador": "Foco nas civilizações antigas do Oriente Próximo e suas contribuições culturais e tecnológicas.",
+      "palavras_chave": [
+        "Mesopotâmia",
+        "Egito",
+        "Crescente Fértil",
+        "cuneiforme",
+        "politeísmo"
+      ]
+    },
+    {
+      "nome": "As américas no século XX",
+      "escopo": "Este módulo cobre a crise de 1929, a Grande Depressão, as ditaduras militares na América do Sul, o desenvolvimentismo e autoritarismos na América Latina, e a política externa dos EUA durante a Guerra Fria.",
+      "incluir_quando": "Classificar aqui quando a questão discute a política do New Deal, a Operação Condor, a Revolução Cubana, ou as intervenções dos EUA na América Latina durante a Guerra Fria.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata das independências americanas (usar 'Américas Independentes') ou da descolonização afro-asiática (usar 'Descolonização Afro-asiática').",
+      "diferenciador": "Foco nas transformações políticas e econômicas nas Américas durante o século XX, incluindo a influência dos EUA.",
+      "palavras_chave": [
+        "Grande Depressão",
+        "ditaduras militares",
+        "Guerra Fria",
+        "América Latina",
+        "New Deal"
+      ]
+    },
+    {
+      "nome": "Nova ordem mundial e  globalização",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Renascimento",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Período Colonial",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Revoluções Inglesas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Idade Média",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Mercantilismo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Descolonização Afro-asiática",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Movimento Abolicionista",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Independência dos Estados Unidos da América",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Brasil: A nova república",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Revoluções do Século XX",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Idade Contemporânea",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Primeira República",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Período Regencial: política e revoltas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Processo de Independência",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "II Guerra Mundial",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Império Bizantino e Império Árabe",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Primeiro Reinado",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reações operárias: lutas políticas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "História da África",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "República Liberal",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Revolução francesa",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Socialismo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Era Vargas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "O mundo ameríndio",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Brasil: A ditadura militar",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Idade Moderna",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Iluminismo e Liberalismo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Período Pré-Colonial",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Pré-História",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Estudos Históricos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "O imperialismo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Desafio do Mundo Presente",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Revolução Industrial",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Cidadania e Direitos Humanos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Era Napoleônica",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "I guerra mundial",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Regimes Totalitários",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Conquista e Colonização da América",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Segundo Reinado",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Guerra Fria",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    }
+  ]
+}

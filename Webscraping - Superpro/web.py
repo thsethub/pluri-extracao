@@ -236,6 +236,47 @@ async def conferencia_page():
     return HTML_CONFERENCIA
 
 
+@app.get("/agente-ia", response_class=HTMLResponse)
+async def agente_ia_page():
+    return HTML_AGENTE_IA
+
+
+# ── IA Endpoints (proxy para API port 8000) ──────────────────────────
+
+@app.get("/api/ia/status")
+async def get_ia_status():
+    async with httpx.AsyncClient(timeout=10) as c:
+        try:
+            r = await c.get(f"{API_BASE}/classificacao-ia/status")
+            return r.json()
+        except:
+            return {"error": "API indisponível"}
+
+
+@app.post("/api/ia/treinar")
+async def treinar_ia():
+    async with httpx.AsyncClient(timeout=10) as c:
+        r = await c.post(f"{API_BASE}/classificacao-ia/treinar")
+        return r.json()
+
+
+@app.get("/api/ia/validar")
+async def validar_ia():
+    async with httpx.AsyncClient(timeout=10) as c:
+        r = await c.get(f"{API_BASE}/classificacao-ia/validar-manual")
+        return r.json()
+
+
+@app.get("/api/ia/logs")
+async def get_ia_logs(lines: int = 50):
+    async with httpx.AsyncClient(timeout=10) as c:
+        try:
+            r = await c.get(f"{API_BASE}/classificacao-ia/logs", params={"lines": lines})
+            return r.json()
+        except:
+            return {"logs": ["API indisponível"]}
+
+
 # ── Helpers ──────────────────────────────────────────────────────────
 
 
@@ -414,7 +455,8 @@ HTML_PAGE = """<!DOCTYPE html>
     <h1>🤖 <span>Extração</span> SuperProfessor</h1>
     <div>
       <a href="/conferencia" style="color:var(--accent); text-decoration:none; font-size:13px; margin-right:8px; padding:5px 12px; border:1px solid var(--accent); border-radius:6px;">🔎 Conferência</a>
-      <a href="/verificacao" style="color:var(--orange,#f97316); text-decoration:none; font-size:13px; margin-right:16px; padding:5px 12px; border:1px solid var(--orange,#f97316); border-radius:6px;">🔄 Verificação</a>
+      <a href="/verificacao" style="color:var(--orange,#f97316); text-decoration:none; font-size:13px; margin-right:8px; padding:5px 12px; border:1px solid var(--orange,#f97316); border-radius:6px;">🔄 Verificação</a>
+      <a href="/agente-ia" style="color:var(--cyan); text-decoration:none; font-size:13px; margin-right:16px; padding:5px 12px; border:1px solid var(--cyan); border-radius:6px;">🤖 Agente IA</a>
       <span class="elapsed" id="elapsed"></span>
       <span id="status-badge" class="badge-idle">Parado</span>
     </div>
@@ -936,7 +978,11 @@ HTML_CONFERENCIA = """<!DOCTYPE html>
 
   <header>
     <h1>🔎 <span>Conferência</span> de Classificações</h1>
-    <a href="/" class="nav-link">← Painel de Controle</a>
+    <div class="nav-links">
+      <a class="nav-link" href="/">🤖 Extração</a>
+      <a class="nav-link" href="/verificacao" style="color:var(--orange,#f97316); border-color:var(--orange,#f97316);">🔄 Verificação</a>
+      <a class="nav-link" href="/agente-ia" style="color:var(--cyan); border-color:var(--cyan);">🤖 Agente IA</a>
+    </div>
   </header>
 
   <!-- Filtros -->
@@ -1565,6 +1611,7 @@ HTML_VERIFICACAO = """<!DOCTYPE html>
     <div class="nav-links">
       <a class="nav-link" href="/">🤖 Extração</a>
       <a class="nav-link" href="/conferencia">🔎 Conferência</a>
+      <a class="nav-link" href="/agente-ia" style="color:var(--cyan); border-color:var(--cyan);">🤖 Agente IA</a>
     </div>
   </header>
 
@@ -1807,6 +1854,223 @@ function toast(msg, type = 'error') {
     el.style.transition = 'all 0.3s';
     setTimeout(() => el.remove(), 300);
   }, 4000);
+}
+
+init();
+</script>
+</body>
+</html>
+"""
+
+
+HTML_AGENTE_IA = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agente IA — Extração SuperProfessor</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #8b8d97;
+    --accent: #6366f1;
+    --accent-hover: #818cf8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --cyan: #06b6d4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+  }
+  .container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  }
+  header h1 { font-size: 22px; font-weight: 600; }
+  header h1 span { color: var(--cyan); }
+  .nav-link {
+    color: var(--accent); text-decoration: none; font-size: 14px;
+    padding: 6px 14px; border: 1px solid var(--accent); border-radius: 8px;
+    margin-left: 8px;
+    transition: all .2s;
+  }
+  .nav-link:hover { background: var(--accent); color: #fff; }
+
+  .grid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; margin-bottom: 20px;
+  }
+  .card h2 { font-size: 14px; color: var(--muted); text-transform: uppercase; margin-bottom: 16px; }
+
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; text-align: center;
+  }
+  .stat-box .val { font-size: 22px; font-weight: 700; color: var(--cyan); }
+  .stat-box .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+
+  .btn {
+    width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: 600;
+    cursor: pointer; margin-bottom: 10px; transition: all .2s; font-size: 14px;
+  }
+  .btn-primary { background: var(--cyan); color: #fff; }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-outline:hover { background: var(--border); }
+
+  #ia-console {
+    background: #0a0c10; border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px; height: 450px; overflow-y: auto; font-family: monospace;
+    font-size: 12px; line-height: 1.6; color: #a1a1aa;
+  }
+  .log-line { margin-bottom: 2px; border-bottom: 1px solid rgba(255,255,255,.02); padding: 2px 0; }
+  .log-error { color: var(--red); }
+  .log-success { color: var(--green); }
+  .log-info { color: var(--cyan); }
+
+  #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+  .toast { 
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--cyan);
+    padding: 12px 20px; border-radius: 8px; color: var(--text); font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5); margin-bottom: 10px;
+    animation: toast-in 0.3s;
+  }
+  @keyframes toast-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🤖 <span>Agente IA</span> Classificador</h1>
+    <div class="nav-links">
+      <a class="nav-link" href="/">🤖 Extração</a>
+      <a class="nav-link" href="/conferencia">🔎 Conferência</a>
+      <a class="nav-link" href="/verificacao" style="color:var(--yellow); border-color:var(--yellow);">🔄 Verificação</a>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Console de Logs da IA</h2>
+      <div id="ia-console">Carregando logs...</div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h2>Estatísticas</h2>
+        <div class="stats-grid">
+          <div class="stat-box"><div class="val" id="st-ia">—</div><div class="lbl">IA Realizado</div></div>
+          <div class="stat-box"><div class="val" id="st-manual">—</div><div class="lbl">Manuais</div></div>
+        </div>
+        <div style="margin-top:15px; text-align:center;">
+            <div id="st-progress" style="font-size:12px; color:var(--muted)">Progresso: 0%</div>
+            <div style="width:100%; height:4px; background:var(--border); border-radius:2px; margin-top:5px; overflow:hidden;">
+                <div id="st-bar" style="width:0%; height:100%; background:var(--cyan);"></div>
+            </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Ações</h2>
+        <button class="btn btn-primary" id="btn-validar" onclick="startValidation()">🎯 Validar Base Manual</button>
+        <button class="btn btn-outline" id="btn-treinar" onclick="startTrain()">🧠 Re-treinar Modelo</button>
+        <p style="font-size:11px; color:var(--muted); margin-top:10px;">
+          * A validação popula a tabela <b>classificacoes_agente_ia</b> sem alterar as classificações oficiais dos professores.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="toast-container"></div>
+</div>
+
+<script>
+let logInterval = null;
+
+async function init() {
+  loadStatus();
+  loadLogs();
+  logInterval = setInterval(() => {
+    loadLogs();
+    loadStatus();
+  }, 3000);
+}
+
+async function loadStatus() {
+  try {
+    const r = await fetch('/api/ia/status');
+    const d = await r.json();
+    if (d.error) return;
+    document.getElementById('st-ia').textContent = d.total_ia;
+    document.getElementById('st-manual').textContent = d.total_manual;
+    const p = (d.progresso_validacao || 0).toFixed(1);
+    document.getElementById('st-progress').textContent = `Progresso: ${p}%`;
+    document.getElementById('st-bar').style.width = `${p}%`;
+  } catch(e) {}
+}
+
+async function loadLogs() {
+  try {
+    const r = await fetch('/api/ia/logs?lines=60');
+    const d = await r.json();
+    const console_ = document.getElementById('ia-console');
+    if (d.logs && d.logs.length > 0) {
+      console_.innerHTML = d.logs.map(line => {
+        let cls = '';
+        if (line.includes('ERROR')) cls = 'log-error';
+        else if (line.includes('SUCCESS') || line.includes('concluída')) cls = 'log-success';
+        else if (line.includes('INFO')) cls = 'log-info';
+        return `<div class="log-line ${cls}">${escapeHtml(line)}</div>`;
+      }).join('');
+      console_.scrollTop = console_.scrollHeight;
+    } else {
+        console_.innerHTML = '<span style="color:var(--muted)">Nenhum log encontrado hoje.</span>';
+    }
+  } catch(e) {}
+}
+
+async function startValidation() {
+  if (!confirm('Deseja iniciar a classificação massiva de todas as questões manuais?')) return;
+  try {
+    const r = await fetch('/api/ia/validar');
+    const d = await r.json();
+    toast(d.message || 'Iniciado!', 'success');
+  } catch(e) { toast('Erro ao disparar'); }
+}
+
+async function startTrain() {
+  if (!confirm('Deseja iniciar o re-treino do modelo? Isso pode levar alguns minutos.')) return;
+  try {
+    const r = await fetch('/api/ia/treinar', { method: 'POST' });
+    const d = await r.json();
+    toast(d.message || 'Treino iniciado!', 'success');
+  } catch(e) { toast('Erro ao disparar'); }
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function toast(msg, type='info') {
+  const c = document.getElementById('toast-container');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  if (type === 'success') el.style.borderLeftColor = 'var(--green)';
+  if (type === 'error') el.style.borderLeftColor = 'var(--red)';
+  el.textContent = msg;
+  c.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
 }
 
 init();

@@ -1,0 +1,26 @@
+{
+  "disciplina": "Educação Física",
+  "instrucao_geral": "Classifique pelo processo ou fenômeno principal relacionado à prática corporal, não pelo contexto secundário ou histórico.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de diferentes práticas corporais ou contextos culturais que se inter-relacionam de maneira essencial.",
+  "modulos": [
+    {
+      "nome": "Educação Física",
+      "escopo": "Este módulo abrange a compreensão e prática de danças e ginásticas, incluindo suas variações culturais e técnicas. Explora a cultura corporal, desportivização e saúde, analisando como o corpo se relaciona com o ambiente social e cultural. Inclui também a prática e teoria de esportes coletivos e individuais, além de lutas e jogos, enfatizando a importância do movimento e da atividade física para o bem-estar.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a técnica e história de uma dança específica, a diferença entre ginástica artística e rítmica, a importância da atividade física para a saúde, a estratégia em esportes coletivos como futebol ou basquete, ou a prática de jogos tradicionais em diferentes culturas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de aspectos biológicos do corpo humano (usar módulo de Biologia), a história dos esportes em um contexto histórico específico (usar módulo de História), ou a análise de políticas públicas de saúde (usar módulo de Sociologia).",
+      "diferenciador": "Foco na prática e teoria das atividades físicas e sua relação com a cultura e saúde.",
+      "palavras_chave": [
+        "dança",
+        "ginástica",
+        "esportes coletivos",
+        "cultura corporal",
+        "saúde",
+        "jogos",
+        "lutas",
+        "atividade física",
+        "desportivização",
+        "bem-estar"
+      ]
+    }
+  ]
+}

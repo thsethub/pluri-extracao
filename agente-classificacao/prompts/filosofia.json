@@ -1,0 +1,189 @@
+{
+  "disciplina": "Filosofia",
+  "instrucao_geral": "Classifique pelo conceito filosófico central abordado na questão, não pelo contexto histórico ou cultural secundário.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir genuinamente o conhecimento de duas áreas filosóficas distintas para ser respondida. Contextos históricos ou culturais não justificam a inclusão de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "Estética e Filosofia da Arte",
+      "escopo": "Este módulo aborda a natureza da arte e da beleza, explorando conceitos como expressão artística, forma, e o papel da estética na cultura e política. Inclui discussões sobre o gosto, juízo estético e sensibilidades, além de filosofias contemporâneas da arte.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a definição de arte, a relação entre arte e política, a análise de obras de arte sob uma perspectiva estética, ou a discussão sobre o gosto e juízo estético.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de ética na arte (usar 'Ética e Filosofia Moral'), ou quando discute a indústria cultural e consumo de massa (usar 'Indústria Cultural e Cultura de Massa').",
+      "diferenciador": "Foco na análise filosófica da arte e estética em suas várias dimensões.",
+      "palavras_chave": [
+        "arte",
+        "estética",
+        "beleza",
+        "juízo",
+        "expressão"
+      ]
+    },
+    {
+      "nome": "Filosofia Política e Moral",
+      "escopo": "Este módulo explora as teorias políticas e morais, incluindo contratualismo, liberalismo, e comunitarismo. Discute a justiça, direitos, igualdade, e a participação política, além de filosofias do poder e dominação.",
+      "incluir_quando": "Classificar aqui quando a questão envolve teorias de justiça, debates sobre democracia e participação política, ou análises de poder e dominação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos humanos específicos (usar 'Filosofia dos Direitos Humanos e Cidadania') ou de regimes políticos específicos como totalitarismo (usar 'Totalitarismo, Autoritarismo e Democracia').",
+      "diferenciador": "Análise das estruturas políticas e morais que fundamentam a sociedade.",
+      "palavras_chave": [
+        "justiça",
+        "poder",
+        "democracia",
+        "contratualismo",
+        "liberalismo"
+      ]
+    },
+    {
+      "nome": "Filosofia dos Direitos Humanos e Cidadania",
+      "escopo": "Este módulo aborda os fundamentos dos direitos humanos, cidadania, e a história dos direitos civis e políticos. Explora lutas por reconhecimento e justiça social, além de movimentos sociais e ação coletiva.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a história dos direitos humanos, cidadania no Brasil, ou movimentos sociais em prol da justiça social.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias políticas gerais (usar 'Filosofia Política e Moral') ou de aspectos culturais da sociedade (usar 'Indústria Cultural e Cultura de Massa').",
+      "diferenciador": "Foco nos direitos humanos e cidadania como pilares da justiça social.",
+      "palavras_chave": [
+        "direitos humanos",
+        "cidadania",
+        "justiça social",
+        "movimentos sociais",
+        "reconhecimento"
+      ]
+    },
+    {
+      "nome": "Filosofia e Tecnologia na Sociedade Contemporânea",
+      "escopo": "Este módulo examina a relação entre filosofia e tecnologia, incluindo inteligência artificial, sociedade da informação, e tecnopolítica. Discute a influência da tecnologia na liberdade, vigilância, e transformações sociais.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a ética da tecnologia, impactos sociais da inteligência artificial, ou a relação entre tecnologia e democracia.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias do conhecimento (usar 'Teoria do Conhecimento e Epistemologia') ou de aspectos culturais da tecnologia (usar 'Indústria Cultural e Cultura de Massa').",
+      "diferenciador": "Análise crítica da interação entre tecnologia e sociedade sob uma perspectiva filosófica.",
+      "palavras_chave": [
+        "tecnologia",
+        "inteligência artificial",
+        "vigilância",
+        "sociedade da informação",
+        "tecnopolítica"
+      ]
+    },
+    {
+      "nome": "Filosofias Orientais, Africanas e Indígenas",
+      "escopo": "Este módulo explora cosmologias e ontologias não ocidentais, incluindo filosofias africanas, indígenas e orientais. Aborda epistemologias do sul e pensamento descolonial, destacando a diversidade filosófica global.",
+      "incluir_quando": "Classificar aqui quando a questão envolve cosmologias não ocidentais, filosofias africanas ou indígenas, ou epistemologias do sul.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofias ocidentais clássicas (usar 'História da Filosofia Antiga e Medieval') ou de questões políticas contemporâneas (usar 'Filosofia Política e Moral').",
+      "diferenciador": "Foco nas tradições filosóficas não ocidentais e suas contribuições únicas.",
+      "palavras_chave": [
+        "cosmologia",
+        "ontologia",
+        "descolonial",
+        "filosofias africanas",
+        "filosofias indígenas"
+      ]
+    },
+    {
+      "nome": "Fundamentos da Filosofia e Introdução ao Pensar Filosófico",
+      "escopo": "Este módulo introduz os campos da filosofia, métodos filosóficos, e a origem do pensamento filosófico. Explora a relação da filosofia com outros saberes e os problemas filosóficos fundamentais.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a definição de filosofia, métodos filosóficos, ou a origem do pensamento filosófico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofias específicas (usar 'História da Filosofia Antiga e Medieval') ou de teorias do conhecimento (usar 'Teoria do Conhecimento e Epistemologia').",
+      "diferenciador": "Introdução abrangente aos conceitos e métodos filosóficos fundamentais.",
+      "palavras_chave": [
+        "filosofia",
+        "métodos",
+        "pensamento",
+        "saberes",
+        "problemas filosóficos"
+      ]
+    },
+    {
+      "nome": "História da Filosofia Antiga e Medieval",
+      "escopo": "Este módulo cobre a filosofia pré-socrática, a filosofia de Platão e Aristóteles, o helenismo, e a filosofia medieval, incluindo a escolástica e a patrística. Explora o surgimento da retórica e o método socrático.",
+      "incluir_quando": "Classificar aqui quando a questão envolve filósofos antigos como Sócrates, Platão, ou Aristóteles, ou a filosofia medieval como a escolástica.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofias modernas ou contemporâneas (usar 'História da Filosofia Moderna' ou 'História da Filosofia Contemporânea').",
+      "diferenciador": "Foco na evolução do pensamento filosófico desde os pré-socráticos até a Idade Média.",
+      "palavras_chave": [
+        "Sócrates",
+        "Platão",
+        "Aristóteles",
+        "escolástica",
+        "patrística"
+      ]
+    },
+    {
+      "nome": "História da Filosofia Contemporânea",
+      "escopo": "Este módulo explora correntes filosóficas contemporâneas como a teoria crítica, estruturalismo, existencialismo, e fenomenologia. Inclui também o positivismo, marxismo, e a filosofia analítica.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a Escola de Frankfurt, existencialismo, ou teorias críticas contemporâneas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofias antigas ou medievais (usar 'História da Filosofia Antiga e Medieval') ou de questões epistemológicas (usar 'Teoria do Conhecimento e Epistemologia').",
+      "diferenciador": "Análise das correntes filosóficas que moldaram o pensamento contemporâneo.",
+      "palavras_chave": [
+        "teoria crítica",
+        "existencialismo",
+        "fenomenologia",
+        "marxismo",
+        "positivismo"
+      ]
+    },
+    {
+      "nome": "História da Filosofia Moderna",
+      "escopo": "Este módulo cobre o desenvolvimento do pensamento moderno, incluindo o racionalismo, empirismo, iluminismo, e a filosofia crítica de Kant. Explora também o humanismo e a antropologia filosófica moderna.",
+      "incluir_quando": "Classificar aqui quando a questão envolve o debate entre racionalismo e empirismo, ou a filosofia crítica de Kant.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofias contemporâneas (usar 'História da Filosofia Contemporânea') ou de questões políticas (usar 'Filosofia Política e Moral').",
+      "diferenciador": "Foco nas transformações filosóficas que definiram a modernidade.",
+      "palavras_chave": [
+        "racionalismo",
+        "empirismo",
+        "iluminismo",
+        "Kant",
+        "modernidade"
+      ]
+    },
+    {
+      "nome": "Indústria Cultural e Cultura de Massa",
+      "escopo": "Este módulo analisa a indústria cultural e a cultura de massa, incluindo manipulação, alienação, e controle social. Explora também a mídia, publicidade, e o espetáculo na sociedade contemporânea.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a crítica à indústria cultural, cultura de massa, ou o papel da mídia na sociedade.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de estética (usar 'Estética e Filosofia da Arte') ou de teorias políticas (usar 'Filosofia Política e Moral').",
+      "diferenciador": "Análise crítica da influência da indústria cultural e da cultura de massa na sociedade.",
+      "palavras_chave": [
+        "indústria cultural",
+        "cultura de massa",
+        "mídia",
+        "alienação",
+        "publicidade"
+      ]
+    },
+    {
+      "nome": "Teoria do Conhecimento e Epistemologia",
+      "escopo": "Este módulo explora os conceitos fundamentais da epistemologia, incluindo ceticismo, empirismo, e racionalismo. Discute também a epistemologia da ciência e a síntese crítica de Kant.",
+      "incluir_quando": "Classificar aqui quando a questão envolve debates sobre a natureza do conhecimento, ceticismo, ou a epistemologia da ciência.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofia moral (usar 'Ética e Filosofia Moral') ou de filosofia política (usar 'Filosofia Política e Moral').",
+      "diferenciador": "Foco na análise e compreensão dos fundamentos do conhecimento humano.",
+      "palavras_chave": [
+        "epistemologia",
+        "ceticismo",
+        "empirismo",
+        "racionalismo",
+        "conhecimento"
+      ]
+    },
+    {
+      "nome": "Totalitarismo, Autoritarismo e Democracia",
+      "escopo": "Este módulo analisa regimes políticos, incluindo totalitarismo, autoritarismo, e democracia. Explora a resistência e defesa da democracia e os fundamentos dos regimes não democráticos.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise de regimes totalitários, autoritarismo, ou a defesa da democracia.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias políticas gerais (usar 'Filosofia Política e Moral') ou de direitos humanos (usar 'Filosofia dos Direitos Humanos e Cidadania').",
+      "diferenciador": "Análise dos diferentes regimes políticos e suas implicações para a liberdade e democracia.",
+      "palavras_chave": [
+        "totalitarismo",
+        "autoritarismo",
+        "democracia",
+        "liberdade",
+        "regimes políticos"
+      ]
+    },
+    {
+      "nome": "Ética e Filosofia Moral",
+      "escopo": "Este módulo aborda os conceitos fundamentais da ética, incluindo bioética, utilitarismo, e ética kantiana. Explora também a ética aplicada e a justiça sob uma perspectiva ética.",
+      "incluir_quando": "Classificar aqui quando a questão envolve dilemas éticos, teorias morais como o utilitarismo, ou a aplicação da ética em contextos específicos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de estética (usar 'Estética e Filosofia da Arte') ou de direitos humanos (usar 'Filosofia dos Direitos Humanos e Cidadania').",
+      "diferenciador": "Foco na análise e aplicação de princípios éticos e morais.",
+      "palavras_chave": [
+        "ética",
+        "moral",
+        "utilitarismo",
+        "bioética",
+        "justiça"
+      ]
+    }
+  ]
+}

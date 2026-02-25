@@ -1,0 +1,259 @@
+{
+  "disciplina": "Sociologia",
+  "instrucao_geral": "Classifique pelo fenômeno social principal abordado na questão, considerando o contexto sociológico específico e os conceitos centrais discutidos.",
+  "regras_multi_modulo": "Atribuir múltiplos módulos apenas quando a questão requer conhecimento de duas áreas distintas de sociologia para ser respondida. Contextos secundários ou exemplos não justificam a inclusão de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "A Exclusão e a Inclusão como Questões Sociais",
+      "escopo": "Este módulo aborda os diversos tipos de exclusão social, incluindo exclusão de gênero e étnico-racial, e as políticas públicas de inclusão. Discute também as populações em situação de vulnerabilidade e as estratégias para promover a inclusão social.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a exclusão de minorias, políticas de inclusão social, vulnerabilidade social, discriminação de gênero ou étnica, ou a análise de políticas públicas voltadas para inclusão.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos civis e políticos (usar módulo 'Cidadania e Direitos'), ou quando foca em movimentos sociais específicos (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Foco nas dinâmicas de exclusão e inclusão social e nas políticas públicas relacionadas.",
+      "palavras_chave": [
+        "exclusão social",
+        "inclusão",
+        "vulnerabilidade",
+        "discriminação",
+        "políticas públicas"
+      ]
+    },
+    {
+      "nome": "Cidadania e Direitos",
+      "escopo": "Este módulo explora o conceito sociológico de cidadania e os direitos de primeira, segunda, terceira e quarta geração. Analisa a evolução dos direitos civis, políticos, sociais e ambientais ao longo do tempo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda direitos civis, políticos, sociais ou ambientais, a evolução histórica dos direitos, ou o conceito de cidadania em contextos sociológicos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de movimentos sociais específicos (usar módulo 'Movimentos Sociais') ou de exclusão social (usar módulo 'A Exclusão e a Inclusão como Questões Sociais').",
+      "diferenciador": "Análise dos direitos humanos e da cidadania em suas várias gerações.",
+      "palavras_chave": [
+        "cidadania",
+        "direitos humanos",
+        "direitos civis",
+        "direitos sociais",
+        "direitos ambientais"
+      ]
+    },
+    {
+      "nome": "Cidade e Desigualdades",
+      "escopo": "Este módulo analisa a questão urbana, a desigualdade social e a discriminação nas cidades, além da segregação socioespacial e dos processos de gentrificação. Examina como as cidades refletem e amplificam as desigualdades sociais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda desigualdade urbana, segregação espacial, gentrificação, ou discriminação em contextos urbanos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de desigualdade em contextos rurais (usar módulo 'O espaço rural e a reforma agrária') ou de exclusão social em geral (usar módulo 'A Exclusão e a Inclusão como Questões Sociais').",
+      "diferenciador": "Foco nas desigualdades e dinâmicas sociais específicas do ambiente urbano.",
+      "palavras_chave": [
+        "desigualdade urbana",
+        "segregação",
+        "gentrificação",
+        "discriminação urbana",
+        "questão urbana"
+      ]
+    },
+    {
+      "nome": "Cultura, Identidade e Diversidade",
+      "escopo": "Este módulo explora o conceito antropológico de cultura, a diversidade de gênero, raça e etnia, e a questão indígena. Analisa como a identidade cultural é formada e como a diversidade é tratada na sociedade.",
+      "incluir_quando": "Classificar aqui quando a questão aborda diversidade cultural, identidade de gênero, questões raciais, ou a cultura indígena.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de ideologia e cultura de massa (usar módulo 'Cultura, Sociedade e Ideologia') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Análise da diversidade cultural e das identidades sociais em suas múltiplas formas.",
+      "palavras_chave": [
+        "cultura",
+        "identidade",
+        "diversidade",
+        "gênero",
+        "etnia"
+      ]
+    },
+    {
+      "nome": "Cultura, Sociedade e Ideologia",
+      "escopo": "Este módulo aborda a contracultura, o discurso de poder e resistência, além das distinções entre cultura erudita, popular e de massa. Explora também o conceito de ideologia e seu impacto na sociedade.",
+      "incluir_quando": "Classificar aqui quando a questão aborda ideologia, cultura de massa, contracultura, ou o impacto das ideologias na sociedade.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de diversidade cultural e identidade (usar módulo 'Cultura, Identidade e Diversidade') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Foco na relação entre cultura, ideologia e poder social.",
+      "palavras_chave": [
+        "ideologia",
+        "cultura de massa",
+        "contracultura",
+        "poder",
+        "resistência"
+      ]
+    },
+    {
+      "nome": "Estratificação Social",
+      "escopo": "Este módulo explora os conceitos, princípios e sistemas de estratificação social, incluindo a teoria marxista da classe social. Analisa como as sociedades são organizadas em camadas hierárquicas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda classes sociais, estratificação econômica, ou teorias de estratificação social.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de desigualdade urbana (usar módulo 'Cidade e Desigualdades') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Análise das estruturas hierárquicas e das classes sociais na sociedade.",
+      "palavras_chave": [
+        "estratificação",
+        "classe social",
+        "hierarquia",
+        "Marx",
+        "desigualdade"
+      ]
+    },
+    {
+      "nome": "Globalização: Comunicação e Sociedade",
+      "escopo": "Este módulo aborda o impacto da mídia e das redes sociais na sociedade globalizada, incluindo a formação da opinião pública e o fenômeno das fake news. Analisa como a comunicação global influencia as dinâmicas sociais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda redes sociais, mídia global, fake news, ou a influência da comunicação na sociedade.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de globalização econômica (usar módulo 'Globalização: trabalho e economia') ou de cultura de massa (usar módulo 'Industria Cultural').",
+      "diferenciador": "Foco na interseção entre comunicação global e dinâmicas sociais.",
+      "palavras_chave": [
+        "mídia",
+        "redes sociais",
+        "opinião pública",
+        "fake news",
+        "comunicação"
+      ]
+    },
+    {
+      "nome": "Globalização: trabalho e economia",
+      "escopo": "Este módulo explora o capitalismo financeiro, o neoliberalismo, a divisão internacional do trabalho e a precarização do trabalho. Analisa como a globalização econômica afeta as relações de trabalho e a economia global.",
+      "incluir_quando": "Classificar aqui quando a questão aborda capitalismo, neoliberalismo, divisão internacional do trabalho, ou precarização do trabalho.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de comunicação global (usar módulo 'Globalização: Comunicação e Sociedade') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Análise das dinâmicas econômicas e laborais no contexto da globalização.",
+      "palavras_chave": [
+        "capitalismo",
+        "neoliberalismo",
+        "trabalho",
+        "economia",
+        "globalização"
+      ]
+    },
+    {
+      "nome": "Industria Cultural",
+      "escopo": "Este módulo aborda o conceito de indústria cultural, cultura de massa e alienação, além do consumismo e satisfação programada. Explora as críticas da Escola de Frankfurt à indústria cultural e o papel da mídia no controle social.",
+      "incluir_quando": "Classificar aqui quando a questão aborda indústria cultural, cultura de massa, alienação, ou críticas à mídia e ao consumismo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de ideologia (usar módulo 'Cultura, Sociedade e Ideologia') ou de redes sociais (usar módulo 'Globalização: Comunicação e Sociedade').",
+      "diferenciador": "Foco na crítica à indústria cultural e seu impacto na sociedade.",
+      "palavras_chave": [
+        "indústria cultural",
+        "cultura de massa",
+        "alienação",
+        "consumismo",
+        "Escola de Frankfurt"
+      ]
+    },
+    {
+      "nome": "Introdução à Sociedade",
+      "escopo": "Este módulo introduz os conceitos básicos de estrutura e organização social, instituições sociais, papéis e status sociais, além do processo de socialização e os agentes envolvidos. Fornece uma base para o entendimento das dinâmicas sociais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos básicos de sociologia, como estrutura social, instituições, ou socialização.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias sociológicas específicas (usar módulo 'Teorias Sociológicas') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Introdução aos conceitos fundamentais da estrutura e dinâmica social.",
+      "palavras_chave": [
+        "estrutura social",
+        "instituições",
+        "socialização",
+        "papéis sociais",
+        "status social"
+      ]
+    },
+    {
+      "nome": "Movimentos Sociais",
+      "escopo": "Este módulo explora os movimentos em rede e os protestos contemporâneos, além das tipologias clássicas de movimentos sociais, incluindo os velhos e novos movimentos. Analisa como os movimentos sociais influenciam as mudanças sociais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda movimentos sociais, protestos, ativismo, ou mudanças sociais impulsionadas por movimentos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos civis e políticos (usar módulo 'Cidadania e Direitos') ou de exclusão social (usar módulo 'A Exclusão e a Inclusão como Questões Sociais').",
+      "diferenciador": "Foco na análise dos movimentos sociais e seu impacto nas mudanças sociais.",
+      "palavras_chave": [
+        "movimentos sociais",
+        "protestos",
+        "ativismo",
+        "mudança social",
+        "rede"
+      ]
+    },
+    {
+      "nome": "Política, Estado e Democracia",
+      "escopo": "Este módulo aborda a democracia e suas definições, os conceitos de poder, política e autoridade, além do papel do Estado e da soberania. Analisa como as estruturas políticas influenciam a sociedade.",
+      "incluir_quando": "Classificar aqui quando a questão aborda democracia, poder político, autoridade, ou o papel do Estado.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos civis e políticos (usar módulo 'Cidadania e Direitos') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Análise das estruturas políticas e seu impacto na sociedade.",
+      "palavras_chave": [
+        "democracia",
+        "poder",
+        "política",
+        "Estado",
+        "soberania"
+      ]
+    },
+    {
+      "nome": "Sociologia Brasileira",
+      "escopo": "Este módulo explora a cidadania, democracia e desigualdade no Brasil, a formação social do país, e as interpretações clássicas da sociedade brasileira. Analisa o trabalho de sociólogos brasileiros e suas contribuições.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a sociedade brasileira, cidadania e democracia no Brasil, ou o trabalho de sociólogos brasileiros.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias sociológicas gerais (usar módulo 'Teorias Sociológicas') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Foco na análise da sociedade brasileira e suas dinâmicas sociais.",
+      "palavras_chave": [
+        "Brasil",
+        "cidadania",
+        "democracia",
+        "desigualdade",
+        "sociólogos brasileiros"
+      ]
+    },
+    {
+      "nome": "Sociologia Contemporânea",
+      "escopo": "Este módulo aborda os estudos geracionais, a modernidade líquida de Zygmunt Bauman, e outros teóricos contemporâneos. Explora a sociedade em rede e o impacto das tecnologias nas dinâmicas sociais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda teorias contemporâneas, modernidade líquida, sociedade em rede, ou o impacto das tecnologias.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias clássicas (usar módulo 'Teorias Sociológicas') ou de comunicação global (usar módulo 'Globalização: Comunicação e Sociedade').",
+      "diferenciador": "Análise das teorias sociológicas contemporâneas e seu impacto na sociedade atual.",
+      "palavras_chave": [
+        "modernidade líquida",
+        "sociedade em rede",
+        "tecnologia",
+        "Bauman",
+        "contemporâneo"
+      ]
+    },
+    {
+      "nome": "Sociologia e Meio Ambiente",
+      "escopo": "Este módulo aborda a crise ambiental e o capitalismo predatório, além da justiça ambiental e do racismo ambiental. Analisa a relação entre sociedade e natureza e as questões ambientais contemporâneas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda crise ambiental, justiça ambiental, racismo ambiental, ou a relação sociedade-natureza.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de globalização econômica (usar módulo 'Globalização: trabalho e economia') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Foco na relação entre sociedade e questões ambientais contemporâneas.",
+      "palavras_chave": [
+        "meio ambiente",
+        "justiça ambiental",
+        "racismo ambiental",
+        "capitalismo predatório",
+        "sociedade-natureza"
+      ]
+    },
+    {
+      "nome": "Teorias Sociológicas",
+      "escopo": "Este módulo explora as teorias sociológicas clássicas, incluindo a ação social de Max Weber, o fato social de Émile Durkheim, e o materialismo histórico de Karl Marx. Analisa o pensamento dos principais teóricos da sociologia.",
+      "incluir_quando": "Classificar aqui quando a questão aborda teorias sociológicas clássicas, conceitos de Weber, Durkheim, ou Marx, ou a história do pensamento sociológico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias contemporâneas (usar módulo 'Sociologia Contemporânea') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
+      "diferenciador": "Análise das teorias sociológicas clássicas e seus principais teóricos.",
+      "palavras_chave": [
+        "Weber",
+        "Durkheim",
+        "Marx",
+        "teoria sociológica",
+        "fato social"
+      ]
+    },
+    {
+      "nome": "Trabalho e Sociedade",
+      "escopo": "Este módulo explora o conceito de trabalho e sua relação com o capitalismo, conforme analisado por Weber e Marx. Discute o papel do trabalho na sociedade contemporânea, o sindicalismo e os movimentos de trabalhadores.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o conceito de trabalho, capitalismo, sindicalismo, ou movimentos de trabalhadores.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de globalização econômica (usar módulo 'Globalização: trabalho e economia') ou de teorias sociológicas clássicas (usar módulo 'Teorias Sociológicas').",
+      "diferenciador": "Foco na análise do trabalho e suas dinâmicas na sociedade capitalista.",
+      "palavras_chave": [
+        "trabalho",
+        "capitalismo",
+        "sindicalismo",
+        "Marx",
+        "Weber"
+      ]
+    },
+    {
+      "nome": "Violência, Conflito e Direitos Humanos",
+      "escopo": "Este módulo aborda os direitos humanos e a proteção legal, problemas globais e perspectivas locais, segurança pública e criminalidade, além dos conceitos, tipos e impactos sociais da violência.",
+      "incluir_quando": "Classificar aqui quando a questão aborda violência, direitos humanos, segurança pública, ou criminalidade.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de movimentos sociais (usar módulo 'Movimentos Sociais') ou de exclusão social (usar módulo 'A Exclusão e a Inclusão como Questões Sociais').",
+      "diferenciador": "Análise dos conceitos de violência e direitos humanos em contextos globais e locais.",
+      "palavras_chave": [
+        "violência",
+        "direitos humanos",
+        "segurança pública",
+        "criminalidade",
+        "conflito"
+      ]
+    }
+  ]
+}

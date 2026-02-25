@@ -1,0 +1,405 @@
+{
+  "disciplina": "Biologia",
+  "instrucao_geral": "Classifique pelo processo biológico ou fenômeno principal abordado, garantindo que o foco central da questão seja o critério primário de classificação.",
+  "regras_multi_modulo": "Atribua múltiplos módulos somente quando a questão exigir conhecimento de duas áreas distintas para ser respondida. Contextos secundários não justificam a inclusão de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "Bases da reprodução",
+      "escopo": "Este módulo aborda os fundamentos da reprodução animal, incluindo reprodução assexuada e sexuada, espermatogênese, ovogênese e fecundação humana. Explora também a metagênese e a diversidade nos métodos reprodutivos.",
+      "incluir_quando": "Classificar aqui quando a questão envolver processos de gametogênese, detalhes sobre fecundação humana, tipos de reprodução animal, ou quando discutir a diversidade reprodutiva.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão tratar de ciclos menstruais ou anticoncepção, usar módulo 'Reprodução'. Para questões sobre desenvolvimento embrionário, usar módulo 'Embriologia'.",
+      "diferenciador": "Foco em processos de gametogênese e tipos de reprodução animal.",
+      "palavras_chave": [
+        "assexuada",
+        "espermatogênese",
+        "fecundação",
+        "gametogênese",
+        "ovogênese"
+      ]
+    },
+    {
+      "nome": "Biodiversidade",
+      "escopo": "Este módulo cobre a diversidade biológica e os processos de extinção, tanto naturais quanto antropogênicos. Inclui também a sucessão ecológica e a formação de comunidades clímax.",
+      "incluir_quando": "Classificar aqui quando a questão abordar extinções de espécies, sucessão ecológica, ou a formação de comunidades clímax.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão tratar de biomas específicos ou ecossistemas aquáticos, usar módulo 'Grandes paisagens naturais'. Para questões sobre relações ecológicas, usar módulo 'Relações ecológicas'.",
+      "diferenciador": "Foco em extinções e sucessão ecológica.",
+      "palavras_chave": [
+        "extinção",
+        "sucessão ecológica",
+        "comunidades clímax",
+        "biodiversidade",
+        "antropogênica"
+      ]
+    },
+    {
+      "nome": "Bioenergética",
+      "escopo": "Este módulo explora os processos de produção e uso de energia nas células, incluindo a fotossíntese, fermentação, quimiossíntese e a cadeia transportadora de elétrons. Discute também o papel do ATP e os fatores que afetam a fotossíntese.",
+      "incluir_quando": "Classificar aqui quando a questão envolver a produção de ATP, fotossíntese, fermentação, ou a cadeia transportadora de elétrons.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão tratar de estrutura celular ou organelas específicas, usar módulo 'Compartimentos e processos celulares'. Para questões sobre bioquímica de macromoléculas, usar módulo 'Bioquímica Celular'.",
+      "diferenciador": "Foco em processos energéticos celulares e produção de ATP.",
+      "palavras_chave": [
+        "ATP",
+        "fotossíntese",
+        "fermentação",
+        "cadeia transportadora de elétrons",
+        "quimiossíntese"
+      ]
+    },
+    {
+      "nome": "Bioquímica Celular",
+      "escopo": "Este módulo abrange a composição química das células, incluindo carboidratos, lipídios, proteínas, enzimas e sais minerais. Discute também o caráter ácido-base dos compostos orgânicos e as diferenças entre substâncias orgânicas e inorgânicas.",
+      "incluir_quando": "Classificar aqui quando a questão envolver a estrutura e função de macromoléculas, atividade enzimática, ou o papel de sais minerais nas células.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão tratar de processos energéticos como fotossíntese ou respiração celular, usar módulo 'Bioenergética'. Para questões sobre estrutura celular, usar módulo 'Compartimentos e processos celulares'.",
+      "diferenciador": "Foco na composição química e função das macromoléculas celulares.",
+      "palavras_chave": [
+        "carboidratos",
+        "lipídios",
+        "proteínas",
+        "enzimas",
+        "sais minerais"
+      ]
+    },
+    {
+      "nome": "Biosfera e ação humana: atmosfera",
+      "escopo": "Este módulo aborda os impactos humanos na atmosfera, incluindo aquecimento global, chuva ácida, destruição da camada de ozônio e fenômenos como ilhas de calor e inversão térmica.",
+      "incluir_quando": "Classificar aqui quando a questão envolver mudanças climáticas, poluição atmosférica, ou fenômenos atmosféricos urbanos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão tratar de poluição da água ou do solo, usar módulos 'Biosfera e ação humana: hidrosfera' ou 'Biosfera e ação humana: solo e resíduos sólidos', respectivamente.",
+      "diferenciador": "Foco nos impactos humanos e fenômenos relacionados à atmosfera.",
+      "palavras_chave": [
+        "aquecimento global",
+        "chuva ácida",
+        "camada de ozônio",
+        "ilhas de calor",
+        "inversão térmica"
+      ]
+    },
+    {
+      "nome": "Verminoses",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Grandes paisagens naturais",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Integração e coordenação nervosa e endócrina",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Biosfera e ação humana: soluções sustentáveis",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Material genético: estrutura e função",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Origem da vida",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Relações ecológicas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Evolução: evidências e teorias",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Mono-hibridismo: Mendel e variações",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Reprodução",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Tecidos nervoso e muscular",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Fisiologia vegetal",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Sexo e herança",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Imunidade",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Tecidos conjuntivos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Tecidos de revestimento",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Microorganismos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Poli-hibridismo: Mendel e variações",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Divisão celular",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Genética de populações e evolução",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Morfologia e histologia vegetal",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Classificação e diversidade dos seres vivos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Ciência da vida",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Embriologia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Ecologia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Biosfera e ação humana: solo e resíduos sólidos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Compartimentos e processos celulares",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Cordados",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Fatores ecológicos abióticos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Biosfera e ação humana: hidrosfera",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Ligações gênica e mapa cromossômico",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Grupos vegetais",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Digestão e respiração",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Biotecnologia e Engenharia Genética",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Parasitologia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Circulação, equilíbrio hídrico e excreção",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Grupos sanguíneos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Invertebrados",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Organização celular",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Núcleo celular",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Ecologia de populações",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    }
+  ]
+}

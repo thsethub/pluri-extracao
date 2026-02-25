@@ -1,0 +1,229 @@
+{
+  "disciplina": "Lingua Portuguesa",
+  "instrucao_geral": "Classifique pelo processo/fenômeno principal, não pelo contexto secundário. A ênfase está na função e estrutura linguística, bem como na interpretação e análise textual.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão requer conhecimento genuíno de duas áreas distintas para ser respondida. Contextos secundários não justificam a inclusão de um segundo módulo.",
+  "modulos": [
+    {
+      "nome": "Adjetivo",
+      "escopo": "Este módulo aborda as características e funções dos adjetivos, incluindo a locução adjetiva. Discute como os adjetivos qualificam e modificam substantivos, além de sua concordância e posição na frase.",
+      "incluir_quando": "Classificar aqui quando a questão envolve identificar ou analisar a função de um adjetivo em uma frase, discutir a concordância adjetiva, ou transformar uma locução adjetiva em adjetivo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão envolve análise de advérbios (usar módulo 'Advérbio'), ou quando a questão é sobre substantivos (usar módulo 'Substantivo').",
+      "diferenciador": "Foco na modificação e qualificação de substantivos por meio de adjetivos.",
+      "palavras_chave": [
+        "qualificação",
+        "locução adjetiva",
+        "concordância adjetiva",
+        "modificação",
+        "substantivo"
+      ]
+    },
+    {
+      "nome": "Advérbio",
+      "escopo": "Este módulo explora os advérbios como reveladores de circunstâncias, modificando verbos, adjetivos ou outros advérbios. Examina como os advérbios contribuem para a construção de sentido nas frases.",
+      "incluir_quando": "Classificar aqui quando a questão envolve identificar advérbios em uma frase, discutir suas funções ou analisar como eles alteram o sentido de verbos e adjetivos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão é sobre adjetivos (usar módulo 'Adjetivo') ou sobre preposições (usar módulo 'Preposição').",
+      "diferenciador": "Foco na modificação de verbos, adjetivos ou outros advérbios por meio de advérbios.",
+      "palavras_chave": [
+        "circunstância",
+        "modificação",
+        "verbo",
+        "adjetivo",
+        "sentido"
+      ]
+    },
+    {
+      "nome": "Artigo",
+      "escopo": "Este módulo cobre a morfossintaxe dos artigos, discutindo suas funções de definir ou indefinir substantivos. Analisa a concordância e a posição dos artigos nas frases.",
+      "incluir_quando": "Classificar aqui quando a questão envolve identificar ou analisar o uso de artigos definidos e indefinidos em frases, ou discutir sua concordância com substantivos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão é sobre pronomes (usar módulo 'Pronome') ou sobre adjetivos (usar módulo 'Adjetivo').",
+      "diferenciador": "Foco na definição ou indefinição de substantivos por meio de artigos.",
+      "palavras_chave": [
+        "definido",
+        "indefinido",
+        "concordância",
+        "substantivo",
+        "morfossintaxe"
+      ]
+    },
+    {
+      "nome": "Classes de palavras",
+      "escopo": "Este módulo abrange as diferentes classes gramaticais e suas funções, incluindo substantivos, verbos, adjetivos, advérbios, pronomes, preposições, conjunções, interjeições, numerais e artigos.",
+      "incluir_quando": "Classificar aqui quando a questão envolve identificar ou diferenciar entre as várias classes de palavras em uma frase ou texto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão é específica sobre a função de uma única classe de palavra, como advérbios (usar módulo 'Advérbio') ou verbos (usar módulo 'Verbo').",
+      "diferenciador": "Foco na identificação e diferenciação entre as diversas classes gramaticais.",
+      "palavras_chave": [
+        "substantivo",
+        "verbo",
+        "adjetivo",
+        "advérbio",
+        "classe gramatical"
+      ]
+    },
+    {
+      "nome": "Coerência",
+      "escopo": "Este módulo analisa a coerência textual, abordando como as relações lógicas entre ideias garantem o significado e a compreensão de um texto. Inclui a análise de exemplos e textos para identificar coerência.",
+      "incluir_quando": "Classificar aqui quando a questão envolve avaliar a coerência de um texto, identificar falhas de coerência ou discutir como as relações lógicas entre ideias são estabelecidas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão é sobre coesão textual (usar módulo 'Sintaxe - Período composto: coordenação, subordinação e orações reduzidas') ou sobre interpretação de texto (usar módulo 'Interpretação de texto').",
+      "diferenciador": "Foco na análise das relações lógicas que garantem a coerência de um texto.",
+      "palavras_chave": [
+        "coerência",
+        "relações lógicas",
+        "significado",
+        "texto",
+        "análise"
+      ]
+    },
+    {
+      "nome": "Estudo de textos",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Termos da oração",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Interpretação de texto",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Numeral",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Estrutura e formação das palavras",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Linguagem, língua e comunicação",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Pronome",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Interjeição",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Sintaxe - Período composto: coordenação, subordinação e orações reduzidas",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Intertextualidade",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Concordância verbal, colocação pronominal e as palavras QUE e SE",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Substantivo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Tecnologias da informação e da comunicação (TICs)",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Preposição",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Verbo",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Fonologia, acentuação gráfica e ortografia",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Conjunção",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Sintaxe: regência e crase",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    },
+    {
+      "nome": "Semântica e figuras de linguagem",
+      "escopo": "A DEFINIR",
+      "incluir_quando": "A DEFINIR",
+      "nao_incluir_quando": "A DEFINIR",
+      "diferenciador": "A DEFINIR",
+      "palavras_chave": []
+    }
+  ]
+}
