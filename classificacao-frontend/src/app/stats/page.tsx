@@ -43,7 +43,7 @@ export default function StatsPage() {
                     </h2>
                 </div>
                 <div className={styles.card}>
-                    <span className={styles.cardLabel}>Classificadas (Auto)</span>
+                    <span className={styles.cardLabel}>Classificadas (Sistemas)</span>
                     <h2 className={styles.cardValue} style={{ color: 'var(--yellow)' }}>
                         {stats?.total_auto_superpro?.toLocaleString() || 0}
                     </h2>

@@ -1007,9 +1007,9 @@ async def salvar_classificacao(
     )
     pg_db.add(classificacao)
 
-    # Auto-remover da lista de questões puladas (se existir)
+    # Auto-remover da lista de questões puladas (se existir para qualquer usuário)
+    # Motivo: Se foi classificada, não está mais pendente para ninguém.
     pg_db.query(QuestaoPuladaModel).filter(
-        QuestaoPuladaModel.usuario_id == usuario.id,
         QuestaoPuladaModel.questao_id == request.questao_id,
     ).delete()
 
@@ -1306,41 +1306,40 @@ async def estatisticas_classificacao(
     if not em_ids:
         return ClassificacaoStatsResponse(total_sistema=0, por_usuario={}, por_disciplina={})
 
-    # IDs das ações no Postgres (Manual)
+    # 1. Manual (Prioridade Máxima)
     manuais_ids = {r[0] for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)\
                    .filter(ClassificacaoUsuarioModel.questao_id.in_(em_ids)).all()}
     total_manuais = len(manuais_ids)
 
-    # IDs do Robô no Postgres (Estatísticas por Match)
-    from ..database.pg_pular_models import QuestaoPuladaModel
-    
-    # Automáticas (Match >= 80% e nunca tocadas manualmente)
+    # 2. Automáticas (Match >= 80% e que não foram tocadas manualmente)
     auto_query = pg_db.query(QuestaoAssuntoModel.questao_id).filter(
         QuestaoAssuntoModel.questao_id.in_(em_ids),
-        QuestaoAssuntoModel.classificado_manualmente == False,
         QuestaoAssuntoModel.similaridade >= 0.8
     ).all()
     auto_ids = {r[0] for r in auto_query} - manuais_ids
     total_auto_superpro = len(auto_ids)
 
-    # Faltam Verificar (Match < 80% e nunca tocadas manualmente)
+    # 3. Faltam Verificar (Match < 80% e que não foram tocadas nem são automáticas)
     verificar_query = pg_db.query(QuestaoAssuntoModel.questao_id).filter(
         QuestaoAssuntoModel.questao_id.in_(em_ids),
-        QuestaoAssuntoModel.classificado_manualmente == False,
         QuestaoAssuntoModel.similaridade < 0.8,
         QuestaoAssuntoModel.similaridade > 0
     ).all()
     verificar_ids = {r[0] for r in verificar_query} - manuais_ids - auto_ids
     total_precisa_verificar = len(verificar_ids)
 
-    # Puladas (Global - Filtrando as que já foram finalizadas de outra forma)
-    puladas_ids = {r[0] for r in pg_db.query(QuestaoPuladaModel.questao_id)\
-                   .filter(QuestaoPuladaModel.questao_id.in_(em_ids)).all()}
-    puladas_higienizadas = puladas_ids - manuais_ids - auto_ids - verificar_ids
-    total_puladas = len(puladas_higienizadas)
+    # 4. Puladas (Volume que não está em nenhum dos estados acima)
+    from ..database.pg_pular_models import QuestaoPuladaModel
+    puladas_query = pg_db.query(QuestaoPuladaModel.questao_id).filter(
+        QuestaoPuladaModel.questao_id.in_(em_ids)
+    ).all()
+    # Para a matemática do Pendentes, usamos apenas as que não foram classificadas de outra forma
+    all_puladas_ids = {r[0] for r in puladas_query}
+    puladas_ids_disjoint = all_puladas_ids - manuais_ids - auto_ids - verificar_ids
+    total_puladas = len(puladas_ids_disjoint) # Agora usamos apenas as exclusivas para não estourar a soma do Total
 
-    # Pendentes (O resto matemático)
-    # Total - Finalizadas (M + A) - Candidatas a Auditoria (V) - Puladas (P)
+    # 5. Pendentes (O resto matemático restrito)
+    # A soma de (manuais + auto + verificar + puladas + pendentes) = total_sistema
     total_pendentes = max(0, total_sistema - total_manuais - total_auto_superpro - total_precisa_verificar - total_puladas)
 
     # Por disciplina (Dashboard style)
