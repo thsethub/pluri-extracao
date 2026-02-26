@@ -75,331 +75,577 @@
     },
     {
       "nome": "Nova ordem mundial e  globalização",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das transformações políticas, econômicas, tecnológicas e culturais do mundo contemporâneo, sobretudo do pós-Guerra Fria em diante, com ênfase na reorganização do sistema internacional (unipolaridade/multipolaridade), na intensificação dos fluxos globais (capitais, mercadorias, pessoas, informações), na integração produtiva e financeira, no papel de organismos e blocos econômicos, e nos impactos sociais, ambientais e geopolíticos da globalização.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a reorganização do mundo após 1989/1991 (fim da URSS, fim da Guerra Fria) e seus desdobramentos; a ideia de 'nova ordem mundial' (hegemonia dos EUA, transição para multipolaridade, novas potências e disputas); globalização econômica (neoliberalismo, abertura comercial, desregulamentação, privatizações, financeirização, cadeias globais de valor, multinacionais/transnacionais); integração regional e blocos (UE, NAFTA/USMCA, Mercosul, ASEAN, APEC) e seus efeitos; instituições e governança global (ONU no pós-Guerra Fria, FMI, Banco Mundial, OMC, G7/G20) e políticas associadas; revolução técnico-científica-informacional (internet, telecomunicações, logística, automação) como base da compressão espaço-tempo e da intensificação de fluxos; novas agendas e conflitos globais (terrorismo e 'guerra ao terror', intervenções, guerras assimétricas, ciberconflitos, disputas por energia e recursos); migrações internacionais, refúgio e fronteiras no contexto global; impactos sociais (desigualdade, precarização do trabalho, reestruturação produtiva, desindustrialização/terceirização, economia de serviços) e culturais (homogeneização/hibridez cultural, indústria cultural, 'americanização', glocalização); questões ambientais globais e governança climática (aquecimento global, acordos internacionais) quando relacionadas à dinâmica da globalização e à ordem internacional contemporânea.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Guerra Fria clássica (1947–1991) sem foco na transição e no pós-1991; história econômica anterior (mercantilismo, Revolução Industrial, imperialismo do século XIX) sem conexão explícita com globalização contemporânea; história do Brasil ou de outros países em recortes internos (política doméstica, constituições, governos) sem relação com inserção internacional, neoliberalismo, blocos ou fluxos globais; colonização e expansão marítima moderna; conflitos e diplomacia das Guerras Mundiais; temas de geografia física ou demografia sem vínculo com globalização (clima, relevo, crescimento populacional em abstrato); cultura e mídia em análise puramente estética/literária sem discussão de circulação global, indústria cultural ou redes; economia básica (inflação, juros, oferta e demanda) sem contextualização em financeirização, OMC, FMI, cadeias globais ou integração internacional.",
+      "diferenciador": "Foco na dinâmica do sistema internacional e na intensificação das interdependências globais no período contemporâneo (especialmente pós-Guerra Fria), explicando como a globalização reestrutura poder, economia, tecnologia, cultura e conflitos em escala mundial.",
+      "palavras_chave": [
+        "nova ordem mundial",
+        "globalização",
+        "pós-Guerra Fria",
+        "neoliberalismo",
+        "blocos econômicos"
+      ]
     },
     {
       "nome": "Renascimento",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do Renascimento (séculos XIV–XVI) como movimento cultural, artístico, intelectual e científico originado nas cidades italianas e difundido pela Europa, marcado pelo humanismo, pela retomada de referências greco-romanas, por novas técnicas artísticas, por mudanças na produção e circulação do conhecimento e por transformações nas visões de mundo e do homem.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o Renascimento e/ou seus elementos centrais: humanismo e antropocentrismo; valorização da razão, da experiência e do indivíduo; redescoberta/ressignificação da Antiguidade clássica; mecenato e papel das cidades-estado italianas (Florença, Veneza, Roma) e de famílias como os Médici; inovações artísticas (perspectiva, proporção, chiaroscuro/sfumato, naturalismo, retrato, temas mitológicos e bíblicos com tratamento humanizado); principais artistas e obras (Leonardo da Vinci, Michelangelo, Rafael, Botticelli, Donatello, Brunelleschi, Masaccio, Ticiano); Renascimento do Norte (Erasmo, Thomas More, Dürer, Van Eyck, Bosch) e suas especificidades; imprensa de Gutenberg e impactos na difusão de ideias; avanços científicos e técnicos associados ao período (Copérnico, Galileu, Vesálio, anatomia, cartografia, navegação) quando vinculados ao contexto renascentista; relação do Renascimento com a crise do feudalismo, ascensão burguesa e urbanização, desde que o foco seja cultural/intelectual/artístico; debates sobre secularização, laicização parcial e novas mentalidades, sem reduzir o tema apenas à Reforma.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Reforma Protestante e Contrarreforma (Lutero, Calvino, Concílio de Trento, Inquisição, jesuítas) sem conexão direta com o Renascimento; Grandes Navegações/expansão marítima e colonização como tema central (rotas, conquistas, sistemas coloniais) sem ênfase no contexto cultural renascentista; Iluminismo e Revoluções do século XVIII; Barroco, Rococó ou Neoclassicismo como movimentos artísticos centrais; Idade Média (feudalismo, escolástica, arte gótica/românica) quando o foco não é a transição para a cultura renascentista; história política/militar europeia (guerras italianas, formação de Estados nacionais) se não estiver articulada ao mecenato, cultura e produção artística; história econômica do capitalismo comercial/mercantilismo quando não vinculada ao patrocínio cultural e às transformações intelectuais do período.",
+      "diferenciador": "O foco distintivo é a transformação cultural e intelectual da Europa entre os séculos XIV e XVI, centrada no humanismo e na retomada do classicismo, com impacto direto nas artes, na produção do conhecimento e nas mentalidades, especialmente a partir da Itália e sua difusão europeia.",
+      "palavras_chave": [
+        "humanismo",
+        "antropocentrismo",
+        "mecenato",
+        "perspectiva",
+        "Gutenberg"
+      ]
     },
     {
       "nome": "Período Colonial",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do Brasil sob domínio português (séculos XVI a início do XIX), abrangendo conquista e ocupação do território, administração colonial, economia e trabalho, sociedade e cultura, relações com povos indígenas e africanos, conflitos internos e externos, e transformações que antecedem a crise do sistema colonial e a Independência.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a colonização portuguesa no Brasil e seu funcionamento: capitanias hereditárias e governo-geral; câmaras municipais e administração local; pacto/monopólio colonial e mercantilismo; economia açucareira, pecuária, drogas do sertão, mineração e fiscalidade (quinto, derrama, casas de fundição); trabalho escravo africano e indígena, tráfico negreiro e formas de resistência (quilombos, fugas, revoltas); missões e catequese (jesuítas), aldeamentos e políticas indigenistas; formação social colonial (senhores, homens livres pobres, escravizados), patriarcalismo e vida cotidiana; expansão territorial (bandeirismo, entradas, sertanismo, Tratado de Tordesilhas e tratados de limites como Madri e Santo Ildefonso); invasões e disputas europeias (franceses, holandeses) e guerras coloniais; revoltas e movimentos nativistas e emancipacionistas (Beckman, Mascates, Vila Rica/Filipe dos Santos, Inconfidência Mineira, Conjuração Baiana, Revolução Pernambucana) quando contextualizados no sistema colonial; reformas pombalinas e reorganizações administrativas; crise do Antigo Sistema Colonial e eventos de transição como a vinda da Corte em 1808 e a abertura dos portos, quando tratados como desdobramentos do período colonial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Brasil Império (1822-1889) e suas instituições (Constituição de 1824, Primeiro/Segundo Reinado, Regências, café e escravidão no século XIX, Guerra do Paraguai); Brasil República (1889 em diante); História de Portugal ou da Europa sem conexão direta com a colonização do Brasil; História indígena pré-colonial (antes do contato) sem foco na colonização; História da África sem relação com tráfico atlântico e escravidão no Brasil; Independência como processo político central (1821-1822) quando o foco é a ruptura e a formação do Estado nacional, e não a estrutura colonial; temas de História Geral (Iluminismo, Revolução Francesa, Revolução Industrial) quando não articulados ao contexto colonial brasileiro.",
+      "diferenciador": "Foco na estrutura e dinâmica do sistema colonial luso-brasileiro: dominação metropolitana, economia voltada ao mercado externo, administração e fiscalidade coloniais, escravidão e relações sociais, expansão territorial e conflitos que ocorrem antes da consolidação do Estado nacional independente.",
+      "palavras_chave": [
+        "capitanias hereditárias",
+        "governo-geral",
+        "pacto colonial",
+        "engenho de açúcar",
+        "mineração"
+      ]
     },
     {
       "nome": "Revoluções Inglesas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das Revoluções Inglesas do século XVII e seus desdobramentos políticos: a Guerra Civil (1642–1651), a República/Protetorado de Cromwell, a Restauração (1660) e a Revolução Gloriosa (1688–1689), com ênfase na crise entre Coroa e Parlamento, nas disputas religiosas e na consolidação do constitucionalismo e da monarquia parlamentar.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a crise do absolutismo inglês e o conflito entre rei e Parlamento; as causas, fases e consequências da Guerra Civil Inglesa; a execução de Carlos I e a instauração da Commonwealth; o governo de Oliver Cromwell (Protetorado), incluindo medidas políticas, religiosas e econômicas (ex.: Atos de Navegação) e suas repercussões; a Restauração dos Stuart e as tensões subsequentes; a Revolução Gloriosa, a deposição de Jaime II, a ascensão de Guilherme e Maria e a afirmação da supremacia parlamentar; documentos e marcos institucionais ligados ao período (Petition of Right, Habeas Corpus Act, Bill of Rights, Toleration Act); a formação do Estado liberal/constitucional inglês, a limitação do poder real e a consolidação de direitos e garantias; a relação entre puritanismo, anglicanismo e catolicismo no contexto das revoluções; interpretações historiográficas sobre a “revolução burguesa” inglesa e a ascensão do parlamentarismo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Revolução Industrial (séculos XVIII–XIX) e transformações econômicas/tecnológicas; Revolução Francesa, Iluminismo em geral ou independência dos EUA (a menos que seja comparação direta com as Revoluções Inglesas); história medieval inglesa (Magna Carta, Guerra das Duas Rosas) sem conexão com o século XVII; colonização inglesa e história dos EUA/Irlanda/Escócia como tema central sem vínculo direto com a crise entre Coroa e Parlamento no século XVII; política britânica do século XVIII em diante (ex.: reformas eleitorais, era vitoriana) sem referência aos marcos de 1640–1689; teoria política geral (Hobbes/Locke) quando não contextualizada nas Revoluções Inglesas; guerras europeias do período (ex.: Guerra dos Trinta Anos) sem relação explícita com os eventos ingleses.",
+      "diferenciador": "O módulo se distingue por focar no processo histórico inglês do século XVII que derrubou/limitou o absolutismo e consolidou a supremacia do Parlamento (constitucionalismo e monarquia parlamentar), articulando guerra civil, república/protetorado, restauração e Revolução Gloriosa como um mesmo ciclo de transformações políticas e religiosas.",
+      "palavras_chave": [
+        "Guerra Civil Inglesa",
+        "Oliver Cromwell",
+        "Revolução Gloriosa",
+        "Bill of Rights (1689)",
+        "monarquia parlamentar"
+      ]
     },
     {
       "nome": "Idade Média",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período histórico europeu entre a Antiguidade e a Idade Moderna (aprox. séc. V ao XV), abrangendo a formação e transformação do mundo medieval: ruralização e reinos pós-romanos, feudalismo, sociedade estamental, poder da Igreja, cultura e mentalidades, economia agrária e renascimento comercial, cidades e corporações, conflitos e expansões (Cruzadas), crises (fome, peste, guerras) e transição para a Modernidade (centralização monárquica, mudanças econômicas e culturais). Inclui também interações com Bizâncio e o mundo islâmico quando relacionadas ao contexto medieval.",
+      "incluir_quando": "Classificar aqui quando a questão aborda processos, instituições, eventos, cultura ou sociedade do mundo medieval, especialmente: queda do Império Romano do Ocidente e reinos germânicos; Império Carolíngio e fragmentação política; feudalismo (suserania e vassalagem, feudo, servidão, obrigações, economia de subsistência); sociedade estamental (nobreza, clero, servos/camponeses) e relações de dependência; papel político, econômico e cultural da Igreja (papado, monasticismo, ordens religiosas, heresias, Inquisição, escolástica); cultura medieval (catedrais, românico e gótico, universidades, manuscritos, cavalaria); renascimento urbano e comercial (feiras, rotas, Liga Hanseática, burgos, corporações de ofício, moedas e crédito); Cruzadas e Reconquista (quando tratadas como fenômenos medievais); Bizâncio e sua relação com a Europa medieval (Cisma do Oriente, Constantinopla) e o mundo islâmico em interação com a cristandade medieval (expansão islâmica, Al-Andalus, comércio mediterrâneo); crises do século XIV (Peste Negra, fome, revoltas camponesas, Guerra dos Cem Anos) e mudanças que apontam para a transição à Idade Moderna (fortalecimento monárquico, declínio de certas estruturas feudais, transformações econômicas e culturais).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Antiguidade (Grécia, Roma republicana/imperial antes do séc. V, helenismo) sem conexão direta com a formação do mundo medieval; Idade Moderna (Renascimento artístico-humanista como movimento típico dos séc. XV-XVI, Reformas Protestantes, Grandes Navegações, absolutismo consolidado, mercantilismo, colonização moderna) como foco central; Idade Contemporânea (Revolução Francesa, industrialização, guerras mundiais etc.); história de civilizações não europeias em períodos não medievais ou sem relação com a dinâmica medieval (ex.: China Tang/Song, Império Mali) quando o recorte não for o mundo medieval e suas interações; temas de história do Brasil ou da América que não sejam explicitamente conectados a heranças medievais (ex.: feudalismo como analogia inadequada para o Brasil colonial, a menos que a questão discuta o debate historiográfico).",
+      "diferenciador": "Foco na organização social, política, econômica e cultural do mundo medieval (séc. V–XV), marcada por feudalismo, sociedade estamental e centralidade da Igreja, bem como pelas transformações internas (renascimento urbano-comercial, crises do séc. XIV) que conduzem à transição para a Idade Moderna.",
+      "palavras_chave": [
+        "feudalismo",
+        "suserania e vassalagem",
+        "servidão",
+        "Cruzadas",
+        "Igreja medieval"
+      ]
     },
     {
       "nome": "Mercantilismo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do conjunto de práticas e ideias econômicas predominantes na Europa entre os séculos XV e XVIII, associadas à formação dos Estados modernos e à expansão ultramarina, caracterizadas por forte intervenção estatal, busca de superávit comercial, acumulação de metais preciosos e organização do sistema colonial (pacto colonial, monopólios e companhias de comércio).",
+      "incluir_quando": "Classificar aqui quando a questão aborda políticas mercantilistas e seus instrumentos (metalismo/bulionismo, balança comercial favorável, protecionismo alfandegário, subsídios, monopólios, companhias privilegiadas, navegação e controle de rotas), a relação entre mercantilismo e absolutismo/Estado moderno, a lógica econômica do colonialismo (pacto colonial, exclusivo metropolitano, colônia de exploração vs povoamento sob a ótica econômica), o comércio triangular e o papel do tráfico atlântico na acumulação, disputas comerciais e guerras ligadas a mercados e rotas (rivalidades anglo-holandesas, franco-inglesas etc.) quando o foco é a política econômica estatal, além de autores/termos associados (colbertismo, cameralismo, mercantilistas ingleses) e críticas/rupturas (fisiocracia e liberalismo clássico) quando comparadas ao mercantilismo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: feudalismo e economia medieval (senhorialismo, servidão) sem conexão com políticas estatais modernas; Revolução Industrial e capitalismo industrial (máquinas, fábrica, proletariado) sem relação com políticas mercantilistas; teorias econômicas posteriores como liberalismo de Adam Smith, keynesianismo, neoliberalismo, marxismo, globalização contemporânea, a menos que seja comparação direta com mercantilismo; história política/diplomática de guerras e tratados sem ênfase em objetivos econômicos mercantilistas; colonização e escravidão abordadas apenas por aspectos sociais/culturais/antropológicos, sem foco no pacto colonial, monopólio e acumulação; história monetária/financeira moderna (bancos centrais, inflação contemporânea) sem vínculo com metalismo e balança comercial; temas de navegações e descobrimentos apenas descritivos (rotas, navegadores) sem discussão de monopólio, comércio e política econômica.",
+      "diferenciador": "O foco distintivo é a intervenção do Estado para fortalecer a economia nacional por meio de controle do comércio e do sistema colonial, visando acumulação de riqueza (metais e superávit comercial), em contraste com abordagens que priorizam mercado livre (liberalismo) ou produção industrial (Revolução Industrial).",
+      "palavras_chave": [
+        "balança comercial favorável",
+        "metalismo",
+        "protecionismo",
+        "pacto colonial",
+        "monopólio comercial"
+      ]
     },
     {
       "nome": "Descolonização Afro-asiática",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Processos históricos de independência e fim do domínio colonial na África e na Ásia, sobretudo no pós-Segunda Guerra Mundial, incluindo causas, etapas, atores, estratégias (negociação, guerra, desobediência civil), impactos políticos, econômicos e sociais, formação de novos Estados, conflitos de fronteira e inserção no contexto da Guerra Fria e do Terceiro Mundo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a descolonização na África e/ou na Ásia (séculos XX, especialmente 1945-1975), incluindo: movimentos nacionalistas e anticoloniais; independências e partilhas (ex.: Índia/Paquistão, Indonésia, Vietnã, Argélia, Congo, Angola, Moçambique, Guiné-Bissau, Quênia, Gana, Nigéria, África do Sul no contexto do fim do colonialismo e do apartheid como herança colonial); lideranças e organizações (ex.: Gandhi, Nehru, Jinnah, Ho Chi Minh, Nasser, Ben Bella/FLN, Patrice Lumumba, Kwame Nkrumah, Jomo Kenyatta, Amílcar Cabral, Agostinho Neto, Samora Machel, MPLA/FNLA/UNITA, FRELIMO, PAIGC); políticas e conferências ligadas ao pós-colonial (Conferência de Bandung, Movimento dos Não Alinhados, pan-africanismo, pan-arabismo); papel das metrópoles e do sistema internacional (Reino Unido, França, Portugal, Bélgica, Holanda; ONU; influência EUA/URSS); guerras de independência e descolonização violenta (Indochina/Vietnã, Argélia, colônias portuguesas, Mau Mau); consequências como neocolonialismo, dependência econômica, golpes, guerras civis, disputas fronteiriças, construção nacional, migrações e crises humanitárias associadas ao fim do império colonial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: colonização inicial/expansão imperial europeia dos séculos XV-XIX (partilha da África, Conferência de Berlim) sem foco no processo de independência; história interna de países africanos/asiáticos fora do contexto de descolonização (ex.: dinastias antigas, impérios pré-coloniais) ou temas contemporâneos sem vínculo direto com o fim do colonialismo; descolonização nas Américas (independências latino-americanas) ou na Europa; Guerra Fria em geral quando não conectada a processos de independência afro-asiáticos; conflitos do Oriente Médio que não sejam enquadrados como desdobramentos diretos do fim do colonialismo (ex.: análises exclusivamente religiosas/regionais sem referência ao mandato/imperialismo e independências); apartheid e lutas por direitos civis tratados isoladamente, sem relação com heranças coloniais e o contexto de descolonização; globalização e economia mundial sem relação com neocolonialismo/pós-colonialismo.",
+      "diferenciador": "O foco é a transição do domínio colonial europeu para a independência e a formação de Estados nacionais na África e na Ásia no século XX, enfatizando movimentos anticoloniais, estratégias de libertação, negociações e guerras, e seus impactos no pós-colonial e na Guerra Fria.",
+      "palavras_chave": [
+        "descolonização",
+        "independência",
+        "nacionalismo anticolonial",
+        "Bandung",
+        "Movimento dos Não Alinhados"
+      ]
     },
     {
       "nome": "Movimento Abolicionista",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do Movimento Abolicionista, com ênfase nas ideias, organizações, lideranças, estratégias e conflitos que levaram ao fim legal da escravidão, especialmente no Brasil do século XIX, articulando dimensões políticas, sociais, econômicas, jurídicas e culturais, bem como seus desdobramentos imediatos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o abolicionismo como movimento organizado e/ou como campanha política e social contra a escravidão, incluindo: (1) atuação de abolicionistas (intelectuais, jornalistas, advogados, parlamentares, clubes e sociedades abolicionistas) e suas redes; (2) estratégias e repertórios de ação (comícios, imprensa, panfletos, conferências, arrecadações, compra de alforrias, ações judiciais, boicotes, fugas assistidas, quilombos/quilombagem no contexto final do Império, alistamento/pressão popular); (3) debates parlamentares e opinião pública em torno da abolição e do fim do trabalho escravo; (4) leis e marcos do processo abolicionista quando tratados como parte da campanha e da pressão social (Lei Eusébio de Queirós, Lei do Ventre Livre, Lei dos Sexagenários, Lei Áurea) e a disputa em torno delas; (5) participação e protagonismo de pessoas escravizadas e libertas na luta pela liberdade (fugas, negociações, resistência, mobilização) quando conectados ao movimento abolicionista; (6) tensões com escravistas, impactos na monarquia/Império, relação com a crise do Segundo Reinado e com a transição para a República quando o eixo é a campanha abolicionista; (7) abolicionismo em perspectiva comparada (Reino Unido, EUA, Caribe, América Latina) quando o foco é o movimento e suas ideias/ações.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) sistema escravista em geral (economia do açúcar/café, tráfico atlântico, cotidiano da escravidão, castigos, cultura escrava) sem foco no movimento abolicionista; (2) leis abolicionistas apenas como conteúdo jurídico/cronologia descolada de mobilização social e política (ex.: perguntar só a data da Lei Áurea); (3) pós-abolição e relações raciais no Brasil republicano (trabalho livre, imigração, marginalização, políticas de branqueamento, racismo estrutural) quando não estiverem diretamente vinculados à atuação/agenda abolicionista; (4) movimentos de resistência anteriores ou paralelos (quilombos como Palmares, revoltas escravas coloniais) quando não conectados ao abolicionismo do século XIX; (5) Independência, Regência, Guerra do Paraguai, crise do Império ou Proclamação da República como tema central sem relação direta com a campanha abolicionista; (6) biografias de figuras políticas do período (ex.: D. Pedro II) quando o foco não for sua posição/ação frente ao abolicionismo.",
+      "diferenciador": "O foco é a mobilização organizada e o debate público-político pela abolição (atores, estratégias, imprensa, associações, pressão social e parlamentar) e não a escravidão como sistema ou o pós-abolição como processo social de longo prazo.",
+      "palavras_chave": [
+        "abolicionismo",
+        "Lei Áurea",
+        "sociedades abolicionistas",
+        "Joaquim Nabuco",
+        "Luís Gama"
+      ]
     },
     {
       "nome": "Independência dos Estados Unidos da América",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Processo histórico que levou à independência das Treze Colônias britânicas na América do Norte e à formação dos Estados Unidos, incluindo causas econômicas e políticas, eventos e atores da Revolução Americana (c. 1763–1783), a Declaração de Independência (1776), a guerra contra a Grã-Bretanha, a diplomacia internacional e os primeiros arranjos institucionais do novo país (Artigos da Confederação e Constituição de 1787) em conexão direta com a independência.",
+      "incluir_quando": "Classificar aqui quando a questão aborda as causas e o desenrolar da Independência dos EUA, como: consequências da Guerra dos Sete Anos e novas políticas imperiais britânicas; leis e impostos (Stamp Act, Townshend Acts, Tea Act) e o lema 'no taxation without representation'; protestos e mobilização colonial (Sons of Liberty, boicotes, comitês de correspondência); eventos-chave (Boston Massacre, Boston Tea Party, Coercive/Intolerable Acts, Primeiro e Segundo Congressos Continentais, batalhas de Lexington e Concord, Saratoga, Yorktown); conteúdo, autores e ideias da Declaração de Independência (Jefferson, direitos naturais, Iluminismo); participação de grupos e lideranças (Patriots/Whigs, Loyalists/Tories, George Washington, Benjamin Franklin, John Adams, Thomas Paine); alianças e apoio externo (França, Espanha, Países Baixos; Tratado de Aliança de 1778; papel de Lafayette); Tratado de Paris de 1783 e reconhecimento da independência; impactos imediatos e debates políticos do pós-guerra diretamente ligados ao processo de independência (Artigos da Confederação, fraquezas do governo confederado, Convenção da Filadélfia, Constituição de 1787 e Bill of Rights como desdobramentos do período revolucionário).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: colonização inglesa inicial e formação das colônias antes do ciclo 1763–1783 (Jamestown, Mayflower, puritanos) sem relação direta com a independência; Guerra Civil Americana/independência do Sul (1861–1865); expansão territorial e 'Destino Manifesto' (Louisiana Purchase, Guerra Mexicano-Americana) sem conexão com a independência; história política dos EUA no século XIX/XX (Guerra de 1812, Doutrina Monroe, Guerra Fria) como tema central; Revolução Francesa ou independências latino-americanas como foco principal (a menos que seja comparação direta com a independência dos EUA); história constitucional dos EUA em geral quando não vinculada ao contexto revolucionário (jurisprudência da Suprema Corte, emendas posteriores); história do Canadá ou do Império Britânico em outros contextos sem foco na ruptura das Treze Colônias.",
+      "diferenciador": "Foco na ruptura política das Treze Colônias com a Grã-Bretanha e na Revolução Americana (causas, eventos, guerra, diplomacia e consolidação inicial do novo Estado) como processo de independência, distinguindo-se de temas de colonização anterior, de conflitos posteriores dos EUA e de outras revoluções/independências.",
+      "palavras_chave": [
+        "Treze Colônias",
+        "Declaração de Independência (1776)",
+        "Revolução Americana",
+        "Tratado de Paris (1783)",
+        "no taxation without representation"
+      ]
     },
     {
       "nome": "Brasil: A nova república",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do Brasil no período da Nova República, da transição do regime militar para a democracia (meados dos anos 1980) até a contemporaneidade, abordando redemocratização, Constituição de 1988, instituições democráticas, eleições, governos, políticas econômicas e sociais, crises políticas, impeachment, relações civis-militares e inserção internacional.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a redemocratização e a consolidação democrática no Brasil a partir de 1985, incluindo: fim do regime militar e transição (anistia, abertura, Diretas Já, eleição indireta de Tancredo/Sarney); governo Sarney e a estabilização econômica (planos Cruzado, Bresser, Verão, hiperinflação); Assembleia Constituinte e Constituição de 1988 (direitos sociais, cidadania, SUS, seguridade social, Ministério Público, eleições, federalismo, separação de poderes); eleições presidenciais pós-1989 e governos da Nova República (Collor, Itamar, FHC, Lula, Dilma, Temer, Bolsonaro e desdobramentos recentes); Plano Real e reformas do Estado (privatizações, responsabilidade fiscal, reformas administrativas/previdenciárias, políticas de estabilização); políticas sociais e combate à pobreza (Bolsa Família, programas de transferência de renda, expansão do acesso à educação e saúde); crises e escândalos político-institucionais (PC Farias, Mensalão, Lava Jato, crises de governabilidade, coalizão presidencialista/presidencialismo de coalizão); impeachments e processos de responsabilização (Collor em 1992, Dilma em 2016) e seus contextos; papel do Congresso, Judiciário, STF, TSE, mídia e movimentos sociais na política contemporânea; participação popular e novos movimentos (MST, movimentos estudantis, protestos de 2013, movimentos identitários) quando vinculados ao período e à dinâmica democrática; política externa e integração regional no período (Mercosul, relações com EUA/China, protagonismo internacional) quando situada na Nova República; debates sobre democracia, polarização, desinformação, reformas políticas e eleitorais no Brasil contemporâneo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Brasil Colônia, Império, Primeira República, Era Vargas, República Populista (1946–1964) ou Ditadura Militar (1964–1985) sem conexão direta com a transição e o período pós-1985; história econômica de longo prazo sem recorte na Nova República (ex.: ciclo do café, industrialização varguista) ou apenas teoria econômica; história mundial/América Latina sem foco no Brasil pós-1985; temas de geografia, sociologia ou atualidades sem enquadramento histórico-político na Nova República; políticas públicas setoriais (saúde, educação, segurança) tratadas de forma técnica e atemporal, sem contextualização nos governos e instituições da Nova República; biografias ou eventos culturais sem relação com a redemocratização, instituições e governos do período.",
+      "diferenciador": "Recorte temporal e temático centrado no Brasil democrático pós-1985: transição, Constituição de 1988, funcionamento das instituições e dinâmica político-econômica dos governos eleitos, incluindo crises, reformas e impeachments, distinguindo-se do estudo do regime militar (1964–1985) e de períodos republicanos anteriores.",
+      "palavras_chave": [
+        "Nova República",
+        "Constituição de 1988",
+        "redemocratização",
+        "Plano Real",
+        "impeachment"
+      ]
     },
     {
       "nome": "Revoluções do Século XX",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das principais revoluções e processos revolucionários do século XX (c. 1900–1991), suas causas estruturais e conjunturais, lideranças, ideologias, etapas, impactos internos e internacionais, bem como suas relações com guerras, descolonização e a Guerra Fria. Inclui comparações entre revoluções, análise de programas políticos (socialismo, comunismo, nacionalismo, anti-imperialismo), transformações socioeconômicas e disputas de poder no pós-revolução.",
+      "incluir_quando": "Classificar aqui quando a questão aborda revoluções do século XX ou processos revolucionários correlatos, como: (1) Revolução Russa de 1905 e de 1917 (Fevereiro/Outubro), bolcheviques, sovietes, Lenin, Trotsky, Guerra Civil Russa, NEP, formação da URSS e consequências; (2) Revolução Mexicana (1910–1920), Porfiriato, Madero, Zapata, Villa, Constituição de 1917, reforma agrária e Estado pós-revolucionário; (3) Revolução Chinesa (1911, 1927–1949), Kuomintang vs PCC, Mao Zedong, Longa Marcha, vitória comunista em 1949 e reconfiguração do Estado; (4) Revolução Cubana (1953–1959) e desdobramentos, Fidel Castro, Che Guevara, Batista, alinhamento na Guerra Fria, Baía dos Porcos e Crise dos Mísseis como consequências do processo revolucionário; (5) Revolução Iraniana (1979), queda do Xá, Khomeini, islamismo político e impactos regionais; (6) Revoluções e movimentos anticoloniais/anti-imperialistas com caráter revolucionário no século XX (ex.: Vietnã, Argélia) quando o foco for a dinâmica revolucionária (mobilização, ruptura institucional, guerra revolucionária, construção de novo regime); (7) Comparações e tipologias (revoluções socialistas, nacionalistas, camponesas, urbanas), análise de causas (crise do Estado, desigualdade agrária, guerra, industrialização tardia), e efeitos (reformas agrárias, nacionalizações, partido único, repressão, propaganda, mudanças culturais).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Revoluções de séculos anteriores (Revolução Francesa, Industrial, Revoluções de 1848, independências americanas do séc. XVIII–XIX), salvo se for comparação direta com revoluções do século XX; (2) Guerras mundiais, Guerra Fria, fascismo/nazismo ou ditaduras do século XX como tema central sem foco em processo revolucionário (ex.: apenas batalhas, diplomacia, corrida armamentista); (3) Descolonização e independências africanas/asiáticas quando o enfoque for diplomático-institucional ou cronologia de independência, sem análise de ruptura revolucionária; (4) História econômica geral do século XX (crise de 1929, fordismo, globalização) sem vínculo com revoluções; (5) História do Brasil republicano (1930, 1964, redemocratização) quando tratada como “revolução” apenas no sentido retórico, sem enquadramento historiográfico de processo revolucionário do século XX em escala comparada; (6) Movimentos sociais e reformas graduais (Estado de bem-estar, reformas liberais) sem ruptura revolucionária.",
+      "diferenciador": "O foco é a ruptura revolucionária no século XX: mobilização social e política que derruba/transforma regimes e estruturas (Estado, propriedade, relações de classe), com disputa ideológica e construção de nova ordem, frequentemente conectada a guerras, anti-imperialismo e à polarização da Guerra Fria. Diferencia-se de módulos sobre guerras/diplomacia por priorizar causas, atores, etapas e resultados internos do processo revolucionário.",
+      "palavras_chave": [
+        "Revolução Russa",
+        "bolcheviques",
+        "Revolução Chinesa",
+        "Revolução Cubana",
+        "Revolução Iraniana"
+      ]
     },
     {
       "nome": "Idade Contemporânea",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período histórico que se inicia no final do século XVIII (marcos como a Revolução Francesa e a Revolução Industrial) e se estende até a atualidade, abordando transformações políticas, econômicas, sociais, culturais e tecnológicas em escala nacional e global: consolidação do capitalismo industrial e financeiro, liberalismo e nacionalismos, imperialismo e descolonização, guerras mundiais e Guerra Fria, revoluções e regimes totalitários, expansão de direitos e cidadania, globalização e desafios contemporâneos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda eventos, processos, ideologias, conflitos, movimentos sociais ou mudanças estruturais do final do século XVIII ao século XXI, tais como: Revolução Francesa e seus desdobramentos (cidadania, direitos, Estado-nação, Napoleão); Revolução Industrial e industrialização (urbanização, trabalho assalariado, sindicalismo, capitalismo); liberalismo, socialismo, anarquismo, conservadorismo e nacionalismos; unificações nacionais (Itália, Alemanha) e formação/transformação de Estados-nação; imperialismo do século XIX, partilha da África e da Ásia, neocolonialismo; Primeira e Segunda Guerras Mundiais (causas, alianças, consequências, tratados, genocídios); Revolução Russa/URSS e experiências socialistas; crise de 1929, New Deal, ascensão do fascismo e do nazismo; totalitarismos e autoritarismos contemporâneos; Guerra Fria (bipolaridade, corrida armamentista e espacial, OTAN/Pacto de Varsóvia, conflitos por procuração); descolonização na África e na Ásia, movimentos de independência e não alinhados; integração europeia e organismos internacionais (ONU, FMI, Banco Mundial, UE); globalização, neoliberalismo, reestruturação produtiva, sociedade de consumo; movimentos por direitos civis, feminismos, lutas antirracistas, direitos trabalhistas e direitos humanos; transformações científicas e tecnológicas (segunda revolução industrial, eletrônica, informática, internet) e seus impactos; conflitos e temas do mundo recente (Oriente Médio, terrorismo, migrações, crises econômicas, mudanças climáticas) quando tratados como processos históricos contemporâneos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de: Antiguidade (Egito, Grécia, Roma, Império Bizantino, etc.); Idade Média (feudalismo, cruzadas, islamização medieval, peste negra, etc.); Idade Moderna (Renascimento, Reformas Religiosas, Absolutismo, Mercantilismo, Expansão Marítima, colonização inicial, Iluminismo sem conexão direta com as rupturas do fim do séc. XVIII); História do Brasil Colonial e parte do Brasil Império quando o foco não estiver inserido em processos contemporâneos globais (ex.: economia açucareira colonial, bandeirantismo, administração colonial); temas de geografia, sociologia ou atualidades sem abordagem histórica (ex.: apenas indicadores econômicos atuais, descrição de clima/biomas, análise política imediata sem contextualização histórica); história local/biografias isoladas sem relação com processos contemporâneos mais amplos; artes e literatura tratadas apenas como estética, sem contextualização histórica do período contemporâneo.",
+      "diferenciador": "Centralidade das rupturas e transformações do mundo pós-1789/industrialização até o presente, com ênfase em modernidade política (revoluções, cidadania, Estado-nação), capitalismo industrial/financeiro, imperialismo e descolonização, guerras mundiais, Guerra Fria e globalização — distinguindo-se da Idade Moderna por focar a era das revoluções, da industrialização e dos conflitos/ordens internacionais contemporâneos.",
+      "palavras_chave": [
+        "Revolução Francesa",
+        "Revolução Industrial",
+        "imperialismo",
+        "Guerras Mundiais",
+        "Guerra Fria"
+      ]
     },
     {
       "nome": "Primeira República",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Período da história do Brasil entre a Proclamação da República (1889) e a Revolução de 1930, com foco na organização política e institucional do regime republicano oligárquico, nas dinâmicas econômicas (especialmente a cafeicultura), nas relações entre União e estados, nos movimentos sociais e revoltas do período, e nas transformações urbanas, culturais e militares que marcaram a chamada República Velha.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a Primeira República/República Velha (1889–1930) no Brasil, incluindo: consolidação do regime republicano e Constituição de 1891; federalismo e autonomia estadual; coronelismo, clientelismo, mandonismo local e voto de cabresto; política dos governadores e mecanismos de controle eleitoral (fraudes, degola, comissões verificadoras); pacto oligárquico e política do café com leite; papel das oligarquias regionais (SP, MG e outras) e disputas entre estados; economia agroexportadora e hegemonia do café; políticas de valorização do café (Convênio de Taubaté) e relações com o capital externo; industrialização incipiente, urbanização e imigração; movimentos e conflitos sociais e políticos do período (Canudos, Contestado, Revolta da Vacina, Revolta da Chibata, greves operárias, anarquismo, Revolta da Armada, Revolução Federalista, tenentismo, Coluna Prestes); reformas urbanas e sanitárias na Primeira República (especialmente no Rio de Janeiro) e seus impactos sociais; papel do Exército e da Marinha na política republicana; crise do modelo oligárquico e fatores que levam a 1930 (quebra de 1929, Aliança Liberal, ruptura do pacto oligárquico).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Brasil Império (1822–1889) e temas como escravidão, Segundo Reinado, Guerra do Paraguai, abolição e crise do Império (a menos que seja como antecedente direto para 1889); Era Vargas (1930–1945) e Estado Novo, legislação trabalhista, corporativismo e centralização varguista (exceto quando a questão for sobre a transição/crise final da Primeira República e a Revolução de 1930); República Populista (1946–1964), Ditadura Militar (1964–1985) ou Nova República (1985–); história geral de outros países sem conexão direta com o Brasil (ex.: Primeira República Portuguesa, Terceira República Francesa); temas econômicos contemporâneos sem vínculo com a economia cafeeira e a estrutura oligárquica do período; movimentos sociais do século XIX (ex.: Cabanagem, Balaiada, Farroupilha) sem relação com a Primeira República; história colonial (1500–1822).",
+      "diferenciador": "Foco na República Oligárquica (1889–1930): federalismo com predomínio das oligarquias estaduais, controle político-eleitoral (coronelismo e política dos governadores) e conflitos sociais/militares que expressam tensões do modelo agroexportador e da modernização urbana, culminando na crise que leva à Revolução de 1930.",
+      "palavras_chave": [
+        "República Velha",
+        "Constituição de 1891",
+        "coronelismo",
+        "política dos governadores",
+        "Convênio de Taubaté"
+      ]
     },
     {
       "nome": "Período Regencial: política e revoltas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do Período Regencial no Brasil (1831-1840), com ênfase na organização política e institucional após a abdicação de D. Pedro I, nas disputas entre grupos políticos, nas reformas e leis do período e nas principais revoltas regenciais, suas causas, lideranças, propostas, repressão e consequências, incluindo o caminho para o Golpe da Maioridade e a consolidação do Estado imperial.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a Regência Trina (Provisória e Permanente) e a Regência Una (Feijó e Araújo Lima), o funcionamento do Império sem imperador maior de idade, a disputa entre moderados, exaltados e restauradores (e/ou progressistas e regressistas), o Ato Adicional de 1834 (autonomia provincial, Assembleias Legislativas Provinciais, Regência Una, Município Neutro), a Guarda Nacional, o Código de Processo Criminal de 1832 e suas implicações, a centralização versus descentralização e o chamado Regresso Conservador (Lei Interpretativa do Ato Adicional, reforma do Judiciário/polícia), a política de pacificação e repressão, o Golpe da Maioridade (1840) como desfecho político do período, e as revoltas regenciais (Cabanagem, Farroupilha/Guerra dos Farrapos, Sabinada, Balaiada, Revolta dos Malês) analisando contexto regional, composição social, objetivos (federalismo, separatismo, republicanismo, autonomia provincial, demandas sociais), lideranças, cronologia, repressão e impactos na formação do Estado nacional.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente do Primeiro Reinado (1822-1831) sem conexão direta com a Regência (ex.: Independência, Constituição de 1824, Confederação do Equador, Guerra da Cisplatina, crise do Primeiro Reinado), do Segundo Reinado (1840-1889) sem foco no legado/regulação regencial (ex.: parlamentarismo às avessas, Questão Christie, Guerra do Paraguai, Abolição, República), de revoltas coloniais ou do período joanino (ex.: Inconfidência Mineira, Revolução Pernambucana de 1817, Revolução do Porto), de história local/regional fora do recorte 1831-1840 sem relação com as revoltas regenciais, ou de temas sociais/econômicos do século XIX que não estejam articulados às disputas políticas e às rebeliões do período regencial.",
+      "diferenciador": "O foco distintivo é a crise de governabilidade e a reorganização do Estado imperial durante a menoridade de D. Pedro II, marcada por reformas institucionais e pela tensão centralização–autonomia provincial, tendo como expressão central as revoltas regenciais e as respostas políticas do governo (reformas, Guarda Nacional, repressão e Regresso Conservador) até o Golpe da Maioridade.",
+      "palavras_chave": [
+        "Ato Adicional de 1834",
+        "Regência Una",
+        "Guarda Nacional",
+        "Regresso Conservador",
+        "Cabanagem"
+      ]
     },
     {
       "nome": "Processo de Independência",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos processos históricos de ruptura (ou redefinição) de vínculos coloniais/imperiais e formação de Estados nacionais, com ênfase em causas, etapas, atores, conflitos, negociações, documentos, projetos políticos e consequências internas e externas. Inclui comparações entre diferentes independências (Américas, África, Ásia) e a relação com o contexto internacional (Iluminismo, Revoluções Atlânticas, crise dos impérios, guerras napoleônicas, liberalismo).",
+      "incluir_quando": "Classificar aqui quando a questão aborda causas, conjunturas e etapas de um processo de independência; disputas entre projetos políticos (monarquia x república; centralização x federalismo; manutenção x ruptura de estruturas coloniais); participação e interesses de grupos sociais (elites locais, camadas populares, indígenas, escravizados, libertos, militares, Igreja); eventos-chave (revoltas, guerras de independência, proclamações, assembleias, plebiscitos, negociações diplomáticas); documentos e marcos institucionais (declarações de independência, constituições iniciais, atos de separação, tratados de reconhecimento); papel de lideranças e movimentos (caudilhos, juntas, congressos, partidos, sociedades secretas); influência de ideias e contextos externos (Iluminismo, liberalismo, Revolução Francesa, Independência dos EUA, Revolução Haitiana, Guerras Napoleônicas, crise do Antigo Regime); consequências imediatas e de médio prazo (reconhecimento internacional, formação do Estado, fronteiras, cidadania, continuidade da escravidão/servidão, economia, guerras civis, fragmentação territorial, dependência externa).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de: colonização e administração colonial sem foco na ruptura; história política de períodos já consolidados após a independência (governos, partidos, políticas públicas) sem relação direta com a separação; movimentos sociais ou revoltas que não tenham como eixo a independência (ex.: revoltas fiscais, messiânicas, trabalhistas) a menos que conectadas explicitamente ao processo emancipatório; história econômica de longo prazo (ciclos produtivos, industrialização) sem vínculo com a independência; unificações nacionais (ex.: Itália, Alemanha) quando o foco não for emancipação de domínio colonial/imperial; descolonização do século XX tratada apenas como Guerra Fria/ditaduras sem ênfase no processo de independência; biografias de personagens em outros contextos que não o emancipatório.",
+      "diferenciador": "O foco central é a dinâmica de ruptura/negociação com a metrópole ou poder imperial e a construção inicial da soberania (marcos, conflitos, pactos e projetos de Estado) — não a vida política posterior já estabilizada nem a administração colonial anterior sem perspectiva de emancipação.",
+      "palavras_chave": [
+        "independência",
+        "emancipação",
+        "metrópole",
+        "soberania",
+        "reconhecimento internacional"
+      ]
     },
     {
       "nome": "II Guerra Mundial",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da II Guerra Mundial (1939–1945): suas causas e antecedentes, principais fases e frentes de combate, alianças e estratégias, participação de países e lideranças, políticas de ocupação e genocídio, economia e tecnologia de guerra, conferências diplomáticas, rendição do Eixo e consequências imediatas (reordenação geopolítica, criação da ONU, início da Guerra Fria, julgamentos e reconstrução).",
+      "incluir_quando": "Classificar aqui quando a questão aborda diretamente eventos, processos, atores, batalhas, políticas ou consequências da II Guerra Mundial, incluindo: (1) antecedentes e causas (Tratado de Versalhes, crise de 1929, expansionismo nazi-fascista, apaziguamento, Anschluss, Sudetos, Pacto Molotov–Ribbentrop, invasão da Polônia); (2) alianças e blocos (Eixo e Aliados, entrada dos EUA, URSS e outros); (3) frentes e campanhas (Europa Ocidental e Oriental, Norte da África, Mediterrâneo, Atlântico, Pacífico, China-Birmânia-Índia); (4) batalhas e operações (Batalha da Grã-Bretanha, Stalingrado, El Alamein, Midway, Kursk, Dia D/Normandia, Ardenas, Iwo Jima, Okinawa); (5) guerra total e mobilização (economia de guerra, racionamento, propaganda, trabalho feminino, ciência e tecnologia militar como radar, foguetes, criptografia, Projeto Manhattan); (6) crimes de guerra e violência de massa (Holocausto/Shoah, campos de concentração e extermínio, Einsatzgruppen, genocídios e massacres, deportações, trabalho forçado); (7) diplomacia e conferências (Teerã, Yalta, Potsdam, Carta do Atlântico); (8) fim do conflito (queda de Berlim, rendição alemã, bombas atômicas em Hiroshima e Nagasaki, rendição japonesa); (9) consequências imediatas (divisão da Alemanha, ocupações, Julgamentos de Nuremberg e Tóquio, deslocados, Plano Marshall no pós-guerra imediato, criação da ONU, início da bipolaridade e tensões que levam à Guerra Fria).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) I Guerra Mundial, entreguerras em geral ou Revolução Russa sem conexão explícita com a II Guerra; (2) Guerra Fria (1947 em diante) como tema central — corrida armamentista, OTAN/Pacto de Varsóvia, crises como Cuba e Vietnã — sem foco no período 1939–1945 ou em consequências imediatas diretamente derivadas; (3) fascismo/nazismo como ideologias e regimes em tempo de paz (política interna, ascensão ao poder) sem relação com a guerra; (4) descolonização e independências pós-1945 (Índia, África, Indochina) quando não vinculadas diretamente ao contexto bélico; (5) história do Brasil em geral, a Era Vargas ou a FEB apenas como política interna, sem enquadramento na participação brasileira na II Guerra; (6) história militar genérica (táticas/armas) sem referência clara ao conflito de 1939–1945; (7) ONU e direitos humanos como instituições/temas amplos sem ancoragem no pós-guerra imediato e no contexto da II Guerra.",
+      "diferenciador": "O foco distintivo é o conflito global de 1939–1945 e sua dinâmica (Eixo vs. Aliados), incluindo frentes de batalha, guerra total, genocídio e acordos de paz/ordem internacional do pós-guerra imediato; diferencia-se de 'Entreguerras' por tratar do conflito em si e de 'Guerra Fria' por não ter como eixo a rivalidade EUA–URSS após 1947, embora reconheça suas origens no desfecho da guerra.",
+      "palavras_chave": [
+        "1939-1945",
+        "Eixo e Aliados",
+        "Holocausto",
+        "Dia D (Normandia)",
+        "Hiroshima e Nagasaki"
+      ]
     },
     {
       "nome": "Império Bizantino e Império Árabe",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do Império Bizantino (continuidade do Império Romano do Oriente) e do Império Árabe/islâmico (origens do Islã, expansão e califados), incluindo suas estruturas políticas, religiosas, econômicas e culturais, relações com a Europa e o Mediterrâneo, conflitos e intercâmbios, e legados na Idade Média.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o Império Bizantino e/ou o Império Árabe/islâmico entre a Antiguidade Tardia e a Idade Média, incluindo: (1) formação, organização e governo bizantino (Constantinopla, basileu, burocracia, exército, temas, direito romano e o Corpus Juris Civilis de Justiniano); (2) religião e cultura bizantina (cristianismo oriental, cesaropapismo, iconoclastia, cisma do Oriente de 1054, arte e arquitetura como mosaicos e Hagia Sophia); (3) economia e comércio no Mediterrâneo oriental (rotas, moedas, cidades, papel de Constantinopla); (4) relações e conflitos do Bizâncio com persas sassânidas, povos eslavos, búlgaros, normandos, cruzados e turcos; (5) origens do Islã (Maomé, Hégira, Alcorão, pilares do Islã, umma) e a unificação da Península Arábica; (6) expansão islâmica e formação dos califados (Rashidun, Omíada, Abássida), administração, tributação e status de dhimmi; (7) centros culturais e científicos do mundo islâmico (Bagdá, Casa da Sabedoria, traduções, matemática, medicina, filosofia) e circulação de conhecimentos; (8) Al-Andalus, Norte da África e Mediterrâneo como zonas de contato; (9) guerras e fronteiras bizantino-islâmicas, incluindo disputas por Síria, Egito e Anatólia; (10) Cruzadas quando tratadas em relação direta com Bizâncio e/ou poderes islâmicos; (11) queda de Constantinopla (1453) quando conectada ao processo histórico bizantino e à ascensão otomana como desdobramento do mundo islâmico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Império Romano Ocidental, República Romana ou temas de Roma sem foco no Oriente/Bizâncio; (2) Europa feudal (senhorio, vassalagem, servidão) sem conexão explícita com Bizâncio ou mundo islâmico; (3) Cruzadas analisadas apenas do ponto de vista da Europa latina, sem papel relevante de Bizâncio ou de estados islâmicos; (4) Império Otomano em sua fase clássica/moderna (séculos XVI–XVIII) sem vínculo com a herança bizantina ou com a transição do mundo medieval; (5) História contemporânea do Oriente Médio (colonialismo, nacionalismos árabes, conflitos atuais); (6) História da Igreja Católica no Ocidente (papado, ordens monásticas, Inquisição) sem relação com o cristianismo oriental, cisma ou Bizâncio; (7) História da África subsaariana, Índia, China ou Américas sem conexões diretas com redes islâmicas/bizantinas; (8) Renascimento europeu e Reforma Protestante, salvo quando a questão enfatiza a transmissão de saberes via Bizâncio/islã ou a migração de eruditos após 1453.",
+      "diferenciador": "Foco no Mediterrâneo oriental e no mundo islâmico medieval: a continuidade romano-cristã no Oriente (Bizâncio) e a formação/expansão do Islã e dos califados, destacando instituições, religião, cultura e as interações (conflitos e trocas) entre Bizâncio, Europa e sociedades islâmicas.",
+      "palavras_chave": [
+        "Constantinopla",
+        "Justiniano",
+        "iconoclastia",
+        "califado",
+        "Hégira"
+      ]
     },
     {
       "nome": "Primeiro Reinado",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Período do Brasil Império sob D. Pedro I (1822–1831), abrangendo a consolidação da Independência, a organização político-institucional do novo Estado, a Constituição de 1824 e o funcionamento do regime monárquico centralizado, além das principais crises internas e externas que levaram à abdicação.",
+      "incluir_quando": "Classificar aqui quando a questão aborda eventos, processos, instituições, conflitos ou personagens diretamente ligados ao governo de D. Pedro I no Brasil (1822–1831), como: a Independência e sua consolidação (reconhecimento, resistência e guerras de independência em províncias), a Assembleia Constituinte de 1823 e sua dissolução, a Constituição de 1824 (Poder Moderador, centralização, voto censitário, religião oficial), a Confederação do Equador (1824) e outras rebeliões do período, a política interna entre liberais e conservadores/absolutistas, a formação do Estado imperial e suas relações com as províncias, a política externa e a Guerra da Cisplatina (1825–1828) com a criação do Uruguai, a crise econômica e fiscal do início do Império, a sucessão e a crise política que culmina na Abdicação de 1831 (Noite das Garrafadas, desgaste do imperador, oposição política), bem como a atuação de figuras e grupos do período (D. Pedro I, José Bonifácio, elites provinciais, imprensa política) quando vinculadas ao Primeiro Reinado.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Período Joanino (1808–1821) e medidas de D. João VI; Regências (1831–1840) e revoltas regenciais (Cabanagem, Farroupilha, Sabinada, Balaiada) ou o Ato Adicional de 1834; Segundo Reinado (1840–1889) e temas como parlamentarismo às avessas, Guerra do Paraguai, abolição e crise do Império; Brasil Colônia (administração colonial, mineração, escravidão em perspectiva colonial sem conexão direta com 1822–1831); história de Portugal sem relação com a crise do Império brasileiro; ou questões de Independência tratadas exclusivamente como processo internacional/colonial sem foco no governo e instituições do Primeiro Reinado (por exemplo, apenas causas gerais de emancipação na América).",
+      "diferenciador": "Foco na construção e crise inicial do Estado imperial brasileiro sob D. Pedro I, especialmente a Constituição de 1824 e o arranjo político centralizador (Poder Moderador) e as tensões que levam à abdicação em 1831, distinguindo-se de módulos vizinhos por estar entre a Independência e o início das Regências.",
+      "palavras_chave": [
+        "D. Pedro I",
+        "Constituição de 1824",
+        "Poder Moderador",
+        "Confederação do Equador",
+        "Guerra da Cisplatina"
+      ]
     },
     {
       "nome": "Reações operárias: lutas políticas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das formas de ação política do movimento operário e de trabalhadores organizados, suas estratégias de mobilização e disputa de poder, suas pautas e conquistas, e as respostas do Estado e das elites, em diferentes contextos históricos (especialmente na industrialização e na formação de sindicatos e partidos). Inclui greves, protestos, organização sindical, participação eleitoral, criação de partidos, internacionalismo e repressão/negociação.",
+      "incluir_quando": "Classificar aqui quando a questão aborda lutas políticas protagonizadas por trabalhadores/operários, como: organização e atuação de sindicatos, federações e centrais; greves e paralisações com objetivos políticos (direitos, legislação trabalhista, jornada, salários, representação); formação/atuação de partidos operários e socialistas, trabalhistas e comunistas; debates ideológicos no movimento operário (socialismo, anarquismo, sindicalismo revolucionário, marxismo, reformismo); estratégias de ação coletiva (greve geral, boicote, piquetes, comitês, sovietes/conselhos, mutualismo com desdobramento político); reivindicações por cidadania e direitos (voto, liberdade de associação, direito de greve, proteção social); relações entre movimento operário e Estado (repressão policial, leis antigreve, criminalização, negociação, corporativismo, conciliação); episódios e processos históricos de mobilização operária (ex.: greves do século XIX/XX, 1º de Maio, Internacional dos Trabalhadores, Comuna de Paris, Revolução Russa no aspecto de conselhos operários, lutas por legislação social); análise de documentos, discursos, charges e notícias sobre mobilizações e conflitos trabalhistas com dimensão política.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: condições de trabalho e vida operária sem foco em mobilização/ação política (higiene, moradia, rotina fabril) de forma descritiva; história empresarial, tecnologia e organização da produção (taylorismo/fordismo) sem conexão com conflito político operário; políticas estatais trabalhistas vistas apenas do ponto de vista institucional (leis, ministérios, previdência) sem referência a pressão, organização ou reação dos trabalhadores; movimentos sociais não centrados em trabalhadores/operários (camponeses, movimentos estudantis, feministas, antirracistas) a menos que a questão conecte explicitamente à ação operária; revoluções e crises políticas gerais (guerras, golpes, revoluções) quando o protagonismo operário e suas organizações não são o foco; história do pensamento político em abstrato (marxismo/anarquismo) sem vínculo com lutas e organizações operárias; sindicalismo patronal, associações empresariais e lobby empresarial.",
+      "diferenciador": "O foco distintivo é a ação coletiva e a disputa política conduzida por trabalhadores/operários (organização, mobilização, confronto/negociação e participação institucional), e não apenas a existência da classe operária, a economia industrial ou a legislação trabalhista isoladamente.",
+      "palavras_chave": [
+        "sindicato",
+        "greve",
+        "movimento operário",
+        "direito de greve",
+        "partido operário"
+      ]
     },
     {
       "nome": "História da África",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo histórico do continente africano em diferentes períodos (Antiguidade, Idade Média, Moderna e Contemporânea), contemplando formações políticas e sociais, economias, culturas, religiões, redes de comércio, contatos intercontinentais, escravidão e tráfico atlântico, colonialismo e partilha da África, resistências, independências, construção de Estados nacionais e desafios contemporâneos, com atenção à diversidade regional (Norte, Oeste, Centro, Leste e Sul da África) e às fontes e perspectivas africanas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda processos, sociedades, eventos, personagens, estruturas e dinâmicas históricas ocorridas na África ou centradas em africanos, tais como: reinos e impérios africanos (ex.: Gana, Mali, Songhai, Benim, Congo, Axum, Zimbábue), Egito antigo e Núbia/Kush como parte da história africana, cidades e redes do Sahel e do Sudão Ocidental, costa swahili e comércio no Oceano Índico, islamização e cristianismos africanos, rotas transaarianas, escravidão interna e formas de servidão em contextos africanos, tráfico transatlântico de africanos e suas conexões com a África (captura, mercados, portos, impactos demográficos e políticos), presença e atuação europeia na África (feitorias, missionação, companhias), Conferência de Berlim e partilha/ocupação colonial, administrações coloniais (direta/indireta), economias coloniais e trabalho forçado, resistências e guerras anticoloniais, apartheid e história da África do Sul, movimentos de independência e descolonização, pan-africanismo, formação de Estados pós-coloniais, conflitos e reconfigurações políticas (ex.: guerras civis, fronteiras coloniais), integração regional e organizações (ex.: OUA/UA), além de debates historiográficos sobre eurocentrismo, fontes orais, arqueologia e perspectivas africanas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: história da diáspora africana fora da África (ex.: cultura afro-brasileira, quilombos, abolição no Brasil, racismo e movimentos negros nas Américas) sem conexão substantiva com processos históricos no continente; história europeia, asiática ou americana em que a África aparece apenas como cenário secundário; escravidão e tráfico atlântico analisados apenas do ponto de vista das colônias americanas ou da legislação/abolição europeia/americana, sem foco nos contextos africanos; temas de geografia física, clima, biomas ou demografia atual sem recorte histórico; atualidades e política contemporânea sem contextualização histórica; Egito antigo tratado exclusivamente como 'história do Oriente Médio' sem enquadramento africano; estudos culturais/antropológicos atemporais (costumes, etnias) sem abordagem histórica.",
+      "diferenciador": "O foco central é a África como sujeito histórico: processos internos do continente e suas conexões globais (comércio, religiões, escravidão, colonialismo e descolonização) analisados a partir de contextos africanos e da diversidade regional, evitando tratar a África apenas como apêndice da história europeia ou da diáspora nas Américas.",
+      "palavras_chave": [
+        "Conferência de Berlim",
+        "partilha da África",
+        "reinos e impérios africanos",
+        "tráfico transatlântico de africanos",
+        "descolonização africana"
+      ]
     },
     {
       "nome": "República Liberal",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período da história política brasileira conhecido como República Liberal (1945–1964), marcado pela redemocratização após o Estado Novo, pela vigência da Constituição de 1946, pela reorganização partidária e sindical, pela alternância de governos civis e pela crescente polarização política e social que culminou no golpe de 1964.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a redemocratização de 1945 e a queda de Getúlio Vargas; a Constituição de 1946 e suas características (liberdades civis, eleições, separação de poderes); o sistema partidário do período (PSD, UDN, PTB, PSP e outras legendas) e suas bases sociais; eleições presidenciais e governos de Eurico Gaspar Dutra, Getúlio Vargas (1951–1954), Café Filho, Juscelino Kubitschek, Jânio Quadros e João Goulart; políticas econômicas e projetos de desenvolvimento (nacional-desenvolvimentismo, Plano de Metas, industrialização, infraestrutura, construção de Brasília); debates sobre nacionalismo econômico e capital estrangeiro (Petrobras, Eletrobras, remessa de lucros, BNDE/BNDES); relações trabalhistas e populismo (sindicalismo, salário mínimo, CLT no contexto do período, trabalhismo, comícios e mobilização de massas); Guerra Fria no Brasil (anticomunismo, alinhamento internacional, influência dos EUA, papel das Forças Armadas); crises políticas e institucionais (suicídio de Vargas, crise de 1954, movimentos e revoltas, renúncia de Jânio, Campanha da Legalidade, parlamentarismo de 1961–1963 e retorno ao presidencialismo); Reformas de Base e tensões sociais (reforma agrária, urbana, educacional, fiscal, bancária) e a escalada que leva ao golpe civil-militar de 1964.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente da República Oligárquica/Primeira República (1889–1930), coronelismo, política do café com leite e revoltas da Primeira República; da Era Vargas/Estado Novo (1930–1945) como foco central (Revolução de 1930, Constituição de 1937, ditadura do Estado Novo, DIP); do Regime Militar (1964–1985) e seus atos institucionais, repressão, milagre econômico e abertura; da Nova República (1985 em diante) e Constituição de 1988; de história mundial da Guerra Fria sem conexão direta com o Brasil 1945–1964; ou de temas econômicos/sociais brasileiros de longa duração sem recorte explícito no período 1945–1964.",
+      "diferenciador": "Foco na experiência democrática e partidária brasileira entre 1945 e 1964 (Constituição de 1946, populismo/trabalhismo, nacional-desenvolvimentismo e crises que antecedem 1964), distinguindo-se tanto do autoritarismo do Estado Novo quanto do Regime Militar posterior.",
+      "palavras_chave": [
+        "Constituição de 1946",
+        "PSD-UDN-PTB",
+        "nacional-desenvolvimentismo",
+        "Plano de Metas",
+        "golpe de 1964"
+      ]
     },
     {
       "nome": "Revolução francesa",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da Revolução Francesa (1789–1799) e seus desdobramentos imediatos: causas estruturais e conjunturais, crise do Antigo Regime, fases revolucionárias, principais atores e grupos políticos, documentos e medidas, violência política, guerras e impacto na França e na Europa, culminando no Consulado e na ascensão de Napoleão.",
+      "incluir_quando": "Classificar aqui quando a questão aborda causas (crise financeira, desigualdades do Antigo Regime, Iluminismo, fome/carestia, convocação dos Estados Gerais), eventos e processos (Queda da Bastilha, Grande Medo, abolição dos direitos feudais, Declaração dos Direitos do Homem e do Cidadão, Constituição de 1791, fuga de Varennes, queda da monarquia, República, julgamento e execução de Luís XVI, Comitê de Salvação Pública, Terror, Reação Termidoriana, Diretório, Golpe do 18 de Brumário), grupos e atores (jacobinos, girondinos, sans-culottes, Assembleia Nacional/Constituinte/Legislativa, Convenção, Robespierre, Danton, Marat, Olympe de Gouges), políticas e transformações (secularização, Constituição Civil do Clero, venda de bens nacionais, assignats, calendário revolucionário, descristianização, reformas administrativas, cidadania e sufrágio, papel das mulheres), conflitos internos e externos (guerras revolucionárias, coalizões europeias, levée en masse, Vendeia), e consequências/legados (fim do Antigo Regime, difusão de ideias de cidadania e direitos, nacionalismo, impacto na América e Europa, transição para o período napoleônico).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Revolução Industrial (tecnologia, fábricas, urbanização) sem conexão direta com 1789–1799; Independência dos EUA ou outras independências americanas sem relação explícita com a Revolução Francesa; Era Napoleônica como tema central (Império, Bloqueio Continental, Código Napoleônico, campanhas militares) sem foco na dinâmica revolucionária; Iluminismo em geral (autores e ideias) sem aplicação direta ao contexto francês revolucionário; Revoluções de 1830/1848, Comuna de Paris (1871) ou unificações nacionais (Itália/Alemanha) sem vínculo explícito com o legado de 1789; história da França medieval/moderna anterior (Guerra dos Cem Anos, absolutismo de Luís XIV) sem conexão com a crise do Antigo Regime; história do Haiti e a Revolução Haitiana quando tratada de forma autônoma, sem articulação com a Revolução Francesa e suas políticas coloniais.",
+      "diferenciador": "Foco na ruptura política e social na França entre 1789 e 1799: queda do Antigo Regime, redefinição de soberania/cidadania/direitos, radicalização e violência política (Terror) e reorganização institucional que prepara a transição ao Consulado.",
+      "palavras_chave": [
+        "Antigo Regime",
+        "Estados Gerais",
+        "Queda da Bastilha",
+        "Declaração dos Direitos do Homem e do Cidadão",
+        "jacobinos"
+      ]
     },
     {
       "nome": "Socialismo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das origens, fundamentos teóricos, correntes e experiências históricas do socialismo, incluindo suas críticas ao capitalismo, propostas de organização econômica e política, e impactos em movimentos sociais, revoluções, Estados e políticas públicas do século XIX ao XXI.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos, autores, correntes ou processos históricos ligados ao socialismo, como: crítica socialista ao capitalismo (exploração, mais-valia, luta de classes), propostas de socialização/controle coletivo dos meios de produção, planejamento econômico, internacionalismo e organização do movimento operário; socialismo utópico e científico; marxismo e suas derivações (leninismo, trotskismo, stalinismo, maoísmo, gramscianismo); social-democracia e reformismo; revoluções e experiências de Estados socialistas (Revolução Russa/URSS, China, Cuba, Vietnã, Europa Oriental) e seus desdobramentos; debates sobre partido, vanguarda, ditadura do proletariado, conselhos/sovietes, transição ao comunismo; políticas e instituições associadas (coletivização, nacionalizações, economia planificada, NEP, planos quinquenais); relações entre socialismo, sindicalismo, movimentos operários e internacionais (I e II Internacional); disputas e cisões na esquerda (reformistas x revolucionários, bolcheviques x mencheviques); Guerra Fria quando o foco for a organização/ideologia socialista ou a experiência dos regimes socialistas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: comunismo como tema isolado sem discussão do socialismo (por exemplo, apenas anticomunismo genérico) ou de doutrinas não socialistas; liberalismo, conservadorismo, fascismo/nazismo ou nacionalismo sem relação direta com socialismo; história econômica do capitalismo/industrialização sem enfoque em crítica socialista, movimento operário ou propostas socialistas; anarquismo e libertarismo como tema central (a menos que seja em comparação direta com socialismo/marxismo); políticas de bem-estar social/Estado de bem-estar em geral quando não vinculadas a partidos socialistas/social-democratas ou ao debate socialista; Guerra Fria e geopolítica apenas como disputa EUA-URSS sem análise de ideologia, economia planificada ou organização socialista; história de um país/regime autoritário quando o socialismo não for elemento explicativo central; questões puramente filosóficas sobre igualdade/justiça sem referência a tradições socialistas, autores ou movimentos.",
+      "diferenciador": "O foco distintivo é a análise do socialismo como ideologia, teoria e prática histórica (correntes, autores, movimento operário e experiências de Estado/economia), especialmente sua crítica ao capitalismo e propostas de organização coletiva da produção e do poder, diferenciando-se de temas próximos por exigir vínculo explícito com tradições socialistas e seus desdobramentos históricos.",
+      "palavras_chave": [
+        "socialismo",
+        "marxismo",
+        "luta de classes",
+        "meios de produção",
+        "economia planificada"
+      ]
     },
     {
       "nome": "Era Vargas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período em que Getúlio Vargas exerceu centralidade no poder político brasileiro (1930–1945 e 1951–1954), abrangendo a Revolução de 1930, o Governo Provisório, o Governo Constitucional, o Estado Novo, a redemocratização de 1945, o retorno pelo voto em 1951, as políticas econômicas e trabalhistas, a propaganda e o autoritarismo, as relações com movimentos sociais e elites regionais, e o desfecho com a crise de 1954.",
+      "incluir_quando": "Classificar aqui quando a questão aborda eventos, processos, instituições, políticas ou debates diretamente ligados ao governo Vargas e ao varguismo, como: a Revolução de 1930 e a ruptura com a República Oligárquica; a centralização do poder federal e a intervenção nos estados; o Governo Provisório (1930–1934), a Constituição de 1934 e o Governo Constitucional (1934–1937); a Intentona Comunista (1935), a Ação Integralista Brasileira (AIB) e a polarização ideológica; o golpe de 1937, a Constituição de 1937 (\"Polaca\") e o Estado Novo (1937–1945); o DIP (Departamento de Imprensa e Propaganda), censura, propaganda oficial e culto à figura de Vargas; a política trabalhista e corporativista (Ministério do Trabalho, sindicatos atrelados ao Estado, Justiça do Trabalho, CLT de 1943, salário mínimo, carteira de trabalho); a industrialização e o nacional-desenvolvimentismo (CSN, Vale do Rio Doce, políticas de substituição de importações, planejamento estatal); a política econômica e social do período, incluindo relações com o empresariado, trabalhadores urbanos e setores agrários; a participação do Brasil na Segunda Guerra Mundial durante o Estado Novo (FEB, alinhamento com os EUA) e seus impactos na abertura política; a deposição de Vargas em 1945, a transição e o legado varguista; o segundo governo Vargas (1951–1954), o trabalhismo, o nacionalismo econômico (Petrobras/\"O petróleo é nosso\"), conflitos com a UDN e a imprensa, crise política e o suicídio em 1954; conceitos como populismo, trabalhismo, corporativismo, autoritarismo e nacionalismo associados ao varguismo; comparações internas ao período (1930–45 vs. 1951–54) e interpretações historiográficas sobre a Era Vargas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: República Oligárquica/Primeira República (1889–1930) sem conexão direta com a Revolução de 1930 ou com Vargas; movimentos e revoltas anteriores (Canudos, Contestado, Revolta da Vacina, Tenentismo) se não forem articulados como antecedentes imediatos e explicativos da ascensão de 1930; Era JK, Jânio Quadros, João Goulart e o golpe de 1964, exceto quando a questão for sobre legado varguista (trabalhismo, nacional-desenvolvimentismo, Petrobras, CLT) como continuidade; Ditadura Militar (1964–1985) e Nova República, salvo comparações explícitas com o Estado Novo; história econômica geral do Brasil (industrialização, urbanização, sindicalismo) sem recorte temporal e institucional varguista; história mundial (Segunda Guerra, fascismo, comunismo) sem relação com a política interna do Brasil no período Vargas; história regional/local sem vínculo com intervenções federais, políticas varguistas ou eventos do período (ex.: Revolução Constitucionalista de 1932 só entra se conectada ao governo Vargas e à reorganização do Estado).",
+      "diferenciador": "Foco na construção do Estado nacional centralizado e na reorganização político-institucional e trabalhista do Brasil sob Getúlio Vargas, combinando autoritarismo/propaganda e políticas sociais-trabalhistas/industrialização, distinguindo-se por tratar do varguismo como projeto de poder e de modernização estatal (1930–45 e 1951–54).",
+      "palavras_chave": [
+        "Getúlio Vargas",
+        "Estado Novo",
+        "CLT",
+        "DIP",
+        "Revolução de 1930"
+      ]
     },
     {
       "nome": "O mundo ameríndio",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das sociedades indígenas das Américas antes e durante os primeiros contatos com europeus, abrangendo diversidade cultural, organização social e política, economia, religiosidades e cosmologias, tecnologias, territorialidades, redes de troca, formas de guerra e diplomacia, além de impactos iniciais da conquista/colonização e processos de resistência e adaptação.",
+      "incluir_quando": "Classificar aqui quando a questão aborda povos ameríndios (indígenas das Américas) em perspectiva histórica, especialmente: modos de vida e diversidade cultural (caçadores-coletores, horticultores, sociedades urbanas/estatais); organização social (parentesco, clãs, aldeias, cacicados, confederações) e política (lideranças, conselhos, alianças); economia e trabalho (agricultura do milho/mandioca/batata, caça, pesca, coleta, tributos, redistribuição, comércio e rotas); cultura material e tecnologias (cerâmica, tecelagem, metalurgia andina, arquitetura, sistemas agrícolas como chinampas e terraços); cosmologias, rituais e religiosidades (xamanismo, mitos de origem, calendários, sacrifícios em alguns contextos, relação com a natureza); territorialidade e ambiente (ocupação do espaço, manejo de florestas, domesticação de plantas, paisagens antrópicas); grandes civilizações e formações políticas (maias, mexicas/astecas, incas, povos andinos, povos amazônicos, tupi-guarani, guarani, mapuche, iroqueses, entre outros) e suas especificidades; contatos iniciais com europeus e seus efeitos imediatos (epidemias, guerras, alianças, escravização, missões) quando o foco permanece nas sociedades indígenas e suas respostas; resistência, negociação, adaptação e continuidades culturais indígenas no início do período colonial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: história europeia (Renascimento, Reforma, absolutismo) sem centralidade indígena; expansão marítima e colonização vistas do ponto de vista das metrópoles (Portugal/Espanha) com foco em instituições coloniais, administração, economia colonial (plantation, mineração, pacto colonial) sem análise das sociedades indígenas; tráfico atlântico e escravidão africana como tema central; história do Brasil colonial em geral (capitanias, governo-geral, bandeirantismo, economia açucareira) quando indígenas aparecem apenas como coadjuvantes; independências americanas e formação de Estados nacionais; história indígena contemporânea (demarcação de terras, Constituição de 1988, movimentos indígenas atuais) salvo quando explicitamente conectada a continuidades do mundo ameríndio como objeto principal; arqueologia/técnicas arqueológicas em si (datação, estratigrafia) sem discussão histórica das sociedades ameríndias.",
+      "diferenciador": "Centralidade das sociedades indígenas americanas como sujeitos históricos: suas formas próprias de organização, cultura, territorialidade e cosmologias, bem como suas dinâmicas internas e respostas ao contato, em vez de uma narrativa centrada na colonização europeia ou nas instituições coloniais.",
+      "palavras_chave": [
+        "ameríndio",
+        "povos indígenas",
+        "Mesoamérica",
+        "Andes",
+        "cosmologia"
+      ]
     },
     {
       "nome": "Brasil: A ditadura militar",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período da Ditadura Militar no Brasil (1964–1985), abrangendo o golpe de 1964, a estrutura e funcionamento do regime autoritário, os governos militares, os Atos Institucionais, a repressão e censura, a política econômica e social, a oposição e resistência, a política externa e o processo de abertura e redemocratização.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o golpe civil-militar de 1964 e seus antecedentes imediatos; a consolidação do regime e seus instrumentos legais (Atos Institucionais, especialmente o AI-5), suspensão de direitos, cassações e intervenções; a organização do Estado autoritário (bipartidarismo ARENA/MDB, eleições indiretas, controle do Legislativo e Judiciário); repressão política (DOPS, DOI-CODI, SNI), prisões, tortura, desaparecimentos, censura à imprensa e às artes; movimentos de oposição e resistência (movimento estudantil, greves, guerrilhas como Araguaia, atuação de partidos e frentes, Igreja e sociedade civil); políticas econômicas e seus efeitos (PAEG, “milagre econômico”, endividamento, inflação, concentração de renda, obras e projetos de integração); propaganda oficial e nacionalismo (AERP, ufanismo); crises do regime e transição (distensão/abertura, anistia de 1979, Diretas Já, Colégio Eleitoral, fim do bipartidarismo, Constituição de 1988 como desdobramento); análise de fontes e eventos do período (discursos, charges, músicas censuradas, decretos, notícias) diretamente vinculados ao regime militar.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: República Velha, Era Vargas, Estado Novo (1937–1945) ou populismo pré-1964 sem conexão direta com o golpe; redemocratização pós-1985 como tema central (governos Sarney em diante, Plano Real, Nova República) sem foco na transição a partir do regime; ditaduras de outros países (Chile, Argentina, Uruguai) ou Guerra Fria em escala global sem relação explícita com o Brasil 1964–1985; história econômica brasileira em geral (industrialização, desenvolvimentismo) sem recorte do período militar; movimentos culturais (Tropicália, MPB, Cinema Novo) quando analisados sem vínculo com censura/repressão do regime; temas de direitos humanos contemporâneos ou Comissão da Verdade sem ancoragem no período ditatorial; história constitucional/eleitoral do Brasil em geral sem referência aos mecanismos autoritários do regime militar.",
+      "diferenciador": "O foco é o regime autoritário instaurado em 1964 no Brasil e sua dinâmica política-institucional, repressiva e socioeconômica até 1985, incluindo os mecanismos de controle (AI-5, censura, órgãos de repressão) e o processo de abertura/redemocratização diretamente decorrente desse período.",
+      "palavras_chave": [
+        "golpe de 1964",
+        "AI-5",
+        "DOI-CODI",
+        "milagre econômico",
+        "Diretas Já"
+      ]
     },
     {
       "nome": "Idade Moderna",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período histórico entre o final da Idade Média e o início da Idade Contemporânea (aprox. séculos XV a XVIII), com foco nas transformações políticas, econômicas, sociais, culturais e religiosas que marcaram a formação do mundo moderno: Renascimento, Reformas Religiosas, expansão marítima e colonialismo, mercantilismo, absolutismo, Iluminismo, revoluções e reconfigurações do sistema internacional.",
+      "incluir_quando": "Classificar aqui quando a questão aborda processos, eventos, ideias, instituições ou personagens situados majoritariamente entre os séculos XV e XVIII, tais como: (1) transição do feudalismo para formas capitalistas/mercantis e consolidação de Estados nacionais; (2) Renascimento, Humanismo, revolução científica e mudanças culturais europeias; (3) Reformas Protestantes, Contrarreforma, guerras de religião e impactos político-sociais do cristianismo na Europa moderna; (4) expansão marítima europeia, conquista e colonização das Américas, África e Ásia, formação de impérios ultramarinos, tráfico atlântico e escravidão moderna; (5) mercantilismo, metalismo, balança comercial, companhias de comércio, sistema colonial e economia-mundo; (6) absolutismo, centralização monárquica, cortes, burocracias, exércitos permanentes, diplomacia e guerras europeias modernas; (7) Iluminismo, despotismo esclarecido, enciclopedismo, liberalismo nascente e crítica ao Antigo Regime; (8) crises do Antigo Regime e revoluções de fins do século XVIII (especialmente Revolução Francesa e Independência dos EUA) quando tratadas como culminância da Idade Moderna; (9) relações entre Europa e demais regiões no contexto da primeira globalização (trocas colombianas, circulação de produtos, pessoas e ideias).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) Idade Antiga (Grécia, Roma, Antiguidade Oriental) ou Idade Média (feudalismo clássico, cruzadas, Império Bizantino, Alta/Baixa Idade Média) sem conexão direta com transformações modernas; (2) Idade Contemporânea (século XIX em diante) como Revolução Industrial, imperialismo do século XIX, nacionalismos oitocentistas, Primeira/Segunda Guerra, Guerra Fria, globalização recente; (3) História do Brasil/Américas em períodos posteriores (Império do Brasil, República, Era Vargas etc.) sem foco no sistema colonial moderno; (4) temas de geografia, sociologia ou filosofia em abstrato (por exemplo, conceitos iluministas sem contextualização histórica do século XVIII); (5) história local/regional fora do recorte moderno, ou questões de atualidades; (6) pré-história e arqueologia sem relação com a modernidade.",
+      "diferenciador": "O foco distintivo é a formação do mundo moderno entre os séculos XV e XVIII: expansão europeia e colonialismo, consolidação do Estado moderno e do Antigo Regime, mercantilismo e economia atlântica, Reformas religiosas e Iluminismo, culminando nas revoluções que abalam o Antigo Regime. Diferencia-se da Idade Média pela centralização estatal, economia mercantil e expansão ultramarina; e da Idade Contemporânea pela ausência de industrialização plena e pela predominância do Antigo Regime e do sistema colonial.",
+      "palavras_chave": [
+        "Renascimento",
+        "Reforma Protestante",
+        "expansão marítima",
+        "absolutismo",
+        "mercantilismo"
+      ]
     },
     {
       "nome": "Iluminismo e Liberalismo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das ideias, autores, conceitos e impactos históricos do Iluminismo (séculos XVII-XVIII) e do Liberalismo (político e econômico), incluindo suas críticas ao Antigo Regime, defesa da razão, direitos naturais, tolerância, constitucionalismo, separação de poderes, soberania, e a relação com revoluções e transformações institucionais (Revolução Gloriosa, Independência dos EUA, Revolução Francesa) e com a formação do Estado liberal e do capitalismo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda ideias iluministas e/ou liberais, seus principais pensadores e obras, conceitos centrais (razão, progresso, direitos naturais, contrato social, soberania, liberdade individual, igualdade jurídica, tolerância religiosa, laicidade), propostas políticas (constitucionalismo, separação de poderes, limitação do poder monárquico, representação, cidadania), liberalismo econômico (livre mercado, livre concorrência, propriedade privada, crítica ao mercantilismo, fisiocracia, laissez-faire), circulação das ideias (salões, enciclopédia, opinião pública), e impactos em processos históricos como a crise do Antigo Regime, revoluções atlânticas, declarações de direitos, e a consolidação de instituições liberais. Inclui também comparações entre autores (Hobbes, Locke, Montesquieu, Voltaire, Rousseau, Diderot, d'Alembert, Adam Smith, Quesnay) e a aplicação/limites dessas ideias (ex.: exclusões de gênero, raça e propriedade; liberalismo e escravidão; liberalismo censitário).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) eventos e cronologias de revoluções sem foco nas ideias iluministas/liberais (ex.: batalhas, fases e governos específicos) — nesses casos, classificar em módulos de Revolução Francesa, Independência dos EUA etc.; (2) pensamento socialista, marxismo, anarquismo, sindicalismo e críticas do século XIX-XX ao liberalismo como tema central; (3) absolutismo, mercantilismo e Antigo Regime como descrição institucional/econômica sem discussão de crítica iluminista/liberal; (4) nacionalismo, romantismo e conservadorismo como correntes principais; (5) história econômica contemporânea (neoliberalismo, globalização) quando desconectada do liberalismo clássico; (6) filosofia medieval, escolástica, Reforma/Contrarreforma e debates teológicos sem relação com tolerância/razão iluminista; (7) história do Brasil/América Latina quando o foco é o processo político local sem referência explícita à influência iluminista/liberal (ex.: datas, líderes, guerras internas).",
+      "diferenciador": "O foco distintivo é a análise de ideias e doutrinas (Iluminismo e Liberalismo) — seus conceitos, autores e propostas de organização política/econômica — e como elas fundamentam a crítica ao Antigo Regime e a construção do Estado constitucional e da economia de mercado, mais do que a narrativa factual de eventos isolados.",
+      "palavras_chave": [
+        "Iluminismo",
+        "liberalismo",
+        "direitos naturais",
+        "separação de poderes",
+        "laissez-faire"
+      ]
     },
     {
       "nome": "Período Pré-Colonial",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do Brasil antes da colonização efetiva portuguesa (aprox. 1500–1530), incluindo o contexto das grandes navegações e do Tratado de Tordesilhas, o primeiro contato entre europeus e povos indígenas, as expedições exploradoras e guarda-costas, a exploração do pau-brasil por meio do escambo, a presença e concorrência de outros europeus (especialmente franceses) e as razões da ausência inicial de colonização sistemática.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o período entre a chegada dos portugueses e o início da colonização organizada, tratando de: (1) chegada de Cabral e primeiros registros/relatos (ex.: Carta de Pero Vaz de Caminha) como fonte sobre o contato inicial; (2) expedições exploradoras e reconhecimento do litoral, expedições guarda-costas e objetivos de patrulhamento/defesa; (3) exploração econômica inicial centrada no pau-brasil, escambo, feitorias e extração; (4) relações iniciais entre europeus e indígenas (alianças, trocas, conflitos, captura/escravização inicial, choque cultural) no contexto pré-colonial; (5) presença francesa e contrabando do pau-brasil, disputas e ameaças à posse portuguesa; (6) fatores que explicam a demora na colonização (prioridades no Oriente, custos, baixa atratividade imediata, necessidade de defesa do território); (7) marcos de transição para a colonização (ex.: criação das capitanias hereditárias e início do governo-geral como desdobramentos do fim do pré-colonial, quando tratados como mudança de fase).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) colonização efetiva e administração colonial (capitanias hereditárias em funcionamento, governo-geral, câmaras, justiça, sistema colonial); (2) economia açucareira, plantation, engenhos, tráfico atlântico e escravidão africana como eixo central; (3) missões jesuíticas, catequese e organização religiosa/educacional já estruturada no período colonial; (4) invasões e ocupações estrangeiras posteriores (França Antártica, França Equinocial, invasões holandesas) como tema principal; (5) sociedades indígenas em longa duração antes de 1500 (pré-história/arqueologia, povoamento das Américas) quando desconectadas do contato inicial e do recorte 1500–1530; (6) temas do Império ou República (independência, regências, abolição, etc.).",
+      "diferenciador": "Foco no intervalo 1500–1530, marcado por exploração e reconhecimento do território sem colonização sistemática: extração do pau-brasil via escambo, expedições e defesa do litoral, e primeiros contatos/competição europeia, antes da implantação de estruturas coloniais permanentes.",
+      "palavras_chave": [
+        "1500–1530",
+        "pau-brasil",
+        "escambo",
+        "feitorias",
+        "expedições guarda-costas"
+      ]
     },
     {
       "nome": "Pré-História",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das sociedades humanas antes do surgimento da escrita, abrangendo a evolução humana, modos de vida (caça e coleta, sedentarização), tecnologias líticas e do fogo, arte rupestre, organização social, crenças e rituais, e as grandes periodizações (Paleolítico, Mesolítico, Neolítico e Idade dos Metais), com base em evidências arqueológicas, paleoantropológicas e paleoambientais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a vida humana antes da escrita e/ou a periodização da Pré-História; evolução e hominização (hominíneos, Homo sapiens, migrações e povoamento); cultura material e tecnologia (ferramentas de pedra lascada/polida, domínio do fogo, cerâmica, metalurgia inicial); modos de subsistência (caça, coleta, pesca, domesticação de plantas e animais); transição para o sedentarismo e a chamada Revolução Neolítica; arte e simbolismo (arte rupestre, estatuetas, megalitismo); práticas funerárias, rituais e formas de organização social em comunidades pré-letradas; interpretação de vestígios arqueológicos (sítios, estratigrafia, datação relativa/absoluta como carbono-14) e relação com mudanças climáticas do Pleistoceno/Holoceno.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de História Antiga com escrita e Estados organizados (Mesopotâmia, Egito, Fenícia, Hebreus, Grécia, Roma) ou de períodos históricos posteriores (Idade Média, Moderna, Contemporânea); quando o foco é exclusivamente em mitologia, religião ou filosofia de civilizações letradas sem conexão com evidências pré-históricas; quando aborda apenas geologia/paleontologia de dinossauros e eras geológicas sem relação com presença humana; quando trata de arqueologia histórica (períodos com documentação escrita) ou de temas de antropologia cultural contemporânea sem recorte temporal pré-histórico; quando o tema central é a história do Brasil/Américas já no período colonial ou com fontes escritas predominantes (a menos que a questão seja sobre povoamento pré-colonial e arqueologia pré-histórica).",
+      "diferenciador": "Foco em sociedades humanas sem escrita, reconstruídas principalmente por vestígios materiais e métodos arqueológicos/paleoantropológicos, com ênfase na evolução humana e nas transformações tecnológicas e socioeconômicas (caça-coleta → agricultura/sedentarismo) antes do surgimento das primeiras civilizações letradas.",
+      "palavras_chave": [
+        "Paleolítico",
+        "Neolítico",
+        "arte rupestre",
+        "Revolução Neolítica",
+        "Idade dos Metais"
+      ]
     },
     {
       "nome": "Estudos Históricos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudos Históricos abrange a reflexão sobre como o conhecimento histórico é produzido, validado e comunicado. Inclui conceitos de tempo histórico, periodização, causalidade, mudança e permanência, uso e crítica de fontes, métodos de pesquisa, construção de narrativas e interpretações, historiografia e debates sobre memória, patrimônio e usos públicos da História.",
+      "incluir_quando": "Classificar aqui quando a questão aborda procedimentos, conceitos e ferramentas do trabalho do historiador, como: (1) análise, crítica e interpretação de fontes (primárias e secundárias), autoria, contexto, intencionalidade, confiabilidade, vieses e silêncios; (2) metodologia de pesquisa histórica (formulação de problema, hipóteses, recorte temporal/espacial, seleção de evidências, comparação, triangulação, uso de arquivos, história oral); (3) conceitos estruturantes: tempo histórico, duração, simultaneidade, anacronismo, periodização, cronologia, mudança e permanência, causalidade, contingência, agência, estrutura, conjuntura; (4) construção de narrativas e explicações históricas (argumentação, evidência, interpretação, multiperspectividade, controvérsias); (5) historiografia e escolas/abordagens (positivismo, marxismo, Annales, micro-história, história cultural, história social, história global, história do tempo presente), debates teóricos e epistemológicos; (6) memória, patrimônio e usos públicos da História (lugares de memória, comemorações, monumentos, museus, negacionismo, revisionismo, políticas de memória); (7) leitura e interpretação de textos historiográficos, gráficos, mapas e documentos como evidências para sustentar uma tese sobre o passado.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de conteúdos factuais de períodos, eventos, processos ou sociedades específicas (por exemplo, Revolução Francesa, Brasil Colônia, Guerras Mundiais) sem foco explícito em método, fontes, historiografia ou conceitos de análise histórica. Também não incluir quando o foco é predominantemente Geografia (cartografia física, clima), Sociologia/Filosofia sem relação direta com produção do conhecimento histórico, ou quando se trata apenas de datas, biografias e cronologias como memorização. Questões sobre educação patrimonial ou museus devem ficar fora se forem apenas descritivas/turísticas, sem problematizar memória, narrativa e uso público da História.",
+      "diferenciador": "O foco principal é o 'como se faz História': métodos, fontes, conceitos analíticos e debates historiográficos/memoriais, e não o 'o que aconteceu' em um recorte histórico específico.",
+      "palavras_chave": [
+        "fontes históricas",
+        "crítica de fontes",
+        "historiografia",
+        "tempo histórico",
+        "memória e patrimônio"
+      ]
     },
     {
       "nome": "O imperialismo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do imperialismo (sobretudo dos séculos XIX e início do XX) como política e processo de expansão territorial, econômica, política e cultural das potências industriais sobre outras regiões, com ênfase no “novo imperialismo”, na partilha da África e da Ásia, nas justificativas ideológicas, nos mecanismos de dominação e nas consequências para metrópoles e sociedades colonizadas, incluindo relações com a Primeira Guerra Mundial e resistências locais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) o conceito de imperialismo e suas características no século XIX/XX (expansão, dominação, exploração, controle de mercados e recursos); (2) causas do imperialismo: industrialização, capitalismo financeiro, busca de matérias-primas, mercados consumidores, investimentos, rivalidades nacionais, geopolítica e estratégia militar; (3) formas e instrumentos de dominação: colonização direta, protetorados, concessões, esferas de influência, neocolonialismo, diplomacia coercitiva, companhias coloniais, missões religiosas, administração colonial, trabalho forçado e economia de plantation/mineração; (4) ideologias e justificativas: “missão civilizadora”, darwinismo social, racismo científico, nacionalismo, cristianização, fardo do homem branco; (5) eventos e marcos: Conferência de Berlim (1884-85), partilha da África, “Scramble for Africa”, crises marroquinas, Guerra dos Bôeres, incidentes e disputas coloniais; (6) imperialismo na Ásia: Índia britânica, Indochina francesa, dominação/pressões sobre a China (Guerras do Ópio, tratados desiguais, concessões), presença europeia no Sudeste Asiático; (7) imperialismo japonês e/ou norte-americano quando tratados como expansão imperial (ex.: Japão na Ásia, EUA no Caribe/Pacífico) e suas lógicas; (8) resistências e respostas locais: revoltas anticoloniais, movimentos nacionalistas, lideranças e guerras de resistência; (9) consequências: reconfiguração de fronteiras, dependência econômica, impactos sociais e culturais, migrações, violência colonial, formação de elites coloniais, e relação com tensões internacionais que antecedem a Primeira Guerra Mundial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) colonialismo ibérico dos séculos XV–XVIII (expansão marítima, colonização da América, pacto colonial, mercantilismo) sem conexão explícita com o imperialismo do século XIX/XX; (2) descolonização pós-1945 e independências afro-asiáticas como foco principal (a menos que a questão peça causas/legados do imperialismo); (3) imperialismo na Antiguidade (Roma, impérios antigos) ou expansão medieval/moderna sem relação com o “novo imperialismo”; (4) Primeira Guerra Mundial como tema central (alianças, batalhas, tratados) sem vínculo direto com rivalidades imperialistas/coloniais; (5) globalização contemporânea, “imperialismo cultural” atual ou geopolítica do século XXI sem enquadramento histórico do imperialismo clássico; (6) história interna de países europeus (política doméstica, revoluções) sem relação com expansão colonial; (7) temas econômicos gerais (capitalismo, industrialização) quando não conectados à expansão imperialista e à dominação colonial.",
+      "diferenciador": "Foco na expansão e dominação colonial/neocolonial das potências industriais (especialmente 1870–1914), seus mecanismos (políticos, econômicos e ideológicos) e a partilha afro-asiática, distinguindo-se de colonialismo mercantil (séculos XV–XVIII) e de descolonização (pós-1945).",
+      "palavras_chave": [
+        "novo imperialismo",
+        "Conferência de Berlim",
+        "partilha da África",
+        "esferas de influência",
+        "missão civilizadora"
+      ]
     },
     {
       "nome": "Desafio do Mundo Presente",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de temas históricos e geopolíticos contemporâneos (séculos XX e XXI) que explicam desafios atuais do mundo, articulando heranças do passado recente, transformações econômicas, políticas, sociais, culturais e ambientais, e seus impactos em escala local, nacional e global.",
+      "incluir_quando": "Classificar aqui quando a questão aborda problemas, tensões e transformações do mundo contemporâneo, especialmente do pós-Segunda Guerra até hoje, como: Guerra Fria e suas consequências; nova ordem mundial e globalização; conflitos e guerras recentes (étnicos, religiosos, territoriais, geopolíticos); terrorismo e segurança internacional; migrações e crises de refugiados; desigualdades socioeconômicas e exclusão; direitos humanos e cidadania no presente; democracia, autoritarismos e populismos contemporâneos; organismos internacionais e governança global (ONU, OTAN, FMI, Banco Mundial, OMC); integração regional (UE, Mercosul) e disputas comerciais; revolução técnico-científica, digitalização, redes sociais e desinformação; mudanças climáticas, crise ambiental, transição energética e sustentabilidade; pandemias e saúde global; movimentos sociais contemporâneos (feminismos, antirracismo, LGBTQIA+, ambientalismo) e disputas de memória; relações internacionais do Brasil no mundo atual e desafios internos conectados a dinâmicas globais.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de: História Antiga, Medieval ou Moderna sem conexão explícita com desafios contemporâneos; Brasil Colônia, Império ou Primeira República (até 1930) como foco central; conteúdos de História do Brasil do século XX/XXI que sejam estritamente internos e cronológicos (ex.: apenas governos, constituições, economia nacional) sem problematização de desafios do mundo presente; temas de Geografia física ou econômica sem abordagem histórica (ex.: apenas clima, relevo, cartografia); Sociologia/Filosofia em nível teórico abstrato sem contextualização histórica (ex.: apenas conceitos de contrato social, ética, epistemologia); atualidades jornalísticas pontuais sem contextualização histórica e sem relação com processos de longa duração; história cultural/arte/literatura sem vínculo com questões contemporâneas globais (ex.: análise estética isolada).",
+      "diferenciador": "Centralidade na compreensão histórica do tempo presente: conecta processos do pós-1945 (e suas raízes) a dilemas atuais globais — conflitos, globalização, direitos, tecnologia e crise ambiental — enfatizando interdependência internacional e impactos contemporâneos, mais do que a narrativa política nacional isolada.",
+      "palavras_chave": [
+        "Guerra Fria",
+        "globalização",
+        "nova ordem mundial",
+        "direitos humanos",
+        "mudanças climáticas"
+      ]
     },
     {
       "nome": "Revolução Industrial",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das transformações econômicas, tecnológicas, sociais e ambientais associadas à industrialização iniciada na Grã-Bretanha no século XVIII e sua difusão para outras regiões, incluindo mudanças nos sistemas de produção, trabalho, urbanização, transportes, energia, relações de classe e impactos de curto e longo prazo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a origem, características, fases (Primeira e Segunda Revolução Industrial) e consequências da industrialização; a transição do artesanato/manufatura para o sistema fabril; inovações tecnológicas (máquinas, mecanização, novas fontes de energia) e seus efeitos na produtividade; setores-chave (têxtil, siderurgia, mineração, química, eletricidade); mudanças no trabalho (proletariado, disciplina fabril, divisão do trabalho, trabalho infantil e feminino, sindicalismo); urbanização e novas formas de vida nas cidades industriais; transformações nos transportes e comunicações (ferrovias, navios a vapor, telégrafo) ligadas à expansão industrial; relações entre industrialização, capitalismo, mercado consumidor e expansão do comércio; impactos ambientais e sanitários associados ao crescimento industrial; difusão da industrialização para Europa, EUA e Japão e comparações entre ritmos e modelos; debates e interpretações históricas sobre causas (cercamentos, acumulação de capital, revolução agrícola, recursos naturais, instituições) e efeitos sociais (questão social, desigualdade, movimentos operários).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de Revolução Francesa, Iluminismo ou política europeia sem conexão direta com industrialização; imperialismo/colonialismo do século XIX como tema central sem relação explícita com demandas industriais, matérias-primas, mercados ou infraestrutura; história do trabalho e sindicalismo em períodos não vinculados ao contexto industrial (ex.: século XX tardio) sem referência à industrialização; história econômica contemporânea (globalização, neoliberalismo) sem vínculo com a Revolução Industrial; Revolução Científica (séculos XVI-XVII) ou história da ciência em geral sem foco em tecnologias e sistemas produtivos industriais; industrialização no Brasil/América Latina no século XX quando o foco é desenvolvimentismo, Era Vargas ou substituição de importações (a menos que a questão compare ou remeta diretamente às Revoluções Industriais clássicas); Primeira/Segunda Guerra Mundial quando o foco é militar-diplomático e não a base industrial/tecnológica; temas de história urbana ou demografia sem relação com a urbanização industrial e o sistema fabril.",
+      "diferenciador": "O foco distintivo é a industrialização como processo histórico: mecanização e sistema fabril, novas fontes de energia e tecnologias, reorganização do trabalho e profundas mudanças socioeconômicas (urbanização, classes sociais, capitalismo industrial) entre os séculos XVIII e XIX, incluindo sua difusão e impactos.",
+      "palavras_chave": [
+        "sistema fabril",
+        "mecanização",
+        "máquina a vapor",
+        "proletariado",
+        "ferrovias"
+      ]
     },
     {
       "nome": "Cidadania e Direitos Humanos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da construção histórica da cidadania e dos direitos humanos, seus fundamentos, documentos, instituições e lutas sociais, incluindo direitos civis, políticos, sociais, econômicos, culturais e ambientais, bem como mecanismos de garantia, violações e políticas de promoção da igualdade e da dignidade humana em diferentes contextos históricos e contemporâneos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a definição, evolução histórica, ampliação ou restrição da cidadania; direitos e deveres do cidadão; direitos humanos e sua universalidade/indivisibilidade; documentos e marcos (Declaração Universal dos Direitos Humanos, constituições, cartas de direitos, tratados e convenções); participação política e representação (voto, sufrágio, partidos, movimentos sociais, conselhos, protestos); igualdade e não discriminação (racismo, sexismo, xenofobia, intolerância religiosa, LGBTQIA+fobia, capacitismo) como tema de direitos; direitos sociais (educação, saúde, trabalho, moradia, previdência) e políticas públicas associadas; justiça, Estado de Direito e garantias (devido processo legal, presunção de inocência, liberdade de expressão, associação, imprensa, direito de defesa); cidadania em regimes democráticos e autoritários (censura, repressão, perseguição política, prisões, tortura, desaparecimentos) e processos de redemocratização/justiça de transição; direitos de grupos historicamente marginalizados (povos indígenas, população negra, mulheres, crianças e adolescentes, migrantes e refugiados); direitos coletivos e difusos (meio ambiente, patrimônio cultural, direito à cidade); educação em direitos humanos, cultura de paz, mediação de conflitos e combate à violência institucional; atuação de organismos e sistemas de proteção (ONU, OEA, cortes e comissões de direitos humanos, defensorias, ministério público) e formas de denúncia e responsabilização.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de eventos políticos ou guerras sem foco em direitos, cidadania ou garantias; história institucional do Estado (formação de governos, administração, diplomacia) sem discussão de participação, direitos ou liberdades; economia e trabalho apenas como produção, industrialização, comércio ou indicadores, sem abordagem de direitos sociais/trabalhistas; cultura, arte e religião apenas como manifestações culturais, sem relação com liberdade religiosa, intolerância ou direitos culturais; geografia/território e meio ambiente apenas como aspectos físicos ou econômicos, sem enfoque em direitos ambientais, justiça ambiental ou direito à cidade; legislação e constituições apenas como cronologia normativa, sem análise de direitos, deveres, cidadania ou mecanismos de proteção; ética/filosofia política em abstrato (contratualismo, teorias do Estado) quando não conectada a direitos, cidadania, participação e garantias concretas.",
+      "diferenciador": "O foco central é a relação entre indivíduos/grupos e o Estado/sociedade a partir de direitos, deveres, garantias, participação e mecanismos de proteção/violação, analisando a cidadania como construção histórica e os direitos humanos como referência normativa e política para avaliar práticas e instituições.",
+      "palavras_chave": [
+        "cidadania",
+        "direitos humanos",
+        "direitos civis e políticos",
+        "direitos sociais",
+        "igualdade e não discriminação"
+      ]
     },
     {
       "nome": "Era Napoleônica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período em que Napoleão Bonaparte ascende ao poder na França, consolida um novo regime (Consulado e Império), promove reformas internas e conduz guerras que reconfiguram a Europa (1799–1815), incluindo suas políticas, instituições, campanhas militares, alianças, queda e legado político-jurídico.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a ascensão de Napoleão (Golpe do 18 de Brumário), o Consulado, o Império Napoleônico, a legitimação do poder (plebiscitos, coroação), reformas administrativas e jurídicas (Código Napoleônico/Código Civil, centralização, Concordata, educação, burocracia), política econômica e social (burguesia, propriedade, mérito), relações com a Revolução Francesa (continuidade/ruptura), as Guerras Napoleônicas (coalizões, batalhas, estratégias), o Bloqueio Continental e seus efeitos, a reorganização territorial e política da Europa (Estados satélites, Confederação do Reno), a Península Ibérica (invasões, Guerra Peninsular, resistência), a invasão da Rússia (1812) e suas consequências, a queda e abdicações, exílios (Elba e Santa Helena), o Governo dos Cem Dias, a Batalha de Waterloo, o Congresso de Viena e a Restauração/Equilíbrio europeu como desdobramentos diretos, bem como o impacto do napoleonicismo (nacionalismos, liberalismo, difusão de instituições e códigos).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de fases anteriores da Revolução Francesa sem conexão direta com Napoleão (Assembleia Nacional, Convenção, Terror jacobino, Diretório em geral), de processos do Antigo Regime francês sem relação com o período napoleônico, de história europeia do século XIX posterior sem vínculo explícito com o legado napoleônico (Revoluções de 1830/1848, unificações italiana e alemã sem menção a Napoleão/Guerras Napoleônicas), de história militar geral sem referência às campanhas napoleônicas, ou de história de Portugal/Espanha/América Latina sem conexão com as invasões napoleônicas e seus efeitos.",
+      "diferenciador": "Foco na liderança e no regime de Napoleão Bonaparte e nas transformações político-jurídicas e geopolíticas europeias decorrentes de suas reformas e guerras (1799–1815), distinguindo-se por enfatizar Consulado/Império, Código Napoleônico e Guerras Napoleônicas como eixo central.",
+      "palavras_chave": [
+        "Napoleão Bonaparte",
+        "18 de Brumário",
+        "Código Napoleônico",
+        "Bloqueio Continental",
+        "Waterloo"
+      ]
     },
     {
       "nome": "I guerra mundial",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da Primeira Guerra Mundial (1914–1918): suas causas de longo e curto prazo, o estopim, alianças e blocos, principais frentes e fases do conflito, estratégias e tecnologias militares, participação de países e impérios, vida nas trincheiras e mobilização total, impactos políticos, sociais e econômicos, desfecho, tratados de paz e consequências imediatas (reconfiguração territorial, crise do pós-guerra e condições que favoreceram tensões posteriores).",
+      "incluir_quando": "Classificar aqui quando a questão aborda a Primeira Guerra Mundial entre 1914 e 1918, incluindo: (1) causas estruturais (imperialismo, nacionalismos, rivalidades econômicas e coloniais, corrida armamentista, militarismo) e causas imediatas (crise de julho, atentado de Sarajevo); (2) sistemas de alianças (Tríplice Entente, Tríplice Aliança, alianças e tratados) e a dinâmica diplomática europeia pré-1914; (3) eventos e campanhas do conflito (frente ocidental e oriental, guerra de movimento e guerra de trincheiras, Batalha do Somme, Verdun, Marne, Tannenberg, Gallipoli, guerra submarina, bloqueios navais); (4) entrada e papel de atores (Alemanha, Império Austro-Húngaro, Império Otomano, Rússia, França, Reino Unido, Itália, EUA, Japão, colônias e domínios); (5) tecnologia e táticas (metralhadoras, artilharia pesada, gás tóxico, tanques, aviação, U-boats, propaganda, censura); (6) dimensões sociais e econômicas (economia de guerra, racionamento, trabalho feminino, mobilização total, moral civil, greves e tensões internas); (7) desfecho e armistício de 1918, Conferência de Paz de Paris e Tratado de Versalhes (e outros tratados correlatos), Liga das Nações, reparações, cláusula de culpa de guerra; (8) consequências imediatas: queda de impérios (Austro-Húngaro, Otomano, Russo, Alemão), novos Estados, mudanças de fronteiras, impactos demográficos e culturais, e relações com crises do pós-guerra.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Segunda Guerra Mundial (1939–1945), nazifascismo, Holocausto, Guerra Fria, ou conflitos posteriores, mesmo que mencionem a I Guerra apenas como antecedente distante; (2) Revolução Russa e Guerra Civil Russa como tema central (1917–1922), quando a guerra aparece apenas como contexto; (3) história do imperialismo/colonialismo do século XIX sem conexão direta com 1914–1918; (4) história militar geral (armas, táticas) sem referência explícita ao conflito de 1914–1918; (5) tratados e diplomacia do entreguerras (ex.: Locarno, Munique) quando a I Guerra não é o foco; (6) biografias ou eventos nacionais que não se relacionem diretamente com a participação na I Guerra; (7) conflitos balcânicos anteriores (Guerras Balcânicas) se não estiverem articulados como antecedente direto do estopim de 1914.",
+      "diferenciador": "O foco distintivo é o conflito global de 1914–1918 e sua lógica própria (alianças europeias, guerra de trincheiras/mobilização total, frentes e batalhas da época, armistício e tratados de paz imediatos), diferenciando-se de temas do entreguerras e da Segunda Guerra, que podem ser consequências, mas não são o objeto principal.",
+      "palavras_chave": [
+        "Primeira Guerra Mundial",
+        "1914-1918",
+        "Tríplice Entente",
+        "Tríplice Aliança",
+        "Tratado de Versalhes"
+      ]
     },
     {
       "nome": "Regimes Totalitários",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos regimes totalitários do século XX, suas origens, ideologias, estruturas de poder, mecanismos de controle social e repressão, propaganda, economia e política externa, bem como seus impactos sociais e humanos, com ênfase em casos como nazismo, fascismo e stalinismo e suas relações com o período entre-guerras e a Segunda Guerra Mundial.",
+      "incluir_quando": "Classificar aqui quando a questão aborda características, funcionamento e consequências de regimes totalitários (partido único, culto ao líder, propaganda de massa, censura, polícia política, repressão, eliminação de opositores, mobilização social), a ascensão e consolidação do fascismo italiano, do nazismo alemão e do stalinismo soviético, a comparação entre totalitarismo e outras formas de governo, o papel de ideologias (fascismo, nazismo, comunismo stalinista) na organização do Estado, políticas de perseguição e violência de Estado (campos de concentração, expurgos, deportações, genocídio/antissemitismo no contexto do nazismo), corporativismo e economia dirigida em regimes totalitários, bem como a relação desses regimes com o contexto do entre-guerras, crise de 1929, nacionalismo, militarismo e expansionismo que contribuíram para a Segunda Guerra Mundial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de autoritarismos não totalitários (ex.: ditaduras militares latino-americanas, Estado Novo brasileiro, salazarismo, franquismo) sem foco em totalitarismo; de democracia liberal, parlamentarismo ou constitucionalismo; de temas da Segunda Guerra Mundial sem conexão direta com a natureza/funcionamento de regimes totalitários (batalhas, frentes militares, estratégias); de Guerra Fria e regimes comunistas pós-1945 sem ênfase no stalinismo/totalitarismo; de Revolução Russa e Leninismo sem foco na consolidação stalinista; de nacional-socialismo apenas como evento eleitoral/partidário sem análise do Estado totalitário; de Holocausto tratado isoladamente como história do genocídio sem ligação ao aparato totalitário nazista; ou de conceitos gerais de propaganda/mídia sem enquadramento histórico em regimes totalitários.",
+      "diferenciador": "O foco principal é a compreensão do totalitarismo como forma de organização do Estado e da sociedade: centralização extrema do poder, ideologia oficial, mobilização e controle das massas, repressão sistemática e uso de propaganda, analisando casos clássicos (nazismo, fascismo, stalinismo) e suas dinâmicas históricas no entre-guerras.",
+      "palavras_chave": [
+        "totalitarismo",
+        "nazismo",
+        "fascismo",
+        "stalinismo",
+        "propaganda"
+      ]
     },
     {
       "nome": "Conquista e Colonização da América",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do processo de conquista europeia das Américas (séculos XV–XVII) e da formação dos sistemas coloniais, incluindo motivações, agentes, estratégias de dominação, impactos sobre povos indígenas e africanos, organização política e econômica das colônias e disputas entre potências europeias.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a chegada e expansão europeia nas Américas e seus desdobramentos coloniais, como: viagens e conquistas ibéricas (Espanha e Portugal) e de outras potências (França, Inglaterra, Holanda); conquista de impérios e sociedades indígenas (ex.: astecas, incas, taínos) e mecanismos de dominação (alianças, guerras, catequese, violência, epidemias); instituições e formas de trabalho coloniais (encomienda, mita, repartimiento, escravidão indígena e africana, plantation); administração e ordenamento colonial (vice-reinos, capitanias, câmaras, audiências, Casa de Contratação, Conselho das Índias); exploração econômica e circuitos atlânticos (mineração de prata e ouro, açúcar, tabaco, comércio triangular, mercantilismo, pacto colonial); evangelização e ação missionária (ordens religiosas, reduções, conversão, sincretismos); resistência e conflitos (revoltas indígenas, quilombos, guerras coloniais, pirataria e corso); formação de sociedades coloniais (mestiçagens, hierarquias de castas, criollos, indígenas, africanos e europeus) e impactos demográficos, ambientais e culturais da colonização.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: civilizações americanas pré-colombianas sem relação com a conquista/colonização; independências americanas e formação de Estados nacionais (séculos XVIII–XIX); história dos EUA/América Latina no século XIX–XX (industrialização, imperialismo, guerras mundiais, Guerra Fria); história europeia interna sem conexão direta com a colonização americana; colonização da África/Ásia (imperialismo do século XIX) sem vínculo com a América; temas de história do Brasil/América colonial muito específicos apenas de período posterior (ex.: reformas pombalinas, crise do sistema colonial no fim do século XVIII) quando o foco não for a conquista e a estruturação inicial do sistema colonial.",
+      "diferenciador": "Foco na conquista europeia e na implantação/funcionamento do sistema colonial nas Américas (dominação, trabalho, administração, economia atlântica e impactos socioculturais) entre os séculos XV e XVII, distinguindo-se de temas pré-colombianos (antes do contato) e de independências/nações (ruptura do sistema colonial).",
+      "palavras_chave": [
+        "conquista",
+        "colonização",
+        "encomienda",
+        "vice-reinos",
+        "pacto colonial"
+      ]
     },
     {
       "nome": "Segundo Reinado",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Período do Império do Brasil sob D. Pedro II (1840–1889), abrangendo a consolidação do Estado imperial, o funcionamento do sistema político (Parlamentarismo às avessas, Poder Moderador, partidos), a economia cafeeira e suas transformações (trabalho escravo, imigração, ferrovias), a política externa e conflitos (especialmente a Guerra do Paraguai), as tensões sociais e políticas (movimento abolicionista, Questão Religiosa e Questão Militar) e a crise final do regime que culmina na Proclamação da República.",
+      "incluir_quando": "Classificar aqui quando a questão aborda eventos, processos, instituições, atores ou debates do Brasil entre 1840 e 1889, como: Golpe da Maioridade e início do reinado de D. Pedro II; centralização política e estabilidade relativa após as Regências; funcionamento do Império (Poder Moderador, Conselho de Estado, eleições, clientelismo, coronelismo em formação, revezamento entre Liberais e Conservadores); Parlamentarismo no Império (\"parlamentarismo às avessas\" e papel do imperador na nomeação/demissão de gabinetes); revoltas e conflitos internos do período (ex.: Praieira) quando contextualizados no Segundo Reinado; economia do café (Vale do Paraíba e Oeste Paulista), expansão da infraestrutura (ferrovias, portos), modernização limitada e relações com o capital britânico; manutenção e crise do escravismo, tráfico negreiro e sua repressão (Lei Eusébio de Queirós) e transição para trabalho livre (imigração, parceria/colonato); legislação e etapas do abolicionismo (Lei do Ventre Livre, Lei dos Sexagenários, Lei Áurea) e atuação de abolicionistas; Guerra do Paraguai (causas, alianças, impactos políticos, econômicos e militares no Império); Questão Christie e relações diplomáticas; Questão Religiosa (conflito entre Estado e Igreja/ultramontanismo/maçonaria) e Questão Militar (tensões entre Exército e monarquia); crescimento do republicanismo e do positivismo, crise do regime e fatores que levam a 1889; papel de D. Pedro II, da elite cafeeira, do Exército e de grupos urbanos na deslegitimação do Império.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Período Colonial (capitanias, açúcar colonial, mineração, administração portuguesa); Independência e Primeiro Reinado (1822–1831), incluindo Constituição de 1824 e abdicação de D. Pedro I, quando não conectados diretamente a desdobramentos do Segundo Reinado; Período Regencial (1831–1840) como tema central (Ato Adicional, revoltas regenciais como Cabanagem, Farroupilha, Sabinada, Balaiada) sem foco no impacto/fechamento no Segundo Reinado; República Velha e períodos republicanos (1889 em diante) como tema principal (governos militares iniciais, Constituição de 1891, política dos governadores, tenentismo etc.); história geral da escravidão/abolicionismo em outros países sem relação com o Brasil imperial; história econômica do café no século XX; Guerra do Paraguai tratada exclusivamente do ponto de vista de história geral do Cone Sul sem conexão com o Império brasileiro; temas culturais/científicos do século XIX sem vínculo com instituições, política ou sociedade do Segundo Reinado.",
+      "diferenciador": "Identifica-se pelo recorte 1840–1889 e pelo foco no funcionamento e crise do Império sob D. Pedro II: política imperial (Poder Moderador e parlamentarismo às avessas), economia cafeeira com transição do trabalho escravo para o livre, Guerra do Paraguai e as questões (Religiosa e Militar) que desestabilizam a monarquia até 1889.",
+      "palavras_chave": [
+        "D. Pedro II",
+        "Parlamentarismo às avessas",
+        "Poder Moderador",
+        "Guerra do Paraguai",
+        "Lei Áurea"
+      ]
     },
     {
       "nome": "Guerra Fria",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período de tensões e disputas globais (aprox. 1947–1991) entre EUA e URSS, marcado por bipolaridade, corrida armamentista e nuclear, competição ideológica (capitalismo x socialismo), formação de blocos e alianças, guerras por procuração, propaganda, espionagem, disputas tecnológicas e processos que levaram à distensão e ao fim da URSS.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a rivalidade EUA–URSS e seus desdobramentos: bipolaridade e divisão do mundo em blocos; Doutrina Truman, Plano Marshall, COMECON; OTAN, Pacto de Varsóvia e alianças correlatas; crises e marcos como Bloqueio de Berlim, Muro de Berlim, Crise dos Mísseis em Cuba, Guerra da Coreia, Guerra do Vietnã, Afeganistão (invasão soviética), Revolução Cubana no contexto da Guerra Fria; corrida armamentista e nuclear (dissuasão, MAD), corrida espacial (Sputnik, Apollo), espionagem e propaganda; macartismo e anticomunismo; política de contenção, coexistência pacífica, distensão (détente), SALT/START; descolonização e Terceiro Mundo quando vinculados à disputa entre blocos; Primavera de Praga, Doutrina Brejnev, Solidariedade na Polônia; Perestroika e Glasnost, queda do Muro, colapso do bloco socialista no Leste Europeu e dissolução da URSS; impactos na América Latina (intervenções, ditaduras, Operação Condor) quando explicitamente conectados à lógica da Guerra Fria.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Segunda Guerra Mundial (1939–1945) sem conexão direta com a ordem bipolar posterior; Primeira Guerra Mundial; história interna de países (EUA, URSS/Rússia, China, Cuba, Vietnã etc.) sem relação com a disputa EUA–URSS; Revolução Russa e período stalinista anterior a 1945 sem ponte para a Guerra Fria; descolonização e independências na África/Ásia como processos internos sem enquadramento na competição entre blocos; integração europeia (CEE/UE) e reconstrução do pós-guerra apenas como tema econômico-institucional sem referência ao confronto Leste-Oeste; conflitos do Oriente Médio (guerras árabe-israelenses, crise do petróleo) quando abordados sem o recorte de alinhamentos e intervenções da Guerra Fria; globalização e ordem pós-1991 (unipolaridade, Guerra ao Terror) sem retomada explícita do contexto da Guerra Fria.",
+      "diferenciador": "O elemento central é a lógica de bipolaridade e competição sistêmica entre EUA e URSS (ideológica, militar, tecnológica e geopolítica) que estrutura eventos, alianças e conflitos indiretos no mundo entre 1947 e 1991.",
+      "palavras_chave": [
+        "bipolaridade",
+        "EUA e URSS",
+        "OTAN e Pacto de Varsóvia",
+        "corrida armamentista/nuclear",
+        "Muro de Berlim"
+      ]
     }
   ]
 }

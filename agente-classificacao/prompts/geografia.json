@@ -75,291 +75,501 @@
     },
     {
       "nome": "Geologia e Mineração no Brasil",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da base geológica do território brasileiro e sua relação com a ocorrência, exploração e impactos da mineração. Abrange estruturas e unidades geológicas (crátons, escudos cristalinos, bacias sedimentares), processos de formação de recursos minerais, principais províncias e distritos minerais, cadeias produtivas (extração, beneficiamento, logística e exportação), regulação e conflitos socioambientais associados à atividade mineral no Brasil.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) unidades e estruturas geológicas do Brasil (escudos cristalinos, crátons, bacias sedimentares, dobramentos antigos) e como elas condicionam a distribuição de minérios; (2) províncias/distritos minerais e áreas de destaque (Quadrilátero Ferrífero, Carajás, Serra do Navio, Vale do Ribeira, Província Borborema, bacias sedimentares com petróleo/gás, entre outras) e seus produtos; (3) tipos de recursos minerais e energéticos no Brasil (ferro, manganês, bauxita, ouro, nióbio, cobre, estanho, calcário, fosfato, gemas, carvão mineral, petróleo e gás) e sua gênese/ocorrência; (4) mineração e economia brasileira (commodities minerais, exportações, siderurgia, metalurgia, papel de empresas e infraestrutura como ferrovias/portos); (5) técnicas e formas de lavra (a céu aberto, subterrânea, garimpo), beneficiamento e rejeitos; (6) impactos ambientais e sociais da mineração (desmatamento, contaminação por metais, assoreamento, barragens de rejeitos, riscos e desastres, saúde, trabalho, conflitos territoriais, povos indígenas e comunidades tradicionais); (7) legislação, governança e fiscalização mineral no Brasil (ANM, licenciamento ambiental, CFEM/royalties, áreas protegidas, regularização do garimpo) quando vinculadas diretamente à mineração; (8) recuperação de áreas degradadas, mitigação e gestão de riscos em contextos minerários brasileiros.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) geomorfologia, clima, hidrografia, solos ou biomas sem relação direta com geologia econômica/mineração; (2) agricultura, indústria ou energia em geral sem foco em recursos minerais (ex.: matriz elétrica, hidrelétricas, eólica/solar) ou sem conexão com extração mineral; (3) petróleo e gás apenas como geopolítica/mercado/Refino sem discutir base geológica, bacias sedimentares ou exploração; (4) desastres ambientais (enchentes, deslizamentos) sem vínculo com mineração ou barragens de rejeitos; (5) cartografia, geotecnologias e sensoriamento remoto como tema principal, salvo quando aplicados explicitamente à prospecção/monitoramento minerário; (6) história econômica regional/urbana sem relação com mineração; (7) geologia geral (tectônica de placas, tipos de rochas) de forma abstrata, sem contextualização no Brasil e/ou sem conexão com recursos minerais.",
+      "diferenciador": "O foco central é a relação entre a estrutura geológica do Brasil e a ocorrência/exploração de recursos minerais (incluindo impactos, regulação e dinâmica econômica da mineração). Diferencia-se de módulos de 'Geografia Física' por enfatizar geologia aplicada e recursos; e de 'Economia/Indústria' por ancorar a análise na base geológica e nos territórios minerários.",
+      "palavras_chave": [
+        "escudo cristalino",
+        "bacias sedimentares",
+        "Quadrilátero Ferrífero",
+        "Carajás",
+        "barragens de rejeitos"
+      ]
     },
     {
       "nome": "Industrialização: evolução e panorama atual",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do processo histórico de industrialização e suas transformações até o cenário contemporâneo, incluindo revoluções industriais, mudanças tecnológicas e organizacionais, reestruturação produtiva, globalização, cadeias globais de valor, novas geografias industriais, impactos socioespaciais e ambientais, e indicadores atuais da indústria no mundo e no Brasil.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a evolução da industrialização (1ª, 2ª, 3ª e 4ª Revoluções Industriais), fordismo/taylorismo/toyotismo e a reestruturação produtiva; a passagem da indústria pesada para setores de alta tecnologia e serviços avançados; desconcentração e relocalização industrial (desindustrialização, reindustrialização, industrialização tardia); formação de complexos industriais, distritos industriais, tecnopolos e clusters; globalização produtiva (multinacionais, offshoring, outsourcing, cadeias globais de valor, just-in-time); panorama atual da indústria (Indústria 4.0, automação, robotização, digitalização, IA, manufatura avançada); distribuição espacial da indústria no mundo e no Brasil (regiões industriais tradicionais e novas fronteiras); políticas industriais e seus efeitos (substituição de importações, abertura econômica, incentivos, zonas econômicas especiais); e impactos socioeconômicos e ambientais associados à industrialização (urbanização, migrações, trabalho, poluição, transição energética) quando conectados ao processo industrial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de agropecuária e agronegócio sem relação com industrialização; comércio, finanças e globalização apenas pelo viés de fluxos comerciais/financeiros sem foco produtivo-industrial; geopolítica e relações internacionais sem conexão com cadeias produtivas e indústria; urbanização, rede urbana e problemas urbanos sem vínculo com industrialização; energia e matriz energética de forma isolada (sem relação com produção industrial e revoluções tecnológicas); mineração e extrativismo como tema central sem encadeamentos industriais; logística e transportes apenas como infraestrutura geral; ou conteúdos de Geografia física (clima, relevo, hidrografia) sem interface com localização/impactos industriais.",
+      "diferenciador": "O foco é explicar como a indústria se formou e se transformou ao longo do tempo e como se organiza hoje no espaço geográfico (tecnologias, modelos produtivos, localização e redes globais), distinguindo-se de módulos que tratam apenas de setores primário/terciário, urbanização ou globalização sem ênfase na produção industrial.",
+      "palavras_chave": [
+        "Revolução Industrial",
+        "fordismo/toyotismo",
+        "reestruturação produtiva",
+        "cadeias globais de valor",
+        "Indústria 4.0"
+      ]
     },
     {
       "nome": "Pedologia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos solos (pedosfera): sua origem e formação (pedogênese), constituição e propriedades físicas, químicas e biológicas, perfis e horizontes, fatores e processos de intemperismo e formação, classificação e mapeamento de solos, dinâmica e conservação, além de usos e impactos antrópicos (degradação, erosão, contaminação e manejo).",
+      "incluir_quando": "Classificar aqui quando a questão aborda formação e evolução dos solos (pedogênese) e seus fatores (clima, organismos, relevo, material de origem/rocha-mãe, tempo); descrição e interpretação de perfis e horizontes do solo (O, A, E, B, C, R) e processos como eluviamento/iluviamento, laterização, podzolização, gleização, salinização e calcificação; propriedades do solo (textura, estrutura, porosidade, densidade, permeabilidade, cor, pH, CTC, matéria orgânica, fertilidade, acidez, salinidade); tipos e classes de solos e sistemas de classificação (ex.: Latossolos, Argissolos, Neossolos, Cambissolos, Gleissolos; ou equivalentes internacionais como Oxisols, Ultisols etc.); relação solo–relevo–vegetação e aptidão agrícola; conservação e manejo do solo (terraceamento, plantio em contorno, rotação, cobertura vegetal, adubação, calagem, práticas conservacionistas); degradação do solo (erosão laminar/sulcos/voçorocas, compactação, desertificação, perda de matéria orgânica, contaminação por agrotóxicos/metais pesados) e medidas de mitigação; leitura de mapas/legendas de solos, cartas pedológicas e interpretação de perfis em cortes/descrições de campo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de geologia/geomorfologia sem foco no solo (rochas, tectonismo, formas de relevo, processos fluviais/marinhos/glaciais) ou de intemperismo apenas como tema de rochas sem conexão com formação de solo; climatologia/meteorologia (tipos de clima, massas de ar, dinâmica atmosférica) sem relação direta com pedogênese; hidrologia (bacias, aquíferos, ciclo hidrológico) sem discutir propriedades do solo como infiltração/armazenamento; biogeografia/ecologia (biomas, sucessão, cadeias alimentares) sem vínculo com solos; agricultura/economia agrária/uso da terra quando o foco é produção, mercado, políticas agrícolas ou técnicas de cultivo sem discutir atributos e manejo do solo; saneamento/contaminação ambiental geral (água/ar) sem ênfase em contaminação e remediação do solo; cartografia/SIG de forma genérica sem conteúdo pedológico.",
+      "diferenciador": "O foco central é o SOLO como corpo natural: sua formação, perfil/horizontes, propriedades, classificação e manejo/conservação. Diferencia-se de geomorfologia e geologia por não priorizar formas de relevo ou rochas em si, e de agricultura por não priorizar produção/mercado, mas sim atributos e processos pedológicos que condicionam o uso da terra.",
+      "palavras_chave": [
+        "pedologia",
+        "pedogênese",
+        "horizontes do solo",
+        "intemperismo",
+        "erosão do solo"
+      ]
     },
     {
       "nome": "Sistemas de orientação e localização geográfica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos métodos e instrumentos usados para orientar-se e localizar pontos na superfície terrestre, incluindo direções cardeais e colaterais, pontos de referência, uso de bússola e rosa dos ventos, leitura e interpretação de mapas para localização, coordenadas geográficas (latitude e longitude), hemisférios, meridianos e paralelos, e noções de fusos horários relacionadas à posição na Terra.",
+      "incluir_quando": "Classificar aqui quando a questão aborda orientação espacial e localização geográfica, como: identificar ou usar pontos cardeais/colaterais; interpretar rosa dos ventos; determinar direções (norte, sul, leste, oeste) em mapas, croquis ou no espaço vivido; utilizar bússola ou referências naturais (posição do Sol, estrelas) para orientar-se; localizar lugares por coordenadas geográficas (latitude/longitude) e reconhecer paralelos e meridianos; identificar hemisférios (N/S, L/O) a partir de coordenadas; compreender e aplicar noções de localização absoluta e relativa; relacionar posição longitudinal com fusos horários (cálculo básico de diferença de horas) quando o foco for a localização na Terra.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: escala cartográfica, cálculo de distâncias e conversões de escala (a menos que seja secundário e a ênfase seja orientação/localização); projeções cartográficas, tipos de mapas temáticos e suas distorções; relevo, clima, vegetação, hidrografia ou biomas; geopolítica, regionalizações, demografia e economia; sensoriamento remoto, SIG/GPS como tecnologia em si (quando o foco for ferramentas digitais, processamento de dados ou geotecnologias, e não o conceito de orientação/localização); leitura de coordenadas em plano cartesiano/matemática sem relação com latitude/longitude; astronomia em profundidade (estações do ano, movimentos da Terra) quando não estiver vinculada à orientação/localização.",
+      "diferenciador": "O foco central é 'onde está' e 'como se orientar para chegar', usando direções e coordenadas na superfície terrestre (pontos cardeais/rosa dos ventos, latitude/longitude, meridianos/paralelos e hemisférios), distinguindo-se de cartografia mais ampla (escala/projeções) e de conteúdos físicos ou humanos que descrevem características dos lugares.",
+      "palavras_chave": [
+        "pontos cardeais",
+        "rosa dos ventos",
+        "bússola",
+        "latitude e longitude",
+        "meridianos e paralelos"
+      ]
     },
     {
       "nome": "Hidrografia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das águas na superfície e no subsolo da Terra, abrangendo a distribuição, dinâmica, formas e processos associados aos corpos d’água (rios, lagos, aquíferos, mares e oceanos), bacias hidrográficas, regimes e redes de drenagem, ciclo hidrológico, usos da água, impactos ambientais e gestão de recursos hídricos em diferentes escalas geográficas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: bacias hidrográficas (delimitação, divisores de água, afluentes, sub-bacias, hierarquia fluvial); elementos e dinâmica dos rios (nascente, foz, leito, margens, planície de inundação, meandros, vazão, descarga, erosão, transporte e deposição de sedimentos); regimes fluviais (pluvial, nival, glacial, misto) e variações sazonais; redes e padrões de drenagem (dendrítica, treliça, radial, paralela, retangular) e sua relação com relevo/estrutura geológica; tipos de foz (delta, estuário) e processos costeiro-fluviais associados; lagos e ambientes lacustres (origem tectônica, glacial, vulcânica, represamento, oxbow), represas e reservatórios; águas subterrâneas (aquíferos, lençol freático, recarga, porosidade/permeabilidade, artesianismo, contaminação); oceanos e mares sob enfoque geográfico (correntes marítimas, marés, salinidade, ressurgência, circulação oceânica) quando o foco for a hidrosfera e seus processos; ciclo hidrológico (evaporação, condensação, precipitação, infiltração, escoamento superficial) e balanço hídrico; disponibilidade hídrica, escassez, conflitos pelo uso da água, gestão e políticas de recursos hídricos (comitês de bacia, outorga, enquadramento, cobrança); impactos e riscos hidrológicos (enchentes, cheias, secas, assoreamento, eutrofização, poluição hídrica) e medidas de mitigação; aproveitamento hidrelétrico e obras hidráulicas quando a análise central for o sistema fluvial/bacia e seus efeitos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: climatologia/meteorologia sem relação direta com ciclo hidrológico, bacias ou dinâmica das águas (ex.: massas de ar, frentes, tipos de clima); geomorfologia/relevo sem conexão com drenagem ou processos fluviais (ex.: dobramentos, falhas, tipos de rochas como foco central); pedologia/solos sem enfoque em infiltração, recarga, erosão hídrica ou contaminação de aquíferos; biogeografia/ecossistemas aquáticos quando o foco for biodiversidade, cadeias alimentares ou conservação biológica (ex.: manguezais e recifes apenas como ecossistemas); saneamento básico e saúde pública quando o foco for infraestrutura urbana (rede de esgoto, tratamento) sem análise hidrográfica; geopolítica/energia quando o foco for matriz energética, economia ou disputas territoriais sem relação com bacias e recursos hídricos; cartografia e geotecnologias como tema principal (projeções, escalas, SIG) sem aplicação direta à hidrografia; oceanografia física/química avançada como disciplina específica (ex.: química marinha detalhada) sem abordagem geográfica de correntes, marés e circulação em escala regional/global.",
+      "diferenciador": "O foco central é a hidrosfera e a organização espacial e dinâmica das águas (superficiais e subterrâneas) — especialmente bacias hidrográficas, redes de drenagem, regimes e processos fluviais — e suas implicações ambientais e de gestão, distinguindo-se de clima, relevo, biomas e infraestrutura urbana quando estes não são analisados a partir do funcionamento dos sistemas hídricos.",
+      "palavras_chave": [
+        "bacia hidrográfica",
+        "rede de drenagem",
+        "regime fluvial",
+        "aquífero",
+        "ciclo hidrológico"
+      ]
     },
     {
       "nome": "Espaço Natural e Dinâmicas Socioambientais",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do espaço natural (componentes físicos da Terra) e de como ele se organiza e se transforma por processos naturais e pela ação humana, analisando as interações sociedade-natureza, os impactos ambientais, os riscos e a gestão/uso sustentável dos recursos em diferentes escalas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda elementos e processos do meio físico (relevo, clima, hidrografia, solos, vegetação, biomas, geologia) e suas dinâmicas; a relação entre atividades humanas e o ambiente (uso e ocupação do solo, desmatamento, agropecuária, mineração, urbanização, industrialização) com consequências socioambientais; problemas e impactos ambientais (poluição do ar/água/solo, assoreamento, erosão, desertificação, perda de biodiversidade, ilhas de calor, contaminação, queimadas); riscos e desastres naturais e socioambientais (enchentes, deslizamentos, secas, ciclones, terremotos, vulcanismo) incluindo vulnerabilidade, exposição e prevenção; mudanças climáticas e variabilidade climática, seus efeitos e medidas de mitigação/adaptação; gestão de recursos naturais e políticas/estratégias de conservação (unidades de conservação, manejo, recuperação de áreas degradadas, saneamento, gestão de bacias hidrográficas, recursos hídricos, energias e seus impactos); leitura e interpretação de mapas/diagramas ambientais (climogramas, perfis de relevo, cartas de risco, mapas de biomas) quando o objetivo é compreender dinâmicas naturais e socioambientais.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de geopolítica, relações internacionais, conflitos territoriais e blocos econômicos sem foco ambiental; demografia, migrações, urbanização e rede urbana apenas sob ótica socioeconômica (sem análise de impactos/riscos ambientais); economia e produção (indústria, comércio, globalização, logística) sem relação com recursos naturais/impactos; cartografia e geotecnologias como conteúdo técnico (projeções, coordenadas, escalas) sem aplicação a temas ambientais; regionalização, cultura, identidade e organização do território sem interface com o meio físico; história do pensamento geográfico ou temas de cidadania/legislação em geral quando não vinculados à gestão ambiental.",
+      "diferenciador": "O foco central é a interação sociedade-natureza: compreender processos físicos do espaço natural e como o uso humano do território gera impactos, riscos e demandas de gestão ambiental, distinguindo-se de módulos mais econômicos, políticos ou demográficos por priorizar dinâmicas ambientais e socioambientais.",
+      "palavras_chave": [
+        "biomas",
+        "bacia hidrográfica",
+        "impactos ambientais",
+        "riscos socioambientais",
+        "mudanças climáticas"
+      ]
     },
     {
       "nome": "Geologia: dinâmica da terra e estruturas geológicas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos processos internos e externos que moldam a Terra e das principais estruturas geológicas resultantes, incluindo tectônica de placas, dinâmica do manto e da litosfera, formação e deformação de rochas, sismos, vulcanismo, orogênese, falhas e dobras, além de bacias sedimentares e grandes unidades estruturais (escudos/crátons, dobramentos modernos, plataformas).",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) tectônica de placas (movimentos convergentes, divergentes e transformantes), deriva continental, expansão do assoalho oceânico, subducção, riftes, dorsais e fossas; (2) estrutura interna da Terra (crosta, manto, núcleo), litosfera/astenosfera, convecção mantélica e suas implicações; (3) vulcanismo e magmatismo (tipos de vulcões, produtos vulcânicos, hotspots, intrusões/extrusões, relação com limites de placas); (4) sismos/terremotos (ondas sísmicas, epicentro/hipocentro, magnitude/intensidade, zonas sísmicas, risco geológico associado a falhas e limites de placas); (5) deformações e estruturas geológicas (dobras, falhas normais/inversas/transformantes, fraturas, diaclases, nappes, metamorfismo associado a pressão/temperatura); (6) orogênese e formação de cadeias montanhosas, cinturões orogênicos, isostasia e soerguimento; (7) grandes unidades geológicas e evolução do relevo em escala geológica (crátons/escudos cristalinos, bacias sedimentares, dobramentos antigos e modernos, plataformas); (8) tempo geológico e leitura de evidências geológicas quando o foco é explicar a dinâmica/estrutura (ex.: como uma bacia sedimentar se forma por subsidência tectônica); (9) riscos e impactos geológicos diretamente ligados à dinâmica interna (vulcões, terremotos, tsunamis de origem tectônica, instabilidade por falhamentos).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) geomorfologia e agentes externos com foco principal em intemperismo, erosão, transporte e sedimentação fluvial/eólica/glacial/marinha sem conexão central com tectônica/estruturas (ex.: formação de dunas, meandros, voçorocas); (2) pedologia/solos (horizontes, fertilidade, laterização) e uso agrícola; (3) climatologia/meteorologia (massas de ar, frentes, El Niño) e hidrologia (bacias hidrográficas) sem relação direta com processos geológicos internos; (4) biogeografia/ecologia e temas ambientais gerais (desmatamento, biodiversidade) sem componente geológico estruturante; (5) geopolítica, economia e mineração quando o foco é produção, mercado, legislação ou impactos socioeconômicos, e não a gênese geológica das jazidas/estruturas; (6) cartografia e geotecnologias (projeções, escalas, SIG, sensoriamento remoto) salvo quando usadas explicitamente para interpretar estruturas tectônicas; (7) astronomia e origem do Sistema Solar, exceto quando diretamente vinculadas à estrutura interna/energia terrestre; (8) oceanografia e dinâmica costeira sem vínculo com tectônica (ex.: marés, correntes).",
+      "diferenciador": "Foco na dinâmica interna da Terra e nas estruturas geológicas/tectônicas que explicam a formação e deformação da crosta (placas, falhas, dobras, orogênese, sismos e vulcanismo), distinguindo-se de módulos centrados em agentes externos do relevo, clima, solos ou temas socioeconômicos.",
+      "palavras_chave": [
+        "tectônica de placas",
+        "subducção",
+        "falhas e dobras",
+        "vulcanismo",
+        "sismicidade"
+      ]
     },
     {
       "nome": "Industrialização Brasileira",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do processo histórico e geográfico da industrialização no Brasil, suas fases, políticas econômicas, agentes (Estado e capital privado), distribuição espacial da indústria, infraestrutura associada, impactos socioeconômicos e ambientais, e a inserção do país na divisão internacional do trabalho e nas cadeias produtivas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o desenvolvimento industrial brasileiro em qualquer período (da industrialização tardia à contemporânea), incluindo: fases e marcos (Era Vargas, substituição de importações, Plano de Metas, II PND, abertura econômica/anos 1990, reestruturação produtiva); políticas industriais e papel do Estado (protecionismo, incentivos fiscais, BNDES, estatais, planejamento); setores e complexos industriais (siderurgia, automobilístico, petroquímico, bens de capital, eletroeletrônico, agroindústria); organização e localização industrial (concentração no Sudeste, industrialização paulista, desconcentração/\"interiorização\", polos e distritos industriais, ZPEs); fatores locacionais (mercado consumidor, mão de obra, energia, transportes, portos, matérias-primas); redes e infraestrutura (rodoviarismo, portos, energia elétrica, petróleo e gás); metropolização e regiões industriais (ABC paulista, RMSP, eixos industriais, regiões metropolitanas); impactos e problemas (desigualdades regionais, urbanização, migrações, favelização, poluição, desindustrialização, reprimarização, indústria 4.0); e a inserção do Brasil na economia global (multinacionais, IDE, cadeias globais de valor, dependência tecnológica).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: industrialização mundial/europeia/estadunidense sem conexão direta com o Brasil; agricultura e estrutura fundiária sem relação com agroindústria ou complexos industriais; mineração e extrativismo apenas como atividade primária (sem encadeamentos industriais); comércio exterior e balança comercial sem foco em política industrial, manufaturas ou estrutura produtiva; urbanização, rede urbana ou metropolização em geral sem vínculo com dinâmica industrial; energia, transportes ou infraestrutura de forma genérica (sem relação com localização/expansão industrial); temas de geopolítica, demografia ou meio ambiente que não estejam articulados ao processo industrial brasileiro.",
+      "diferenciador": "O foco é explicar como, quando e onde a indústria se desenvolveu no Brasil e como isso reorganizou o território (concentração/desconcentração, polos, infraestrutura e impactos), distinguindo-se de módulos que tratam de industrialização global, urbanização geral ou setor primário sem encadeamento industrial.",
+      "palavras_chave": [
+        "substituição de importações",
+        "Era Vargas",
+        "Plano de Metas",
+        "desconcentração industrial",
+        "ABC paulista"
+      ]
     },
     {
       "nome": "Comercio exterior brasileiro",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do comércio exterior do Brasil, incluindo exportações e importações, composição e destino/origem da pauta comercial, saldos e indicadores da balança comercial, parceiros e blocos econômicos, políticas e instrumentos de comércio (tarifas, acordos, barreiras), logística e infraestrutura associadas, e impactos econômicos e territoriais da inserção brasileira no mercado internacional.",
+      "incluir_quando": "Classificar aqui quando a questão aborda exportações/importações do Brasil; balança comercial (superávit, déficit, saldo, corrente de comércio); pauta exportadora/importadora (commodities, manufaturados, semimanufaturados, produtos básicos); principais parceiros comerciais (China, EUA, UE, Mercosul etc.) e mudanças no padrão de parcerias; acordos e blocos econômicos relacionados ao Brasil (Mercosul, ALADI, OMC, acordos bilaterais) e seus efeitos no comércio; políticas de comércio exterior (tarifas, subsídios, incentivos, drawback, câmbio e competitividade, proteção/abertura comercial); barreiras tarifárias e não tarifárias (quotas, medidas sanitárias, antidumping) que afetam o Brasil; termos de troca, dependência de commodities, reprimarização e agregação de valor na pauta; fluxos de capitais e comércio quando conectados diretamente ao desempenho comercial externo; logística do comércio exterior (portos, corredores de exportação, custos de transporte, escoamento de grãos/minério) quando o foco é viabilizar/explicar exportações e importações; estatísticas e séries históricas do comércio exterior brasileiro e sua relação com conjunturas (crises, boom de commodities, variação cambial).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de comércio interno brasileiro, mercado consumidor e distribuição doméstica; industrialização, agronegócio ou mineração sem relação explícita com exportações/importações; geopolítica internacional ou relações diplomáticas sem conexão direta com fluxos comerciais do Brasil; globalização em termos gerais sem recorte no Brasil e sem indicadores de comércio exterior; transporte e infraestrutura em geral (rodovias, ferrovias, portos) quando o foco não é o escoamento para exportação/importação; finanças públicas, inflação, política monetária ou crescimento econômico sem vínculo com balança comercial, câmbio e competitividade externa; migrações, turismo internacional e remessas sem relação com comércio de bens/serviços; comércio exterior de outros países sem comparação direta com o Brasil.",
+      "diferenciador": "O foco é a inserção do Brasil no comércio internacional medida por fluxos de exportação/importação, composição da pauta, parceiros, políticas e barreiras comerciais, e seus efeitos econômicos e territoriais; diferencia-se de temas de economia brasileira geral por exigir conexão explícita com a balança comercial e relações comerciais externas.",
+      "palavras_chave": [
+        "balança comercial",
+        "exportações brasileiras",
+        "importações",
+        "pauta exportadora",
+        "parceiros comerciais"
+      ]
     },
     {
       "nome": "Formações vegetais",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das formações vegetais (biomas e tipos de cobertura vegetal) e sua distribuição no espaço geográfico, relacionando fisionomia e estrutura da vegetação com clima, solo, relevo, hidrografia, latitude/altitude, sazonalidade e ações antrópicas. Inclui classificação, características, adaptações, biodiversidade, dinâmica (sucessão, regeneração) e impactos (desmatamento, queimadas, fragmentação) sobre diferentes formaações vegetais no Brasil e no mundo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, descrição, comparação ou explicação de formações vegetais/biomas (ex.: floresta equatorial, floresta tropical, floresta temperada, taiga, tundra, savana, pradaria/estepe, vegetação mediterrânea, desertos, manguezais, restingas, campos, cerrado, caatinga, mata atlântica, amazônia, pantanal, pampa), suas características fisionômicas (porte, estratos, densidade, caducifólia/perenifólia, xeromorfismo, folhas aciculadas, raízes profundas), relações com fatores naturais (clima, regime de chuvas, temperatura, amplitude térmica, solos, altitude, maritimidade/continentalidade), distribuição geográfica e zonalidade/azonalidade, ecótonos e transições, adaptações das plantas ao ambiente, sucessão ecológica e estágios de regeneração, além de impactos humanos diretamente ligados à cobertura vegetal (desmatamento, queimadas, expansão agropecuária, silvicultura, monoculturas, fragmentação, conservação e unidades de proteção quando o foco é a vegetação).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: climatologia sem conexão direta com tipos de vegetação (massas de ar, frentes, El Niño/La Niña), geomorfologia e relevo sem relação com cobertura vegetal, hidrografia (bacias, regime fluvial) sem discutir vegetação associada, pedologia/química do solo de forma isolada, agricultura e sistemas produtivos (plantio, técnicas, cadeias produtivas) sem foco na vegetação natural, urbanização e indústria, demografia, geopolítica, cartografia e geotecnologias (projeções, escalas, sensoriamento remoto) quando não aplicadas à análise de cobertura vegetal, fauna e ecologia geral (cadeias alimentares, ciclos biogeoquímicos) sem ênfase em formações vegetais, e legislação ambiental/gestão territorial quando o tema central não é a caracterização/distribuição das formações vegetais.",
+      "diferenciador": "O foco central é a cobertura vegetal natural (fisionomia, composição e distribuição) e sua relação causal com fatores ambientais e impactos humanos, distinguindo-se de módulos de clima, relevo, hidrografia ou atividades econômicas quando estes aparecem apenas como contexto.",
+      "palavras_chave": [
+        "biomas",
+        "formações vegetais",
+        "cobertura vegetal",
+        "fitofisionomia",
+        "ecótono"
+      ]
     },
     {
       "nome": "Impactos ambientais da agropecuária",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos efeitos da agropecuária (agricultura e pecuária) sobre o meio ambiente, considerando mudanças no uso e cobertura da terra, degradação de solos, recursos hídricos, biodiversidade, qualidade do ar e clima, bem como práticas de manejo e políticas que mitigam ou agravam esses impactos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda impactos ambientais causados por atividades agropecuárias, como desmatamento e conversão de ecossistemas para lavouras/pastagens; queimadas associadas à abertura de áreas; erosão, compactação, salinização e perda de fertilidade do solo; assoreamento e sedimentação de rios; contaminação de água e solo por agrotóxicos, fertilizantes e dejetos animais (eutrofização, nitratos, fosfatos); uso intensivo e escassez hídrica por irrigação e captação; perda de biodiversidade, fragmentação de habitats e redução de serviços ecossistêmicos; emissões de gases de efeito estufa (metano da pecuária, óxido nitroso de fertilizantes, CO2 por mudança de uso da terra) e contribuição para mudanças climáticas; poluição do ar por queimadas e volatilização de amônia; impactos de monoculturas e expansão da fronteira agrícola; comparação entre sistemas (convencional vs. orgânico/agroecológico) sob a ótica ambiental; medidas de mitigação e manejo sustentável (plantio direto, rotação de culturas, ILPF, terraceamento, recuperação de APPs e matas ciliares, manejo de dejetos, redução de insumos, agricultura de precisão) quando o foco é reduzir impactos ambientais.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de aspectos econômicos, sociais ou produtivos da agropecuária (preços, mercado, produtividade, estrutura fundiária, trabalho, agronegócio) sem conexão explícita com impactos ambientais; de temas ambientais gerais não vinculados à agropecuária (poluição industrial/urbana, mineração, resíduos sólidos urbanos) ou de impactos ambientais de outros setores; de técnicas agronômicas apenas do ponto de vista de rendimento/gestão, sem discutir efeitos ambientais; de climatologia/biomas de forma descritiva sem relação com uso agropecuário; de legislação ambiental de modo genérico (ex.: Código Florestal) se não estiver aplicada a práticas agropecuárias e seus impactos; de alimentação/nutrição e cadeias agroindustriais sem enfoque ambiental.",
+      "diferenciador": "O foco é a relação causal entre práticas agropecuárias e alterações ambientais (solo, água, biodiversidade, atmosfera/clima), incluindo mecanismos de degradação e estratégias de mitigação; diferencia-se de módulos sobre economia agrária ou organização do espaço rural por priorizar consequências ecológicas e biofísicas.",
+      "palavras_chave": [
+        "desmatamento",
+        "agrotóxicos",
+        "erosão do solo",
+        "eutrofização",
+        "emissões de gases de efeito estufa"
+      ]
     },
     {
       "nome": "As grandes potências industriais e a Russia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das grandes potências industriais no sistema mundial e da Rússia como potência (industrial, energética, militar e geopolítica), abordando sua formação histórica, bases produtivas, inovação tecnológica, inserção no comércio internacional, redes de infraestrutura, influência geopolítica e impactos socioespaciais. Inclui a comparação entre centros industriais tradicionais e emergentes, e a análise do papel russo no espaço pós-soviético e na economia global.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) características, localização e evolução das grandes potências industriais (EUA, Japão, Alemanha/UE, Reino Unido/França, e outras economias centrais) e seus complexos industriais; (2) reestruturação produtiva, desindustrialização relativa, terciarização avançada, indústria 4.0, P&D, patentes, cadeias globais de valor e multinacionais associadas às potências; (3) geografia industrial: cinturões industriais, megalópoles, tecnopolos, clusters, logística e infraestrutura estratégica (portos, ferrovias, corredores); (4) comércio internacional e finanças ligados à indústria (balança comercial de manufaturados, exportação de alta tecnologia, protecionismo, acordos e disputas comerciais quando conectadas à indústria); (5) Rússia: industrialização histórica (Império/URSS), economia planificada e transição pós-1991, reestruturação industrial, papel do Estado e de oligopólios; (6) Rússia como potência energética e industrial: petróleo, gás, mineração, metalurgia, complexo militar-industrial, nuclear, aeroespacial, e sua importância para a Europa e a Ásia; (7) geopolítica russa e espaço pós-soviético (CEI, Eurásia), relações com UE, EUA, China, OTAN, e efeitos econômicos/industriais de sanções e conflitos quando o foco for a capacidade produtiva/energética e a posição de potência; (8) desigualdades regionais e socioespaciais associadas à industrialização e à economia russa (Sibéria, Urais, Rússia europeia, cidades industriais, monotowns) e impactos ambientais da indústria/energia.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) industrialização do Brasil, políticas industriais brasileiras, parques industriais regionais do Brasil (Sudeste, Zona Franca de Manaus etc.) sem comparação direta com potências; (2) globalização em sentido amplo (cultura, internet, migrações) sem foco em potências industriais e sua base produtiva; (3) China, Tigres Asiáticos ou Índia como tema central, a menos que a questão seja comparativa com potências industriais tradicionais e/ou com a Rússia; (4) geopolítica geral (guerras, diplomacia, terrorismo) sem conexão com indústria, energia, tecnologia, comércio de manufaturados ou poder econômico; (5) temas físicos da Rússia (clima, relevo, biomas) ou demografia/cultura russa (língua, religião) sem relação com industrialização, energia e poder; (6) União Europeia como integração política/institucional (Parlamento, tratados) sem vínculo com indústria, tecnologia e competitividade; (7) energia no mundo de forma genérica (matriz energética global, renováveis) sem recorte nas potências industriais e/ou no papel energético-industrial da Rússia.",
+      "diferenciador": "O foco principal é a relação entre industrialização avançada (tecnologia, produtividade, cadeias globais e poder econômico) e a condição de potência no sistema mundial, com ênfase comparativa nas grandes potências industriais e no caso específico da Rússia como potência industrial-energética e geopolítica no espaço eurasiático.",
+      "palavras_chave": [
+        "potências industriais",
+        "cadeias globais de valor",
+        "tecnopolos e clusters",
+        "complexo militar-industrial",
+        "Rússia e energia (gás/petróleo)"
+      ]
     },
     {
       "nome": "Fontes energéticas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das diferentes fontes de energia utilizadas pela sociedade (renováveis e não renováveis), sua origem, formas de aproveitamento, distribuição espacial, impactos socioambientais, custos e papel na matriz energética e na transição energética.",
+      "incluir_quando": "Classificar aqui quando a questão aborda tipos de fontes energéticas (petróleo, carvão, gás natural, nuclear, hidrelétrica, eólica, solar, biomassa, geotérmica, maremotriz), suas características (renovável/não renovável, densidade energética, intermitência, emissões), processos de geração/extração/transformação (refino, termelétricas, usinas, enriquecimento de urânio, biocombustíveis), composição e comparação de matrizes energéticas (mundial, nacional, regional), segurança e geopolítica da energia (dependência, OPEP, choques do petróleo, rotas e infraestrutura como oleodutos/gasodutos), impactos ambientais e sociais (GEE, poluição, desmatamento, alagamentos, resíduos radioativos, conflitos territoriais), eficiência energética e transição energética (descarbonização, eletrificação, armazenamento, hidrogênio como vetor energético) e políticas/planejamento energético (incentivos, regulação, metas climáticas) quando o foco central for a fonte de energia e seu uso.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de eletricidade e circuitos (Física), cálculos de potência/consumo sem discussão de fontes, climatologia e meteorologia sem relação com geração energética, impactos ambientais gerais sem vínculo com produção/uso de energia, mineração/indústria em geral sem foco em recursos energéticos, transporte e logística sem relação com combustíveis/infraestrutura energética, agricultura sem foco em biomassa/biocombustíveis, ou quando o tema central for mudanças climáticas de forma ampla sem conexão direta com matriz energética e fontes.",
+      "diferenciador": "O foco é identificar, comparar e analisar as fontes de energia e sua inserção territorial (matriz energética, produção, infraestrutura e impactos), distinguindo origem, renovabilidade e consequências socioambientais, e não apenas consumo elétrico, clima ou poluição de modo genérico.",
+      "palavras_chave": [
+        "matriz energética",
+        "fontes renováveis",
+        "combustíveis fósseis",
+        "hidrelétrica",
+        "transição energética"
+      ]
     },
     {
       "nome": "Fontes energéticas no Brasil",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das principais fontes de energia utilizadas e produzidas no Brasil, sua distribuição territorial, matriz energética e elétrica, cadeias produtivas, infraestrutura (geração, transmissão e distribuição), políticas e regulação do setor, impactos socioambientais e tendências de transição energética no contexto brasileiro.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a matriz energética e/ou matriz elétrica do Brasil; tipos de fontes (hidrelétrica, termelétrica, eólica, solar, biomassa, biocombustíveis, petróleo, gás natural, carvão, nuclear) no contexto brasileiro; produção, consumo, importação/exportação e autossuficiência energética do Brasil; localização e regionalização de recursos e empreendimentos (bacias petrolíferas, pré-sal, parques eólicos, usinas hidrelétricas, refinarias, gasodutos, linhas de transmissão); funcionamento e planejamento do setor elétrico brasileiro (SIN, ONS, leilões, expansão da oferta, segurança energética); crises e eventos ligados ao abastecimento (racionamento, bandeiras tarifárias, estiagens e seus efeitos na geração); impactos ambientais e sociais de projetos energéticos no Brasil (alagamentos, deslocamentos, emissões, desmatamento, conflitos territoriais, licenciamento); políticas públicas e marcos regulatórios brasileiros relacionados à energia (ANP, ANEEL, EPE, Petrobras, RenovaBio, Proinfa, metas de descarbonização); comparação entre fontes no Brasil quanto a custo, intermitência, emissões, eficiência e potencial de expansão; transição energética no Brasil (eletrificação, hidrogênio de baixo carbono, biometano, armazenamento, modernização da rede) quando ancorada em dados, exemplos e realidade brasileira.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de fontes energéticas de forma global sem recorte para o Brasil; conteúdos de Física/Química sobre princípios de geração (leis, circuitos, termodinâmica) sem relação com a matriz e o território brasileiro; temas de Geopolítica do petróleo/energia em escala mundial sem foco no Brasil; mineração e recursos naturais em geral quando não conectados à produção/uso de energia; mudanças climáticas e efeito estufa de modo amplo sem vínculo com o setor energético brasileiro; economia industrial/agrária sem relação com energia (ex.: apenas produção de cana, soja, siderurgia) a menos que conecte a biocombustíveis, biomassa ou consumo energético; saneamento, água e hidrografia sem relação com hidreletricidade; questões exclusivamente sobre mobilidade/transportes sem discutir combustíveis e matriz energética brasileira.",
+      "diferenciador": "O módulo se distingue por analisar as fontes de energia especificamente no Brasil, articulando matriz energética/elétrica, distribuição espacial dos recursos e infraestrutura do setor, além de políticas e impactos socioambientais no território brasileiro.",
+      "palavras_chave": [
+        "matriz energética brasileira",
+        "matriz elétrica",
+        "hidrelétricas",
+        "pré-sal",
+        "biocombustíveis"
+      ]
     },
     {
       "nome": "Problemas ambientais no mundo atual",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos principais problemas ambientais contemporâneos em escala local, regional e global, suas causas (naturais e sobretudo antrópicas), impactos socioeconômicos e territoriais, desigualdades ambientais, riscos e vulnerabilidades, além de políticas, acordos e estratégias de mitigação, adaptação e gestão ambiental.",
+      "incluir_quando": "Classificar aqui quando a questão aborda problemas ambientais atuais e suas dinâmicas geográficas, como: mudanças climáticas/aquecimento global e eventos extremos; poluição do ar, da água e do solo; gestão de resíduos (lixo urbano, industrial, eletrônico, plástico) e saneamento; desmatamento, queimadas e degradação de biomas; perda de biodiversidade e fragmentação de habitats; desertificação, erosão e degradação de solos; escassez hídrica, crise da água, contaminação e conflitos pelo uso da água; acidificação dos oceanos, sobrepesca e poluição marinha; ilhas de calor urbanas e problemas ambientais urbanos; impactos ambientais de atividades econômicas (agropecuária, mineração, indústria, energia, transporte) e de grandes obras; riscos e desastres socioambientais (enchentes, deslizamentos, secas, incêndios florestais) com ênfase em vulnerabilidade social; justiça ambiental, racismo ambiental e desigualdades na distribuição de impactos; políticas ambientais, governança, licenciamento, unidades de conservação, fiscalização; acordos e agendas globais (Acordo de Paris, COP, ODS, Protocolo de Montreal) e instrumentos econômicos (créditos de carbono); soluções e estratégias (mitigação, adaptação, transição energética, economia circular, conservação, restauração, manejo sustentável).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: climatologia e dinâmica atmosférica sem relação com impactos/problemas ambientais (ex.: massas de ar, frentes, tipos de clima apenas descritivos); geologia/geomorfologia e processos naturais sem enfoque em degradação, risco ou gestão (ex.: formação de rochas, tectonismo, relevo apenas classificatório); cartografia e geotecnologias como conteúdo central (ex.: escala, projeções, coordenadas, SIG) sem aplicação a problemas ambientais; demografia, urbanização, economia, geopolítica ou globalização sem recorte ambiental explícito; agricultura, indústria, energia ou transportes apenas sob ótica produtiva/locacional, sem impactos ambientais; biogeografia/ecologia apenas conceitual (cadeias alimentares, sucessão ecológica) sem conexão com degradação, conservação ou políticas; história ambiental ou legislação ambiental apenas como cronologia/estrutura jurídica sem análise de problemas e impactos; desastres naturais tratados exclusivamente como fenômenos físicos, sem componente socioambiental (vulnerabilidade, ocupação do solo, gestão de risco).",
+      "diferenciador": "O foco é a relação sociedade-natureza no presente, enfatizando impactos ambientais, riscos e desigualdades territoriais, bem como respostas de gestão e políticas (mitigação/adaptação), e não apenas a descrição de elementos naturais ou atividades econômicas isoladas.",
+      "palavras_chave": [
+        "mudanças climáticas",
+        "poluição",
+        "desmatamento",
+        "biodiversidade",
+        "sustentabilidade"
+      ]
     },
     {
       "nome": "Linguagem Cartográfica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da linguagem e dos elementos de representação cartográfica usados para ler, interpretar e produzir mapas e outras representações do espaço geográfico. Inclui convenções e símbolos, escala e suas conversões, orientação e coordenadas, projeções cartográficas e distorções, leitura de legendas e cores, noções de generalização cartográfica e interpretação de diferentes tipos de mapas (temáticos e de referência).",
+      "incluir_quando": "Classificar aqui quando a questão aborda leitura, interpretação ou construção de mapas/plantas/croquis e seus elementos: (1) escala (numérica, gráfica, verbal), cálculo de distâncias reais e no mapa, conversão de unidades e redução/ampliação; (2) orientação e localização (pontos cardeais/colaterais, rosa dos ventos, azimute/rumo, uso de bússola), coordenadas geográficas (latitude/longitude, hemisférios, meridianos/paralelos, Equador, Greenwich, fusos quando vinculados a longitude); (3) legenda, simbologia e convenções cartográficas (pictogramas, cores, hachuras, isolinhas/curvas de nível, toponímia), semiótica gráfica e variáveis visuais (cor, tamanho, forma, textura) aplicadas a mapas; (4) projeções cartográficas (cilíndrica, cônica, azimutal; Mercator, Peters, etc.), distorções (área, forma, distância, direção) e adequação da projeção ao objetivo; (5) tipos de mapas e representações (mapa político, físico, topográfico, temático: coroplético, isarítmico, de pontos, fluxos, cartogramas), leitura de mapas e extração de informações; (6) noções de generalização cartográfica (simplificação, seleção, classificação) e qualidade/limitações da representação; (7) noções básicas de cartografia digital/GIS e sensoriamento remoto apenas quando o foco for a leitura/representação cartográfica (camadas, georreferenciamento, escala/resolução) e não a análise técnica aprofundada.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) conteúdos de Geografia Física (clima, relevo, hidrografia, biomas) sem exigir leitura/interpretação cartográfica; (2) Geografia Humana/econômica (população, urbanização, indústria, agricultura, geopolítica) sem foco em elementos de mapa/escala/coordenação/projeção; (3) fusos horários como tema central de tempo e organização do espaço mundial, quando não estiverem articulados à longitude/coordenadas e leitura cartográfica; (4) estatística e gráficos (tabelas, gráficos de barras/linhas/pizza) sem conversão para mapas temáticos ou discussão de simbologia cartográfica; (5) geotecnologias em nível técnico (processamento de imagens, classificação supervisionada, algoritmos, modelagem espacial) quando o foco não for linguagem cartográfica; (6) navegação/astronomia (movimentos da Terra, estações) sem uso de coordenadas/orientação cartográfica; (7) história da cartografia como narrativa histórica sem aplicação a projeções, convenções e leitura de mapas.",
+      "diferenciador": "O foco é a representação do espaço por meio de mapas e seus códigos (escala, orientação, coordenadas, projeções e simbologia), isto é, como o espaço é traduzido em linguagem cartográfica e como interpretar/produzir essa representação, e não o conteúdo temático do espaço em si.",
+      "palavras_chave": [
+        "escala cartográfica",
+        "coordenadas geográficas",
+        "projeções cartográficas",
+        "legenda e simbologia",
+        "orientação (pontos cardeais)"
+      ]
     },
     {
       "nome": "Dinâmica Populacional Brasileira",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das transformações e características da população do Brasil ao longo do tempo e no espaço, incluindo crescimento e distribuição populacional, estrutura etária e por sexo, natalidade, mortalidade, fecundidade, expectativa de vida, transição demográfica, migrações internas e internacionais, urbanização e metropolização, além de seus impactos socioeconômicos e territoriais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda indicadores demográficos do Brasil (taxas de natalidade, mortalidade, fecundidade, crescimento vegetativo, saldo migratório, esperança de vida), pirâmides etárias e estrutura da população brasileira, envelhecimento populacional, bônus demográfico, transição demográfica/epidemiológica no Brasil, distribuição espacial da população (densidade demográfica, concentração litorânea, vazios demográficos, interiorização), processos de urbanização brasileira e rede urbana (metropolização, conurbação, regiões metropolitanas), migrações no território brasileiro (êxodo rural, migração campo-cidade, migrações inter-regionais como Nordeste–Sudeste, retorno ao Nordeste, migração para fronteiras agrícolas, migração pendular), imigração e emigração envolvendo o Brasil (fluxos recentes e históricos) e relações entre dinâmica populacional e políticas públicas/planejamento (habitação, saúde, previdência, mercado de trabalho) quando o foco central for demográfico-territorial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de conceitos gerais de Demografia sem recorte brasileiro (apenas definições universais), de população mundial ou de outros países, de economia regional/industrialização/agronegócio sem conexão explícita com indicadores e processos populacionais, de geografia urbana focada em morfologia da cidade, segregação socioespacial, mobilidade urbana e problemas urbanos (violência, saneamento, transporte) sem vínculo com urbanização e dinâmica demográfica, de regionalização do Brasil e aspectos físicos (clima, relevo, biomas) sem relação com distribuição populacional, de questões étnico-raciais e culturais (identidade, cultura, povos tradicionais) quando não articuladas a dados e processos demográficos, e de políticas migratórias/direito internacional em abordagem jurídica sem análise geográfica dos fluxos e impactos populacionais no Brasil.",
+      "diferenciador": "O foco é explicar e interpretar como a população do Brasil muda (cresce, envelhece, se desloca e se urbaniza) e como esses processos se distribuem no território brasileiro, usando indicadores demográficos e fluxos migratórios como eixo central.",
+      "palavras_chave": [
+        "transição demográfica",
+        "pirâmide etária",
+        "migração interna",
+        "urbanização brasileira",
+        "envelhecimento populacional"
+      ]
     },
     {
       "nome": "Globalização e Economia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das interações econômicas em escala mundial e seus efeitos territoriais, abordando a integração de mercados, fluxos (capitais, mercadorias, serviços, informações e pessoas), cadeias globais de produção, atuação de empresas transnacionais, financeirização, comércio internacional, blocos econômicos e instituições globais, bem como impactos socioespaciais (desigualdades, reestruturação produtiva, trabalho, consumo) e ambientais associados à economia globalizada.",
+      "incluir_quando": "Classificar aqui quando a questão aborda processos, agentes e dinâmicas da economia mundial e da globalização, como: (1) comércio internacional, exportações/importações, balança comercial, termos de troca, protecionismo e tarifas; (2) blocos econômicos e acordos (integração regional, união aduaneira, mercado comum) e seus efeitos; (3) empresas transnacionais/multinacionais, investimento estrangeiro direto (IED), offshoring/outsourcing, deslocalização industrial e reestruturação produtiva; (4) cadeias globais de valor, logística global, portos, hubs, contêineres, just-in-time e redes de transporte vinculadas ao comércio; (5) globalização financeira: fluxos de capitais, bolsas, câmbio, dívida externa, paraísos fiscais, crises financeiras e volatilidade; (6) organismos e regras do sistema econômico global (OMC, FMI, Banco Mundial, G7/G20) e políticas associadas (ajustes, liberalização, neoliberalismo); (7) divisão internacional do trabalho, centro-periferia, dependência, industrialização tardia, especialização produtiva e reprimarização; (8) economia digital e globalização informacional quando conectada a mercados e produção (plataformas, e-commerce, dados como ativo, serviços globais); (9) impactos territoriais e sociais da globalização econômica: desigualdade, precarização, migrações de trabalho, consumo global, urbanização ligada a serviços avançados, cidades globais; (10) debates sobre globalização (homogeneização cultural ligada ao consumo, glocalização) quando o eixo central for econômico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) globalização cultural/identitária (mídia, língua, hábitos, cultura pop) sem relação direta com economia, comércio ou produção; (2) geopolítica e relações internacionais com foco em conflitos, segurança, disputas territoriais e poder militar, sem ênfase econômica; (3) demografia e migrações apenas sob ótica populacional (taxas, pirâmides, transição demográfica) sem conexão com mercado de trabalho e economia global; (4) urbanização e redes urbanas em escala nacional/local sem vínculo com fluxos globais, finanças ou cadeias produtivas; (5) meio ambiente e clima (aquecimento global, biomas, poluição) quando não articulados a produção, comércio, energia e economia global; (6) economia interna de um país (inflação, política fiscal, setor primário/secundário/terciário) se não houver conexão explícita com integração internacional, comércio exterior ou fluxos globais; (7) cartografia, geotecnologias e técnicas de análise espacial sem conteúdo econômico-global; (8) história econômica em períodos antigos/coloniais se o foco não for a dinâmica contemporânea da globalização e do sistema mundial.",
+      "diferenciador": "O foco é a integração econômica em escala global e seus fluxos (mercadorias, capitais, produção e informação) e como isso reorganiza territórios, trabalho e desigualdades; diferencia-se de módulos de Geopolítica por priorizar mercados e agentes econômicos, e de Globalização Cultural por priorizar produção, comércio, finanças e cadeias globais.",
+      "palavras_chave": [
+        "comércio internacional",
+        "cadeias globais de valor",
+        "empresas transnacionais",
+        "blocos econômicos",
+        "fluxos de capitais"
+      ]
     },
     {
       "nome": "Produção Econômica e a Dinâmica Socioespacial",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estuda como as atividades econômicas (agropecuária, indústria, comércio, serviços, mineração, energia, logística e finanças) se organizam no território e como essa organização produz, transforma e diferencia o espaço geográfico, gerando fluxos, redes, hierarquias urbanas, especializações regionais, desigualdades socioespaciais e impactos socioambientais em diferentes escalas (local, regional, nacional e global).",
+      "incluir_quando": "Classificar aqui quando a questão aborda a relação entre produção econômica e organização do espaço, incluindo: localização e distribuição de atividades produtivas; fatores locacionais (matéria-prima, energia, mão de obra, mercado consumidor, infraestrutura, tecnologia, políticas públicas); cadeias produtivas e circuitos espaciais de produção; redes e fluxos (mercadorias, capitais, pessoas, informação) e sua influência na dinâmica territorial; divisão territorial do trabalho, especialização produtiva e regionalização econômica; urbanização e metropolização associadas a funções econômicas; reestruturação produtiva, desindustrialização, terciarização e economia informacional; agronegócio, modernização agrícola, fronteira agrícola e impactos no uso do solo; mineração, energia e grandes projetos e seus efeitos territoriais; logística, transportes, portos, corredores de exportação e integração territorial; globalização, empresas transnacionais, comércio exterior e inserção do território em redes globais; desigualdades socioespaciais vinculadas à economia (segregação, periferização, gentrificação, informalidade, precarização do trabalho) quando conectadas a processos produtivos e ao mercado; conflitos territoriais por terra, recursos e infraestrutura quando relacionados a atividades econômicas; análise de mapas, gráficos e textos que expliquem padrões espaciais de produção, circulação e consumo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: conceitos físicos e naturais sem vínculo com atividades econômicas (clima, relevo, hidrografia, biomas, geologia) de forma isolada; cartografia e técnicas de representação (escala, projeções, coordenadas) sem análise socioeconômica; demografia pura (taxas, pirâmides etárias, migrações) sem conexão com mercado de trabalho, produção ou organização territorial; política e geopolítica internacional focadas em conflitos, fronteiras, diplomacia e segurança sem relação com economia e redes produtivas; cultura, identidade, religião e aspectos socioculturais sem articulação com dinâmicas econômicas e espaciais; educação ambiental e impactos ambientais tratados apenas como ecologia/conservação, sem discussão de atividades produtivas e uso do território; história econômica ou industrial apenas cronológica, sem análise espacial/territorial; questões de cidadania e direitos urbanos (moradia, saneamento, mobilidade) quando não vinculadas a processos econômicos e à produção do espaço.",
+      "diferenciador": "O foco é explicar como a economia (produção, circulação e consumo) organiza o território e produz dinâmicas socioespaciais — redes, fluxos, hierarquias, especializações e desigualdades — privilegiando a análise espacial e multiescalar dos processos produtivos.",
+      "palavras_chave": [
+        "divisão territorial do trabalho",
+        "cadeia produtiva",
+        "circuitos espaciais de produção",
+        "redes e fluxos",
+        "fatores locacionais"
+      ]
     },
     {
       "nome": "Domínios Morfoclimáticos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos Domínios Morfoclimáticos (especialmente a classificação de Aziz Nacib Ab’Sáber) e sua relação integrada entre relevo/geomorfologia, clima, vegetação, solos, hidrografia e processos naturais, com ênfase no território brasileiro e em suas faixas de transição (ecótonos).",
+      "incluir_quando": "Classificar aqui quando a questão aborda a identificação, caracterização, comparação ou explicação de Domínios Morfoclimáticos e/ou seus componentes integrados (relevo + clima + vegetação + solos + hidrografia), incluindo: (1) domínios brasileiros (Amazônico, Cerrados, Caatingas, Mares de Morros/Mata Atlântica, Araucárias, Pradarias/Campos Sulinos) e suas localizações; (2) critérios de Ab’Sáber (morfologia do relevo, estrutura superficial, clima, fitofisionomias, drenagem) e a ideia de “conjunto paisagístico”; (3) ecótonos e áreas de transição (ex.: Agreste, Pantanal como área de transição/complexo, zonas de contato Cerrado-Amazônia, Cerrado-Caatinga etc.); (4) relações entre dinâmica climática e formas de relevo (intemperismo, erosão, pedogênese) dentro de um domínio; (5) impactos e vulnerabilidades ambientais típicas de cada domínio quando vinculadas às suas características morfoclimáticas (ex.: desertificação na Caatinga, voçorocas em áreas de Cerrado, movimentos de massa em Mares de Morros), desde que o foco seja o domínio e sua lógica integrada; (6) leitura e interpretação de mapas/diagramas que representem domínios morfoclimáticos, seus limites e transições.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) biomas de forma isolada (apenas fauna/flora, conservação, biodiversidade) sem integrar relevo-clima-solos/hidrografia ou sem referência a domínios morfoclimáticos; (2) climatologia geral (massas de ar, frentes, tipos climáticos, El Niño/La Niña) sem conexão explícita com domínios; (3) geomorfologia/relevo de forma isolada (planaltos, planícies, depressões, estrutura geológica) sem articulação com clima e cobertura vegetal no conceito de domínio; (4) pedologia/solos de forma isolada (latossolos, argissolos etc.) sem enquadramento em domínios; (5) hidrografia/bacias hidrográficas e regime fluvial sem relação com domínios; (6) regionalizações do Brasil que não sejam a de domínios morfoclimáticos (regiões do IBGE, complexos regionais/geoeconômicos, regionalização político-administrativa); (7) temas de uso do solo, agropecuária, urbanização, economia regional ou demografia, quando não estiverem ancorados na explicação morfoclimática do domínio.",
+      "diferenciador": "O que define este módulo é a abordagem integrada da paisagem (relevo + clima + vegetação + solos + drenagem) para delimitar e explicar grandes unidades naturais do Brasil segundo Ab’Sáber, incluindo limites e faixas de transição (ecótonos), e não apenas biomas, climas ou formas de relevo analisados separadamente.",
+      "palavras_chave": [
+        "domínios morfoclimáticos",
+        "Ab’Sáber",
+        "ecótono",
+        "Mares de Morros",
+        "Cerrado"
+      ]
     },
     {
       "nome": "Geopolítica na África e na América",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações de poder, disputas territoriais, processos históricos e dinâmicas econômicas e estratégicas que moldam a organização política e a inserção internacional de países e regiões da África e das Américas (Norte, Central, Caribe e Sul), incluindo colonialismo, descolonização, fronteiras, integração regional, influência de potências, recursos naturais e conflitos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda geopolítica envolvendo países/regiões africanas e/ou americanas, como: (1) colonialismo, partilha da África, descolonização, neocolonialismo e seus impactos territoriais e políticos; (2) formação de Estados, fronteiras herdadas, disputas fronteiriças e secessões (ex.: Saara Ocidental, Sudão/Sudão do Sul, RDC, Nigéria, Etiópia/Eritreia, Somália); (3) conflitos armados, guerras civis, insurgências, terrorismo e missões internacionais no continente africano ou nas Américas; (4) influência e intervenção de potências e atores externos (EUA, China, Rússia, UE, França, Reino Unido) e competição por áreas de influência; (5) integração e blocos regionais e seus efeitos geopolíticos (UA, CEDEAO/ECOWAS, SADC, EAC; OEA, Mercosul, Unasul, Aliança do Pacífico, CARICOM, USMCA/NAFTA); (6) geopolítica de recursos naturais e infraestrutura (petróleo no Golfo da Guiné, minerais estratégicos como cobalto/coltan, água e barragens, agronegócio, Amazônia, lítio andino, Canal do Panamá, rotas marítimas e portos); (7) relações Norte–Sul, dependência, dívida, sanções, ajuda internacional, cooperação Sul–Sul e BRICS com foco em África/Américas; (8) migrações e crises humanitárias com dimensão geopolítica (refugiados, deslocamentos, fronteiras, políticas migratórias nas Américas e na África); (9) disputas e tensões geopolíticas nas Américas (Guerra Fria na América Latina, Cuba, Venezuela, Colômbia, narcotráfico como poder territorial, militarização de fronteiras, influência dos EUA) e no Caribe; (10) temas de soberania e governança territorial (Amazônia e soberania, Guiana/Essequibo, Malvinas/Falklands, Sahel e controle territorial).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) geopolítica europeia, asiática ou do Oriente Médio sem conexão substantiva com África ou Américas; (2) geografia física (clima, relevo, biomas) de África/Américas sem enfoque em poder, Estado, conflitos, fronteiras ou relações internacionais; (3) demografia, urbanização, indicadores sociais ou economia interna (PIB, setores produtivos) sem dimensão geopolítica; (4) história geral (pré-colonial, colonial ou contemporânea) apenas descritiva, sem análise de disputas de poder/território e inserção internacional; (5) cartografia, geotecnologias ou regionalização escolar sem conteúdo geopolítico; (6) globalização e comércio mundial em termos gerais, quando não houver recorte claro para África e/ou Américas e suas disputas/alianças; (7) questões ambientais (desmatamento, desertificação, mudanças climáticas) tratadas apenas como ecologia, sem debate de soberania, governança, conflitos ou acordos internacionais.",
+      "diferenciador": "O foco é a análise de poder e território (conflitos, fronteiras, influência externa, blocos e recursos estratégicos) especificamente aplicada à África e às Américas, distinguindo-se de conteúdos meramente físicos, econômicos ou históricos por enfatizar relações internacionais, disputas e estratégias geopolíticas.",
+      "palavras_chave": [
+        "descolonização",
+        "fronteiras e disputas territoriais",
+        "blocos regionais (UA/Mercosul/OEA)",
+        "influência de potências (EUA/China/Rússia/UE)",
+        "recursos estratégicos (petróleo/minerais/Amazônia/lítio)"
+      ]
     },
     {
       "nome": "Os dois sistemas econômicos do século XX",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo comparativo dos dois grandes sistemas econômicos que marcaram o século XX — capitalismo e socialismo (economia planificada) — e sua expressão geopolítica na Guerra Fria, analisando princípios, formas de organização da produção e do trabalho, papel do Estado e do mercado, propriedade dos meios de produção, planejamento econômico, consumo, desigualdades, industrialização, blocos econômicos e impactos territoriais no mundo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a comparação entre capitalismo e socialismo no século XX; características centrais de economia de mercado versus economia planificada; propriedade privada x propriedade estatal/coletiva dos meios de produção; papel do Estado (intervencionismo, bem-estar social, planejamento central) e do mercado (livre concorrência, preços, oferta e demanda); formação e disputa entre blocos (EUA/OTAN e URSS/Pacto de Varsóvia) com base em modelos econômicos; políticas e estratégias econômicas associadas à Guerra Fria (corrida armamentista, ajuda externa, influência econômica, propaganda); exemplos históricos vinculados aos sistemas (URSS, Europa Oriental, EUA, Europa Ocidental, China maoísta, Cuba) quando o foco é o modelo econômico; efeitos socioespaciais dos sistemas (industrialização, urbanização, consumo de massa, desigualdades, padrões de desenvolvimento, divisão internacional do trabalho) no contexto do século XX; transição/crise do socialismo real e reestruturações do capitalismo no fim do século XX quando tratadas como mudança de sistema ou de modelo econômico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: economia global contemporânea pós-1991 sem relação com a oposição capitalismo x socialismo; globalização, neoliberalismo, financeirização e blocos econômicos atuais (UE, Mercosul, NAFTA/USMCA) sem conexão explícita com os sistemas do século XX; história política/militar da Guerra Fria (guerras por procuração, crises diplomáticas) sem discussão do modelo econômico; Revolução Industrial, mercantilismo, colonialismo e imperialismo de séculos anteriores sem vínculo com os sistemas do século XX; temas de geografia econômica setorial (agropecuária, indústria, energia, transportes) quando não articulados à lógica capitalismo/socialismo; debates teóricos de sociologia/filosofia política (marxismo, liberalismo) em nível abstrato sem aplicação ao funcionamento econômico e territorial no século XX; economia brasileira específica (Era Vargas, desenvolvimentismo, Plano Real) se não estiver enquadrada na disputa/contraste entre os dois sistemas.",
+      "diferenciador": "O foco distintivo é a oposição e comparação entre capitalismo (economia de mercado) e socialismo real (economia planificada) como sistemas econômicos estruturantes do século XX e sua materialização geopolítica e territorial na Guerra Fria.",
+      "palavras_chave": [
+        "capitalismo",
+        "socialismo",
+        "economia planificada",
+        "economia de mercado",
+        "Guerra Fria"
+      ]
     },
     {
       "nome": "Geopolítica no pós-II guerra mundial",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
+      "escopo": "Estudo das transformações geopolíticas globais após 1945, com ênfase na reorganização da ordem internacional, na Guerra Fria e na bipolaridade EUA–URSS, na criação e atuação de organismos internacionais, nos processos de descolonização e formação do Terceiro Mundo, nas alianças político-militares e econômicas, nas crises e guerras por procuração, e na transição para a ordem pós-Guerra Fria (1989–1991) e seus desdobramentos iniciais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) a formação da ordem mundial do pós-guerra (conferências e acordos como Yalta e Potsdam, redefinição de fronteiras, reconstrução europeia, Plano Marshall); (2) a Guerra Fria como sistema geopolítico (bipolaridade, corrida armamentista e nuclear, dissuasão, equilíbrio de poder, doutrinas de contenção, propaganda e disputa ideológica); (3) a criação, papel e limites de instituições do pós-1945 (ONU, Conselho de Segurança, FMI, Banco Mundial, GATT/OMC) e sua relação com a geopolítica; (4) alianças e blocos (OTAN, Pacto de Varsóvia, COMECON, alinhamento e não alinhamento, Movimento dos Não Alinhados); (5) crises e conflitos do período vinculados à disputa EUA–URSS (Berlim e o Muro, Crise dos Mísseis em Cuba, Guerra da Coreia, Guerra do Vietnã, Afeganistão, conflitos no Oriente Médio no contexto da Guerra Fria, golpes e intervenções indiretas); (6) descolonização na África e Ásia e seus impactos geopolíticos (novos Estados, fronteiras herdadas, neocolonialismo, dependência, disputas por influência); (7) a emergência do chamado Terceiro Mundo/Sul Global e debates sobre desenvolvimento, dependência e ordem econômica internacional; (8) a crise e dissolução do bloco soviético (Perestroika, Glasnost, queda do Muro, fim da URSS) e a reconfiguração geopolítica imediata (unipolaridade relativa, expansão de alianças, novos conflitos e nacionalismos no Leste Europeu).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) geopolítica anterior a 1945 (imperialismo do século XIX, Primeira Guerra, período entreguerras, ascensão do nazifascismo) sem conexão direta com a ordem pós-1945; (2) história interna de países (política doméstica, economia interna, cultura) sem relação com a disputa geopolítica internacional do pós-guerra; (3) globalização econômica e neoliberalismo a partir dos anos 1990/2000 como tema central, sem vínculo explícito com a transição pós-Guerra Fria; (4) conflitos contemporâneos do século XXI (Guerra ao Terror, Primavera Árabe, Ucrânia pós-2014, rivalidade EUA–China atual) quando não forem abordados como desdobramentos diretos do arranjo pós-1945; (5) geografia física, demografia, urbanização, clima, cartografia ou regionalizações sem enfoque geopolítico do pós-II Guerra; (6) integração regional específica (ex.: União Europeia) quando tratada apenas como economia/integração institucional, sem contextualização na reconstrução do pós-guerra e na Guerra Fria; (7) teorias clássicas de geopolítica (Heartland, Rimland) se discutidas de forma abstrata, sem aplicação ao contexto pós-1945.",
+      "diferenciador": "O foco distintivo é a ordem internacional construída após 1945 e a dinâmica da Guerra Fria (bipolaridade, blocos, instituições e conflitos por procuração), incluindo descolonização e a transição 1989–1991, analisadas como processos geopolíticos globais.",
       "palavras_chave": []
     },
     {
       "nome": "Tecnologias de informação e comunicação (TIC)",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do papel das Tecnologias de Informação e Comunicação (TIC) na produção, circulação e uso de informações geográficas, na organização do espaço e nas dinâmicas socioespaciais. Inclui redes digitais, infraestrutura de telecomunicações, plataformas e serviços online, geotecnologias e dados (incluindo geodados), bem como impactos econômicos, culturais, políticos e ambientais associados à conectividade, à digitalização e à sociedade em rede.",
+      "incluir_quando": "Classificar aqui quando a questão aborda o uso, funcionamento ou impactos das TIC em contextos geográficos, como: internet e redes de comunicação; infraestrutura (cabos submarinos, fibras ópticas, antenas, satélites, data centers) e sua distribuição territorial; conectividade e desigualdades de acesso (divisão digital); fluxos de informação e globalização; plataformas digitais e economia de dados (e-commerce, redes sociais, aplicativos, serviços sob demanda) e seus efeitos no espaço urbano/regional; teletrabalho, educação a distância e reorganização de mobilidade/uso do solo; geotecnologias e informação geográfica (SIG/GIS, GPS/GNSS, sensoriamento remoto, cartografia digital, mapas online, georreferenciamento, geocodificação, VGI/crowdsourcing); monitoramento e gestão territorial com TIC (alertas de desastres, logística, rastreamento, cidades inteligentes); ciberespaço e territorialidades digitais; governança, vigilância, privacidade e regulação relacionadas a dados e comunicação; desinformação e circulação de informações com repercussões territoriais; análise de redes e fluxos informacionais como elemento explicativo de fenômenos geográficos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: conteúdos de informática sem relação com espaço geográfico (programação, hardware genérico, manutenção de computadores); cartografia tradicional sem componente digital/tecnológico (projeções, escala, coordenadas) quando não vinculada a SIG, GPS ou mapas digitais; climatologia, geologia, hidrografia ou biogeografia sem uso de TIC para monitoramento/análise; transportes e logística apenas como infraestrutura física (rodovias, ferrovias, portos) sem mediação por sistemas de informação, rastreamento ou plataformas; economia e globalização apenas por comércio/indústria sem ênfase em fluxos informacionais e redes digitais; demografia e urbanização sem discussão de conectividade, plataformas, dados ou geotecnologias; mídia tradicional (rádio/TV impressa) quando não articulada a redes digitais e comunicação em rede; temas de cidadania/ética de forma genérica sem vínculo com dados, conectividade, vigilância ou plataformas.",
+      "diferenciador": "O foco central é a mediação tecnológica da informação e da comunicação (redes digitais, dados e geotecnologias) como fator que estrutura fluxos, relações e desigualdades no espaço geográfico, distinguindo-se por enfatizar conectividade, infraestrutura informacional e uso de dados/tecnologias para analisar e gerir o território.",
+      "palavras_chave": [
+        "TIC",
+        "internet",
+        "divisão digital",
+        "SIG (GIS)",
+        "GPS/GNSS"
+      ]
     },
     {
       "nome": "Meios de transporte",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos meios de transporte e sua organização no espaço geográfico, incluindo tipos (terrestre, aquaviário e aéreo), infraestrutura e redes de circulação, funções econômicas e sociais, fluxos de pessoas e mercadorias, intermodalidade e impactos territoriais, ambientais e urbanos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda tipos de transporte (rodoviário, ferroviário, hidroviário, marítimo, fluvial, aéreo, dutoviário), comparação entre modais (custo, velocidade, capacidade, alcance, segurança), infraestrutura de transporte (rodovias, ferrovias, portos, aeroportos, hidrovias, terminais, estações, pontes, túneis, dutos), redes e fluxos (corredores logísticos, rotas, eixos de circulação, conectividade, acessibilidade), logística e distribuição (cadeias de suprimento, transporte de cargas, escoamento da produção, transporte público), intermodalidade/multimodalidade, planejamento e políticas de mobilidade e transporte, e efeitos do transporte na organização do território (integração regional, urbanização, localização industrial, turismo), bem como impactos ambientais e sociais associados (emissões, poluição, ruído, acidentes, segregação socioespacial, congestionamentos).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de comunicação e telecomunicações (internet, telefonia, satélites) sem relação direta com transporte; de comércio exterior e economia apenas em termos de preços/tarifas sem discutir logística/fluxos/rotas; de migrações e mobilidade populacional como fenômeno demográfico sem foco nos modais e redes de transporte; de cartografia e orientação (coordenadas, escalas) sem aplicação a rotas/infraestrutura; de energia e combustíveis em si (matriz energética, petróleo) sem conexão com sistemas de transporte; de trânsito e legislação de tráfego de forma normativa (regras de direção, multas) sem análise geográfica; de indústria automobilística/aviação como setor produtivo sem relação com circulação e território; de urbanismo geral (uso do solo, habitação) sem vínculo com mobilidade/transportes.",
+      "diferenciador": "O foco é a circulação no espaço geográfico: modais, infraestrutura, redes e fluxos de pessoas e mercadorias e como isso estrutura o território (conectividade, acessibilidade e logística), distinguindo-se de temas próximos por priorizar o sistema de transporte e seus impactos espaciais.",
+      "palavras_chave": [
+        "modal de transporte",
+        "rodoviário",
+        "ferroviário",
+        "hidroviário",
+        "aéreo"
+      ]
     },
     {
       "nome": "Geografia do Brasil e Organização do Espaço Brasileiro",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da formação, organização e dinâmica do espaço geográfico brasileiro, articulando território, regionalizações, redes, urbanização, industrialização, agropecuária, infraestrutura, população e desigualdades socioespaciais, com ênfase nas relações entre natureza, economia, política e sociedade no Brasil.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a organização do território brasileiro e suas transformações, incluindo: regionalizações do Brasil (IBGE, geoeconômica, complexos regionais), integração e desigualdades regionais; estrutura e dinâmica da população brasileira (distribuição, migrações internas, urbanização, metropolização, rede urbana); atividades econômicas no Brasil e sua espacialização (industrialização, desconcentração industrial, agronegócio, agricultura familiar, extrativismo, setor terciário); infraestrutura e redes (transportes, energia, telecomunicações, logística, corredores de exportação) e seus impactos; uso e ocupação do solo e conflitos territoriais (fronteira agrícola, grilagem, reforma agrária, terras indígenas, unidades de conservação); políticas territoriais e planejamento (Sudene, Sudam, Zona Franca de Manaus, projetos de integração, desenvolvimento regional); questões ambientais vinculadas ao uso do território no Brasil (desmatamento, queimadas, biomas brasileiros em relação à ocupação, recursos hídricos e gestão) quando o foco for a organização do espaço brasileiro; geopolítica interna e fronteiras brasileiras quando relacionadas à integração territorial, circulação e controle do território.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Geografia geral/mundial (globalização, geopolítica internacional, regionalizações do mundo) sem foco no Brasil; cartografia e geotecnologias como conteúdo central (projeções, escalas, coordenadas, sensoriamento remoto) sem aplicação direta à organização do espaço brasileiro; climatologia, geomorfologia, hidrografia ou biogeografia do Brasil quando o enfoque for estritamente físico-natural (tipos de clima, formas de relevo, dinâmica atmosférica) sem relação com ocupação/produção do espaço; história do Brasil, sociologia ou economia geral sem recorte espacial/geográfico; atualidades pontuais (notícias) sem exigir análise territorial do Brasil; geografia de um estado/município muito específica quando não conectada a processos nacionais de organização do espaço.",
+      "diferenciador": "O foco é explicar como o território brasileiro é produzido e organizado (regionalizações, redes, fluxos, atividades econômicas, urbanização e desigualdades) e como políticas e agentes sociais moldam o espaço no Brasil, mais do que descrever apenas elementos físicos ou temas globais.",
+      "palavras_chave": [
+        "regionalização do Brasil",
+        "rede urbana",
+        "desigualdades regionais",
+        "fronteira agrícola",
+        "integração territorial"
+      ]
     },
     {
       "nome": "Conferências e acordos do meio ambiente",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das principais conferências internacionais, cúpulas e tratados ambientais, seus contextos históricos, objetivos, princípios, instrumentos e resultados, incluindo a governança ambiental global (ONU e organismos associados), mecanismos de implementação e monitoramento, e impactos nas políticas públicas e na cooperação internacional.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conferências, cúpulas, convenções, protocolos, acordos, tratados ou agendas internacionais sobre meio ambiente e desenvolvimento sustentável; quando pede identificar datas, locais, participantes, documentos finais e desdobramentos (ex.: declarações, agendas, metas); quando discute princípios e conceitos formalizados nesses eventos (ex.: desenvolvimento sustentável, responsabilidades comuns porém diferenciadas, princípio da precaução, poluidor-pagador); quando trata de regimes internacionais específicos (clima, biodiversidade, desertificação, ozônio, resíduos perigosos) e seus mecanismos (COPs, NDCs, mercado de carbono, financiamento climático, transferência de tecnologia, relatórios e verificação); quando relaciona esses acordos a políticas nacionais, legislação ambiental, metas de redução de emissões, conservação, adaptação e mitigação; quando compara conferências (Estocolmo-1972, Rio-92, Joanesburgo-2002, Rio+20-2012) e seus legados (Agenda 21, Declaração do Rio, ODS/Agenda 2030).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata apenas de ecologia, biomas, ciclos biogeoquímicos, clima e tempo, impactos ambientais locais sem referência a acordos/conferências; quando o foco é exclusivamente em legislação ambiental interna (constituição, códigos, licenciamento, unidades de conservação) sem conexão com tratados internacionais; quando aborda educação ambiental, gestão de resíduos, saneamento, energia ou agricultura apenas como temas setoriais sem menção a compromissos internacionais; quando discute geopolítica geral, comércio internacional ou economia global sem vínculo com governança ambiental; quando trata de desastres naturais e riscos ambientais sem relação com marcos internacionais (ex.: Sendai) ou cooperação multilateral.",
+      "diferenciador": "O foco central é a governança ambiental internacional: eventos multilaterais, documentos e tratados que estabelecem compromissos, metas, princípios e mecanismos de cooperação/monitoramento entre países, distinguindo-se de temas ambientais puramente físicos, locais ou apenas de políticas domésticas.",
+      "palavras_chave": [
+        "Rio-92",
+        "Acordo de Paris",
+        "Protocolo de Kyoto",
+        "COP",
+        "Agenda 2030"
+      ]
     },
     {
       "nome": "Dinâmica Populacional e Demografia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da população humana em termos de tamanho, distribuição espacial, estrutura (idade/sexo), crescimento e seus componentes (natalidade, mortalidade, fecundidade, migrações), transição demográfica, indicadores demográficos e suas implicações socioeconômicas e territoriais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos, medidas, análises ou interpretações sobre: crescimento populacional e suas taxas; natalidade, mortalidade, fecundidade e esperança de vida; saldo vegetativo e saldo migratório; migrações internas e internacionais (origem/destino, fatores de atração/repulsão, refúgio, êxodo rural, urbanização como resultado de fluxos); estrutura etária e por sexo (pirâmides etárias, razão de dependência, envelhecimento populacional, bônus demográfico); distribuição e densidade populacional; transição demográfica e epidemiológica; políticas populacionais (natalistas/antinatalistas) e planejamento familiar; indicadores como TBN, TBM, TGF, crescimento natural, taxa de crescimento total, mortalidade infantil; projeções populacionais e leitura de gráficos/tabelas/censos; impactos demográficos em trabalho, previdência, saúde, educação, habitação e organização do território.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: urbanização e rede urbana sem foco em fluxos migratórios/estrutura populacional; economia e mercado de trabalho sem uso de indicadores demográficos; geopolítica, conflitos e fronteiras sem relação com migrações/refugiados; climatologia, relevo, hidrografia e biomas; agricultura, indústria, comércio e globalização sem conexão com dinâmica populacional; cartografia e geotecnologias (projeções, escalas, sensoriamento) sem análise demográfica; cultura, etnia e identidade sem recorte demográfico (composição, distribuição, indicadores); saúde pública e epidemiologia apenas biomédica, sem transição epidemiológica/indicadores populacionais; história geral sem análise de população (censos, migrações, crescimento).",
+      "diferenciador": "O foco é a população como objeto de medida e análise (indicadores, estruturas e fluxos) e como ela muda no tempo e no espaço; diferencia-se por exigir leitura/uso de dados demográficos e explicações baseadas em natalidade, mortalidade e migração.",
+      "palavras_chave": [
+        "transição demográfica",
+        "taxa de natalidade",
+        "taxa de mortalidade",
+        "migração",
+        "pirâmide etária"
+      ]
     },
     {
       "nome": "Energial mundial e combustíveis fósseis",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da matriz energética mundial com ênfase na produção, distribuição, comércio e consumo de energia a partir de combustíveis fósseis (petróleo, carvão mineral e gás natural), incluindo sua geografia (principais regiões produtoras e consumidoras), infraestrutura (extração, refino, transporte), dinâmica geopolítica, impactos socioambientais e tendências de transição energética relacionadas à redução do uso de fósseis.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a energia em escala mundial (ou comparações entre países/regiões) com foco em combustíveis fósseis, incluindo: (1) composição e evolução da matriz energética mundial e participação de petróleo, carvão e gás; (2) cadeias produtivas fósseis: exploração/extração (onshore/offshore, pré-sal, fracking), refino, termelétricas, petroquímica; (3) fluxos e comércio internacional de energia: exportadores/importadores, rotas, oleodutos/gasodutos, LNG/GNL, chokepoints (ex.: Estreito de Ormuz), OPEP/OPEC e políticas de oferta; (4) geopolítica e segurança energética: conflitos, sanções, dependência energética, choques do petróleo, formação de preços e volatilidade; (5) impactos ambientais e climáticos associados aos fósseis: emissões de CO2, efeito estufa, poluição do ar, derramamentos de óleo, mineração de carvão, externalidades; (6) debates e políticas de transição energética diretamente ligados à redução/substituição de fósseis (descarbonização, metas de emissões, phase-out do carvão, captura e armazenamento de carbono/CCS quando vinculada a fósseis); (7) comparação entre fontes fósseis (densidade energética, custo, disponibilidade, reservas, vida útil, EROI) e seus usos (transporte, eletricidade, indústria).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) energias renováveis sem relação direta com a substituição de fósseis (solar, eólica, biomassa, geotérmica) como tema central; (2) energia nuclear como foco principal; (3) eletricidade e redes (transmissão, distribuição, mercado elétrico) sem ênfase em geração termelétrica fóssil ou matriz mundial; (4) hidrelétricas e gestão de recursos hídricos como tema central; (5) mudanças climáticas em geral (efeito estufa, acordos climáticos) sem conexão explícita com combustíveis fósseis/matriz energética; (6) mineração/indústria em geral sem recorte energético (ex.: siderurgia, mineração de ferro) ou sem foco em carvão/petróleo/gás; (7) questões estritamente locais/urbanas sobre poluição, mobilidade ou consumo doméstico de energia sem vínculo com a geografia e dinâmica global dos fósseis; (8) conceitos físicos/químicos de combustão, calorimetria ou engenharia de motores sem abordagem geográfica/econômica/ambiental da energia mundial.",
+      "diferenciador": "O foco distintivo é a análise geográfica e geopolítica da matriz energética mundial centrada em combustíveis fósseis (petróleo, carvão e gás), seus fluxos globais, infraestrutura e impactos, diferindo de módulos sobre renováveis, eletricidade em geral ou clima quando estes não estão ancorados na dinâmica dos fósseis.",
+      "palavras_chave": [
+        "matriz energética mundial",
+        "combustíveis fósseis",
+        "petróleo",
+        "carvão mineral",
+        "gás natural"
+      ]
     },
     {
       "nome": "Astronomia e Representações Espaciais",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de conceitos básicos de Astronomia aplicados à Geografia e das formas de representar o espaço geográfico. Abrange movimentos da Terra e suas consequências (dia/noite, estações, fusos horários), orientação e localização (pontos cardeais, coordenadas geográficas), leitura e interpretação de mapas e outras representações (plantas, cartas, croquis, imagens de satélite), além de escala, projeções cartográficas e convenções cartográficas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) Astronomia de base geográfica: rotação e translação da Terra, inclinação do eixo terrestre, solstícios e equinócios, estações do ano, duração do dia e da noite, movimentos aparentes do Sol, fases da Lua e eclipses (quando relacionados a observação/orientação/tempo), marés (quando associadas à atração gravitacional e ciclos astronômicos), noções do Sistema Solar e referências celestes usadas para orientação; (2) Tempo e localização: fusos horários, linha internacional de data, cálculo de horários a partir de longitudes, horário de verão (quando tratado como ajuste de tempo relacionado a insolação/tempo solar); (3) Orientação e coordenadas: pontos cardeais e colaterais, rosa dos ventos, azimute/ruma (em nível escolar), latitude, longitude, Equador, meridiano de Greenwich, hemisférios, paralelos e meridianos, localização por coordenadas; (4) Cartografia e representações espaciais: leitura e interpretação de mapas, plantas, cartas topográficas, croquis, maquetes, globos, mapas temáticos, imagens de satélite e fotografias aéreas; elementos do mapa (título, legenda, escala, orientação, fonte, projeção), simbologia e convenções cartográficas; (5) Escala e medidas: escala numérica e gráfica, conversão e cálculo de distâncias/áreas a partir da escala, generalização cartográfica; (6) Projeções cartográficas: tipos (cilíndrica, cônica, azimutal), propriedades (conforme, equivalente, equidistante), distorções e adequação ao objetivo do mapa; (7) Tecnologias de geolocalização e sensoriamento remoto quando o foco é representação/localização: GPS/GNSS, SIG/Geoprocessamento (conceitos básicos), coordenadas em aplicativos, interpretação de imagens orbitais para localização e análise espacial.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) Climatologia e meteorologia sem vínculo com movimentos da Terra/insolação em termos astronômicos (ex.: massas de ar, frentes, tipos de clima, previsão do tempo); (2) Geologia/geomorfologia (relevo, tectônica, rochas, solos) sem uso central de mapas/escala/projeções; (3) Demografia, urbanização, economia, geopolítica e redes (migrações, industrialização, comércio, conflitos) quando mapas aparecem apenas como ilustração e não como objeto de análise cartográfica; (4) Hidrografia e oceanografia (bacias, rios, correntes) sem foco em representação cartográfica ou em marés por causas astronômicas; (5) História da Astronomia ou astrofísica avançada (estrelas, galáxias, cosmologia) sem relação direta com orientação, tempo, estações ou aplicações geográficas; (6) Estatística e gráficos (tabelas, gráficos de barras/linhas) quando não se trata de representação espacial/cartográfica; (7) Questões de meio ambiente e sustentabilidade sem componente de localização, cartografia ou astronomia aplicada.",
+      "diferenciador": "O foco principal é a relação entre fenômenos astronômicos e a organização do tempo/espaço na Terra, junto às técnicas e linguagens de representação do espaço geográfico (cartografia, escala, projeções, coordenadas e leitura de mapas/imagens). Diferencia-se por exigir orientação/localização e interpretação de representações espaciais, ou explicação de fenômenos terrestres a partir de movimentos e referências astronômicas.",
+      "palavras_chave": [
+        "coordenadas geográficas",
+        "latitude e longitude",
+        "fusos horários",
+        "escala cartográfica",
+        "projeções cartográficas"
+      ]
     },
     {
       "nome": "Continentes e suas características",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos continentes (África, América, Antártida, Ásia, Europa e Oceania) e de suas principais características físicas e humanas, incluindo localização e limites, dimensões e extensão, relevo, clima, hidrografia, biomas/vegetação, recursos naturais, população e aspectos socioeconômicos gerais, além de comparações e regionalizações (ex.: América do Norte/Central/Sul; Europa Ocidental/Oriental).",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, localização, limites e divisão dos continentes; comparação entre continentes (tamanho, população, densidade, climas, biomas, relevo, hidrografia); características naturais de um continente (cadeias montanhosas, planícies, desertos, rios, bacias, oceanos adjacentes, zonas climáticas); características humanas em escala continental (distribuição populacional, urbanização, indicadores socioeconômicos gerais, atividades econômicas predominantes, diversidade cultural/linguística em visão panorâmica); regionalizações internas amplas dentro de um continente (ex.: África Subsaariana e Norte da África; Sudeste Asiático; Oriente Médio como recorte regional associado ao continente asiático); e questões que peçam para relacionar um continente a seus traços marcantes (ex.: Antártida e clima polar; Ásia e maior população; África e grandes desertos e savanas; Oceania e ilhas/arquepélagos).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de países específicos, capitais, fronteiras nacionais ou estados/províncias (a menos que seja apenas exemplo para caracterizar o continente); cartografia e técnicas de mapas (projeções, escalas, coordenadas) sem foco em continentes; tectônica de placas e geologia global como tema central (ex.: placas litosféricas) sem conexão direta com caracterização continental; clima, biomas, relevo ou hidrografia em abordagem geral do planeta sem recorte por continente; história, colonização, geopolítica, conflitos e blocos econômicos como foco principal (ex.: União Europeia, OTAN, BRICS) sem ênfase nas características continentais; oceanos e mares como tema central (correntes marítimas, marés) sem relação com continentes; e exercícios de localização de cidades/pontos turísticos isolados.",
+      "diferenciador": "O foco é a escala continental: reconhecer e comparar continentes e descrever seus traços físicos e humanos mais gerais, em vez de detalhar países, temas globais abstratos ou técnicas cartográficas.",
+      "palavras_chave": [
+        "continentes",
+        "África",
+        "Ásia",
+        "Europa",
+        "Oceania"
+      ]
     },
     {
       "nome": "Urbanização no território brasileiro",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do processo de urbanização no Brasil e sua organização territorial: evolução histórica, ritmos e fases, distribuição espacial da população urbana, rede e hierarquia urbana, metropolização, conurbação, periferização, segregação socioespacial, mobilidade, habitação, infraestrutura e impactos socioambientais nas cidades brasileiras, articulando causas (industrialização, êxodo rural, políticas públicas) e consequências (desigualdades, problemas urbanos e reestruturação do espaço).",
+      "incluir_quando": "Classificar aqui quando a questão aborda o processo de urbanização no Brasil (crescimento da população urbana, expansão das cidades, transformação do espaço urbano) e/ou a estrutura urbana brasileira, incluindo: (1) histórico e fases da urbanização brasileira (industrialização, êxodo rural, urbanização acelerada no século XX, interiorização); (2) metropolização e regiões metropolitanas (formação, funções, governança, problemas); (3) rede urbana e hierarquia das cidades no Brasil (metrópoles, capitais regionais, cidades médias, cidades pequenas; centralidade e fluxos); (4) conurbação, expansão urbana, periurbanização, urban sprawl e verticalização em cidades brasileiras; (5) segregação socioespacial, periferização, favelização, gentrificação e desigualdade urbana no contexto brasileiro; (6) problemas urbanos no Brasil (déficit habitacional, mobilidade/transportes, saneamento, violência, informalidade, poluição, ilhas de calor, enchentes) e suas relações com o crescimento urbano; (7) políticas urbanas e instrumentos no Brasil quando vinculados à urbanização (planejamento urbano, Estatuto da Cidade, regularização fundiária, habitação social, mobilidade urbana) e seus efeitos territoriais; (8) urbanização e regionalização do território brasileiro (concentração no Sudeste, litoralização, interiorização, fronteiras urbanas) e comparações entre regiões do Brasil; (9) relações campo-cidade no Brasil quando o foco é a urbanização e a dinâmica urbana (migrações internas, pendularidade, metropolização do interior).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) urbanização em escala mundial ou de outros países sem conexão explícita com o Brasil; (2) demografia geral (natalidade, mortalidade, transição demográfica) sem foco na urbanização e no espaço urbano brasileiro; (3) industrialização, economia ou setor terciário no Brasil sem relação direta com crescimento urbano, rede urbana ou organização do espaço urbano; (4) geografia agrária, estrutura fundiária, agricultura e ruralidades sem articulação com êxodo rural/urbanização; (5) cartografia, geologia, clima, biomas ou hidrografia do Brasil sem vínculo com problemas/expansão urbana; (6) políticas públicas urbanas tratadas de forma jurídica/administrativa abstrata, sem análise territorial da urbanização; (7) arquitetura/urbanismo técnico (tipologias construtivas, desenho urbano detalhado) quando não conectado a processos de urbanização e desigualdades socioespaciais; (8) temas de transporte/logística nacional (rodovias, portos, comércio exterior) quando não relacionados à mobilidade urbana e à rede urbana; (9) questões sobre regionalização do Brasil (complexos regionais, macrorregiões) sem discutir urbanização, metrópoles ou rede urbana.",
+      "diferenciador": "O foco é a urbanização como processo e como organização do espaço urbano no Brasil (rede urbana, metropolização e desigualdades socioespaciais), distinguindo-se de temas econômicos, demográficos ou ambientais quando estes não estão diretamente articulados à dinâmica urbana brasileira.",
+      "palavras_chave": [
+        "urbanização brasileira",
+        "rede urbana",
+        "metropolização",
+        "conurbação",
+        "segregação socioespacial"
+      ]
     },
     {
       "nome": "Urbanização: processos e dinâmicas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da urbanização como processo histórico, social, econômico e espacial: crescimento e transformação das cidades, formação e expansão das áreas urbanas, organização interna do espaço urbano, redes urbanas e fluxos, bem como impactos socioambientais e desafios de planejamento e gestão.",
+      "incluir_quando": "Classificar aqui quando a questão aborda processos de urbanização (causas, ritmos, etapas e consequências), crescimento urbano e metropolização, expansão periférica e espraiamento urbano, conurbação, verticalização, segregação socioespacial, gentrificação, favelização e informalidade urbana, mobilidade urbana e deslocamentos pendulares, uso e ocupação do solo urbano (zoneamento, centralidades, periferias), estrutura e morfologia urbana, rede urbana e hierarquia de cidades (metrópoles, cidades médias, pequenas), relações campo-cidade, industrialização e terciarização associadas ao urbano, problemas urbanos (déficit habitacional, saneamento, poluição, ilhas de calor, enchentes, violência, desigualdade), políticas e instrumentos de planejamento urbano (plano diretor, Estatuto da Cidade, regularização fundiária, habitação social), e análise de indicadores urbanos (taxa de urbanização, densidade, crescimento vegetativo/migratório, IDH urbano, acesso a serviços).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de geografia rural e dinâmica agrária (estrutura fundiária, agricultura, pecuária, reforma agrária) sem relação com urbanização; de demografia geral sem recorte urbano (pirâmides etárias, transição demográfica) quando não conectada a migrações/urbanização; de industrialização e economia em geral sem foco em efeitos urbanos/organização do espaço urbano; de transportes e logística em escala nacional/global (corredores de exportação, comércio exterior) sem enfoque em mobilidade urbana; de meio ambiente físico (clima, relevo, hidrografia) sem conexão com impactos/risco urbano; de geopolítica, regionalização e globalização sem discussão de cidades, redes urbanas ou metrópoles; de cartografia e geotecnologias como fim em si mesmas; de turismo e cultura sem relação com reestruturação urbana; ou de arquitetura/urbanismo estritamente técnico (estilos arquitetônicos) sem análise geográfica das dinâmicas urbanas.",
+      "diferenciador": "Foco na cidade como espaço produzido socialmente e em suas dinâmicas: como e por que as áreas urbanas crescem, se organizam, se conectam em redes e geram desigualdades e impactos, distinguindo-se de temas econômicos, demográficos ou ambientais quando estes não estão articulados ao processo urbano.",
+      "palavras_chave": [
+        "urbanização",
+        "metropolização",
+        "rede urbana",
+        "segregação socioespacial",
+        "gentrificação"
+      ]
     },
     {
       "nome": "Clima e formações vegetais no Brasil",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos tipos de clima do Brasil e sua distribuição espacial, dos elementos e fatores climáticos (temperatura, precipitação, massas de ar, altitude, latitude, maritimidade/continentalidade), e da relação entre clima, biomas e formações vegetais brasileiras (estrutura, adaptações e dinâmica). Inclui a caracterização e localização de biomas como Amazônia, Cerrado, Caatinga, Mata Atlântica, Pantanal e Pampa, além de formações associadas (manguezais, restingas, campos, matas de araucária) e impactos antrópicos e mudanças climáticas sobre a vegetação.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) classificação, características e distribuição dos climas brasileiros (equatorial, tropical, tropical de altitude, tropical atlântico/litorâneo, semiárido, subtropical), incluindo variações regionais; (2) elementos do clima (temperatura, umidade, pressão, ventos, precipitação, amplitude térmica) e sua leitura em climogramas, mapas climáticos e séries históricas; (3) fatores climáticos no Brasil (latitude, altitude, relevo/orografia, maritimidade/continentalidade, correntes marítimas, cobertura vegetal, urbanização) e como explicam padrões de chuva e temperatura; (4) massas de ar e frentes que atuam no Brasil (mEc, mEa, mTa, mTc, mPa), ZCAS, frentes frias, friagens, veranicos e seus efeitos; (5) biomas e formações vegetais brasileiras: identificação, localização, fisionomia (floresta ombrófila, estacional, savana, estepe/campos), biodiversidade e adaptações (xeromorfismo, caducifolia, raízes profundas, folhas coriáceas); (6) relação clima–solo–vegetação e sazonalidade (estação seca/chuvosa) na definição de paisagens; (7) ecótonos e transições (ex.: Mata dos Cocais, áreas de contato Cerrado–Amazônia); (8) impactos ambientais e antrópicos ligados a clima e vegetação (desmatamento, queimadas, savanização, desertificação, ilhas de calor, mudanças no regime de chuvas) quando o foco for a explicação geográfica/climática e a resposta da vegetação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) climatologia global sem recorte do Brasil (El Niño/La Niña, circulação geral, climas do mundo) a menos que conecte explicitamente aos climas/biomas brasileiros; (2) hidrografia e bacias hidrográficas (rios, aquíferos, cheias) sem relação direta com clima/vegetação; (3) geologia, geomorfologia e relevo do Brasil como tema central (planaltos, depressões, estrutura geológica) sem uso para explicar clima/vegetação; (4) pedologia/solos como foco principal (tipos de solo, fertilidade, laterização) sem articulação com formações vegetais e clima; (5) agricultura, economia e uso do solo (culturas, pecuária, agronegócio) quando o foco for produtivo/econômico e não a caracterização climática/fitogeográfica; (6) conservação ambiental e políticas públicas (unidades de conservação, legislação) quando o foco for jurídico/gestão e não a relação clima–vegetação; (7) biogeografia de fauna, cadeias alimentares e ecologia geral sem ênfase em formações vegetais e condicionantes climáticos; (8) meteorologia de curto prazo (previsão do tempo, instrumentos) sem conexão com padrões climáticos brasileiros e vegetação.",
+      "diferenciador": "O foco é explicar e reconhecer a distribuição dos climas e das formações vegetais/biomas no território brasileiro e suas relações causais (fatores e massas de ar) e efeitos na paisagem, distinguindo-se de módulos de hidrografia, relevo, solos ou economia por priorizar clima e cobertura vegetal como eixos centrais.",
+      "palavras_chave": [
+        "climas do Brasil",
+        "massas de ar",
+        "ZCAS",
+        "biomas brasileiros",
+        "formações vegetais"
+      ]
     },
     {
       "nome": "Geomorfologia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das formas de relevo da superfície terrestre, sua origem, evolução e dinâmica, considerando processos endógenos e exógenos, agentes modeladores (água, vento, gelo, gravidade, mar) e a relação entre estrutura geológica, clima, tempo e ação humana na modelagem do relevo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, descrição, classificação, gênese ou evolução de formas de relevo (montanhas, planaltos, planícies, depressões, vales, escarpas, dunas, falésias, deltas, terraços, morainas etc.); processos geomorfológicos (intemperismo físico/químico/biológico, erosão, transporte e sedimentação, movimentos de massa, carstificação, abrasão marinha, deflação eólica, ação glacial, dinâmica fluvial); relação entre relevo e fatores condicionantes (litologia/estrutura, tectonismo, clima, cobertura vegetal, tempo geológico); leitura e interpretação de perfis topográficos, hipsometria, declividade e compartimentação do relevo; riscos e impactos associados ao relevo e aos processos (deslizamentos, voçorocas, assoreamento, erosão costeira) quando o foco é a dinâmica do modelado; unidades e classificações do relevo (ex.: planalto, planície, depressão; domínios morfoclimáticos quando o enfoque é o modelado do relevo).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de geologia/tectônica interna sem foco no modelado do relevo (petrologia, mineralogia, estratigrafia, tipos de rochas, placas tectônicas apenas como teoria); pedologia/solos como tema central (horizontes, fertilidade, classificação de solos) sem relação direta com processos geomorfológicos; climatologia/meteorologia (massas de ar, tipos de clima) sem conexão com formas e processos de relevo; hidrologia/oceanografia como tema central (ciclo hidrológico, vazão, bacias hidrográficas, correntes marinhas) quando não discute formas/processos geomorfológicos; biogeografia/ecologia (biomas, sucessão) sem vínculo com relevo; cartografia e geotecnologias como foco (projeções, coordenadas, sensoriamento remoto) sem análise geomorfológica; geografia urbana/agrária/econômica (uso do solo, produção) quando o relevo é apenas contexto secundário.",
+      "diferenciador": "O foco é o 'modelado' da superfície: formas de relevo e os processos/agentes que as criam e transformam (intemperismo, erosão, deposição, movimentos de massa), mais do que a composição das rochas, o clima em si ou a hidrologia isolada.",
+      "palavras_chave": [
+        "relevo",
+        "intemperismo",
+        "erosão",
+        "sedimentação",
+        "movimentos de massa"
+      ]
     },
     {
       "nome": "Climatologia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do clima e de seus elementos, fatores e processos em diferentes escalas (local, regional e global), incluindo a dinâmica atmosférica, a formação de tipos climáticos, a variabilidade e as mudanças climáticas, bem como métodos de observação, medição e representação de dados climáticos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda elementos do clima (temperatura, umidade, pressão atmosférica, ventos, precipitação, nebulosidade, radiação/insolação), fatores do clima (latitude, altitude, maritimidade/continentalidade, relevo/orografia, correntes marítimas, massas de ar, cobertura vegetal/uso do solo), circulação geral da atmosfera (células de Hadley/Ferrel/Polar, ZCIT, alísios, westerlies, jatos, frentes frias/quentes/oclusas), sistemas meteorológicos e sua relação com o clima (ciclones, anticiclones, monções, brisas, inversão térmica), classificação e caracterização de climas (Köppen, Thornthwaite, climas equatorial, tropical, semiárido, mediterrâneo, temperado, continental, polar, de montanha), leitura e interpretação de climogramas e séries históricas, balanço hídrico e evapotranspiração, extremos climáticos (secas, ondas de calor/frio, geadas, granizo, tempestades) quando analisados como padrões climáticos, variabilidade climática e teleconexões (El Niño/La Niña, ENSO, Oscilação do Atlântico Norte/NAO, Dipolo do Índico), mudanças climáticas (efeito estufa, aquecimento global, forçantes radiativas, mitigação/adaptação em perspectiva geográfica), e impactos climáticos em atividades humanas e paisagens (agricultura, recursos hídricos, saúde, energia) quando o foco é a relação com padrões e processos climáticos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de previsão do tempo de curto prazo e boletins meteorológicos sem discutir padrões climáticos (Meteorologia operacional), de hidrologia e dinâmica de rios/aquíferos sem conexão explícita com clima (Hidrografia), de biomas/ecossistemas e distribuição de vegetação sem ênfase nos controles climáticos (Biogeografia), de solos e intemperismo sem relação com regimes climáticos (Pedologia/Geomorfologia), de poluição do ar e qualidade do ar com foco químico-sanitário sem discutir processos atmosféricos/climáticos (Geografia ambiental), de desastres naturais como eventos isolados sem análise de variabilidade/padrões climáticos (Gestão de riscos), ou de astronomia/estações do ano apenas como conteúdo de Sistema Terra sem conexão com elementos e fatores climáticos.",
+      "diferenciador": "Foco na explicação e interpretação de padrões atmosféricos de médio e longo prazo (clima), seus elementos/fatores, mecanismos de circulação e classificações, distinguindo-se de Meteorologia por não se limitar ao tempo imediato e de outras áreas físicas por priorizar processos atmosféricos e regimes climáticos.",
+      "palavras_chave": [
+        "elementos do clima",
+        "fatores do clima",
+        "circulação geral da atmosfera",
+        "classificação climática (Köppen)",
+        "mudanças climáticas"
+      ]
     }
   ]
 }

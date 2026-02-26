@@ -75,155 +75,269 @@
     },
     {
       "nome": "Estudo de textos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Abrange a leitura, compreensão, interpretação e análise de textos verbais e multimodais, considerando sentido global e local, organização textual, progressão temática, relações lógico-semânticas, inferências, implícitos, efeitos de sentido, ponto de vista e adequação ao contexto de produção e circulação.",
+      "incluir_quando": "Classificar aqui quando a questão aborda compreensão/interpretação de um texto (ou trecho) e exige identificar tema, ideia principal, finalidade, tese, argumentos, informações explícitas e implícitas, inferências, pressupostos e subentendidos; analisar coesão e coerência (referenciação, conectivos, retomadas, progressão temática); reconhecer relações entre partes do texto (causa/consequência, oposição, comparação, exemplificação, conclusão); identificar ponto de vista, posicionamento do enunciador, marcas de subjetividade/objetividade, ironia e humor; analisar efeitos de sentido de escolhas lexicais, pontuação, modalizadores e recursos expressivos; interpretar elementos de textos multimodais (imagem, gráfico, charge, tirinha, anúncio) em articulação com o verbal; localizar e relacionar informações, comparar textos sobre o mesmo tema, avaliar consistência de argumentos e distinguir fato/opinião no contexto do texto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de gramática normativa isolada (classes de palavras, flexão, concordância, regência, crase, colocação pronominal) sem relação com construção de sentido no texto; de ortografia, acentuação, pontuação e morfologia como regras descontextualizadas; de literatura (escolas literárias, autores, obras, figuras de linguagem como conteúdo histórico-literário) sem foco na interpretação do texto apresentado; de produção textual/redação (planejamento, escrita, reescrita, gêneros como tarefa de produção) quando não há análise interpretativa de texto-base; de variação linguística e sociolinguística como tema central; de semântica lexical isolada (sinônimos/antônimos) sem ancoragem em um texto; de análise sintática/periodização como fim em si mesmo; de normas de citação, formatação e aspectos técnicos de pesquisa.",
+      "diferenciador": "O foco é construir sentido a partir do texto em contexto: compreender, interpretar e analisar como o texto organiza informações e produz efeitos de sentido, mais do que aplicar regras gramaticais ou produzir um novo texto.",
+      "palavras_chave": [
+        "interpretação de texto",
+        "compreensão leitora",
+        "inferência",
+        "coesão e coerência",
+        "efeitos de sentido"
+      ]
     },
     {
       "nome": "Termos da oração",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo e identificação dos termos que compõem a oração (estrutura sintática interna), suas funções e classificações, incluindo termos essenciais, integrantes e acessórios, bem como relações de regência, concordância e colocação pronominal quando diretamente ligadas à função sintática dos termos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, classificação, análise ou transformação de termos da oração, como: sujeito (simples, composto, oculto/desinencial, indeterminado, inexistente), predicado (verbal, nominal, verbo-nominal) e núcleo do predicado; predicativo do sujeito e do objeto; objeto direto e indireto (inclusive com pronomes oblíquos), complemento nominal, agente da passiva, adjunto adnominal, adjunto adverbial, aposto, vocativo; termos preposicionados e distinção entre complemento nominal x adjunto adnominal; distinção entre objeto indireto x adjunto adverbial; identificação de núcleos e modificadores dentro de sintagmas; reescrita de frases para alterar voz (ativa/passiva) com foco em agente da passiva e objetos; questões que pedem para localizar termos, justificar a função sintática de um termo destacado, ou analisar a estrutura sujeito–verbo–complementos–adjuntos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: análise do período composto e orações (orações subordinadas/coordenação, funções de orações inteiras como sujeito/objeto etc.), mesmo que mencione 'sujeito' ou 'objeto' em nível oracional; pontuação e vírgula como tema central (aposto/vocativo só entram aqui se o foco for a função sintática, não a pontuação); classes de palavras/morfologia (substantivo, adjetivo, pronome, tempos verbais) sem foco na função sintática na oração; semântica/figuras de linguagem; concordância verbal/nominal e regência verbal/nominal como tema principal (só entram aqui se a questão estiver centrada em identificar o termo regido e sua função, como objeto indireto/complemento nominal); colocação pronominal como tema principal; crase como tema principal; análise textual/interpretação.",
+      "diferenciador": "O foco é a FUNÇÃO SINTÁTICA de palavras e sintagmas dentro de uma oração (quem exerce o papel de sujeito, complemento, adjunto, predicativo etc.), e não a classe gramatical, a pontuação, a semântica ou a relação entre orações no período composto.",
+      "palavras_chave": [
+        "sujeito",
+        "predicado",
+        "objeto direto",
+        "objeto indireto",
+        "complemento nominal"
+      ]
     },
     {
       "nome": "Interpretação de texto",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Compreensão e análise de textos verbais e/ou multimodais, identificando informações explícitas e implícitas, inferindo sentidos, reconhecendo tema, ideia principal, finalidade, ponto de vista, efeitos de sentido e relações lógico-discursivas para responder a perguntas sobre o conteúdo e a construção do texto.",
+      "incluir_quando": "Classificar aqui quando a questão aborda compreensão do texto (o que ele diz e como diz), exigindo localizar informações, identificar tema/assunto, ideia principal e secundárias, resumir, reconhecer finalidade e público-alvo, inferir informações implícitas, deduzir sentido de palavras/expressões pelo contexto, interpretar ironia/humor, identificar ponto de vista e posicionamento do autor/narrador, reconhecer pressupostos e subentendidos, analisar coesão e coerência (referenciação, conectivos, progressão temática), estabelecer relações entre partes do texto (causa/consequência, comparação, oposição, conclusão), interpretar elementos de textos multimodais (título, imagem, gráfico, charge, tirinha) em relação ao verbal, e avaliar efeitos de sentido produzidos por escolhas linguísticas no contexto do texto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de gramática normativa ou metalinguagem sem depender do sentido global do texto (classes de palavras, análise sintática, concordância, regência, crase, pontuação como regra, ortografia), de literatura/história literária (escolas literárias, autores, características de movimentos) sem foco na compreensão do texto apresentado, de produção textual/redação (planejamento, tese, estrutura dissertativa, reescrita) como objetivo principal, de figuras de linguagem e recursos estilísticos apenas como identificação isolada (ex.: 'identifique a metáfora') sem relação com o sentido do texto, de semântica lexical fora de contexto (sinônimos/antônimos soltos), ou de interpretação de enunciados matemáticos/científicos em que o foco não é leitura e análise textual em Língua Portuguesa.",
+      "diferenciador": "O foco principal é construir sentido a partir do texto (explícito e implícito), articulando conteúdo, contexto e organização discursiva; a resposta depende da leitura e compreensão do texto, e não da aplicação de regras gramaticais isoladas ou de conhecimento externo.",
+      "palavras_chave": [
+        "tema",
+        "ideia principal",
+        "inferência",
+        "implícito",
+        "efeitos de sentido"
+      ]
     },
     {
       "nome": "Numeral",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do numeral como classe gramatical na Língua Portuguesa: identificação, classificação, flexão e emprego de palavras/expressões que indicam quantidade, ordem, multiplicação, fração, proporção e coletividade, incluindo sua escrita por extenso e concordância em contextos frasais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda reconhecimento ou uso de numerais (cardinais, ordinais, multiplicativos, fracionários e coletivos), sua função no enunciado (determinante/adjunto adnominal, núcleo do sintagma nominal, substantivação), concordância de numerais com substantivos (gênero e número quando aplicável), emprego de formas como 'um/uma', 'dois/duas', 'ambos/ambas', 'meio/meia', 'cento/centena', 'mil/milhão/bilhão' e suas combinações, leitura e escrita de números por extenso (incluindo datas, valores, porcentagens e medidas quando o foco for a forma numeral), uso de ordinal em títulos/séculos/capítulos (ex.: 'século XXI', '1º capítulo'), distinção entre numeral e outras classes (ex.: numeral x artigo/indefinido; numeral x pronome), e questões de correção gramatical envolvendo numerais (ex.: 'duzentas pessoas', 'meia hora', 'dois mil e vinte', 'um milhão de habitantes').",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de operações matemáticas, resolução de problemas de aritmética/porcentagem/medidas sem foco linguístico; de ortografia e acentuação em geral sem relação com numerais; de classes gramaticais como artigo, pronome, adjetivo ou substantivo sem discussão específica de numeral; de concordância verbal/nominal ampla quando o numeral não for o elemento central; de pontuação, regência, crase ou colocação pronominal sem vínculo com numerais; de semântica textual (interpretação) em que números aparecem apenas como dados; de formação de palavras (prefixos/sufixos) ou morfologia verbal; de notação científica, algarismos romanos ou arábicos apenas como convenção gráfica sem análise do numeral como classe.",
+      "diferenciador": "O foco é o numeral enquanto classe de palavras e seu emprego gramatical (tipo, valor semântico de quantidade/ordem/fração/multiplicação/coletividade, flexão e concordância, e escrita por extenso), e não o cálculo ou outros tópicos de gramática desvinculados do uso numeral.",
+      "palavras_chave": [
+        "numeral",
+        "cardinal",
+        "ordinal",
+        "fracionário",
+        "multiplicativo"
+      ]
     },
     {
       "nome": "Estrutura e formação das palavras",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da constituição interna das palavras e dos processos de criação/derivação no português, incluindo identificação de morfemas (radical, afixos, vogal temática, desinências), análise de famílias de palavras e classificação dos processos de formação (derivação e composição), além de fenômenos como parassíntese, hibridismo, abreviação e onomatopeia.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a análise morfológica de palavras (segmentação em morfemas e suas funções) e/ou os mecanismos de formação de palavras. Inclui: (1) identificação e nomeação de morfemas: radical, raiz, tema, vogal temática, afixos (prefixo/sufixo), infixos (quando tratados), desinências nominais e verbais (gênero, número, pessoa, tempo, modo), vogal/consoante de ligação; (2) reconhecimento de famílias de palavras e relação entre palavras primitivas e derivadas; (3) classificação de processos de formação: derivação prefixal, sufixal, prefixal e sufixal, parassintética, regressiva, imprópria (conversão), derivação por siglas/acrônimos, abreviação/abreviamento, reduplicação (quando cobrada), onomatopeia; (4) composição por justaposição e por aglutinação; (5) hibridismo (elementos de línguas diferentes), estrangeirismos quando o foco for o processo de formação/adaptação morfológica; (6) identificação de neologismos e explicação do processo formador; (7) questões que pedem para formar novas palavras a partir de um radical/afixo, ou explicar o sentido produzido por prefixos e sufixos (ex.: re-, in-, -mente, -ção, -dade) no âmbito da formação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) classes de palavras e suas funções sintáticas (substantivo, adjetivo, verbo etc.) sem foco na estrutura interna/formaçāo; (2) flexão verbal/nominal como conteúdo de conjugação/declinação (tempos, modos, concordância) sem análise de morfemas ou formação; (3) ortografia, acentuação, hífen e regras do Acordo Ortográfico quando o objetivo não for identificar morfemas/processos (ex.: uso do hífen em prefixos como regra ortográfica, sem análise de formação); (4) semântica/figuras de linguagem, sinonímia/antonímia, polissemia, denotação/conotação sem relação com afixos/processos; (5) etimologia e história das palavras como origem histórica, sem foco em processos produtivos de formação no português; (6) fonética/fonologia (encontros vocálicos, dígrafos, prosódia) sem relação com morfemas; (7) análise sintática, regência, crase, pontuação, coesão e coerência textual; (8) variação linguística e gêneros textuais, salvo se a questão explicitamente explorar neologismo/processo de formação.",
+      "diferenciador": "O foco é a MORFOLOGIA interna da palavra: identificar partes (morfemas) e explicar/classificar COMO a palavra foi formada (derivação, composição e outros processos), e não seu papel na frase, regras ortográficas isoladas ou significados em nível textual.",
+      "palavras_chave": [
+        "morfema",
+        "radical",
+        "prefixo",
+        "sufixo",
+        "formação de palavras"
+      ]
     },
     {
       "nome": "Linguagem, língua e comunicação",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos fundamentos da comunicação humana e dos conceitos de linguagem e língua, incluindo elementos do processo comunicativo, funções da linguagem, variação linguística, norma-padrão e adequação ao contexto, além de noções de signo e códigos (verbal e não verbal).",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos e relações entre linguagem, língua e fala; descreve ou analisa o processo de comunicação (emissor, receptor, mensagem, canal, código, referente/contexto, ruído, feedback); trata de funções da linguagem (referencial, emotiva/expressiva, conativa/apelativa, fática, metalinguística, poética) e sua identificação em textos; discute tipos de linguagem (verbal, não verbal, mista), códigos e signos; explora variação linguística (regional, social, histórica, situacional/registro), preconceito linguístico, norma-padrão versus uso, e adequação linguística ao gênero, ao interlocutor e à situação; aborda intencionalidade, efeitos de sentido ligados ao contexto comunicativo e à escolha de registro; compara modalidades oral e escrita em termos de finalidade e contexto de uso.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de gramática normativa e análise morfossintática (classes de palavras, concordância, regência, crase, colocação pronominal, períodos, orações, pontuação) sem foco no processo comunicativo; interpretação de texto e compreensão leitora como objetivo central (tema, inferência, tese, argumentos) sem discutir funções da linguagem, variação ou elementos da comunicação; literatura (escolas literárias, autores, figuras de linguagem como conteúdo principal, análise estética) sem relação direta com funções da linguagem ou comunicação; produção textual/redação (estrutura de dissertação, coesão e coerência como foco exclusivo, planejamento de texto) quando não estiverem vinculadas à adequação comunicativa/registro; semântica e pragmática avançadas (atos de fala, implicaturas) quando o foco não for o modelo básico de comunicação e suas funções; linguística histórica/etimologia e formação de palavras como tema central.",
+      "diferenciador": "Foco nos conceitos gerais e funcionais da comunicação e do uso da língua em contexto (elementos do processo comunicativo, funções da linguagem e adequação/variação), mais do que em regras gramaticais, interpretação textual isolada ou conteúdos literários.",
+      "palavras_chave": [
+        "processo de comunicação",
+        "funções da linguagem",
+        "variação linguística",
+        "norma-padrão",
+        "linguagem verbal e não verbal"
+      ]
     },
     {
       "nome": "Pronome",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos pronomes na Língua Portuguesa: conceito, classificação, formas, flexões e emprego na frase e no texto, incluindo referência (deixis/anáfora/catáfora), colocação pronominal e usos normativos e semânticos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, classificação, flexão, substituição ou emprego de pronomes (pessoais, possessivos, demonstrativos, indefinidos, interrogativos, relativos, de tratamento), incluindo: função referencial (retomada/antecipação de termos), coesão textual por pronomes, pronomes oblíquos átonos e tônicos, pronomes retos, pronomes reflexivos/recíprocos, pronomes relativos e suas funções (que, quem, o qual, cujo, onde, quanto), concordância e regência envolvendo pronomes relativos (ex.: 'de que', 'a que'), uso de 'cujo' (sem artigo), emprego de 'se' (reflexivo, apassivador, índice de indeterminação do sujeito) quando o foco for pronominal, colocação pronominal (próclise, ênclise, mesóclise) e casos de ambiguidade/clareza referencial causados por pronomes.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: concordância verbal/nominal sem foco em pronome; regência verbal/nominal sem foco em pronome relativo; crase; pontuação; ortografia/acentuação; formação de palavras; classes de palavras em geral quando o objetivo não é pronome; análise sintática de termos (sujeito, objeto, adjunto, complemento) quando o pronome aparece apenas como exemplo e o foco é a função sintática; voz passiva e indeterminação do sujeito quando o foco é a estrutura verbal e não o valor do 'se'; coesão e coerência de modo amplo quando não há análise do papel pronominal; pronomes de tratamento apenas como etiqueta social/formatos de carta sem análise gramatical.",
+      "diferenciador": "O foco é o pronome como classe gramatical e seu papel de substituição/retomada/indicação de pessoas, coisas e relações no discurso, incluindo formas, valores e colocação; não é a análise sintática geral nem regras de concordância/regência isoladas.",
+      "palavras_chave": [
+        "pronomes",
+        "pronomes pessoais",
+        "pronome relativo",
+        "colocação pronominal",
+        "próclise/ênclise/mesóclise"
+      ]
     },
     {
       "nome": "Interjeição",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da interjeição como classe gramatical: palavra/expressão invariável que manifesta emoções, sensações, reações, apelos, ordens, chamamentos ou estados de espírito; seus valores semânticos, formas (simples/compostas), uso na oralidade e na escrita, pontuação típica e identificação em textos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, reconhecimento, classificação ou uso de interjeições em frases/textos; valores expressivos (surpresa, alegria, dor, medo, alívio, reprovação, ironia, chamamento, incentivo, pedido, silêncio etc.); distinção entre interjeição e outras classes em contexto (ex.: 'Nossa!', 'Puxa!', 'Ei!', 'Ufa!', 'Socorro!', 'Psiu!'); formação (simples vs. locuções interjetivas como 'Meu Deus!', 'Ora bolas!', 'Valha-me Deus!'); efeitos de sentido e marcas de oralidade; emprego de sinais de pontuação associados (exclamação, vírgula, reticências) e sua função expressiva; reescrita/substituição por interjeições equivalentes mantendo o sentido; análise de discurso direto com interjeições e sua contribuição para caracterização de personagem/registro.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de pontuação de modo geral sem foco em interjeições; de vocativo/chamamento como termo da oração (ex.: 'João, venha cá') sem interjeição; de onomatopeias como recurso sonoro/estilístico (ex.: 'tic-tac', 'bum') sem discussão de interjeição; de advérbios, conjunções, partículas de realce, marcadores discursivos ou gírias sem enquadramento como interjeição (ex.: 'tipo', 'daí', 'né' quando o foco é coesão/registro); de funções da linguagem (emotiva, conativa) sem análise gramatical de interjeições; de classes gramaticais em geral quando interjeição não é o alvo; de figuras de linguagem/expressividade em sentido amplo sem identificação de interjeições.",
+      "diferenciador": "Foco na interjeição como unidade invariável de valor expressivo e pragmático (reação imediata/ato de fala), geralmente isolada ou destacada por pontuação, não exercendo função sintática típica na oração, mas produzindo efeito de sentido e interação.",
+      "palavras_chave": [
+        "interjeição",
+        "locução interjetiva",
+        "expressão de emoção",
+        "exclamação",
+        "ei/ufa/ah/oh"
+      ]
     },
     {
       "nome": "Sintaxe - Período composto: coordenação, subordinação e orações reduzidas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do período composto na Língua Portuguesa, com foco na identificação, classificação e análise das orações em coordenação e subordinação, bem como no reconhecimento e transformação de orações reduzidas (de infinitivo, gerúndio e particípio) em orações desenvolvidas e vice-versa. Inclui relações sintático-semânticas entre orações, conectivos, valores das conjunções e efeitos de sentido decorrentes da articulação oracional.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) identificação de período composto e contagem/classificação de orações; (2) coordenação: orações coordenadas assindéticas e sindéticas (aditivas, adversativas, alternativas, conclusivas, explicativas), reconhecimento de conjunções coordenativas e do valor semântico do conectivo; (3) subordinação: orações subordinadas substantivas (subjetiva, objetiva direta/indireta, completiva nominal, predicativa, apositiva), adjetivas (restritiva e explicativa) e adverbiais (causal, concessiva, condicional, consecutiva, final, temporal, comparativa, conformativa, proporcional), incluindo a função sintática que a oração exerce no período; (4) distinção entre coordenação e subordinação (dependência sintática, autonomia, papel do conectivo); (5) orações reduzidas: reconhecimento de reduzidas de infinitivo, gerúndio e particípio; presença/ausência de conectivo; sujeito expresso ou implícito; equivalência com orações desenvolvidas; (6) transformação entre estruturas (reduzida ↔ desenvolvida; coordenação ↔ subordinação quando possível) e análise de mudanças de sentido/registro; (7) pontuação relacionada ao período composto (vírgula em adjetivas explicativas, coordenação com sujeitos diferentes, etc.) quando o foco for a articulação entre orações; (8) ambiguidade e interpretação de sentido decorrente do tipo de oração e do conectivo (por exemplo, 'como', 'que', 'se', 'quando', 'porque' com valores distintos).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) período simples, termos essenciais/integrantes/acessórios da oração sem foco em período composto; (2) regência verbal/nominal, crase, concordância, colocação pronominal, voz verbal, predicação verbal/nominal, transitividade, se não houver análise de orações em período composto; (3) morfologia (classes de palavras, flexões) ou semântica lexical isolada; (4) pontuação em geral (uso de vírgula, ponto e vírgula, dois-pontos) sem relação direta com coordenação/subordinação; (5) análise de conectivos apenas como classe gramatical (conjunção/preposição) sem exigir classificação do tipo de oração ou relação entre orações; (6) figuras de linguagem, coesão e coerência textual, gêneros textuais, interpretação de texto, quando não houver demanda de identificar/classificar orações coordenadas/subordinadas/reduzidas; (7) orações subordinadas em sentido amplo tratadas apenas como 'orações' sem pedir tipologia, função sintática ou relação de dependência (ex.: apenas localizar uma oração no texto).",
+      "diferenciador": "O foco distintivo é a análise da estrutura do período composto: como as orações se articulam (coordenação vs. subordinação), que função sintática a oração subordinada desempenha no período e como reconhecer/transformar orações reduzidas (infinitivo, gerúndio, particípio) em relação às desenvolvidas, com atenção aos conectivos e aos valores semânticos das relações entre orações.",
+      "palavras_chave": [
+        "período composto",
+        "orações coordenadas",
+        "orações subordinadas",
+        "orações reduzidas",
+        "conjunções"
+      ]
     },
     {
       "nome": "Intertextualidade",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações entre textos (verbais, não verbais e multimodais), identificando como um texto dialoga com outro por meio de citações, alusões, referências, paródias, paráfrases, pastiches, epígrafes e reescrituras, bem como os efeitos de sentido produzidos por essas conexões em diferentes gêneros e mídias.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a presença, identificação, análise ou comparação de relações intertextuais entre dois ou mais textos (ou entre texto e imagem/música/filme), pedindo para reconhecer fonte/referência, explicar o efeito de sentido do diálogo entre textos, distinguir tipos de intertextualidade (citação, alusão, paráfrase, paródia, pastiche, epígrafe, referência cultural), analisar reescrituras/adaptações (ex.: conto recontado, releitura de mito, adaptação cinematográfica) sob a ótica do diálogo com o texto-base, ou interpretar humor/ironia/crítica decorrentes de retomada de outro texto. Inclui também questões sobre intertextualidade explícita (com marcação, aspas, menção ao autor/obra) e implícita (sem marcação, dependente de repertório), e sobre intertextualidade em publicidade, charges, memes, canções e textos literários.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata apenas de: coesão e coerência internas (conectivos, referenciação, progressão temática) sem relação com outro texto; tipologia/gêneros textuais sem foco em diálogo entre textos; figuras de linguagem, denotação/conotação, semântica ou interpretação geral sem referência a outro texto; variação linguística, norma-padrão, gramática (morfossintaxe, pontuação, concordância, regência); análise de discurso/argumentação centrada apenas em tese e estratégias internas do texto, sem retomada de outro; metalinguagem ou funções da linguagem sem relação intertextual; intratextualidade (relações dentro do mesmo texto) quando não houver remissão a textos externos; estudos de literatura (escolas literárias, biografia de autor, contexto histórico) quando não houver comparação/diálogo textual; adaptação/resumo/reconto avaliados apenas por fidelidade ao enredo, sem discutir referências e efeitos intertextuais.",
+      "diferenciador": "O foco é o diálogo entre textos: reconhecer e interpretar como um texto incorpora, transforma ou referencia outro(s) e quais efeitos de sentido (humor, crítica, ironia, reforço argumentativo, atualização cultural) resultam dessa relação, mais do que a análise interna isolada de um único texto.",
+      "palavras_chave": [
+        "intertextualidade",
+        "paródia",
+        "paráfrase",
+        "alusão",
+        "citação"
+      ]
     },
     {
       "nome": "Concordância verbal, colocação pronominal e as palavras QUE e SE",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Este módulo cobre regras e usos normativos de concordância verbal (relação entre sujeito e verbo), colocação pronominal (próclise, ênclise e mesóclise) e o emprego/valor gramatical das palavras “que” e “se” em diferentes funções (conjunção, pronome relativo, partícula apassivadora, índice de indeterminação do sujeito, partícula expletiva, etc.), incluindo identificação, correção e reescrita de frases conforme a norma-padrão.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) Concordância verbal: identificação do sujeito e ajuste do verbo em número/pessoa; casos especiais como sujeito composto (anteposto/posposto), núcleos ligados por “e”, “ou”, “nem”, “com”, “bem como”; concordância com expressões partitivas (“a maioria de”, “parte de”), coletivos, porcentagens, frações, medidas, datas/horas; concordância com “um dos que”, “mais de um”, “menos de dois”, “cerca de”; concordância com pronomes relativos (“que”, “quem”, “o qual”) e com “se” em construções específicas; concordância em orações reduzidas/infinitivo; verbos impessoais e casos de invariabilidade (haver no sentido de existir, fazer indicando tempo, ser indicando horas/datas, verbos meteorológicos); concordância em voz passiva e com sujeito oracional; (2) Colocação pronominal: posição de pronomes oblíquos átonos (me, te, se, o, a, lhe, nos, vos, os, as, lhes) em relação ao verbo; regras de próclise (palavras atrativas: não, nunca, já, ainda, talvez, pronomes relativos, conjunções subordinativas, advérbios antepostos sem pausa, indefinidos, interrogativos/exclamativos), ênclise (início de oração, após pausa, com verbo no imperativo afirmativo, infinitivo impessoal, gerúndio sem atrator), mesóclise (futuro do presente/pretérito sem atrator); proibições e preferências normativas (não iniciar período com pronome átono; casos com locuções verbais: posição antes do auxiliar, entre auxiliar e principal, ou após o principal conforme atratores e forma verbal); (3) Palavras “que” e “se”: classificação e função em contexto, como “que” pronome relativo, conjunção integrante, conjunção subordinativa (causal, consecutiva, comparativa etc. quando aplicável), pronome interrogativo/exclamativo, partícula expletiva/realce; e “se” como pronome reflexivo/recíproco, conjunção condicional, conjunção integrante (em interrogativas indiretas), partícula apassivadora (voz passiva sintética) e índice de indeterminação do sujeito; distinção entre “se” apassivador x indeterminador e efeitos na concordância verbal; reescrita/transformação (ativa ↔ passiva sintética/analítica) envolvendo “se”; identificação de erro e correção de concordância/colocação envolvendo “que” e “se”.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: concordância nominal (artigo, adjetivo, numeral, particípio com substantivo) sem foco em verbo; regência verbal/nominal e crase (a/à) como tema central; pontuação, ortografia, acentuação, formação de palavras, semântica/figuras de linguagem; análise sintática geral (termos da oração, períodos compostos) sem objetivo de concordância verbal, colocação pronominal ou funções de “que”/“se”; pronomes em geral (classificação ampla) sem discussão de posição (próclise/ênclise/mesóclise) ou sem foco em “que”/“se”; uso de “que” apenas como elemento estilístico/coesivo em interpretação de texto sem cobrança de função gramatical; voz passiva/ativa como tópico isolado quando não envolve “se” ou concordância verbal; variação linguística/registro (norma culta vs. coloquial) quando não há cobrança normativa de colocação pronominal/concordância.",
+      "diferenciador": "O foco distintivo é a aplicação de regras normativas que afetam (a) a flexão do verbo em função do sujeito e de estruturas específicas e (b) a posição de pronomes átonos e (c) a identificação do valor gramatical de “que” e “se”, especialmente quando essas escolhas alteram concordância e estrutura (ex.: “Vendem-se casas” x “Precisa-se de funcionários”; “que” relativo exigindo concordância com antecedente).",
+      "palavras_chave": [
+        "concordância verbal",
+        "próclise/ênclise/mesóclise",
+        "pronome relativo que",
+        "partícula apassivadora e índice de indeterminação do sujeito (se)",
+        "palavras atrativas e colocação pronominal"
+      ]
     },
     {
       "nome": "Substantivo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do substantivo como classe gramatical: conceito, identificação em frases e textos, flexões (gênero, número e grau), classificações (comum/próprio, concreto/abstrato, simples/composto, primitivo/derivado, coletivo) e funções/empregos frequentes (substantivação, locuções substantivas, formação de substantivos).",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, definição ou análise de substantivos; classificação de substantivos (comum, próprio, concreto, abstrato, coletivo, simples, composto, primitivo, derivado); flexão de substantivos (gênero: masculino/feminino e formas biformes/uniformes; número: singular/plural e plurais irregulares; grau: aumentativo/diminutivo, sintético/analítico); processos ligados ao substantivo (derivação sufixal/prefixal para formar substantivos, substantivação de outras classes, uso de artigos/pronomes para substantivar); reconhecimento de locuções substantivas e núcleos substantivos em sintagmas nominais; emprego de coletivos e seus sentidos; concordância nominal quando o foco principal for a flexão do substantivo (ex.: pluralização do núcleo) e não a regra do adjetivo/artigo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: adjetivo (classificação, grau, concordância com o substantivo), artigo (definido/indefinido e usos), pronome (tipos e funções), verbo (tempos, modos, vozes, regência), advérbio, preposição, conjunção, interjeição; sintaxe de termos da oração (sujeito, predicado, objeto, complemento nominal, adjunto adnominal, aposto, vocativo) quando o foco é a função sintática e não a classe substantivo; regência nominal/verbal e crase; semântica geral (sinonímia, antonímia) sem relação direta com substantivos; formação de palavras em geral quando não estiver centrada na formação/identificação de substantivos; ortografia/acentuação/pontuação; figuras de linguagem; interpretação de texto sem análise morfológica do substantivo.",
+      "diferenciador": "O foco é a classe gramatical 'substantivo' e suas propriedades morfológicas (classificação e flexões) e usos típicos (substantivação e coletivos), distinguindo-se de módulos próximos por não priorizar função sintática ampla nem concordância/regência como tema central, mas sim a identificação e o comportamento do substantivo.",
+      "palavras_chave": [
+        "substantivo",
+        "classificação do substantivo",
+        "gênero e número",
+        "grau do substantivo",
+        "substantivação"
+      ]
     },
     {
       "nome": "Tecnologias da informação e da comunicação (TICs)",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Abrange o uso, a análise e a produção de textos e práticas de linguagem mediadas por tecnologias digitais, incluindo leitura e escrita em ambientes online, comunicação em redes, multimodalidade (texto, imagem, áudio, vídeo), hipertextualidade, pesquisa e curadoria de informações, ética e cidadania digital, segurança e privacidade, além de ferramentas e gêneros digitais (e-mail, post, comentário, blog, fórum, chat, podcast, vídeo, infográfico).",
+      "incluir_quando": "Classificar aqui quando a questão aborda práticas de Língua Portuguesa relacionadas a ambientes digitais e TICs, como: (1) interpretação/produção de textos em suportes digitais (sites, redes sociais, aplicativos); (2) análise de linguagem e efeitos de sentido em posts, comentários, memes, threads, mensagens instantâneas, e-mails; (3) hipertexto, links, navegação, intertextualidade e leitura não linear; (4) multimodalidade e semiose (integração de verbal, visual e sonoro) em infográficos, vídeos, stories, anúncios digitais; (5) pesquisa online, avaliação de credibilidade de fontes, checagem de fatos, desinformação/fake news, bolhas informacionais e algoritmos; (6) netiqueta, adequação linguística em diferentes plataformas, registro e concisão em mensagens; (7) direitos autorais, plágio, licenças (ex.: Creative Commons), citação e referência em contexto digital; (8) privacidade, segurança digital, rastros digitais, proteção de dados e comportamento responsável; (9) letramento digital e competências de uso de ferramentas (editores, plataformas colaborativas) quando o foco é a prática de linguagem (planejamento, revisão, publicação, interação).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) gramática normativa, ortografia, pontuação, morfossintaxe ou análise linguística sem relação com contexto digital; (2) literatura (escolas literárias, autores, obras) sem mediação por TICs; (3) teoria geral de gêneros textuais impressos (carta, artigo, crônica) sem recorte digital; (4) informática/tecnologia em sentido técnico (hardware, programação, redes de computadores) sem foco em linguagem, leitura, escrita e comunicação; (5) mídia e comunicação de massa tradicional (rádio/TV/jornal impresso) quando não há discussão de ambientes digitais; (6) produção textual escolar genérica (redação dissertativa, resumo) sem exigência de suporte/plataforma digital, multimodalidade ou circulação online; (7) educação midiática ampla sem tarefas de linguagem (apenas conceitos sociológicos/tecnológicos).",
+      "diferenciador": "O foco é a linguagem em ecossistemas digitais: como textos circulam, são produzidos e interpretados em plataformas e redes, com hipertextualidade, multimodalidade, interação, curadoria de informação e ética/cidadania digital — não a tecnologia em si nem apenas conteúdos linguísticos tradicionais desconectados do digital.",
+      "palavras_chave": [
+        "letramento digital",
+        "hipertexto",
+        "multimodalidade",
+        "fake news",
+        "cidadania digital"
+      ]
     },
     {
       "nome": "Preposição",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das preposições na Língua Portuguesa: classe gramatical invariável que liga termos, estabelecendo relações de sentido (posse, origem, destino, causa, finalidade, meio, instrumento, assunto, companhia, oposição, conformidade, tempo, lugar etc.), incluindo preposições essenciais e acidentais, locuções prepositivas, regência/preposição exigida por nomes e verbos, e contrações/combinações com artigos, pronomes e advérbios.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, uso, valor semântico ou função de preposições e locuções prepositivas; escolha da preposição adequada em lacunas; análise da relação entre termos introduzida por preposição (ex.: de, em, a, para, por, com, sem, sobre, entre); distinção entre preposição e outras classes (advérbio, conjunção, pronome relativo) quando o foco é o termo prepositivo; regência nominal e verbal quando o objetivo principal é determinar/justificar a preposição exigida (ex.: gostar de, assistir a, obedecer a, preferir a, apto a, amor a); emprego de a/à (crase) quando a questão centra na presença da preposição 'a' antes de termo feminino (mesmo que envolva artigo); contrações e combinações prepositivas (do, da, dos, das; no, na, nos, nas; ao, aos; à, às; pelo, pela; dum, duma; neste, nessa; daquele etc.) quando o foco é a preposição e sua fusão; classificação de preposições (essenciais x acidentais) e reconhecimento de locuções (a fim de, em vez de, de acordo com, por causa de, em relação a, junto a, à medida que quando tratada como locução prepositiva).",
+      "nao_incluir_quando": "NÃO classificar aqui quando o foco principal for: conjunções e orações subordinadas (ex.: porque, embora, quando, para que) sem ênfase na preposição; advérbios e locuções adverbiais (ex.: perto, longe, acima) quando analisados como advérbio, não como locução prepositiva; pronomes relativos e suas funções (ex.: de que, em que) quando o objetivo é o pronome/oração relativa; pontuação, ortografia, acentuação, concordância verbal/nominal, colocação pronominal; crase tratada exclusivamente como regra de acentuação indicativa (à) sem discussão da preposição 'a' e da regência; regência verbal/nominal quando o objetivo é apenas classificar o tipo de complemento (objeto direto/indireto) ou transitividade, sem foco na preposição; análise sintática geral (adjunto adnominal, complemento nominal, adjunto adverbial) quando a preposição é apenas acessória e não o alvo da questão.",
+      "diferenciador": "O módulo se distingue por ter como núcleo a preposição (ou locução prepositiva) como elemento de ligação e o sentido/relação que ela estabelece entre termos, incluindo sua exigência por regência e suas contrações/combinações; não é um módulo de conjunções, advérbios ou sintaxe geral, embora possa dialogar com esses temas.",
+      "palavras_chave": [
+        "preposição",
+        "locução prepositiva",
+        "regência verbal",
+        "regência nominal",
+        "contração/combinação"
+      ]
     },
     {
       "nome": "Verbo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do verbo como classe gramatical: formas, flexões e valores semânticos, incluindo tempos, modos, pessoas, números, vozes, aspectos, locuções verbais, verbos regulares/irregulares, verbos auxiliares e principais, além de emprego e concordância verbal em contextos frasais e textuais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, análise ou uso de verbos e suas flexões (tempo, modo, pessoa, número), conjugação (regular/irregular), formas nominais (infinitivo, gerúndio, particípio), vozes verbais (ativa, passiva analítica/sintética, reflexiva), locuções verbais e perífrases (auxiliar + principal), valores e efeitos de sentido dos tempos/modos (presente com valor de futuro, pretérito com valor de cortesia, etc.), aspecto verbal (ação habitual, pontual, contínua, concluída), verbos auxiliares (ter, haver, ser, estar, ir, vir, ficar, andar) e sua função, emprego de tempos e modos em gêneros textuais, concordância verbal (sujeito simples/composto, sujeito posposto, coletivos, porcentagens, expressões partitivas, \"um dos que\", \"mais de um\", \"haver\" impessoal, \"fazer\" indicando tempo), correção de formas verbais (\"intervir\", \"reaver\", \"pôr\" e derivados), e transformação de frases envolvendo mudança de voz, tempo, modo ou forma verbal.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de regência verbal e nominal (preposições exigidas por verbos/nomes) sem foco em flexão/emprego do verbo; de crase (a + a) como tema central; de pontuação, ortografia, acentuação, formação de palavras, semântica lexical, figuras de linguagem, coesão e coerência; de análise sintática centrada em funções (sujeito, predicado, objetos, adjuntos) sem exigir análise de flexão/tempo/modo/voz; de concordância nominal; de pronomes, substantivos, adjetivos, advérbios, artigos e numerais como foco principal; de colocação pronominal (próclise/ênclise/mesóclise) quando o foco não é a forma verbal; de transitividade verbal apenas para classificar objetos (direto/indireto) sem exploração do verbo enquanto flexão/tempo/modo/voz; de verbos em sentido figurado apenas como recurso estilístico sem análise gramatical.",
+      "diferenciador": "O foco é o verbo e seu funcionamento morfológico e semântico no enunciado: conjugação, flexões (tempo/modo/pessoa/número), formas nominais, vozes e locuções, bem como o emprego correto dessas formas (incluindo concordância verbal). Distingue-se de módulos próximos por não priorizar regência/crase, pontuação ou funções sintáticas isoladas, mas sim a forma e o valor do verbo.",
+      "palavras_chave": [
+        "tempo verbal",
+        "modo verbal",
+        "conjugação",
+        "voz passiva",
+        "locução verbal"
+      ]
     },
     {
       "nome": "Fonologia, acentuação gráfica e ortografia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos sons da língua e sua relação com a escrita, abrangendo fonologia (fonemas, encontros, sílabas, prosódia), regras de acentuação gráfica e normas ortográficas do português (grafia correta, emprego de letras, hífen, uso de maiúsculas/minúsculas e sinais diacríticos).",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, análise ou aplicação de: (1) fonologia: fonema vs. letra, dígrafos, encontros vocálicos (ditongo, tritongo, hiato), encontros consonantais, semivogais, nasalização, valores fonéticos de letras (ex.: x, s, g/j, c/ç, r/rr), processos fonológicos (assimilação, redução, elisão) quando relacionados à pronúncia e/ou à escrita; (2) estrutura e divisão silábica: separação de sílabas, classificação quanto ao número de sílabas (mono/di/tri/polissílabas), sílaba tônica (oxítona, paroxítona, proparoxítona), tonicidade e prosódia; (3) acentuação gráfica: regras gerais e casos especiais (proparoxítonas, paroxítonas terminadas em ditongo, hiatos com i/u tônicos, acento diferencial quando cobrado, acentos em formas verbais, acentuação de monossílabos tônicos), além de justificativa do uso/ausência de acento; (4) ortografia: grafia correta de palavras, emprego de letras e dígrafos (s/ss/ç/sc/sç/x/ch; g/j; c/qu; m/n; r/rr; l/u), uso do hífen (prefixos, compostos, locuções quando aplicável), uso de maiúsculas/minúsculas, apóstrofo quando cobrado, e efeitos do Acordo Ortográfico (ex.: queda do trema, mudanças em acentos e hífen) quando a questão exigir a norma vigente.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) morfologia e formação de palavras (prefixação/sufixação, classes gramaticais, flexões) sem foco em grafia/acentuação; (2) sintaxe (concordância, regência, crase, colocação pronominal, pontuação) sem relação direta com ortografia/acentuação; (3) semântica, interpretação de texto, coesão/coerência, figuras de linguagem; (4) variação linguística e sociolinguística sem cobrança normativa de ortografia/acentuação; (5) métrica, versificação e recursos sonoros literários (aliteração, assonância, rima) quando o objetivo é análise estilística e não fonologia normativa; (6) ortoépia/prosódia apenas como adequação de pronúncia em contexto de oralidade (ex.: apresentação/oratória) sem vínculo com regras de acentuação ou estrutura silábica.",
+      "diferenciador": "O foco é a norma e a análise do sistema sonoro e sua representação escrita: como se pronuncia (fonologia/silabação/tonicidade) e como se escreve corretamente (acentuação e ortografia), incluindo regras e exceções normativas.",
+      "palavras_chave": [
+        "fonema",
+        "dígrafo",
+        "divisão silábica",
+        "acentuação gráfica",
+        "ortografia"
+      ]
     },
     {
       "nome": "Conjunção",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das conjunções como classe gramatical invariável que liga palavras, orações e períodos, estabelecendo relações de coordenação e subordinação, com foco em classificação, valor semântico, emprego e efeitos de sentido na coesão e na argumentação do texto.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, classificação ou uso de conjunções (coordenativas e subordinativas), incluindo: (1) reconhecer conjunções em frases/textos; (2) classificar conjunções coordenativas (aditivas, adversativas, alternativas, conclusivas, explicativas) e subordinativas (integrantes e adverbiais: causais, concessivas, condicionais, conformativas, consecutivas, comparativas, finais, temporais, proporcionais); (3) determinar o valor semântico/relacional expresso pela conjunção (causa, oposição, conclusão, condição etc.); (4) substituir/reescrever períodos trocando conjunções e avaliando manutenção/alteração de sentido; (5) analisar efeitos de sentido, coesão e progressão argumentativa gerados por conectivos conjuntivos; (6) pontuação e estrutura do período relacionadas ao uso de conjunções (por exemplo, vírgula antes de 'mas', 'porém', 'contudo'; correlação 'não só... mas também'; 'tanto... quanto'; 'quer... quer'); (7) distinção entre conjunção e outras classes em casos limítrofes (por exemplo, 'que' integrante vs pronome relativo; 'como' conjunção vs advérbio; 'se' conjunção vs pronome).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) preposições e locuções prepositivas (regência nominal/verbal, crase) sem foco em conjunções; (2) pronomes relativos e orações adjetivas com ênfase em função do pronome, antecedente e restritiva/explicativa, sem foco no papel conjuntivo; (3) advérbios e locuções adverbiais (tempo, modo, intensidade) sem relação com conectivos entre orações; (4) pontuação de modo geral (vírgula, ponto e vírgula, dois-pontos) sem vínculo com conjunções/conectores; (5) análise sintática ampla (sujeito, predicado, complementos) quando a conjunção não é o objeto central; (6) coesão textual por outros mecanismos (referenciação, elipse, substituição lexical) sem destaque para conjunções; (7) semântica discursiva/argumentação sem menção a conectivos conjuntivos específicos; (8) interjeições, conjunções coordenativas confundidas com marcadores conversacionais quando o foco é pragmático e não gramatical.",
+      "diferenciador": "O foco principal é o conectivo que estabelece relação lógica/semântica entre termos e, sobretudo, entre orações (coordenação e subordinação), exigindo identificar a conjunção e o tipo de relação que ela cria no período e no texto.",
+      "palavras_chave": [
+        "conjunção",
+        "orações coordenadas",
+        "orações subordinadas",
+        "conectivos",
+        "valor semântico"
+      ]
     },
     {
       "nome": "Sintaxe: regência e crase",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações de dependência entre termos na oração (regência verbal e nominal) e do emprego do acento grave indicativo de crase, incluindo identificação de termos regentes e regidos, preposições exigidas, complementos, e regras de ocorrência/ausência/facultatividade da crase em diferentes contextos sintáticos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda regência verbal (verbos que exigem preposição, transitividade, objeto direto/indireto, complementos verbais, mudança de sentido por regência), regência nominal (nomes/adjetivos/advérbios que exigem preposição e seus complementos), seleção e correção de preposições em construções, reescrita/adequação de frases para atender à regência, identificação do termo regente e do termo regido, e/ou emprego da crase (quando ocorre a fusão de 'a' + 'a/as', condições para uso do acento grave, casos obrigatórios, proibidos e facultativos, crase antes de pronomes, nomes próprios, topônimos, palavras femininas, locuções prepositivas/adverbiais/conjuntivas, expressões de tempo/modo, 'à medida que', 'às vezes', 'à noite', 'à moda de', 'àquele(s)/àquela(s)/àquilo', 'a qual/às quais', além de testes como substituição por 'ao' e verificação de artigo).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de concordância verbal/nominal, colocação pronominal (próclise/ênclise/mesóclise), pontuação, ortografia/acentuação gráfica (sem foco em crase), morfologia e classes de palavras (sem relação com regência/crase), semântica/figuras de linguagem, análise sintática geral sem foco em regência (ex.: apenas identificar sujeito/predicado), predicação verbal e tipos de predicado (quando não envolve exigência de preposição), voz ativa/passiva, período composto e orações subordinadas (quando o foco não é a regência do verbo/nome ou a crase), e uso de preposições por sentido/estilo sem cobrança de regência normativa.",
+      "diferenciador": "O foco é a exigência normativa de preposição determinada por verbo ou nome (regência) e a consequência disso no uso do acento grave (crase), isto é, a relação entre termo regente–termo regido e a presença/ausência de 'a' preposicionado + artigo/pronome demonstrativo feminino.",
+      "palavras_chave": [
+        "regência verbal",
+        "regência nominal",
+        "termo regente",
+        "termo regido",
+        "crase"
+      ]
     },
     {
       "nome": "Semântica e figuras de linguagem",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do significado na língua (sentido de palavras, expressões e enunciados em contexto) e dos efeitos de sentido produzidos por recursos expressivos, especialmente figuras de linguagem. Abrange relações semânticas (sinonímia, antonímia, polissemia etc.), denotação e conotação, ambiguidade, inferência e interpretação, além da identificação e análise de figuras como metáfora, metonímia, ironia, hipérbole, eufemismo, personificação, antítese, paradoxo, gradação, pleonasmo, aliteração, assonância, anáfora, elipse, zeugma, entre outras.",
+      "incluir_quando": "Classificar aqui quando a questão aborda interpretação de sentidos e efeitos de sentido, como: (1) significado de palavras/expressões no contexto; (2) denotação vs. conotação; (3) ambiguidade, duplo sentido, sentido literal e figurado; (4) relações semânticas: sinonímia, antonímia, hiperonímia/hiponímia, homonímia, paronímia, polissemia, campos semânticos; (5) mudança de sentido por contexto, registro, intenção comunicativa, ironia; (6) identificação, classificação e explicação de figuras de linguagem (de palavras/tropo, de pensamento, de construção/sintaxe, de som); (7) análise do efeito expressivo/argumentativo de figuras em textos literários, publicitários, charges, memes, poemas e canções; (8) reconhecimento de recursos como metáfora, comparação, metonímia, sinestesia, catacrese, prosopopeia/personificação, hipérbole, eufemismo, ironia, antítese, paradoxo, gradação/clímax, pleonasmo, perífrase/antonomásia, aliteração, assonância, onomatopeia, anáfora, paralelismo, elipse, zeugma, inversão/hipérbato, polissíndeto, assíndeto, anacoluto, apóstrofe, reticências com valor expressivo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) gramática normativa sem foco em sentido (concordância, regência, crase, colocação pronominal, flexão verbal/nominal); (2) sintaxe e análise de termos/orações apenas estrutural (sujeito, predicado, adjuntos, orações subordinadas) sem discutir efeitos de sentido; (3) morfologia e formação de palavras (prefixos/sufixos, derivação, composição) quando o objetivo não é semântico; (4) ortografia, acentuação, pontuação e prosódia como regras, sem relação com expressividade/ambiguidade; (5) gêneros textuais, tipologias, coesão e coerência, argumentação e retórica geral, quando não houver foco em figuras/efeitos de sentido; (6) literatura (escolas literárias, autores, contexto histórico) sem análise de linguagem figurada; (7) variação linguística e sociolinguística (dialetos, norma-padrão) sem foco em sentido/figuras; (8) pragmática e atos de fala como tema central (pressupostos, implicaturas) quando não estiverem articulados à interpretação semântica/figuras de linguagem.",
+      "diferenciador": "O foco é a construção e interpretação de sentidos e efeitos expressivos no texto, especialmente por relações semânticas e pelo uso de linguagem figurada (figuras de linguagem), e não a correção gramatical ou a estrutura sintática em si.",
+      "palavras_chave": [
+        "denotação",
+        "conotação",
+        "polissemia",
+        "ambiguidade",
+        "figuras de linguagem"
+      ]
     }
   ]
 }

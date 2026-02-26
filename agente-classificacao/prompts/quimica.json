@@ -75,275 +75,479 @@
     },
     {
       "nome": "Eletrólise",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das reações de oxirredução não espontâneas promovidas por corrente elétrica (eletrólise), em soluções aquosas ou sais fundidos, incluindo identificação de ânodo/cátodo, semirreações, produtos formados, leis de Faraday e aplicações industriais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda eletrólise (processo eletroquímico forçado) e/ou pede para: identificar ânodo e cátodo em célula eletrolítica; determinar onde ocorre oxidação e redução; prever produtos nos eletrodos em eletrólise de soluções aquosas (competição entre íons e água) ou de sais fundidos; escrever e balancear semirreações e reação global; calcular massa/quantidade de substância/volume de gás depositado ou liberado a partir de corrente, tempo e número de elétrons (leis de Faraday); relacionar carga elétrica (Q = I·t) com mols de elétrons; discutir sobrepotencial, seletividade e ordem de descarga (quando em nível escolar); analisar eletrólise com eletrodos inertes vs eletrodos ativos (ex.: Cu em CuSO4); tratar de eletrorrefino, eletrodeposição/galvanoplastia, anodização, produção de Cl2/NaOH (cloro-soda), produção de Al por Hall-Héroult, eletrólise da água e corrosão controlada por corrente.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: pilhas/células galvânicas (reações espontâneas gerando corrente) e cálculo de E°/potencial de célula sem corrente imposta; série eletroquímica apenas para prever espontaneidade sem contexto de eletrólise; corrosão e proteção catódica/anódica sem eletrólise aplicada; condutividade elétrica, dissociação iônica e propriedades coligativas sem reações nos eletrodos; equilíbrio químico, pH, hidrólise e tampões sem ligação com eletrólise; baterias e acumuladores (chumbo-ácido, íon-lítio) quando o foco é funcionamento/armazenamento de energia e não eletrólise; eletroforese e processos de separação por campo elétrico sem reações redox; química orgânica eletrossintética em nível avançado sem abordagem escolar de eletrólise.",
+      "diferenciador": "Foco em reações redox NÃO espontâneas dirigidas por uma fonte externa de corrente/tensão, com formação de produtos nos eletrodos e/ou cálculos estequiométricos via carga elétrica (leis de Faraday), distinguindo-se de pilhas (espontâneas) e de temas de soluções/condutividade sem reação eletroquímica.",
+      "palavras_chave": [
+        "eletrólise",
+        "célula eletrolítica",
+        "leis de Faraday",
+        "ânodo e cátodo",
+        "eletrodeposição"
+      ]
     },
     {
       "nome": "Funções Orgânicas Nitrogenadas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das funções orgânicas que contêm nitrogênio como heteroátomo no grupo funcional, incluindo identificação, nomenclatura, estrutura, propriedades, reatividade e principais transformações de aminas, amidas, nitrilas, nitrocompostos e derivados relacionados (ex.: sais de amônio, isocianatos), bem como sua ocorrência e aplicações.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação ou classificação de funções nitrogenadas (amina, amida, nitrila, nitro, sal de amônio etc.); nomenclatura IUPAC/usual e reconhecimento de sufixos/prefixos (ex.: -amina, -amida, -nitrila, nitro-); determinação de estrutura e isomeria envolvendo grupos nitrogenados (amina primária/secundária/terciária; amida primária/secundária/terciária; amônio quaternário); basicidade e formação de sais de amônio (protonação de aminas), comparação de basicidade entre aminas e anilinas; propriedades físicas associadas (polaridade, ligações de hidrogênio, ponto de ebulição/solubilidade) de aminas e amidas; reações típicas: acilação de aminas formando amidas, hidrólise de amidas e nitrilas, redução de nitrocompostos a aminas, diazotação de aminas aromáticas (quando o foco for a função amina), formação de sais de amônio quaternário, eliminação de Hofmann (se contextualizada como derivado de amônio); reconhecimento em biomoléculas e fármacos quando o ponto central for o grupo nitrogenado (ex.: aminoácidos como aminas + ácidos carboxílicos, ureia como amida, nicotina como amina).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de funções oxigenadas ou halogenadas sem ênfase no nitrogênio (álcoois, fenóis, éteres, aldeídos, cetonas, ácidos carboxílicos, ésteres, haletos orgânicos); quando o nitrogênio aparece apenas como parte de ligações C–N em contextos não funcionais ou sem discussão do grupo funcional (ex.: polímeros/compostos nitrogenados citados sem análise); quando o foco é química inorgânica do nitrogênio (amônia, nitratos/nitritos, óxidos de nitrogênio, ácido nítrico) sem relação com funções orgânicas; quando o tema central é bioquímica/metabolismo (proteínas, DNA, enzimas) sem abordagem de identificação/nomenclatura/propriedades/reação de funções orgânicas nitrogenadas; quando o assunto é aromaticidade/reações do anel benzênico em geral e a amina/nitro é apenas substituinte secundário sem papel na pergunta; quando a questão é sobre polímeros (nylon, poliuretanos) e o foco é polimerização/materiais, não a função amida/isocianato em si.",
+      "diferenciador": "Presença e papel do nitrogênio como heteroátomo definindo a função orgânica (C–N em aminas/amidas, C≡N em nitrilas, –NO2 em nitrocompostos, N+ em sais de amônio) e as consequências em nomenclatura, basicidade e reatividade características dessas funções.",
+      "palavras_chave": [
+        "amina",
+        "amida",
+        "nitrila",
+        "nitrocomposto",
+        "sal de amônio"
+      ]
     },
     {
       "nome": "Reações Inorgânicas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo e classificação das reações químicas envolvendo substâncias inorgânicas, com ênfase em identificação de reagentes e produtos, previsão de produtos, escrita e balanceamento de equações, reconhecimento de padrões reacionais e aplicação de conceitos como oxirredução, neutralização, precipitação e liberação de gases em sistemas inorgânicos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, representação (equações) e/ou análise de reações inorgânicas, incluindo: (1) tipos clássicos: síntese/combinação, decomposição, simples troca (deslocamento), dupla troca (metátese); (2) reações ácido-base (neutralização, hidrólise de sais quando tratada como reação, formação de sal e água); (3) reações de precipitação (regras de solubilidade, formação de sólido, equações iônicas e iônicas líquidas); (4) reações com liberação de gases (carbonatos/bicarbonatos com ácidos gerando CO2, sulfetos gerando H2S, nitritos gerando NO/NO2, amônio com base gerando NH3, etc.); (5) reações de oxirredução em contexto inorgânico (variação de NOX, agentes oxidante/redutor, balanceamento por NOX ou método das semi-reações em meio ácido/básico); (6) reatividade de metais e série eletroquímica aplicada a deslocamento; (7) reações envolvendo óxidos (óxidos ácidos/básicos/anfóteros) e sua reação com água, ácidos ou bases; (8) escrita e balanceamento de equações moleculares, iônicas totais e iônicas líquidas para sistemas inorgânicos; (9) estequiometria diretamente vinculada a uma reação inorgânica (cálculo de reagente limitante, rendimento, massas/volumes) quando o foco é a reação e seus produtos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Química Orgânica (reações orgânicas como substituição, adição, eliminação, esterificação, polimerização, mecanismos, funções orgânicas); (2) Cinética química (lei de velocidade, energia de ativação, catalisadores) sem foco em um tipo de reação inorgânica específico; (3) Equilíbrio químico e constantes (Kc, Kp, Le Châtelier) como tema central, incluindo equilíbrio ácido-base (Ka, Kb, pH, tampões) quando o foco é cálculo de pH e não a reação em si; (4) Eletroquímica como tema central (pilhas, eletrólise, potenciais padrão, Nernst) quando o foco é potencial/corrente e não a identificação/balanceamento da reação; (5) Termoquímica (entalpia, Lei de Hess, calorimetria) quando o foco é energia; (6) Química de coordenação (complexos, ligantes, isomeria, constante de formação) salvo se a questão for explicitamente sobre uma reação inorgânica simples envolvendo complexação como produto principal; (7) Propriedades periódicas, ligações químicas e estrutura (geometria, polaridade) sem reação; (8) Separação de misturas, soluções e concentrações (molaridade, diluição) sem equação reacional; (9) Radioatividade e reações nucleares.",
+      "diferenciador": "O foco é reconhecer e manipular equações e padrões de transformação química típicos de substâncias inorgânicas (metátese, precipitação, neutralização, redox, formação de gases), priorizando previsão de produtos e balanceamento/representação (molecular e iônica), em vez de cálculos de pH, potenciais eletroquímicos, cinética, equilíbrio ou mecanismos orgânicos.",
+      "palavras_chave": [
+        "síntese e decomposição",
+        "simples troca e dupla troca",
+        "precipitação e solubilidade",
+        "neutralização ácido-base",
+        "oxirredução (NOX)"
+      ]
     },
     {
       "nome": "Hidrocarbonetos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos hidrocarbonetos (compostos formados apenas por carbono e hidrogênio), abrangendo classificação (alcanos, alcenos, alcinos, aromáticos), estrutura e representação, nomenclatura (IUPAC e usual), isomeria, propriedades físicas e químicas, reações características e aplicações/ocorrência (petróleo, gás natural, combustíveis).",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, classificação, nomenclatura ou propriedades de compostos constituídos exclusivamente por C e H; reconhecimento e diferenciação entre alcanos, alcenos, alcinos, cicloalcanos, dienos e aromáticos; determinação de fórmulas (molecular/geral) e grau de insaturação de hidrocarbonetos; escrita e interpretação de estruturas (cadeia aberta/fechada, normal/ramificada, saturada/insaturada, homogênea) e representações (condensada, desenvolvida, esquelética); isomeria em hidrocarbonetos (cadeia, posição, geométrica cis-trans/E-Z, conformacional quando aplicável); propriedades físicas típicas (ponto de ebulição/fusão, densidade, solubilidade, volatilidade) e tendências com tamanho/ramificação; reações orgânicas envolvendo hidrocarbonetos como reagentes principais (combustão, halogenação de alcanos, adição em alcenos/alcinos, hidrogenação, polimerização de alcenos, ozonólise em nível introdutório, substituição eletrofílica aromática em nível básico como nitração/halogenação); identificação de frações do petróleo e relação com tipos de hidrocarbonetos; questões de estequiometria e energia associadas à combustão de hidrocarbonetos (quando o foco é o hidrocarboneto e sua reação).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de funções orgânicas que contenham heteroátomos (álcoois, éteres, aldeídos, cetonas, ácidos carboxílicos, ésteres, aminas, amidas, haletos orgânicos como função principal etc.); polímeros e plásticos quando o foco é macromoléculas, propriedades de materiais ou mecanismos avançados (classificar em Polímeros, se houver); bioquímica (lipídios, carboidratos) mesmo que contenham cadeias hidrocarbonadas, quando o foco é biológico/funcional; termoquímica geral, cinética, equilíbrio, eletroquímica ou química ambiental sem ênfase em hidrocarbonetos específicos; química do petróleo em nível industrial (refino detalhado, craqueamento catalítico avançado, processos petroquímicos) quando o foco é engenharia/processos; reações orgânicas cujo foco é mecanismo detalhado ou síntese multietapas envolvendo várias funções (classificar em Reações Orgânicas/Mecanismos, se aplicável); compostos inorgânicos de carbono (CO, CO2, carbonatos, cianetos) e materiais como grafite/diamante, salvo quando usados apenas como contexto e o núcleo da questão for hidrocarbonetos.",
+      "diferenciador": "O foco principal é a química de compostos formados exclusivamente por carbono e hidrogênio, enfatizando classificação, nomenclatura, isomeria e reatividade típica de ligações C–C e C–H (saturação/insaturação e aromaticidade), distinguindo-se de módulos de funções orgânicas com heteroátomos e de temas industriais/biológicos onde a cadeia hidrocarbonada é apenas parte do contexto.",
+      "palavras_chave": [
+        "alcanos",
+        "alcenos",
+        "alcinos",
+        "aromáticos",
+        "nomenclatura IUPAC"
+      ]
     },
     {
       "nome": "Reações orgânicas de Substituição",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das reações orgânicas em que um átomo ou grupo funcional em uma molécula é substituído por outro, incluindo mecanismos, fatores que controlam a reatividade e seletividade, e aplicações em haletos de alquila, compostos aromáticos e derivados de ácidos carboxílicos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda reações de substituição em compostos orgânicos, como: (1) substituição nucleofílica alifática (SN1, SN2) em haletos de alquila, tosilatos/mesilatos, com discussão de nucleófilo, grupo abandonador, solvente, estereoquímica (inversão de Walden, racemização), rearranjos carbocatiônicos e cinética; (2) substituição nucleofílica acílica (adição-eliminação) em cloretos de acila, anidridos, ésteres e amidas, incluindo reatividade relativa e papel do grupo abandonador; (3) substituição eletrofílica aromática (SEA/SEAr) como nitração, sulfonação, halogenação, alquilação e acilação de Friedel–Crafts, com efeitos ativantes/desativantes e diretores orto/para/meta; (4) substituição nucleofílica aromática (SNAr) e mecanismos relacionados (adição-eliminação via complexo de Meisenheimer, eliminação-adição/benzino), incluindo necessidade de grupos retiradores de elétrons e posição orto/para; (5) comparação entre vias de substituição e condições que favorecem cada uma, previsão de produtos majoritários e justificativas mecanísticas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) reações de adição a ligações múltiplas (adição eletrofílica a alcenos/alcinos, hidratação, hidro-halogenação, halogenação, hidroboracão-oxidação); (2) reações de eliminação (E1, E2, E1cb) como tema central, incluindo regra de Zaitsev/Hofmann, formação de alcenos como objetivo principal; (3) oxidação e redução (álcoois a carbonilas, hidrogenação, redução por hidretos, ozonólise); (4) reações radicalares que não sejam tratadas como substituição orgânica típica (ex.: polimerização radicalar) ou mecanismos fotoquímicos sem foco em substituição; (5) reações ácido–base, tautomeria, isomeria, conformação e análise espectroscópica (IV, RMN, EM) quando não vinculadas à identificação/explicação de uma substituição; (6) nomenclatura e classificação de funções orgânicas sem transformação por substituição.",
+      "diferenciador": "O foco é a troca de um grupo por outro (substituição) e a explicação/predição do mecanismo e seletividade (SN1/SN2, SEA, SNAr, substituição acílica), distinguindo-se de módulos de adição, eliminação e oxirredução onde não há substituição direta de um grupo abandonador por um nucleófilo/eletrofílo.",
+      "palavras_chave": [
+        "SN1",
+        "SN2",
+        "substituição eletrofílica aromática",
+        "substituição nucleofílica aromática",
+        "grupo abandonador"
+      ]
     },
     {
       "nome": "Propriedades Coligativas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das propriedades de soluções que dependem do número de partículas de soluto (e não da natureza química), incluindo efeitos sobre pressão de vapor, temperaturas de ebulição e congelamento, e pressão osmótica; abrange cálculos com concentração efetiva (fator de van’t Hoff) e aplicações como anticongelantes, sal em estradas, conservação por sal/açúcar e osmose em sistemas biológicos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda propriedades coligativas de soluções, isto é, quando envolve: (1) diminuição da pressão de vapor (Lei de Raoult) e comparação de volatilidade/pressão de vapor entre solvente puro e solução; (2) elevação do ponto de ebulição (ΔTb = Kb·m·i) e/ou abaixamento do ponto de congelamento/crioscopia (ΔTf = Kf·m·i), incluindo determinação de massa molar por ebuliometria/crioscopia; (3) pressão osmótica e osmose (π = i·M·R·T), tonicidade (hipotônico/hipertônico/isotônico) e fenômenos de membrana semipermeável; (4) efeito do tipo de soluto (eletrólito vs não eletrólito), dissociação/associação, grau de ionização e uso do fator de van’t Hoff (i) para contabilizar o número de partículas; (5) comparação entre soluções com diferentes concentrações (molaridade, molalidade, fração molar) quando o objetivo é prever/quantificar variações coligativas; (6) situações-problema típicas: sal/açúcar alterando congelamento/ebulição, soro fisiológico, dessalinização por osmose reversa, conservação de alimentos por osmose, anticongelante em radiadores, e cálculo de concentração a partir de dados de ΔTb/ΔTf/π.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) propriedades físicas de substâncias puras sem relação com soluções (ponto de fusão/ebulição intrínsecos, mudanças de fase sem soluto); (2) equilíbrio químico, pH, hidrólise, tampões, solubilidade e Kps, quando não houver foco em efeitos coligativos; (3) cinética química, termoquímica, eletroquímica (pilhas/eletrólise) ou ligações químicas, exceto se usados apenas como contexto e o cálculo central for coligativo; (4) propriedades de gases ideais/leis dos gases sem conexão com pressão osmótica; (5) concentração de soluções (diluição, preparo, titulação) quando o objetivo é apenas obter concentração, sem aplicar a uma propriedade coligativa; (6) destilação, volatilidade e diagramas de fases de misturas quando o foco é separação/azeótropos ou equilíbrio líquido-vapor avançado, e não a Lei de Raoult em contexto coligativo; (7) transporte por membranas em biologia (difusão facilitada, transporte ativo) quando não envolver osmose/pressão osmótica/tonicidade.",
+      "diferenciador": "O foco distintivo é a dependência exclusiva do número de partículas de soluto na solução (concentração efetiva via i), levando a variações mensuráveis em pressão de vapor, pontos de ebulição/congelamento e pressão osmótica, frequentemente com fórmulas específicas (Raoult, ΔTb, ΔTf, π) e comparação entre eletrólitos e não eletrólitos.",
+      "palavras_chave": [
+        "lei de Raoult",
+        "pressão de vapor",
+        "elevação ebuliométrica",
+        "abaixamento crioscópico",
+        "pressão osmótica"
+      ]
     },
     {
       "nome": "Equílibrio Químico",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de sistemas reacionais reversíveis em que as velocidades direta e inversa se igualam, caracterizando o equilíbrio dinâmico. Abrange a constante de equilíbrio (Kc, Kp), quociente reacional (Q), interpretação e manipulação de expressões de K, relação entre Kp e Kc, uso de tabelas ICE, grau de dissociação/ionização em equilíbrio, deslocamento do equilíbrio por variações de concentração, pressão/volume e temperatura (Princípio de Le Châtelier), efeito de gás inerte, papel de catalisadores, e análise qualitativa e quantitativa de composições no equilíbrio. Inclui equilíbrios homogêneos e heterogêneos (com sólidos e líquidos puros fora da expressão de K) e conexões com ΔG° e espontaneidade quando aplicável.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculo, interpretação ou previsão de composição/estado de equilíbrio em reações reversíveis, incluindo: (1) escrita e manipulação de expressões de Kc/Kp (incluindo omissão de sólidos e líquidos puros), comparação de K para reações relacionadas (inversão, multiplicação por coeficiente, soma de reações); (2) uso de Q para prever sentido de evolução até o equilíbrio (Q<K, Q>K, Q=K); (3) resolução numérica/algébrica com tabelas ICE para encontrar concentrações/pressões no equilíbrio, inclusive com aproximações; (4) conversão entre Kp e Kc e uso de pressões parciais; (5) aplicação do Princípio de Le Châtelier a perturbações (adição/remoção de reagentes/produtos, mudança de volume/pressão, diluição, variação de temperatura) e identificação do novo equilíbrio; (6) efeito de catalisador (não altera K, apenas acelera a chegada ao equilíbrio) e de gás inerte (a V constante vs a P constante); (7) equilíbrio em sistemas com múltiplas fases (heterogêneo) e interpretação de gráficos/curvas de composição vs tempo até o equilíbrio; (8) relação entre K e termodinâmica (ΔG°, ΔG=ΔG°+RT ln Q, K=e^{-ΔG°/RT}) quando o foco é o estado de equilíbrio e sua dependência com T.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) cinética química (leis de velocidade, ordem de reação, mecanismos, energia de ativação) sem conexão explícita com K, Q ou estado de equilíbrio; (2) equilíbrio ácido-base (pH, pKa, Ka/Kb, tampões, hidrólise) como tema central — a menos que a questão use explicitamente o formalismo geral de equilíbrio e K para uma reação genérica e o foco seja o conceito de equilíbrio químico; (3) solubilidade e produto de solubilidade (Kps) e precipitação como tema central; (4) eletroquímica (pilhas, potencial padrão, Nernst) sem foco em K/Q de equilíbrio químico geral; (5) termoquímica/entalpia e Lei de Hess sem discussão de como a temperatura afeta K ou de ΔG°-K; (6) estequiometria de reações irreversíveis e rendimento sem estabelecimento de equilíbrio; (7) propriedades dos gases e cálculos de PV=nRT sem relação com pressões parciais em Kp ou deslocamento de equilíbrio.",
+      "diferenciador": "O foco é a condição de equilíbrio dinâmico e a previsão quantitativa/qualitativa da composição no equilíbrio via K e Q, bem como como perturbações deslocam o equilíbrio (Le Châtelier), distinguindo-se de cinética (velocidade) e de equilíbrios específicos (ácido-base, solubilidade) quando estes não são tratados como aplicações diretas do formalismo de K/Q.",
+      "palavras_chave": [
+        "equilíbrio dinâmico",
+        "constante de equilíbrio (Kc/Kp)",
+        "quociente reacional (Q)",
+        "Princípio de Le Châtelier",
+        "tabela ICE"
+      ]
     },
     {
       "nome": "Equílibrio Iônico",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos equilíbrios químicos em soluções aquosas envolvendo espécies iônicas, com ênfase em dissociação/ionização, constantes de equilíbrio (Ka, Kb, Kw, Kps), pH/pOH, hidrólise de sais, efeito do íon comum, soluções tampão e deslocamentos de equilíbrio que afetam a concentração de íons.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculos, conceitos ou previsões relacionados a equilíbrios iônicos em água, como: (1) ionização de ácidos e bases (fortes e fracos) e determinação de Ka/Kb a partir de dados de pH, grau de ionização ou concentrações no equilíbrio; (2) autoionização da água e uso de Kw, relações pH + pOH = 14 (a 25 °C) e variação com temperatura quando explicitada; (3) cálculo de pH/pOH de soluções de ácidos/bases fortes e fracos, incluindo aproximações (x << C) e verificação; (4) hidrólise de sais (sais de ácido fraco/base forte, ácido forte/base fraca, ácido fraco/base fraca) e previsão de caráter ácido/básico/neutro e pH; (5) efeito do íon comum e deslocamento de equilíbrios de ionização/dissociação; (6) soluções tampão (par conjugado ácido/base), equação de Henderson–Hasselbalch, capacidade tamponante e variação de pH após adição de pequenas quantidades de ácido/base; (7) equilíbrio de solubilidade (Kps), solubilidade molar, precipitação seletiva, comparação de Q vs Kps, influência do íon comum e do pH na solubilidade quando ligado a equilíbrios ácido–base; (8) titulações ácido–base quando o foco é o equilíbrio iônico (curva de titulação, pH em diferentes pontos, ponto de equivalência, escolha de indicador baseada em faixa de viragem e pH no equivalência); (9) especiação ácido–base (frações de espécies HA/A−, H2A/HA−/A2−) quando derivada de Ka e pH; (10) uso de diagramas/expressões de equilíbrio para montar ICE tables (inicial–variação–equilíbrio) em sistemas iônicos aquosos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) equilíbrio químico geral em fase gasosa ou não aquosa (Kc, Kp, Le Châtelier) sem foco em íons, pH, Ka/Kb/Kw/Kps; (2) estequiometria de neutralização simples (ácido forte + base forte) apenas com cálculo de mols e concentração final, sem discussão de pH/hidrólise/tampão; (3) eletroquímica (pilhas, eletrólise, potenciais, Nernst) mesmo que envolva íons, quando o foco é redox e não equilíbrio ácido–base/solubilidade; (4) cinética química (velocidade, ordem, mecanismos) ou termodinâmica (ΔG, ΔH, ΔS) sem aplicação direta a constantes de equilíbrio iônico; (5) propriedades coligativas, soluções e concentração (molaridade, diluição) sem pH/Ka/Kb/Kps; (6) complexação/coordenação e constantes de formação (Kf) como tema central, exceto quando explicitamente combinadas com Kps/precipitação e o objetivo é o equilíbrio iônico em solução; (7) química orgânica/estruturas e reatividade sem abordagem de equilíbrio ácido–base em solução; (8) análise instrumental (pHmetro, condutividade) quando o foco é o método e não o equilíbrio químico subjacente.",
+      "diferenciador": "O foco principal é a determinação e a previsão de concentrações de íons em solução aquosa a partir de constantes de equilíbrio (Ka, Kb, Kw, Kps) e do deslocamento desses equilíbrios (íon comum, tampões, hidrólise, precipitação), geralmente culminando em pH/pOH, solubilidade ou formação de precipitado.",
+      "palavras_chave": [
+        "pH/pOH",
+        "Ka e Kb",
+        "Kw (autoionização da água)",
+        "hidrólise de sais",
+        "Kps (produto de solubilidade)"
+      ]
     },
     {
       "nome": "Isomeria Plana ou Constitucional",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da isomeria em que compostos possuem a mesma fórmula molecular, mas diferem na conectividade (ordem de ligação) entre os átomos, resultando em estruturas (fórmulas estruturais) diferentes. Abrange identificação, classificação e comparação de isômeros constitucionais, incluindo subtipos clássicos e suas implicações em nomenclatura e propriedades.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, contagem, desenho ou classificação de isômeros com mesma fórmula molecular e diferentes ligações/conectividade; comparação de estruturas para decidir se são isômeros constitucionais; determinação do tipo de isomeria plana (cadeia, posição, função, metameria/compensação, tautomeria quando tratada como constitucional em nível escolar); conversão entre fórmulas (molecular, estrutural, condensada, em bastão) para verificar conectividade; problemas de nomenclatura (IUPAC/usual) cujo objetivo é distinguir isômeros constitucionais; questões que pedem exemplos de isomeria plana para uma dada fórmula ou classe funcional; análise de como a mudança de posição de insaturação, ramificação, heteroátomo ou grupo funcional altera o composto mantendo a mesma fórmula molecular.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de estereoisomeria (isomeria espacial), como cis-trans/E-Z, isomeria óptica (quiralidade, R/S, enantiômeros, diastereoisômeros), conformações (anti/gauche, cadeira/barco) sem mudança de conectividade; quando o foco é apenas nomenclatura orgânica sem comparação entre isômeros; quando aborda isomeria de coordenação/inorgânica (complexos) ou isótopos; quando trata de ressonância/mesomeria (estruturas de ressonância não são isômeros); quando o tema central é reatividade/mecanismo sem relação com isomeria constitucional; quando discute apenas propriedades físicas gerais sem vincular a diferenças de conectividade entre compostos de mesma fórmula molecular.",
+      "diferenciador": "O critério central é a diferença de conectividade (ordem de ligação) entre átomos mantendo a mesma fórmula molecular, com ênfase em classificar o subtipo de isomeria plana (cadeia, posição, função, metameria e, em alguns currículos, tautomeria) e não em arranjos espaciais.",
+      "palavras_chave": [
+        "isomeria plana",
+        "isomeria constitucional",
+        "mesma fórmula molecular",
+        "cadeia/posição/função",
+        "metameria/tautomeria"
+      ]
     },
     {
       "nome": "Grandezas Químicas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo e aplicação das grandezas fundamentais usadas para quantificar matéria e transformações químicas, incluindo quantidade de matéria (mol), massa molar, número de partículas (constante de Avogadro), volume molar e relações entre massa, volume, quantidade de matéria e número de entidades, com uso de conversões e cálculos estequiométricos básicos baseados nessas grandezas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculos, conversões ou interpretações envolvendo mol, massa molar (g/mol), quantidade de matéria (n), número de partículas/entidades (átomos, moléculas, íons, fórmulas unitárias), constante de Avogadro (NA), volume molar de gases (em CNTP/condições padrão) e relações do tipo m = n·M, N = n·NA, n = m/M, n = V/Vm; quando pede para determinar massa, número de mols, número de partículas, massa molar, composição em termos de mols, ou converter entre g, mol, L (gases) e partículas; quando envolve densidade e volume apenas como ponte para obter quantidade de matéria (ex.: usar d = m/V para achar m e então n); quando trata de fórmulas empírica e molecular a partir de percentuais/composição, desde que o foco seja converter massa/percentual em mol e obter proporções; quando envolve pureza/rendimento/soluções apenas na etapa de converter para mol e relacionar grandezas químicas (sem aprofundar em concentração como tema central).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: balanceamento e estequiometria de reações (reagente limitante, excesso, rendimento) sem ênfase nas conversões de grandezas; soluções e concentrações (molaridade, molalidade, ppm, diluição, titulação) como foco central; gases com leis dos gases (PV=nRT, Boyle, Charles, Dalton) como foco principal em vez de volume molar/condições padrão; termoquímica (entalpia, calorimetria), cinética, equilíbrio, eletroquímica; estrutura atômica e tabela periódica (número atômico, massa atômica, isótopos) quando não há cálculo de mol/partículas; química orgânica e funções; propriedades coligativas; pH e ácido-base; unidades e conversões puramente físicas (sem ligação com mol/NA/massa molar).",
+      "diferenciador": "O foco é quantificar matéria por meio da quantidade de matéria (mol) e suas conversões diretas entre massa, número de partículas e volume (especialmente de gases em condições padrão), usando relações fundamentais (m=n·M, N=n·NA, n=V/Vm) como núcleo do raciocínio.",
+      "palavras_chave": [
+        "mol",
+        "massa molar",
+        "constante de Avogadro",
+        "quantidade de matéria",
+        "volume molar"
+      ]
     },
     {
       "nome": "Polímeros",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de macromoléculas (polímeros) e seus monômeros, mecanismos e tipos de polimerização, estrutura e classificação (adição/condensação; linear/ramificado/reticulado; homo/ copolímeros), propriedades físico-químicas e térmicas (massa molar, cristalinidade, Tg, Tm, viscosidade), processamento e aplicações (plásticos, fibras, elastômeros, resinas), além de degradação, reciclagem e impactos ambientais de materiais poliméricos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: identificação de polímeros e monômeros; escrita/interpretação de unidades repetitivas e grau de polimerização; reações de polimerização por adição (radicalar, iônica, coordenação/Ziegler-Natta) e por condensação (poliésteres, poliamidas, policarbonatos) com subprodutos; distinção entre termoplásticos, termorrígidos e elastômeros; copolimerização (aleatória, alternada, em bloco, enxertada) e efeito na propriedade; relação estrutura–propriedade (ramificação, reticulação, tacticidade, cristalinidade) e consequências em densidade, resistência, elasticidade e solubilidade; propriedades térmicas (Tg, Tm) e comportamento mecânico (módulo, alongamento, fluência); massa molar média (Mn, Mw), polidispersidade e métodos conceituais de determinação; aditivos e formulação (plastificantes, estabilizantes, cargas, pigmentos, retardantes de chama) e seus efeitos; processamento (extrusão, injeção, sopro, fiação) quando ligado ao comportamento do polímero; biodegradação, oxidação, fotodegradação, hidrólise; reciclagem (mecânica, química), códigos de resina e sustentabilidade de polímeros; exemplos clássicos (PE, PP, PVC, PS, PET, nylon, borracha natural/sintética, PTFE, PMMA) e suas aplicações.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: química orgânica geral sem foco em macromoléculas (reações de adição/eliminação/substituição em pequenas moléculas); bioquímica de biopolímeros (proteínas, DNA, polissacarídeos) quando o foco é metabolismo/estrutura biológica e não conceitos de polímeros e polimerização; materiais inorgânicos e cerâmicos/metalurgia sem discussão de polímeros; físico-química de soluções e colóides em geral (tensão superficial, micelas) sem ligação explícita a polímeros; química ambiental geral (poluição, tratamento de água) sem ênfase em plásticos/polímeros; química analítica/instrumentação (IR, RMN, GPC/SEC, DSC, TGA) quando o objetivo é apenas interpretar o método sem contextualização em polímeros; propriedades mecânicas de materiais de forma genérica (Lei de Hooke, tensões) sem referência a materiais poliméricos; combustíveis e petroquímica em geral sem conexão com produção/uso de polímeros.",
+      "diferenciador": "O foco é a relação entre monômeros, mecanismos de polimerização e a estrutura macromolecular (unidade repetitiva, massa molar, ramificação/reticulação, cristalinidade) para explicar propriedades, processamento, aplicações e ciclo de vida de materiais poliméricos.",
+      "palavras_chave": [
+        "polimerização",
+        "monômero",
+        "unidade repetitiva",
+        "termoplástico",
+        "Tg"
+      ]
     },
     {
       "nome": "Funções Halogenadas, Sulfuradas e Outras Funções Orgânicas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo, identificação, nomenclatura, propriedades e reatividade de funções orgânicas que envolvem halogênios (F, Cl, Br, I), enxofre (S) e outras funções menos centrais em módulos clássicos (ex.: nitro, nitrila, isocianato, tiocianato), incluindo classificação de compostos, reconhecimento de grupos funcionais, tipos de reações típicas (substituição, eliminação, oxidação/redução) e aplicações/impactos (solventes halogenados, fármacos, pesticidas, odor de tióis).",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) haletos orgânicos/derivados halogenados (haloalcanos, haloarenos): identificação do grupo C–X, nomenclatura IUPAC e usual (cloroetano, bromobenzeno), classificação (primário/secundário/terciário; alílico/benzílico/vinílico/arílico), propriedades (polaridade, ponto de ebulição, densidade, solubilidade) e reatividade (SN1, SN2, E1, E2, formação de reagentes de Grignard, hidrólise, eliminação para alcenos); (2) funções sulfuradas: tióis (R–SH), sulfetos/tioéteres (R–S–R), dissulfetos (R–S–S–R), tióis aromáticos, tióis vs álcoois (acidez, odor, nucleofilicidade), oxidação de tióis a dissulfetos e a ácidos sulfônicos, sulfóxidos e sulfonas, sulfonatos e sulfonamidas quando o foco for o grupo sulfonila ligado a carbono; (3) outras funções orgânicas frequentemente tratadas em conjunto por serem “derivadas” ou menos recorrentes: nitrocompostos (R–NO2), nitrilas/ciano (R–C≡N), isonitrilas (R–N≡C), isocianatos (R–N=C=O), tiocianatos (R–SCN) e isotiocianatos (R–NCS), peróxidos orgânicos (R–O–O–R) quando o foco for reconhecimento/reatividade típica; (4) questões de reconhecimento de função em estruturas, fórmulas, nomes, espectros ou propriedades, desde que o grupo funcional central seja halogenado, sulfurado ou uma dessas “outras funções”; (5) mecanismos e previsões de produto em reações envolvendo esses grupos (ex.: substituição nucleofílica em haletos, eliminação de HX, oxidação de tióis, conversões envolvendo nitrilas).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) hidrocarbonetos (alcanos, alcenos, alcinos, aromáticos) sem presença/ênfase em halogênios, enxofre ou outras funções citadas; (2) funções oxigenadas e nitrogenadas clássicas como tema central (álcoois, fenóis, éteres, aldeídos, cetonas, ácidos carboxílicos, ésteres, aminas, amidas) — exceto quando comparadas diretamente a tióis/sulfetos/haletos como foco principal; (3) polímeros, bioquímica ou química ambiental de forma ampla, quando o grupo halogenado/sulfurado não for o elemento central de classificação/reatividade; (4) reações orgânicas gerais (adição, substituição, eliminação) sem substratos halogenados/sulfurados/“outras funções” como protagonistas; (5) química inorgânica do enxofre/halogênios (ácido sulfúrico, sulfatos, haletos inorgânicos, SO2, H2S) sem ligação direta a funções orgânicas; (6) espectroscopia/identificação instrumental como tema principal sem foco em reconhecer especificamente essas funções.",
+      "diferenciador": "O módulo se distingue por ter como eixo a presença de halogênios (C–X) e/ou enxofre (C–S, S–S, S=O) em moléculas orgânicas, além de funções “não convencionais” como nitro e nitrila, enfatizando nomenclatura, classificação e reatividade típica (especialmente substituição/eliminação em haletos e oxidações em compostos sulfurados), em vez das funções oxigenadas/nitrogenadas mais comuns.",
+      "palavras_chave": [
+        "haleto orgânico",
+        "haloalcano",
+        "substituição nucleofílica (SN1/SN2)",
+        "tiol (mercaptano)",
+        "nitrila (grupo ciano)"
+      ]
     },
     {
       "nome": "Radiotividade",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da radioatividade natural e artificial, tipos de radiação emitida por núcleos instáveis, leis de decaimento nuclear, cinética de desintegração (meia-vida), séries radioativas, reações nucleares (fissão, fusão, captura), detecção e medidas de radiação, efeitos biológicos, proteção radiológica e aplicações tecnológicas (medicina, datação, energia).",
+      "incluir_quando": "Classificar aqui quando a questão aborda fenômenos e processos nucleares envolvendo núcleos instáveis e emissão de radiação (alfa, beta, gama), equações de desintegração e balanceamento nuclear (número de massa A e número atômico Z), cálculo de meia-vida/constante de decaimento/atividade, comparação de poder de penetração e ionização, séries de decaimento, transmutação nuclear, fissão e fusão, energia liberada em processos nucleares (defeito de massa/E=mc²) quando vinculada a reações nucleares, unidades e grandezas radiológicas (Bq, Ci, Gy, Sv) e interpretação de gráficos/tabelas de decaimento, além de aplicações e riscos (radioterapia, PET, traçadores, datação por C-14, usinas nucleares, blindagem e segurança).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: reações químicas e cinética química (velocidade de reação, catalisadores) sem componente nuclear; estrutura eletrônica, espectros e radiação eletromagnética em geral (UV, IV, micro-ondas) sem relação com emissão gama nuclear; eletroquímica, ligações químicas, estequiometria e equilíbrio; física de partículas/raios cósmicos sem foco em decaimento nuclear; química analítica instrumental (espectrofotometria, cromatografia) sem radiometria; termodinâmica/energia de ligações químicas (entalpia) sem reações nucleares; modelos atômicos históricos apenas (Rutherford/Bohr) quando não conectados a radioatividade e decaimento.",
+      "diferenciador": "O foco é a instabilidade do núcleo atômico e suas transformações (desintegração e reações nucleares), com ênfase em emissão de partículas/radiação, leis de decaimento e grandezas radiológicas — diferindo de temas de química que envolvem apenas rearranjos eletrônicos/químicos.",
+      "palavras_chave": [
+        "radioatividade",
+        "decaimento nuclear",
+        "meia-vida",
+        "radiação alfa beta gama",
+        "atividade (Bq)"
+      ]
     },
     {
       "nome": "Tabela Periódica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da organização dos elementos químicos na Tabela Periódica e das relações entre posição (períodos, grupos/famílias, blocos) e propriedades periódicas, incluindo tendências, classificação de elementos e uso da tabela para prever comportamento químico.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a estrutura e leitura da Tabela Periódica (períodos, grupos/famílias, numeração, blocos s/p/d/f), a identificação/classificação de elementos (metais, ametais, semimetais; alcalinos, alcalino-terrosos, halogênios, gases nobres; metais de transição; lantanídeos e actinídeos), a relação entre configuração eletrônica e posição na tabela (camada de valência, elétrons de valência, bloco), e principalmente as propriedades periódicas e suas tendências (raio atômico/iónico, energia de ionização, afinidade eletrônica, eletronegatividade, caráter metálico, reatividade, carga nuclear efetiva, efeito de blindagem). Incluir também questões que pedem comparação/ordenação de elementos com base na posição na tabela, previsão de formação de íons típicos por grupo, e interpretação de variações ao longo de um período ou ao descer um grupo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de ligações químicas e geometria molecular (polaridade, VSEPR, tipos de ligação) sem exigir tendências periódicas; de estequiometria, balanceamento e cálculos de reações; de soluções, pH, equilíbrio químico, cinética, termoquímica; de química orgânica; de radioatividade/nuclear (meia-vida, decaimento) sem conexão com posição na tabela; de nomenclatura e propriedades de compostos específicos sem uso da Tabela Periódica; de estrutura atômica em nível fundamental (modelos atômicos, números quânticos, espectros) quando não houver vínculo explícito com periodicidade/posição na tabela.",
+      "diferenciador": "O foco é usar a posição do elemento na Tabela Periódica para classificar e prever propriedades e tendências periódicas (comparar/ordenar/justificar variações), mais do que descrever reações, cálculos ou estruturas moleculares isoladas.",
+      "palavras_chave": [
+        "período",
+        "grupo/família",
+        "propriedades periódicas",
+        "eletronegatividade",
+        "energia de ionização"
+      ]
     },
     {
       "nome": "Química, Tecnologia e Saúde no Cotidiano",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações entre conceitos químicos e suas aplicações tecnológicas no cotidiano, com ênfase em impactos na saúde humana e coletiva. Abrange produtos e processos comuns (alimentos, medicamentos, cosméticos, saneantes, materiais, combustíveis), avaliação de riscos e benefícios, segurança química, toxicologia básica, qualidade da água e do ar, rotulagem e regulamentação, além de escolhas de consumo informadas e sustentabilidade associada a tecnologias químicas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda aplicações da Química em tecnologias e produtos do dia a dia e discute efeitos na saúde, segurança e qualidade de vida, por exemplo: (1) composição, função e uso seguro de medicamentos, vacinas, antibióticos, analgésicos, antiácidos, contraceptivos e interações com o organismo; (2) toxicidade, dose-resposta, intoxicações, alergias, carcinogenicidade, disruptores endócrinos, bioacumulação/biomagnificação e exposição a contaminantes (metais pesados, agrotóxicos, solventes, aditivos); (3) saneamento e saúde pública: tratamento de água (cloração, ozonização, fluoretação), potabilidade, desinfecção, esgoto, resíduos e controle de patógenos; (4) qualidade do ar e poluição: material particulado, NOx, SO2, ozônio troposférico, fumaça, monóxido de carbono, efeitos respiratórios e medidas de mitigação; (5) alimentos e nutrição sob olhar químico: aditivos (conservantes, corantes, antioxidantes), rotulagem, contaminação, rancificação, reações de escurecimento, segurança alimentar; (6) produtos de higiene e limpeza (sabões, detergentes, alvejantes, desinfetantes), pH, compatibilidades perigosas (misturas que liberam gases tóxicos), e boas práticas domésticas; (7) cosméticos e protetores solares: filtros UV, fragrâncias, conservantes, alergênicos, estabilidade e segurança; (8) materiais e tecnologias com impacto na saúde: plásticos e microplásticos, BPA/ftalatos, embalagens, nanomateriais, baterias e descarte; (9) energia e combustíveis no cotidiano (etanol, gasolina, GLP) com foco em emissões, riscos de manuseio e impactos à saúde; (10) interpretação de rótulos, fichas de segurança (FISPQ/SDS), pictogramas GHS, limites de exposição e regulamentações sanitárias/ambientais; (11) tomada de decisão baseada em evidências sobre uso de tecnologias químicas (benefícios, riscos, custo, alternativas mais seguras).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) cálculos e teoria de Química geral sem contexto de tecnologia/saúde (estequiometria, balanceamento, estrutura atômica, ligações, termoquímica) de forma abstrata; (2) Química orgânica/inorgânica focada em nomenclatura, mecanismos e síntese sem conexão com produtos, riscos ou aplicações cotidianas; (3) eletroquímica, cinética, equilíbrio, soluções e pH apenas como exercício matemático, sem aplicação em saneamento, alimentos, medicamentos ou segurança; (4) química industrial e processos de produção em escala com foco econômico/engenharia, quando não houver discussão de impacto na saúde/uso cotidiano; (5) temas exclusivamente ambientais/ecológicos (ciclos biogeoquímicos, efeito estufa, aquecimento global) quando não houver vínculo explícito com exposição humana, saúde pública ou tecnologias de consumo; (6) biologia/fisiologia pura (sistemas do corpo, doenças) sem componente químico de substâncias, materiais, reações ou tecnologias; (7) análises laboratoriais e instrumentação (cromatografia, espectroscopia) quando o foco for técnico-metodológico e não a interpretação para saúde/consumo.",
+      "diferenciador": "Integra conceitos químicos a situações reais de consumo e uso de tecnologias, priorizando avaliação de risco/benefício, segurança, toxicologia e saúde pública (como a Química afeta diretamente o bem-estar no cotidiano), em vez de focar apenas em teoria, cálculos ou classificação de substâncias.",
+      "palavras_chave": [
+        "toxicidade",
+        "saneamento",
+        "medicamentos",
+        "rotulagem",
+        "contaminantes"
+      ]
     },
     {
       "nome": "Reações orgânicas de Adição",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das reações orgânicas de adição, nas quais átomos ou grupos se adicionam a uma ligação múltipla (C=C, C≡C, C=O) ou a sistemas conjugados, aumentando o grau de saturação e formando novos enlaces sigma. Inclui tipos (adição eletrofílica, nucleofílica, radicalar), condições reacionais, mecanismos, regioseletividade e estereosseletividade, além de aplicações típicas em alcenos, alcinos, dienos conjugados e carbonilas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda reações em que ocorre adição a ligações múltiplas ou sistemas π, com formação de novos enlaces e consumo da insaturação. Exemplos: (1) adição eletrofílica a alcenos/alcinos (HX, X2, H2O em meio ácido, formação de haloidrinas, hidratação, hidro-halogenação); (2) regras e seletividades de adição (Markovnikov, anti-Markovnikov/peróxidos, orientação em dienos conjugados 1,2 vs 1,4, estabilidade de carbocátions, rearranjos); (3) estereoquímica de adição (adição sin/anti, formação de racematos, produtos cis/trans, bromação anti via íon bromônio, hidrogenação sin em catalisador); (4) adições a carbonilas (adição nucleofílica a aldeídos/cetonas: HCN, NaBH4/LiAlH4 como redução por adição de hidreto, reagentes de Grignard/organolítio, formação de hemiacetais/acetais como adição seguida de substituição); (5) adição conjugada (Michael 1,4) em α,β-insaturados; (6) identificação de reagentes, produtos e mecanismos de adição, incluindo intermediários (carbocátion, halônio, enolato) e condições (catalisadores, solventes, temperatura) que controlam o produto.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) substituição (SN1/SN2, substituição eletrofílica aromática, substituição acílica) sem etapa central de adição a ligação π; (2) eliminação (E1/E2, desidratação, desidro-halogenação) como foco principal; (3) oxidações que não sejam interpretadas como adição a π (ex.: oxidação de álcool a carbonila, clivagem oxidativa como ozonólise quando o foco é quebra de cadeia e não a etapa de adição); (4) reações de polimerização como tema central (mesmo que iniciem por adição), quando o objetivo é cinética/mecanismo de cadeia e propriedades do polímero; (5) reações de rearranjo, isomerização, combustão, esterificação/condensação e outras transformações sem consumo de insaturação por adição; (6) química de aromáticos em geral, onde o anel preserva aromaticidade (SEAr) em vez de adição ao anel.",
+      "diferenciador": "O foco distintivo é a transformação que CONSOME uma ligação π (ou sistema conjugado) por adição de espécies (E+, Nu−, radicais ou H−), formando novos enlaces sigma e determinando regio- e estereosseletividade do produto (Markovnikov/anti-Markovnikov; sin/anti; 1,2/1,4), frequentemente com análise mecanística (carbocátion, halônio, enolato) e previsão de produtos.",
+      "palavras_chave": [
+        "adição eletrofílica",
+        "Markovnikov",
+        "anti-Markovnikov",
+        "adição nucleofílica à carbonila",
+        "adição conjugada (Michael)"
+      ]
     },
     {
       "nome": "Isomeria Óptica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da estereoisomeria relacionada à quiralidade e à atividade óptica: identificação de centros quirais, enantiômeros e diastereoisômeros, condições de quiralidade (incluindo ausência de plano/centro de simetria), representação (Fischer, cunha-tracejado, Newman), nomenclatura/configuração absoluta (R/S) e relativa (D/L quando aplicável), rotação do plano da luz polarizada (dextrógiro/levógiro), mistura racêmica e excesso enantiomérico, além de noções de resolução de racematos e propriedades/reações estereoespecíficas relevantes.",
+      "incluir_quando": "Classificar aqui quando a questão aborda quiralidade e suas consequências: (1) identificar se uma molécula é quiral/aqüiral e justificar por simetria ou presença de centro estereogênico; (2) reconhecer/contar centros quirais (carbono assimétrico) e determinar número de estereoisômeros considerando meso; (3) distinguir enantiômeros, diastereoisômeros e compostos meso; (4) atribuir configuração R/S por regras CIP e/ou converter entre representações (Fischer ↔ 3D) para obter R/S; (5) relacionar configuração com rotação óptica (sinal +/−, d/l) e discutir que R/S não determina necessariamente o sinal de rotação; (6) tratar de mistura racêmica, racemização, resolução (agente quiral, cristalização, cromatografia quiral) e cálculo/interpretação de excesso enantiomérico (%ee) e composição enantiomérica; (7) comparar propriedades de enantiômeros (em meio aquiral) e diferenças em ambientes quirais (receptores, catalisadores, reagentes quirais); (8) analisar reações com implicações estereoquímicas que preservam/invertem configuração (ex.: inversão de Walden em SN2) quando o foco é a consequência em quiralidade/atividade óptica.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) isomeria geométrica cis/trans ou E/Z sem conexão com quiralidade/atividade óptica; (2) isomeria constitucional/estrutural (cadeia, posição, função, tautomeria) sem estereoisomeria quiral; (3) conformações (anti/gauche, cadeira do ciclo-hexano) sem discussão de quiralidade/enantio/diastereo; (4) polarimetria apenas como técnica instrumental (lei de Beer, espectroscopia, instrumentação) sem aplicação a rotação óptica/enantiomeria; (5) nomenclatura orgânica geral sem atribuição R/S, D/L ou discussão de enantiômeros; (6) mecanismos de reação (SN1/SN2/E1/E2) quando o foco é cinética/termodinâmica e não o resultado estereoquímico/óptico; (7) estereoisomeria em complexos de coordenação (Δ/Λ, cis/trans em octaédricos) a menos que a questão seja explicitamente sobre quiralidade/atividade óptica desses complexos.",
+      "diferenciador": "O foco central é a relação entre quiralidade (assimetria espacial) e atividade óptica, incluindo identificação de enantiômeros/meso, atribuição de configuração (R/S, D/L quando pertinente) e implicações como rotação óptica, racematos e excesso enantiomérico—distinguindo-se de outros tópicos de isomeria que não envolvem quiralidade.",
+      "palavras_chave": [
+        "quiralidade",
+        "enantiômeros",
+        "centro quiral",
+        "configuração R/S (CIP)",
+        "mistura racêmica e excesso enantiomérico"
+      ]
     },
     {
       "nome": "Reações específicas de grupos funcionais",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das reações orgânicas características (quimiosseletivas) de cada grupo funcional, relacionando estrutura e reatividade, reagentes/condições típicas, mecanismos mais comuns e produtos esperados em transformações envolvendo funções como álcoois, aldeídos, cetonas, ácidos carboxílicos e derivados, aminas, fenóis, éteres, haletos orgânicos, alcenos/alcinos e aromáticos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, previsão ou explicação de reações típicas de um grupo funcional específico, incluindo: (1) transformações e interconversões de funções (ex.: álcool → aldeído/cetona/ácido; ácido → éster/amida/cloreto de acila; nitro → amina); (2) escolha de reagentes/condições para reagir seletivamente com uma função (ex.: PCC vs KMnO4; NaBH4 vs LiAlH4; SOCl2; PBr3; H2SO4/H3PO4; H2/Pd; O3; mCPBA); (3) mecanismos associados a funções (substituição nucleofílica acílica, adição nucleofílica a carbonila, eliminação/desidratação de álcoois, substituição em haletos, reações de aromáticos como SEAr, adição eletrofílica a alcenos); (4) reações de reconhecimento/ensaios clássicos por função (Tollens, Fehling/Benedict, iodoformo, 2,4-DNPH, Lucas, Baeyer, bromação de fenóis); (5) quimiosseletividade e compatibilidade de grupos funcionais em síntese (proteção/desproteção quando motivada por reatividade de funções); (6) comparação de reatividade entre funções próximas (aldeído vs cetona; cloreto de acila vs anidrido vs éster vs amida; SN1/SN2/E1/E2 em haletos conforme substrato).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) nomenclatura, identificação e classificação de grupos funcionais sem discutir reações; (2) estequiometria, balanceamento, termoquímica, cinética geral ou equilíbrio sem foco em reatividade de funções orgânicas; (3) química inorgânica (ácido-base, redox, complexos) sem conexão direta com transformação de grupos funcionais; (4) polímeros e polimerização como tema central (adição/condensação) sem detalhar reações características de funções específicas; (5) espectroscopia (IV, RMN, MS) e análise estrutural sem pedir reações; (6) reações orgânicas tratadas apenas por tipo genérico (\"adição\", \"substituição\") sem ancoragem em um grupo funcional concreto ou em reagentes típicos; (7) bioquímica/metabolismo (glicólise, ciclo de Krebs) salvo quando a pergunta for explicitamente sobre reatividade de funções (ex.: oxidação de álcool a aldeído) em contexto orgânico.",
+      "diferenciador": "O foco é a relação 'grupo funcional → reatividade típica → reagentes/condições → produto/mecanismo', isto é, reconhecer e prever transformações orgânicas específicas e quimiosseletivas de funções, distinguindo-se de módulos de identificação estrutural, propriedades físicas ou mecanismos gerais sem contexto funcional.",
+      "palavras_chave": [
+        "adição nucleofílica à carbonila",
+        "substituição nucleofílica acílica",
+        "oxidação/redução de álcoois e carbonilas",
+        "esterificação/transesterificação/hidrólise",
+        "SEAr (substituição eletrofílica aromática)"
+      ]
     },
     {
       "nome": "Termoquímica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das trocas de energia na forma de calor associadas a transformações físicas e reações químicas, incluindo variação de entalpia (ΔH), processos endotérmicos/exotérmicos, calorimetria, capacidade calorífica, Lei de Hess, entalpias padrão (formação, combustão, neutralização, dissolução), energia de ligação e influência de condições (estado físico, temperatura, pressão) nos valores energéticos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculo, interpretação ou comparação de calor/energia térmica em processos químicos ou físicos, como: determinar ΔH de reação; identificar se um processo é endotérmico ou exotérmico; usar calorimetria (q = m·c·ΔT, q = C·ΔT) para achar calor trocado, temperatura final, capacidade calorífica ou calor específico; aplicar conservação de energia em sistemas (reação + solução + calorímetro); usar Lei de Hess e manipulação de equações termoquímicas; trabalhar com entalpias padrão (ΔH°f, ΔH°c, ΔH°rxn) e tabelas; calcular ΔH por energias de ligação (quebra e formação de ligações); analisar diagramas de energia/entalpia e perfis energéticos focando ΔH (não a cinética); discutir calor de dissolução/hidratação, neutralização e mudanças de fase com enfoque em calor latente/entalpia; converter unidades (J, kJ, cal) e relacionar sinais de ΔH e q ao sistema/vizinhança.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: velocidade de reação, energia de ativação, mecanismos e catalisadores (cinética), mesmo que haja gráfico de energia; equilíbrio químico e constante K, Le Châtelier e termodinâmica de equilíbrio com ΔG e ΔS como foco principal (a menos que o objetivo central seja ΔH/termoquímica); eletroquímica (pilhas, eletrólise, potenciais) e energia elétrica; estequiometria sem componente energético (apenas mols, rendimento, reagente limitante); propriedades coligativas e soluções sem cálculo/efeito de calor (apenas concentração, pH, solubilidade); gases ideais e leis dos gases sem discussão de calor/entalpia; estrutura atômica, ligações e geometria molecular sem uso para estimar ΔH por energias de ligação; mudanças de estado e diagramas de fases quando o foco é apenas pressão/temperatura de transição, não o calor envolvido.",
+      "diferenciador": "O foco é quantificar e interpretar a energia térmica (calor) e a variação de entalpia (ΔH) associadas a reações e transformações, frequentemente via calorimetria, Lei de Hess e entalpias padrão, distinguindo-se de cinética (taxa/Ea) e de termodinâmica de equilíbrio (ΔG/ΔS e espontaneidade).",
+      "palavras_chave": [
+        "entalpia",
+        "ΔH",
+        "calorimetria",
+        "Lei de Hess",
+        "endotérmico/exotérmico"
+      ]
     },
     {
       "nome": "Reações Orgânicas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das transformações químicas envolvendo compostos orgânicos, incluindo tipos de reações, mecanismos, reatividade, seletividade, condições reacionais, reagentes/catalisadores e previsão de produtos (majoritários/minoritários), bem como aspectos de estereoquímica e regiocontrole associados às reações.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, classificação, previsão ou explicação de reações orgânicas (adição, substituição, eliminação, oxidação/redução, rearranjos, condensações, polimerizações), mecanismos (SN1/SN2, E1/E2, adição eletrofílica/nucleofílica, substituição eletrofílica aromática, reações radicalares), escolha de reagentes e condições (solvente, temperatura, catalisador, ácido/base), comparação de reatividade entre substratos orgânicos, determinação de produto(s) e subproduto(s), controle regioquímico (Markovnikov/anti-Markovnikov), estereoquímico (sin/anti, inversão/retensão, racemização, E/Z, R/S), e análise de etapas determinantes de velocidade/intermediários (carbocátion, carbanion, radical, enolato).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de nomenclatura e identificação de funções orgânicas sem transformação reacional; propriedades físicas (ponto de ebulição, solubilidade) sem foco em reação; equilíbrio ácido-base e pH sem contexto de mecanismo/reação orgânica; estequiometria geral e balanceamento sem especificidade orgânica; química inorgânica (reações de sais, complexos, redox inorgânico) sem substratos orgânicos; bioquímica/metabolismo quando o foco é fisiológico e não o mecanismo orgânico; técnicas analíticas (IV, RMN, CG/EM) quando o foco é interpretação espectroscópica e não a reação; cinética/termodinâmica gerais sem aplicação a um mecanismo orgânico específico.",
+      "diferenciador": "Ênfase em como e por que compostos orgânicos se transformam (tipo de reação + mecanismo + previsão de produtos e seletividade), distinguindo-se de módulos centrados apenas em estrutura, nomenclatura, propriedades ou análise instrumental.",
+      "palavras_chave": [
+        "substituição nucleofílica (SN1/SN2)",
+        "eliminação (E1/E2)",
+        "adição (Markovnikov/anti-Markovnikov)",
+        "substituição eletrofílica aromática (SEA)",
+        "mecanismo reacional (carbocátion/enolato/radical)"
+      ]
     },
     {
       "nome": "Reações orgânicas de Eliminação",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das reações orgânicas de eliminação que levam à formação de ligações múltiplas (principalmente alcenos e alcinos) pela remoção de grupos/átomos de uma molécula (ex.: HX, H2O), incluindo mecanismos (E1, E2, E1cb), fatores que controlam velocidade e seletividade (regioquímica e estereoquímica), condições reacionais, competição com substituição e rearranjos associados.",
+      "incluir_quando": "Classificar aqui quando a questão aborda reações em que ocorre eliminação (perda de dois átomos/grupos de carbonos adjacentes) com formação de dupla/tripla ligação, ou discute: (1) identificação e distinção de mecanismos E1, E2 e E1cb; (2) desidro-halogenação de haletos de alquila e tosilatos/mesilatos; (3) desidratação de álcoois para formar alcenos; (4) escolha de base/solvente/temperatura e seu efeito na via de eliminação; (5) competição eliminação vs substituição (E2 vs SN2; E1 vs SN1) e como prever o produto majoritário; (6) regioseletividade (regra de Zaitsev/Saytzeff vs produto de Hofmann; influência de base volumosa, grupo de saída, estabilidade do alceno); (7) estereosseletividade/estereoespecificidade (exigência anti-periplanar em E2, formação de E/Z, trans/cis, eliminação em ciclohexanos com orientação axial); (8) rearranjos carbocatiônicos em E1 (migração de hidreto/metil) e consequências no produto; (9) eliminação em sistemas conjugados e formação de dienos (incluindo controle termodinâmico/cinético quando pertinente); (10) eliminação dupla para formar alcinos a partir de di-haletos (quando tratada como sequência de eliminações); (11) interpretação de perfis energéticos, etapas determinantes de velocidade e efeitos de estrutura do substrato (primário/secundário/terciário, estabilização de carbocátion, impedimento estérico) especificamente no contexto de eliminação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) reações de substituição nucleofílica (SN1/SN2) sem foco em eliminação ou sem comparação explícita com eliminação; (2) reações de adição a alcenos/alcinos (hidratação, halogenação, hidro-halogenação, hidrogenação) como tema central; (3) oxidações/reduções de álcoois, carbonilas e outros grupos funcionais sem etapa de eliminação como foco; (4) reações de eliminação em química inorgânica (ex.: eliminação em complexos metálicos) ou processos não orgânicos; (5) mecanismos de polimerização, rearranjos pericíclicos (Diels–Alder, eletrocíclicas) ou substituições eletrofílicas aromáticas; (6) questões apenas de nomenclatura, identificação de funções orgânicas ou propriedades físicas sem discutir formação de alcenos/alcinos por eliminação; (7) reações de condensação (aldólica, Claisen, Knoevenagel) quando o foco é formação C–C/carbonila, a menos que a etapa de desidratação/eliminações (E1cb) seja o ponto central avaliado.",
+      "diferenciador": "O foco distintivo é a formação de ligações múltiplas por remoção de grupos/átomos (eliminação β) e a análise mecanística/regio- e estereoquímica (E1/E2/E1cb, Zaitsev vs Hofmann, anti-periplanaridade), frequentemente em competição direta com substituição nucleofílica.",
+      "palavras_chave": [
+        "E1",
+        "E2",
+        "E1cb",
+        "Zaitsev",
+        "Hofmann"
+      ]
     },
     {
       "nome": "Ligações Químicas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de como e por que os átomos se unem para formar substâncias, abrangendo os principais tipos de ligações (iônica, covalente e metálica), suas representações (Lewis, fórmulas estruturais), conceitos associados (eletronegatividade, polaridade, regra do octeto, energia de ligação) e a relação entre ligação/estrutura e propriedades macroscópicas (ponto de fusão/ebulição, condutividade, dureza, solubilidade, geometria e forças intermoleculares quando usadas para explicar propriedades).",
+      "incluir_quando": "Classificar aqui quando a questão aborda: identificação, comparação ou previsão do tipo de ligação (iônica, covalente, metálica) a partir de elementos/íons envolvidos; uso de eletronegatividade para inferir caráter iônico/covalente e polaridade de ligações; construção e interpretação de estruturas de Lewis, pares ligantes e não ligantes, cargas formais, ressonância e exceções à regra do octeto (expansão do octeto, octeto incompleto, radicais); determinação de geometria molecular e ângulos de ligação via VSEPR e hibridização (sp, sp2, sp3 etc.) quando vinculadas à formação de ligações; distinção entre ligações simples, duplas e triplas, ordem de ligação, comprimento e energia de ligação; explicação de propriedades de substâncias com base no tipo de ligação e estrutura (rede iônica, rede covalente, molecular, metálica), incluindo condutividade elétrica em sólidos/fundidos/solução, maleabilidade/ductilidade, dureza, pontos de fusão/ebulição; polaridade molecular (dipolo resultante) a partir de ligações polares e geometria; identificação e comparação de forças intermoleculares (dipolo-dipolo, London, ligação de hidrogênio) quando usadas como extensão do tema de ligações para justificar propriedades físicas; energia reticular e estabilidade de sólidos iônicos em nível conceitual; formação de íons, transferência/compartilhamento de elétrons e modelos de ligação (teoria do octeto, modelo do mar de elétrons, ligação covalente por sobreposição de orbitais em nível introdutório).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: estequiometria e balanceamento de equações sem foco em tipo/estrutura de ligação; reações químicas (ácido-base, oxirredução, precipitação) cujo objetivo principal seja calcular quantidades, identificar reagentes/produtos ou prever espontaneidade, sem discutir ligações; termoquímica/cinética/equilíbrio com foco em energia de reação, velocidade ou constantes, sem análise de energia/ordem de ligação; soluções e propriedades coligativas sem relação explícita com polaridade/forças intermoleculares; química orgânica centrada em mecanismos, funções orgânicas e reatividade (substituição, adição, eliminação) sem ênfase em hibridização/estrutura e polaridade; química nuclear; eletroquímica (pilhas/eletrólise) quando o foco é potencial, corrente e cálculos; propriedades periódicas em geral (raio atômico, energia de ionização) quando não aplicadas diretamente à previsão de ligações; cristalografia e estruturas de sólidos em detalhe (célula unitária, empacotamento) quando não conectadas ao tipo de ligação; nomenclatura e fórmulas químicas apenas como identificação de compostos, sem discutir como as ligações se formam.",
+      "diferenciador": "O foco principal é a natureza da interação eletrônica que mantém átomos/íons unidos (transferência, compartilhamento ou deslocalização de elétrons) e como essa interação determina estrutura (Lewis/VSEPR/hibridização) e propriedades físicas; diferencia-se de outros módulos por priorizar 'como os átomos se ligam e que consequências isso traz', e não cálculos reacionais, classificações de reações ou quantificação estequiométrica.",
+      "palavras_chave": [
+        "ligação iônica",
+        "ligação covalente",
+        "eletronegatividade",
+        "estrutura de Lewis",
+        "VSEPR"
+      ]
     },
     {
       "nome": "Isomeria Geométrica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da isomeria espacial decorrente da restrição de rotação (principalmente em ligações duplas C=C e em estruturas cíclicas), levando a arranjos diferentes dos substituintes no espaço, como cis/trans e E/Z, incluindo critérios de ocorrência, nomenclatura, identificação, comparação de propriedades e representação estrutural.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, nomeação ou comparação de isômeros geométricos (cis/trans ou E/Z); verificação das condições para existir isomeria geométrica (presença de dupla ligação com dois substituintes diferentes em cada carbono sp2, ou anel/ciclo com substituintes em posições que geram restrição de rotação); determinação de configuração E/Z via regras de prioridade de Cahn–Ingold–Prelog (CIP); conversão entre representações (fórmula estrutural, esquelética, projeções) para decidir se é cis/trans ou E/Z; contagem de estereoisômeros quando a isomeria geométrica está envolvida; análise de consequências da geometria (polaridade, ponto de ebulição/fusão, estabilidade relativa, reatividade) atribuídas especificamente a cis/trans ou E/Z; distinção entre isomeria geométrica em alcenos e em cicloalcanos substituídos; reconhecimento de que cis/trans pode ser inadequado em alcenos com quatro substituintes diferentes e necessidade de E/Z.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata apenas de isomeria constitucional/planar (cadeia, posição, função, metameria, tautomeria) sem estereoisomeria; isomeria óptica/quiralidade (R/S, enantiômeros, diastereoisômeros em geral) sem foco em restrição de rotação e arranjo cis/trans ou E/Z; conformações por rotação livre (anti/gauche, cadeira/barco) sem travamento geométrico; estereoquímica de reações (adição sin/anti, mecanismos E1/E2, eliminação) quando não exige determinar cis/trans ou E/Z do produto; nomenclatura IUPAC geral sem menção a E/Z ou cis/trans; compostos de coordenação com isomeria geométrica (cis/trans em complexos) se o contexto for exclusivamente inorgânico e não orgânico (a menos que o currículo explicitamente inclua).",
+      "diferenciador": "O foco é a diferença de arranjo espacial causada por rotação impedida (dupla ligação ou anel), levando a pares cis/trans ou E/Z e sua determinação por regras geométricas (incluindo CIP), distinguindo-se de isomeria óptica (R/S) e de isomeria constitucional.",
+      "palavras_chave": [
+        "isomeria geométrica",
+        "cis-trans",
+        "E/Z",
+        "Cahn-Ingold-Prelog",
+        "alcenos e cicloalcanos"
+      ]
     },
     {
       "nome": "Funções Orgânicas Oxigenadas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das funções orgânicas que contêm oxigênio em seus grupos funcionais, abrangendo identificação, nomenclatura (IUPAC e usual), estrutura e propriedades, isomeria funcional, reatividade e principais reações (oxidação, redução, esterificação, hidrólise, saponificação, desidratação, formação de acetais/hemicetais), além de aplicações e reconhecimento em fórmulas estruturais, semidesenvolvidas e em mecanismos básicos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, classificação, nomenclatura, propriedades ou reações envolvendo funções orgânicas oxigenadas, tais como: álcoois (mono/di/triálcoois; primário/secundário/terciário), fenóis, éteres, aldeídos, cetonas, ácidos carboxílicos, ésteres, anidridos carboxílicos, haletos de acila (cloretos de ácido), peróxidos orgânicos, enóis/enolatos (quando relacionados a carbonila), acetais/hemicetais, lactonas e hidroxiácidos; reconhecimento do grupo funcional (hidroxila, carbonila, carboxila, éster, éter), comparação de acidez/basicidade (fenol vs álcool; ácido carboxílico), polaridade e ligações de hidrogênio, pontos de ebulição/solubilidade; isomeria funcional entre álcool/éter, aldeído/cetona, ácido/éster; reações típicas: oxidação de álcoois (PCC, KMnO4, dicromato), redução de carbonilas (NaBH4, LiAlH4), adição nucleofílica a aldeídos/cetonas, formação de hemiacetal/acetal, reação de Tollens/Fehling, esterificação de Fischer, transesterificação, hidrólise ácida/básica de ésteres, saponificação, formação de sabões, desidratação de álcoois (formação de alcenos/éteres), clivagem de éteres, reações de ácidos carboxílicos e derivados (substituição acílica), identificação em compostos do cotidiano (etanol, acetona, ácido acético, ésteres aromatizantes).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: hidrocarbonetos (alcanos, alcenos, alcinos, aromáticos) sem foco em grupo oxigenado; funções nitrogenadas (aminas, amidas, nitrilas, nitrocompostos), sulfuradas (tióis, sulfetos, ácidos sulfônicos) ou halogenadas (haletos orgânicos) como tema central; carboidratos, lipídios e biomoléculas em geral quando o foco é bioquímica/metabolismo e não a função oxigenada e sua reatividade; polímeros e materiais (poliésteres, policarbonatos) quando o foco é polimerização/propriedades macroscópicas sem ênfase na função; química analítica/instrumental (IR, RMN, cromatografia) quando o objetivo é interpretação espectroscópica geral e não identificação de função oxigenada; estequiometria, termoquímica, cinética, equilíbrio, eletroquímica ou soluções sem relação direta com funções oxigenadas; mecanismos avançados (aldol, Claisen, Baeyer-Villiger) se o recorte do curso não inclui tais tópicos e a questão não enfatiza a identificação da função oxigenada.",
+      "diferenciador": "Presença e papel do oxigênio como grupo funcional em moléculas orgânicas (hidroxila, carbonila, carboxila e derivados), com ênfase em como isso determina nomenclatura, propriedades (polaridade, acidez, ligações de hidrogênio) e reatividade característica (oxidação/redução, esterificação e substituição acílica).",
+      "palavras_chave": [
+        "álcool",
+        "fenol",
+        "éter",
+        "aldeído",
+        "ácido carboxílico"
+      ]
     },
     {
       "nome": "Eletroquímica: Pilhas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de pilhas (células galvânicas/voltaicas) e da conversão espontânea de energia química em energia elétrica por meio de reações de oxirredução separadas em dois eletrodos, incluindo identificação de ânodo/cátodo, fluxo de elétrons/íons, notação de célula, cálculo e interpretação de potencial padrão e não padrão, e previsões de espontaneidade.",
+      "incluir_quando": "Classificar aqui quando a questão aborda pilhas/células galvânicas (voltaicas) e seus componentes e funcionamento, como: (1) identificação de ânodo e cátodo em pilhas e associação com oxidação/redução; (2) determinação do sentido do fluxo de elétrons no circuito externo e migração de íons na ponte salina/sepador; (3) escrita e interpretação de notação de célula (ex.: Zn(s)|Zn2+(aq)||Cu2+(aq)|Cu(s)); (4) cálculo de E°cel a partir de potenciais padrão de redução (E°cel = E°cátodo − E°ânodo) e comparação de forças oxidantes/redutoras; (5) previsão de espontaneidade (E°cel > 0), agente oxidante e agente redutor; (6) uso da equação de Nernst para potenciais em condições não padrão e efeito de concentração/pressão/temperatura no potencial; (7) relação entre ΔG, E e n (ΔG = −nFE) e, quando pertinente, K e E° (ΔG° = −nFE°, E° = (RT/nF)lnK); (8) análise de pilhas clássicas (Daniell, pilhas metálicas, pilhas com eletrodos inertes e espécies em solução) e interpretação de diagramas de pilhas; (9) comparação entre pilhas em série/paralelo apenas no contexto de tensão/corrente resultante de células galvânicas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) eletrólise/células eletrolíticas (reações não espontâneas forçadas por fonte externa, leis de Faraday para massa depositada, galvanoplastia, eletrólise da água/salmoura); (2) corrosão e proteção anticorrosiva como tema central (ferrugem, passivação, proteção catódica) sem foco em uma pilha específica e seus potenciais; (3) baterias comerciais e química aplicada (íon-lítio, chumbo-ácido, NiMH) quando o foco é tecnologia/engenharia, materiais, capacidade (Ah), densidade de energia, recarga e segurança, sem exploração conceitual de pilhas e potenciais; (4) equilíbrio ácido-base, pH e tampões sem conexão com potenciais/redox; (5) termoquímica/termodinâmica geral sem ligação com E, ΔG e reações redox em pilhas; (6) cinética eletroquímica, sobrepotencial e mecanismos de eletrodo como foco principal; (7) condutividade de soluções e leis de Ohm/Kohlrausch sem contexto de célula galvânica.",
+      "diferenciador": "O foco distintivo é a célula galvânica (pilha) operando por reação redox espontânea que gera diferença de potencial elétrico, com ênfase em ânodo/cátodo, potenciais de eletrodo (E° e E via Nernst), notação de célula e direção de fluxo de elétrons/íons — em contraste com eletrólise (não espontânea) e outros tópicos de eletroquímica.",
+      "palavras_chave": [
+        "pilha",
+        "célula galvânica",
+        "ânodo",
+        "cátodo",
+        "potencial padrão (E°)"
+      ]
     },
     {
       "nome": "Química Ambiental",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos processos químicos que ocorrem no ambiente (atmosfera, hidrosfera, litosfera e biosfera), das fontes e transformações de poluentes, seus impactos em ecossistemas e saúde, e das estratégias químicas de monitoramento, prevenção, remediação e tratamento (água, ar e solo), incluindo ciclos biogeoquímicos e química do clima.",
+      "incluir_quando": "Classificar aqui quando a questão aborda química aplicada ao meio ambiente, incluindo: (1) poluição do ar, água e solo (origem, composição, reações, transporte e destino ambiental); (2) processos atmosféricos como formação de ozônio troposférico, smog fotoquímico, chuva ácida, aerossóis, NOx, SOx, CO, material particulado e química de gases de efeito estufa; (3) química aquática: pH, alcalinidade, dureza, equilíbrio carbonato/bicarbonato, oxigênio dissolvido, DBO/DQO, eutrofização, nutrientes (N e P), metais em água, cloração e subprodutos, tratamento de água e efluentes; (4) química do solo e sedimentos: adsorção, mobilidade de contaminantes, especiação, lixiviação, pesticidas, hidrocarbonetos, metais pesados, remediação (biorremediação, fitorremediação, oxidação avançada, estabilização/solidificação); (5) ciclos biogeoquímicos (carbono, nitrogênio, enxofre, fósforo) e suas perturbações por atividades humanas; (6) toxicologia ambiental e risco químico (bioacumulação, biomagnificação, persistência, POPs, disruptores endócrinos) quando o foco é a química das substâncias e seu comportamento ambiental; (7) monitoramento e análise ambiental (amostragem, parâmetros de qualidade, técnicas analíticas e interpretação de dados) quando contextualizados em poluição/qualidade ambiental; (8) química verde e prevenção da poluição (substituição de solventes, redução de resíduos, métricas como E-factor/atom economy) quando conectadas a impactos ambientais.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) estequiometria, equilíbrio, cinética, termoquímica ou eletroquímica em contexto abstrato, sem relação com ambiente/poluição; (2) química orgânica (mecanismos, síntese, nomenclatura) sem aplicação ambiental explícita; (3) química analítica puramente instrumental (calibração, limites de detecção, validação) sem cenário de monitoramento ambiental; (4) bioquímica/fisiologia/toxicologia humana clínica sem foco no destino/transformação ambiental de substâncias; (5) geologia/mineralogia/pedologia descritiva sem ênfase em reações químicas e contaminantes; (6) engenharia sanitária/gestão ambiental/legislação e políticas públicas quando o foco é normativo/administrativo e não químico; (7) química industrial e processos de produção sem discussão de emissões, efluentes, resíduos ou mitigação ambiental.",
+      "diferenciador": "O foco é a química dos contaminantes e dos processos naturais/antropogênicos no ambiente (transformações, especiação, transporte, persistência e impactos), bem como soluções químicas de monitoramento e remediação, distinguindo-se de química geral/industrial por exigir contextualização ambiental (ar/água/solo) e avaliação de qualidade ambiental.",
+      "palavras_chave": [
+        "chuva ácida",
+        "eutrofização",
+        "smog fotoquímico",
+        "DBO/DQO",
+        "bioacumulação"
+      ]
     },
     {
       "nome": "Reações de Oxirredução em compostos orgânicos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de reações de oxirredução envolvendo compostos orgânicos, com ênfase em identificar oxidação e redução em substratos orgânicos, reconhecer agentes oxidantes e redutores, prever produtos e variações de estado de oxidação (especialmente do carbono), e relacionar transformações funcionais típicas (álcool ↔ aldeído/cetona ↔ ácido carboxílico, hidrogenação/desidrogenação, oxidação de alcenos/alcinos, combustão e reações com halogênios/oxidantes comuns). Inclui balanceamento conceitual por transferência de elétrons/átomos (H/O) e interpretação de condições reacionais em nível escolar.",
+      "incluir_quando": "Classificar aqui quando a questão aborda oxirredução em moléculas orgânicas, por exemplo: (1) determinar se uma transformação orgânica é oxidação ou redução (ganho/perda de H, ganho/perda de O, mudança no número de ligações C–O/C–H/C–X); (2) calcular/atribuir número de oxidação do carbono (ou variação de NOX) em reagentes e produtos orgânicos; (3) identificar agente oxidante e agente redutor em reações orgânicas (KMnO4, K2Cr2O7, PCC, MnO2, O3, H2/Ni, NaBH4, LiAlH4, perácidos etc.); (4) prever produtos de oxidação/redução de funções orgânicas (álcoois primários → aldeídos/ácidos; álcoois secundários → cetonas; aldeídos → ácidos; alcenos → diol/epóxido/ozonólise; hidrogenação de alcenos/alcinos; redução de carbonilas a álcoois; redução de ácidos/ésteres a álcoois); (5) reconhecer reações redox orgânicas em contextos aplicados (combustão de hidrocarbonetos, rancificação/oxidação de lipídios, respiração/fermentação como redox orgânico em nível conceitual, corrosão/oxidação de materiais orgânicos, branqueamento/oxidação de corantes); (6) comparar força/seleção de oxidantes e condições (oxidação branda vs forte; parada em aldeído vs avanço a ácido; hidrogenação catalítica vs redução por hidretos) quando o foco é a natureza redox da transformação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) oxirredução inorgânica sem participação de substratos orgânicos (pilhas, eletrólise, corrosão de metais, reações de permanganato/dicromato apenas com íons inorgânicos); (2) reações orgânicas que não são redox (substituição nucleofílica, eliminação, adição eletrofílica sem mudança global de oxidação, esterificação, hidrólise, polimerização, isomerização, reações ácido–base em orgânica); (3) nomenclatura, identificação de funções, propriedades físicas, estequiometria geral ou mecanismos detalhados (radicalar, SN1/SN2, E1/E2) quando a oxirredução não é o eixo central; (4) bioquímica/metabolismo com foco em vias e enzimas (NAD+/NADH, FAD/FADH2) se não houver solicitação explícita de interpretar como oxidação/redução de substratos orgânicos; (5) balanceamento formal de equações redox em meio ácido/básico com método das semi-reações quando o contexto não envolve compostos orgânicos.",
+      "diferenciador": "O que separa este módulo é o foco em reconhecer e analisar oxidação e redução especificamente em compostos orgânicos (mudanças em ligações C–H/C–O/C–X e NOX do carbono) e em prever transformações de grupos funcionais por agentes oxidantes/redutores, em vez de tratar redox apenas no contexto inorgânico/eletroquímico ou reações orgânicas não-redox.",
+      "palavras_chave": [
+        "oxidação de álcool",
+        "redução de carbonila",
+        "número de oxidação do carbono",
+        "agente oxidante (KMnO4/dicromato/PCC)",
+        "hidrogenação (H2/Ni)"
+      ]
     },
     {
       "nome": "Teoria dos Gases",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do comportamento macroscópico e microscópico dos gases, relacionando pressão, volume, temperatura e quantidade de matéria por meio das leis dos gases, da equação de estado (gás ideal) e de correções para gases reais, incluindo misturas gasosas e aplicações em transformações gasosas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda leis e relações entre P, V, T e n (Boyle-Mariotte, Charles, Gay-Lussac, Avogadro, lei combinada), uso da equação dos gases ideais (PV = nRT) e conversões de unidades (atm, Pa, mmHg; K; L/m³), condições padrão (CNTP/STP) e volume molar, transformações gasosas (isotérmica, isobárica, isocórica, adiabática) com cálculos e interpretação de gráficos P×V, V×T, P×T, teoria cinético-molecular (energia cinética média, distribuição de velocidades, relação com temperatura, colisões, difusão/efusão e lei de Graham), pressão parcial e misturas (lei de Dalton), densidade e massa molar de gases (d = PM/RT), estequiometria envolvendo gases (reagentes/produtos gasosos, volumes em mesmas condições), desvios do ideal e gases reais (forças intermoleculares, volume próprio, fator de compressibilidade Z, equação de van der Waals) e aplicações típicas como balões, pneus, recipientes, manometria/barometria e variação de pressão com altitude quando tratadas via relações de gases.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de termoquímica (entalpia, calorimetria) sem foco em relações P-V-T-n, de termodinâmica geral (1ª/2ª lei, entropia, ciclos) sem aplicação explícita a transformações gasosas, de soluções (concentração, propriedades coligativas) exceto quando diretamente conectadas a pressão de gases (ex.: lei de Henry pode ser outro tópico), de equilíbrio químico e cinética sem uso de leis dos gases, de eletroquímica, estrutura atômica, ligações químicas, geometria molecular, forças intermoleculares em líquidos/sólidos sem conexão com gases reais, de mudanças de fase e diagramas de fases como foco central, ou de química orgânica/inorgânica descritiva sem modelagem/comportamento gasoso.",
+      "diferenciador": "O foco principal é modelar e calcular o comportamento de sistemas gasosos a partir das variáveis de estado (P, V, T, n) e da interpretação microscópica (teoria cinético-molecular), distinguindo-se de outros módulos por enfatizar equações/leis de estado, transformações gasosas e misturas gasosas.",
+      "palavras_chave": [
+        "PV=nRT",
+        "leis dos gases",
+        "pressão parcial (Dalton)",
+        "teoria cinético-molecular",
+        "gases reais (van der Waals/Z)"
+      ]
     },
     {
       "nome": "Dispersões",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de sistemas materiais em que uma substância (fase dispersa) está distribuída em outra (meio dispersante), abrangendo classificação por tamanho de partículas (soluções, coloides e suspensões), propriedades características (efeito Tyndall, movimento browniano, sedimentação), estabilidade e métodos de separação/purificação (filtração, decantação, centrifugação, diálise, ultrafiltração, coagulação/floculação). Inclui também emulsões, aerossóis, espumas e sols, com aplicações cotidianas e industriais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) definição de dispersão, fase dispersa e meio dispersante; (2) distinção entre solução verdadeira, coloide e suspensão com base em tamanho de partículas, homogeneidade aparente e estabilidade; (3) identificação e interpretação de propriedades de coloides e suspensões: efeito Tyndall, movimento browniano, adsorção, carga das partículas, eletroforese, coagulação/floculação, peptização, proteção coloidal; (4) tipos de dispersões coloidais (sol, gel, emulsão, espuma, aerossol) e exemplos (leite, maionese, neblina, fumaça, chantilly, gelatina, tinta); (5) estabilidade de dispersões e fatores que a afetam (temperatura, eletrólitos, pH, surfactantes/tensoativos, concentração, tamanho de partícula); (6) métodos de separação adequados para cada tipo de dispersão: filtração simples vs. a vácuo, decantação, sedimentação, centrifugação, diálise, ultrafiltração, osmose reversa aplicada a coloides/soluções, coagulação para tratamento de água; (7) preparação e purificação de coloides (dispersão/condensação, diálise para remover íons, uso de agentes emulsificantes); (8) questões de tratamento de água e efluentes envolvendo turbidez, floculantes, coloides e remoção de partículas; (9) comparação de propriedades macroscópicas (transparência, opalescência, viscosidade) relacionadas ao tipo de dispersão.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) soluções apenas sob o ponto de vista de concentração, diluição, solubilidade, curvas de solubilidade, Kps, propriedades coligativas ou estequiometria de soluções, sem discutir dispersões/coloides/suspensões; (2) separação de misturas em geral (destilação simples/fracionada, extração, cromatografia) sem relação com tamanho de partículas/coloides/suspensões; (3) cinética química, equilíbrio químico, ácidos e bases, eletroquímica, termoquímica, ligações químicas, estrutura atômica, química orgânica, polímeros, ou química ambiental em geral, quando não houver foco em sistemas dispersos; (4) propriedades de materiais (densidade, ponto de fusão/ebulição) sem conexão com dispersões; (5) surfactantes/detergentes apenas como reações orgânicas ou composição, sem ligação com emulsões/estabilidade coloidal.",
+      "diferenciador": "O foco é a classificação e o comportamento de sistemas dispersos (solução–coloide–suspensão) e suas propriedades/estabilidade e separação baseadas no tamanho de partículas e interação entre fases, especialmente fenômenos típicos de coloides (Tyndall, browniano, coagulação, diálise).",
+      "palavras_chave": [
+        "coloide",
+        "suspensão",
+        "efeito Tyndall",
+        "movimento browniano",
+        "emulsão"
+      ]
     },
     {
       "nome": "Introdução ao Átomo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo introdutório da estrutura e natureza do átomo, incluindo partículas subatômicas, números atômico e de massa, representação simbólica, conceitos de elemento/isótopos/íons e modelos atômicos históricos básicos que explicam a constituição da matéria.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a ideia de átomo como unidade básica da matéria; identificação e características de prótons, nêutrons e elétrons (cargas, massas relativas, localização); cálculo e interpretação de número atômico (Z), número de massa (A) e número de nêutrons (A−Z); escrita e leitura de notação nuclear e símbolos (por exemplo, 23/11Na); distinção entre átomo neutro, cátion e ânion e relação com perda/ganho de elétrons; conceitos de elemento químico e identidade atômica (Z define o elemento); isótopos (mesmo Z, A diferente), isóbaros (mesmo A) e isótonos (mesmo número de nêutrons); noções iniciais de modelos atômicos (Dalton, Thomson, Rutherford, Bohr) em nível conceitual e suas evidências gerais (ex.: experimento da lâmina de ouro) sem aprofundar em espectros/quantização avançada.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de distribuição eletrônica detalhada (configuração eletrônica, subníveis, orbitais, números quânticos), tabela periódica e propriedades periódicas (raio atômico, eletronegatividade, energia de ionização), ligações químicas (iônica, covalente, metálica), geometria molecular e VSEPR, estequiometria e cálculos de mol/massa, soluções e concentração, termoquímica, cinética, equilíbrio químico, eletroquímica, química orgânica, radioatividade e decaimento nuclear (meia-vida, tipos de emissão) ou espectros atômicos/quantização em profundidade.",
+      "diferenciador": "Foco na constituição do átomo e na identificação do elemento via Z, com cálculos simples de A, Z e nêutrons e compreensão conceitual de modelos atômicos iniciais, sem avançar para estrutura eletrônica quântica detalhada ou propriedades periódicas.",
+      "palavras_chave": [
+        "átomo",
+        "próton",
+        "nêutron",
+        "elétron",
+        "número atômico"
+      ]
     },
     {
       "nome": "Reações redox e número de oxidação (NOX)",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de reações de oxirredução (redox) envolvendo transferência de elétrons, variação de número de oxidação (NOX), identificação de espécies oxidantes e redutoras, e balanceamento de equações redox por métodos baseados em NOX ou semirreações (íon-elétron) em meio ácido, básico ou neutro. Inclui regras de atribuição de NOX, reconhecimento de oxidação e redução, e análise quantitativa simples de elétrons transferidos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda determinação/atribuição de NOX em elementos, íons ou compostos; identificação de quais espécies sofrem oxidação e quais sofrem redução; variação de NOX entre reagentes e produtos; identificação de agente oxidante e agente redutor; contagem de elétrons transferidos; escrita e combinação de semirreações; balanceamento de reações redox (por NOX ou método das semirreações) em meio ácido/básico; desproporcionamento (dismutação) e comproporcionamento; análise de reações típicas redox (metais com ácidos, halogênios, permanganato, dicromato, peróxidos, óxidos, sulfetos, nitratos etc.) quando o foco é a mudança de NOX/transferência de elétrons; questões conceituais sobre oxidação/redução (ganho/perda de elétrons, aumento/diminuição de NOX) e sobre conservação de carga e massa em redox.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: balanceamento de equações não-redox (apenas ajuste estequiométrico sem mudança de NOX); ácido-base (Arrhenius/Brønsted-Lowry/Lewis), pH, neutralização e hidrólise sem enfoque em redox; eletroquímica aplicada (pilhas, eletrólise, potenciais padrão, equação de Nernst, ddp, corrente, leis de Faraday) quando o foco é cálculo de potencial/energia e não a identificação de NOX/redox em si; cinética química, equilíbrio químico, termoquímica; química orgânica (oxidação/redução orgânica por funções) quando tratada como transformação funcional sem uso de NOX/eletrons; complexação e coordenação (número de oxidação em complexos só se a questão não envolver redox, mas apenas nomenclatura/estrutura); radioatividade e reações nucleares; propriedades periódicas e ligações químicas sem relação com NOX/redox.",
+      "diferenciador": "O foco central é a análise de transferência de elétrons via variação de NOX (quem oxida/reduz, agentes oxidante/redutor) e o balanceamento específico de reações redox por NOX/semirreações, distinguindo-se de tópicos como eletroquímica (potenciais e energia elétrica) e de balanceamentos puramente estequiométricos sem mudança de NOX.",
+      "palavras_chave": [
+        "oxirredução",
+        "reação redox",
+        "número de oxidação",
+        "NOX",
+        "agente oxidante"
+      ]
     },
     {
       "nome": "Substâncias, Misturas e Transformações",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da matéria quanto à sua composição e comportamento: identificação e classificação de substâncias (simples/compostas), misturas (homogêneas/heterogêneas), fases e componentes, propriedades físicas e químicas usadas para caracterização, e transformações físicas e químicas (incluindo evidências, conservação de massa e representação básica de mudanças). Inclui também métodos de separação de misturas e noções de pureza e concentração em nível introdutório.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) definição e distinção entre substância pura e mistura; (2) classificação de substâncias em simples e compostas; (3) classificação de misturas em homogêneas e heterogêneas, incluindo identificação de fases e componentes; (4) interpretação de situações do cotidiano envolvendo soluções, suspensões, emulsões, coloides e sistemas multifásicos (em nível conceitual); (5) propriedades físicas para caracterizar materiais (densidade, pontos de fusão/ebulição, solubilidade, condutividade, magnetismo, aspecto) e uso dessas propriedades para diferenciar substâncias e misturas; (6) transformações físicas (mudança de estado, dissolução, fragmentação, deformação) versus transformações químicas (combustão, oxidação, fermentação, decomposição, neutralização), com identificação por evidências (formação de gás, precipitado, mudança de cor/odor, liberação/absorção de energia); (7) conservação de massa em transformações e leitura de enunciados/experimentos simples relacionados; (8) métodos de separação de misturas e o princípio físico envolvido (filtração, decantação, centrifugação, destilação simples/fracionada, evaporação, cristalização, extração, separação magnética, peneiração, flotação, cromatografia em nível introdutório); (9) noções de pureza, impurezas e como a presença de impurezas altera propriedades (ex.: faixa de fusão/ebulição); (10) cálculos e interpretações simples ligados a misturas/soluções quando o foco é composição e separação (ex.: concentração comum, porcentagem em massa/volume, diluição básica), desde que não exija aprofundamento de estequiometria.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) estrutura atômica, tabela periódica, ligações químicas e geometria molecular (a menos que seja apenas suporte mínimo para dizer se é substância simples/composta); (2) reações químicas com foco em balanceamento, estequiometria, rendimento, reagente limitante, leis ponderais em profundidade; (3) termoquímica, cinética, equilíbrio químico, eletroquímica, radioatividade; (4) química orgânica (funções, nomenclatura, mecanismos) como tema central; (5) gases ideais, leis dos gases e cálculos de pressão/volume/temperatura como foco principal; (6) soluções em nível avançado (molaridade, molalidade, propriedades coligativas, pH/pOH, tampões) quando o objetivo é quantitativo/analítico; (7) técnicas instrumentais e análises laboratoriais avançadas (espectroscopia, titulação detalhada, cromatografia instrumental) como tema central; (8) mineralogia/metalurgia e processos industriais quando o foco é tecnológico e não a classificação de substâncias/misturas e suas transformações.",
+      "diferenciador": "O foco é reconhecer e classificar sistemas materiais (substâncias e misturas), descrever suas propriedades observáveis e explicar/identificar transformações físicas e químicas, incluindo como separar misturas com base em diferenças de propriedades, em um nível conceitual e experimental introdutório.",
+      "palavras_chave": [
+        "substância pura",
+        "mistura homogênea",
+        "mistura heterogênea",
+        "separação de misturas",
+        "transformação química"
+      ]
     },
     {
       "nome": "Química Orgânica: Conceitos Iniciais",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Introdução à Química Orgânica com ênfase nos conceitos fundamentais que definem e organizam o estudo dos compostos de carbono: características do átomo de carbono, ligações e estruturas, representação de moléculas orgânicas, classificação de cadeias carbônicas, identificação de funções orgânicas básicas e noções iniciais de nomenclatura e isomeria.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos introdutórios de Química Orgânica, como: definição e escopo de compostos orgânicos; tetravalência do carbono, catenação, hibridização (sp, sp2, sp3) e tipos de ligações (simples, dupla, tripla; sigma e pi) em nível conceitual; fórmulas e representações (molecular, estrutural, semidesenvolvida, condensada, bastão/linha, Lewis) e leitura/interpretação dessas representações; classificação de cadeias carbônicas (aberta/fechada, normal/ramificada, saturada/insaturada, homogênea/heterogênea, aromática/alifática, monocíclica/policíclica) e identificação de heteroátomos na cadeia; reconhecimento e identificação de funções orgânicas mais comuns em nível inicial (hidrocarbonetos, haletos orgânicos, álcoois, fenóis, éteres, aldeídos, cetonas, ácidos carboxílicos, ésteres, aminas, amidas) a partir de grupos funcionais; noções iniciais de nomenclatura (IUPAC e/ou usual) para cadeias simples e funções básicas, incluindo escolha da cadeia principal, numeração e radicais mais comuns; conceitos básicos de isomeria (constitucional/estrutural: cadeia, posição, função; e estereoisomeria introdutória como cis-trans/E-Z quando apresentada de forma elementar) e contagem/identificação de isômeros simples; propriedades gerais associadas à estrutura (polaridade, solubilidade, ponto de ebulição) apenas quando dependem diretamente de grupos funcionais e tipo de cadeia, sem aprofundar em mecanismos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: reações orgânicas e seus mecanismos (adição, substituição, eliminação, oxidação/redução orgânica, esterificação, saponificação, polimerização, halogenação, hidratação, etc.); química de hidrocarbonetos e aromáticos em nível reacional (benzeno e substituição eletrofílica aromática, orientação orto/meta/para); bioquímica (carboidratos, lipídios, proteínas, DNA) como tema central; polímeros e materiais (tipos, síntese, propriedades) em profundidade; termoquímica, cinética, equilíbrio, eletroquímica, soluções e estequiometria como foco principal; espectroscopia e técnicas analíticas (IV, RMN, MS, cromatografia); química ambiental/industrial aplicada; nomenclatura avançada (múltiplas funções complexas, estereoquímica avançada, regras CIP detalhadas) quando o objetivo não é introdutório; química inorgânica (ligações metálicas, complexos, sais) sem relação direta com conceitos orgânicos básicos.",
+      "diferenciador": "Foco em reconhecer, representar e classificar estruturas orgânicas (cadeias, ligações, grupos funcionais) e aplicar noções iniciais de nomenclatura e isomeria, sem exigir estudo de mecanismos de reação ou aplicações avançadas.",
+      "palavras_chave": [
+        "cadeia carbônica",
+        "grupo funcional",
+        "hibridização do carbono",
+        "nomenclatura IUPAC",
+        "isomeria"
+      ]
     },
     {
       "nome": "Soluções e Suas Unidades de Concentração",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de soluções (misturas homogêneas) com ênfase em como expressar, converter e calcular a concentração de solutos em diferentes unidades, incluindo preparo por diluição e interpretação de dados experimentais relacionados à concentração.",
+      "incluir_quando": "Classificar aqui quando a questão aborda definição e componentes de uma solução (soluto/solvente), cálculo de concentração e conversões entre unidades (molaridade, molalidade, normalidade, fração molar, porcentagens m/m, m/v, v/v, g/L, ppm, ppb), preparo de soluções a partir de soluto puro ou solução estoque, diluições (uso de C1V1=C2V2), mistura de soluções com diferentes concentrações, determinação de concentração a partir de massa, volume, densidade e pureza, uso de título/teor e concentração comum, e interpretação de rótulos/descrições de soluções (ex.: 0,9% m/v, 70% v/v, 1,0 mol/L).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de propriedades coligativas (tonoscopia, ebulioscopia, crioscopia, pressão osmótica) sem foco em unidades de concentração, solubilidade e curvas de solubilidade/saturação como tema central, equilíbrio químico em solução (pH, pOH, Ka, Kb, tampões, hidrólise, Kps) como foco principal, reações em solução e estequiometria de titulações/redox/precipitação sem ênfase em unidades de concentração, cinética e termodinâmica, eletroquímica, ou separação de misturas (destilação, extração) sem cálculos de concentração.",
+      "diferenciador": "O foco é quantificar 'quanto soluto há' em uma solução e expressar essa quantidade em unidades padronizadas, incluindo conversões e preparo/diluição, mais do que discutir solubilidade, equilíbrio ácido-base ou efeitos coligativos.",
+      "palavras_chave": [
+        "molaridade (mol/L)",
+        "molalidade (mol/kg)",
+        "diluição (C1V1=C2V2)",
+        "ppm/ppb",
+        "porcentagem m/m m/v v/v"
+      ]
     }
   ]
 }

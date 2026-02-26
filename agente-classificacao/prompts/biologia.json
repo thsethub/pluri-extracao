@@ -75,331 +75,577 @@
     },
     {
       "nome": "Verminoses",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das verminoses humanas (helmintíases): doenças causadas por vermes parasitas (nematódeos, cestódeos e trematódeos), abrangendo agentes etiológicos, ciclos de vida, formas de transmissão, hospedeiros, patogênese, sinais e sintomas, diagnóstico, tratamento e medidas de prevenção/saneamento.",
+      "incluir_quando": "Classificar aqui quando a questão aborda verminoses/helmintíases em humanos, incluindo: identificação do verme (nome popular ou científico) e seu grupo (nematódeo/cestódeo/trematódeo); ciclo biológico (fases, ovos/larvas, migração no corpo, autoinfecção), hospedeiro definitivo/intermediário e vetores/organismos envolvidos (caramujo, porco, boi etc.); vias de transmissão (fecal-oral, ingestão de carne crua/malcozida, penetração ativa pela pele, água contaminada); manifestações clínicas típicas (anemia, prurido anal, diarreia, dor abdominal, hepatosplenomegalia, obstrução intestinal, tosse na fase pulmonar, elefantíase, hematuria); métodos de diagnóstico (parasitológico de fezes, fita gomada, pesquisa de ovos/larvas, sorologia quando aplicável); tratamento/controle (anti-helmínticos como albendazol/mebendazol/praziquantel/ivermectina, desparasitação coletiva) e prevenção (saneamento básico, higiene, uso de calçados, cozimento adequado de carnes, controle de hospedeiros intermediários, educação em saúde).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: protozooses (amebíase, giardíase, malária, toxoplasmose, doença de Chagas, leishmaniose) sem foco em helmintos; infecções bacterianas/virais/fúngicas; ectoparasitoses (piolho, sarna/escabiose, bicho-de-pé) sem relação com vermes internos; conceitos gerais de parasitismo/ecologia sem aplicação a verminoses específicas; imunologia/hematologia/nutrição de forma ampla (ex.: anemia ferropriva) sem vínculo explícito com helmintos; saneamento básico e saúde pública de modo genérico sem menção a helmintíases; zoologia/anatomia de invertebrados (Platelmintos/Nematelmintos) apenas descritiva, sem contexto de doença, transmissão, diagnóstico ou prevenção.",
+      "diferenciador": "Foco em doenças causadas por helmintos (vermes) e seus ciclos/transmissão/prevenção, distinguindo-se de parasitoses por protozoários e de conteúdos de zoologia que não abordam a dimensão clínica/epidemiológica.",
+      "palavras_chave": [
+        "helmintíase",
+        "ascaridíase",
+        "esquistossomose",
+        "teníase",
+        "ancilostomíase"
+      ]
     },
     {
       "nome": "Grandes paisagens naturais",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo e caracterização das grandes paisagens naturais (biomas e domínios morfoclimáticos), relacionando clima, relevo, solo, hidrografia, vegetação e fauna, sua distribuição espacial e dinâmica natural, com ênfase em padrões globais e/ou do Brasil.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, descrição, comparação ou explicação de grandes paisagens naturais/biomas (ex.: Amazônia, Cerrado, Caatinga, Mata Atlântica, Pantanal, Pampa; tundra, taiga, savana, deserto, floresta temperada), incluindo: (1) fatores abióticos que as definem (clima, regime de chuvas, temperatura, latitude/altitude, relevo, tipos de solo, disponibilidade hídrica); (2) fisionomia e adaptações da vegetação (xeromorfismo, caducifólia, folhas coriáceas, estratificação, gramíneas, coníferas) e relações com fauna; (3) distribuição geográfica e transições (ecótonos, gradientes altitudinais/latitudinais, zonas climáticas); (4) processos naturais que mantêm/transformam a paisagem (fogo natural, sazonalidade, cheias, sucessão ecológica em escala de paisagem); (5) leitura/interpretação de mapas, climogramas e perfis de vegetação para reconhecer biomas/paisagens; (6) comparação entre paisagens quanto a produtividade, biodiversidade, ciclagem de nutrientes e limitações ambientais em escala regional.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) ecologia de populações/comunidades sem vínculo com biomas/paisagens (cadeias alimentares, dinâmica populacional, nicho) em nível local; (2) genética, evolução, citologia, fisiologia humana/animal, microbiologia ou botânica/zoologia sistemática sem relação com paisagens; (3) impactos ambientais e conservação como foco central (desmatamento, poluição, unidades de conservação, serviços ecossistêmicos, mudanças climáticas) a menos que a identificação/caracterização do bioma seja o núcleo da questão; (4) geologia/geomorfologia isolada (tectonismo, tipos de rochas) sem conexão com domínios/biomas; (5) agricultura, uso do solo, urbanização e economia regional como tema principal; (6) ciclos biogeoquímicos globais (carbono, nitrogênio) sem aplicação direta à diferenciação de paisagens naturais.",
+      "diferenciador": "O foco é reconhecer e explicar padrões em escala de paisagem/bioma (distribuição e características integradas de clima–solo–relevo–vegetação–fauna), e não processos biológicos em escala de organismo/população nem impactos antrópicos como tema central.",
+      "palavras_chave": [
+        "biomas",
+        "domínios morfoclimáticos",
+        "climograma",
+        "ecótono",
+        "fitofisionomia"
+      ]
     },
     {
       "nome": "Integração e coordenação nervosa e endócrina",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de como os sistemas nervoso e endócrino atuam de forma integrada para coordenar funções do organismo, mantendo a homeostase e regulando respostas rápidas (nervosas) e de longa duração (hormonais). Abrange organização e funcionamento do sistema nervoso (central, periférico e autônomo), transmissão do impulso nervoso e sinapses, reflexos e integração sensorial-motora, além de glândulas endócrinas, hormônios, mecanismos de ação hormonal, eixos hipotálamo-hipófise e retroalimentação (feedback). Inclui também a interface neuroendócrina e exemplos de regulação fisiológica (glicemia, temperatura, estresse, crescimento, reprodução, ritmos biológicos).",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) coordenação e integração de funções corporais por sistema nervoso e/ou endócrino; (2) neurônios, potenciais de ação, despolarização/repolarização, canais iônicos, mielina, condução saltatória; (3) sinapses químicas/elétricas, neurotransmissores, receptores, somação, inibição/excitação, plasticidade sináptica; (4) arcos reflexos, reflexos medulares, integração no SNC, vias aferentes/eferentes, controle motor e sensorial; (5) sistema nervoso autônomo (simpático/parassimpático), neurotransmissores autonômicos e efeitos em órgãos-alvo; (6) glândulas endócrinas (hipófise, tireoide, paratireoides, pâncreas endócrino, suprarrenais, gônadas, pineal) e seus hormônios; (7) mecanismos de ação hormonal (receptores de membrana vs intracelulares, segundos mensageiros, esteroides vs peptídicos), transporte no sangue e meia-vida; (8) eixos hormonais e regulação por feedback negativo/positivo (ex.: HPA, HPT, HPG), controle hipotalâmico e neuro-hipófise; (9) homeostase e regulação fisiológica mediada por nervos/hormônios (glicemia: insulina/glucagon; estresse: adrenalina/cortisol; osmolaridade: ADH; cálcio: PTH/calcitonina; metabolismo: T3/T4; crescimento: GH/IGF; lactação/parto: prolactina/ocitocina); (10) integração neuroendócrina e respostas coordenadas a estímulos internos/externos, incluindo ritmos circadianos e melatonina quando ligados à coordenação hormonal/nervosa.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) anatomia geral de órgãos sem foco em coordenação nervosa/endócrina (ex.: descrição de partes do encéfalo sem função integrativa, ou anatomia de glândulas sem regulação hormonal); (2) fisiologia de sistemas (digestório, respiratório, circulatório, excretor) quando a regulação nervosa/endócrina não é central na pergunta; (3) genética, biologia molecular, evolução, ecologia, microbiologia ou imunologia, exceto quando explicitamente conectadas a controle neuroendócrino (ex.: estresse e imunomodulação pode entrar se o foco for eixo HPA); (4) reprodução e desenvolvimento apenas descritivos (gametogênese, fecundação, embriologia) sem ênfase em controle hormonal/neural; (5) farmacologia/toxicologia como tema principal (drogas, anestésicos, psicotrópicos) quando não se pede mecanismo sináptico/hormonal; (6) doenças e patologias como foco exclusivo (diabetes, hipotireoidismo, Parkinson) se a questão não explorar mecanismos de regulação, feedback, neurotransmissão ou ação hormonal; (7) comportamento e psicologia em nível descritivo (emoções, aprendizagem) sem base neurofisiológica/neuroendócrina explícita.",
+      "diferenciador": "O foco principal é a regulação e coordenação do organismo por sinais elétricos (neurais) e químicos (hormonais), incluindo mecanismos de transmissão, integração e controle por feedback, especialmente na interface hipotálamo-hipófise e na manutenção da homeostase. Diferencia-se de módulos de 'fisiologia de sistemas' por priorizar os mecanismos de controle (nervoso/endócrino) e não apenas a função do órgão.",
+      "palavras_chave": [
+        "homeostase",
+        "potencial de ação",
+        "sinapse",
+        "hipotálamo-hipófise",
+        "feedback negativo"
+      ]
     },
     {
       "nome": "Biosfera e ação humana: soluções sustentáveis",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das interações entre a biosfera e as atividades humanas, com ênfase nos impactos ambientais (locais e globais) e nas estratégias, tecnologias e políticas de mitigação, adaptação e conservação orientadas à sustentabilidade. Inclui análise de uso de recursos naturais, mudanças no uso do solo, poluição, perda de biodiversidade e mudanças climáticas, bem como soluções sustentáveis em energia, produção, consumo, gestão de resíduos e conservação/restauração de ecossistemas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda impactos da ação humana sobre a biosfera e/ou propõe, avalia ou compara soluções sustentáveis. Exemplos de enfoques: (1) mitigação e adaptação às mudanças climáticas (redução de emissões, sequestro de carbono, resiliência de ecossistemas e cidades); (2) conservação da biodiversidade (unidades de conservação, corredores ecológicos, manejo sustentável, combate a espécies invasoras, proteção de serviços ecossistêmicos); (3) uso sustentável de recursos (água, solo, florestas, pesca, mineração) e limites planetários; (4) poluição e controle ambiental (ar, água, solo; eutrofização; agrotóxicos; microplásticos) com medidas de prevenção e remediação; (5) economia circular e gestão de resíduos (reduzir-reutilizar-reciclar, compostagem, logística reversa, tratamento de esgoto); (6) agricultura e alimentação sustentáveis (agroecologia, rotação de culturas, plantio direto, redução de desmatamento, pegada hídrica e de carbono); (7) transição energética e eficiência (energias renováveis, eficiência energética, mobilidade sustentável) e seus trade-offs ecológicos; (8) avaliação de impacto ambiental, licenciamento, indicadores de sustentabilidade, pegada ecológica/carbono e análise de ciclo de vida; (9) educação ambiental, governança, políticas públicas e acordos internacionais (ex.: metas de conservação, clima) quando conectados a resultados na biosfera; (10) restauração ecológica e soluções baseadas na natureza (reflorestamento, recuperação de matas ciliares, renaturalização de rios) e seus efeitos sobre biodiversidade e serviços ecossistêmicos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) ecologia básica sem relação com ação humana ou sustentabilidade (cadeias alimentares, nicho, sucessão ecológica) de forma puramente conceitual; (2) fisiologia, genética, evolução, citologia, histologia, anatomia ou microbiologia sem conexão com impactos ambientais/soluções sustentáveis; (3) biogeoquímica e ciclos (carbono, nitrogênio, água) apenas descritivos, sem discutir perturbações antrópicas e medidas de mitigação; (4) geologia, meteorologia ou química ambiental em nível físico-químico sem foco em biosfera e gestão/soluções; (5) saúde humana e epidemiologia sem vínculo com ambiente, poluição ou sustentabilidade; (6) tecnologia/engenharia de forma genérica (ex.: funcionamento de painéis solares) sem análise de impactos ecológicos, sustentabilidade ou tomada de decisão ambiental; (7) legislação ambiental como memorização de artigos/leis sem relação com conservação, impactos e estratégias sustentáveis.",
+      "diferenciador": "O foco central é a relação causa–impacto–solução: como atividades humanas alteram a biosfera e quais intervenções sustentáveis (tecnológicas, ecológicas, econômicas e políticas) reduzem danos, restauram ecossistemas e mantêm serviços ecossistêmicos, frequentemente com análise de trade-offs e indicadores.",
+      "palavras_chave": [
+        "sustentabilidade",
+        "impacto ambiental",
+        "conservação da biodiversidade",
+        "mudanças climáticas",
+        "economia circular"
+      ]
     },
     {
       "nome": "Material genético: estrutura e função",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do material genético (principalmente DNA e RNA) quanto à sua composição química, organização estrutural, propriedades e funções biológicas, incluindo como a informação genética é armazenada, copiada, expressa e regulada em diferentes níveis (molecular e cromossômico). Abrange também a relação entre genes, genoma e cromossomos, e como alterações no material genético podem impactar a função celular.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) Estrutura do DNA: nucleotídeos, açúcar-fosfato, bases nitrogenadas, pareamento complementar (A-T, C-G), ligações fosfodiéster e pontes de hidrogênio, antiparalelismo, dupla hélice, sulcos maior/menor, estabilidade e desnaturação/renaturação; (2) Estrutura e tipos de RNA: mRNA, tRNA, rRNA, snRNA/miRNA (quando o foco for função/estrutura do material genético), diferenças DNA x RNA (ribose/desoxirribose, uracila/timina, fita simples/dupla, estabilidade); (3) Organização do material genético: gene, alelo, locus, genoma, cromatina, nucleossomos, histonas, eucromatina/heterocromatina, cromossomos (incluindo centrômero, telômeros) e níveis de compactação; (4) Replicação do DNA: semiconservativa, origem de replicação, forquilha, helicase, primase, DNA polimerase, síntese 5'→3', fita líder e fita retardatária, fragmentos de Okazaki, ligase, proofreading, telomerase (conceito e função); (5) Fluxo de informação genética (dogma central) quando o foco for o papel do DNA/RNA como material informacional: transcrição (RNA polimerase, promotor, terminador, processamento de RNA em eucariotos como splicing, cap 5', cauda poli-A) e tradução (códon, anticódon, ribossomo) apenas na medida em que expliquem a função do material genético; (6) Código genético e relação gene→proteína quando a ênfase estiver em como a informação é codificada/armazenada e lida; (7) Mutação e alterações no material genético: mutações pontuais (substituição, inserção, deleção), frameshift, mutações cromossômicas (deleção, duplicação, inversão, translocação), efeitos sobre proteínas/expressão gênica; (8) Regulação e epigenética quando o foco for estrutura/estado do material genético: metilação do DNA, modificações de histonas, remodelamento de cromatina, silenciamento; (9) Comparações entre material genético em procariontes e eucariontes: cromossomo circular vs linear, plasmídeos, operons (se o foco for organização do DNA), introns/exons; (10) Técnicas e evidências relacionadas à estrutura/função do material genético quando cobradas conceitualmente: replicação in vitro (PCR em nível conceitual), eletroforese, sequenciamento, hibridização, DNA recombinante, desde que o núcleo da questão seja entender DNA/RNA como material genético.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Genética mendeliana e padrões de herança (leis de Mendel, cruzamentos, heredogramas, probabilidade, ligação gênica e mapas) sem foco molecular/estrutural do DNA/RNA; (2) Divisão celular (mitose, meiose, gametogênese, segregação cromossômica) quando o foco é ciclo celular e não a estrutura/função do material genético; (3) Biotecnologia aplicada e engenharia genética com ênfase em procedimentos/uso (transgênicos, clonagem, CRISPR, terapia gênica, OGM, bioética) sem exigir compreensão estrutural/funcional do material genético; (4) Evolução e genética de populações (seleção, deriva, Hardy-Weinberg) sem foco em mutação/estrutura do DNA como mecanismo molecular; (5) Síntese proteica e metabolismo celular como tema central (tradução detalhada, vias metabólicas, enzimas) quando o material genético aparece apenas como contexto; (6) Microbiologia/virologia com foco em ciclos de vida, patogenicidade ou imunologia, exceto quando a questão for sobre genoma viral, replicação/expressão do material genético; (7) Citologia geral (organelas, membranas) sem relação direta com DNA/RNA; (8) Ecologia e fisiologia; (9) Cariótipo e aneuploidias quando o foco é diagnóstico/condição clínica e não a organização/alteração do material genético em si (a menos que a questão explore o tipo de alteração cromossômica e seu efeito informacional).",
+      "diferenciador": "O foco é o DNA/RNA como suporte físico-químico da informação biológica: sua estrutura, organização, replicação e como a informação é armazenada, transmitida e pode ser alterada. Diferencia-se de genética clássica (padrões de herança) e de biotecnologia aplicada (técnicas/uso) por priorizar mecanismos e propriedades moleculares do material genético.",
+      "palavras_chave": [
+        "DNA",
+        "RNA",
+        "nucleotídeo",
+        "replicação",
+        "cromatina"
+      ]
     },
     {
       "nome": "Origem da vida",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das principais hipóteses e evidências científicas sobre como a vida surgiu na Terra, incluindo a evolução química (abiogênese), condições da Terra primitiva, síntese abiótica de moléculas orgânicas, formação de protocélulas, surgimento de sistemas de replicação e metabolismo, e a transição para os primeiros seres vivos, além do contexto histórico de teorias como biogênese e geração espontânea.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) hipóteses sobre a origem da vida (abiogênese/evolução química, panspermia, mundo do RNA, metabolismo primeiro, fontes hidrotermais, argilas/superfícies catalíticas); (2) condições ambientais da Terra primitiva (atmosfera redutora/oxidante, ausência de O2 livre, radiação UV, descargas elétricas, vulcanismo, oceanos primitivos) e como elas influenciam a síntese de compostos orgânicos; (3) experimentos e evidências relacionadas à síntese abiótica e formação de moléculas orgânicas (Miller-Urey e variações, meteoritos/condritos carbonáceos, síntese de aminoácidos, nucleotídeos, lipídios); (4) formação de estruturas pré-celulares (coacervados, microesferas de proteinoides, lipossomos/vesículas, protocélulas) e propriedades como compartimentalização e homeostase rudimentar; (5) origem de replicação e hereditariedade (RNA como material genético e catalisador, ribozimas, replicadores, código genético inicial) e origem de vias metabólicas primitivas; (6) distinção e debate histórico entre geração espontânea e biogênese, incluindo experimentos clássicos (Redi, Needham, Spallanzani, Pasteur) quando usados para discutir a origem da vida e a refutação da geração espontânea; (7) cronologia inicial da vida (primeiros procariontes, anaerobiose, quimiossíntese/fotossíntese primitiva) quando o foco é o surgimento da vida e não a evolução posterior.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) evolução biológica após o surgimento da vida (seleção natural, especiação, deriva genética, evidências evolutivas gerais) sem conexão direta com a origem; (2) origem e evolução de grupos específicos (eucariontes, multicelularidade, plantas/animais) quando o foco é posterior e não o aparecimento inicial da vida; (3) bioquímica e metabolismo celular em organismos atuais (respiração, fotossíntese, fermentação, síntese proteica) sem relação com hipóteses de origem; (4) citologia e organelas (teoria endossimbiótica, mitocôndrias, cloroplastos) quando não vinculadas ao tema de origem da vida; (5) ecologia, ciclos biogeoquímicos e origem da atmosfera/oxigenação (Grande Evento de Oxigenação) se o foco não for a transição inicial para a vida; (6) astrobiologia/vida extraterrestre em geral, exoplanetas e habitabilidade, exceto quando diretamente conectados à panspermia ou a modelos de origem; (7) história da ciência em geral (método científico, cientistas) sem relação com teorias/experimentos sobre origem da vida.",
+      "diferenciador": "Foco em processos pré-bióticos e hipóteses/experimentos que explicam a transição de química não viva para sistemas vivos (protocélulas, replicação e metabolismo iniciais), distinguindo-se de conteúdos de evolução biológica que pressupõem vida já existente.",
+      "palavras_chave": [
+        "abiogênese",
+        "evolução química",
+        "Miller-Urey",
+        "mundo do RNA",
+        "protocélulas"
+      ]
     },
     {
       "nome": "Relações ecológicas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das interações entre organismos em um ecossistema, incluindo relações intraespecíficas e interespecíficas, seus efeitos (positivos, negativos ou neutros) sobre os envolvidos, e as consequências ecológicas como competição por recursos, regulação populacional, coevolução e organização de comunidades.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, definição, comparação ou análise de interações ecológicas entre seres vivos, como: (1) relações intraespecíficas (entre indivíduos da mesma espécie) e interespecíficas (entre espécies diferentes); (2) efeitos da interação para cada participante (+/+, +/0, +/-, -/-, -/0, 0/0) e classificação em harmônicas/desarmônicas; (3) exemplos e mecanismos de mutualismo (obrigatório ou facultativo), protocooperação, comensalismo, inquilinismo, forésia, parasitismo, parasitoidismo, predação, herbivoria, competição, amensalismo/antibiose e neutralismo; (4) relações sociais como colônia, sociedade, gregarismo, hierarquia, territorialismo e cooperação; (5) consequências ecológicas das interações, como exclusão competitiva, partilha de nicho, controle biológico, dinâmica predador-presa, estratégias de defesa (mimetismo, aposematismo), e coevolução; (6) interpretação de situações-problema, gráficos ou textos que descrevam interações entre organismos e peçam a classificação do tipo de relação ou a previsão de efeitos populacionais.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) cadeias e teias alimentares, níveis tróficos, pirâmides ecológicas e fluxo de energia (a menos que o foco seja a interação específica como predação/herbivoria); (2) ciclos biogeoquímicos (água, carbono, nitrogênio, fósforo) e química ambiental; (3) sucessão ecológica, biomas, ecossistemas, habitats, fatores abióticos e clima como tema central; (4) dinâmica populacional quantitativa (crescimento exponencial/logístico, capacidade de suporte, curvas de sobrevivência) sem ênfase em interações entre espécies; (5) conservação, impactos ambientais, poluição, mudanças climáticas e manejo ambiental quando não centrados em relações entre organismos; (6) evolução e genética (seleção natural, deriva, especiação) quando não vinculadas explicitamente a coevolução/interações ecológicas; (7) microbiologia, doenças e imunologia em humanos/animais quando o foco não é a relação ecológica (ex.: patogênese sem discutir parasitismo como interação).",
+      "diferenciador": "O foco é classificar e explicar o tipo de interação entre organismos (quem se beneficia, quem é prejudicado e como), distinguindo relações intra/interespecíficas e seus efeitos ecológicos, em vez de tratar de energia, matéria, clima, sucessão ou modelos matemáticos de população como tema principal.",
+      "palavras_chave": [
+        "mutualismo",
+        "comensalismo",
+        "parasitismo",
+        "predação",
+        "competição"
+      ]
     },
     {
       "nome": "Evolução: evidências e teorias",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das bases conceituais da evolução biológica e das principais teorias explicativas, com ênfase nas evidências que sustentam a ancestralidade comum e a mudança das populações ao longo do tempo. Inclui mecanismos evolutivos (seleção natural, deriva genética, fluxo gênico, mutação, recombinação), modelos históricos (Lamarckismo, Darwinismo, Teoria Sintética/Neodarwinismo), processos de especiação e padrões macroevolutivos, além de métodos e linhas de evidência (fósseis, anatomia comparada, embriologia, biogeografia, genética/molecular, filogenias).",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) evidências de evolução e ancestralidade comum, como registro fóssil e datação relativa/absoluta aplicada a fósseis, formas transicionais, homologias e analogias, órgãos vestigiais, embriologia comparada, biogeografia (endemismo, ilhas, deriva continental), evidências moleculares (DNA, proteínas, pseudogenes, relógio molecular) e construção/interpretação de árvores filogenéticas (cladogramas, sinapomorfias, monofilia); (2) teorias e história do pensamento evolutivo: Lamarck (uso e desuso, herança de caracteres adquiridos), Darwin/Wallace (seleção natural, adaptação), Teoria Sintética (genética de populações, mutação e recombinação como fontes de variabilidade, seleção atuando sobre fenótipos), neutralismo/teoria neutra (ênfase em deriva e mutações neutras) quando conectados a evidências; (3) mecanismos evolutivos e suas consequências: seleção natural (direcional, estabilizadora, disruptiva), seleção sexual, deriva genética (efeito fundador, gargalo), fluxo gênico, mutação, recombinação, equilíbrio de Hardy-Weinberg e fatores que o rompem; (4) especiação e isolamento reprodutivo: alopátrica, simpátrica, parapátrica, mecanismos pré-zigóticos e pós-zigóticos, hibridização e poliploidia (especialmente em plantas), radiação adaptativa; (5) microevolução e macroevolução: adaptação, exaptação, convergência evolutiva, coevolução, seleção artificial como analogia/experimento, extinções e padrões de diversificação quando tratados sob perspectiva evolutiva; (6) interpretação de dados/experimentos clássicos ligados à evolução (ex.: resistência a antibióticos/inseticidas como seleção, melanismo industrial, seleção em tentilhões) e leitura de gráficos/tabelas de frequências alélicas ao longo do tempo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) genética mendeliana e herança (leis de Mendel, cruzamentos, heredogramas) sem conexão explícita com evolução, genética de populações ou Hardy-Weinberg; (2) taxonomia e sistemática apenas descritivas (regras de nomenclatura, categorias taxonômicas) sem filogenia/evidências evolutivas; (3) ecologia (cadeias alimentares, ciclos biogeoquímicos, dinâmica populacional ecológica) sem foco em mudança evolutiva/seleção; (4) origem da vida/abiogênese e evolução química (Oparin-Haldane, Miller-Urey) quando não vinculadas a evidências e teorias de evolução biológica; (5) fisiologia, anatomia ou embriologia humanas/animais como conteúdo funcional, sem uso como evidência comparativa de evolução; (6) biotecnologia e genética molecular aplicadas (PCR, clonagem, transgênicos) sem discussão de evidências moleculares/filogenia/variabilidade e mecanismos evolutivos; (7) paleontologia/geologia apenas como eras e períodos geológicos sem relação com evolução e evidências de ancestralidade.",
+      "diferenciador": "O foco central é explicar e justificar a mudança evolutiva e a ancestralidade comum por meio de evidências (fósseis, comparações anatômicas e moleculares, biogeografia, filogenias) e teorias/mecanismos (seleção, deriva, fluxo gênico, mutação, especiação), distinguindo-se de módulos que tratam apenas de herança genética, classificação biológica ou ecologia sem perspectiva evolutiva.",
+      "palavras_chave": [
+        "seleção natural",
+        "teoria sintética",
+        "homologia",
+        "registro fóssil",
+        "filogenia"
+      ]
     },
     {
       "nome": "Mono-hibridismo: Mendel e variações",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de herança monogênica (um único gene/um par de alelos) em cruzamentos mono-híbridos, com base nas leis de Mendel e em variações/padrões relacionados. Inclui análise de genótipos e fenótipos, dominância e recessividade, segregação de alelos, uso de quadros de Punnett, cálculo de proporções e probabilidades, e interpretação de resultados experimentais e pedigrees simples quando envolvem apenas um caráter.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cruzamentos envolvendo UM caráter (um gene), como: (1) aplicação da 1ª Lei de Mendel (Lei da Segregação) em cruzamentos AA x aa, Aa x Aa, Aa x aa, etc.; (2) determinação de genótipos/fenótipos de descendentes e proporções esperadas (3:1, 1:2:1, 1:1) e suas variações; (3) uso de quadro de Punnett, regra do produto/soma e probabilidade em mono-hibridismo; (4) teste-cruzamento (cruzamento-teste) para inferir genótipo de indivíduo com fenótipo dominante; (5) conceitos de alelos, homozigoto/heterozigoto, dominância completa e interpretação de resultados mendelianos para um único locus; (6) variações do padrão mendeliano ainda monogênicas, como dominância incompleta, codominância e alelos múltiplos (desde que a análise seja de um caráter por vez), incluindo proporções fenotípicas típicas (ex.: 1:2:1 em dominância incompleta/codominância); (7) herança ligada ao sexo quando tratada como um único gene (ex.: daltonismo/hemofilia) com cálculo de probabilidades e genótipos; (8) análise de heredogramas simples para um único caráter (autossômico dominante/recessivo ou ligado ao X) com inferência de genótipos e riscos; (9) comparação entre proporções teóricas e dados observados em cruzamentos mono-híbridos (incluindo noções básicas de desvio amostral/aleatoriedade, sem exigir estatística avançada).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) di-hibridismo ou poli-hibridismo (dois ou mais genes simultaneamente), incluindo 2ª Lei de Mendel (assortimento independente) e proporções como 9:3:3:1; (2) ligação gênica, recombinação, crossing-over e mapeamento genético; (3) epistasia e interações gênicas entre loci diferentes; (4) genética quantitativa/poligênica e herança multifatorial; (5) genética de populações (Hardy-Weinberg, frequências alélicas/genotípicas em populações); (6) mutações, cariótipo, aneuploidias, herança mitocondrial, imprinting, pleiotropia (quando o foco não é o cruzamento monogênico), ou regulação gênica; (7) biotecnologia (PCR, clonagem, transgênicos) e genética molecular (replicação, transcrição, tradução) sem análise de cruzamentos monogênicos; (8) problemas puramente de estatística/qui-quadrado em profundidade sem conexão central com mono-hibridismo.",
+      "diferenciador": "O foco é a previsão e interpretação de resultados hereditários para UM único caráter (um locus), usando a segregação mendeliana e suas variações monogênicas (dominância completa/incompleta, codominância, alelos múltiplos e, quando aplicável, ligação ao sexo) com proporções e probabilidades de descendência.",
+      "palavras_chave": [
+        "mono-hibridismo",
+        "1ª Lei de Mendel",
+        "segregação dos alelos",
+        "quadro de Punnett",
+        "teste-cruzamento"
+      ]
     },
     {
       "nome": "Reprodução",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos processos biológicos de formação de novos indivíduos, incluindo reprodução assexuada e sexuada, gametogênese, fecundação, desenvolvimento embrionário inicial, ciclos de vida e estratégias reprodutivas em animais, plantas e outros organismos, bem como regulação hormonal e aspectos de hereditariedade diretamente ligados ao ato reprodutivo.",
+      "incluir_quando": "Classificar aqui quando a questão aborda mecanismos, etapas, estruturas ou regulação da reprodução, como: reprodução sexuada vs. assexuada; mitose/meiose no contexto reprodutivo; formação de gametas (espermatogênese, ovogênese, microsporogênese, megasporogênese); fecundação (interna/externa), polinização e dupla fecundação em angiospermas; sistemas reprodutores e seus órgãos (testículos, ovários, útero, ovidutos, estames, carpelos, cones); ciclos reprodutivos (ciclo menstrual/estral), ovulação, espermiação; desenvolvimento embrionário inicial (clivagem, mórula, blástula, gástrula, folhetos embrionários) e anexos embrionários (âmnio, cório, alantoide, saco vitelínico, placenta); tipos de desenvolvimento (direto/indireto, metamorfose) quando ligados ao ciclo reprodutivo; estratégias reprodutivas (oviparidade, viviparidade, ovoviviparidade, cuidado parental, r/K, fecundidade); reprodução em plantas (alternância de gerações, gametófito/esporófito, esporos, sementes, frutos) e em fungos/protistas quando o foco é o processo reprodutivo; controle hormonal da reprodução (GnRH, FSH, LH, estrogênio, progesterona, testosterona, prolactina, ocitocina) e métodos contraceptivos/infertilidade quando centrados na fisiologia reprodutiva.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: genética mendeliana, ligação gênica, mutações, heredogramas e probabilidade (a menos que o foco seja gametas/meiose/fecundação); biotecnologia e engenharia genética (clonagem, transgênicos, PCR) sem ênfase no processo reprodutivo natural; ecologia de populações e dinâmica populacional (crescimento, capacidade de suporte) sem discutir estratégias reprodutivas; anatomia/fisiologia geral não reprodutiva (digestão, respiração, excreção, circulação, sistema nervoso) sem conexão com reprodução; embriologia avançada e organogênese detalhada (neurulação, formação de órgãos) quando desvinculada de reprodução/ciclo de vida; comportamento animal geral (territorialidade, comunicação) sem relação direta com acasalamento/cuidado parental; doenças e ISTs como tema central de patologia/epidemiologia (classificar aqui apenas se a pergunta for sobre impacto na reprodução ou funcionamento do sistema reprodutor); botânica geral (fotossíntese, transporte, tecidos vegetais) sem foco em flores, sementes, frutos e ciclos reprodutivos.",
+      "diferenciador": "O foco é a geração de descendentes e a continuidade do ciclo de vida: formação de gametas/esporos, encontro e fusão de gametas (ou multiplicação assexuada), estruturas reprodutivas e regulação hormonal, além do desenvolvimento embrionário inicial e estratégias reprodutivas.",
+      "palavras_chave": [
+        "meiose",
+        "gametogênese",
+        "fecundação",
+        "ciclo menstrual",
+        "alternância de gerações"
+      ]
     },
     {
       "nome": "Tecidos nervoso e muscular",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos tecidos nervoso e muscular em Biologia: composição celular e histológica, organização (neurônios, glia, fibras musculares), propriedades funcionais (excitabilidade, condução, contração), tipos (músculo esquelético, cardíaco e liso), mecanismos de comunicação e controle (sinapses, potencial de ação, junção neuromuscular), e relações com sistemas corporais (controle motor, reflexos, tônus, coordenação).",
+      "incluir_quando": "Classificar aqui quando a questão aborda estrutura, função, tipos, fisiologia básica e histologia do tecido nervoso e/ou muscular, incluindo: neurônios (dendritos, axônio, mielina, nódulos de Ranvier), células da glia (astrócitos, oligodendrócitos, células de Schwann, micróglia), sinapses (química/elétrica), neurotransmissores e transmissão sináptica, potencial de ação e potencial de repouso, condução saltatória, arco reflexo, integração nervosa básica; e no tecido muscular: sarcômero (actina, miosina, troponina, tropomiosina), teoria do deslizamento dos filamentos, acoplamento excitação-contração, papel do Ca2+ e do retículo sarcoplasmático, ATP na contração, tipos de fibras (I, IIa, IIx/IIb), diferenças entre músculo esquelético, cardíaco e liso (estriações, discos intercalares, controle voluntário/involuntário), junção neuromuscular (placa motora, acetilcolina), tônus muscular, fadiga, e identificação de tecidos em lâminas/imagens (características histológicas típicas).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: anatomia macroscópica do sistema nervoso (nomes e localização de lobos, nervos cranianos, tratos específicos) sem foco em tecido/histologia/fisiologia celular; órgãos dos sentidos e fisiologia sensorial detalhada (visão, audição, olfato) quando não centrada em neurônios/sinapses; endocrinologia e regulação hormonal (ex.: adrenalina, tiroxina) sem relação direta com contração muscular ou excitabilidade; bioquímica/metabolismo energético geral (glicólise, ciclo de Krebs) sem aplicação explícita à contração/fadiga; patologias e doenças (Parkinson, esclerose múltipla, miastenia gravis, distrofias) quando o foco é clínico/epidemiológico e não os mecanismos teciduais; desenvolvimento embrionário e histogênese (neurulação, miogênese) se não houver ênfase em características do tecido maduro; outros tecidos (epitelial, conjuntivo, sanguíneo) quando são o tema central; fisiologia cardiovascular/respiratória geral sem foco no músculo cardíaco como tecido (ex.: hemodinâmica).",
+      "diferenciador": "O foco distintivo é a compreensão tecidual e celular de como neurônios e fibras musculares funcionam (excitabilidade, condução e contração) e como sua organização histológica sustenta essas funções, incluindo sinapses e junção neuromuscular, mais do que anatomia de órgãos, clínica ou metabolismo geral.",
+      "palavras_chave": [
+        "neurônio",
+        "sinapse",
+        "potencial de ação",
+        "mielina",
+        "sarcômero"
+      ]
     },
     {
       "nome": "Fisiologia vegetal",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do funcionamento das plantas em nível de órgãos, tecidos, células e moléculas, incluindo processos de obtenção e uso de água, sais minerais e gases, produção e transporte de substâncias, regulação por hormônios e respostas a estímulos ambientais, bem como crescimento, desenvolvimento e reprodução sob a perspectiva funcional.",
+      "incluir_quando": "Classificar aqui quando a questão aborda processos fisiológicos de plantas, como: fotossíntese (fase clara/escura, fatores limitantes, pigmentos, C3/C4/CAM), respiração celular e balanço energético; relações hídricas (potencial hídrico, osmose, turgor, plasmólise, absorção de água, transpiração, estômatos, coesão-tensão, pressão radicular, gutação); nutrição mineral (macronutrientes/micronutrientes, deficiência mineral, absorção ativa/passiva, micorrizas, fixação biológica de nitrogênio, nodulação); transporte no xilema e floema (seiva bruta/elaborada, translocação, hipótese do fluxo de massa, fonte-dreno, anelamento); regulação e sinalização (fitormônios como auxina, giberelina, citocinina, etileno, ABA; tropismos e nastias; dominância apical; abscisão; dormência; germinação; senescência); crescimento e desenvolvimento (meristemas, alongamento celular, fotomorfogênese, vernalização, fotoperiodismo, floração); respostas a estresses (hídrico, salino, térmico, luminoso, patógenos) quando o foco for o mecanismo fisiológico; trocas gasosas e controle estomático; metabolismo secundário e defesas químicas quando tratados como respostas fisiológicas reguladas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: morfologia/anatomia vegetal descritiva (tipos de tecidos, estruturas de raiz/caule/folha sem relação funcional), taxonomia e sistemática de plantas, ecologia vegetal e interações em nível de comunidade/ecossistema (sucessão, biomas, dinâmica populacional) sem foco em mecanismos fisiológicos, genética e biologia molecular vegetal (herança, transgênicos, expressão gênica) quando não conectadas a processos fisiológicos, botânica econômica/agronomia (manejo, produtividade, adubação como prática) sem discutir mecanismos, reprodução e ciclos de vida apenas em termos de alternância de gerações/estruturas reprodutivas (mais ligado a botânica reprodutiva) sem ênfase em regulação hormonal/fisiológica, microbiologia/fitopatologia quando o foco for o agente e não a resposta fisiológica da planta, bioquímica geral (enzimas, vias metabólicas) sem contextualização em processos vegetais.",
+      "diferenciador": "Ênfase em COMO a planta funciona e se regula (processos, fluxos, balanços e sinalização) — especialmente transporte de água/solutos, fotossíntese/respiração e controle hormonal de crescimento e respostas — em contraste com módulos que descrevem estruturas, classificam organismos ou analisam relações ecológicas sem detalhar mecanismos fisiológicos.",
+      "palavras_chave": [
+        "fotossíntese",
+        "transpiração",
+        "xilema",
+        "floema",
+        "fitormônios"
+      ]
     },
     {
       "nome": "Sexo e herança",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de como o sexo é determinado e como características genéticas são herdadas quando os genes estão ligados aos cromossomos sexuais ou quando a expressão do fenótipo depende do sexo. Inclui padrões de herança ligados ao X e ao Y, herança influenciada/limitada ao sexo, compensação de dose, inativação do X, sistemas de determinação sexual e análise de heredogramas com foco em diferenças entre sexos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda determinação do sexo (XX/XY, ZZ/ZW, haplodiploidia, SRY, cromossomos sexuais, aneuploidias sexuais) e/ou padrões de herança associados ao sexo: herança ligada ao X (recessiva/dominante), herança ligada ao Y (holândrica), herança pseudoautossômica, herança mitocondrial com vieses por sexo quando explicitamente discutidos, compensação de dose e inativação do X (corpúsculo de Barr, mosaicismo), penetrância/expressividade dependentes do sexo, herança influenciada pelo sexo (autossômica com dominância diferente em machos e fêmeas) e herança limitada ao sexo (características expressas em apenas um sexo). Também incluir quando a questão pede identificação de genótipos/fenótipos por sexo, probabilidades de descendência considerando sexo, interpretação de heredogramas com foco em padrões ligados ao sexo, e exemplos clássicos (daltonismo, hemofilia, distrofia muscular de Duchenne, hipertricose auricular, calvície androgenética como influenciada pelo sexo, produção de leite como limitada ao sexo).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata apenas de herança mendeliana autossômica (monoibridismo/dihibridismo) sem relação com sexo; ligação gênica e mapeamento em autossomos sem referência a cromossomos sexuais; genética de populações (Hardy-Weinberg) sem componente ligado ao sexo; mutações, replicação, transcrição e tradução sem relação com determinação sexual ou herança ligada ao sexo; reprodução humana/animal (gametogênese, fecundação, ciclo menstrual) quando o foco é fisiologia e não padrões de herança; desenvolvimento embrionário e diferenciação sexual apenas anatômica/hormonal sem conexão com genética; biotecnologia (PCR, clonagem, transgênicos) sem discussão de herança ligada ao sexo; herança mitocondrial ou citoplasmática quando apresentada como padrão geral sem conexão com sexo/determinação sexual.",
+      "diferenciador": "O foco central é a interação entre genética e sexo: genes nos cromossomos sexuais e/ou expressão fenotípica dependente do sexo, com ênfase em padrões de transmissão diferentes entre homens e mulheres (ou machos e fêmeas) e em mecanismos de determinação sexual.",
+      "palavras_chave": [
+        "herança ligada ao X",
+        "herança ligada ao Y",
+        "determinação do sexo",
+        "inativação do X",
+        "herança influenciada pelo sexo"
+      ]
     },
     {
       "nome": "Imunidade",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do sistema imunológico e das respostas de defesa do organismo contra patógenos e substâncias estranhas, incluindo imunidade inata e adaptativa, células e órgãos linfoides, moléculas efetoras (anticorpos, citocinas, complemento), mecanismos de reconhecimento e eliminação, memória imunológica, vacinação e principais disfunções (alergias, autoimunidade, imunodeficiências, rejeição a transplantes).",
+      "incluir_quando": "Classificar aqui quando a questão aborda mecanismos de defesa do corpo (barreiras, inflamação, febre, fagocitose), componentes do sistema imune (leucócitos como neutrófilos, macrófagos, linfócitos B e T, células NK; órgãos como timo, baço, linfonodos, medula óssea), distinção entre imunidade inata e adaptativa, apresentação de antígenos e MHC, ativação e diferenciação de linfócitos (T CD4+, T CD8+, plasmócitos, células de memória), produção e função de anticorpos (IgM, IgG, IgA, IgE, IgD), resposta humoral e celular, citocinas e quimiocinas, sistema complemento, neutralização/opsonização/ADCC, imunização ativa e passiva, vacinas e soros, imunidade de rebanho, hipersensibilidades/alergias, doenças autoimunes, imunodeficiências (ex.: HIV/AIDS, SCID), imunologia de transplantes (rejeição, compatibilidade), imunoterapia (ex.: anticorpos monoclonais, checkpoint), e interpretação de situações clínicas/experimentais relacionadas à resposta imune.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de microbiologia (estrutura, reprodução e classificação de vírus, bactérias, fungos e protozoários) sem foco na resposta do hospedeiro; parasitologia e ciclos de vida de parasitas sem mecanismos imunes; genética e biologia molecular (replicação, transcrição, tradução, mutações) sem relação com reconhecimento imune/anticorpos; fisiologia geral (sangue, sistema linfático como drenagem, homeostase) sem função imunológica; farmacologia/antibióticos e resistência bacteriana sem imunidade; epidemiologia e saúde pública (incidência, prevalência, R0) quando não envolver vacinação/imunidade; biotecnologia (PCR, eletroforese, clonagem) sem aplicação imunológica; histologia de tecidos sem identificação de células/órgãos imunes e suas funções.",
+      "diferenciador": "O foco é a interação hospedeiro–agente estranho mediada pelo sistema imunológico: reconhecimento de antígenos, ativação de células e moléculas efetoras, geração de memória e consequências (proteção, vacinação ou disfunções como alergia/autoimunidade/imunodeficiência).",
+      "palavras_chave": [
+        "imunidade inata",
+        "imunidade adaptativa",
+        "anticorpos",
+        "linfócitos T e B",
+        "vacinas"
+      ]
     },
     {
       "nome": "Tecidos conjuntivos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos tecidos conjuntivos em animais (especialmente vertebrados), abrangendo origem embrionária (mesênquima/mesoderma), composição (células e matriz extracelular), tipos (conjuntivo propriamente dito, adiposo, cartilaginoso, ósseo e sanguíneo/hematopoético), funções (sustentação, preenchimento, defesa, nutrição, transporte, reserva energética, reparo/cicatrização) e suas características histológicas e funcionais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) definição e funções de tecido conjuntivo e sua distinção geral de epitelial, muscular e nervoso; (2) componentes da matriz extracelular (substância fundamental, fibras colágenas, elásticas e reticulares) e sua relação com propriedades mecânicas; (3) tipos celulares típicos (fibroblastos/fibrócitos, adipócitos, macrófagos, mastócitos, plasmócitos, leucócitos) e suas funções (síntese de matriz, fagocitose, inflamação, imunidade); (4) classificação do conjuntivo propriamente dito (frouxo/areolar, denso modelado e não modelado, reticular, elástico) e correlação com localização e função; (5) tecido adiposo (branco/unilocular e marrom/multilocular), termogênese, reserva energética e papel endócrino; (6) tecido cartilaginoso (hialino, elástico, fibrocartilagem), condrócitos/condroblastos, pericôndrio, avascularidade e nutrição por difusão; (7) tecido ósseo (compacto e esponjoso), osteoblastos/osteócitos/osteoclastos, matriz mineralizada, osteonas/sistemas de Havers, remodelação e ossificação (intramembranosa e endocondral); (8) sangue e tecido hematopoético como conjuntivo especializado (plasma, hemácias, leucócitos, plaquetas), hemostasia/coagulação em nível básico e funções de transporte/defesa; (9) processos de reparo tecidual envolvendo conjuntivo (cicatrização, formação de tecido de granulação, deposição de colágeno, fibrose) e inflamação no contexto do conjuntivo; (10) identificação de tecidos conjuntivos em lâminas/imagens por características como abundância de matriz, tipos de fibras, lacunas com condrócitos, osteócitos em lacunas, canais de Havers, adipócitos com grande vacúolo lipídico, presença de vasos e células imunes no estroma.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) tecido epitelial (revestimento, glândulas, polaridade, junções celulares, lâmina basal) sem foco no estroma/conjuntivo; (2) tecido muscular (contração, sarcômeros, tipos de músculo) ou tecido nervoso (neurônios, sinapses, glia) sem relação direta com conjuntivo; (3) fisiologia/imunologia sistêmica detalhada (respostas imunes adaptativas, anticorpos, vias de complemento) sem ancoragem em células do conjuntivo ou histologia; (4) anatomia de órgãos e sistemas (ex.: sistema esquelético, articulações, medula óssea) quando o foco é macroscópico/funcional e não histológico do tecido conjuntivo; (5) patologia específica (ex.: osteoporose, artrite reumatoide, tumores) quando cobrada como doença/diagnóstico clínico sem exigir conceitos de tecido conjuntivo; (6) bioquímica molecular aprofundada de colágeno/elastina (síntese, hidroxilação, mutações) quando o objetivo é bioquímica/genética e não histologia/classificação; (7) embriologia geral (folhetos embrionários, gastrulação) sem conexão direta com mesênquima e formação de conjuntivo; (8) hemodinâmica, fisiologia cardiovascular ou hematologia clínica (tipagem sanguínea, anemias, contagens) quando não se discute sangue como tecido conjuntivo e seus componentes básicos.",
+      "diferenciador": "Ênfase na matriz extracelular (fibras + substância fundamental) e na diversidade de células e tipos de conjuntivo (frouxo/denso, adiposo, cartilagem, osso, sangue), relacionando estrutura histológica com funções de sustentação, preenchimento, defesa, transporte e reparo — em contraste com módulos centrados em células justapostas (epitélio) ou em excitabilidade/contração (nervoso/muscular).",
+      "palavras_chave": [
+        "matriz extracelular",
+        "fibras colágenas",
+        "fibroblasto",
+        "cartilagem",
+        "tecido ósseo"
+      ]
     },
     {
       "nome": "Tecidos de revestimento",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos tecidos de revestimento (epitélios) em animais e plantas, abordando sua organização celular, tipos, especializações, localização, funções e relação com proteção, absorção, secreção, trocas e permeabilidade. Inclui epiderme vegetal e periderme (súber), bem como epitélio de revestimento e glandular em animais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, classificação, estrutura, funções ou exemplos de tecidos de revestimento, como: epitélio de revestimento (simples, estratificado, pseudoestratificado, de transição), tipos celulares (pavimentoso, cúbico, prismático/colunar), polaridade e membrana basal, junções celulares (oclusivas, aderentes, desmossomos, hemidesmossomos, gap), especializações apicais (microvilosidades, cílios, estereocílios), queratinização, renovação epitelial, permeabilidade e transporte (difusão, filtração, absorção), epitélio respiratório e intestinal, epitélio de transição (urotélio), epitélio glandular (exócrino/endócrino, unicelular/multicelular, modos de secreção merócrina/apócrina/holócrina), glândulas e seus ductos, e em plantas: epiderme, cutícula, estômatos, tricomas/pelos, rizoderme e pelos absorventes, periderme/súber, lenticelas e funções de proteção e controle de perda de água.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: tecidos conjuntivos (cartilagem, osso, sangue, adiposo, conjuntivo propriamente dito), tecido muscular, tecido nervoso, histologia de órgãos sem foco no revestimento (ex.: fisiologia renal/hepática sem ênfase no epitélio), processos patológicos gerais (câncer, inflamação) sem relação direta com epitélio, embriologia detalhada (folhetos germinativos) sem conexão com epitélios, tecidos vegetais de sustentação e condução (xilema, floema, colênquima, esclerênquima), meristemas, parênquimas, ou anatomia vegetal interna (córtex, cilindro vascular) quando o foco não é epiderme/periderme.",
+      "diferenciador": "Foco em tecidos que revestem superfícies e cavidades e formam barreiras seletivas e/ou secretoras, caracterizados por células justapostas com pouca matriz extracelular, polaridade e membrana basal (em animais) ou epiderme/periderme com estruturas como cutícula, estômatos e tricomas (em plantas).",
+      "palavras_chave": [
+        "epitélio",
+        "epiderme",
+        "membrana basal",
+        "microvilosidades",
+        "estômatos"
+      ]
     },
     {
       "nome": "Microorganismos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos seres microscópicos e entidades acelulares, sua diversidade (bactérias, arqueias, protozoários, algas microscópicas, fungos microscópicos e vírus), estrutura e funcionamento, reprodução e genética, metabolismo, ecologia e ciclos biogeoquímicos, relações com outros seres vivos (simbiose, patogenicidade), além de aplicações em saúde, indústria, biotecnologia e saneamento. Inclui noções de microbiologia (cultivo, esterilização, controle microbiano) e imunologia básica quando diretamente vinculadas a microrganismos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) identificação, classificação e características de microrganismos (bactérias, arqueias, vírus, protozoários, fungos microscópicos, algas unicelulares); (2) estrutura celular microbiana (parede celular, cápsula, flagelos, pili/fímbrias, plasmídeos, ribossomos 70S, endósporos) e diferenças entre procariontes e eucariontes microscópicos; (3) virologia básica (capsídeo, envelope, material genético, ciclo lítico/lisogênico, retrovírus, bacteriófagos) e distinção entre vírus e células; (4) reprodução e variabilidade genética microbiana (fissão binária, brotamento, esporulação, conjugação, transformação, transdução, recombinação, mutações, resistência a antibióticos); (5) metabolismo e crescimento microbiano (fermentação, respiração aeróbia/anaeróbia, quimiossíntese, fotossíntese em cianobactérias, curva de crescimento, fatores ambientais como pH/temperatura/oxigênio); (6) ecologia microbiana e ciclos biogeoquímicos (decomposição, fixação de nitrogênio, nitrificação, desnitrificação, microbiota, biofilmes, extremófilos); (7) microrganismos e saúde/doenças infecciosas (agentes etiológicos, vias de transmissão, prevenção, vacinas e soros quando relacionados ao patógeno, zoonoses, parasitoses por protozoários, micoses, bacterioses, viroses); (8) controle de microrganismos (assepsia, antissepsia, desinfecção, esterilização, pasteurização, antibióticos/antivirais/antifúngicos, resistência microbiana); (9) aplicações biotecnológicas e industriais (fermentação alcoólica/lática, produção de alimentos, enzimas, antibióticos, biorremediação, tratamento de esgoto, engenharia genética envolvendo microrganismos).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) zoologia, botânica ou anatomia/fisiologia de organismos macroscópicos sem foco microbiano; (2) genética, evolução ou biologia molecular em nível geral (DNA, RNA, síntese proteica, herança mendeliana) sem conexão explícita com microrganismos, vírus ou processos microbianos; (3) imunologia detalhada (respostas imunes, tipos celulares, anticorpos, inflamação) quando o foco não é o microrganismo/infecção específica; (4) ecologia geral (cadeias alimentares, biomas, populações) sem papel central de microrganismos em decomposição/ciclos; (5) bioquímica/metabolismo celular em geral (glicólise, Krebs, fotossíntese em plantas) sem contextualização microbiana (ex.: fermentação em leveduras, cianobactérias); (6) parasitologia de helmintos (vermes) e artrópodes vetores quando o foco é o animal e não o microrganismo causador; (7) saúde pública/epidemiologia e políticas sanitárias em nível macro sem conteúdo biológico sobre microrganismos; (8) biotecnologia que não envolva microrganismos (ex.: transgênicos vegetais/animais) a menos que o processo dependa de vetores microbianos (plasmídeos, vírus, bactérias).",
+      "diferenciador": "O foco principal é a biologia de seres microscópicos e entidades acelulares (especialmente bactérias, vírus, fungos e protozoários), incluindo sua estrutura, reprodução, metabolismo, ecologia, patogenicidade e controle/aplicações — distinguindo-se de ecologia, genética e fisiologia gerais por exigir que o microrganismo seja o objeto central da questão.",
+      "palavras_chave": [
+        "bactérias",
+        "vírus",
+        "protozoários",
+        "fungos",
+        "fermentação"
+      ]
     },
     {
       "nome": "Poli-hibridismo: Mendel e variações",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de herança envolvendo dois ou mais genes (poli-hibridismo), com base nas leis de Mendel e suas extensões: cruzamentos di-híbridos e tri-híbridos, segregação independente, cálculo de proporções genotípicas e fenotípicas, uso de probabilidade e análise combinatória, além de variações e exceções que alteram as proporções mendelianas (como ligação gênica, permutação/crossing-over, epistasia e interações gênicas).",
+      "incluir_quando": "Classificar aqui quando a questão aborda cruzamentos com dois ou mais caracteres (ex.: AaBb x AaBb; AaBbCc x AaBbCc), determinação de gametas possíveis e suas frequências, aplicação da 2ª Lei de Mendel (segregação/assortimento independente) e suas condições, uso de regra do produto e regra da soma para obter probabilidades em poli-hibridismo, construção/interpretação de quadros de Punnett para di/tri-hibridismo ou métodos alternativos (ramificações, probabilidades), cálculo de proporções clássicas (ex.: 9:3:3:1; 27:9:9:9:3:3:3:1) e suas variações, identificação de genótipos a partir de fenótipos em cruzamentos múltiplos, testcross (cruzamento-teste) aplicado a di/tri-híbridos, análise de herança independente versus genes ligados (desvio das proporções esperadas), problemas envolvendo recombinação (frequência de recombinantes, distância genética em cM) quando conectados a cruzamentos com múltiplos loci, e interações gênicas que modificam proporções em cruzamentos envolvendo mais de um gene (epistasia recessiva/dominante, genes complementares, duplicação gênica, interação aditiva) no contexto de proporções fenotípicas derivadas de cruzamentos poli-híbridos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata apenas de mono-hibridismo (um único gene/característica) sem extensão para múltiplos loci, herança ligada ao sexo (X/Y) como foco principal sem análise poli-híbrida, genética de populações (Hardy-Weinberg, frequências alélicas populacionais) sem cruzamentos mendelianos multi-locus, genética molecular (replicação, transcrição, tradução, mutações) sem relação com padrões de herança, cariótipo e aneuploidias (não-disjunção) sem conexão com proporções de cruzamentos multi-gênicos, heredogramas (pedigrees) focados em um único caráter sem combinação de múltiplos genes, e temas de biotecnologia (PCR, clonagem, transgênicos) sem aplicação direta a segregação independente/ligação gênica em cruzamentos.",
+      "diferenciador": "O foco é a análise de herança simultânea de múltiplos genes (di/tri-hibridismo e além), com ênfase em proporções e probabilidades mendelianas e nos desvios dessas proporções por interação gênica e/ou ligação gênica, distinguindo-se de módulos centrados em um único gene (mono-hibridismo) ou em genética de populações/molecular.",
+      "palavras_chave": [
+        "di-hibridismo",
+        "tri-hibridismo",
+        "segregação independente",
+        "9:3:3:1",
+        "ligação gênica"
+      ]
     },
     {
       "nome": "Divisão celular",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos processos pelos quais uma célula origina novas células, abrangendo o ciclo celular e os mecanismos de divisão (mitose e meiose), suas etapas, estruturas envolvidas, controle, variabilidade genética e consequências de erros na segregação cromossômica.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: ciclo celular (G1, S, G2, fase M), replicação do DNA como preparação para a divisão, mitose (prófase, prometáfase, metáfase, anáfase, telófase) e citocinese; meiose I e II (sinapse, crossing-over, quiasmas, segregação independente, redução cromossômica), formação de gametas/esporos, comparação mitose vs meiose (número de divisões, ploidia, variabilidade genética, produtos finais); estruturas e dinâmica cromossômica (cromátides-irmãs, centrômero, cinetócoro, fuso mitótico/meiótico, microtúbulos, polos/centrossomos, placa metafásica); checkpoints e regulação (ciclinas, CDKs, checkpoint G1/S, G2/M, checkpoint do fuso, APC/C) e relação com proliferação celular; erros e anomalias (não-disjunção, aneuploidias como trissomias/monossomias, poliploidia, mosaicismo), mutações relacionadas à divisão, e implicações em câncer; interpretação de cariótipos e esquemas de divisão celular quando o foco é segregação cromossômica; cálculos e raciocínios sobre número de cromossomos/cromátides ao longo das fases; questões sobre recombinação e variabilidade gerada pela meiose.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: genética mendeliana e padrões de herança (leis de Mendel, pedigree) sem foco no mecanismo meiótico; biologia molecular (replicação, transcrição, tradução) quando não conectada ao ciclo celular/divisão; reprodução e desenvolvimento (fecundação, embriogênese, gametogênese) se o foco não for a meiose/mitose; histologia e tecidos (renovação tecidual) sem detalhar etapas/controle da divisão; microbiologia com ênfase em fissão binária de procariontes e crescimento bacteriano (a menos que a questão compare explicitamente com mitose/meiose); biotecnologia (PCR, clonagem, CRISPR) sem relação direta com divisão celular; evolução/ecologia; metabolismo celular; estrutura de membranas e transporte; apoptose e senescência quando não vinculadas a checkpoints/controle do ciclo celular.",
+      "diferenciador": "Foco no mecanismo e na regulação da segregação cromossômica e da formação de células-filhas (mitose/meiose) ao longo do ciclo celular, incluindo etapas, estruturas do fuso, mudanças no número de cromossomos/cromátides e consequências de falhas (aneuploidias/câncer).",
+      "palavras_chave": [
+        "mitose",
+        "meiose",
+        "ciclo celular",
+        "fuso mitótico",
+        "não-disjunção"
+      ]
     },
     {
       "nome": "Genética de populações e evolução",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de como as frequências alélicas e genotípicas variam em populações ao longo do tempo e como processos evolutivos (seleção natural, deriva genética, fluxo gênico, mutação e acasalamento não aleatório) moldam a diversidade genética, a adaptação e a especiação. Inclui modelos e inferências como Equilíbrio de Hardy–Weinberg, medidas de variabilidade, estrutura populacional e evidências/mecanismos de evolução.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) Equilíbrio de Hardy–Weinberg: pressupostos, cálculo de p e q, frequências genotípicas esperadas (p², 2pq, q²), testes de desvio e interpretação de causas (seleção, migração, deriva, mutação, endogamia); (2) Mudanças evolutivas em frequências alélicas/genotípicas ao longo de gerações; (3) Forças evolutivas: seleção natural (direcional, estabilizadora, disruptiva), seleção sexual, seleção dependente de frequência, vantagem do heterozigoto, seleção contra recessivos, coeficiente de seleção/aptidão relativa; (4) Deriva genética: efeito fundador, gargalo populacional, tamanho efetivo populacional (Ne) e consequências (perda de variabilidade, fixação aleatória); (5) Fluxo gênico/migração e seus efeitos na homogeneização/diferenciação entre populações; (6) Mutação como fonte de novos alelos e equilíbrio mutação–seleção; (7) Acasalamento não aleatório: endogamia, exogamia, assortativo/disassortativo e efeitos em heterozigosidade; (8) Estrutura genética de populações: subpopulações, diferenciação (ex.: FST/índices de fixação), isolamento por distância, clinas, panmixia; (9) Medidas de diversidade genética: heterozigosidade, polimorfismo, riqueza alélica, frequência de haplótipos; (10) Especiação e macroevolução em conexão com genética populacional: isolamento reprodutivo pré/pós-zigótico, especiação alopátrica/simpátrica/parapátrica, reforço, hibridização, zonas híbridas; (11) Evidências e padrões evolutivos interpretados com base populacional: adaptação, seleção em populações naturais, relógio molecular/neutralismo quando ligado a variação populacional; (12) Aplicações: genética de conservação (perda de variabilidade, depressão endogâmica), resistência a antibióticos/pesticidas como evolução em tempo real, manejo de populações.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) Genética mendeliana clássica em nível de indivíduo/família (leis de Mendel, cruzamentos mono/di-híbridos, heredogramas) sem foco em frequências populacionais; (2) Genética molecular e expressão gênica (replicação, transcrição, tradução, regulação, operons, epigenética) sem conexão com variação em populações; (3) Biotecnologia e técnicas laboratoriais (PCR, eletroforese, clonagem, CRISPR) quando não usadas para inferir estrutura/variação populacional; (4) Citogenética e cariótipos (mitose/meiose, aneuploidias, rearranjos) sem discussão de efeitos em frequências alélicas/populacionais; (5) Ecologia de populações/comunidades (crescimento populacional, dinâmica predador-presa, nicho, sucessão) sem componente genético-evolutivo; (6) Sistemática/filogenia puramente classificatória (cladogramas, taxonomia) quando não aborda processos evolutivos e genética de populações; (7) Origem da vida e evolução química, ou história evolutiva descritiva sem mecanismos populacionais; (8) Fisiologia, anatomia, botânica/zoologia descritiva sem relação com seleção/variação genética.",
+      "diferenciador": "O foco central é a evolução como mudança nas frequências alélicas/genotípicas em populações e a quantificação/modelagem dessas mudanças (ex.: Hardy–Weinberg e forças evolutivas), distinguindo-se de genética individual (Mendel) e de biologia molecular por priorizar processos e padrões em nível populacional ao longo do tempo.",
+      "palavras_chave": [
+        "Hardy-Weinberg",
+        "frequência alélica",
+        "seleção natural",
+        "deriva genética",
+        "fluxo gênico"
+      ]
     },
     {
       "nome": "Morfologia e histologia vegetal",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da forma, organização externa e interna das plantas, abrangendo a anatomia e a histologia dos órgãos vegetais (raiz, caule, folha, flor, fruto e semente), os tecidos (meristemáticos e permanentes), sistemas de revestimento, fundamental e vascular, além de estruturas especializadas e adaptações anatômicas relacionadas à função.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: identificação, descrição, comparação ou função de órgãos vegetais (raiz, caule, folha, flor, fruto, semente) sob o ponto de vista morfológico/anatômico; tipos de raízes e caules (ex.: pivotante/fasciculada; rizoma, tubérculo, estolão, cladódio, bulbo) e suas características estruturais; morfologia foliar (limbo, pecíolo, bainha, nervação, filotaxia, estômatos, tricomas) e variações (folhas simples/compostas, modificações como espinhos, gavinhas, brácteas); organização tecidual e histológica (meristemas apicais e laterais, câmbio vascular, felogênio; parênquimas, colênquima, esclerênquima; xilema e floema; epiderme e periderme); crescimento primário e secundário e seus produtos (lenho, líber, anéis de crescimento, casca); anatomia de raiz/caule/folha em corte transversal/longitudinal, incluindo reconhecimento de camadas e feixes vasculares (colateral, bicolateral, concêntrico, radial) e diferenças entre monocotiledôneas e eudicotiledôneas; estruturas secretoras e de proteção (laticíferos, canais resiníferos, hidatódios, nectários, idioblastos, cristais como drusas/ráfides); anatomia reprodutiva quando o foco é estrutural (partes da flor, ovário, óvulo, tegumentos, endosperma, pericarpo) e não processos genéticos; adaptações anatômicas/morfológicas (xeromorfismo, suculência, aerênquima, pneumatóforos, raízes-escora, velame, estômatos afundados) relacionadas à função e ao ambiente; interpretação de imagens, lâminas, micrografias ou esquemas anatômicos/histológicos de plantas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: fisiologia vegetal (fotossíntese, respiração, transpiração como processo, hormônios e sinalização, nutrição mineral, transporte de seiva como mecanismo físico-químico sem foco anatômico); reprodução e genética vegetal com ênfase em ciclos, meiose, fecundação, herança, melhoramento, biotecnologia e transgenia (a menos que a pergunta seja sobre estrutura de órgãos/tecidos reprodutivos); taxonomia, sistemática e identificação de espécies baseada em filogenia (sem foco em anatomia/histologia); ecologia vegetal e interações (sucessão, biomas, relações planta-animal) sem abordagem anatômica; microbiologia/fitopatologia (doenças, patógenos) exceto quando a questão for sobre alterações anatômicas/tecidos afetados; citologia e biologia celular geral (organelas, mitose, membranas) sem conexão direta com tecidos/órgãos vegetais; bioquímica de metabólitos (pigmentos, lignina, celulose) quando o foco não é a localização/tecido/estrutura; anatomia comparada de animais ou histologia animal.",
+      "diferenciador": "O foco é a descrição e interpretação de estruturas vegetais em nível de órgão e tecido (morfologia externa e anatomia/histologia interna), frequentemente com reconhecimento de camadas e tipos celulares em cortes e esquemas, distinguindo-se de fisiologia por priorizar 'como é feito/organizado' em vez de 'como funciona em termos de processos'.",
+      "palavras_chave": [
+        "epiderme",
+        "xilema",
+        "floema",
+        "meristema",
+        "crescimento secundário"
+      ]
     },
     {
       "nome": "Classificação e diversidade dos seres vivos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da diversidade biológica e das formas de organizar, nomear e comparar os seres vivos, incluindo princípios de taxonomia e sistemática, categorias de classificação, regras de nomenclatura, critérios morfológicos e moleculares, e noções de filogenia para interpretar relações evolutivas entre grupos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, comparação ou organização de seres vivos em grupos (taxa) com base em características compartilhadas; uso de categorias taxonômicas (domínio, reino, filo/divisão, classe, ordem, família, gênero, espécie); nomenclatura binomial e regras básicas (gênero + epíteto específico, latim, itálico/sublinhado, autoria); conceitos de taxonomia, sistemática, classificação natural/artificial; construção/interpretação de cladogramas, árvores filogenéticas, ancestralidade comum, sinapomorfias, homologia vs analogia; critérios de classificação (morfologia, anatomia, embriologia, fisiologia, citologia, bioquímica, DNA/RNA, proteínas); distinção e caracterização de grandes grupos (procariontes vs eucariontes; unicelulares vs multicelulares; autotróficos vs heterotróficos) e sistemas amplos de classificação (3 domínios; reinos tradicionais e suas revisões); diversidade e características gerais de grupos como bactérias/arqueias, protistas, fungos, plantas e animais quando o foco é classificatório/diagnóstico; chaves dicotômicas, identificação taxonômica e critérios diagnósticos; conceitos de espécie (biológico, morfológico, filogenético) quando usados para delimitar e classificar organismos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de ecologia (cadeias alimentares, nicho, biomas, dinâmica populacional, relações ecológicas) sem foco em classificação; evolução em geral (seleção natural, deriva genética, especiação, evidências evolutivas) quando não envolve filogenia/cladística ou organização taxonômica; genética e biologia molecular (replicação, transcrição, tradução, mutações, engenharia genética) sem aplicação a sistemática/filogenia; fisiologia e anatomia detalhada de sistemas (digestório, respiratório, nervoso etc.) sem objetivo de comparar grupos para classificá-los; microbiologia clínica (doenças, patogenicidade, antibióticos) sem ênfase em taxonomia; botânica/zoologia descritiva focada em ciclos de vida, reprodução ou fisiologia sem enquadramento classificatório; conteúdos de citologia e bioquímica isolados (organelas, metabolismo) sem uso como critério de classificação; conservação e biodiversidade em termos de políticas/impactos ambientais sem discussão de categorias taxonômicas ou relações filogenéticas.",
+      "diferenciador": "O foco é organizar e nomear a diversidade dos seres vivos e inferir relações de parentesco (taxonomia/sistemática/filogenia), usando características diagnósticas e evidências (morfológicas e moleculares), e não explicar processos ecológicos, fisiológicos ou genéticos de forma independente.",
+      "palavras_chave": [
+        "taxonomia",
+        "sistemática",
+        "nomenclatura binomial",
+        "cladograma",
+        "filogenia"
+      ]
     },
     {
       "nome": "Ciência da vida",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos seres vivos e dos processos que caracterizam a vida, abrangendo organização biológica (do nível molecular ao ecológico), estrutura e função celular, genética e hereditariedade, evolução, diversidade biológica, fisiologia e homeostase, reprodução e desenvolvimento, interações ecológicas e fluxos de energia e matéria nos ecossistemas, além de métodos e evidências científicas aplicadas à Biologia.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos, processos ou evidências relacionados a seres vivos e sistemas biológicos, incluindo: (1) características da vida (metabolismo, homeostase, reprodução, adaptação, organização celular); (2) bioquímica e biologia molecular em contexto biológico (macromoléculas, enzimas, DNA/RNA, expressão gênica, metabolismo celular); (3) citologia e microbiologia (estrutura e função de organelas, membrana plasmática, transporte, ciclo celular, mitose/meiose, vírus, bactérias, protistas, fungos); (4) genética e biotecnologia (leis de Mendel, herança, mutações, recombinação, genética de populações, engenharia genética, PCR, clonagem, transgênicos, bioética em biotecnologia); (5) evolução e origem da diversidade (seleção natural, deriva genética, especiação, filogenia, evidências evolutivas, coevolução); (6) anatomia e fisiologia de organismos (sistemas do corpo, regulação hormonal e nervosa, imunidade, digestão, respiração, circulação, excreção, osmorregulação, fotossíntese e fisiologia vegetal); (7) reprodução e desenvolvimento (gametogênese, fecundação, embriologia, ciclos de vida, reprodução assexuada/sexuada, desenvolvimento e diferenciação); (8) ecologia (níveis de organização, cadeias e teias alimentares, pirâmides ecológicas, ciclos biogeoquímicos, dinâmica populacional, relações ecológicas, sucessão, biomas, conservação, impactos ambientais sobre seres vivos); (9) classificação e sistemática (taxonomia, nomenclatura, domínios e reinos, cladística); (10) interpretação de dados biológicos (gráficos/tabelas de crescimento populacional, heredogramas, resultados experimentais em biologia, estudos de campo e laboratório).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Química geral ou orgânica sem conexão explícita com processos biológicos (estequiometria, ligações, reações em geral); (2) Física (mecânica, eletricidade, óptica) sem aplicação direta a sistemas vivos; (3) Geociências/astronomia (rochas, tectônica, clima global, sistema solar) exceto quando o foco for ecologia/biomas/impactos sobre organismos; (4) Matemática/estatística pura sem contexto biológico; (5) Saúde pública, medicina clínica, farmacologia ou nutrição como prática/conduta (diagnóstico, tratamento, posologia) quando não estiverem sendo usados para avaliar conceitos biológicos (fisiologia, imunologia, microbiologia); (6) Tecnologia/engenharia sem biotecnologia (eletrônica, programação, materiais); (7) Questões ambientais exclusivamente legais, econômicas ou de políticas públicas sem conteúdo ecológico/biológico central; (8) História/filosofia da ciência sem foco em evidências e conceitos biológicos.",
+      "diferenciador": "O foco central é explicar e analisar fenômenos envolvendo seres vivos e sistemas biológicos (estrutura, função, herança, evolução e interações ecológicas), distinguindo-se de áreas que tratam de matéria/energia de forma não biológica (Física/Química) ou de aspectos sociais/clinicamente prescritivos (saúde pública/medicina) sem base conceitual de Biologia.",
+      "palavras_chave": [
+        "célula",
+        "DNA",
+        "evolução",
+        "homeostase",
+        "ecossistema"
+      ]
     },
     {
       "nome": "Embriologia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do desenvolvimento embrionário animal/humano desde a fecundação até a organogênese e o período fetal inicial, incluindo etapas, mecanismos celulares e moleculares, formação de folhetos embrionários, anexos embrionários, padrões de segmentação e gastrulação, neurulação, diferenciação e malformações congênitas básicas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda processos e etapas do desenvolvimento embrionário, como fecundação, clivagem/segmentação, mórula, blástula/blastocisto, implantação/nidação, gastrulação, formação de ectoderma/mesoderma/endoderma, neurulação, organogênese, dobramentos embrionários, diferenciação celular, indução embrionária, eixos corporais e padrões de desenvolvimento; quando trata de anexos embrionários (âmnio, cório, alantoide, saco vitelínico), placenta e membranas fetais; quando compara tipos de ovos e segmentação (holoblástica/meroblástica; radial/espiral; determinada/indeterminada), destino celular e mapas de destino; quando envolve desenvolvimento de sistemas/órgãos em fase embrionária (tubo neural, somitos, notocorda, crista neural, coração primitivo, arcos faríngeos) e noções de teratogênese e malformações relacionadas a falhas em etapas embrionárias; quando discute regulação do desenvolvimento (morfógenos, genes HOX, sinalização Wnt/SHH/BMP/FGF) no contexto embrionário.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de reprodução e fisiologia reprodutiva sem foco no desenvolvimento embrionário (ciclo menstrual, gametogênese isolada, espermatogênese/ovogênese sem ligação ao embrião, métodos contraceptivos); genética e hereditariedade sem relação com desenvolvimento (leis de Mendel, ligação gênica, mutações em geral); histologia e anatomia de tecidos/órgãos em estado adulto sem referência ao desenvolvimento; fisiologia geral (sistemas digestório, respiratório, endócrino) sem abordagem embriológica; evolução e filogenia sem foco em desenvolvimento; biologia celular/molecular geral (mitose, meiose, expressão gênica) quando não aplicada a eventos embrionários; botânica e desenvolvimento vegetal (embriogênese de plantas) se o currículo separar explicitamente embriologia animal/humana de embriologia vegetal; ecologia e microbiologia.",
+      "diferenciador": "Foco no 'como' estruturas e eixos do corpo se formam ao longo do tempo a partir do zigoto (sequência de eventos e mecanismos de diferenciação/indução), distinguindo-se de reprodução (formação de gametas e fecundação como fim em si) e de anatomia/fisiologia (funcionamento de estruturas já formadas).",
+      "palavras_chave": [
+        "fecundação",
+        "clivagem",
+        "gastrulação",
+        "neurulação",
+        "folhetos embrionários"
+      ]
     },
     {
       "nome": "Ecologia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações entre os seres vivos e o ambiente, incluindo níveis de organização (indivíduo a biosfera), fluxo de energia, ciclagem de matéria, dinâmica e estrutura de populações e comunidades, interações ecológicas, sucessão, biomas, impactos antrópicos e conservação da biodiversidade.",
+      "incluir_quando": "Classificar aqui quando a questão aborda relações organismo-ambiente; fatores bióticos e abióticos; habitat e nicho ecológico; níveis tróficos, cadeias e teias alimentares; pirâmides ecológicas (energia, biomassa, números) e produtividade primária/ secundária; ciclos biogeoquímicos (água, carbono, nitrogênio, fósforo) e decomposição; dinâmica populacional (crescimento exponencial/logístico, capacidade de suporte, densidade, natalidade, mortalidade, migração, estratégias r/K); estrutura e dinâmica de comunidades (diversidade, riqueza, equitabilidade, espécies-chave, dominância); interações ecológicas (competição, predação, herbivoria, parasitismo, mutualismo, comensalismo, amensalismo) e coevolução associada; sucessão ecológica (primária/secundária), clímax e distúrbios; biomas, ecossistemas, ecótonos, zonificação e distribuição de organismos; ecologia de paisagens (fragmentação, corredores ecológicos, efeito de borda); impactos ambientais (poluição, eutrofização, chuva ácida, aquecimento global, efeito estufa, ilhas de calor, desertificação, bioacumulação/biomagnificação); conservação e manejo (unidades de conservação, serviços ecossistêmicos, restauração ecológica, espécies invasoras, extinção, sustentabilidade).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de fisiologia (respiração celular, fotossíntese em nível bioquímico, homeostase), genética e hereditariedade (leis de Mendel, DNA, mutações), biologia molecular e bioquímica (enzimas, metabolismo detalhado), citologia e histologia (organelas, tecidos), anatomia e zoologia/botânica descritiva (morfologia e classificação sem enfoque ecológico), microbiologia clínica (patógenos e doenças) ou imunologia; evolução e sistemática quando o foco é filogenia/seleção natural sem conexão explícita com interações ecológicas; geologia/meteorologia/hidrologia puras (clima, relevo, ciclos físicos) sem relação com organismos e ecossistemas; educação ambiental normativa/legislação ambiental quando não envolve conceitos ecológicos (apenas leis, políticas, datas).",
+      "diferenciador": "Foco em interações e processos em sistemas biológicos em múltiplas escalas (populações, comunidades e ecossistemas), enfatizando fluxo de energia, ciclagem de matéria e relações biótico-abióticas, em vez de mecanismos internos do organismo ou herança genética.",
+      "palavras_chave": [
+        "ecossistema",
+        "cadeia alimentar",
+        "ciclos biogeoquímicos",
+        "sucessão ecológica",
+        "capacidade de suporte"
+      ]
     },
     {
       "nome": "Biosfera e ação humana: solo e resíduos sólidos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações entre biosfera e ação humana com foco em solo e resíduos sólidos: formação, propriedades e funções ecológicas do solo; impactos antrópicos (erosão, contaminação, compactação, salinização, desertificação); manejo e conservação do solo; geração, classificação, tratamento e destinação de resíduos sólidos (urbanos, industriais, agrícolas, de serviços de saúde, eletrônicos); políticas e práticas de gestão (redução, reutilização, reciclagem, compostagem, logística reversa, aterros, incineração) e seus efeitos ambientais e na saúde.",
+      "incluir_quando": "Classificar aqui quando a questão aborda solo e/ou resíduos sólidos no contexto da biosfera e da ação humana, incluindo: (1) processos de degradação do solo (erosão hídrica/eólica, assoreamento, perda de fertilidade, lixiviação, compactação, salinização, acidificação, desertificação) e suas causas (desmatamento, agricultura intensiva, sobrepastoreio, urbanização, mineração); (2) conservação e manejo do solo (plantio direto, terraceamento, curvas de nível, rotação de culturas, adubação verde, cobertura vegetal, reflorestamento, controle de voçorocas, recuperação de áreas degradadas, fitorremediação/bioremediação); (3) poluição/contaminação do solo por agrotóxicos, metais pesados, chorume, hidrocarbonetos, resíduos industriais e seus efeitos na biota, na água subterrânea e na saúde; (4) resíduos sólidos: conceitos (resíduo x rejeito), composição e caracterização, coleta seletiva, reciclagem, compostagem, biodigestão, aterro sanitário x lixão, incineração/coproc. térmico, tratamento de resíduos de saúde, e-lixo, microplásticos como resíduo persistente; (5) impactos ambientais da má gestão de resíduos (vetores, doenças, contaminação de solo e água, emissão de gases como metano, poluição visual, mortalidade de fauna) e medidas de mitigação; (6) instrumentos e práticas de gestão (3Rs/5Rs, economia circular, logística reversa, responsabilidade compartilhada, educação ambiental) quando aplicados especificamente a resíduos sólidos e seus efeitos no solo/ecossistemas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) poluição do ar, efeito estufa, chuva ácida, camada de ozônio, mudanças climáticas sem relação direta com solo ou resíduos sólidos; (2) poluição e tratamento de água/esgoto, eutrofização, potabilidade e saneamento básico focados em água, sem conexão com contaminação do solo ou disposição de resíduos; (3) ecologia geral (cadeias alimentares, nicho, sucessão ecológica, biomas) sem abordar impactos no solo ou gestão de resíduos; (4) ciclos biogeoquímicos (carbono, nitrogênio, fósforo) de forma abstrata, sem vínculo com fertilidade do solo, manejo agrícola ou resíduos; (5) genética, evolução, fisiologia, citologia, microbiologia clínica, zoologia/botânica descritiva sem interface com solo/resíduos; (6) agrotóxicos apenas sob ótica de toxicologia humana/alimentar, sem discutir contaminação do solo, persistência ambiental ou manejo; (7) resíduos líquidos (efluentes) e emissões gasosas como tema central, sem componente de resíduos sólidos ou solo.",
+      "diferenciador": "O foco distintivo é a interface entre ação humana e biosfera mediada pelo SOLO (como recurso/ecossistema e alvo de degradação/contaminação) e pela GESTÃO DE RESÍDUOS SÓLIDOS (geração, tratamento e destinação), enfatizando impactos ambientais e estratégias de mitigação/conservação.",
+      "palavras_chave": [
+        "erosão do solo",
+        "assoreamento",
+        "contaminação do solo",
+        "aterro sanitário",
+        "coleta seletiva"
+      ]
     },
     {
       "nome": "Compartimentos e processos celulares",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da organização interna da célula (compartimentos/organela e suas funções) e dos principais processos celulares que ocorrem nesses compartimentos, incluindo transporte através de membranas, tráfego intracelular, metabolismo energético, síntese e processamento de biomoléculas, comunicação e controle do ciclo celular.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) identificação, estrutura e função de organelas e compartimentos celulares (núcleo, nucléolo, ribossomos, RER/REL, complexo de Golgi, lisossomos, peroxissomos, mitocôndrias, cloroplastos, vacúolos, endossomos, citoesqueleto, centrossomo, membrana plasmática, parede celular); (2) compartimentalização e como ela organiza reações e vias metabólicas (ex.: respiração na mitocôndria, fotossíntese no cloroplasto, síntese proteica no RER, modificação/empacotamento no Golgi); (3) transporte de substâncias e dinâmica de membranas: difusão, osmose, transporte facilitado, transporte ativo (bombas, cotransporte), endocitose (fagocitose, pinocitose, mediada por receptor), exocitose, transcitose; (4) tráfego vesicular e endomembranas: formação de vesículas, fusão, direcionamento, secreção, via secretora e endocítica, reciclagem de membrana; (5) processamento e destino de proteínas e lipídios: tradução, translocação para organelas, sinalização de endereçamento (peptídeo sinal), dobramento, glicosilação, ubiquitinação e degradação (proteassoma/lisossomo); (6) processos de obtenção e uso de energia e matéria em nível celular: respiração celular (glicólise, ciclo de Krebs, cadeia transportadora de elétrons, fosforilação oxidativa), fermentação, fotossíntese (fase clara/escura), quimiosmose, ATP; (7) comunicação e regulação celular associadas a compartimentos: receptores de membrana, transdução de sinal, segundos mensageiros, controle do ciclo celular, checkpoints, mitose/meiose no contexto de organelas e citoesqueleto; (8) homeostase celular e manutenção: autofagia, apoptose (em nível de organelas/mitocôndria), estresse do retículo, detoxificação em peroxissomos, digestão intracelular em lisossomos; (9) comparações entre células procarióticas e eucarióticas e entre células animais/vegetais quando o foco é a presença/ausência e função de compartimentos e processos associados.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) genética e hereditariedade em nível de transmissão (leis de Mendel, cruzamentos, mapeamento genético) sem foco em processos celulares/compartimentos; (2) biologia molecular centrada em DNA/RNA (replicação, transcrição, tradução) apenas como dogma central abstrato, sem relação com organelas, endereçamento, RER/Golgi ou regulação celular; (3) histologia e anatomia de tecidos/órgãos (epitélios, sistemas do corpo) sem conexão direta com organelas e processos intracelulares; (4) ecologia, evolução, taxonomia e biodiversidade; (5) fisiologia de organismos (respiração, digestão, circulação) em escala sistêmica, sem detalhar mecanismos celulares de membrana/organela; (6) microbiologia focada em patogenicidade, imunologia, antibióticos ou ciclos virais, exceto quando a pergunta enfatiza entrada/saída celular, organelas ou tráfego intracelular; (7) bioquímica de macromoléculas (estrutura de proteínas, enzimas, lipídios, carboidratos) quando o foco não é onde/como ocorrem processos dentro da célula; (8) técnicas laboratoriais (microscopia, centrifugação, cultura celular) a menos que a questão seja sobre fracionamento/identificação de organelas e suas funções.",
+      "diferenciador": "O foco é a célula como sistema compartimentalizado: onde (em quais organelas/membranas) e como (por quais mecanismos de transporte e vias intracelulares) os processos essenciais acontecem, conectando estrutura de compartimentos à função e ao fluxo de matéria/energia dentro da célula.",
+      "palavras_chave": [
+        "organelas",
+        "membrana plasmática",
+        "transporte através de membranas",
+        "tráfego vesicular",
+        "respiração celular"
+      ]
     },
     {
       "nome": "Cordados",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do filo Chordata (Cordados), suas características diagnósticas, diversidade, classificação e aspectos de anatomia, fisiologia, desenvolvimento e evolução dos principais grupos (urocordados, cefalocordados e vertebrados), incluindofinalmente a comparação entre classes de vertebrados e suas adaptações.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, descrição, comparação ou aplicação de conceitos sobre cordados, incluindo: (1) características exclusivas/diagnósticas do filo (notocorda, tubo nervoso dorsal oco, fendas faringianas, endóstilo/ glândula tireoide, cauda pós-anal) em qualquer fase do ciclo de vida; (2) subfilos Urochordata/Tunicata, Cephalochordata e Vertebrata/Craniata, com exemplos e diferenças; (3) origem e destino embrionário de estruturas típicas (ex.: notocorda, crista neural, somitos) quando o foco é cordados/vertebrados; (4) anatomia e fisiologia comparada de vertebrados (tegumento, esqueleto axial/apendicular, circulação simples/dupla, coração com 2/3/4 câmaras, respiração branquial/pulmonar, excreção e osmorregulação, termorregulação ecto/endotermia) no contexto de classes de vertebrados; (5) evolução e transições em vertebrados (ex.: surgimento de mandíbulas, nadadeiras pares, pulmões, ovo amniótico, penas, pelos) e filogenia básica de cordados; (6) classificação e características de peixes (condrictes/osteíctes), anfíbios, répteis (incluindo aves) e mamíferos, com adaptações ao ambiente; (7) estruturas e sistemas típicos de vertebrados (crânio, coluna vertebral, arcadas branquiais, mandíbula, ouvido médio, membros) quando usados para reconhecer grupos de cordados; (8) questões com cladogramas, chaves de identificação, comparações de caracteres e exemplos de animais cordados (ascídias, anfioxo, lampreias, tubarões, peixes ósseos, sapos, lagartos, aves, mamíferos) em que o objetivo é inferir parentesco, características ou classificação dentro de Chordata.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) zoologia de invertebrados não cordados (poríferos, cnidários, platelmintos, nematódeos, anelídeos, moluscos, artrópodes, equinodermos) sem relação explícita com cordados; (2) embriologia geral (folhetos embrionários, gastrulação, neurulação) sem conexão direta com características/linhagens de cordados ou vertebrados; (3) anatomia/fisiologia humana isolada (sistemas do corpo humano) quando não há enfoque comparativo com outros vertebrados ou com características de cordados; (4) genética, evolução ou ecologia em nível geral (seleção natural, Hardy-Weinberg, cadeias alimentares, biomas) sem aplicação específica a cordados; (5) microbiologia, botânica ou citologia; (6) taxonomia/filogenia ampla de Metazoa sem detalhar Chordata ou sem usar caracteres diagnósticos de cordados; (7) temas de vertebrados tratados apenas como saúde, doenças, imunologia ou comportamento, sem vínculo com classificação, anatomia comparada ou características do filo.",
+      "diferenciador": "O foco principal é reconhecer e explicar o que define os cordados e como seus grupos (especialmente vertebrados) se diferenciam por caracteres anatômicos, fisiológicos e evolutivos (notocorda, tubo nervoso dorsal, fendas faringianas, cauda pós-anal e inovações como crânio, mandíbula e ovo amniótico), distinguindo-os de invertebrados e de abordagens não comparativas de biologia humana.",
+      "palavras_chave": [
+        "notocorda",
+        "tubo nervoso dorsal",
+        "fendas faringianas",
+        "urocordados",
+        "vertebrados"
+      ]
     },
     {
       "nome": "Fatores ecológicos abióticos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos componentes não vivos do ambiente (fatores físicos e químicos) e de como eles influenciam a sobrevivência, distribuição, abundância, desempenho fisiológico e adaptações de organismos e populações, incluindo limites de tolerância, estresse ambiental e variações espaciais/temporais desses fatores em ecossistemas terrestres e aquáticos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a influência de variáveis físicas/químicas do meio sobre seres vivos, populações ou comunidades, como: temperatura, luz (intensidade/fotoperíodo), água/umidade, salinidade, pH, oxigênio dissolvido, CO2, nutrientes minerais, tipo de solo (textura, porosidade, fertilidade), vento, pressão, altitude, radiação, turbidez, correntes, marés, profundidade, condutividade, clima e sazonalidade; quando envolve conceitos de tolerância ecológica (mínimo, máximo e ótimo), estenotermia/euritermia, estenohalinidade/euryhalinidade, estresse abiótico, aclimatação, adaptações fisiológicas/morfológicas relacionadas a fatores abióticos (ex.: xerofitismo, halófitas, termorregulação, osmorregulação); quando pede interpretação de gráficos/curvas de tolerância, nicho em relação a variáveis abióticas, ou efeitos de mudanças abióticas (secas, ondas de calor, geadas, acidificação, eutrofização como alteração química do meio) sobre organismos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de interações bióticas (predação, competição, parasitismo, mutualismo, comensalismo), dinâmica de populações por fatores dependentes da densidade, cadeias/teias alimentares e níveis tróficos, fluxo de energia e produtividade primária como tema central (sem foco no fator abiótico determinante), ciclos biogeoquímicos em abordagem ampla (carbono, nitrogênio, fósforo) sem ênfase no fator abiótico como condicionante imediato, sucessão ecológica e estrutura de comunidades como foco principal, conservação/impactos antrópicos em geral (desmatamento, caça, fragmentação) quando não centrados em variáveis abióticas específicas, ou conteúdos de fisiologia/biologia celular que não estejam contextualizados como resposta a estressores abióticos do ambiente.",
+      "diferenciador": "O foco é o papel de condições físicas e químicas do ambiente (não vivas) como limitantes e determinantes do desempenho e da distribuição dos organismos, enfatizando limites de tolerância e respostas/adaptações ao estresse abiótico, e não as relações entre seres vivos ou processos tróficos.",
+      "palavras_chave": [
+        "temperatura",
+        "luz/fotoperíodo",
+        "umidade/água",
+        "salinidade",
+        "pH"
+      ]
     },
     {
       "nome": "Biosfera e ação humana: hidrosfera",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da hidrosfera (águas superficiais, subterrâneas e atmosféricas) e das interações entre biosfera e ação humana, com ênfase em disponibilidade, qualidade da água, ciclo hidrológico, ecossistemas aquáticos e impactos antrópicos (poluição, uso, manejo e conservação). Inclui processos físicos, químicos e biológicos que determinam a dinâmica da água e suas consequências para a vida e para a sociedade.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) componentes da hidrosfera (rios, lagos, oceanos, aquíferos, águas subterrâneas, geleiras, umidade atmosférica) e sua relação com a biosfera; (2) ciclo da água/ciclo hidrológico (evaporação, condensação, precipitação, infiltração, escoamento superficial, recarga de aquíferos) e como atividades humanas o alteram (urbanização, desmatamento, barragens, irrigação); (3) qualidade da água e parâmetros/indicadores (pH, turbidez, oxigênio dissolvido, DBO/DQO, nutrientes como nitrato/fosfato, coliformes, salinidade) e efeitos sobre organismos; (4) poluição hídrica e fontes (esgoto doméstico, efluentes industriais, agrotóxicos, fertilizantes, mineração, derramamento de óleo, microplásticos) e seus impactos (eutrofização, mortandade de peixes, bioac_nameulação/biomagnificação, contaminação de aquíferos); (5) ecossistemas aquáticos e serviços ecossistêmicos (manguezais, estuários, recifes, zonas ripárias, wetlands) e conservação/restauração; (6) uso e gestão da água (captação, tratamento, reuso, dessalinização, saneamento básico, bacias hidrográficas, outorga, conflitos pelo uso, pegada hídrica) e medidas de mitigação/adaptação; (7) eventos e riscos relacionados à água com componente antrópico (enchentes por impermeabilização, assoreamento, escassez hídrica, intrusão salina, contaminação por nitrato/arsênio) e estratégias de prevenção; (8) relações entre água e saúde/biologia (doenças de veiculação hídrica, proliferação de vetores em água parada, impacto de contaminantes em cadeias alimentares aquáticas).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) atmosfera e clima em geral sem foco em água (efeito estufa, circulação atmosférica) exceto quando ligado diretamente ao ciclo hidrológico/recursos hídricos; (2) geologia/solo sem relação com água (tectônica, tipos de rochas) ou pedologia sem infiltração/erosão/assoreamento; (3) ecologia terrestre e biomas terrestres sem componente hídrico relevante (cadeias alimentares em florestas, savanas) a menos que envolva bacias, rios, zonas úmidas ou disponibilidade de água; (4) oceanografia física/química avançada sem conexão com impactos humanos/biologia (correntes oceânicas apenas descritivas) salvo quando relacionada a poluição, pesca, acidificação, zonas mortas; (5) genética, fisiologia, citologia, evolução ou microbiologia sem vínculo com água/ambientes aquáticos/contaminação; (6) gestão ambiental ampla (resíduos sólidos, poluição do ar) sem interface com recursos hídricos; (7) energia e combustíveis (hidrelétricas podem entrar apenas se o foco for impacto em rios/ecossistemas/qualidade/fluxo de água; se for engenharia/produção energética, não).",
+      "diferenciador": "O foco central é a água como componente ambiental (hidrosfera) e como meio/condicionante da vida, analisando como ações humanas alteram quantidade, qualidade e dinâmica hídrica e como isso repercute em ecossistemas aquáticos, saúde e gestão de recursos hídricos.",
+      "palavras_chave": [
+        "hidrosfera",
+        "ciclo hidrológico",
+        "qualidade da água",
+        "poluição hídrica",
+        "eutrofização"
+      ]
     },
     {
       "nome": "Ligações gênica e mapa cromossômico",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da herança de genes localizados no mesmo cromossomo (ligação gênica), sua relação com a recombinação por crossing-over na meiose e o uso de frequências de recombinação para estimar distâncias genéticas e construir mapas cromossômicos (mapas de ligação), incluindo análise de testcross e interferência/coeficiente de coincidência.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) genes ligados vs. segregação independente; (2) identificação de ligação gênica a partir de proporções fenotípicas/genotípicas desviando de 9:3:3:1 ou 1:1:1:1; (3) crossing-over e recombinação entre loci no mesmo cromossomo; (4) cálculo de frequência de recombinação (recombinantes/total) e conversão em distância genética (centiMorgan, unidade de mapa); (5) determinação de ordem gênica e distâncias relativas usando cruzamento-teste (testcross) e análise de descendentes; (6) mapeamento com dois ou três pontos (two-point/three-point testcross), identificação de classes parentais, recombinantes simples e duplos; (7) cálculo de interferência, coeficiente de coincidência e expectativa de duplo crossing-over; (8) interpretação de mapas de ligação e limitações (ex.: subestimação por múltiplos crossing-overs, máximo ~50% de recombinação); (9) distinção entre ligação completa e incompleta e seus efeitos nas proporções de descendentes.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) genética mendeliana básica sem ligação (leis de Mendel, segregação independente em genes não ligados) sem menção a recombinação/ligação; (2) herança ligada ao sexo (X/Y) como foco principal, a menos que o problema seja especificamente de mapeamento/ligação no cromossomo sexual; (3) recombinação em nível molecular (recombinação homóloga, reparo de DNA, recombinação em bactérias) sem uso de frequência de recombinação para mapear genes; (4) mapeamento físico/genômico (pares de bases, sequenciamento, marcadores moleculares e mapas físicos) sem enfoque em mapa de ligação por recombinação; (5) mutações, epistasia, pleiotropia, penetrância/expressividade e interação gênica como tema central sem análise de ligação; (6) citogenética estrutural (inversões, translocações) exceto quando explicitamente conectada a supressão de recombinação e interpretação de mapas; (7) linkage disequilibrium em genética de populações/associação genômica (GWAS) sem construção de mapa de ligação por cruzamentos.",
+      "diferenciador": "O foco distintivo é usar a recombinação (crossing-over) para inferir proximidade e ordem de genes no mesmo cromossomo, quantificando distâncias em unidades de mapa (cM) e construindo/interpretando mapas de ligação a partir de dados de cruzamentos (especialmente testcross e análise de recombinantes, incluindo duplos crossing-overs e interferência).",
+      "palavras_chave": [
+        "ligação gênica",
+        "frequência de recombinação",
+        "crossing-over",
+        "mapa de ligação",
+        "centiMorgan"
+      ]
     },
     {
       "nome": "Grupos vegetais",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da diversidade e classificação dos principais grupos de plantas (e organismos tradicionalmente tratados como vegetais em contextos escolares), comparando características morfológicas, anatômicas, reprodutivas e evolutivas: briófitas, pteridófitas, gimnospermas e angiospermas, incluindo adaptações ao ambiente terrestre, presença de vasos condutores, sementes, flores e frutos, alternância de gerações e ciclos reprodutivos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, comparação ou classificação de grupos vegetais (briófitas, pteridófitas, gimnospermas, angiospermas) com base em critérios como: presença/ausência de tecidos vasculares (xilema e floema), sementes, flores, frutos, esporos; dominância de gametófito ou esporófito; dependência de água para fecundação; estruturas reprodutivas (anterídios, arquegônios, estróbilos/cones, flores); tipos de esporos (homosporia/heterosporia); características gerais e exemplos típicos (musgos, samambaias, pinheiros, plantas com flor); tendências evolutivas e adaptações à vida terrestre (cutícula, estômatos, vasos, pólen, tubo polínico, semente, fruto).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: fisiologia vegetal (fotossíntese, respiração, transpiração, hormônios, transporte de seiva em detalhe), anatomia/tecidos vegetais de forma isolada (meristemas, parênquimas, colênquima, esclerênquima) sem foco em grupos, ecologia de plantas (sucessão, biomas, interações ecológicas) sem comparação entre grupos, genética/evolução em geral sem recorte para grupos vegetais, taxonomia botânica avançada (famílias, gêneros, nomenclatura binomial detalhada) além do nível de grandes grupos, microbiologia/algas/fungos quando o foco não é a comparação com os grandes grupos de plantas terrestres, ou reprodução de angiospermas em nível muito específico (dupla fecundação, desenvolvimento do endosperma) quando o objetivo não é diferenciar grupos vegetais.",
+      "diferenciador": "O foco é distinguir e classificar grandes grupos vegetais por características evolutivas e reprodutivas (vasos, esporos, sementes, pólen, flores e frutos) e pela alternância de gerações, em vez de processos fisiológicos ou ecologia.",
+      "palavras_chave": [
+        "briófitas",
+        "pteridófitas",
+        "gimnospermas",
+        "angiospermas",
+        "alternância de gerações"
+      ]
     },
     {
       "nome": "Digestão e respiração",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos processos biológicos de obtenção de energia e matéria a partir dos alimentos e do oxigênio, incluindo digestão (mecânica e química), absorção e assimilação de nutrientes, e respiração (trocas gasosas, transporte de gases e respiração celular), com ênfase em estruturas, funções, etapas, enzimas, regulação e integração entre sistemas digestório e respiratório.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) Sistema digestório: órgãos e suas funções (boca, dentes, língua, glândulas salivares, faringe, esôfago, estômago, fígado, vesícula biliar, pâncreas, intestino delgado e grosso, reto/ânus); processos de ingestão, mastigação, deglutição, peristaltismo; digestão mecânica vs química; sucos digestivos e enzimas (amilase salivar/pancreática, pepsina, tripsina/quimotripsina, lipase, lactase, maltase, sacarase, peptidases), bile e emulsificação de gorduras; pH e sua influência na atividade enzimática; absorção de nutrientes (vilosidades/microvilosidades, capilares sanguíneos e vasos quilíferos/linfáticos), destino metabólico de carboidratos, lipídios e proteínas; microbiota intestinal e funções básicas; regulação hormonal e nervosa da digestão (gastrina, secretina, CCK, insulina/glucagon quando relacionados ao destino de nutrientes); distúrbios diretamente ligados à digestão/absorção (intolerância à lactose, doença celíaca, úlcera, refluxo, diarreia/constipação, desidratação por perda de água no intestino, hepatite/colestase quando relacionadas à bile/digestão). (2) Sistema respiratório: anatomia e função (cavidade nasal, faringe, laringe, traqueia, brônquios, bronquíolos, alvéolos, pleuras, diafragma e músculos intercostais); ventilação pulmonar (inspiração/expiração, volumes e capacidades quando cobrados conceitualmente), mecânica da respiração e pressão; trocas gasosas e difusão (gradientes de O2/CO2, superfície alveolar, espessura da membrana, ventilação-perfusão em nível introdutório); transporte de gases no sangue (hemoglobina, oxiemoglobina, bicarbonato, efeito Bohr em nível escolar); controle da respiração (centros bulbares, quimiorreceptores, CO2/pH como estímulo principal); respiração celular e produção de ATP (glicólise, ciclo de Krebs, cadeia transportadora de elétrons/fosforilação oxidativa, fermentação como alternativa anaeróbia), relação entre consumo de O2, liberação de CO2 e energia; integração digestão–respiração–circulação no fornecimento de substratos e oxigênio para o metabolismo; impactos de exercício físico no consumo de O2, ventilação e uso de nutrientes; doenças respiratórias e efeitos fisiológicos (asma, bronquite, pneumonia, enfisema/DPOC, tabagismo) quando o foco é troca gasosa/ventilação/transportes de gases.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) Circulação/hematologia como tema central (pressão arterial, tipos sanguíneos, coagulação, imunidade do sangue) sem relação direta com transporte de gases ou absorção de nutrientes. (2) Excreção/urinário (rim, néfron, osmorreulação) sem conexão com equilíbrio ácido-base ligado à respiração ou com água absorvida no intestino. (3) Nutrição e dietas apenas do ponto de vista de pirâmide alimentar, calorias, vitaminas/minerais e saúde pública, sem abordar digestão/absorção/metabolismo energético. (4) Fotossíntese e fisiologia vegetal (trocas gasosas em estômatos, respiração em plantas) quando o foco é botânica/ecologia e não respiração celular em geral. (5) Bioquímica geral (enzimas, pH, ATP) de forma abstrata, sem aplicação explícita a digestão, trocas gasosas ou respiração celular. (6) Sistema endócrino (insulina, glucagon, tireoide, adrenal) como tema principal, quando não estiver articulado ao destino de nutrientes pós-absorção ou ao metabolismo energético. (7) Imunologia/inflamação e microbiologia (infecções, vacinas, patógenos) sem foco funcional em digestão/respiração. (8) Anatomia geral do corpo humano sem ênfase funcional nos processos digestivos ou respiratórios.",
+      "diferenciador": "Foco nos processos de transformação e obtenção de energia: digestão e absorção de nutrientes + trocas gasosas e respiração celular (produção de ATP), incluindo a integração funcional entre sistemas para sustentar o metabolismo.",
+      "palavras_chave": [
+        "digestão",
+        "enzimas digestivas",
+        "absorção intestinal",
+        "trocas gasosas",
+        "respiração celular"
+      ]
     },
     {
       "nome": "Biotecnologia e Engenharia Genética",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos princípios, técnicas e aplicações da biotecnologia e da engenharia genética, incluindo manipulação de DNA/RNA, modificação de organismos, produção de moléculas de interesse (proteínas, enzimas, vacinas), diagnóstico molecular, biofármacos, organismos geneticamente modificados e aspectos de biossegurança e bioética relacionados.",
+      "incluir_quando": "Classificar aqui quando a questão aborda técnicas de manipulação genética (DNA recombinante, clonagem molecular, vetores plasmidiais/virais, enzimas de restrição, ligase, transformação/transfecção, seleção por marcadores), amplificação e análise de ácidos nucleicos (PCR, RT-PCR, qPCR, eletroforese, sequenciamento, genotipagem), edição gênica (CRISPR-Cas, TALENs, ZFNs) e seus usos; produção biotecnológica (insulina recombinante, hormônios, anticorpos monoclonais, vacinas recombinantes, enzimas industriais, fermentação aplicada e biorreatores quando o foco é produto/processo biotecnológico); transgênicos/OGMs (plantas Bt, resistência a herbicidas, biofortificação, animais transgênicos) e avaliação de riscos/benefícios; terapia gênica, vetores e estratégias (in vivo/ex vivo), medicina personalizada e farmacogenômica quando centradas em ferramentas genéticas; diagnóstico e rastreio molecular (testes de DNA, identificação forense, paternidade, detecção de patógenos por métodos moleculares); biologia sintética (circuitos genéticos, chassis, construção de genes) e aplicações; biossegurança, regulamentação, rotulagem, propriedade intelectual (patentes) e bioética (uso de embriões, edição germinativa, privacidade genética) quando conectadas diretamente a intervenções biotecnológicas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de genética clássica (leis de Mendel, heredogramas, linkage e recombinação em nível de cruzamentos) sem técnicas de engenharia; biologia molecular básica (replicação, transcrição, tradução, código genético) apenas conceitual, sem aplicação tecnológica; evolução e seleção natural (incluindo fluxo gênico e deriva) sem relação com biotecnologia; ecologia e impactos ambientais gerais sem foco em OGMs/biotecnologia; microbiologia/fermentação apenas como metabolismo e crescimento microbiano, sem contexto de produção biotecnológica ou engenharia; imunologia e vacinas apenas do ponto de vista fisiológico/imunológico, sem plataformas recombinantes ou produção biotecnológica; anatomia, fisiologia e saúde pública sem diagnóstico molecular/terapia gênica; bioquímica de enzimas e vias metabólicas sem aplicação em processos biotecnológicos; citogenética (cariótipo, aneuploidias) quando não envolve testes moleculares/engenharia genética.",
+      "diferenciador": "O foco é a aplicação de ferramentas e processos para manipular material genético e sistemas biológicos com finalidade prática (produção, diagnóstico, modificação/edição, terapia), distinguindo-se de genética e biologia molecular 'fundamentais' por enfatizar técnicas, protocolos, produtos e implicações ético-regulatórias da intervenção.",
+      "palavras_chave": [
+        "DNA recombinante",
+        "PCR",
+        "CRISPR-Cas9",
+        "transgênicos (OGM)",
+        "terapia gênica"
+      ]
     },
     {
       "nome": "Parasitologia",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos parasitas (protozoários, helmintos e artrópodes) e suas relações com hospedeiros, incluindo ciclos de vida, formas infectantes, transmissão, patogênese, manifestações clínicas, diagnóstico, tratamento e medidas de prevenção/controle em humanos e outros animais, com ênfase em doenças parasitárias e epidemiologia associada.",
+      "incluir_quando": "Classificar aqui quando a questão aborda parasitas e parasitismo, incluindo: identificação e classificação de protozoários/helmintos/ectoparasitas; conceitos de hospedeiro definitivo/intermediário/paratênico, reservatório e vetor (biológico/mecânico); ciclos biológicos (direto/indireto), estágios (ovo, larva, cisto, trofozoíto, esquistossômulo etc.) e formas infectantes/diagnósticas; mecanismos de transmissão (fecal-oral, vetorial, penetração ativa, ingestão de carne crua, água/alimentos contaminados, contato com solo, vertical); patogênese e resposta do hospedeiro (lesão tecidual, espoliação, toxinas, inflamação, eosinofilia, granuloma, imunomodulação, evasão imune); sinais/sintomas e síndromes parasitárias (diarreia, anemia, hepatosplenomegalia, prurido anal, linfedema, febre periódica, lesões cutâneas); métodos de diagnóstico parasitológico (EPF, Kato-Katz, Baermann, fita gomada, gota espessa, esfregaço, sorologia, PCR, testes rápidos) e interpretação; terapêutica e profilaxia (anti-helmínticos, antiprotozoários, controle de vetores, saneamento, educação em saúde, quimioprofilaxia, desparasitação em massa); epidemiologia e ecologia de parasitoses (endemia, surtos, fatores de risco, zoonoses, ciclo urbano/silvestre); exemplos clássicos de parasitoses (malária, doença de Chagas, leishmaniose, giardíase, amebíase, toxoplasmose, esquistossomose, teníase/cisticercose, ascaridíase, ancilostomíase, enterobíase, filariose, pediculose, escabiose).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: bacteriologia, virologia ou micologia sem componente parasitário relevante; imunologia geral sem foco em parasitas/doenças parasitárias; ecologia de populações/comunidades sem relação com parasitismo ou ciclos de parasitas; genética/evolução em geral sem exemplos de parasitas; anatomia/fisiologia humana sem contexto de parasitoses; doenças não infecciosas (metabólicas, autoimunes, neoplásicas) sem relação com parasitas; entomologia/zoologia de artrópodes apenas descritiva (morfologia/taxonomia) sem papel como ectoparasita ou vetor; saúde pública/saneamento de forma ampla quando não vinculados a prevenção/controle de parasitoses; microbiologia clínica focada em antibióticos e bactérias sem menção a parasitas.",
+      "diferenciador": "Foco em organismos parasitas e na interação parasita–hospedeiro (ciclo de vida, transmissão, formas infectantes/diagnósticas, patogênese e controle), distinguindo-se de outros módulos por tratar especificamente de protozoários, helmintos e ectoparasitas/vetores e das doenças parasitárias associadas.",
+      "palavras_chave": [
+        "hospedeiro definitivo",
+        "vetor biológico",
+        "ciclo de vida",
+        "forma infectante",
+        "helmintos"
+      ]
     },
     {
       "nome": "Circulação, equilíbrio hídrico e excreção",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos sistemas e processos biológicos responsáveis pelo transporte interno de substâncias (circulação), pela manutenção do balanço de água e sais (osmorregulação/equilíbrio hídrico) e pela eliminação de resíduos metabólicos (excreção), incluindo estruturas, mecanismos fisiológicos, regulação hormonal e adaptações em diferentes grupos de seres vivos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) circulação em animais e/ou plantas: coração, vasos, sangue/hemolinfa, linfa, circulação aberta/fechada, simples/dupla, sistêmica/pulmonar, pressão arterial, débito cardíaco, trocas capilares, retorno venoso, transporte de gases/nutrientes/hormônios; (2) composição e funções do sangue: plasma, hemácias, hemoglobina, leucócitos, plaquetas, coagulação, grupos sanguíneos e compatibilidade (ABO/Rh) quando o foco for transporte/defesa/coagulação no contexto circulatório; (3) equilíbrio hídrico e osmótico: osmose, tonicidade, regulação de água e íons, balanço hídrico, desidratação/hiper-hidratação, mecanismos de conservação/perda de água, papel de rins/brânquias/pele/glândulas de sal, adaptação a ambientes marinhos, dulcícolas e terrestres; (4) excreção e sistema urinário: formação da urina (filtração glomerular, reabsorção, secreção, excreção), néfron, rim, ureter, bexiga, uretra, taxa de filtração glomerular (TFG), concentração/diluição urinária, alça de Henle, mecanismo de contracorrente, ureia/ácido úrico/amônia, cálculo renal e noções fisiológicas relacionadas; (5) regulação hormonal e homeostase associada: ADH/vasopressina, aldosterona, sistema renina-angiotensina-aldosterona (SRAA), peptídeos natriuréticos, controle de pressão/volemia e osmolaridade; (6) excreção em diferentes organismos: protonefrídios/metanefrídios, túbulos de Malpighi, glândulas antenais, vacúolo contrátil, estratégias de excreção nitrogenada (amoniotélicos, ureotélicos, uricotélicos); (7) relação entre circulação e excreção/osmorregulação: como o sistema circulatório fornece/retira substâncias dos órgãos excretores e como isso impacta a homeostase.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) respiração/ventilação e trocas gasosas como tema central (pulmões, brânquias, mecânica ventilatória) sem foco em transporte circulatório ou regulação hídrica; (2) digestão, absorção intestinal e metabolismo energético como foco principal, exceto quando conectados diretamente ao transporte/excreção; (3) sistema nervoso e sentidos, ou controle endócrino geral sem relação com ADH/aldosterona/SRAA/volemia/osmolaridade; (4) imunologia detalhada (resposta imune, anticorpos, vacinas) quando não estiver ancorada em componentes do sangue no contexto circulatório; (5) reprodução e desenvolvimento; (6) anatomia geral sem função fisiológica de circulação/excreção/osmorregulação; (7) botânica de transporte em plantas quando o foco for fotossíntese, crescimento ou hormônios vegetais sem relação com xilema/floema e balanço hídrico (transpiração, estômatos, potencial hídrico).",
+      "diferenciador": "O foco principal é a homeostase interna por meio do transporte de substâncias (circulação) e do controle/eliminação de água, sais e resíduos metabólicos (osmorregulação e excreção), incluindo mecanismos fisiológicos e regulação hormonal; diferencia-se de módulos próximos por priorizar balanço hídrico/pressão/osmolaridade e formação de urina, em vez de ventilação/respiração, digestão ou controle neural.",
+      "palavras_chave": [
+        "osmorregulação",
+        "néfron",
+        "ADH",
+        "filtração glomerular",
+        "circulação dupla"
+      ]
     },
     {
       "nome": "Grupos sanguíneos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos sistemas de grupos sanguíneos humanos e sua base genética/imunológica, com ênfase em ABO e Rh: antígenos (aglutinogênios) nas hemácias, anticorpos (aglutininas) no plasma, padrões de aglutinação, herança (alelos e dominância/codominância), compatibilidade em transfusões e implicações clínicas como doença hemolítica do recém-nascido.",
+      "incluir_quando": "Classificar aqui quando a questão aborda sistemas de tipagem sanguínea (especialmente ABO e/ou Rh), incluindo: identificação de tipos sanguíneos por testes de aglutinação; relação antígeno–anticorpo (A, B, D; anti-A, anti-B, anti-D); compatibilidade e regras de doação/recebimento de sangue/hemácias/plasma; genética dos grupos sanguíneos (IA, IB, i; codominância; genótipos e fenótipos; cruzamentos e probabilidades); fator Rh e sensibilização materno-fetal; eritroblastose fetal/doença hemolítica do recém-nascido e profilaxia com imunoglobulina anti-D; interpretação de tabelas de compatibilidade e de resultados laboratoriais de tipagem.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: anatomia e fisiologia geral do sangue (funções, composição, hematopoiese) sem tipagem; coagulação/hemostasia (plaquetas, fatores de coagulação, trombose); doenças do sangue não centradas em antígenos ABO/Rh (anemias, leucemias) sem relação com grupos sanguíneos; imunologia geral (vacinas, resposta imune) sem aplicação a antígenos eritrocitários; transplantes e compatibilidade HLA; genética mendeliana geral sem referência a ABO/Rh; sistemas de grupos sanguíneos raros (Kell, Duffy, MNS) quando o foco não for tipagem/compatibilidade e o enunciado não conectar ao tema de grupos sanguíneos.",
+      "diferenciador": "Foco em antígenos de hemácias e anticorpos plasmáticos que determinam tipagem, aglutinação e compatibilidade transfusional, articulados à herança genética (ABO/Rh) e às consequências clínicas específicas (incompatibilidade Rh materno-fetal).",
+      "palavras_chave": [
+        "ABO",
+        "Rh",
+        "aglutinogênio",
+        "aglutinina",
+        "eritroblastose fetal"
+      ]
     },
     {
       "nome": "Invertebrados",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos animais invertebrados (sem coluna vertebral), abrangendo sua diversidade, classificação, características morfofisiológicas, anatomia comparada, reprodução, desenvolvimento, ecologia, adaptações e importância ambiental, econômica e sanitária. Inclui os principais filos/grupos: Poríferos, Cnidários, Platelmintos, Nematelmintos (Nematódeos), Anelídeos, Moluscos, Artrópodes (insetos, aracnídeos, crustáceos, miriápodes) e Equinodermos, além de temas transversais como simetria, celoma, segmentação, sistemas orgânicos e ciclos de vida.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, comparação ou explicação de características de invertebrados e seus filos/grupos, como: (1) taxonomia e critérios de classificação (simetria, folhetos embrionários, protostômios/deuterostômios, presença de celoma, segmentação/metameria); (2) morfologia e anatomia (exoesqueleto, concha, rádula, cnidócitos, espículas, parapódios, setas, ambulacrário, pedicelárias); (3) fisiologia e sistemas (digestório completo/incompleto, respiração traqueal/branquial/cutânea, circulação aberta/fechada, excreção por nefrídios/túbulos de Malpighi, sistema nervoso ganglionar); (4) reprodução e desenvolvimento (brotamento, regeneração, hermafroditismo, partenogênese, metamorfose completa/incompleta, larvas como plânula, trocófora, náuplio, bipinária); (5) ecologia e relações (polinização por insetos, decomposição por anelídeos, recifes de corais, parasitismo por platelmintos/nematódeos, vetores artrópodes); (6) ciclos de vida e doenças associadas a invertebrados (esquistossomose, teníase/cisticercose, ascaridíase, ancilostomose, filariose, dengue/malária como vetores, entre outras) quando o foco é o organismo invertebrado, seu ciclo e/ou sua biologia; (7) identificação de grupos por características diagnósticas (ex.: equinodermos com simetria pentarradial e sistema ambulacrário; artrópodes com apêndices articulados e ecdise; poríferos filtradores sem tecidos verdadeiros).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) vertebrados (peixes, anfíbios, répteis, aves, mamíferos) ou anatomia/fisiologia humana sem relação direta com invertebrados; (2) botânica, microbiologia, genética, biologia celular/molecular ou bioquímica sem conexão explícita com invertebrados; (3) ecologia geral (cadeias alimentares, ciclos biogeoquímicos, dinâmica populacional) sem foco em grupos invertebrados específicos; (4) evolução/filogenia em nível amplo quando não envolve a caracterização de filos invertebrados (ex.: apenas seleção natural em abstrato); (5) parasitologia/epidemiologia quando o foco é exclusivamente a doença em humanos (sintomas, tratamento, políticas de saúde) e não o invertebrado (parasita ou vetor) e seu ciclo; (6) zoologia de cordados, embriologia comparada de vertebrados ou histologia de tecidos humanos; (7) conteúdos de classificação biológica em geral (reinos/domínios) sem detalhamento de filos invertebrados.",
+      "diferenciador": "Foco em animais sem coluna vertebral, especialmente na identificação e comparação dos principais filos de invertebrados e em suas características diagnósticas (morfologia, fisiologia, reprodução e ciclos de vida), distinguindo-os de vertebrados e de temas biológicos gerais sem recorte zoológico.",
+      "palavras_chave": [
+        "Poríferos",
+        "Cnidários",
+        "Artrópodes",
+        "Moluscos",
+        "Equinodermos"
+      ]
     },
     {
       "nome": "Organização celular",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da célula como unidade estrutural e funcional dos seres vivos, abrangendo tipos celulares (procariontes e eucariontes), organização interna (membrana, citoplasma, organelas, núcleo), especializações e relações entre estrutura e função, além de níveis básicos de organização dentro da célula (compartimentalização) e diferenças entre células animais, vegetais e de outros grupos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, descrição, comparação ou funcionamento de componentes celulares (membrana plasmática, parede celular, citoplasma, núcleo, ribossomos, mitocôndrias, cloroplastos, retículo endoplasmático, complexo golgiense, lisossomos, peroxissomos, vacúolos, citoesqueleto, centríolos, cílios/flagelos), diferenças entre células procariontes e eucariontes, diferenças entre célula animal e vegetal, compartimentalização e organização interna, relação estrutura-função de organelas, transporte e tráfego intracelular (síntese e endereçamento de proteínas, via secretora básica), e interpretação de esquemas/micrografias para reconhecer estruturas celulares.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de bioquímica/metabolismo (respiração celular, fotossíntese, fermentação, ciclos metabólicos) sem foco na organização/identificação de organelas; genética e biologia molecular (DNA, replicação, transcrição, tradução, código genético) como tema central; divisão celular e ciclo celular (mitose, meiose, fases, crossing-over) como foco principal; histologia e tecidos/órgãos (epitélio, músculo, sistemas) em nível macroscópico; ecologia e evolução; microbiologia/virologia com ênfase em patogenicidade, ciclos de infecção ou classificação de microrganismos sem foco na estrutura celular; fisiologia de membranas em nível avançado (potencial de ação, sinapses) quando o foco não é a organização celular.",
+      "diferenciador": "Foco na arquitetura e nos componentes da célula (quem é quem e o que faz), comparando tipos celulares e organelas e relacionando estrutura com função, mais do que em processos metabólicos, genética ou divisão celular.",
+      "palavras_chave": [
+        "procarionte",
+        "eucarionte",
+        "organelas",
+        "membrana plasmática",
+        "núcleo"
+      ]
     },
     {
       "nome": "Núcleo celular",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estrutura, composição e funções do núcleo celular em células eucarióticas, incluindo envoltório nuclear, poros, nucleoplasma, cromatina/cromossomos, nucléolo e processos nucleares como replicação do DNA, transcrição e processamento de RNA, além de organização do genoma e controle da expressão gênica em nível nuclear.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) componentes do núcleo (carioteca/envoltório nuclear, membranas interna/externa, lâmina nuclear, poros nucleares, nucleoplasma); (2) cromatina e cromossomos (eucromatina/heterocromatina, níveis de compactação, nucleossomos, histonas, organização e localização nuclear); (3) nucléolo (formação, regiões organizadoras nucleolares, síntese de rRNA e montagem de subunidades ribossômicas); (4) tráfego núcleo-citoplasma (importação/exportação via poros, sinais NLS/NES, transporte de RNAs e proteínas); (5) processos nucleares centrais: replicação do DNA, transcrição (RNA polimerases eucarióticas em termos gerais), processamento de RNA (capping, splicing, poliadenilação), maturação e exportação de mRNA; (6) regulação nuclear da expressão gênica (acessibilidade da cromatina, remodelamento, modificações de histonas/DNA em nível conceitual, fatores de transcrição e elementos regulatórios quando o foco é o que ocorre no núcleo); (7) ciclo celular no que se refere a eventos nucleares (duplicação do material genético, condensação/descondensação cromossômica, desorganização/reorganização do envoltório nuclear na mitose) quando o foco principal é o núcleo; (8) diferenças gerais entre núcleo e estruturas análogas (nucleoide em procariontes) quando a comparação serve para explicar o núcleo eucariótico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) mitose/meiose com foco em fases, fuso mitótico, centríolos/centrossomo, segregação cromossômica e citocinese (a menos que o foco seja especificamente a dinâmica do envoltório nuclear/cromatina); (2) síntese proteica/tradução e ribossomos no citoplasma ou RER (exceto quando o foco for o nucléolo e a montagem de subunidades ribossômicas); (3) organelas não nucleares (mitocôndrias, cloroplastos, lisossomos, peroxissomos, Golgi, membrana plasmática) sem relação direta com funções/estrutura nuclear; (4) genética clássica (leis de Mendel, heredogramas, linkage, mapeamento) quando não houver ênfase em cromatina/expressão gênica no núcleo; (5) biologia molecular aplicada (PCR, eletroforese, clonagem, CRISPR, sequenciamento) quando o foco for técnica e não processos nucleares; (6) regulação gênica em nível pós-traducional, sinalização celular e vias metabólicas predominantemente citoplasmáticas; (7) procariontes em geral (nucleoide, plasmídeos) quando o objetivo não for contrastar com o núcleo eucariótico.",
+      "diferenciador": "Foco no compartimento nuclear e em como ele organiza, protege e regula o material genético (DNA/cromatina) e os processos de expressão gênica (transcrição e processamento de RNA), distinguindo-se de tópicos de divisão celular (fuso/citocinese) e de síntese proteica citoplasmática.",
+      "palavras_chave": [
+        "envoltório nuclear",
+        "poros nucleares",
+        "cromatina",
+        "nucléolo",
+        "transcrição"
+      ]
     },
     {
       "nome": "Ecologia de populações",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das populações biológicas (indivíduos da mesma espécie em uma área e tempo), descrevendo e explicando como variam em tamanho, densidade, distribuição e estrutura, e quais processos ecológicos e evolutivos determinam sua dinâmica ao longo do tempo (natalidade, mortalidade, imigração, emigração), incluindo modelos de crescimento, regulação populacional e estratégias de história de vida.",
+      "incluir_quando": "Classificar aqui quando a questão aborda dinâmica populacional (crescimento exponencial/logístico, capacidade de suporte, taxas de natalidade e mortalidade, imigração/emigração), estrutura e parâmetros populacionais (densidade, tamanho populacional, distribuição espacial agregada/regular/aleatória, razão sexual, estrutura etária, tabelas de vida, curvas de sobrevivência), regulação e fatores limitantes (dependência de densidade, competição intraespecífica, predação, parasitismo, doenças, recursos, fatores abióticos), modelos e análises (r, K, dN/dt, tempo de duplicação, potencial biótico, efeito Allee, metapopulações, extinção/colonização, resgate), estratégias reprodutivas e história de vida (r/K, semelparidade/iteroparidade, trade-offs, fecundidade, investimento parental), e métodos de estimativa populacional (amostragem, quadrantes, transectos, captura-marca-recaptura, estimativas de densidade/abundância) quando o foco é a população de uma espécie.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de interações entre espécies em nível de comunidade (competição interespecífica detalhada, nicho, exclusão competitiva, predação como estruturação de comunidades, mutualismo, redes tróficas, sucessão ecológica, diversidade e riqueza de espécies), de ecossistemas e fluxos de energia/matéria (cadeias alimentares, pirâmides ecológicas, produtividade, ciclos biogeoquímicos), de ecologia de paisagens/biomas/clima (biomas, zonas climáticas, ecótonos, fragmentação e conectividade em escala de paisagem sem modelagem de metapopulação), de genética de populações (Hardy-Weinberg, deriva genética, fluxo gênico, seleção natural em termos de frequências alélicas), ou de conservação/gestão ambiental apenas normativa (políticas, legislação) sem análise de parâmetros e processos populacionais.",
+      "diferenciador": "O foco é quantitativo e processual sobre uma única espécie: como e por que o tamanho, a densidade e a estrutura de uma população mudam no tempo e no espaço, usando taxas demográficas, modelos de crescimento e mecanismos de regulação populacional.",
+      "palavras_chave": [
+        "crescimento logístico",
+        "capacidade de suporte (K)",
+        "taxa intrínseca de crescimento (r)",
+        "tabela de vida",
+        "captura-marca-recaptura"
+      ]
     }
   ]
 }

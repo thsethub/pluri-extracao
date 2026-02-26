@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import AppLayout from '@/components/AppLayout';
 import { apiRequest, API_BASE_URL } from '@/lib/api';
+import { getUsuario } from '@/lib/auth';
 import { showToast } from '@/components/Toast';
 import { Play, RotateCcw, Activity, Terminal as TerminalIcon, Search, Eye, X } from 'lucide-react';
 import Dropdown from '@/components/Dropdown';
@@ -52,6 +54,18 @@ interface ClassificacaoDetail {
 }
 
 export default function AgenteIAPage() {
+    const router = useRouter();
+    const [isAuthorized, setIsAuthorized] = useState(false);
+
+    useEffect(() => {
+        const usuario = getUsuario();
+        if (!usuario || !usuario.is_admin) {
+            router.push('/classificar');
+        } else {
+            setIsAuthorized(true);
+        }
+    }, [router]);
+
     const [logs, setLogs] = useState<LogLine[]>([]);
     const [isRunning, setIsRunning] = useState(false);
 
@@ -89,11 +103,7 @@ export default function AgenteIAPage() {
         loadDisciplinas();
     }, []);
 
-    useEffect(() => {
-        if (logEndRef.current) {
-            logEndRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [logs]);
+
 
     useEffect(() => {
         fetchClassificacoes(page);
@@ -201,6 +211,8 @@ export default function AgenteIAPage() {
         }
     };
 
+    if (!isAuthorized) return null;
+
     return (
         <AppLayout>
             <div className={styles.container}>
@@ -262,9 +274,10 @@ export default function AgenteIAPage() {
                                     label="Filtro de Modelo Web"
                                     options={[
                                         { value: '', label: 'Todos os Modelos' },
-                                        { value: 'gpt-4o-mini_prompt_v2', label: 'GPT-4o-mini (V2)' },
-                                        { value: 'gpt-4o-mini_prompt_v1', label: 'GPT-4o-mini (V1)' },
-                                        { value: 'logistic_regression', label: 'Regressão Logística' }
+                                        { value: 'gpt-5.2', label: 'GPT-5.2' },
+                                        // { value: 'gpt-4o', label: 'GPT-4o (Vision)' },
+                                        { value: 'gpt-4o-mini', label: 'GPT-4o-mini' },
+                                        { value: 'logistic_regression', label: 'Embeddings' }
                                     ]}
                                     value={filterModelo}
                                     onChange={(v: any) => { setFilterModelo(v); setPage(1); }}
@@ -276,7 +289,7 @@ export default function AgenteIAPage() {
                                 <Dropdown
                                     label="Status do Match"
                                     options={[
-                                        { value: '', label: 'Qualquer Status (Match)' },
+                                        { value: '', label: 'Qualquer Status' },
                                         { value: 'exact', label: 'Match Exato' },
                                         { value: 'partial', label: 'Match Parcial' },
                                         { value: 'none', label: 'Sem Match' },

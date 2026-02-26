@@ -50,7 +50,7 @@ class OpenAIClient:
             response = self.client.chat.completions.create(
                 model=model or self.model,
                 messages=messages,
-                max_tokens=max_tokens or self.max_tokens,
+                max_completion_tokens=max_tokens or self.max_tokens,
                 temperature=(
                     temperature if temperature is not None else self.temperature
                 ),

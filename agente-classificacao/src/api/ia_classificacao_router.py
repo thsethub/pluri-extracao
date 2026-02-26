@@ -226,17 +226,30 @@ async def classificar_questao(
             prompt_data, modulos_validos, texto_final, habilidade_info
         )
         
+        # Buscar imagens em base64 embutidas na questão
+        base64_images = []
+        if isinstance(texto_final, str):
+            pattern = r'<img[^>]+src=["\'](data:image/[a-zA-Z0-9]+;base64,[^"\']+)["\'][^>]*>'
+            import re
+            for m in re.finditer(pattern, texto_final):
+                base64_images.append(m.group(1))
+
+        # Montar payload multimodal
+        user_content = [{"type": "text", "text": user_prompt}]
+        for img_data in base64_images:
+            user_content.append({"type": "image_url", "image_url": {"url": img_data}})
+
         client = OpenAIClient()
         messages = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
+            {"role": "user", "content": user_content if base64_images else user_prompt}
         ]
         
-        response = client.create_completion(messages, model="gpt-4o-mini")
+        response = client.create_completion(messages, model="gpt-5.2")
         tokens_used = response.get("tokens_used", 0)
         llm_time_ms = response.get("processing_time_ms", 0)
-        # GPT-4o-mini: $0.15/1M input + $0.60/1M output ≈ $0.0003/1K tokens médio
-        custo_estimado = tokens_used * 0.0000003  # custo em USD
+        # GPT-5.2: custo médio estimado
+        custo_estimado = tokens_used * 0.00002  # custo em USD
         
         # 8. Parsear resposta
         try:
@@ -282,7 +295,7 @@ async def classificar_questao(
         
         # 10. Persistir resultado
         prompt_slug = slugify(disciplina)
-        modelo_nome = f"gpt-4o-mini_prompt_{prompt_slug}"
+        modelo_nome = f"gpt-5.2_prompt_{prompt_slug}"
         
         try:
             existing = pg_db.query(ClassificacaoAgenteIaModel).filter(
@@ -500,9 +513,12 @@ async def list_classificacoes(
     try:
         query = pg_db.query(ClassificacaoAgenteIaModel)
         
-        if modelo_filter:
-            query = query.filter(ClassificacaoAgenteIaModel.modelo_utilizado.ilike(f"%{modelo_filter}%"))
-        if disciplina_filter:
+        if modelo_filter and modelo_filter != "all":
+            if modelo_filter == "gpt-4o":
+                query = query.filter(ClassificacaoAgenteIaModel.modelo_utilizado.ilike(f"%gpt-4o\_%"))
+            else:
+                query = query.filter(ClassificacaoAgenteIaModel.modelo_utilizado.ilike(f"%{modelo_filter}%"))
+        if disciplina_filter and disciplina_filter != "all":
             query = query.filter(ClassificacaoAgenteIaModel.disciplina == disciplina_filter)
         
         items = query.order_by(ClassificacaoAgenteIaModel.created_at.desc()).all()
@@ -515,15 +531,19 @@ async def list_classificacoes(
         for item in items:
             manual = manual_dict.get(item.questao_id)
             manual_modulos = None
+            manual_descricoes = None
             if manual:
                 manual_modulos = manual.modulos_escolhidos or ([manual.modulo_escolhido] if manual.modulo_escolhido else [])
+                manual_descricoes = manual.descricoes_assunto_list or ([manual.descricao_assunto] if manual.descricao_assunto else [])
             
             ia_set = set(item.modulos_preditos or [])
+            ia_desc_set = set(item.descricoes_modulos or [])
             manual_set = set(manual_modulos) if manual_modulos else None
+            manual_desc_set = set([d for d in manual_descricoes if d]) if manual_descricoes else set()
             
             match_status = "pending"
             if manual_set is not None:
-                if ia_set == manual_set:
+                if ia_set == manual_set and ia_desc_set == manual_desc_set:
                     match_status = "exact"
                 elif ia_set & manual_set:
                     match_status = "partial"
@@ -592,13 +612,14 @@ async def get_classificacao_detail(
             manual_modulos = manual.modulos_escolhidos or ([manual.modulo_escolhido] if manual.modulo_escolhido else [])
             manual_descricoes = manual.descricoes_assunto_list or ([manual.descricao_assunto] if manual.descricao_assunto else [])
         
-        # Comparação
         ia_set = set(ia.modulos_preditos or [])
+        ia_desc_set = set(ia.descricoes_modulos or [])
         manual_set = set(manual_modulos) if manual_modulos else None
+        manual_desc_set = set([d for d in manual_descricoes if d]) if manual_descricoes else set()
         
         match_status = None
         if manual_set is not None:
-            if ia_set == manual_set:
+            if ia_set == manual_set and ia_desc_set == manual_desc_set:
                 match_status = "exact"
             elif ia_set & manual_set:
                 match_status = "partial"
@@ -680,11 +701,22 @@ async def validar_stream(limit: int = 1000):
                     ).first()
                     
                     manual_mods = None
+                    manual_desc = None
                     if manual_q:
                         manual_mods = manual_q.modulos_escolhidos or ([manual_q.modulo_escolhido] if manual_q.modulo_escolhido else [])
+                        manual_desc = manual_q.descricoes_assunto_list or ([manual_q.descricao_assunto] if manual_q.descricao_assunto else [])
                     
-                    match = "exact" if manual_mods and set(result.modulos_preditos) == set(manual_mods) else \
-                            "partial" if manual_mods and set(result.modulos_preditos) & set(manual_mods) else "none"
+                    match = "none"
+                    if manual_mods:
+                        ia_mods_set = set(result.modulos_preditos or [])
+                        ia_desc_set = set(result.descricoes_modulos or [])
+                        m_mods_set = set(manual_mods)
+                        m_desc_set = set([d for d in manual_desc if d])
+                        
+                        if ia_mods_set == m_mods_set and ia_desc_set == m_desc_set:
+                            match = "exact"
+                        elif ia_mods_set & m_mods_set:
+                            match = "partial"
                     
                     event_data = {
                         "type": "progress",

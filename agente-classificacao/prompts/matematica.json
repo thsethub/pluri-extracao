@@ -75,211 +75,367 @@
     },
     {
       "nome": "Funções",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de funções como relações entre conjuntos que associam a cada elemento do domínio um único elemento do contradomínio, incluindo representações (algébrica, gráfica, tabular e verbal), propriedades (domínio, imagem, zeros, crescimento/decrescimento, paridade, periodicidade), operações e transformações, composição e inversa, e análise de famílias usuais (afim/linear, quadrática, polinomial, racional, modular, exponencial, logarítmica, trigonométrica e por partes).",
+      "incluir_quando": "Classificar aqui quando a questão aborda definição ou identificação de função; verificação se uma relação é função (teste da reta vertical, unicidade da imagem); determinação de domínio, contradomínio e imagem; cálculo de valores f(x) e pré-imagens; resolução de equações do tipo f(x)=k e localização de zeros/raízes; construção, leitura e interpretação de gráficos de funções; análise de comportamento (crescimento/decrescimento, máximos/mínimos, concavidade em nível elementar, interceptos, assíntotas em funções racionais, periodicidade); comparação de funções e estudo de sinal; operações com funções (soma, produto, quociente) e seus domínios; composição de funções f∘g e avaliação; função inversa (existência, bijetividade/monotonicidade, cálculo e interpretação gráfica por simetria em y=x); transformações de gráficos (translações, reflexões, dilatações/contrações, |f(x)|, f(|x|), f(x-a)+b, -f(x), f(-x)); funções definidas por partes e análise de continuidade em nível básico; modelagem de situações por funções (custo, receita, lucro, conversões, escalas, crescimento/decadência) quando o foco é a relação funcional e sua análise.",
+      "nao_incluir_quando": "NÃO classificar aqui quando o foco principal for: resolução de equações/inequações sem abordagem funcional (por exemplo, apenas resolver um polinômio ou sistema); geometria analítica centrada em retas, circunferências e cônicas como objetos geométricos sem interpretação como função; progressões (PA/PG) e sequências tratadas apenas como listas/recorrências sem linguagem de função; estatística e probabilidade (distribuições, média, variância) sem uso de função como objeto central; trigonometria voltada a identidades, leis dos senos/cossenos e resolução de triângulos sem análise de função trigonométrica; cálculo diferencial/integral (derivadas, integrais, limites) quando o objetivo é técnica de cálculo e não propriedades elementares de funções; matrizes, vetores e transformações lineares em álgebra linear; lógica de conjuntos e relações em geral quando não se exige a propriedade de funcionalidade nem análise de f(x).",
+      "diferenciador": "O foco é tratar expressões e relações como uma função f: domínio → contradomínio, analisando mapeamento, representações e comportamento (gráfico/propriedades), e não apenas manipulação algébrica isolada ou resolução de equações sem interpretação funcional.",
+      "palavras_chave": [
+        "domínio e imagem",
+        "gráfico de função",
+        "função inversa",
+        "composição de funções",
+        "transformações de gráficos"
+      ]
     },
     {
       "nome": "Trigonometria",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações entre ângulos e medidas em triângulos e no círculo trigonométrico, incluindo razões trigonométricas, identidades, equações trigonométricas, leis dos senos e cossenos, funções trigonométricas e suas propriedades (gráficos, periodicidade, amplitude, fase), além de aplicações em problemas geométricos e de modelagem.",
+      "incluir_quando": "Classificar aqui quando a questão aborda razões trigonométricas (seno, cosseno, tangente e recíprocas) em triângulos retângulos; conversão e uso de graus e radianos; círculo trigonométrico, ângulos notáveis, quadrantes e sinais; identidades trigonométricas (pitagóricas, de ângulos complementares/suplementares, soma e diferença, ângulo duplo/metade, produto-soma e soma-produto); simplificação e prova de identidades; equações e inequações trigonométricas e suas soluções gerais; funções trigonométricas (domínio, imagem, período, amplitude, deslocamentos, transformações) e interpretação/traçado de gráficos; leis dos senos e dos cossenos, área de triângulo via trigonometria (1/2 ab sen C), resolução de triângulos oblíquos; aplicações envolvendo alturas, distâncias, inclinações, navegação, ondas e fenômenos periódicos modelados por senóides; uso de trigonometria em geometria analítica (por exemplo, parametrizações com sen/cos, relações com coordenadas no círculo) quando o foco é trigonométrico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de geometria plana sem uso de razões trigonométricas (sem sen/cos/tan, leis dos senos/cossenos ou círculo trigonométrico); semelhança de triângulos e Teorema de Pitágoras usados isoladamente (sem conexão explícita com trigonometria); funções e gráficos em geral quando não envolvem funções trigonométricas; números complexos e forma trigonométrica/De Moivre quando o foco é álgebra de complexos; cálculo (limites, derivadas, integrais) mesmo que apareçam sen/cos como parte de técnicas de cálculo; séries de Fourier e análise harmônica avançada; vetores e produto escalar quando o foco é álgebra vetorial (a menos que a questão peça explicitamente ângulos via cosseno ou identidades trigonométricas); física/engenharia quando a trigonometria não é o método central (por exemplo, dinâmica com equações diferenciais sem ênfase trigonométrica).",
+      "diferenciador": "O elemento central é relacionar ângulos a razões/funções trigonométricas (sen, cos, tan) e usar identidades, equações e o círculo trigonométrico para calcular, transformar ou modelar situações; a presença e o uso substantivo de funções/razões trigonométricas é o critério decisivo.",
+      "palavras_chave": [
+        "seno",
+        "cosseno",
+        "tangente",
+        "círculo trigonométrico",
+        "identidades trigonométricas"
+      ]
     },
     {
       "nome": "Quadriláteros Notáveis",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo, identificação, classificação e propriedades dos quadriláteros notáveis (paralelogramo, retângulo, losango, quadrado, trapézio e deltoide/pipa), incluindo relações entre lados, ângulos, paralelismo, perpendicularidade, diagonais (congruência, perpendicularidade, bissetriz, ponto médio), simetrias e condições necessárias e suficientes para caracterização. Pode envolver cálculo de medidas (lados, ângulos, diagonais, perímetro e área) quando fundamentado nessas propriedades.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) reconhecer ou nomear um quadrilátero a partir de propriedades (ex.: 'diagonais perpendiculares', 'lados opostos paralelos', 'ângulos retos'); (2) demonstrar ou usar propriedades específicas de paralelogramo/retângulo/losango/quadrado/trapézio/deltoide (ex.: diagonais do retângulo são congruentes; diagonais do losango são perpendiculares e bissetam ângulos; bases do trapézio são paralelas; trapézio isósceles tem ângulos da base congruentes e diagonais congruentes); (3) aplicar critérios de classificação (condições necessárias e suficientes), inclusive conversas do tipo 'se um paralelogramo tem diagonais congruentes então é retângulo'; (4) resolver problemas de medidas em que a chave é uma propriedade de quadriláteros notáveis (cálculo de ângulos internos, diagonais, altura, área de losango via diagonais, área de trapézio, perímetro/área de quadrado/retângulo) desde que o enunciado dependa da identificação/uso do quadrilátero notável; (5) relações entre quadriláteros notáveis (ex.: 'todo quadrado é retângulo e losango', 'todo retângulo é paralelogramo'); (6) simetrias e eixos de simetria desses quadriláteros quando usadas para caracterização ou resolução; (7) problemas com coordenadas/vetores/geometria analítica cujo objetivo seja provar que uma figura é um quadrilátero notável ou usar suas propriedades (ex.: mostrar que quatro pontos formam um retângulo verificando paralelismo e ângulo reto).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) polígonos em geral sem foco em quadriláteros notáveis (soma de ângulos internos de um quadrilátero apenas como caso de polígono, sem classificação/propriedades específicas); (2) triângulos, circunferência, semelhança, trigonometria ou teorema de Pitágoras sem conexão explícita com um quadrilátero notável; (3) cálculo de área/perímetro de figuras planas de forma puramente algorítmica, sem uso de propriedades de quadriláteros notáveis (ex.: 'calcule a área do retângulo' apenas aplicando A=b·h, sem qualquer propriedade/identificação envolvida, se o módulo de destino for 'Áreas de Figuras Planas'); (4) geometria espacial (prismas, paralelepípedos) mesmo que apareçam faces retangulares/quadradas, quando o foco é volume/área total; (5) transformações geométricas (simetria, rotação, translação) como tema central, sem caracterização de quadriláteros notáveis; (6) problemas de coordenadas cujo foco seja distância, ponto médio ou inclinação de reta sem concluir/usar que a figura é um quadrilátero notável; (7) tesselações/mosaicos e padrões artísticos sem exploração das propriedades/critério de quadriláteros notáveis.",
+      "diferenciador": "O foco é a caracterização e o uso de propriedades estruturais (paralelismo, congruência, ângulos, diagonais e simetrias) que definem e distinguem tipos específicos de quadriláteros, incluindo critérios 'se e somente se' para identificar a classe do quadrilátero e relações de inclusão entre essas classes.",
+      "palavras_chave": [
+        "paralelogramo",
+        "retângulo",
+        "losango",
+        "quadrado",
+        "trapézio"
+      ]
     },
     {
       "nome": "Progressão Geométrica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de sequências numéricas em que cada termo (a partir do segundo) é obtido multiplicando o termo anterior por uma constante chamada razão (q). Inclui identificação e caracterização de PG, cálculo de termos (termo geral), determinação de razão e termo inicial, propriedades, inserção de meios geométricos, e soma de termos (soma dos n primeiros termos e soma de PG infinita quando aplicável), além de aplicações em crescimento/decrescimento exponencial discreto.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) reconhecimento de uma progressão geométrica a partir de uma lista de termos, padrão multiplicativo ou descrição verbal; (2) cálculo de qualquer termo de uma PG (an, a1, q, n) usando an = a1*q^(n-1); (3) determinação da razão q por quociente entre termos consecutivos, inclusive com termos negativos ou fracionários; (4) problemas que pedem a soma dos n primeiros termos (Sn) de uma PG finita, com uso de Sn = a1*(q^n - 1)/(q - 1) (q ≠ 1) ou Sn = n*a1 (q = 1); (5) soma de PG infinita convergente (|q| < 1), com S = a1/(1 - q); (6) inserção de k meios geométricos entre dois números, ou encontrar meios geométricos; (7) propriedades típicas de PG, como produto de termos equidistantes (a_k * a_{n-k+1} = a1*an), relação entre termos, monotonicidade conforme q, alternância de sinais quando q < 0; (8) modelagem de situações de multiplicação sucessiva (juros compostos discretos, depreciação percentual, crescimento populacional por fator fixo, escalas, duplicação/halving, progressões em problemas de contagem com fator constante); (9) identificação de q a partir de gráficos/tabelas que indiquem crescimento multiplicativo por etapa; (10) questões que explicitamente mencionem 'progressão geométrica', 'PG', 'razão', 'termo geral', 'soma dos termos', 'meios geométricos'.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) progressão aritmética (PA) ou padrões aditivos (diferença constante) e suas somas; (2) funções exponenciais contínuas (do tipo f(x)=a*b^x) sem contexto de sequência/termos discretos ou sem uso de fórmulas de PG; (3) juros simples (crescimento linear) ou problemas financeiros sem multiplicação sucessiva por fator constante; (4) séries e somatórios gerais que não sejam especificamente de PG (por exemplo, séries harmônicas, telescópicas, somas de potências sem estrutura geométrica); (5) sequências definidas por recorrências não multiplicativas (Fibonacci, recursões lineares aditivas) ou por padrões não constantes; (6) logaritmos e equações exponenciais em geral, quando o foco não é uma sequência/PG (ex.: resolver 2^x=10); (7) porcentagem e regra de três sem repetição por fator constante ao longo de etapas; (8) análise combinatória/probabilidade sem estrutura de multiplicação sucessiva por razão fixa entre termos; (9) matrizes, determinantes, ou geometria plana/espacial sem relação com PG (exceto quando a própria questão modela uma PG).",
+      "diferenciador": "O elemento central é a razão multiplicativa constante entre termos consecutivos (q), levando a fórmulas de termo geral e soma típicas de PG; diferencia-se de tópicos próximos por ser crescimento/decrescimento discreto por multiplicação (não por adição como na PA, nem por modelagem contínua sem termos discretos).",
+      "palavras_chave": [
+        "progressão geométrica",
+        "PG",
+        "razão q",
+        "termo geral an=a1*q^(n-1)",
+        "soma dos n primeiros termos Sn"
+      ]
     },
     {
       "nome": "Geometria Espacial: Prismas e Pirâmides",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de sólidos geométricos espaciais do tipo prismas e pirâmides, incluindo identificação e classificação (retos/oblíquos, regulares/irregulares), elementos (bases, faces laterais, arestas, vértices, altura, apótema, geratriz quando aplicável), planificações, relações métricas e cálculos de área lateral, área total e volume, além de problemas aplicados envolvendo seções e troncos (frustos) de pirâmides e, quando pertinente, de prismas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda prismas e/ou pirâmides em qualquer uma das seguintes situações: (1) reconhecimento do sólido a partir de descrição, desenho, rede (planificação) ou propriedades; (2) contagem de faces, arestas e vértices de prismas/pirâmides (incluindo uso de relações como a de Euler em poliedros); (3) cálculo de volume de prismas (V = Abase·h) e de pirâmides (V = Abase·h/3), inclusive com bases poligonais (triangular, quadrangular, hexagonal etc.) e com dados de altura, apótema, lado da base, perímetro da base; (4) cálculo de área lateral e área total: em prismas (Alat = perímetro da base·altura no prisma reto; soma das áreas das faces laterais no geral) e em pirâmides (Alat = (perímetro da base·apótema)/2 em pirâmide regular; soma das áreas das faces laterais no geral); (5) problemas com pirâmide regular envolvendo apótema da pirâmide, apótema da base, altura e relações pitagóricas em triângulos notáveis formados por seções meridianas; (6) planificação e montagem: determinar medidas faltantes, áreas a partir da rede, ou identificar qual planificação corresponde a um prisma/pirâmide; (7) seções paralelas à base e semelhança em pirâmides (razões lineares, áreas e volumes), incluindo tronco de pirâmide (frusto) e suas fórmulas usuais de volume (V = h/3·(A1 + A2 + sqrt(A1·A2))) e área lateral em frusto regular (Alat = (P1 + P2)·g/2, quando g é a geratriz/apótema do tronco); (8) aplicações contextualizadas (embalagens, telhados, monumentos, reservatórios) desde que o modelo geométrico central seja prisma/pirâmide; (9) comparação entre prismas e pirâmides (por exemplo, mesma base e altura) e relações de volume (pirâmide = 1/3 do prisma correspondente).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) cilindros, cones e esferas (corpos redondos), mesmo que haja menção genérica a 'sólidos'; (2) poliedros que não sejam prismas ou pirâmides como tetraedro tratado isoladamente sem enfoque de pirâmide, dodecaedro/icosaedro, ou poliedros em geral sem especificar prisma/pirâmide; (3) geometria plana (áreas e perímetros de polígonos) sem uso explícito como base/face de prisma ou pirâmide; (4) coordenadas, vetores, geometria analítica espacial (distância ponto-plano, equações de planos) sem conexão direta com prismas/pirâmides; (5) transformações geométricas, simetria e congruência no plano/espacial sem foco em métricas de prismas/pirâmides; (6) apenas relação de Euler ou contagem em poliedros genéricos quando o sólido não é identificado como prisma/pirâmide; (7) problemas de trigonometria espacial ou de triângulos em 3D que não envolvam explicitamente prismas/pirâmides como objeto central.",
+      "diferenciador": "O foco distintivo é o estudo métrico e estrutural de poliedros com duas bases paralelas e congruentes (prismas) ou com uma base e faces laterais triangulares concorrendo em um vértice (pirâmides), incluindo planificações, áreas (lateral/total) e volumes, frequentemente usando altura, apótema e semelhança em seções paralelas à base (especialmente em pirâmides e seus troncos).",
+      "palavras_chave": [
+        "prisma",
+        "pirâmide",
+        "planificação",
+        "área lateral",
+        "volume"
+      ]
     },
     {
       "nome": "Geometria Plana: Conceitos Iniciais e Ângulos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo introdutório da Geometria Plana com foco em conceitos básicos (ponto, reta, semirreta, segmento, plano), relações entre retas (paralelas, concorrentes, perpendiculares), noções de distância e alinhamento, e principalmente em ângulos: definição, notação, medida (graus), classificação, operações e relações (complementares, suplementares, adjacentes, opostos pelo vértice) e ângulos formados por retas paralelas cortadas por uma transversal (correspondentes, alternos internos/externos, colaterais internos/externos).",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação, definição ou propriedades de elementos básicos da geometria plana (ponto, reta, semirreta, segmento, plano) e suas relações; construção/representação e leitura de figuras simples envolvendo retas e ângulos; cálculo de medidas de ângulos em graus usando relações fundamentais (soma em linha reta 180°, volta completa 360°, ângulo raso, reto, agudo, obtuso, côncavo); problemas com ângulos complementares e suplementares; ângulos adjacentes e opostos pelo vértice; determinação de ângulos em figuras com retas paralelas e transversal usando correspondentes, alternos e colaterais; uso de equações simples para encontrar x em expressões de ângulos; verificação de paralelismo/perpendicularidade a partir de relações angulares; interpretação de enunciados que pedem classificar ângulos ou justificar relações angulares em desenhos planos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando o foco principal for cálculo de áreas, perímetros ou medidas de polígonos (triângulos, quadriláteros, circunferência) sem ênfase em relações de ângulos; congruência e semelhança de triângulos, teorema de Tales, trigonometria, lei dos senos/cossenos; geometria analítica (plano cartesiano, equações de reta, distância entre pontos por fórmula); geometria espacial (prismas, pirâmides, cilindros, cones, esferas) e ângulos diedros; transformações geométricas (simetria, rotação, translação) quando não centradas em relações angulares básicas; problemas de construção com régua e compasso que tenham como objetivo principal polígonos/circunferências e não a determinação de ângulos; medidas em radianos ou tópicos avançados de ângulos (funções trigonométricas) como tema central.",
+      "diferenciador": "Ênfase em conceitos iniciais de figuras planas e, sobretudo, em relações e cálculo de medidas de ângulos (incluindo paralelas cortadas por transversal), sem avançar para propriedades métricas de polígonos, trigonometria ou geometria analítica/espacial.",
+      "palavras_chave": [
+        "ponto reta semirreta segmento",
+        "ângulo agudo obtuso reto raso",
+        "complementares suplementares adjacentes",
+        "opostos pelo vértice",
+        "paralelas transversal alternos correspondentes colaterais"
+      ]
     },
     {
       "nome": "Função Trigonométrica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das funções trigonométricas (seno, cosseno, tangente e, quando pertinente, secante, cossecante e cotangente) como funções reais: definição no círculo trigonométrico, domínio e imagem, periodicidade, paridade, zeros, máximos e mínimos, sinais por quadrantes, gráficos e transformações (amplitude, período, fase e deslocamento vertical), além de modelagem de fenômenos periódicos e resolução de equações/inequações trigonométricas em termos funcionais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda funções trigonométricas como objetos funcionais, por exemplo: (1) construção, leitura ou análise de gráficos de y=sen(x), y=cos(x), y=tan(x) e variações do tipo y=a·sen(bx+c)+d, y=a·cos(bx+c)+d, y=a·tan(bx+c)+d; (2) identificação/uso de amplitude, período, frequência, fase (deslocamento horizontal) e translação vertical; (3) determinação de domínio, imagem, paridade (função par/ímpar), monotonicidade por intervalos, assíntotas (especialmente em tan/sec/csc), interceptos e zeros; (4) uso do círculo trigonométrico para interpretar valores e sinais de sen/cos/tan como funções do ângulo (em radianos ou graus), incluindo redução ao primeiro quadrante e periodicidade; (5) resolução de equações e inequações trigonométricas envolvendo sen, cos, tan (e eventualmente sec, csc, cot) com soluções gerais e/ou em intervalos, quando o foco é a função e sua periodicidade; (6) composição e inversão quando aplicável (arcsen, arccos, arctan) no contexto de função inversa e restrições de domínio; (7) modelagem de situações periódicas (marés, movimento harmônico simples, ondas, temperatura sazonal) usando senos/cossenos, com ajuste de parâmetros a partir de dados; (8) problemas que pedem identificar a expressão de uma função trigonométrica a partir de gráfico, tabela ou descrição (ex.: encontrar a, b, c, d).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) trigonometria em triângulos (razões trigonométricas em triângulo retângulo, lei dos senos, lei dos cossenos, área com seno) sem enfoque em função e gráficos; (2) identidades trigonométricas e manipulações algébricas (ex.: fórmulas de adição, duplicação, produto-soma) quando o objetivo central é provar/simplificar identidades, e não analisar funções; (3) geometria analítica/complexos envolvendo trigonometria apenas como ferramenta (ex.: forma trigonométrica de números complexos, De Moivre) sem estudo funcional; (4) cálculo (derivadas, integrais, séries de Fourier) onde sen/cos aparecem como funções a derivar/integrar, mas o tópico central é cálculo; (5) vetores e física (componentes, projeções) quando sen/cos são usados apenas para decomposição vetorial sem análise de periodicidade/gráfico; (6) conversão grau-radiano e medidas de arco/setor como tema principal, sem exploração de funções trigonométricas; (7) resolução de equações algébricas que apenas mencionam sen/cos como constantes numéricas (ex.: sen(30°)=1/2) sem estrutura funcional.",
+      "diferenciador": "O foco é tratar seno, cosseno, tangente etc. como funções periódicas: análise de gráficos e parâmetros (amplitude, período, fase, deslocamento), propriedades funcionais (domínio/imagem, paridade, assíntotas) e resolução/modelagem usando periodicidade — não apenas razões em triângulos ou identidades algébricas.",
+      "palavras_chave": [
+        "amplitude",
+        "período",
+        "deslocamento de fase",
+        "gráfico de seno/cosseno/tangente",
+        "equação trigonométrica"
+      ]
     },
     {
       "nome": "Porcentagens",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo e aplicação de porcentagens (razão por 100) em contextos numéricos e de problemas: conversões entre fração, decimal e porcentagem; cálculo de percentuais de uma quantidade; determinação do todo a partir de uma parte percentual; variações percentuais (aumento, desconto, acréscimo, redução); comparação por percentuais; taxas sucessivas; e interpretação de percentuais em tabelas, gráficos e situações do cotidiano (juros simples como caso particular de porcentagem por período).",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculo, interpretação ou manipulação de porcentagens, incluindo: (1) converter entre % ↔ decimal ↔ fração (ex.: 0,25 = 25% = 1/4); (2) calcular x% de um valor, ou qual percentual uma parte representa do todo; (3) encontrar o valor inicial/final dado um percentual de aumento ou desconto; (4) problemas de desconto, acréscimo, promoção, imposto, comissão, gorjeta, lucro/prejuízo expressos em %; (5) variação percentual e taxa de crescimento/queda (ex.: “aumentou 15%”, “reduziu 8%”); (6) percentuais sucessivos e efeito composto (ex.: +10% e depois −10%); (7) repartição proporcional e rateios quando expressos em %; (8) leitura de gráficos/tabelas com percentuais (participação, fatia, distribuição); (9) juros simples quando formulado explicitamente como porcentagem por período (ex.: 2% ao mês, sem capitalização).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) probabilidade, estatística ou análise de dados sem necessidade de operar com porcentagens (ex.: média/mediana/moda, desvio padrão) — a menos que o cálculo central seja percentual; (2) juros compostos, capitalização, taxas equivalentes e matemática financeira avançada quando o foco é regime composto e não apenas aplicação direta de %; (3) razão e proporção em geral, regra de três, escalas ou frações sem menção/uso essencial de porcentagem; (4) funções exponenciais/logarítmicas e crescimento populacional modelado por funções, mesmo que apareça “%” apenas como taxa em um modelo; (5) geometria (áreas, volumes) em que a porcentagem não é o conceito central; (6) unidades e conversões (km/h, m/s, ppm) sem relação direta com percentuais; (7) problemas de contagem/combinatória em que “%” aparece apenas como dado periférico.",
+      "diferenciador": "O foco principal é a relação parte-todo expressa por 100 e a transformação multiplicativa associada a taxas percentuais (descontos, acréscimos e variações), distinguindo-se de razão/proporção genérica e de matemática financeira composta quando a capitalização é o elemento central.",
+      "palavras_chave": [
+        "porcentagem",
+        "percentual",
+        "desconto",
+        "acréscimo",
+        "variação percentual"
+      ]
     },
     {
       "nome": "Progressão Aritmética",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de sequências numéricas em que a diferença entre termos consecutivos é constante (razão), incluindo identificação, construção, termo geral, termo inicial, razão, soma de termos e aplicações (problemas contextualizados) envolvendo progressão aritmética (PA).",
+      "incluir_quando": "Classificar aqui quando a questão aborda progressão aritmética (PA) explicitamente ou implicitamente, exigindo: reconhecer/confirmar que uma sequência é PA pela diferença constante; determinar a razão (r) e/ou o primeiro termo (a1); calcular termos específicos (an) ou o termo geral (an = a1 + (n-1)r); encontrar a posição n de um termo dado; inserir termos entre dois valores (interpolação aritmética); calcular a soma dos n primeiros termos (Sn = n(a1+an)/2 ou Sn = n(2a1+(n-1)r)/2); resolver problemas de contagem/planejamento/finanças simples modelados por PA (crescimento linear por incrementos fixos); trabalhar com propriedades como média aritmética de termos equidistantes (ak + a_{n-k+1} constante) e termo central como média dos extremos em uma PA finita.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: progressão geométrica (razão multiplicativa constante), juros compostos, crescimento exponencial; sequências sem diferença constante (quadráticas, recursivas não lineares, Fibonacci); funções afins/lineares sem linguagem de sequência/termos (a menos que a pergunta peça explicitamente termos de uma PA); séries e somatórios gerais que não sejam soma de termos de uma PA; média aritmética/estatística descritiva sem relação com termos de uma PA; problemas de combinatória/contagem que não se modelam por incrementos constantes; equações de recorrência ou indução matemática sem foco em PA.",
+      "diferenciador": "O elemento central é a variação aditiva constante entre termos (diferença comum r) e o uso de fórmulas de termo geral e soma de uma sequência linearmente crescente/decrescente; distingue-se de PG por não haver multiplicação por uma constante, mas sim adição/subtração fixa a cada passo.",
+      "palavras_chave": [
+        "progressão aritmética",
+        "PA",
+        "razão (r)",
+        "termo geral (an)",
+        "soma dos n primeiros termos (Sn)"
+      ]
     },
     {
       "nome": "Logaritmo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de logaritmos como inversos de funções exponenciais, suas propriedades algébricas, mudança de base, resolução de equações e inequações logarítmicas/exponenciais com uso de logaritmos, análise de funções logarítmicas (domínio, imagem, gráficos, transformações) e aplicações que modelam grandezas em escala logarítmica.",
+      "incluir_quando": "Classificar aqui quando a questão aborda definição de logaritmo (log_a(b)=x ↔ a^x=b), condições de existência (a>0, a≠1, b>0), propriedades (produto, quociente, potência, log de 1, log da base), mudança de base (log_a(b)=log_c(b)/log_c(a)), relação entre logaritmo e exponencial, simplificação/expansão de expressões com log, cálculo de valores logarítmicos, resolução de equações e inequações envolvendo logaritmos (incluindo verificação de domínio), resolução de equações exponenciais via logaritmos, estudo de função logarítmica (crescimento/decrescimento conforme a, assíntota vertical, interceptos, domínio/imagem), composição e inversa entre funções exponenciais e logarítmicas, e problemas aplicados que explicitamente usem logaritmos (pH, decibéis, magnitude sísmica, escalas, crescimento exponencial com tempo de meia-vida usando log, número de dígitos via log10, juros compostos com log para isolar tempo).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata apenas de funções exponenciais sem uso de logaritmos (por exemplo, apenas calcular 2^n), de progressões geométricas/aritméticas sem log, de equações polinomiais/racionais/trigonométricas sem log, de limites/derivadas/integrais envolvendo ln/log como ferramenta de Cálculo (ex.: derivar ln(x), integrar 1/x) quando o foco é Cálculo e não propriedades/solução algébrica com logaritmos, de matrizes/complexos/estatística, ou de notação 'log' em contextos não matemáticos (logs de sistema, registros) sem conteúdo de logaritmo.",
+      "diferenciador": "Presença explícita de logaritmos (log, ln) ou da necessidade de aplicar a inversão exponencial↔logarítmica e suas propriedades para transformar, simplificar ou resolver expressões/equações/inequações, com atenção às restrições de domínio (argumento positivo e base válida).",
+      "palavras_chave": [
+        "log",
+        "ln",
+        "mudança de base",
+        "propriedades dos logaritmos",
+        "equação logarítmica"
+      ]
     },
     {
       "nome": "Geometria Plana: Triângulos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de triângulos na Geometria Plana: classificação (quanto aos lados e ângulos), elementos notáveis (altura, mediana, bissetriz, mediatriz), pontos notáveis (baricentro, incentro, circuncentro, ortocentro), propriedades angulares e métricas, congruência e semelhança, relações métricas (incluindo Pitágoras e projeções), perímetro e área, e aplicações em problemas geométricos no plano.",
+      "incluir_quando": "Classificar aqui quando a questão aborda triângulos explicitamente ou depende de propriedades específicas de triângulos, como: (1) classificação de triângulos (equilátero, isósceles, escaleno; acutângulo, retângulo, obtusângulo); (2) soma dos ângulos internos (180°) e relações com ângulos externos; (3) desigualdade triangular e existência de triângulo; (4) congruência de triângulos (LLL, LAL, ALA, AAL, hipotenusa-cateto) e consequências (lados/ângulos correspondentes); (5) semelhança de triângulos (AA, LAL proporcional, LLL proporcional), razão de semelhança e efeitos em perímetros/áreas; (6) triângulos retângulos: Teorema de Pitágoras, relações trigonométricas básicas quando usadas como ferramenta geométrica (seno, cosseno, tangente em triângulo retângulo), relações métricas na hipotenusa (projeções, altura relativa à hipotenusa); (7) cálculo de área e perímetro de triângulos (base-altura, Heron, área por dois lados e seno do ângulo, casos especiais como equilátero); (8) linhas e pontos notáveis: mediana, altura, bissetriz, mediatriz; baricentro (razão 2:1), incentro (bissetrizes), circuncentro (mediatrizes), ortocentro (alturas), circunferência circunscrita e inscrita; (9) propriedades de isósceles/equilátero (ângulos da base, altura=mediana=bissetriz no isósceles, etc.); (10) problemas de construção/argumentação geométrica no plano em que a estrutura central é um triângulo e suas relações internas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) polígonos em geral (quadriláteros, pentágonos etc.) sem foco essencial em triângulos; (2) circunferência/círculo como tema central (arcos, ângulos na circunferência, setores) sem uso determinante de propriedades de triângulos; (3) geometria espacial (pirâmides, prismas, tetraedros) mesmo que apareçam faces triangulares, se o objetivo for volume/área de sólidos; (4) trigonometria em contexto de funções (gráficos, identidades, equações trigonométricas) sem dependência de propriedades geométricas de triângulos; (5) geometria analítica (coordenadas, distância, ponto médio, equações de reta) quando o foco é algébrico/analítico e não propriedades clássicas de triângulos; (6) transformações geométricas (simetria, rotação, homotetia) como tema principal, exceto quando usadas diretamente para provar congruência/semelhança de triângulos; (7) áreas de figuras planas em geral (trapézio, círculo) quando o triângulo não é a figura central nem a decomposição principal; (8) teoremas de paralelas e proporcionalidade (Tales) quando aplicados genericamente a segmentos sem configuração explícita de triângulos ou semelhança entre triângulos como núcleo.",
+      "diferenciador": "O foco principal é a figura triângulo e suas propriedades internas (ângulos, lados, linhas/pontos notáveis) e relações entre triângulos (congruência, semelhança e relações métricas), distinguindo-se de módulos de polígonos gerais, círculo, trigonometria funcional e geometria analítica.",
+      "palavras_chave": [
+        "triângulo",
+        "congruência",
+        "semelhança",
+        "Pitágoras",
+        "baricentro"
+      ]
     },
     {
       "nome": "Geometria Espacial: Posições e Sólidos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de objetos e relações no espaço tridimensional, envolvendo posições relativas entre pontos, retas e planos, bem como identificação, classificação e propriedades de sólidos geométricos (poliedros e corpos redondos), suas seções, planificações e elementos (faces, arestas, vértices, bases, altura, geratrizes).",
+      "incluir_quando": "Classificar aqui quando a questão aborda relações espaciais e propriedades de sólidos em 3D, como: (1) posições relativas entre reta e reta (paralelas, concorrentes, reversas), reta e plano (contida, paralela, secante/perpendicular), plano e plano (paralelos, secantes); (2) perpendicularidade e paralelismo no espaço, incluindo identificação por descrição, figura ou coordenadas; (3) identificação e classificação de sólidos: prismas, pirâmides, tetraedro, cubo, paralelepípedo, troncos, cilindro, cone, esfera; (4) elementos dos sólidos (faces, arestas, vértices, bases, altura, apótema, geratriz, eixo) e contagens/estruturas (ex.: número de faces/arestas/vértices, relação de Euler V - A + F); (5) planificações (nets) e montagem de sólidos a partir de planificações; (6) seções planas e cortes em sólidos (ex.: secção transversal de prisma/cilindro, corte paralelo à base, corte oblíquo) e reconhecimento da figura gerada; (7) vistas ortogonais (frontal, superior, lateral) e interpretação de representações de sólidos; (8) simetria e congruência em sólidos quando o foco é espacial (eixos/planos de simetria do sólido).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) geometria plana (polígonos, circunferência, ângulos em 2D) sem conexão explícita com sólidos ou relações no espaço; (2) cálculo de área/volume como objetivo central (mesmo em sólidos) quando o foco é mensuração e fórmulas, e não posições/estrutura do sólido; (3) geometria analítica/espacial com ênfase em equações, vetores, produto escalar/vetorial, distância ponto-plano, interseção por sistemas, se o objetivo é algébrico-analítico; (4) trigonometria aplicada a sólidos (ex.: ângulos e distâncias com seno/cosseno) quando o foco é trigonométrico; (5) transformações geométricas no plano (translação, rotação, reflexão) sem discussão de simetria espacial; (6) problemas de perspectiva/desenho técnico que não envolvam identificação de posições relativas ou propriedades de sólidos.",
+      "diferenciador": "O foco é a compreensão estrutural e relacional em 3D: como elementos geométricos se posicionam no espaço (reta/plano) e como sólidos são identificados, descritos e analisados por suas propriedades, elementos, planificações e seções — mais do que calcular medidas (área/volume) ou resolver por métodos algébricos.",
+      "palavras_chave": [
+        "reta reversa",
+        "reta e plano",
+        "poliedro",
+        "planificação",
+        "seção plana"
+      ]
     },
     {
       "nome": "Números e Operações Fundamentais",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos conjuntos numéricos e do sentido de número, incluindo leitura, escrita, comparação, ordenação, decomposição e representação (reta numérica, formas decimal e fracionária), bem como as operações fundamentais (adição, subtração, multiplicação e divisão) e seus significados, propriedades, algoritmos, estimativas, cálculo mental e resolução de problemas envolvendo essas operações com números naturais, inteiros, racionais (frações e decimais) e, quando pertinente, irracionais em contextos de operações básicas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) identificação, leitura e escrita de números (naturais, inteiros, racionais; eventualmente irracionais) e valor posicional; (2) comparação, ordenação, arredondamento, estimativa e aproximações numéricas; (3) decomposição e composição de números (ex.: 3.482 = 3 mil + 4 centenas + 8 dezenas + 2 unidades); (4) representação na reta numérica e conversões simples entre formas (fração ↔ decimal, número misto ↔ fração imprópria); (5) operações fundamentais e seus significados (juntar, retirar, comparar, completar; parcelas, soma, diferença; grupos iguais, produto; partilha e medida na divisão, quociente e resto); (6) cálculo exato e aproximado com adição, subtração, multiplicação e divisão, incluindo com números negativos, frações e decimais; (7) propriedades operatórias aplicadas ao cálculo (comutativa, associativa, distributiva, elemento neutro, inverso aditivo/multiplicativo quando aplicável); (8) algoritmos e estratégias de cálculo (contas armadas, cálculo mental, decomposição, uso de estimativas para checagem); (9) múltiplos e divisores em nível operacional (paridade, critérios de divisibilidade, decomposição em fatores primos) quando o objetivo é efetuar/justificar divisões, simplificar frações ou calcular MMC/MDC em problemas aritméticos; (10) problemas contextualizados cujo núcleo é escolher e executar operações fundamentais e interpretar o resultado (troco, repartição, contagem de itens, medidas simples, razão como quociente em situações elementares).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Álgebra e funções (equações/inequações com incógnitas como foco central, expressões algébricas, sistemas, funções, polinômios); (2) Geometria e medidas como tema principal (área, perímetro, volume, ângulos, semelhança, trigonometria), mesmo que exija contas básicas apenas como suporte; (3) Estatística e probabilidade (médias, gráficos, combinatória, eventos), salvo quando a tarefa for puramente executar operações com números sem interpretação estatística; (4) Porcentagem, juros, razão e proporção como tópico central (regra de três, escalas, taxas), exceto quando aparecerem apenas como conversões numéricas muito elementares e o foco for a operação básica; (5) Conjuntos e lógica (operações com conjuntos, proposições) e teoria dos números avançada (congruências, provas formais); (6) Operações com radicais, potências e logaritmos quando o foco é propriedades específicas desses temas (mesmo que envolvam multiplicar/dividir); (7) Análise de erros, demonstrações formais ou justificativas teóricas que não envolvam diretamente o cálculo/uso das operações fundamentais e do sentido de número.",
+      "diferenciador": "O foco principal é o sentido de número e a execução/seleção das quatro operações (e suas propriedades e representações) para calcular e resolver problemas aritméticos; outros módulos entram quando o objetivo central passa a ser modelagem algébrica, proporcionalidade/porcentagem, geometria/medidas ou análise de dados.",
+      "palavras_chave": [
+        "adição",
+        "subtração",
+        "multiplicação",
+        "divisão",
+        "frações"
+      ]
     },
     {
       "nome": "Introdução à Trigonometria",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo inicial das razões trigonométricas (seno, cosseno e tangente) em triângulos retângulos e/ou no círculo trigonométrico, incluindo definições, interpretação geométrica, uso de ângulos notáveis, conversões básicas entre graus e radianos, relações fundamentais iniciais e aplicações diretas para calcular lados, ângulos e alturas/distâncias em problemas contextualizados.",
+      "incluir_quando": "Classificar aqui quando a questão aborda definição, identificação ou uso de seno, cosseno e tangente; relações entre catetos e hipotenusa em triângulo retângulo; escolha da razão trigonométrica adequada para encontrar um lado ou um ângulo; cálculo de valores trigonométricos de ângulos notáveis (0°, 30°, 45°, 60°, 90°) e seus equivalentes em radianos; uso de tabela/triângulos notáveis para obter sen, cos, tg; interpretação no círculo trigonométrico (ponto (cos θ, sen θ), quadrantes e sinais); conversão graus↔radianos em nível introdutório; aplicação direta de trigonometria em problemas de altura e distância (inclinação, sombra, ângulo de elevação/depressão) sem exigir técnicas avançadas; uso de identidades básicas como tg θ = sen θ / cos θ e sen²θ + cos²θ = 1 em exercícios simples; resolução de triângulos retângulos com trigonometria (incluindo uso de calculadora para sen/cos/tg e arcoseno/arcocosseno/arcotangente quando indicado).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: Teorema de Pitágoras e semelhança de triângulos sem uso explícito de razões trigonométricas; funções trigonométricas como funções periódicas com estudo aprofundado de gráficos, período, amplitude, fase e transformações; equações e inequações trigonométricas complexas (múltiplas soluções, intervalos gerais, uso extensivo de identidades); identidades trigonométricas avançadas (ângulo duplo, triplo, soma e diferença, produto-soma, fórmulas de prostaférese); leis dos senos e dos cossenos e resolução de triângulos quaisquer (não retângulos) como foco principal; trigonometria analítica avançada, números complexos e fórmula de Euler; séries de Fourier, limites e derivadas/integral de funções trigonométricas (cálculo); geometria analítica sem conexão trigonométrica (distância, inclinação, circunferência) ou vetores sem uso de ângulos/razões trigonométricas; aplicações físicas avançadas (ondas, harmônicos) onde trigonometria é apenas ferramenta secundária.",
+      "diferenciador": "Foco em introduzir e aplicar diretamente as razões trigonométricas básicas (sen, cos, tg) para relacionar ângulos e lados em triângulos retângulos e no círculo trigonométrico, com ênfase em valores notáveis e problemas de altura/distância, sem entrar em identidades/equações trigonométricas avançadas ou em resolução de triângulos não retângulos.",
+      "palavras_chave": [
+        "seno",
+        "cosseno",
+        "tangente",
+        "triângulo retângulo",
+        "círculo trigonométrico"
+      ]
     },
     {
       "nome": "Áreas de Figuras Planas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Cálculo, comparação e decomposição de áreas de figuras geométricas planas (2D), usando fórmulas, propriedades e unidades de medida, incluindo figuras usuais (quadrado, retângulo, triângulo, paralelogramo, losango, trapézio, círculo) e figuras compostas formadas por essas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculo de área (medida de superfície) de figuras planas, aplicação direta ou derivação de fórmulas de área, comparação de áreas, determinação de dimensões a partir da área, conversão de unidades de área (cm², m², ha), uso de malhas quadriculadas para estimar/contar área, decomposição e recomposição de figuras para obter área, áreas de regiões sombreadas, diferença/soma de áreas, e problemas contextualizados (piso, terreno, pintura, papel, tecido) cujo objetivo principal seja encontrar área.",
+      "nao_incluir_quando": "NÃO classificar aqui quando o foco principal for perímetro/contorno (mesmo que a figura seja plana), comprimento de circunferência/arcos, volume ou área de superfície de sólidos (3D), semelhança/escala com foco em razão de semelhança sem pedir área, coordenadas/Geometria Analítica (área por determinante) se o tópico central for outro, trigonometria para encontrar lados/ângulos sem objetivo final de área, teorema de Pitágoras quando usado apenas para comprimento, probabilidade/estatística com gráficos de área (histogramas) sem cálculo geométrico, e problemas de unidades de medida que não envolvam área (apenas comprimento ou capacidade).",
+      "diferenciador": "O objetivo central é determinar ou comparar a medida de superfície (em unidades quadradas) de figuras 2D, frequentemente por fórmulas e decomposição de regiões, distinguindo-se de tópicos próximos que tratam de contorno (perímetro), medidas lineares (comprimento) ou grandezas tridimensionais (volume/área total de sólidos).",
+      "palavras_chave": [
+        "área",
+        "cm²",
+        "m²",
+        "figuras planas",
+        "região sombreada"
+      ]
     },
     {
       "nome": "Geometria Espacial: Cilindros e Cones",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de sólidos geométricos do tipo cilindro e cone (retos e, quando aplicável, oblíquos), incluindo identificação de elementos (raio, diâmetro, altura, geratriz, eixo, bases), planificações, áreas (lateral, total e da base), volumes, relações métricas e problemas aplicados envolvendo medidas e conversões.",
+      "incluir_quando": "Classificar aqui quando a questão envolve cilindros e/ou cones e pede ou utiliza: (1) cálculo de volume (V=πr²h para cilindro; V=(1/3)πr²h para cone); (2) cálculo de área lateral e área total (cilindro: Al=2πrh, At=2πr(h+r); cone reto: Al=πrg, At=πr(g+r)); (3) determinação de geratriz g (especialmente em cone reto, com g²=r²+h²) ou uso de altura/raio/diâmetro; (4) planificação (desenvolvimento) do cilindro (retângulo + 2 círculos) e do cone (setor circular + círculo), incluindo comprimento da circunferência, arco do setor e ângulo do setor; (5) problemas de capacidade/armazenamento/enchimento/escoamento envolvendo recipientes cilíndricos ou cônicos; (6) comparação de volumes/áreas entre cilindro e cone, escalas e semelhança (variação com fator k: áreas ~k², volumes ~k³); (7) seções e cortes simples quando o foco é manter o modelo de cilindro/cone (ex.: corte paralelo à base gerando círculo; tronco de cone/cilindro quando explicitamente tratado como derivação direta); (8) identificação e classificação do sólido como cilindro ou cone a partir de descrição, figura ou propriedades.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) prismas e pirâmides em geral (mesmo que haja comparação superficial sem uso de fórmulas/elementos de cilindro/cone); (2) esfera, calota esférica, fuso, cunha esférica ou problemas centrados em geometria esférica; (3) geometria plana (círculo, setor, coroa circular) sem conexão explícita com planificação/área/volume de cilindro ou cone; (4) tronco de pirâmide, paralelepípedo, cubo, tetraedro e outros poliedros; (5) coordenadas/analítica (equações de superfícies, cônicas no plano) quando o foco é álgebra/analítica e não medidas geométricas do sólido; (6) problemas de física/química (pressão, densidade, vazão) em que o sólido é apenas contexto e não há cálculo geométrico de área/volume; (7) otimização/cálculo diferencial (máximos e mínimos) cujo foco é cálculo, mesmo que envolva cilindro/cone, a menos que o objetivo principal seja aplicar diretamente fórmulas geométricas básicas.",
+      "diferenciador": "O foco distintivo é a modelagem e o cálculo de medidas (áreas e volumes) especificamente de sólidos de revolução simples: cilindros e cones, incluindo seus elementos característicos (geratriz, altura, raio) e suas planificações (retângulo e setor circular), o que os separa de poliedros (prismas/pirâmides) e de sólidos esféricos.",
+      "palavras_chave": [
+        "cilindro",
+        "cone",
+        "geratriz",
+        "planificação",
+        "volume"
+      ]
     },
     {
       "nome": "Funções Polinomiais do 1º e 2º Graus",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de funções polinomiais de 1º grau (afins/lineares) e de 2º grau (quadráticas), incluindo suas formas algébricas, interpretação e construção de gráficos, análise de coeficientes, raízes/zeros, interceptos, variação (crescimento/decrescimento), vértice e concavidade, além de aplicações típicas (modelagem, problemas contextualizados) e resolução de equações/inequações diretamente associadas a essas funções.",
+      "incluir_quando": "Classificar aqui quando a questão aborda funções do tipo f(x)=ax+b (a≠0) e/ou f(x)=ax²+bx+c (a≠0), pedindo para: identificar coeficientes e seus efeitos no gráfico; determinar domínio e imagem (especialmente em quadráticas); calcular e interpretar raízes/zeros (f(x)=0), interceptos com os eixos, ponto de interseção entre duas funções; construir, esboçar ou analisar gráficos (reta e parábola), incluindo inclinação/coeficiente angular, coeficiente linear, concavidade, eixo de simetria, vértice (máximo/mínimo), valor máximo/mínimo; usar formas fatorada, canônica (a(x-h)²+k) e geral; aplicar fórmula de Bhaskara/discriminante (Δ) e relações entre raízes e coeficientes; resolver inequações quadráticas/lineares via análise de sinal e gráfico; determinar intervalos de crescimento/decrescimento e positividade/negatividade; modelar situações com função afim ou quadrática (custo/receita/lucro, movimento uniformemente variado, área, trajetória, otimização simples) e interpretar parâmetros no contexto; compor tarefas de avaliação de função (calcular f(x0)), encontrar x dado f(x), e problemas de variação linear/quadrática.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: polinômios em geral sem foco funcional (operações algébricas, fatoração genérica, teorema do resto, divisão de polinômios) sem análise de função; funções de grau maior (cúbicas, quartas etc.) como tema central; funções racionais, exponenciais, logarítmicas, trigonométricas, modulares, por partes, ou compostas/inversas como foco principal; sistemas lineares/matrizes/GAUSS sem interpretação como função afim; geometria analítica avançada (equação geral da reta/circunferência, distância, ângulo entre retas) quando não vinculada à análise de função; progressões (PA/PG) e estatística; cálculo (limites, derivadas) para estudar máximos/mínimos; inequações e equações que não derivam de funções afins/quadráticas (ex.: exponenciais/logarítmicas) ou que são apenas manipulação algébrica sem interpretação funcional.",
+      "diferenciador": "O foco é a relação entre expressão algébrica e comportamento gráfico/variacional de funções polinomiais de 1º e 2º graus (reta e parábola), com ênfase em coeficientes, zeros, vértice/concavidade e interpretação de gráficos e modelos.",
+      "palavras_chave": [
+        "função afim",
+        "função quadrática",
+        "reta",
+        "parábola",
+        "vértice"
+      ]
     },
     {
       "nome": "Geometria Plana: Polígonos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de polígonos no plano: definição e classificação (convexo/côncavo, simples/complexo, regular/irregular), elementos (lados, vértices, diagonais, ângulos internos e externos), propriedades e relações métricas e angulares (soma dos ângulos internos/externos, número de diagonais), perímetro e área de polígonos (especialmente triângulos, quadriláteros e polígonos regulares), além de problemas envolvendo decomposição em triângulos, simetrias e apótema em polígonos regulares.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) identificação/definição de polígono e seus elementos (lados, vértices, diagonais, ângulos internos/externos); (2) classificação de polígonos por número de lados (triângulo, quadrilátero, pentágono etc.) e por propriedades (convexo/côncavo, regular/irregular, equilátero/equiângulo quando aplicável); (3) cálculo do número de diagonais (fórmula n(n-3)/2) ou raciocínios equivalentes; (4) soma dos ângulos internos ((n-2)·180°) e ângulo interno de polígono regular, bem como soma dos ângulos externos (360°) e ângulo externo de polígono regular; (5) problemas de perímetro de polígonos e relações entre lados (incluindo polígonos regulares); (6) área de polígonos por fórmulas usuais (triângulo, paralelogramo, trapézio, losango, quadrado, retângulo) e por decomposição/triangulação; (7) área e perímetro de polígonos regulares usando apótema, raio, lado e a fórmula A = (P·a)/2; (8) propriedades de quadriláteros notáveis (paralelogramo, retângulo, quadrado, losango, trapézio) quando o foco é a natureza poligonal (lados/ângulos/diagonais/perímetro/área) e não outros tópicos; (9) problemas de simetria e regularidade em polígonos (eixos de simetria, rotações) quando vinculados à classificação/propriedades do polígono; (10) construção/descrição de polígonos em malhas, coordenadas ou figuras, desde que o objetivo seja determinar propriedades poligonais (número de lados, ângulos, diagonais, perímetro, área).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) circunferência/círculo como tema central (arcos, cordas, ângulos na circunferência, setor/segmento circular), mesmo que apareça um polígono inscrito/circunscrito apenas como contexto; (2) trigonometria (lei dos senos/cossenos, razões trigonométricas) como ferramenta principal para resolver triângulos, a menos que o foco seja explicitamente propriedades gerais de polígonos; (3) semelhança de triângulos, teorema de Tales ou relações proporcionais como núcleo do problema (classificar em Semelhança/Tales); (4) geometria espacial (poliedros, prismas, pirâmides) mesmo que envolva faces poligonais; (5) transformações geométricas (translações, rotações, reflexões) como tópico principal sem ênfase em propriedades de polígonos; (6) geometria analítica com foco em equações de retas, distância entre pontos, área por determinantes/shoelace, se o objetivo principal for coordenadas e não conceitos de polígonos; (7) ângulos entre retas paralelas e transversais, ou apenas relações de ângulos em retas, sem referência essencial a polígonos; (8) problemas de área/perímetro exclusivamente de figuras curvas ou mistas em que o componente poligonal não é o objeto de estudo; (9) congruência de triângulos e critérios (LAL, ALA etc.) quando o foco é provar congruência, não propriedades de polígonos em geral.",
+      "diferenciador": "O foco é a estrutura e as propriedades gerais de figuras poligonais no plano (lados, vértices, diagonais, ângulos, perímetro e área) e suas fórmulas clássicas em função do número de lados e da regularidade, distinguindo-se de tópicos centrados em círculos, trigonometria, semelhança ou geometria espacial.",
+      "palavras_chave": [
+        "polígono",
+        "diagonais",
+        "soma dos ângulos internos",
+        "ângulos externos",
+        "polígono regular"
+      ]
     },
     {
       "nome": "Geometria Analítica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de objetos geométricos (pontos, retas, circunferências e outras curvas) por meio de coordenadas e equações em sistemas de referência (plano cartesiano e, quando aplicável, espaço), relacionando propriedades geométricas a expressões algébricas: distâncias, inclinações, ângulos, interseções, paralelismo/perpendicularidade, áreas via coordenadas e transformações simples.",
+      "incluir_quando": "Classificar aqui quando a questão aborda geometria no plano (ou espaço) usando coordenadas, vetores ou equações, por exemplo: (1) distância entre dois pontos, ponto médio, divisão de segmento, baricentro/centroide por coordenadas; (2) equações da reta (geral, reduzida, paramétrica), coeficiente angular, condição de paralelismo e perpendicularidade, ângulo entre retas, distância de ponto a reta, interseção de retas; (3) circunferência: equação reduzida e geral, centro e raio, posição relativa entre reta e circunferência (secante/tangente), potência de um ponto em linguagem algébrica; (4) cônicas em nível analítico (quando presente no currículo): parábola, elipse, hipérbole por equações e elementos (foco, diretriz, eixos) em abordagem coordenada; (5) lugares geométricos descritos por equações/inequações no plano cartesiano; (6) transformações no plano via coordenadas (translação, reflexão, rotação simples, homotetia) e seus efeitos em equações/pontos; (7) uso de vetores no plano para representar deslocamentos, colinearidade, paralelismo, produto escalar para ângulo/projeção, desde que o foco seja resolver um problema geométrico por coordenadas; (8) cálculo de área/perímetro de figuras a partir de coordenadas (ex.: fórmula do polígono/\"shoelace\"), ou determinação de região no plano por inequações lineares/quadráticas com interpretação geométrica.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) geometria plana clássica sem coordenadas/equações (teorema de Tales, semelhança, congruência, circunferência por ângulos/arcos, trigonometria em triângulos) a menos que a resolução exija o plano cartesiano; (2) álgebra pura e funções sem interpretação geométrica (estudo de função afim/quadrática apenas por gráficos genéricos, sem propriedades de retas/circunferências/cônicas como objetos geométricos); (3) geometria espacial/estereometria (volumes, áreas de sólidos) sem uso de coordenadas/vetores no espaço; (4) matrizes/determinantes e sistemas lineares como tema central, quando não aplicados a problemas geométricos de coordenadas; (5) estatística, probabilidade, combinatória; (6) cálculo diferencial/integral (tangente como derivada, áreas por integrais) sem enquadramento em geometria analítica; (7) trigonometria e vetores em física (cinemática, forças) quando o objetivo não é uma propriedade geométrica no plano cartesiano.",
+      "diferenciador": "O foco é traduzir geometria em linguagem algébrica no sistema de coordenadas (equações, coordenadas e vetores) e extrair propriedades geométricas por manipulação algébrica; a presença explícita de pontos (x,y)/(x,y,z), equações de retas/circunferências/cônicas, coeficiente angular, distância e interseções é o principal sinal distintivo.",
+      "palavras_chave": [
+        "plano cartesiano",
+        "equação da reta",
+        "coeficiente angular",
+        "distância entre pontos",
+        "equação da circunferência"
+      ]
     },
     {
       "nome": "Matrizes e Determinantes",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de matrizes como estruturas para organizar dados e representar transformações lineares, incluindo operações matriciais, propriedades, tipos especiais de matrizes e o cálculo/uso de determinantes para analisar invertibilidade, resolução de sistemas e propriedades associadas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda definição, notação e dimensões de matrizes (ordem m×n), leitura/identificação de elementos a_ij, igualdade de matrizes; operações com matrizes (adição, subtração, multiplicação por escalar, produto de matrizes, potência de matriz quando aplicável), propriedades do produto (associatividade, distributividade, não comutatividade), matriz identidade e matriz nula; matrizes especiais (diagonal, escalar, triangular superior/inferior, simétrica, antissimétrica, ortogonal quando tratada via A^T A = I), transposta e suas propriedades; inversa de matriz (condições de existência, cálculo por adjunta/cofatores, por escalonamento/Gauss-Jordan, verificação A·A^{-1}=I); determinantes (definição e cálculo em 2×2 e 3×3, regra de Sarrus quando pertinente, expansão por cofatores/Laplace, propriedades: troca de linhas, fator comum, linearidade por linha/coluna, determinante de triangular/diagonal, det(AB)=det(A)det(B), det(A^T)=det(A), det(A^{-1})=1/det(A)); uso do determinante para decidir invertibilidade (det≠0), para resolver sistemas lineares (Regra de Cramer) e para discutir singularidade; cálculo de cofatores, matriz dos cofatores, adjunta (adjugate) e relação A^{-1} = adj(A)/det(A); problemas aplicados que explicitamente exijam modelagem/solução via matrizes e/ou determinantes (por exemplo, composição de transformações via produto de matrizes, área/volume via determinante em contextos elementares, desde que o foco seja o determinante).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de sistemas lineares sem uso explícito de matrizes/determinantes (métodos de substituição, eliminação direta sem notação matricial), geometria analítica/vetores sem determinantes ou matrizes (produto escalar/vetorial como foco), funções e gráficos, polinômios, trigonometria, probabilidade/estatística; transformações lineares, espaços vetoriais, autovalores/autovetores, diagonalização e decomposições (LU/QR/SVD) quando o foco é Álgebra Linear avançada e não operações básicas com matrizes/determinantes; cálculo de área/volume por geometria pura sem determinantes; resolução numérica/algoritmos de computação matricial quando o foco é programação/complexidade e não o conteúdo matemático de matrizes e determinantes.",
+      "diferenciador": "O foco central é manipular matrizes e determinantes como objetos algébricos: realizar operações matriciais, calcular determinantes e usar essas ferramentas para inferir invertibilidade e resolver problemas (especialmente sistemas via inversa ou Cramer), distinguindo-se de tópicos que resolvem sistemas ou estudam vetores/transformações sem a linguagem e propriedades matriciais/determinantais.",
+      "palavras_chave": [
+        "matriz",
+        "determinante",
+        "produto de matrizes",
+        "matriz inversa",
+        "cofator"
+      ]
     },
     {
       "nome": "Relações Métricas no Triângulo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações métricas entre lados, alturas, projeções e segmentos notáveis em triângulos, com ênfase no triângulo retângulo e nas consequências de semelhança de triângulos geradas pela altura relativa à hipotenusa. Inclui fórmulas para calcular catetos, hipotenusa, altura, projeções e áreas a partir dessas relações.",
+      "incluir_quando": "Classificar aqui quando a questão aborda relações métricas internas de um triângulo (especialmente retângulo) envolvendo: (1) altura relativa à hipotenusa e os segmentos em que ela divide a hipotenusa; (2) projeções dos catetos na hipotenusa; (3) fórmulas do tipo: a^2 = c·p e b^2 = c·q (cateto ao quadrado igual ao produto da hipotenusa pela projeção correspondente), h^2 = p·q (altura ao quadrado igual ao produto das projeções), c = p + q (hipotenusa como soma das projeções), ab = c·h (produto dos catetos igual ao produto da hipotenusa pela altura), e variações para encontrar medidas desconhecidas; (4) uso explícito de semelhança de triângulos decorrente da altura na hipotenusa para deduzir/usar essas relações; (5) problemas que pedem comprimento de segmentos formados por altura, mediana/segmentos na hipotenusa quando o contexto é o triângulo retângulo e suas projeções; (6) aplicações em área do triângulo retângulo via h e c (A = (c·h)/2) ou via catetos (A = (ab)/2) quando o objetivo é conectar com as relações métricas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Teorema de Pitágoras e suas aplicações diretas sem envolver projeções/altura na hipotenusa/segmentos métricos (ex.: a^2 + b^2 = c^2 apenas); (2) trigonometria no triângulo retângulo (seno, cosseno, tangente, razões trigonométricas, ângulos) como ferramenta central; (3) semelhança de triângulos em geral sem foco nas relações métricas específicas do triângulo retângulo (por exemplo, escalas, razões de lados em triângulos quaisquer); (4) Lei dos Senos e Lei dos Cossenos em triângulos oblíquos; (5) propriedades de pontos notáveis (baricentro, incentro, circuncentro, ortocentro) e suas relações, quando não conectadas às relações métricas da altura na hipotenusa; (6) geometria analítica (distância entre pontos, equação de reta) ou geometria espacial; (7) cálculo de área por Heron ou por base·altura em triângulos quaisquer sem uso das relações métricas do triângulo retângulo.",
+      "diferenciador": "O foco distintivo é o uso de projeções na hipotenusa e da altura relativa à hipotenusa (e a semelhança associada) para estabelecer relações algébricas entre segmentos do triângulo, indo além de Pitágoras e além de trigonometria.",
+      "palavras_chave": [
+        "projeção do cateto",
+        "altura na hipotenusa",
+        "segmentos da hipotenusa",
+        "relações métricas",
+        "semelhança no triângulo retângulo"
+      ]
     },
     {
       "nome": "Função Modular",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de funções definidas a partir do valor absoluto (módulo), incluindo definição, propriedades, representação gráfica, escrita por partes, transformações (translações, reflexões e dilatações), resolução de equações e inequações com módulo e análise de domínio, imagem, zeros e comportamento por intervalos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda funções com valor absoluto, como f(x)=|x|, f(x)=|ax+b|, f(x)=a|x-b|+c, f(x)=|g(x)|, f(x)=|g(x)|+k, ou expressões equivalentes que exigem reescrever em forma por partes. Também incluir quando pedir: (1) esboçar/interpretar gráficos em 'V' ou com quebras por causa do módulo; (2) determinar domínio, imagem, zeros/raízes, interceptos, vértice, simetria e monotonicidade de funções modulares; (3) identificar parâmetros a, b, c em transformações de |x| (abertura, deslocamentos, reflexão); (4) resolver equações do tipo |ax+b|=c, |g(x)|=h(x), |f(x)|=k, e sistemas que envolvam módulo; (5) resolver inequações do tipo |ax+b|<c, |ax+b|>=c, |g(x)|<=k, incluindo interpretação em intervalos; (6) compor ou comparar funções com módulo, analisar continuidade e pontos de não derivabilidade (cantos) quando relevante ao nível do problema; (7) problemas contextualizados que modelam distância em reta (ex.: |x-a|) ou erro absoluto, desde que a resolução dependa explicitamente de função/expressão modular.",
+      "nao_incluir_quando": "NÃO classificar aqui quando o módulo aparece apenas como operação numérica sem caráter funcional (ex.: calcular |−7|, simplificar |a| com a>0 dado), ou quando o foco principal é: (1) distância entre pontos/segmentos em geometria analítica sem tratar como função (ex.: distância entre dois pontos no plano usando fórmula); (2) norma/módulo de vetor, número complexo (|z|) ou trigonometria, a menos que a questão peça explicitamente análise de função com valor absoluto; (3) inequações/equações polinomiais, racionais, exponenciais, logarítmicas ou trigonométricas sem valor absoluto; (4) função definida por partes que não deriva de valor absoluto (ex.: piecewise arbitrária); (5) arredondamento, parte inteira, teto/piso (floor/ceil) e funções discretas similares; (6) módulo em aritmética modular (congruências) ou 'mod' de teoria dos números; (7) otimização/derivadas em cálculo onde o módulo é incidental e o objetivo é técnica de derivação/otimização geral, sem ênfase em propriedades de função modular.",
+      "diferenciador": "O elemento central é o valor absoluto como definidor da função, exigindo análise por casos (escrita por partes) e gerando gráficos característicos com mudança de expressão em pontos onde o argumento do módulo zera (ex.: 'V', quebras/cantos), além de técnicas específicas para equações/inequações do tipo |expressão| ⋚ constante.",
+      "palavras_chave": [
+        "valor absoluto",
+        "módulo",
+        "função modular",
+        "gráfico em V",
+        "escrita por partes"
+      ]
     },
     {
       "nome": "Teorema de Tales e Semelhança de Triângulos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de proporcionalidade em figuras geométricas, especialmente em triângulos, envolvendo o Teorema de Tales (retas paralelas determinando segmentos proporcionais), critérios e propriedades de semelhança de triângulos (AA, LAL, LLL), razão de semelhança, escalas, e aplicações para determinar comprimentos, alturas, distâncias inacessíveis e relações entre perímetros e áreas em figuras semelhantes.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) uso direto do Teorema de Tales em feixes de paralelas cortadas por transversais, com montagem de proporções entre segmentos correspondentes; (2) triângulos com uma reta paralela a um lado formando triângulos menores semelhantes ao original (ex.: DE // BC em ΔABC) e dedução de proporções; (3) identificação ou prova de semelhança de triângulos por critérios AA (ângulo-ângulo), LAL (lado-ângulo-lado com ângulo compreendido) ou LLL (lado-lado-lado), incluindo correspondência de vértices; (4) cálculo de medidas (lados, alturas, segmentos em transversais) a partir da razão de semelhança; (5) problemas de escala e ampliação/redução de figuras via semelhança (mapas, maquetes, sombras, espelhos, triangulação), desde que a resolução dependa de proporções de triângulos semelhantes; (6) relações derivadas da semelhança: perímetros proporcionais à razão de semelhança e áreas proporcionais ao quadrado da razão; (7) uso de semelhança em triângulos retângulos quando a solução se baseia em triângulos semelhantes (por exemplo, altura relativa à hipotenusa gerando triângulos semelhantes), e não primariamente em trigonometria.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) trigonometria (seno, cosseno, tangente, leis dos senos/cossenos) como ferramenta principal, sem necessidade de semelhança/Tales; (2) Teorema de Pitágoras e relações métricas no triângulo retângulo quando aplicadas apenas como fórmulas, sem argumentação por semelhança; (3) geometria analítica (coeficiente angular, equações de retas, distância entre pontos) sem uso explícito de proporcionalidade por paralelas/semelhança; (4) congruência de triângulos (LAL, LLL, ALA) com foco em igualdade de medidas, não em proporcionalidade; (5) cálculo de áreas e perímetros por fórmulas diretas (Heron, base×altura/2, etc.) sem relação de semelhança; (6) homotetia, transformações geométricas e escalonamentos tratados de forma abstrata sem problemas de proporção/triângulos semelhantes; (7) problemas de razão e proporção puramente algébricos (regra de três) sem contexto geométrico de paralelas/triângulos.",
+      "diferenciador": "O foco central é a proporcionalidade geométrica obtida por retas paralelas (Teorema de Tales) e pela semelhança de triângulos (critérios e razão de semelhança) para estabelecer e resolver proporções entre segmentos correspondentes, distinguindo-se de tópicos que usam igualdade (congruência) ou relações métricas/trigonométricas sem base em semelhança.",
+      "palavras_chave": [
+        "Teorema de Tales",
+        "retas paralelas",
+        "segmentos proporcionais",
+        "triângulos semelhantes",
+        "razão de semelhança"
+      ]
     },
     {
       "nome": "Geometria Plana: Retas e Planos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de conceitos e relações geométricas envolvendo retas no plano e sua representação/descrição, incluindo posições relativas entre retas, ângulos formados por retas e transversais, paralelismo e perpendicularidade, distância e projeções no plano, além de noções de plano como superfície geométrica onde as retas se situam (sem aprofundar em geometria espacial).",
+      "incluir_quando": "Classificar aqui quando a questão aborda propriedades, relações ou cálculos envolvendo retas no plano, tais como: posições relativas (concorrentes/secantes, paralelas, perpendiculares, coincidentes); ângulos entre retas e com transversal (correspondentes, alternos internos/externos, colaterais internos, suplementares, complementares); condições de paralelismo/perpendicularidade (inclusive por ângulos ou por coeficiente angular em geometria analítica); equações da reta no plano (geral, reduzida, segmentária), coeficiente angular, interceptos, ponto de interseção de duas retas, feixes de retas; distância de ponto a reta e entre retas paralelas; mediatriz, bissetriz e retas notáveis definidas por condições de equidistância; projeção ortogonal de ponto em reta; problemas de construção/argumentação com retas e ângulos em figuras planas; uso de axiomas/postulados básicos de incidência (pontos determinam uma reta; retas determinam ângulos) quando o foco é a relação entre retas no plano.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: polígonos e suas propriedades (triângulos, quadriláteros, semelhança, congruência) como tema central; circunferência/círculo (arcos, cordas, tangentes, ângulos na circunferência); áreas e perímetros como objetivo principal sem foco em relações entre retas; geometria espacial (planos no espaço, retas reversas, ângulos entre planos, interseção de planos, poliedros); transformações geométricas (simetrias, rotações, translações) como tópico central; trigonometria (leis dos senos/cossenos) quando o foco não é a relação entre retas; vetores e geometria analítica de forma predominante em outros objetos (por exemplo, distância entre pontos, equações de circunferência, cônicas) sem ênfase em retas; sistemas lineares/álgebra pura sem interpretação geométrica de retas.",
+      "diferenciador": "O foco é a análise de retas no plano e das relações angulares/posicionais entre elas (paralelismo, perpendicularidade, interseção, transversais) e suas representações (geométrica e/ou por equações), distinguindo-se de módulos centrados em figuras planas específicas (polígonos, circunferências) ou em geometria espacial.",
+      "palavras_chave": [
+        "retas paralelas",
+        "retas perpendiculares",
+        "transversal",
+        "ângulos alternos/correspondentes",
+        "equação da reta"
+      ]
     },
     {
       "nome": "Geometria Espacial: Poliedros",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de sólidos geométricos tridimensionais do tipo poliedro (sólidos limitados por faces planas), incluindo sua classificação, elementos (faces, arestas, vértices), planificações, relações métricas (áreas e volumes quando aplicável), relações topológicas (como a fórmula de Euler) e propriedades de poliedros regulares e prismas/pirâmides.",
+      "incluir_quando": "Classificar aqui quando a questão aborda poliedros e suas propriedades, como: identificar ou classificar prismas, pirâmides, tetraedros, hexaedros, octaedros, dodecaedros, icosaedros; contar ou relacionar faces/arestas/vértices; aplicar a fórmula de Euler (V - A + F = 2) e variações em contextos de poliedros convexos; analisar ou construir planificações (redes) de poliedros; determinar se um sólido é poliedro (faces planas) e discutir convexidade; calcular área total/área lateral e volume de prismas e pirâmides (incluindo troncos quando tratados como poliedros); trabalhar com seções planas em poliedros (cortes que geram polígonos) quando o foco é a estrutura do poliedro; problemas de montagem/embalagem envolvendo caixas e sólidos com faces planas; reconhecer e usar propriedades de poliedros regulares (sólidos platônicos) e semirregulares quando explicitamente citados; problemas que envolvem dualidade (ex.: cubo e octaedro) ou simetrias de poliedros, desde que o objeto central seja o poliedro.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: corpos redondos (cilindro, cone, esfera, tronco de cone) sem foco em poliedros; geometria plana (polígonos, áreas em 2D) sem conexão explícita com um sólido poliedral; trigonometria/geom. analítica em 3D (distâncias, vetores, planos, retas) quando o sólido não é um poliedro ou quando o foco é coordenadas; sólidos de revolução; malhas/planificações de cilindro/cone; problemas de volume/área de “caixas” apenas como paralelepípedo retângulo em aritmética aplicada sem discussão de elementos/estrutura de poliedros (faces/arestas/vértices, classificação, Euler, planificação); topologia de grafos/teoria dos grafos sem referência a poliedros; cristalografia/química (estruturas moleculares) se o foco não for a geometria do poliedro.",
+      "diferenciador": "O foco é em sólidos com faces planas (poliedros) e na relação entre seus elementos (faces, arestas, vértices), sua classificação (prismas/pirâmides/platônicos), planificações e propriedades estruturais como a fórmula de Euler, distinguindo-se de módulos de corpos redondos e de geometria plana.",
+      "palavras_chave": [
+        "poliedro",
+        "faces arestas vértices",
+        "fórmula de Euler",
+        "prisma e pirâmide",
+        "planificação"
+      ]
     },
     {
       "nome": "Geometria Espacial: Esferas e Sólidos Semelhantes",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de geometria espacial envolvendo esferas (e suas partes) e a semelhança entre sólidos geométricos, com ênfase em medidas (área e volume), relações de escala e proporcionalidade em 3D, incluindo aplicações em problemas contextualizados.",
+      "incluir_quando": "Classificar aqui quando a questão aborda esferas (raio, diâmetro, circunferência máxima, área da superfície esférica, volume da esfera), partes da esfera (hemisfério, calota esférica, fuso esférico, setor esférico, zona esférica) e/ou relações de semelhança entre sólidos (razão de semelhança/escala, fator de ampliação/redução) com consequências em comprimentos, áreas e volumes. Inclui problemas de comparação entre dois sólidos semelhantes (cubos, prismas, cilindros, cones, pirâmides, esferas) pedindo razão entre áreas/volumes, determinação de dimensões a partir de um fator de escala, ou uso de proporcionalidade (k, k^2, k^3). Inclui também situações de esfera inscrita/circunscrita em outros sólidos quando o objetivo principal é calcular medidas esféricas ou usar semelhança/escala para obter áreas/volumes.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de geometria plana (círculos, áreas de figuras planas, semelhança de triângulos) sem conexão direta com sólidos 3D; de sólidos espaciais sem esfera e sem semelhança (apenas volume/área de prismas, pirâmides, cilindros, cones, troncos) como tópico central; de trigonometria espacial, vetores, geometria analítica no espaço (distâncias em 3D, equações de esfera no R^3) quando o foco é coordenadas e não medidas geométricas usuais; de problemas de escalas em mapas/desenhos técnicos 2D sem extrapolação para sólidos; de densidade/massa/pressão/empuxo em física quando a geometria é apenas acessória e não se pede relações de área/volume ou semelhança.",
+      "diferenciador": "O que distingue este módulo é o foco em (1) fórmulas e propriedades específicas da esfera e de suas partes e (2) semelhança entre sólidos com uso sistemático das potências do fator de escala (comprimentos ~ k, áreas ~ k^2, volumes ~ k^3), frequentemente comparando dois sólidos ou escalonando um sólido no espaço.",
+      "palavras_chave": [
+        "esfera",
+        "área da superfície esférica",
+        "volume da esfera",
+        "calota esférica",
+        "sólidos semelhantes"
+      ]
     }
   ]
 }

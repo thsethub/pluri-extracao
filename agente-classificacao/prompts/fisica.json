@@ -75,291 +75,501 @@
     },
     {
       "nome": "Estudo dos gases",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do comportamento macroscópico dos gases e suas transformações, relacionando pressão, volume, temperatura e quantidade de matéria. Inclui leis empíricas (Boyle-Mariotte, Charles, Gay-Lussac, Avogadro), equação de estado do gás ideal, transformações gasosas (isotérmica, isobárica, isocórica/isovolumétrica, adiabática), misturas de gases (lei de Dalton), densidade e massa molar de gases, condições normais/padrão e aplicações típicas (balões, pneus, recipientes, manômetros). Pode envolver gráficos P×V, P×T, V×T e cálculos com unidades e conversões (K, atm, Pa, L, m³).",
+      "incluir_quando": "Classificar aqui quando a questão aborda relações entre P, V, T e n em gases, como: (1) aplicação direta das leis dos gases (PV=const, V/T=const, P/T=const, V/n=const) e lei geral/combinada; (2) uso da equação do gás ideal PV=nRT para encontrar pressão, volume, temperatura, número de mols, massa, densidade ou massa molar; (3) transformações gasosas e identificação do tipo de processo (isotérmico, isobárico, isocórico, adiabático) a partir de enunciado ou gráfico; (4) problemas com mistura de gases e pressões parciais (lei de Dalton) e coleta de gás sobre água (quando o foco é pressão parcial do vapor/ajuste de pressão do gás); (5) leitura/interpretação de diagramas P-V e cálculo de trabalho em expansão/compressão quando o sistema é um gás e o processo é descrito por uma lei de transformação; (6) conversões e condições CNTP/TPN, volume molar e comparação de volumes em mesmas condições; (7) instrumentos e situações típicas de gases (manômetro, barômetro, seringa, cilindro, balão) quando o objetivo é aplicar leis dos gases.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) termodinâmica geral sem foco em gases (1ª/2ª lei, máquinas térmicas, ciclos, entropia) ou quando o trabalho/calor é analisado sem usar relações P-V-T de gases; (2) hidrostática/hidrodinâmica de líquidos (pressão em fluidos, empuxo, Bernoulli) sem modelar o fluido como gás ideal ou sem leis dos gases; (3) cinética/teoria cinética e distribuição de velocidades (Maxwell-Boltzmann), energia interna microscópica e caminho livre médio, quando o foco é microscópico e não as leis macroscópicas usuais; (4) química de gases (estequiometria, leis volumétricas de reação, equilíbrio, gases reais/van der Waals) quando o objetivo é químico e não a física das transformações; (5) calorimetria e mudanças de fase (vaporização/condensação) como tema central, exceto quando aparece apenas como correção de pressão parcial em mistura; (6) acústica/ondas em gases (velocidade do som) sem uso de leis dos gases; (7) eletricidade/plasma ou propriedades elétricas do ar sem relações P-V-T.",
+      "diferenciador": "O foco distintivo é modelar o gás por relações de estado e transformações (P, V, T, n) para prever como o sistema gasoso responde a compressões/expansões e variações de temperatura, incluindo misturas via pressões parciais, tipicamente com PV=nRT e leis empíricas.",
+      "palavras_chave": [
+        "gás ideal",
+        "PV=nRT",
+        "leis dos gases",
+        "transformações gasosas",
+        "pressão parcial"
+      ]
     },
     {
       "nome": "Carga elétrica e processos de eletrização",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da carga elétrica como propriedade da matéria (sinais, quantização e conservação) e dos mecanismos pelos quais corpos adquirem, perdem ou redistribuem carga: eletrização por atrito, por contato (condução) e por indução, incluindo polarização, aterramento e distinção entre condutores e isolantes no contexto desses processos. Abrange também a interpretação microscópica (transferência de elétrons) e aplicações/efeitos típicos de eletricidade estática.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) definição e propriedades da carga elétrica (positiva/negativa, unidade coulomb, quantização em múltiplos de e, conservação da carga); (2) identificação do sinal final de corpos após interações e a ideia de que a eletrização usualmente envolve transferência de elétrons; (3) processos de eletrização por atrito, por contato e por indução, incluindo etapas do processo, condições necessárias e resultados (corpos com cargas iguais/opostas, redistribuição de cargas); (4) polarização de corpos neutros na presença de cargas externas e distinção entre polarização e eletrização efetiva; (5) uso de aterramento (ligação à Terra) em indução para obter carga líquida e análise do sentido do fluxo de elétrons; (6) comparação entre condutores e isolantes/dielétricos no contexto de eletrização e distribuição de cargas (superfície vs volume, mobilidade de elétrons); (7) problemas conceituais ou quantitativos simples envolvendo carga total após contato entre esferas/condutores idênticos, conservação de carga em sistemas, e identificação do processo de eletrização descrito; (8) fenômenos de eletricidade estática diretamente ligados a eletrização (pente e papel, balões, faíscas por descarga, eletroscópio como detector de carga, série triboelétrica quando usada para prever sinais).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Lei de Coulomb, campo elétrico, linhas de campo, força elétrica entre cargas, superposição de forças (a menos que o foco seja identificar/obter as cargas via eletrização); (2) potencial elétrico, energia potencial elétrica, trabalho, capacitância e capacitores; (3) corrente elétrica, circuitos, resistência, Lei de Ohm, potência elétrica, associação de resistores, instrumentos (amperímetro/voltímetro) em regime de corrente; (4) eletrostática avançada com Gauss, condutores em equilíbrio eletrostático e distribuição de carga por simetria (exceto quando explicitamente conectada ao processo de eletrização/aterramento); (5) magnetismo, indução eletromagnética, forças magnéticas, circuitos RL/RC/AC; (6) estrutura atômica e modelos de matéria sem relação direta com transferência de elétrons em eletrização; (7) química (íons, oxirredução) ou eletrólise, salvo quando a questão for explicitamente sobre carga elétrica e conservação/quantização em contexto físico de eletrização.",
+      "diferenciador": "O foco é como os corpos adquirem ou redistribuem carga (mecanismos de eletrização e conservação/quantização), e não as interações de campo/força/potencial resultantes entre cargas ou o comportamento de cargas em circuitos com corrente.",
+      "palavras_chave": [
+        "eletrização",
+        "atrito",
+        "contato",
+        "indução",
+        "polarização"
+      ]
     },
     {
       "nome": "Corrente, tensão e resistência elétrica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das grandezas elétricas fundamentais em circuitos: corrente elétrica (fluxo de carga), tensão/diferença de potencial (energia por carga) e resistência elétrica (oposição à passagem de corrente), incluindo suas definições, unidades, medições, relações matemáticas (especialmente a Lei de Ohm) e aplicações em circuitos simples (associações de resistores, quedas de tensão, potência e energia).",
+      "incluir_quando": "Classificar aqui quando a questão aborda definições, interpretação física ou cálculo de corrente (I), tensão (V) e resistência (R); uso direto ou indireto da Lei de Ohm (V=RI); conversões e unidades (ampère, volt, ohm) e leitura de instrumentos (amperímetro, voltímetro, multímetro) relacionados a I, V e R; análise de circuitos resistivos em corrente contínua (CC) envolvendo quedas de tensão, divisão de tensão, divisão de corrente, resistência equivalente em série/paralelo/mista; relação entre resistência e propriedades do material/condutor (R=ρL/A) quando o objetivo é determinar R e, a partir disso, I e V; potência elétrica e efeito Joule em resistores (P=VI, P=I²R, P=V²/R) quando o foco é consequência direta de I, V e R; identificação de condutor/isolante e comportamento ôhmico vs não-ôhmico (curva V×I) quando a discussão central é a relação entre V, I e R.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de eletrostática (campo elétrico, potencial elétrico de cargas puntiformes, lei de Coulomb, capacitância e capacitores) sem foco em corrente em circuitos; magnetismo e indução (força magnética, campo magnético, lei de Faraday/Lenz, indutância) como tema central; circuitos em corrente alternada (CA) com reatância, impedância, fasores, potência reativa/fator de potência; análise avançada de circuitos com leis de Kirchhoff como foco principal (malhas/nós extensos) quando não estiver centrada em I, V e R básicos; eletrônica de semicondutores (diodos, transistores, LEDs) quando o foco é comportamento não linear/dispositivos e não a relação fundamental V-I-R; eletroquímica (pilhas, eletrólise) quando o foco é reações e potencial eletroquímico; transmissão de energia e sistemas elétricos (transformadores, redes) quando o foco é infraestrutura e não grandezas básicas; instrumentação/segurança elétrica como tema principal sem cálculos ou conceitos centrais de I, V e R.",
+      "diferenciador": "Foco em grandezas elétricas fundamentais e suas relações em circuitos resistivos (I, V, R), especialmente a Lei de Ohm e consequências diretas (quedas de tensão, resistência equivalente, potência dissipada), distinguindo-se de tópicos de campo/carga (eletrostática), magnetismo/indução e CA/impedância.",
+      "palavras_chave": [
+        "corrente elétrica",
+        "tensão (diferença de potencial)",
+        "resistência elétrica",
+        "Lei de Ohm",
+        "resistores em série e paralelo"
+      ]
     },
     {
       "nome": "Gravitação",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das interações gravitacionais e seus efeitos: Lei da Gravitação Universal, campo e potencial gravitacional, energia gravitacional, movimento orbital e leis de Kepler, dinâmica de satélites e planetas, marés, variação de g com altitude/latitude, e noções de gravidade em referenciais não inerciais (peso aparente). Inclui aplicações quantitativas e conceituais em sistemas astronômicos e próximos à Terra.",
+      "incluir_quando": "Classificar aqui quando a questão aborda força gravitacional entre massas (F = G m1 m2 / r^2), campo gravitacional (g, intensidade de campo, linhas de campo), potencial gravitacional e energia potencial gravitacional (U = -GMm/r, variações de energia em órbitas), velocidade de escape, órbitas circulares e elípticas, leis de Kepler (período, semieixo maior, áreas), movimento de satélites (geoestacionário, baixa órbita, velocidade orbital), determinação de massas de astros via órbitas, marés e efeitos gravitacionais diferenciais, variação da aceleração da gravidade com altitude/profundidade/latitude e rotação da Terra, peso vs massa em contexto gravitacional, e problemas que envolvam G, M, r, g, μ=GM, ou relações orbitais (T^2 ∝ a^3).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: queda livre e lançamentos sob aceleração constante sem discutir gravitação universal/campo (cinemática básica), leis de Newton em geral sem foco gravitacional, trabalho e energia em contextos não gravitacionais (molas, atrito, eletricidade), eletrostática e lei de Coulomb (mesma forma matemática, mas interação elétrica), magnetismo, movimento circular uniforme sem origem gravitacional (força centrípeta genérica), hidrostática/pressão atmosférica, relatividade geral e curvatura do espaço-tempo em nível avançado (a menos que seja apenas menção qualitativa ligada à gravidade), astronomia descritiva sem cálculos/ideias físicas de gravitação (fases da Lua, constelações) e geofísica não relacionada a g/campo/potencial.",
+      "diferenciador": "O foco é a interação gravitacional como força de longo alcance e suas grandezas associadas (G, campo g, potencial, energia) explicando órbitas e fenômenos astronômicos; diferencia-se de cinemática/dinâmica geral por exigir modelagem gravitacional (dependência 1/r^2, GM, órbitas/Kepler) e não apenas aceleração constante ou força resultante genérica.",
+      "palavras_chave": [
+        "gravitação universal",
+        "campo gravitacional",
+        "potencial gravitacional",
+        "leis de Kepler",
+        "velocidade de escape"
+      ]
     },
     {
       "nome": "Estática dos fluidos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
+      "escopo": "Estudo de fluidos (líquidos e gases) em repouso e das grandezas e leis que descrevem o equilíbrio hidrostático: pressão e sua variação com a profundidade/altura, transmissão de pressão, empuxo e condições de flutuação, além de aplicações como manômetros, barômetros e vasos comunicantes.",
+      "incluir_quando": "Classificar aqui quando a questão aborda fluidos em equilíbrio (sem escoamento) e envolve: (1) pressão hidrostática e sua dependência com a profundidade/altura (p = p0 + ρgh), comparação de pressões em pontos de um fluido em repouso; (2) pressão atmosférica e medições com barômetros/manômetros (coluna de mercúrio, U-tubo, pressão absoluta vs manométrica); (3) princípio de Pascal e transmissão de pressão em fluidos confinados (prensa hidráulica, multiplicação de força, seringas); (4) vasos comunicantes e equilíbrio de colunas de líquidos (mesmo fluido ou fluidos diferentes, relação ρ1h1 = ρ2h2 quando aplicável); (5) empuxo (princípio de Arquimedes), cálculo de força de empuxo (E = ρfluido g Vdeslocado), peso aparente, densidade relativa, condições de flutuação/imersão (E = P, E > P, E < P), estabilidade básica de corpos flutuantes quando tratada de forma elementar; (6) forças de pressão em superfícies submersas em situações simples (resultante por diferença de pressões, por exemplo em tampas/portas) desde que o fluido esteja em repouso; (7) situações de equilíbrio envolvendo líquidos em recipientes, mergulho, submarinos, balões (quando o foco é empuxo/pressão estática) e variação de pressão com altitude em gases em aproximações simples.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) fluidos em movimento (hidrodinâmica): equação de Bernoulli, continuidade, vazão, efeito Venturi, Torricelli, escoamento laminar/turbulento, viscosidade, perdas de carga; (2) tensão superficial, capilaridade, molhabilidade e fenômenos de interface dominados por forças coesivas/adesivas; (3) termodinâmica e teoria cinética dos gases (leis dos gases, transformações, calor, trabalho) quando o foco não é pressão hidrostática/empuxo; (4) elasticidade e deformação de sólidos, pressão em sólidos sem contexto de fluido; (5) ondas em fluidos (som, ondas na água) e acústica; (6) instrumentação elétrica/eletrônica de sensores de pressão sem uso das leis de estática dos fluidos; (7) problemas de densidade/massa específica sem relação com pressão hidrostática, empuxo ou equilíbrio de colunas.",
+      "diferenciador": "O foco é o equilíbrio de fluidos em repouso e as consequências da pressão estática (variação com a profundidade, transmissão de pressão) e do empuxo, distinguindo-se de tópicos de fluidos em movimento (Bernoulli/continuidade) e de fenômenos de superfície (tensão superficial/capilaridade).",
       "palavras_chave": []
     },
     {
       "nome": "Cinemática vetorial",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do movimento de partículas no espaço (2D/3D) usando grandezas vetoriais: posição, deslocamento, velocidade e aceleração como vetores; decomposição em componentes; descrição por equações vetoriais/paramétricas; análise em diferentes referenciais e sistemas de coordenadas; movimentos típicos como lançamento oblíquo e movimento circular, com ênfase na direção e no sentido das grandezas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda movimento em duas ou três dimensões e exige tratamento vetorial (módulo, direção e sentido) de posição/deslocamento/velocidade/aceleração; quando pede decompor vetores em componentes (x, y, z) ou recompor resultantes; quando usa equações vetoriais/paramétricas do tipo r(t), v(t)=dr/dt, a(t)=dv/dt; quando envolve mudança de base/sistema de coordenadas (cartesiano, polar, cilíndrico) para descrever o movimento; quando trata de velocidade relativa e transformação entre referenciais (ex.: barco no rio, avião com vento) com soma vetorial; quando analisa trajetória e componentes tangencial/normal (centrípeta) em movimento curvilíneo; quando inclui lançamento oblíquo (separação horizontal/vertical) e/ou movimento circular (ω, v tangencial, a centrípeta) como aplicações de cinemática em 2D/3D; quando solicita ângulos, direção do vetor velocidade/aceleração, ou interpretação de gráficos vetoriais (componentes vs tempo) em mais de uma dimensão.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão é estritamente de cinemática escalar/unidimensional (MRU, MRUV) sem vetores ou sem decomposição em componentes; quando o foco é dinâmica (forças, leis de Newton, trabalho/energia, quantidade de movimento) mesmo que haja movimento em 2D/3D; quando é apenas trigonometria/geom. vetorial sem dependência temporal (soma de vetores estática, equilíbrio) ou sem contexto de movimento; quando trata principalmente de gravitação, órbitas e leis de Kepler com ênfase dinâmica; quando é sobre movimento harmônico simples/ondas (cinemática oscilatória) sem abordagem vetorial espacial; quando é sobre cinemática angular pura de corpo rígido (rotações, torque, momento de inércia) sem conexão com a descrição vetorial do movimento de uma partícula.",
+      "diferenciador": "Ênfase na descrição do movimento com vetores e componentes em 2D/3D (r(t), v(t), a(t)), incluindo direção/sentido e composição vetorial (especialmente velocidade relativa e movimentos curvilíneos), distinguindo-se da cinemática 1D escalar e de tópicos de dinâmica baseados em forças.",
+      "palavras_chave": [
+        "posição vetorial r(t)",
+        "decomposição em componentes (x,y,z)",
+        "velocidade relativa (soma vetorial)",
+        "lançamento oblíquo",
+        "aceleração centrípeta/tangencial"
+      ]
     },
     {
       "nome": "Potencial elétrico e trabalho da força elétrica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do potencial elétrico (V) e da energia potencial elétrica (U) associados a cargas e distribuições de carga, e da relação entre trabalho da força elétrica, variação de energia potencial e diferença de potencial. Inclui cálculo de V e ΔV, trabalho em deslocamentos no campo elétrico, caráter conservativo da força elétrica em eletrostática, superfícies equipotenciais e conexão com o campo elétrico (E = -∇V, em especial E ≈ -ΔV/Δs em 1D).",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculo, interpretação ou aplicação de potencial elétrico, diferença de potencial e/ou trabalho da força elétrica em situações eletrostáticas. Exemplos típicos: (1) determinar V em um ponto devido a uma carga puntiforme (V = kQ/r) ou a várias cargas (superposição); (2) relacionar trabalho e potencial: W_e = -ΔU e W_e = q(Vi - Vf) = -qΔV; (3) calcular energia potencial elétrica U = qV ou U = k qQ/r e variações de U; (4) usar conservação de energia para obter velocidade/energia cinética de uma carga acelerada por uma ddp (ΔK = -ΔU = qΔV, com sinais consistentes); (5) identificar que o trabalho da força elétrica independe do caminho em eletrostática e depende apenas dos pontos inicial e final; (6) analisar superfícies equipotenciais, movimento ao longo de equipotenciais (trabalho nulo) e direção do campo elétrico perpendicular às equipotenciais; (7) obter campo elétrico a partir do potencial (E = -dV/dx em 1D, ou relação qualitativa com gradiente); (8) problemas com placas paralelas e campo uniforme usando ΔV = -E·Δs (ou V varia linearmente com a posição) e trabalho W = qE·Δs; (9) discutir referência de potencial (V=0 no infinito, escolha de nível de referência) e sinais de V, U, W para cargas positivas/negativas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) cálculo de campo elétrico por Lei de Coulomb ou Lei de Gauss sem uso de potencial/energia/trabalho; (2) força elétrica e dinâmica (F = qE, F = kqQ/r^2) sem conexão com trabalho/energia/potencial; (3) circuitos elétricos (tensão em resistores, leis de Kirchhoff, potência elétrica, corrente, resistência, capacitores em circuitos RC) quando o foco é análise de circuito e não energia/potencial eletrostático; (4) capacitância e energia armazenada em capacitores (U = 1/2 CV^2) como tema central, a menos que a questão seja explicitamente sobre potencial e trabalho no campo; (5) magnetismo, força magnética, indução eletromagnética; (6) eletrodinâmica e campos variáveis no tempo (onde o campo elétrico pode não ser conservativo); (7) potencial gravitacional ou trabalho de outras forças (mola, atrito) sem analogia explícita e sem conteúdo de potencial elétrico.",
+      "diferenciador": "O foco é a descrição energética do campo elétrico: potencial (V), energia potencial (U) e trabalho (W) da força elétrica, enfatizando diferença de potencial e conservação (campo eletrostático conservativo), em vez de força/campo como grandezas primárias ou análise de circuitos.",
+      "palavras_chave": [
+        "potencial elétrico",
+        "diferença de potencial",
+        "energia potencial elétrica",
+        "trabalho da força elétrica",
+        "equipotencial"
+      ]
     },
     {
       "nome": "Ondas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de ondas e fenômenos ondulatórios: descrição e modelagem de perturbações que se propagam em meios materiais ou no vácuo, suas grandezas características (amplitude, período, frequência, comprimento de onda, fase, velocidade), tipos (mecânicas/eletromagnéticas; transversais/longitudinais; progressivas/estacionárias), princípios (superposição), e efeitos como reflexão, refração, difração, interferência, polarização, ressonância, batimentos, efeito Doppler e intensidade/energia transportada.",
+      "incluir_quando": "Classificar aqui quando a questão aborda propagação de perturbações e suas relações quantitativas/qualitativas, por exemplo: (1) cálculo ou interpretação de v, f, T, λ, ω, k, fase e defasagem; (2) equação de onda e função de onda (y(x,t)=A sen(kx−ωt+φ), sinais de propagação, velocidade de fase); (3) ondas em cordas, molas, superfícies, som e ondas sísmicas (incluindo velocidade em meios, dependência com tensão/densidade linear em cordas, compressibilidade/densidade em fluidos, noções de impedância); (4) ondas estacionárias, harmônicos, nós/ventres, condições de contorno (extremidade fixa/livre), modos em cordas e colunas de ar (tubos abertos/fechados); (5) superposição, interferência construtiva/destrutiva, diferença de caminho, coerência, padrões de franjas (fenda dupla, rede de difração em nível conceitual ou com fórmulas usuais); (6) reflexão e refração de ondas (lei de Snell para luz, mudança de λ e v ao mudar de meio, ângulo crítico e reflexão total interna quando aplicável); (7) difração e princípio de Huygens (qualitativo e quantitativo básico); (8) polarização (especialmente em ondas eletromagnéticas e transversais); (9) efeito Doppler (som e luz em nível escolar), batimentos e frequência aparente; (10) intensidade, potência, energia transportada por ondas, nível sonoro em decibéis, atenuação e espalhamento (quando tratados como fenômenos ondulatórios); (11) ressonância e frequência natural associadas a sistemas oscilantes acoplados a ondas (ex.: ressonância em colunas de ar).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) óptica geométrica sem enfoque ondulatório (espelhos, lentes, formação de imagens, instrumentos ópticos) a menos que envolva interferência/difração/polarização; (2) eletromagnetismo em circuitos e campos (Lei de Ohm, circuitos RC/RL, indução, forças magnéticas) sem discussão de ondas eletromagnéticas; (3) oscilações/movimento harmônico simples como tema central (pêndulo, massa-mola, energia no MHS) quando não houver propagação/ondas ou modos estacionários; (4) acústica apenas fisiológica/psicoacústica (percepção auditiva) ou aplicações tecnológicas sem modelagem ondulatória; (5) mecânica de fluidos (pressão, empuxo, Bernoulli) sem ondas; (6) física moderna/quantum (função de onda quântica, dualidade onda-partícula) quando o foco não for ondas clássicas; (7) sismologia/geofísica descritiva sem análise de propagação, velocidade, reflexão/refração de ondas.",
+      "diferenciador": "O foco é a propagação e a superposição de perturbações (clássicas) e os fenômenos característicos resultantes (interferência, difração, refração, ondas estacionárias, Doppler), distinguindo-se de oscilações isoladas (MHS) e de óptica puramente geométrica/circuitos elétricos sem abordagem ondulatória.",
+      "palavras_chave": [
+        "comprimento de onda",
+        "frequência",
+        "interferência",
+        "difração",
+        "efeito Doppler"
+      ]
     },
     {
       "nome": "Trabalho e potência mecânica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do trabalho realizado por forças e da taxa de realização de trabalho (potência) em sistemas mecânicos, incluindo cálculo de trabalho por força constante ou variável, interpretação em gráficos força-deslocamento, relação com energia cinética (teorema trabalho–energia) e determinação de potência média e instantânea em movimentos e máquinas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculo, interpretação ou aplicação de trabalho mecânico e/ou potência mecânica, como: (1) trabalho de uma força constante: W = F·d·cos(θ), incluindo casos de força paralela, perpendicular ou inclinada ao deslocamento; (2) trabalho resultante e soma de trabalhos de múltiplas forças (peso, normal, atrito, tração, força elástica, forças aplicadas); (3) trabalho de forças variáveis por integração ou por área sob o gráfico F×x (por exemplo, mola: W = (1/2)k(x_f^2 − x_i^2)); (4) uso do teorema trabalho–energia: W_resultante = ΔK para relacionar forças, deslocamento e variação de velocidade; (5) potência média e instantânea: P_média = W/Δt, P = dW/dt, P = F·v·cos(θ), incluindo problemas com velocidade constante, aceleração, subida/descida de planos, elevadores e veículos; (6) conversões e unidades (joule, watt, kW, hp/cv) e interpretação física do sinal do trabalho (positivo/negativo/nulo); (7) eficiência/rendimento de máquinas quando formulado em termos de potência útil e potência fornecida (η = P_útil/P_fornecida), desde que o foco central seja potência/trabalho mecânico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) energia potencial e conservação de energia sem uso explícito de trabalho/potência (por exemplo, apenas U_g = mgh, U_e = (1/2)kx^2, conservação de energia mecânica como foco central); (2) dinâmica newtoniana focada em forças e aceleração (leis de Newton, diagramas de corpo livre) sem pedir trabalho, potência ou teorema trabalho–energia; (3) impulso e quantidade de movimento (I = Δp, colisões) sem conexão com trabalho–energia; (4) torque, momento angular e potência rotacional como tema principal (τ, ω, P = τ·ω) quando o foco é rotação; (5) termodinâmica e potência/energia em contextos não mecânicos (calor, trabalho termodinâmico p·ΔV, máquinas térmicas); (6) eletricidade (potência elétrica P = VI, efeito Joule) ou ondas (intensidade) sem relação com potência mecânica; (7) cinemática pura (MRU/MRUV) sem ligação com trabalho/energia/potência.",
+      "diferenciador": "O foco distintivo é quantificar a transferência de energia por forças ao longo de um deslocamento (trabalho) e a rapidez dessa transferência (potência), frequentemente conectando forças e movimento via W = F·d·cos(θ), área em F×x e o teorema trabalho–energia, em vez de apenas descrever forças (dinâmica) ou conservar energia sem calcular trabalho/potência.",
+      "palavras_chave": [
+        "trabalho mecânico",
+        "potência mecânica",
+        "teorema trabalho-energia",
+        "W = F·d·cos(θ)",
+        "P = F·v·cos(θ)"
+      ]
     },
     {
       "nome": "Movimento uniforme (MU)",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do movimento retilíneo com velocidade constante (módulo e direção constantes) e aceleração nula, descrevendo a posição em função do tempo por meio de relações lineares e gráficos característicos (s×t e v×t). Inclui interpretação e resolução de problemas com deslocamento, distância percorrida, velocidade média (que coincide com a velocidade constante no MU) e conversões de unidades.",
+      "incluir_quando": "Classificar aqui quando a questão aborda movimento em linha reta com velocidade constante e aceleração igual a zero, envolvendo: (1) uso direto ou implícito das equações do MU (s = s0 + vt; Δs = vΔt); (2) cálculo de posição, deslocamento, distância percorrida, tempo ou velocidade em situações de velocidade constante; (3) interpretação/construção de gráficos do MU: s×t como reta (inclinação = v; intercepto = s0) e v×t como linha horizontal (área = deslocamento); (4) comparação de movimentos uniformes (encontro, ultrapassagem, perseguição) com velocidades constantes, inclusive sistemas de referência e escolha de origem; (5) problemas com unidades e conversões típicas (m/s ↔ km/h) em contexto de velocidade constante; (6) identificação de MU a partir de dados tabulados (posição vs tempo) com variação linear; (7) leitura de sinais (v positiva/negativa) e sentido do movimento em MRU/MU.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) movimento uniformemente variado (MUV/MRUV), queda livre, lançamento vertical ou qualquer caso com aceleração constante diferente de zero; (2) movimento circular uniforme (MCU) ou grandezas angulares (ω, período, frequência, aceleração centrípeta); (3) cinemática vetorial em 2D (lançamento oblíquo, projéteis) ou movimentos curvilíneos; (4) dinâmica (forças, leis de Newton, atrito) como foco principal, mesmo que haja velocidade constante; (5) gráficos e análises envolvendo aceleração não nula (a×t diferente de zero) ou velocidade variável; (6) relatividade/transformações de Galileu como tema central além do uso básico de referencial; (7) média de velocidades em trechos com velocidades diferentes (movimento não uniforme) como objetivo principal.",
+      "diferenciador": "A característica definidora é a velocidade constante em trajetória retilínea (a = 0), levando a posição linear no tempo e gráficos s×t retilíneos; distingue-se de MUV por não haver aceleração e de MCU por não haver trajetória circular nem grandezas angulares.",
+      "palavras_chave": [
+        "movimento uniforme",
+        "MRU",
+        "velocidade constante",
+        "s = s0 + vt",
+        "gráfico posição-tempo"
+      ]
     },
     {
       "nome": "Energia mecânica e sua conservação",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da energia mecânica (soma de energias cinética e potencial) e das condições em que ela se conserva ou varia, incluindo transformações entre energia cinética, potencial gravitacional e potencial elástica, análise de sistemas com forças conservativas e não conservativas, e aplicação do princípio da conservação da energia para resolver problemas de movimento sem recorrer diretamente às equações de Newton.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) cálculo e comparação de energia cinética (Ec = 1/2 mv^2), energia potencial gravitacional (Ep = mgh ou variações ΔEp) e energia potencial elástica (Ee = 1/2 kx^2); (2) uso explícito do princípio de conservação da energia mecânica (Em = Ec + Ep (+ Ee) constante) em ausência de forças dissipativas; (3) conversão entre formas de energia em situações como queda livre, lançamento vertical, movimento em rampas/pistas, montanhas-russas, pêndulos ideais, sistemas massa-mola, blocos em trilhos; (4) identificação de forças conservativas vs não conservativas e impacto na conservação de Em; (5) aplicação de trabalho de forças não conservativas (atrito, resistência do ar, força aplicada) como variação da energia mecânica: W_nc = ΔEm; (6) determinação de velocidades, alturas, compressões/alongamentos de mola, pontos de retorno e condições de movimento a partir de balanços energéticos; (7) interpretação de gráficos/tabelas de energia (Ec, Ep, Em) ao longo do movimento e verificação de conservação; (8) problemas que pedem “energia mecânica inicial e final”, “perda de energia mecânica”, “energia dissipada”, “energia transformada em calor” em contexto de movimento.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) trabalho e energia de forma geral sem foco em energia mecânica/conservação (por exemplo, apenas teorema trabalho–energia para obter velocidade a partir do trabalho resultante, sem discutir Ep/Ee/Em); (2) potência, rendimento, máquinas térmicas ou energia interna/termodinâmica como tema central; (3) quantidade de movimento/impulso e colisões (mesmo que haja menção a energia cinética, mas o foco seja conservação do momento ou colisões elásticas/inelásticas); (4) dinâmica via Leis de Newton e forças com resolução por equações de movimento, quando a abordagem energética não é solicitada nem relevante; (5) gravitação/órbitas e energia potencial gravitacional em nível de energia total orbital (energia mecânica em órbitas) se o foco principal for leis de Kepler, campo gravitacional ou potencial gravitacional avançado; (6) eletrostática/circuitos e conservação de energia elétrica (diferença de potencial, energia potencial elétrica) sem analogia direta e explícita com energia mecânica; (7) simples conversões de unidades de energia ou discussões conceituais genéricas sobre “energia” sem aplicação a Ec/Ep/Ee e conservação.",
+      "diferenciador": "O foco distintivo é o balanço e a conservação (ou variação por forças não conservativas) da energia mecânica Em = Ec + Ep (+ Ee) para prever estados de movimento (velocidade, altura, deformação) por transformações entre energias, em vez de resolver o movimento principalmente por forças e acelerações.",
+      "palavras_chave": [
+        "energia mecânica",
+        "conservação da energia",
+        "energia cinética",
+        "energia potencial gravitacional",
+        "energia potencial elástica"
+      ]
     },
     {
       "nome": "Introdução à Física",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo inicial do que é a Física, seus objetivos, métodos e linguagem: fenômenos naturais, modelagem, grandezas e unidades, medições, algarismos significativos, análise dimensional, ordens de grandeza, conversões e noções básicas de vetores e gráficos como ferramentas para descrever o mundo físico.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos introdutórios e metacientíficos de Física, como: definição e campo de atuação da Física; relação entre teoria, experimento e modelagem; etapas do método científico (hipótese, teste, validação, refutação); distinção entre grandezas físicas e não físicas; sistemas de unidades (SI) e unidades fundamentais/derivadas; conversão de unidades e notação científica; precisão vs exatidão, erro absoluto/relativo, incerteza de medida e propagação simples de incertezas; algarismos significativos e arredondamento; análise dimensional e verificação de consistência de fórmulas; estimativas e ordens de grandeza; leitura e interpretação de tabelas e gráficos (posição-tempo, velocidade-tempo como introdução, sem aprofundar cinemática); noções iniciais de vetores (módulo, direção, sentido, decomposição) apenas como ferramenta de representação; identificação de variáveis, parâmetros e constantes em modelos simples; discussão de idealizações (ponto material, corpo rígido, ausência de atrito) em nível introdutório.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de conteúdos específicos e desenvolvidos de outras áreas, como: cinemática (MRU, MRUV, lançamentos, movimento circular com fórmulas e problemas típicos), dinâmica (leis de Newton, forças, atrito, trabalho e energia), estática, gravitação, hidrostática/hidrodinâmica, termologia/termodinâmica, ondulatória, óptica geométrica/física, eletrostática/eletrodinâmica, magnetismo, eletromagnetismo, física moderna (quântica, relatividade, nuclear), circuitos elétricos, ou resolução de problemas que dependam essencialmente dessas leis e equações; também não incluir quando o foco é matemática pura (álgebra, trigonometria, cálculo) sem contexto físico, ou metrologia avançada/instrumentação específica (calibração detalhada, estatística de dados aprofundada) além do nível introdutório.",
+      "diferenciador": "Ênfase na linguagem e no método da Física (medir, modelar, estimar e checar consistência) em vez de aplicar leis físicas específicas de um tópico (como Newton, energia, circuitos, termodinâmica).",
+      "palavras_chave": [
+        "método científico",
+        "Sistema Internacional (SI)",
+        "análise dimensional",
+        "algarismos significativos",
+        "ordem de grandeza"
+      ]
     },
     {
       "nome": "Movimento Harmônico Simples (MHS)",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do Movimento Harmônico Simples (MHS) como oscilação periódica descrita por função senoidal/cossenoidal e por equação diferencial linear do tipo x'' + ω²x = 0, incluindo relações entre deslocamento, velocidade, aceleração, fase, amplitude, período, frequência, energia e aplicações típicas (massa-mola e pêndulo simples em pequenas oscilações).",
+      "incluir_quando": "Classificar aqui quando a questão aborda oscilações em que a força restauradora (ou aceleração) é proporcional e oposta ao deslocamento (F = -kx, a = -ω²x), ou quando pede/usa a descrição matemática do MHS: x(t)=A cos(ωt+φ) ou A sen(ωt+φ), v(t), a(t), fase e defasagem, condições iniciais para determinar A e φ, período T=2π/ω e frequência f=1/T, frequência angular ω, energia mecânica no MHS (E=1/2 kA², troca entre energia cinética e potencial), velocidade máxima (vmax=ωA) e aceleração máxima (amax=ω²A), gráficos x×t, v×t, a×t e interpretação de amplitude/período/fase, sistemas equivalentes a MHS (massa-mola horizontal/vertical em torno do equilíbrio, pêndulo simples para pequenos ângulos com ω=√(g/L), oscilador harmônico), e problemas que envolvem identificar se o movimento é MHS e extrair parâmetros (k, m, L, g, A, φ, T, ω) a partir de dados experimentais ou enunciado.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: movimento circular uniforme (MCU) sem conexão explícita com projeção em MHS; ondas mecânicas/eletromagnéticas (equação de onda, interferência, difração) sem foco em oscilador; oscilações amortecidas e/ou forçadas como tema central (amortecimento, ressonância, fator de qualidade, regime transiente) — a menos que o enunciado reduza explicitamente ao caso não amortecido e não forçado; pêndulo físico, pêndulo composto ou grandes amplitudes (não linear) quando o objetivo é além da aproximação de pequenos ângulos; vibrações em sistemas contínuos (cordas, membranas) e modos normais como foco principal; problemas puramente de energia em molas sem caráter oscilatório/temporal (ex.: compressão estática) quando não há análise de oscilação; cinemática geral periódica sem a condição de força restauradora linear.",
+      "diferenciador": "O elemento decisivo é a presença de uma dinâmica oscilatória linear com aceleração proporcional ao deslocamento (a = -ω²x) e solução senoidal com período constante, permitindo relacionar diretamente x(t), v(t), a(t), fase e energia do oscilador harmônico.",
+      "palavras_chave": [
+        "movimento harmônico simples",
+        "oscilador harmônico",
+        "x'' + ω²x = 0",
+        "F = -kx",
+        "período T = 2π/ω"
+      ]
     },
     {
       "nome": "Estática dos sólidos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do equilíbrio de corpos rígidos (sólidos) sob a ação de forças e momentos, incluindo condições de equilíbrio translacional e rotacional, análise de torques, reações em apoios, distribuição de forças em estruturas simples e determinação de centro de massa/centro de gravidade em situações estáticas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda equilíbrio estático de um corpo rígido, exigindo aplicar simultaneamente (ou conceitualmente) as condições ΣF = 0 e/ou Στ = 0; cálculo de torque/momento de uma força (braço de alavanca, sentido horário/anti-horário); determinação de forças de reação em apoios (pino/articulação, rolete, engaste) em vigas, barras, escadas, placas ou corpos apoiados; problemas de alavancas, gangorras, chaves, portas e sistemas com forças aplicadas a distâncias; análise de distribuição de cargas em vigas (cargas concentradas e/ou distribuídas) em regime estático; identificação de ponto de aplicação da resultante de uma carga distribuída; cálculo/uso de centro de massa/centro de gravidade para equilíbrio e estabilidade (tombamento, condição para não virar); equilíbrio com atrito estático quando ele é necessário para manter o corpo rígido em repouso (por exemplo, escada apoiada na parede, bloco em contato com superfície rugosa) desde que o foco seja o equilíbrio do sólido e os torques; problemas de estabilidade e condições de escorregamento/tombamento em corpos rígidos; diagramas de corpo livre de sólidos com forças e momentos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: equilíbrio de partículas/ponto material sem considerar rotação/torque (apenas ΣF = 0); dinâmica de rotação (aceleração angular, Στ = Iα, energia rotacional, momento de inércia em movimento); cinemática/ dinâmica translacional (MRU/MRUV, leis de Newton com aceleração); hidrostática e empuxo (pressão em fluidos, princípio de Arquimedes) salvo se for apenas um carregamento externo em um problema de equilíbrio de sólido; elasticidade e deformações (Lei de Hooke, tensão/deformação, flexão com foco em deformação) quando o objetivo é resistência dos materiais e não equilíbrio global; estática de estruturas complexas com métodos avançados de engenharia (treliças com método dos nós/seções, hiperestaticidade) se o currículo separar isso como tópico próprio; trabalho e energia, potência; gravitação orbital; eletrostática/magnetostática; termologia.",
+      "diferenciador": "O foco é o equilíbrio de corpos rígidos, onde a rotação importa: além de somar forças, é essencial somar momentos/torques em torno de pontos/eixos para garantir equilíbrio rotacional e determinar reações e condições de estabilidade.",
+      "palavras_chave": [
+        "equilíbrio estático",
+        "torque",
+        "momento de força",
+        "reação de apoio",
+        "centro de massa"
+      ]
     },
     {
       "nome": "Física Moderna",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos fenômenos e modelos físicos desenvolvidos a partir do início do século XX que explicam comportamentos não descritos adequadamente pela Física Clássica, incluindo quantização, dualidade onda-partícula, estrutura atômica, relatividade, física nuclear e de partículas, e aplicações tecnológicas associadas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos, leis, experimentos, modelos ou aplicações de Física Moderna, tais como: (1) Mecânica Quântica e quantização: energia quantizada, fótons, efeito fotoelétrico, efeito Compton, radiação de corpo negro, hipótese de Planck, modelo de Bohr, níveis de energia, transições eletrônicas, espectros atômicos, princípio da incerteza, função de onda, probabilidade, equação de Schrödinger (conceitual ou cálculo simples), tunelamento, spin, princípio de exclusão de Pauli, estatísticas quânticas (Bose-Einstein/Fermi-Dirac) em nível introdutório; (2) Dualidade e ondas de matéria: de Broglie, interferência/difração de elétrons, experimento de dupla fenda com partículas; (3) Relatividade: postulados da Relatividade Especial, dilatação do tempo, contração do comprimento, simultaneidade, transformações de Lorentz, composição relativística de velocidades, energia e momento relativísticos, equivalência massa-energia (E=mc²), Relatividade Geral em nível conceitual (gravitação como curvatura do espaço-tempo, desvio gravitacional da luz, buracos negros, lentes gravitacionais) quando o foco é moderno; (4) Física Nuclear: radioatividade (alfa, beta, gama), meia-vida, decaimento exponencial, reações nucleares, fissão, fusão, energia de ligação, defeito de massa, estabilidade nuclear, aplicações (reatores, medicina nuclear, datação); (5) Física de Partículas e interações fundamentais: quarks, léptons, bósons, antipartículas, aniquilação/criação de pares, neutrinos, Modelo Padrão em nível introdutório, aceleradores e detectores; (6) Sólidos e aplicações modernas quando o núcleo é quântico: bandas de energia, semicondutores, diodos, transistores, LED, laser (emissão estimulada), supercondutividade (conceitual), efeito Hall quântico (se citado), nanotecnologia/efeitos quânticos em materiais; (7) Cosmologia moderna quando baseada em relatividade/partículas: Big Bang, expansão do universo, radiação cósmica de fundo, matéria escura/energia escura (conceitual), desde que o tratamento seja de Física Moderna e não apenas astronomia descritiva.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata predominantemente de: (1) Mecânica Clássica (cinemática, dinâmica newtoniana, trabalho e energia, impulso, colisões, gravitação newtoniana sem relatividade); (2) Eletromagnetismo clássico e circuitos (Lei de Ohm, Kirchhoff, campos e forças de Coulomb, indução de Faraday, ondas eletromagnéticas) quando não há quantização/fótons/efeitos modernos; (3) Óptica geométrica e ondulatória clássica (reflexão, refração, lentes, interferência/difração de luz) se não houver conexão explícita com dualidade onda-partícula, fótons ou experimentos quânticos; (4) Termodinâmica e Física Estatística clássica (gases ideais, ciclos, entropia) exceto quando o foco for corpo negro, estatísticas quânticas ou efeitos de quantização; (5) Física Atômica em abordagem puramente clássica/histórica sem quantização (por exemplo, modelos pré-quânticos sem discutir níveis de energia); (6) Astronomia/astrofísica descritiva (órbitas, leis de Kepler, classificação estelar) sem uso central de relatividade, nuclear ou quântica; (7) Química geral (ligações, estequiometria) mesmo que mencione átomos, se não houver tratamento físico moderno (espectros, níveis, quântica).",
+      "diferenciador": "Presença de quantização e/ou relatividade (efeitos em altas velocidades/campos gravitacionais intensos) e/ou processos nucleares/partículas elementares como explicação central do fenômeno, em contraste com descrições contínuas e determinísticas típicas da Física Clássica.",
+      "palavras_chave": [
+        "efeito fotoelétrico",
+        "dualidade onda-partícula",
+        "princípio da incerteza",
+        "transformações de Lorentz",
+        "radioatividade"
+      ]
     },
     {
       "nome": "Movimento uniformemente variado (MUV)",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do movimento retilíneo com aceleração constante (não nula ou podendo ser nula como caso-limite), relacionando posição, deslocamento, velocidade e tempo por meio das equações horárias e gráficos característicos. Inclui análise de sinais, escolha de referencial, interpretação de gráficos (s×t, v×t, a×t) e aplicações típicas como queda livre e lançamentos verticais (sem resistência do ar).",
+      "incluir_quando": "Classificar aqui quando a questão aborda movimento com aceleração constante e exige usar/interpretar relações do tipo v = v0 + at, s = s0 + v0 t + (1/2) a t^2, v^2 = v0^2 + 2aΔs, ou ainda área sob o gráfico v×t e inclinação de s×t e v×t. Também incluir quando envolver: determinação de a, v0, s0, tempo, velocidade final, deslocamento; análise de frenagem/arrancada com aceleração constante; problemas de queda livre e lançamento vertical (a = ±g constante); identificação do tipo de gráfico e suas propriedades (parábola em s×t, reta em v×t, constante em a×t); conversões e consistência de unidades (m, s, m/s, m/s²) em contexto de MUV; discussão de sentido do movimento versus sinal de velocidade e aceleração em 1D.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: movimento uniforme (a = 0) como tema central sem extensão para MUV; movimento circular (mesmo com aceleração centrípeta) ou MCU/MCUV; cinemática vetorial em 2D/3D com decomposição de componentes como foco principal (ex.: lançamento oblíquo completo); dinâmica (leis de Newton, forças) como foco principal sem reduzir a um MUV dado; movimentos com aceleração variável (não constante), uso de cálculo diferencial/integral como requisito central; oscilação/harmônico simples; cinemática relativística; análise puramente de energia, trabalho e potência sem uso das equações/gráficos de MUV; hidrodinâmica/termodinâmica/eletricidade e magnetismo.",
+      "diferenciador": "O elemento decisivo é a hipótese de aceleração constante em movimento retilíneo e o uso das equações e gráficos característicos do MUV para relacionar s, v, a e t (incluindo queda livre/lançamento vertical como casos particulares).",
+      "palavras_chave": [
+        "aceleração constante",
+        "equações do MUV",
+        "v = v0 + at",
+        "s = s0 + v0t + (1/2)at^2",
+        "gráficos s×t v×t a×t"
+      ]
     },
     {
       "nome": "Energia e potência elétrica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da energia elétrica transferida/consumida em circuitos e dispositivos e da taxa dessa transferência (potência), incluindo relações com tensão, corrente e resistência, cálculo de consumo em kWh, rendimento e dissipação por efeito Joule em situações de corrente contínua e alternada (valores eficazes).",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculo, comparação ou interpretação de energia elétrica (trabalho/consumo) e/ou potência elétrica em componentes ou circuitos, usando relações como E = P·t, P = U·I, P = I²·R, P = U²/R, energia em joule ou kWh, leitura de placa de aparelhos (W, kW, V, A), estimativa de gasto/conta de luz, tempo de uso para um dado consumo, potência total em associações de resistores/cargas, potência dissipada em resistores (efeito Joule), potência fornecida por fontes/geradores, rendimento/eficiência (energia útil vs. energia consumida), e em CA quando envolver potência média/ativa e uso de valores eficazes (Vrms, Irms) para P = Vrms·Irms (ou com fator de potência quando explicitado).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: leis de Kirchhoff, análise de malhas/nós e distribuição de correntes/tensões sem foco em potência/energia; associação de resistores apenas para obter resistência equivalente; campo elétrico, potencial elétrico e energia potencial de cargas em eletrostática sem consumo em circuito; capacitância/indutância e transitórios (RC/RL/RLC) quando o foco é a dinâmica temporal e não o balanço de energia/potência; magnetismo e indução eletromagnética (Faraday/Lenz) sem cálculo de potência/energia elétrica; máquinas elétricas/transformadores quando o foco é apenas relação de espiras/tensões/correntes sem potência, rendimento ou perdas; eletrônica (diodos, transistores) quando o foco é funcionamento/curvas características e não dissipação/consumo; termologia/calorimetria sem conexão explícita com energia elétrica dissipada (Joule).",
+      "diferenciador": "O foco central é quantificar 'quanto' de energia elétrica é consumida/transferida e 'quão rápido' isso ocorre (potência), frequentemente conectando grandezas elétricas (U, I, R) a consumo (kWh), dissipação e eficiência, em vez de apenas determinar tensões/correntes ou descrever fenômenos elétricos.",
+      "palavras_chave": [
+        "potência elétrica",
+        "energia elétrica",
+        "kWh",
+        "efeito Joule",
+        "P = U·I"
+      ]
     },
     {
       "nome": "Príncipios da Óptica Geométrica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da propagação retilínea da luz e das leis fundamentais que regem sua interação com superfícies e meios transparentes no regime de raios (óptica geométrica), incluindo reflexão, refração, índices de refração, leis de Snell-Descartes, ângulo crítico, reflexão interna total, reversibilidade dos raios e formação de imagens por espelhos e interfaces planas, com uso de diagramas de raios e aproximação paraxial quando aplicável.",
+      "incluir_quando": "Classificar aqui quando a questão aborda princípios e leis da óptica geométrica, como: (1) modelo de raio luminoso e propagação retilínea em meios homogêneos; (2) leis da reflexão (ângulo de incidência = ângulo de reflexão), normal à superfície, espelhos planos e esféricos no contexto de traçado de raios; (3) refração e lei de Snell-Descartes (n1 senθ1 = n2 senθ2), definição e uso de índice de refração, velocidade da luz no meio (v = c/n); (4) desvio angular ao atravessar interfaces, lâminas de faces paralelas, deslocamento lateral e condições geométricas de incidência; (5) ângulo crítico e reflexão interna total, fibras ópticas e guias de luz no regime geométrico; (6) princípio da reversibilidade dos raios e independência dos raios (superposição no regime geométrico); (7) formação de imagens por reflexão/refração em interfaces simples, especialmente espelho plano e dioptria plana, com análise de posição aparente, profundidade aparente e construção por prolongamento de raios; (8) uso de convenções de sinais e aproximação de pequenos ângulos/paraxial em problemas de traçado e cálculo básico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) óptica física/ondulatória: interferência, difração, polarização, coerência, fendas, redes de difração, experimento de Young; (2) natureza quântica da luz: fótons, efeito fotoelétrico, espectros atômicos; (3) instrumentos ópticos e sistemas complexos com ênfase em equações específicas (lentes delgadas, equação de Gauss, aumento, microscópio, telescópio) quando o foco não é o princípio básico de reflexão/refração, mas sim o sistema de formação de imagens por lentes; (4) eletromagnetismo e ondas em geral (equações de Maxwell, propagação de ondas EM) sem abordagem por raios; (5) fotometria/radiometria (lúmen, candela, iluminância), cor e percepção visual; (6) problemas puramente de geometria sem relação com leis de reflexão/refração; (7) fenômenos atmosféricos e dispersão cromática (arco-íris, prisma com dispersão) quando o foco central é dependência com o comprimento de onda e não as leis geométricas básicas.",
+      "diferenciador": "Foco em descrever e prever trajetórias de raios de luz e ângulos/posições de imagens usando leis de reflexão e refração em interfaces e espelhos, sem recorrer a efeitos ondulatórios (interferência/difração) nem a modelos quânticos; ênfase em diagramas de raios, Snell-Descartes, índice de refração e condições de reflexão interna total.",
+      "palavras_chave": [
+        "lei da reflexão",
+        "lei de Snell-Descartes",
+        "índice de refração",
+        "ângulo crítico",
+        "reflexão interna total"
+      ]
     },
     {
       "nome": "Quantidade de movimento e sua convervação",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da quantidade de movimento (momento linear) e do impulso, suas relações com força e variação temporal, e a aplicação do princípio de conservação da quantidade de movimento em sistemas isolados, especialmente em colisões e explosões, incluindo análise em 1D e 2D, referenciais e centro de massa.",
+      "incluir_quando": "Classificar aqui quando a questão aborda cálculo ou interpretação de quantidade de movimento p = m·v; conservação de p em sistemas isolados (antes/depois) em colisões (elásticas, inelásticas, perfeitamente inelásticas) e explosões/fragmentações; uso de impulso I = F·Δt e teorema do impulso (Δp = ∫F dt ≈ Fmédio·Δt); problemas com forças externas desprezíveis ou análise de sistema vs. partícula; colisões em duas dimensões com conservação vetorial (componentes x e y) e ângulos; recuo (arma/projétil), propulsão e foguetes em abordagem de conservação de momento (nível introdutório, sem equação de Tsiolkovsky); análise via centro de massa (velocidade do CM constante quando força externa resultante é nula) e uso do referencial do centro de massa para simplificar colisões; gráficos F×t para obter impulso e variação de momento; identificação de quando a conservação de momento é aplicável (isolamento, forças internas se cancelam, tempo de colisão curto).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de conservação de energia mecânica/teorema trabalho-energia (mesmo em colisões) sem uso de momento/impulso; cinemática pura (MRU/MRUV, lançamentos) sem menção a momento; dinâmica newtoniana focada em forças e aceleração sem relacionar a Δp/impulso; torque, momento angular e sua conservação (rotacional); estática e equilíbrio; hidrostática/hidrodinâmica sem conservação de momento linear (ex.: Bernoulli) ou sem análise de impulso; relatividade (momento relativístico) como foco central; equação do foguete (Tsiolkovsky) e sistemas de massa variável em tratamento avançado, quando o objetivo principal é deduzir/usar a equação e não a conservação de momento em eventos discretos.",
+      "diferenciador": "O foco é a grandeza vetorial quantidade de movimento e sua conservação em sistemas isolados, frequentemente em interações rápidas (colisões/explosões) e na relação impulso–variação de momento, distinguindo-se de módulos centrados em energia/trabalho ou em rotação (momento angular).",
+      "palavras_chave": [
+        "quantidade de movimento",
+        "momento linear",
+        "impulso",
+        "conservação do momento",
+        "colisão"
+      ]
     },
     {
       "nome": "Refração da luz",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da mudança de direção e/ou velocidade da luz ao atravessar a interface entre meios com diferentes índices de refração, incluindo leis e modelos (Snell-Descartes), ângulo crítico, reflexão interna total, dispersão e aplicações em sistemas ópticos e fenômenos cotidianos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a passagem da luz de um meio para outro (ou gradiente de índice) e discute/descreve/calcula: desvio do raio refratado; relação entre ângulos de incidência e refração; índice de refração absoluto ou relativo; velocidade da luz no meio (v=c/n) associada à refração; Lei de Snell-Descartes (n1·senθ1 = n2·senθ2); determinação de ângulo de refração, índice desconhecido, ou condição de desvio para a normal/para longe da normal; ângulo crítico e condição de reflexão interna total; refração em lâminas/placas de faces paralelas (deslocamento lateral) e prismas (desvio mínimo, dispersão por n(λ)); fenômenos como “canudo quebrado”, miragens, profundidade aparente, deslocamento aparente de objetos submersos, arco-íris (quando o foco é refração/disp ersão no interior de gotas), fibras ópticas e guias de luz (quando o mecanismo central é refração + reflexão interna total); diagramas de raios em interfaces e interpretação de trajetórias refratadas.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: reflexão (lei da reflexão, espelhos planos/esféricos) sem passagem de meio; formação de imagens por lentes delgadas (equação das lentes, aumento, vergência) quando o foco é óptica geométrica de lentes e não a lei de Snell/índices; difração, interferência, polarização e coerência (óptica ondulatória) sem relação direta com refração; absorção, espalhamento (Rayleigh/Mie), cor de objetos por pigmentos, fotometria; efeito fotoelétrico, espectros atômicos, dualidade onda-partícula; arco-íris explicado apenas por reflexão interna sem discutir refração/disp ersão; velocidade da luz em vácuo, relatividade, ou propagação em meios sem interface/sem variação de índice; instrumentos ópticos (microscópio, telescópio) quando a ênfase é em aumento e formação de imagem, não em refração na interface.",
+      "diferenciador": "O foco central é a mudança de direção/velocidade da luz causada por diferença de índice de refração entre meios, formalizada pela Lei de Snell-Descartes e seus desdobramentos (ângulo crítico, reflexão interna total, dispersão), distinguindo-se de tópicos de reflexão pura, formação de imagens por lentes/espelhos e fenômenos ondulatórios como interferência/difração.",
+      "palavras_chave": [
+        "refração",
+        "índice de refração",
+        "lei de Snell-Descartes",
+        "ângulo crítico",
+        "reflexão interna total"
+      ]
     },
     {
       "nome": "Geradores e receptores elétricos",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo de dispositivos em circuitos elétricos que fornecem energia elétrica (geradores/fontes) ou a consomem/transformam (receptores/cargas), com ênfase em força eletromotriz (fem), resistência interna, tensão nos terminais, potência e rendimento, além das convenções de sinais e das equações características em regime estacionário (corrente contínua).",
+      "incluir_quando": "Classificar aqui quando a questão aborda geradores (pilhas, baterias, fontes) e/ou receptores (motores, eletrolisadores, lâmpadas como carga) modelados por fem e resistência interna; cálculo de tensão nos terminais (U), fem (E ou ε), corrente (i) e resistência interna (r); equação do gerador (U = E - r i) e do receptor (U = E' + r i, com E' como contra-fem); análise de potência elétrica fornecida/absorvida (P = U i), potência útil, perdas internas (r i^2) e rendimento/eficiência (η = Pútil/Pfornecida); identificação de gerador/receptor pelo sentido da corrente e pela convenção de sinais (corrente entrando/saindo do terminal positivo); associação de fontes com resistência interna e seus efeitos (queda de tensão, curto-circuito, corrente de curto, tensão em circuito aberto); problemas que pedem distinguir se um elemento está atuando como gerador ou receptor em determinada situação (ex.: motor em frenagem regenerativa).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de leis de Kirchhoff e análise de malhas/nós sem foco em fem/resistência interna e equações características; associação de resistores e cálculo de resistência equivalente/potência em resistores ideais sem fontes reais; capacitores/indutores e circuitos RC/RL/RLC (transientes, reatância, fasores); eletrostática (campo, potencial, capacitores isolados) sem circuito com fonte; magnetismo/indução eletromagnética (Lei de Faraday) sem modelagem como gerador com fem e r; eletrônica (diodos, transistores, amplificadores) e fontes chaveadas em nível de componentes; geração de energia em usinas (hidrelétrica, termoelétrica) em abordagem macroscópica sem equações de gerador/receptor; instrumentação (voltímetro/amperímetro) quando o foco é apenas erro de medida e não a fonte/receptor.",
+      "diferenciador": "O foco distintivo é a modelagem de fontes e cargas reais por fem (ou contra-fem) e resistência interna, relacionando tensão nos terminais, corrente, potência e rendimento, e decidindo quando um elemento fornece ou absorve energia elétrica.",
+      "palavras_chave": [
+        "força eletromotriz (fem)",
+        "resistência interna",
+        "tensão nos terminais",
+        "contra-fem",
+        "rendimento"
+      ]
     },
     {
       "nome": "Fenômenos ondulatórios",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos comportamentos e efeitos característicos das ondas (mecânicas e eletromagnéticas) ao se propagarem e interagirem com meios, obstáculos e outras ondas, incluindo princípios e aplicações como interferência, difração, reflexão, refração, polarização, ressonância, ondas estacionárias, batimentos, efeito Doppler e dispersão.",
+      "incluir_quando": "Classificar aqui quando a questão aborda propriedades e comportamentos ondulatórios como: (1) interferência (construtiva/destrutiva), coerência, diferença de fase e de caminho, padrões de franjas (fenda dupla, redes de difração, filmes finos); (2) difração por fendas/obstáculos e condições para espalhamento significativo; (3) reflexão e refração de ondas com leis associadas (incluindo Snell para luz), mudança de velocidade/comprimento de onda ao mudar de meio, reflexão total interna; (4) polarização (luz/ondas transversais), filtros polarizadores, lei de Malus; (5) dispersão e dependência com frequência (índice de refração vs comprimento de onda), prisma, arco-íris em abordagem ondulatória; (6) ondas estacionárias, nós/ventres, harmônicos em cordas e colunas de ar, condições de contorno; (7) ressonância e frequência natural em sistemas oscilatórios/ondulatórios; (8) batimentos e superposição de frequências próximas; (9) efeito Doppler para som/luz (clássico e, quando aplicável, relativístico em nível introdutório); (10) intensidade, energia e potência associadas a ondas, atenuação e relação com amplitude quando o foco é fenômeno ondulatório; (11) velocidade de fase e de grupo quando tratadas como fenômenos de propagação; (12) aplicações típicas: acústica (eco, reverberação, interferência sonora), óptica física (interferômetros, difração), telecomunicações (modos/ressonâncias) desde que o foco seja o comportamento ondulatório.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) cinemática/ dinâmica de partículas sem modelagem ondulatória; (2) eletrostática, magnetostática, circuitos elétricos (Lei de Ohm, Kirchhoff, RC/RL) sem análise de ondas; (3) óptica geométrica pura (formação de imagens em espelhos e lentes, equação de Gauss, aumento, traçado de raios) quando não há interferência/difração/polarização; (4) termologia e calorimetria; (5) mecânica dos fluidos sem ondas (pressão, empuxo, Bernoulli) exceto quando explicitamente ondas em fluidos; (6) física moderna/quantum (de Broglie, função de onda, dualidade) quando o foco é quântico e não fenômenos ondulatórios clássicos; (7) astronomia/cosmologia sem Doppler/ondas; (8) som apenas como nível de intensidade em dB, audição e escalas logarítmicas se não envolver propagação/interferência/ressonância; (9) vibrações/osciladores (MHS) quando restritos ao movimento de um corpo e não à propagação/ superposição/ressonância em meios.",
+      "diferenciador": "O foco é a superposição e a interação de ondas (com meios, fronteiras e outras ondas), produzindo padrões e efeitos característicos (interferência, difração, polarização, Doppler, ondas estacionárias), distinguindo-se de tópicos que tratam apenas de trajetórias de raios (óptica geométrica) ou de oscilações locais sem propagação.",
+      "palavras_chave": [
+        "interferência",
+        "difração",
+        "refração",
+        "polarização",
+        "efeito Doppler"
+      ]
     },
     {
       "nome": "Instrumentos Ópticos e Visão",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da formação de imagens e do funcionamento de instrumentos ópticos (lupa, microscópio, telescópio, câmera, projetor, periscópio, binóculos) e da visão humana, incluindo lentes e espelhos em sistemas, aumento (angular e linear), campo de visão, foco, abertura, resolução e correção de defeitos visuais (miopia, hipermetropia, astigmatismo, presbiopia) com óculos e lentes de contato.",
+      "incluir_quando": "Classificar aqui quando a questão aborda: (1) análise de instrumentos ópticos compostos (combinação de lentes/espelhos) e seus parâmetros: aumento, ampliação, potência, distância focal efetiva, distância do objeto/imagem, foco, ajuste para visão distinta; (2) lupa e ampliação angular, ponto próximo, acomodação do olho, imagem no infinito vs imagem no ponto próximo; (3) microscópio composto: objetiva e ocular, formação de imagem intermediária, aumento total, comprimento do tubo, condições de foco; (4) telescópios (refrator/kepleriano, galileano, refletor): aumento angular, inversão de imagem, pupila de saída, uso para objetos no infinito; (5) câmera fotográfica, projetor e olho como sistemas de formação de imagem: diafragma/abertura, profundidade de campo, foco, distância imagem no sensor/retina; (6) resolução e limites de difração em instrumentos (critério de Rayleigh), poder separador, relação com abertura e comprimento de onda; (7) visão humana: formação de imagem na retina, papel do cristalino, íris/pupila, acomodação, ponto remoto e ponto próximo; (8) defeitos de visão (miopia, hipermetropia, astigmatismo, presbiopia) e sua correção com lentes convergentes/divergentes, cálculo de grau (dioptria) e distância focal da lente corretiva; (9) comparação entre instrumentos e olho (analogia objetiva/ocular vs cristalino/retina), e interpretação de diagramas de raios em sistemas ópticos.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de: (1) óptica geométrica básica de uma única lente ou espelho sem contexto de instrumento/visão (equação de Gauss, aumento linear, espelhos planos) como tópico isolado; (2) leis da reflexão/refração, Snell, índice de refração, ângulo crítico e reflexão total interna sem aplicação direta a instrumentos/olho; (3) fenômenos ondulatórios gerais (interferência, difração, polarização) sem conexão com resolução de instrumentos ou visão; (4) fotometria/radiometria, cor e espectro, dispersão em prismas, aberrações cromáticas/geométricas apenas como teoria geral sem instrumento específico; (5) eletrônica e sensores (CCD/CMOS) ou processamento de imagem sem foco em formação óptica; (6) anatomia/biologia do olho em nível fisiológico (cones/bastonetes, nervo óptico) sem modelagem óptica e correção visual.",
+      "diferenciador": "Ênfase em sistemas ópticos aplicados (instrumentos e olho) e em grandezas de desempenho (aumento, foco, campo de visão, pupila de saída, resolução) e correção de visão, em vez de apenas leis e equações de elementos ópticos isolados.",
+      "palavras_chave": [
+        "lupa",
+        "microscópio",
+        "telescópio",
+        "miopia",
+        "aumento angular"
+      ]
     },
     {
       "nome": "Indução eletromagnética",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos fenômenos em que variações de fluxo magnético geram força eletromotriz (fem) e correntes elétricas induzidas, incluindo as leis de Faraday e Lenz, indução mútua e autoindução, indutância, energia armazenada em indutores, correntes de Foucault e aplicações como geradores, transformadores e frenagem eletromagnética.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a geração de fem/corrente induzida por variação do fluxo magnético (por mudança de B, da área, da orientação, ou por movimento relativo entre condutor e campo), o uso explícito de Φ = B·A·cos(θ) e ε = -dΦ/dt (ou ε = -N dΦ/dt), a determinação do sentido da corrente induzida pela lei de Lenz (oposição à variação do fluxo), problemas com espiras/solenoides e indutância (L), autoindução e indução mútua (M), tensão induzida em indutores (V = L di/dt), energia em campo magnético de indutor (U = 1/2 L i^2), análise qualitativa/quantitativa de transformadores ideais (V2/V1 = N2/N1, I2/I1 = N1/N2) quando o princípio central é a indução, correntes parasitas (Foucault) e seus efeitos (aquecimento, amortecimento, frenagem), e dispositivos baseados em indução (geradores, dínamos, captadores, microfones dinâmicos) quando a pergunta exige aplicar Faraday/Lenz/fluxo/indutância.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de magnetostática sem variação temporal (campo de fio retilíneo, espira, solenoide; lei de Biot–Savart; lei de Ampère) sem indução; força magnética sobre cargas/correntes (força de Lorentz, F = qv×B, F = iℓ×B) sem relação com fem induzida; circuitos em corrente contínua ou alternada analisados apenas por leis de Kirchhoff/Ohm e impedâncias sem foco em indutância/indução; ondas eletromagnéticas, equações de Maxwell em geral, radiação e propagação; capacitância e fenômenos puramente eletrostáticos; efeito Hall; motores elétricos quando o foco é torque/força e não a fem de retorno (back-emf) ou indução; transformadores tratados apenas como conservação de potência sem discutir fluxo variável/indução; problemas de energia magnética em campos gerados por correntes constantes sem conexão com L, di/dt ou variação de fluxo.",
+      "diferenciador": "O elemento decisivo é a presença de variação de fluxo magnético (no tempo ou por movimento relativo) como causa de uma fem/corrente induzida, com ênfase em Faraday–Lenz e em indutância (auto/mútua) como descrição quantitativa da indução.",
+      "palavras_chave": [
+        "lei de Faraday",
+        "lei de Lenz",
+        "fluxo magnético",
+        "fem induzida",
+        "indutância"
+      ]
     },
     {
       "nome": "Lentes esféricas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das lentes esféricas (delgadas) e da formação de imagens por refração em superfícies esféricas, incluindo tipos de lentes (convergentes e divergentes), elementos geométricos (eixo principal, centro óptico, focos), raios notáveis, equação das lentes, aumento linear, convenção de sinais e análise de imagens (real/virtual, direita/invertida, maior/menor), além de aplicações como lupa, óculos e instrumentos ópticos simples.",
+      "incluir_quando": "Classificar aqui quando a questão aborda formação de imagens por lentes esféricas (delgadas), com ou sem cálculos, incluindo: identificação de lente convergente/divergente; determinação de foco e distância focal; uso de raios principais para construir imagens; aplicação da equação de Gauss das lentes (1/f = 1/p + 1/p'); cálculo de posição e natureza da imagem (real/virtual), orientação (direita/invertida) e tamanho; cálculo de aumento/magnificação (m = -p'/p = hi/ho); análise de casos típicos (objeto além de 2f, em 2f, entre f e 2f, em f, entre a lente e f); convenção de sinais para p, p' e f; potência dióptrica (P = 1/f em metros) e associação com correção visual (miopia/hipermetropia) quando o foco é a lente; combinação de lentes delgadas em contato (f_eq) ou em sequência quando explicitamente tratada como sistema de lentes; problemas com lupa (imagem virtual ampliada) e noções de acomodação quando diretamente ligadas ao uso de lentes.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: espelhos esféricos (côncavo/convexo) e suas equações; reflexão em espelhos planos; prismas, dispersão e espectro; reflexão total interna e fibras ópticas; leis de Snell e dioptros planos sem foco em lentes; óptica ondulatória (interferência, difração, polarização); instrumentos ópticos cujo foco principal seja espelhos (telescópio refletor) ou análise detalhada de olho humano sem modelagem por lente esférica; aberrações ópticas avançadas (esférica, cromática) e projeto de lentes não-delgadas (lentes espessas) salvo se a questão ainda for essencialmente sobre lentes esféricas delgadas; fotometria/iluminação; câmeras e formação de imagem tratadas apenas como semelhança de triângulos sem referência a lente/foco/equação de lentes.",
+      "diferenciador": "O foco distintivo é a formação de imagens por refração em lentes esféricas (convergentes/divergentes), usando elementos como foco/distância focal, raios notáveis e a equação das lentes para determinar posição, natureza e aumento da imagem — diferindo de módulos de espelhos (reflexão) e de óptica ondulatória (fenômenos de interferência/difração).",
+      "palavras_chave": [
+        "lente convergente",
+        "lente divergente",
+        "distância focal",
+        "equação de Gauss",
+        "aumento linear"
+      ]
     },
     {
       "nome": "Força elétrica e campo elétrico",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das interações elétricas entre cargas em repouso, descrevendo a força elétrica (Lei de Coulomb e princípio da superposição) e o campo elétrico como grandeza vetorial que caracteriza a ação elétrica no espaço. Inclui cálculo e representação de vetores de força e de campo, linhas de campo, campo de distribuições simples de carga e movimento/condição de equilíbrio de cargas sob ação de forças elétricas.",
+      "incluir_quando": "Classificar aqui quando a questão aborda força elétrica e/ou campo elétrico, incluindo: (1) aplicação direta da Lei de Coulomb (módulo e direção da força entre duas ou mais cargas puntiformes); (2) princípio da superposição para somar forças elétricas ou campos elétricos de múltiplas cargas; (3) definição e uso de campo elétrico E = F/q (força sobre uma carga de prova) e cálculo de E gerado por cargas puntiformes; (4) determinação de direção/sentido de E e de F para cargas positivas/negativas; (5) problemas com linhas de campo elétrico, interpretação qualitativa de densidade de linhas e sentido; (6) campo elétrico em pontos do espaço devido a distribuições simples (ex.: anel, barra, plano infinito, esfera/casca esférica) quando o foco é obter E (por simetria e/ou Lei de Gauss, se usada para calcular E); (7) equilíbrio de cargas em um ponto (força resultante nula) e localização de ponto onde E = 0 devido a cargas; (8) relação entre campo elétrico e aceleração/movimento de uma partícula carregada (F = qE) em situações eletrostáticas; (9) comparação entre força elétrica e gravitacional (ordem de grandeza, dependência com distância) quando o objetivo é analisar a força/campo elétrico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) potencial elétrico, energia potencial elétrica, trabalho da força elétrica, diferença de potencial, superfícies equipotenciais (mesmo que mencione E, se o objetivo central for V, U ou trabalho); (2) circuitos elétricos (corrente, resistência, Lei de Ohm, potência, associações, Kirchhoff); (3) capacitância e capacitores (carga em capacitor, energia armazenada, dielétricos) quando o foco não é o campo como causa de força; (4) magnetismo e força magnética (campo magnético, força de Lorentz qv×B, indução eletromagnética); (5) eletrodinâmica e condução em materiais (mobilidade, densidade de corrente, resistividade) sem foco em E como campo eletrostático; (6) ondas eletromagnéticas e radiação; (7) dipolo elétrico e torque/energia de dipolo em campo quando o foco principal for momento de dipolo, torque e energia (a menos que a questão seja predominantemente sobre calcular o campo resultante); (8) Lei de Gauss como tema central de fluxo elétrico e simetria/fluxo, quando a pergunta é sobre fluxo ΦE e não sobre obter E ou força; (9) eletrostática em condutores em equilíbrio (blindagem, efeito de ponta, distribuição de cargas) quando o foco é propriedades do condutor e não o cálculo de E/F em pontos específicos.",
+      "diferenciador": "O foco é determinar e interpretar a interação elétrica via força (Coulomb) e via campo elétrico E (vetor no espaço) — incluindo direção, sentido e superposição — em situações eletrostáticas. Diferencia-se de módulos de potencial/energia por priorizar grandezas vetoriais (F e E) e não trabalho/energia; e de circuitos por não envolver corrente e elementos de circuito.",
+      "palavras_chave": [
+        "Lei de Coulomb",
+        "força elétrica",
+        "campo elétrico",
+        "superposição",
+        "linhas de campo"
+      ]
     },
     {
       "nome": "Termometria",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da medição de temperatura e de suas escalas, incluindo princípios de funcionamento de termômetros, propriedades termométricas, calibração, conversões entre escalas e efeitos de dilatação térmica usados na termometria. Abrange também noções de equilíbrio térmico e lei zero da Termodinâmica como base para a definição operacional de temperatura.",
+      "incluir_quando": "Classificar aqui quando a questão aborda definição operacional de temperatura; equilíbrio térmico e Lei Zero; propriedades termométricas (grandezas que variam com a temperatura) e sua relação com a leitura; tipos e princípios de termômetros (líquido em vidro, bimetálico, gás, resistência/RTD, termistor, termopar, infravermelho) no contexto de medir temperatura; calibração e pontos fixos (ponto do gelo, ponto de ebulição, ponto triplo) e construção de escalas; conversão entre escalas (Celsius, Fahrenheit, Kelvin e variações) e interpretação de leituras; erros de medição, sensibilidade, faixa, resolução e linearidade de instrumentos de temperatura; dilatação térmica aplicada ao funcionamento/erro de termômetros (ex.: coluna de mercúrio/álcool, dilatação do recipiente); comparação de leituras entre diferentes termômetros e ajustes por calibração.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de calorimetria (quantidade de calor, capacidade térmica, calor específico, mudanças de fase, calor latente, mistura térmica) sem foco em medição/escala; transferência de calor (condução, convecção, radiação) como fenômeno energético; dilatação térmica como tema central de sólidos/líquidos/gases (cálculo de ΔL, ΔA, ΔV) sem conexão com termômetros/escala; termodinâmica de processos e máquinas térmicas (1ª/2ª leis, ciclos, entropia, rendimento); gases ideais e transformações (PV=nRT) quando o foco não é termometria por termômetro a gás/escala Kelvin; eletricidade/eletrônica de sensores (circuitos com termistor/RTD) quando o foco é análise de circuito e não a medição de temperatura; meteorologia/climatologia ou aplicações cotidianas sem conteúdo físico de escalas/medição.",
+      "diferenciador": "O foco é a temperatura como grandeza medida: como definir, medir, calibrar e converter leituras (escalas e termômetros), e não a energia térmica (calor) ou os mecanismos de transferência/transformação de energia.",
+      "palavras_chave": [
+        "temperatura",
+        "termômetro",
+        "escala Celsius/Fahrenheit/Kelvin",
+        "calibração e pontos fixos",
+        "Lei Zero do equilíbrio térmico"
+      ]
     },
     {
       "nome": "Introdução ao eletromagnetismo",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo introdutório das interações entre cargas elétricas, correntes e campos elétricos e magnéticos, incluindo conceitos fundamentais de eletrostática e magnetismo, a unificação conceitual via indução eletromagnética e noções iniciais das leis de Maxwell em forma qualitativa e/ou com aplicações simples.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos básicos de eletricidade e magnetismo e suas relações, como: definição e interpretação de campo elétrico e campo magnético; força elétrica (Lei de Coulomb) e força magnética (Lorentz) em situações simples; movimento de cargas em campos E e/ou B (trajetórias, desvio, velocidade de deriva em nível conceitual); fluxo elétrico/magnético e ideia de linhas de campo; aplicações introdutórias das leis de Gauss (para E) e de Ampère (para B) em simetrias simples; campo magnético gerado por correntes (fio retilíneo, espira, solenoide) em nível básico; indução eletromagnética (Lei de Faraday-Lenz), fem induzida e sentido da corrente induzida; noções de ondas eletromagnéticas e relação qualitativa entre E e B; energia e densidade de energia em campos em nível introdutório; identificação de fenômenos cotidianos (ímãs, motores/geradores em nível conceitual, transformadores em noções iniciais) quando o foco é explicar o princípio eletromagnético subjacente.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: circuitos elétricos resistivos detalhados (Lei de Ohm, associações de resistores, Kirchhoff) sem foco em campos; eletrostática avançada com cálculo de potenciais complexos, métodos de imagens, multipolos; magnetostática avançada (materiais magnéticos, histerese, B-H, permeabilidade em detalhe) como tema central; eletrônica (diodos, transistores, amplificadores), instrumentação e sinais; óptica geométrica/física sem conexão explícita com ondas eletromagnéticas; relatividade como tema principal (a menos que seja apenas menção qualitativa à unificação E/B); física moderna (quântica, semicondutores) sem vínculo direto com conceitos básicos de E e B; problemas puramente matemáticos de vetores/cálculo (divergente, rotacional) sem contexto eletromagnético; telecomunicações/antenas em nível de engenharia sem foco nos princípios introdutórios de Maxwell/Faraday.",
+      "diferenciador": "Foco em campos elétricos e magnéticos e na ligação entre eletricidade e magnetismo (forças, geração de campos por cargas/correntes e indução), privilegiando compreensão conceitual e aplicações básicas, em vez de análise de circuitos ou tratamento avançado de materiais e métodos matemáticos.",
+      "palavras_chave": [
+        "campo elétrico",
+        "campo magnético",
+        "Lei de Coulomb",
+        "força de Lorentz",
+        "indução eletromagnética"
+      ]
     },
     {
       "nome": "Introdução à cinemática escalar",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo inicial do movimento em uma dimensão (ao longo de uma trajetória/linha), descrevendo-o por grandezas escalares e suas relações: posição (ou espaço), deslocamento, distância percorrida, intervalo de tempo, velocidade escalar média e instantânea, rapidez, aceleração escalar média e instantânea, além de leitura/interpretação de gráficos básicos (s×t, v×t, a×t) e conversões de unidades usuais.",
+      "incluir_quando": "Classificar aqui quando a questão aborda descrição do movimento unidimensional por grandezas escalares, incluindo: definição e cálculo de posição/espaço e variação de posição (Δs), distinção entre distância percorrida e deslocamento (em 1D), intervalo de tempo (Δt), velocidade escalar média (vm = Δs/Δt) e interpretação de seu sinal em 1D, rapidez (módulo da velocidade), velocidade instantânea como limite/ideia de taxa de variação, aceleração escalar média (am = Δv/Δt) e aceleração instantânea, identificação de movimento progressivo/retrógrado, conversão de unidades (m/s ↔ km/h), e interpretação de gráficos s×t (inclinação como velocidade), v×t (área como deslocamento; inclinação como aceleração) e a×t (área como variação de velocidade) em nível introdutório, sem exigir modelagem vetorial ou dinâmica.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: cinemática vetorial (componentes em 2D/3D, vetores, decomposição, lançamento oblíquo, movimento circular, velocidade angular), dinâmica (leis de Newton, forças, atrito, trabalho/energia, impulso/quantidade de movimento), cinemática com equações específicas de casos clássicos como foco central (MRU/MRUV como módulo próprio quando o problema é essencialmente aplicar equações horárias e de Torricelli de forma sistemática), análise de referenciais não inerciais, relatividade, ou temas de oscilação/ondas. Também não incluir quando o foco é apenas matemática de gráficos sem contexto físico de movimento.",
+      "diferenciador": "Ênfase em conceitos e interpretações iniciais da descrição escalar do movimento em 1D (definições, sinais, médias vs instantâneas e leitura de gráficos), mais do que em modelos específicos (MRU/MRUV) ou em tratamento vetorial/dinâmico.",
+      "palavras_chave": [
+        "cinemática escalar",
+        "posição (s) e deslocamento (Δs)",
+        "velocidade escalar média (Δs/Δt) e rapidez",
+        "aceleração escalar (Δv/Δt)",
+        "gráficos s×t, v×t, a×t"
+      ]
     },
     {
       "nome": "Força magnética",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo da força exercida por campos magnéticos sobre cargas elétricas em movimento e correntes elétricas, incluindo direção, sentido e magnitude da força, bem como aplicações típicas (movimento de partículas carregadas, força em fios, torque em espiras) e relações fundamentais como a força de Lorentz.",
+      "incluir_quando": "Classificar aqui quando a questão aborda a força magnética sobre: (1) uma carga q movendo-se com velocidade v em um campo magnético B (uso de F = q v × B, módulo F = |q| v B sen(θ), direção por regra da mão direita/esquerda e sinal da carga); (2) um condutor retilíneo ou segmento de fio com corrente I em campo B (F = I L × B, módulo F = I L B sen(θ)); (3) uma espira/solenóide em campo magnético envolvendo torque e momento de dipolo magnético (τ = μ × B, μ = N I A); (4) movimento resultante devido à força magnética (trajetória circular/helicoidal, raio r = m v/(|q| B), frequência ciclotrônica ω = |q|B/m, período T = 2πm/(|q|B)); (5) situações em que se pede identificar quando a força magnética é nula (v paralelo a B, carga em repouso) ou comparar forças para diferentes ângulos, velocidades, campos e sinais de carga; (6) problemas conceituais sobre trabalho nulo da força magnética e conservação do módulo da velocidade em campo magnético uniforme (quando não há campo elétrico).",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) cálculo/descrição do campo magnético gerado por correntes (Lei de Biot–Savart, Lei de Ampère, campo de fio longo, espira, solenóide, toróide) sem foco na força resultante; (2) força elétrica/campo elétrico isoladamente (Lei de Coulomb, F = qE) ou movimento sob campo elétrico apenas; (3) indução eletromagnética e fem induzida (Lei de Faraday-Lenz, fluxo magnético, correntes induzidas) quando o foco não é a força magnética sobre cargas/correntes; (4) interação entre dois fios paralelos e definição de ampère/permeabilidade quando o foco é o campo produzido e não a força como aplicação central; (5) magnetização de materiais, domínios magnéticos, histerese, propriedades de ímãs permanentes sem modelagem por força de Lorentz/força em corrente; (6) energia potencial magnética, forças em gradientes de campo (ex.: dipolo em campo não uniforme) se o problema não usa explicitamente força de Lorentz/força em condutor/torque em espira como núcleo.",
+      "diferenciador": "O foco é a ação do campo magnético como agente de força (e torque) sobre cargas em movimento e correntes, determinando direção/sentido via produto vetorial e regras de mão, e as consequências dinâmicas (trajetórias, raio, frequência), em contraste com tópicos que priorizam a geração de B, a indução (Faraday) ou forças elétricas (Coulomb).",
+      "palavras_chave": [
+        "força de Lorentz",
+        "q v × B",
+        "F = I L × B",
+        "regra da mão direita",
+        "movimento circular em campo magnético"
+      ]
     },
     {
       "nome": "Propagação do calor",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo dos mecanismos pelos quais a energia térmica (calor) se transfere de regiões/corpos de maior temperatura para menor temperatura, incluindo condução, convecção e radiação, suas leis/modelos básicos, variáveis que afetam a taxa de transferência e aplicações em situações do cotidiano e em sistemas físicos.",
+      "incluir_quando": "Classificar aqui quando a questão aborda transferência de calor por condução, convecção ou radiação; comparação entre mecanismos de propagação do calor; cálculo/estimativa de fluxo de calor, taxa de transferência (potência térmica) ou energia transferida ao longo do tempo; uso de lei de Fourier (condução), lei de resfriamento de Newton (convecção) e lei de Stefan-Boltzmann (radiação); influência de condutividade térmica, espessura, área, gradiente de temperatura, coeficiente convectivo, emissividade, temperatura absoluta e geometria; isolamento térmico, resistência térmica, associação de camadas (série/paralelo) e analogia elétrica; equilíbrio térmico em regime estacionário vs transitório quando o foco é o mecanismo de propagação; exemplos como panelas, colheres, paredes, garrafas térmicas, roupas, radiadores, correntes de convecção no ar/água, brisas marítimas, efeito estufa (como fenômeno de radiação/absorção), troca térmica por infravermelho, vácuo impedindo condução/convecção; problemas com a ideia de que 'calor sobe' explicada por convecção e densidade; análise de materiais bons/m maus condutores e superfícies polidas/escurecidas em radiação.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de calorimetria (quantidade de calor Q = mcΔT, mudanças de fase, calor latente, mistura de substâncias) sem foco no mecanismo de transferência; termodinâmica de processos e máquinas térmicas (1ª/2ª lei, ciclos, rendimento, entropia) sem ênfase em condução/convecção/radiação; dilatação térmica; teoria cinética/temperatura e escalas termométricas; propriedades térmicas como capacidade térmica e calor específico quando não conectadas à taxa de propagação; transferência de massa/umidade (evaporação) como tema central; eletricidade/analogia de resistores se não estiver aplicada explicitamente a resistência térmica/fluxo de calor; óptica/ondas eletromagnéticas em geral quando não relacionada à radiação térmica (infravermelho, emissão/absorção térmica).",
+      "diferenciador": "O foco é o 'como' o calor se transfere (mecanismo e taxa/fluxo de transferência) entre sistemas devido a diferença de temperatura, e não apenas 'quanto' calor é necessário para variar a temperatura ou mudar de fase (calorimetria) nem a conversão de calor em trabalho e leis gerais (termodinâmica).",
+      "palavras_chave": [
+        "condução",
+        "convecção",
+        "radiação",
+        "lei de Fourier",
+        "Stefan-Boltzmann"
+      ]
     },
     {
       "nome": "Termodinâmica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das relações entre calor, trabalho e energia interna em sistemas macroscópicos, descrevendo estados termodinâmicos, transformações e ciclos, leis da Termodinâmica, propriedades de gases e máquinas térmicas, incluindo noções de entropia e irreversibilidade.",
+      "incluir_quando": "Classificar aqui quando a questão aborda conceitos, leis, grandezas ou processos termodinâmicos, como: (1) variáveis de estado e equações de estado (P, V, T, n; gás ideal e extensões simples), diagramas P-V/T-S e interpretação de áreas (trabalho) e variações de energia; (2) calor, trabalho e energia interna, incluindo a 1ª Lei (ΔU = Q − W) e convenções de sinal, cálculo de Q, W e ΔU em processos isobárico, isocórico, isotérmico, adiabático, politrópico; (3) capacidades térmicas e calores específicos (Cp, Cv), relações para gases ideais, energia interna e entalpia (U, H) quando usadas em problemas de Física; (4) 2ª Lei, máquinas térmicas, refrigeradores e bombas de calor, rendimento/eficiência, coeficiente de performance (COP), ciclos de Carnot e limites de eficiência; (5) entropia (ΔS), processos reversíveis/irreversíveis, enunciados de Clausius e Kelvin-Planck, desigualdade de Clausius, interpretação qualitativa de aumento de entropia; (6) 3ª Lei e noções de temperatura absoluta quando relevantes; (7) mudanças de fase e calor latente quando tratadas sob balanço energético/termodinâmico (ex.: Q = mL, diagramas de fase, equilíbrio térmico em processos com mudança de estado); (8) problemas de mistura e equilíbrio térmico que exijam conservação de energia com calor e/ou trabalho e identificação de sistema, vizinhança e tipo de processo.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) Calorimetria e transferência de calor como fenômeno de transporte (condução, convecção, radiação, lei de Fourier, Stefan-Boltzmann, resistência térmica) sem uso explícito das leis/processos termodinâmicos; (2) teoria cinética e estatística (distribuição de Maxwell-Boltzmann, equipartição, microestados) quando o foco é microscópico/estatístico e não leis macroscópicas; (3) propriedades de fluidos e hidrostática/hidrodinâmica (pressão hidrostática, empuxo, Bernoulli) sem análise termodinâmica; (4) eletromagnetismo, circuitos e efeito Joule quando o foco é elétrico e não balanço termodinâmico (a menos que explicitamente modelado como máquina térmica/1ª lei); (5) química (entalpia de reação, lei de Hess, equilíbrio químico) em contexto de Química, sem abordagem de ciclos/máquinas/leis da Termodinâmica em Física; (6) mecânica (trabalho e energia) sem calor/temperatura/estado termodinâmico; (7) meteorologia/climatologia descritiva sem modelagem termodinâmica (ex.: apenas umidade/pressão atmosférica sem processos e leis).",
+      "diferenciador": "Foco em sistemas macroscópicos e transformações de estado, conectando calor e trabalho às leis da Termodinâmica (especialmente 1ª e 2ª leis), com análise de processos/ciclos e limites de eficiência, em contraste com tópicos de transferência de calor (transporte) ou teoria cinética (microscópica).",
+      "palavras_chave": [
+        "primeira lei da termodinâmica",
+        "energia interna",
+        "entropia",
+        "ciclo de Carnot",
+        "máquina térmica"
+      ]
     },
     {
       "nome": "Dilatação térmica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das variações dimensionais de sólidos, líquidos e gases devido a mudanças de temperatura, incluindo dilatação linear, superficial e volumétrica, coeficientes de dilatação, relações entre coeficientes, dilatação aparente/real em recipientes, e aplicações como folgas em estruturas e instrumentos de medição.",
+      "incluir_quando": "Classificar aqui quando a questão aborda variação de comprimento, área ou volume causada por aquecimento/resfriamento; cálculo de ΔL, ΔA, ΔV em função de L0/A0/V0, ΔT e coeficientes (α, β, γ); comparação de materiais por seus coeficientes de dilatação; relação aproximada entre coeficientes em sólidos (β ≈ 2α, γ ≈ 3α); problemas de dilatação de trilhos, pontes, fios, lâminas, anéis e chapas; dilatação de líquidos em recipientes (dilatação real vs aparente) e calibração de recipientes; variação de densidade com a temperatura decorrente da dilatação volumétrica; leitura/funcionamento de termômetros de líquido (princípio de dilatação); situações de interferência/ajuste (eixo e anel) por aquecimento/resfriamento; análise de tensões internas quando a dilatação é impedida (dilatação constrangida) desde que o foco seja a variação dimensional por temperatura.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de calorimetria (Q = mcΔT, mudanças de fase, calor latente), condução/convecção/radiação (transferência de calor), leis dos gases ideais e transformações gasosas (PV = nRT, Boyle, Charles) quando o foco é pressão/volume/temperatura do gás e não coeficientes de dilatação; dilatação anômala da água e propriedades específicas sem cálculo/ênfase em dilatação térmica (a menos que explicitamente conectada a variação volumétrica com temperatura); elasticidade/Lei de Hooke e tensões/deformações mecânicas sem relação com variação térmica; cinemática/termodinâmica de máquinas térmicas (1ª/2ª lei, ciclos) e entropia; efeitos elétricos/magnéticos dependentes de temperatura sem relação com variação dimensional.",
+      "diferenciador": "O foco é a mudança de dimensões (comprimento, área, volume) de materiais causada por variação de temperatura e o uso de coeficientes de dilatação para quantificar essa mudança, incluindo dilatação aparente/real em líquidos e efeitos práticos de folgas/ajustes.",
+      "palavras_chave": [
+        "dilatação linear",
+        "dilatação volumétrica",
+        "coeficiente de dilatação",
+        "ΔT",
+        "dilatação aparente"
+      ]
     },
     {
       "nome": "Princípios da Dinâmica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das leis que relacionam forças e movimento, com ênfase nas Leis de Newton, na identificação e composição de forças, na construção de diagramas de corpo livre e na aplicação de equações do movimento sob ação de forças (incluindo atrito e força resultante) em referenciais inerciais (e, quando explicitado, não inerciais com forças fictícias).",
+      "incluir_quando": "Classificar aqui quando a questão aborda a relação entre força resultante e aceleração (2ª Lei de Newton), condições de equilíbrio (1ª Lei de Newton e soma de forças nula), ação e reação (3ª Lei de Newton), análise de forças em corpos (peso, normal, tração, força elástica, atrito estático/cinético, resistência do ar quando modelada como força), decomposição vetorial de forças, uso de diagramas de corpo livre, problemas de blocos em planos horizontais/inclinados, sistemas com polias e cordas ideais, elevadores e movimento vertical com forças, movimento circular tratado via força centrípeta como resultante radial, aplicação de ΣF = m·a em uma ou mais direções, e identificação de pares ação-reação entre corpos em interação. Também incluir quando a questão pede para determinar aceleração, força resultante, tensões, normais, coeficientes de atrito, ou condições para iniciar/deslizar/parar com base em forças.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de Cinemática (equações horárias, gráficos v×t, s×t, sem análise de forças), Trabalho e Energia (teorema trabalho-energia, conservação de energia, potência) como abordagem central, Quantidade de Movimento/Impulso (colisões, conservação do momento linear, impulso), Gravitação (lei da gravitação universal, órbitas) sem foco em ΣF = m·a e DCL, Estática/torque e equilíbrio de corpos extensos (momento de força, centro de massa, alavancas) como tema principal, Hidrostática/Hidrodinâmica, Termologia, Ondulatória, Eletromagnetismo, ou Rotação dinâmica com momento angular e equações de rotação (τ = I·α) quando o foco é a dinâmica rotacional e não a translação via Leis de Newton. Também não incluir quando a questão é apenas conceitual sobre 'inércia' sem exigir análise de forças/movimento, a menos que esteja explicitamente conectada às Leis de Newton.",
+      "diferenciador": "O foco distintivo é aplicar as Leis de Newton por meio de diagramas de corpo livre e soma vetorial de forças para obter aceleração, forças internas/externas e condições de equilíbrio, distinguindo este módulo de abordagens energéticas (energia/trabalho) ou de conservação do momento (impulso/colisões).",
+      "palavras_chave": [
+        "Leis de Newton",
+        "diagrama de corpo livre",
+        "força resultante",
+        "ΣF = m·a",
+        "atrito"
+      ]
     },
     {
       "nome": "Forças da mecânica",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo das forças na mecânica clássica e de como elas determinam o movimento e o equilíbrio de corpos, incluindo identificação, representação (diagramas de corpo livre), composição/decomposição vetorial, aplicação das Leis de Newton e análise de forças típicas (peso, normal, atrito, tração, elástica, resistência do ar, empuxo) em situações como planos inclinados, sistemas com polias e movimento circular.",
+      "incluir_quando": "Classificar aqui quando a questão aborda identificação e análise de forças atuando em um corpo ou sistema; construção/interpretação de diagrama de corpo livre; aplicação direta das Leis de Newton (1ª, 2ª e 3ª) para relacionar força resultante, massa e aceleração; cálculo de força resultante e decomposição de forças em componentes; problemas de equilíbrio estático (ΣF = 0) e condições de movimento com aceleração (ΣF = m·a); forças de contato e de campo como peso (mg), normal, atrito estático e cinético (com ou sem coeficientes), tração em cordas/cabos, força elástica (Lei de Hooke), força centrípeta como resultante radial em movimento circular, resistência do ar/arrasto em modelos simples, empuxo em fluidos quando tratado como força no balanço de forças; análise de sistemas típicos: bloco em superfície/plano inclinado, blocos conectados por corda/polia, elevadores, corpos pendurados, carros em curvas, objetos em queda com forças concorrentes; questões que pedem direção/sentido das forças, comparação de módulos, pares ação–reação, ou interpretação de gráficos/tabelas envolvendo força e aceleração.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de cinemática sem forças (MRU, MRUV, lançamentos, gráficos v×t e s×t sem uso de ΣF); trabalho, energia e potência como abordagem central (teorema trabalho–energia, conservação de energia, energia potencial/cinética) sem análise explícita de forças; quantidade de movimento/impulso e colisões (conservação do momento, impulso) como foco principal; gravitação universal e órbitas tratadas pela lei da gravitação (força gravitacional entre massas) como tema central, em vez de peso e dinâmica local; estática de corpos rígidos com torques/momentos e equilíbrio rotacional (Στ = 0), centro de massa e alavancas; hidrostática/hidrodinâmica quando o foco é pressão, vazão, equação de Bernoulli, e não o balanço de forças; oscilações e ondas quando o foco é período/frequência/energia do oscilador sem análise de forças; temas de eletricidade e magnetismo (força elétrica, força magnética) e física moderna.",
+      "diferenciador": "O foco é o balanço vetorial de forças (ΣF) e sua relação direta com aceleração ou equilíbrio via Leis de Newton, normalmente operacionalizado por diagramas de corpo livre e forças típicas de contato/campo na mecânica.",
+      "palavras_chave": [
+        "diagrama de corpo livre",
+        "força resultante",
+        "Leis de Newton",
+        "atrito",
+        "normal"
+      ]
     },
     {
       "nome": "Trajetórias curvas",
-      "escopo": "A DEFINIR",
-      "incluir_quando": "A DEFINIR",
-      "nao_incluir_quando": "A DEFINIR",
-      "diferenciador": "A DEFINIR",
-      "palavras_chave": []
+      "escopo": "Estudo do movimento de partículas em trajetórias não retilíneas (curvas), descrevendo e analisando posição, velocidade e aceleração em referenciais adequados, com ênfase na decomposição vetorial (tangencial e normal/radial), curvatura, raio de curvatura e aplicações típicas como movimento circular (uniforme e não uniforme) e movimento de projéteis (trajetória parabólica) quando o foco é a forma da trajetória e a aceleração associada à curvatura.",
+      "incluir_quando": "Classificar aqui quando a questão aborda movimento em trajetória curva e exige: (1) descrição vetorial do movimento em 2D/3D com mudança de direção da velocidade; (2) decomposição da aceleração em componentes tangencial (a_t) e normal/centrípeta (a_n = v^2/R) ou radial; (3) relação entre curvatura/raio de curvatura e a aceleração normal; (4) análise de movimento circular (MCU/MCNU), incluindo velocidade angular, aceleração angular, aceleração centrípeta e tangencial, período e frequência, desde que o foco seja a cinemática/dinâmica associada à trajetória curva; (5) problemas de curva em estradas, loopings, curvas de nível, rotação em torno de um centro, movimento em arco; (6) identificação/uso de coordenadas intrínsecas (tangente-normal) ou polares (r, θ) para descrever a trajetória; (7) determinação de trajetória (equação da curva) a partir de equações paramétricas ou condições iniciais, quando a forma curva é central; (8) movimento de projéteis/lançamentos oblíquos quando a questão enfatiza a trajetória parabólica, alcance/altura/tempo e a decomposição em eixos, especialmente conectando a curvatura à aceleração gravitacional.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata principalmente de: (1) movimento retilíneo (MRU/MRUV) sem mudança de direção; (2) cinemática puramente angular/rotacional de corpos rígidos (torque, momento de inércia, energia rotacional) sem análise da trajetória de um ponto/partícula; (3) dinâmica de forças em geral (leis de Newton) sem relação explícita com curvatura, aceleração centrípeta/tangencial ou geometria da trajetória; (4) gravitação/orbitas e leis de Kepler quando o foco é a interação gravitacional e não a decomposição cinemática em normal/tangencial (a menos que a questão peça explicitamente aceleração centrípeta/curvatura); (5) movimento harmônico simples e oscilações sem trajetória espacial curva relevante; (6) hidrostática, termologia, eletromagnetismo, óptica e ondas sem componente de movimento em trajetória curva; (7) lançamentos/projéteis quando o foco é exclusivamente energia, conservação de momento, ou resistência do ar/modelagem avançada sem ênfase na forma da trajetória e na decomposição cinemática.",
+      "diferenciador": "O foco distintivo é a mudança contínua de direção do vetor velocidade e a consequente aceleração normal (centrípeta) associada à curvatura da trajetória, frequentemente tratada via decomposição tangencial-normal ou coordenadas polares, distinguindo-se de tópicos de movimento retilíneo e de rotação de corpo rígido sem análise de trajetória.",
+      "palavras_chave": [
+        "trajetória curva",
+        "aceleração centrípeta",
+        "componentes tangencial e normal",
+        "raio de curvatura",
+        "movimento circular"
+      ]
     }
   ]
 }
