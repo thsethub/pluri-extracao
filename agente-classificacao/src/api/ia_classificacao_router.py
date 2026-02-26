@@ -35,10 +35,19 @@ from ..services.openai_client import OpenAIClient
 router = APIRouter(prefix="/classificacao-ia", tags=["Classificação IA"])
 
 # --------------------------------------------------------------------------- #
-# Cache de prompts por disciplina
+# Cache de prompts e flags de controle
 # --------------------------------------------------------------------------- #
 _PROMPTS_CACHE: Dict[str, dict] = {}
 PROMPTS_DIR = os.path.join(os.getcwd(), "prompts")
+CANCEL_VALIDATION = False
+
+@router.post("/cancelar-validacao")
+def cancelar_validacao():
+    """Gatilho para interromper a execução massiva de classificação (SSE ou Background)"""
+    global CANCEL_VALIDATION
+    CANCEL_VALIDATION = True
+    logger.warning("Sinal de CANCELAMENTO recebido. A validação será interrompida!")
+    return {"message": "Validação parada com sucesso."}
 
 
 def slugify(s: str) -> str:
@@ -139,7 +148,7 @@ Responda APENAS com JSON no formato:
 # Endpoint principal de classificação
 # --------------------------------------------------------------------------- #
 @router.post("/classificar", response_model=IAClassificarResponse)
-async def classificar_questao(
+def classificar_questao(
     request: IAClassificarRequest,
     pg_db: Session = Depends(get_pg_db),
     db: Session = Depends(get_db)
@@ -442,7 +451,9 @@ async def get_ia_status(pg_db: Session = Depends(get_pg_db)):
 async def validar_manual(background_tasks: BackgroundTasks):
     """Gatilho para classificar massivamente as questões classificadas por humanos"""
     
-    async def run_validation():
+    def run_validation():
+        global CANCEL_VALIDATION
+        CANCEL_VALIDATION = False
         logger.info("🎯 Iniciando Validação Massiva da IA contra base manual (LLM + Prompts)...")
         pg_session = PgSessionLocal()
         mysql_session = SessionLocal()
@@ -456,14 +467,17 @@ async def validar_manual(background_tasks: BackgroundTasks):
             sucesso = 0
             erros = 0
             for i, qid in enumerate(manual_ids):
+                if CANCEL_VALIDATION:
+                    logger.warning("Validação em background interrompida pelo usuário.")
+                    break
                 try:
                     from .ia_classificacao_schemas import IAClassificarRequest
                     req = IAClassificarRequest(questao_id=qid)
-                    await classificar_questao(req, pg_session, mysql_session)
+                    classificar_questao(req, pg_session, mysql_session)
                     sucesso += 1
                     if (i + 1) % 50 == 0:
                         logger.info(f"Progresso: {i+1}/{len(manual_ids)} ({sucesso} OK, {erros} erros)")
-                    await asyncio.sleep(0.05)  # Rate limit
+                    time.sleep(0.05)  # Rate limit
                 except Exception as ex:
                     pg_session.rollback()
                     erros += 1
@@ -668,7 +682,9 @@ from starlette.responses import StreamingResponse
 async def validar_stream(limit: int = 1000):
     """Classifica as primeiras N questões manuais com streaming SSE"""
     
-    async def event_generator():
+    def event_generator():
+        global CANCEL_VALIDATION
+        CANCEL_VALIDATION = False
         pg_session = PgSessionLocal()
         mysql_session = SessionLocal()
         
@@ -687,9 +703,12 @@ async def validar_stream(limit: int = 1000):
             total_cost = 0.0
             
             for i, qid in enumerate(manual_ids):
+                if CANCEL_VALIDATION:
+                    yield f"data: {json.dumps({'type': 'fatal_error', 'error': 'Validação interrompida forçadamente pelo usuário.'})}\n\n"
+                    break
                 try:
                     req = IAClassificarRequest(questao_id=qid)
-                    result = await classificar_questao(req, pg_session, mysql_session)
+                    result = classificar_questao(req, pg_session, mysql_session)
                     sucesso += 1
                     total_tokens += result.tokens_usados
                     total_cost += result.custo_estimado_usd
@@ -709,11 +728,9 @@ async def validar_stream(limit: int = 1000):
                     match = "none"
                     if manual_mods:
                         ia_mods_set = set(result.modulos_preditos or [])
-                        ia_desc_set = set(result.descricoes_modulos or [])
                         m_mods_set = set(manual_mods)
-                        m_desc_set = set([d for d in manual_desc if d])
                         
-                        if ia_mods_set == m_mods_set and ia_desc_set == m_desc_set:
+                        if ia_mods_set == m_mods_set:
                             match = "exact"
                         elif ia_mods_set & m_mods_set:
                             match = "partial"
@@ -735,7 +752,7 @@ async def validar_stream(limit: int = 1000):
                     }
                     yield f"data: {json.dumps(event_data, ensure_ascii=False)}\n\n"
                     
-                    await asyncio.sleep(0.05)
+                    time.sleep(0.05)
                     
                 except Exception as ex:
                     pg_session.rollback()

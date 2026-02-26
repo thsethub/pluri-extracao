@@ -190,12 +190,19 @@ export default function AgenteIAPage() {
         };
     };
 
-    const stopValidation = () => {
+    const stopValidation = async () => {
         if (eventSourceRef.current) {
             eventSourceRef.current.close();
-            addLog('Validação parada pelo usuário.', 'warning');
-            setIsRunning(false);
-            fetchClassificacoes(1);
+        }
+        addLog('Validação parada pelo usuário.', 'warning');
+        setIsRunning(false);
+        fetchClassificacoes(1);
+
+        try {
+            const baseUrlIA = API_BASE_URL.replace('/classificacao', '/classificacao-ia');
+            await apiRequest('/cancelar-validacao', { method: 'POST', customBaseUrl: baseUrlIA });
+        } catch (e) {
+            console.error('Erro ao enviar sinal de cancelamento:', e);
         }
     };
 
