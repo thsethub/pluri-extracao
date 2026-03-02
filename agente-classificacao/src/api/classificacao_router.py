@@ -529,15 +529,15 @@ async def proxima_questao_classificar(
             .all()
         }
         
-        # 2. Already has manual classification OR is a low-match question (goes to /proxima-verificar).
-        # NAO excluimos classificacoes != [] (path do Superpro): o professor ainda precisa
-        # classificar por modulo Trieduc mesmo que o Superpro ja tenha feito o path taxonomico.
+        # 2. Already has any classification: manual, low-match, or SuperPro.
+        # Questões que já têm qualquer tipo de classificação não devem aparecer para classificar.
         classified_in_system = {
             row[0] for row in pg_db.query(QuestaoAssuntoModel.questao_id)
             .filter(QuestaoAssuntoModel.questao_id.in_(candidate_ids))
             .filter(
                 (QuestaoAssuntoModel.classificado_manualmente == True) |
-                ((QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) & (func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0))
+                ((QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) & (func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0)) |
+                ((QuestaoAssuntoModel.extracao_feita == True) & (QuestaoAssuntoModel.classificacoes.isnot(None)) & (func.json_length(QuestaoAssuntoModel.classificacoes) > 0))
             )
             .all()
         }
@@ -844,10 +844,12 @@ async def proxima_questao_verificar(
         discs = db.query(DisciplinaModel).filter(DisciplinaModel.descricao.in_(nomes)).all()
         disciplina_ids_filtro = [d.id for d in discs]
 
-    # Query Base no PG (extraídas)
+    # Query Base no PG: extraídas pelo Superpro com baixa similaridade (precisa verificação humana)
     query_pg = pg_db.query(QuestaoAssuntoModel).filter(
         QuestaoAssuntoModel.extracao_feita == True,
-        QuestaoAssuntoModel.classificacoes.isnot(None)
+        QuestaoAssuntoModel.classificacoes.isnot(None),
+        QuestaoAssuntoModel.similaridade > 0,
+        QuestaoAssuntoModel.similaridade < 0.8,
     )
 
     if habilidade_id:
