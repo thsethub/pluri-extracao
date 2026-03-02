@@ -91,20 +91,23 @@ services:
       - "com.centurylinklabs.watchtower.scope=pluri"
 
   # ── Watchtower (auto-update das imagens) ────────────────────
-  watchtower:
-    image: containrrr/watchtower
-    container_name: pluri-watchtower
-    restart: unless-stopped
-    environment:
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_POLL_INTERVAL=300
-      - WATCHTOWER_LABEL_ENABLE=false
-      - WATCHTOWER_SCOPE=pluri
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --scope pluri --interval 300
-    labels:
-      - "com.centurylinklabs.watchtower.scope=pluri"
+  # Desabilitado: incompatibilidade entre SDK interno do Watchtower (API 1.25)
+  # e Docker Engine v29 (API mínima 1.44).
+  # Para atualizar manualmente: docker compose pull && docker compose up -d
+  # watchtower:
+  #   image: containrrr/watchtower:latest
+  #   container_name: pluri-watchtower
+  #   restart: unless-stopped
+  #   environment:
+  #     - WATCHTOWER_CLEANUP=true
+  #     - WATCHTOWER_POLL_INTERVAL=300
+  #     - WATCHTOWER_LABEL_ENABLE=false
+  #     - WATCHTOWER_SCOPE=pluri
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   command: --scope pluri --interval 300
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.scope=pluri"
 
 volumes:
   api-logs:
