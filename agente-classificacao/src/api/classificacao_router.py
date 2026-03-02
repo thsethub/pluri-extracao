@@ -328,15 +328,20 @@ async def listar_habilidades_filtro(
 
         total_por_hab: dict[int, int] = {r[0]: r[1] for r in rows_total}
 
-        # Etapa 2: IDs excluídos no PG (3 queries leves, sem IN gigante)
+        # Etapa 2: IDs excluídos no PG (queries leves, sem IN gigante)
         ids_excluir: set[int] = set()
 
-        # 2a. Já classificadas manualmente ou com low-match
+        # 2a. Já classificadas manualmente, com low-match, ou pelo SuperPro
         for r in pg_db.query(QuestaoAssuntoModel.questao_id).filter(
             (QuestaoAssuntoModel.classificado_manualmente == True) |
             (
                 (QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) &
                 (func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0)
+            ) |
+            (
+                (QuestaoAssuntoModel.extracao_feita == True) &
+                (QuestaoAssuntoModel.classificacoes.isnot(None)) &
+                (func.json_length(QuestaoAssuntoModel.classificacoes) > 0)
             )
         ).all():
             ids_excluir.add(r[0])
