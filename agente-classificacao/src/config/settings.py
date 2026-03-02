@@ -18,7 +18,7 @@ class Habilidade(BaseModel):
 
 class Settings(BaseSettings):
     """Configurações globais da aplicação"""
-
+    
     # OpenAI
     openai_api_key: str
     openai_model: str = "gpt-3.5-turbo"
@@ -30,6 +30,23 @@ class Settings(BaseSettings):
     max_retries: int = 3
     retry_delay: int = 1
 
+    # JWT (classificação manual)
+    jwt_secret_key: str = "change-me-in-production"
+    jwt_algorithm: str = "HS256"
+    jwt_expire_minutes: int = 480
+
+    # IA Classificação (pipeline por prompts)
+    ia_classification_model: str = "gpt-5.2"
+    ia_prompt_version: str = "v1"
+    ia_max_question_chars: int = 4000
+    ia_max_output_modules: int = 1
+    ia_use_human_priors: bool = True
+    ia_human_prior_top_k: int = 3
+    ia_human_prior_min_samples: int = 5
+    ia_enable_fallback_first_module: bool = False
+    ia_cost_per_1k_input_tokens: float = 0.0
+    ia_cost_per_1k_output_tokens: float = 0.0
+
     # Database MySQL (leitura - questões)
     db_host: str = "localhost"
     db_port: int = 3306
@@ -37,12 +54,12 @@ class Settings(BaseSettings):
     db_password: str = ""
     db_name: str = "trieduc"
 
-    # Database PostgreSQL local (escrita - assuntos)
+    # Database MySQL RDS (escrita - assuntos, ex-PostgreSQL)
     pg_host: str = "localhost"
-    pg_port: int = 5433
-    pg_user: str = "pluri"
-    pg_password: str = "pluri123"
-    pg_name: str = "pluri_assuntos"
+    pg_port: int = 3306
+    pg_user: str = "root"
+    pg_password: str = ""
+    pg_name: str = "thsethub"
 
     @property
     def database_url(self) -> str:
@@ -51,8 +68,8 @@ class Settings(BaseSettings):
 
     @property
     def pg_database_url(self) -> str:
-        """Retorna a URL de conexão do banco PostgreSQL (assuntos)"""
-        return f"postgresql+psycopg2://{self.pg_user}:{self.pg_password}@{self.pg_host}:{self.pg_port}/{self.pg_name}"
+        """Retorna a URL de conexão do banco MySQL RDS (assuntos)"""
+        return f"mysql+pymysql://{self.pg_user}:{self.pg_password}@{self.pg_host}:{self.pg_port}/{self.pg_name}"
 
     # Disciplinas disponíveis
     disciplines: str = (

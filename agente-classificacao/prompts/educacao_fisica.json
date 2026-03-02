@@ -1,7 +1,7 @@
 {
   "disciplina": "Educação Física",
-  "instrucao_geral": "Classifique pelo processo ou fenômeno principal relacionado à prática corporal, não pelo contexto secundário ou histórico.",
-  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de diferentes práticas corporais ou contextos culturais que se inter-relacionam de maneira essencial.",
+  "instrucao_geral": "Classifique pelo processo ou fenômeno principal relacionado à prática corporal, não pelo contexto secundário ou histórico. Regra de desempate: identifique o objeto pedido no comando da questao e escolha o modulo mais especifico para esse objeto, nao o tema de pano de fundo.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de diferentes práticas corporais ou contextos culturais que se inter-relacionam de maneira essencial. Padrao: retornar apenas 1 modulo. So retorne 2 modulos quando a resolucao exigir, de forma explicita, dois eixos independentes e com justificativas distintas.",
   "modulos": [
     {
       "nome": "Educação Física",

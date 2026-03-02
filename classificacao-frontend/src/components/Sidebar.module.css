@@ -78,8 +78,30 @@
 .nav {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 1rem;
     flex: 1;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.sectionTitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin: 0;
+    padding: 0 0.5rem;
+}
+
+.sectionLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
 .navLink {

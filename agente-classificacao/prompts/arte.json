@@ -1,7 +1,7 @@
 {
   "disciplina": "Arte",
-  "instrucao_geral": "Classifique pelo período histórico e movimento artístico principal, não pelo contexto geográfico ou secundário.",
-  "regras_multi_modulo": "Atribua múltiplos módulos somente quando a questão exigir conhecimento de duas áreas distintas para ser respondida. Contextos secundários não justificam um segundo módulo.",
+  "instrucao_geral": "Classifique pelo período histórico e movimento artístico principal, não pelo contexto geográfico ou secundário. Regra de desempate: identifique o objeto pedido no comando da questao e escolha o modulo mais especifico para esse objeto, nao o tema de pano de fundo.",
+  "regras_multi_modulo": "Atribua múltiplos módulos somente quando a questão exigir conhecimento de duas áreas distintas para ser respondida. Contextos secundários não justificam um segundo módulo. Padrao: retornar apenas 1 modulo. So retorne 2 modulos quando a resolucao exigir, de forma explicita, dois eixos independentes e com justificativas distintas.",
   "modulos": [
     {
       "nome": "A arte grega: do despertar ao período helenístico",

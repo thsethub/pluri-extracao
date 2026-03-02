@@ -1,7 +1,6 @@
 """Modelo SQLAlchemy para autenticação e classificação manual de usuários no PostgreSQL"""
 
-from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, Float, func
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, Float, JSON, func
 from ..database import PgBase
 
 
@@ -48,13 +47,13 @@ class ClassificacaoUsuarioModel(PgBase):
     habilidade_modulo_id = Column(Integer, nullable=True)  # FK → habilidade_modulos.id
 
     # Classificação múltipla (novos campos JSONB)
-    modulos_escolhidos = Column(JSONB, nullable=True)  # Lista de nomes dos módulos
-    classificacoes_trieduc_list = Column(JSONB, nullable=True)  # Lista de classificações TRIEDUC
-    descricoes_assunto_list = Column(JSONB, nullable=True)  # Lista de descrições
-    habilidade_modulo_ids = Column(JSONB, nullable=True)  # Lista de IDs de habilidade_modulos
+    modulos_escolhidos = Column(JSON, nullable=True)  # Lista de nomes dos módulos
+    classificacoes_trieduc_list = Column(JSON, nullable=True)  # Lista de classificações TRIEDUC
+    descricoes_assunto_list = Column(JSON, nullable=True)  # Lista de descrições
+    habilidade_modulo_ids = Column(JSON, nullable=True)  # Lista de IDs de habilidade_modulos
 
     # Classificação da extração automática (para comparação no ML)
-    classificacao_extracao = Column(JSONB, nullable=True)
+    classificacao_extracao = Column(JSON, nullable=True)
 
     # Metadados para ML
     tipo_acao = Column(

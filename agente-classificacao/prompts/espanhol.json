@@ -1,14 +1,14 @@
 {
   "disciplina": "Espanhol",
-  "instrucao_geral": "Classifique pelo foco principal do conteúdo, seja ele cultural, textual, lexical ou gramatical, garantindo que o contexto secundário não desvie a classificação do módulo correto.",
-  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento profundo e simultâneo de duas áreas distintas, como cultura e gramática, para ser respondida corretamente.",
+  "instrucao_geral": "Classifique pelo foco principal do conteúdo, seja ele cultural, textual, lexical ou gramatical, garantindo que o contexto secundário não desvie a classificação do módulo correto. Regra de desempate: identifique o objeto pedido no comando da questao e escolha o modulo mais especifico para esse objeto, nao o tema de pano de fundo.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento profundo e simultâneo de duas áreas distintas, como cultura e gramática, para ser respondida corretamente. Padrao: retornar apenas 1 modulo. So retorne 2 modulos quando a resolucao exigir, de forma explicita, dois eixos independentes e com justificativas distintas.",
   "modulos": [
     {
       "nome": "Cultura do Mundo Hispânico",
       "escopo": "Este módulo abrange as manifestações culturais dos países hispânicos, incluindo tradições, festivais, música, dança e arte. Explora expressões idiomáticas e frases feitas que refletem a cultura e o modo de vida hispânico. Analisa o impacto histórico e social dessas manifestações na identidade cultural dos países de língua espanhola.",
       "incluir_quando": "Classificar aqui quando a questão aborda festivais tradicionais como o Dia de los Muertos, expressões idiomáticas culturais, a influência da música flamenca na cultura espanhola, ou o impacto da colonização na arte hispânica.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão se concentra na compreensão de um texto literário (usar módulo Estudo de textos), ou quando aborda falsos cognatos em um contexto de vocabulário (usar módulo Léxico).",
-      "diferenciador": "Foco exclusivo em manifestações culturais e expressões idiomáticas do mundo hispânico.",
+      "diferenciador": "Foco exclusivo em manifestações culturais e expressões idiomáticas do mundo hispânico. Se o eixo for contexto historico-cultural, costumes, referencias socioculturais e manifestacoes artisticas hispanicas, priorize este modulo.",
       "palavras_chave": [
         "cultura",
         "tradições",
@@ -36,7 +36,7 @@
       "escopo": "Este módulo cobre o vocabulário contextual em espanhol, com ênfase em falsos amigos e palavras heterosemânticas. Explora como o significado das palavras pode variar em diferentes contextos e como evitar confusões comuns entre o espanhol e o português.",
       "incluir_quando": "Classificar aqui quando a questão envolve a identificação de falsos cognatos, compreensão de vocabulário em um contexto específico, ou a distinção entre palavras semelhantes em espanhol e português.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão se concentra em expressões idiomáticas culturais (usar módulo Cultura do Mundo Hispânico) ou na análise de um texto literário (usar módulo Estudo de textos).",
-      "diferenciador": "Foco em vocabulário contextual e falsos amigos entre espanhol e português.",
+      "diferenciador": "Foco em vocabulário contextual e falsos amigos entre espanhol e português. Se a resposta depende de vocabulario, sentido contextual, falsos cognatos, colocacao lexical ou escolha de palavra, priorize 'Lexico'.",
       "palavras_chave": [
         "vocabulário",
         "falsos amigos",

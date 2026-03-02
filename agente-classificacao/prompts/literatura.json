@@ -1,14 +1,14 @@
 {
   "disciplina": "Literatura",
-  "instrucao_geral": "Classifique pelo movimento literário principal e suas características centrais, não pelo contexto histórico secundário.",
-  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de dois movimentos literários distintos para ser respondida. Contextos históricos ou culturais secundários não justificam a inclusão de um segundo módulo.",
+  "instrucao_geral": "Classifique pelo movimento literário principal e suas características centrais, não pelo contexto histórico secundário. Regra de desempate: identifique o objeto pedido no comando da questao e escolha o modulo mais especifico para esse objeto, nao o tema de pano de fundo.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de dois movimentos literários distintos para ser respondida. Contextos históricos ou culturais secundários não justificam a inclusão de um segundo módulo. Padrao: retornar apenas 1 modulo. So retorne 2 modulos quando a resolucao exigir, de forma explicita, dois eixos independentes e com justificativas distintas.",
   "modulos": [
     {
       "nome": "A primeira geração modernista",
       "escopo": "Este módulo cobre a geração de 1922, focando nos desdobramentos da Semana de Arte Moderna e na ruptura estética promovida por essa geração. Explora a linguagem inovadora e os principais autores que marcaram o início do Modernismo no Brasil.",
       "incluir_quando": "Classificar aqui quando a questão aborda a Semana de Arte Moderna, menciona autores como Mário de Andrade ou Oswald de Andrade, discute a ruptura com o passado literário, ou analisa a linguagem inovadora da época.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do regionalismo da década de 1930 (usar 'A segunda geração modernista: prosa e poesia'), ou quando foca em autores do Pré-Modernismo (usar 'Pré-Modernismo').",
-      "diferenciador": "Foco na ruptura estética e linguística da geração de 1922.",
+      "diferenciador": "Foco na ruptura estética e linguística da geração de 1922. Recorte topico: 1922-1930, ruptura estetica, experimentalismo formal, irreverencia e projeto de renovacao linguistica.",
       "palavras_chave": [
         "Semana de Arte Moderna",
         "ruptura",
@@ -22,7 +22,7 @@
       "escopo": "Este módulo aborda a década de 1930, destacando a crise social e o regionalismo presentes na prosa e poesia da segunda geração modernista. Analisa os principais autores e temas que emergiram nesse período.",
       "incluir_quando": "Classificar aqui quando a questão menciona o regionalismo, discute a crise social dos anos 1930, ou analisa obras de autores como Graciliano Ramos ou Jorge Amado.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata da geração de 1945 (usar 'A terceira geração modernista: prosa, poesia e teatro') ou quando foca na ruptura de 1922 (usar 'A primeira geração modernista').",
-      "diferenciador": "Enfoque no regionalismo e na crise social da década de 1930.",
+      "diferenciador": "Enfoque no regionalismo e na crise social da década de 1930. Recorte topico: 1930-1945, prosa regionalista/social e poesia de maior maturidade formal; foco em crise social, seca, migracao e desigualdade.",
       "palavras_chave": [
         "regionalismo",
         "crise social",
@@ -36,7 +36,7 @@
       "escopo": "Este módulo explora a geração de 1945, analisando o contexto histórico e o projeto estético dessa fase. Inclui a produção em prosa, poesia e teatro, destacando autores e obras significativas.",
       "incluir_quando": "Classificar aqui quando a questão aborda o contexto histórico de 1945, discute o projeto estético da época, ou menciona autores como Clarice Lispector ou João Cabral de Melo Neto.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do regionalismo dos anos 1930 (usar 'A segunda geração modernista: prosa e poesia') ou da ruptura de 1922 (usar 'A primeira geração modernista').",
-      "diferenciador": "Foco no projeto estético e na diversidade de gêneros da geração de 1945.",
+      "diferenciador": "Foco no projeto estético e na diversidade de gêneros da geração de 1945. Recorte topico: pos-1945, maior elaboracao formal e introspeccao, com pluralidade de generos e projeto estetico mais rigoroso.",
       "palavras_chave": [
         "1945",
         "projeto estético",
@@ -118,9 +118,9 @@
     {
       "nome": "O Arcadismo em Portugal e no Brasil",
       "escopo": "Este módulo explora o Arcadismo tanto em Portugal quanto no Brasil, destacando suas características e principais autores. Analisa a influência do Arcadismo na literatura dos dois países.",
-      "incluir_quando": "Classificar aqui quando a questão discute o Arcadismo, menciona autores árcades, ou analisa as características do movimento nos dois países.",
-      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Barroco (usar 'Do Quinhentismo ao Barroco: os primórdios da literatura luso-brasileira') ou do Romantismo (usar 'Romantismo em Portugal e no Brasil').",
-      "diferenciador": "Foco na análise das características e influências do Arcadismo em Portugal e no Brasil.",
+      "incluir_quando": "Classificar aqui quando a questão discute o Arcadismo, menciona autores árcades, ou analisa as características do movimento nos dois países. Inclui pastoralismo, bucolismo, ideal neocl?ssico, racionalidade, equil?brio formal, conven??es ?rcades (fugere urbem, aurea mediocritas, locus amoenus) e autores ?rcades.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Barroco (usar 'Do Quinhentismo ao Barroco: os primórdios da literatura luso-brasileira') ou do Romantismo (usar 'Romantismo em Portugal e no Brasil'). N?O classificar aqui quando prevalecerem subjetivismo, sentimentalismo, nacionalismo/indianismo, idealiza??o amorosa ou pessimismo ultrarrom?ntico (nesses casos, usar Romantismo).",
+      "diferenciador": "Foco na análise das características e influências do Arcadismo em Portugal e no Brasil. Arcadismo privilegia modelo neocl?ssico e pastoril; Romantismo privilegia subjetividade, emo??o e ruptura com o ideal cl?ssico.",
       "palavras_chave": [
         "Arcadismo",
         "Portugal",
@@ -160,9 +160,9 @@
     {
       "nome": "Romantismo em Portugal e no Brasil",
       "escopo": "Este módulo cobre o Romantismo em Portugal e no Brasil, destacando a poesia, prosa e teatro românticos. Explora as características do movimento e seus principais representantes nos dois países.",
-      "incluir_quando": "Classificar aqui quando a questão discute o Romantismo, menciona autores românticos, ou analisa as características do movimento em Portugal e no Brasil.",
-      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Realismo (usar 'Realismo e Naturalismo em Portugal e no Brasil') ou do Arcadismo (usar 'O Arcadismo em Portugal e no Brasil').",
-      "diferenciador": "Foco nas características e nos principais representantes do Romantismo em Portugal e no Brasil.",
+      "incluir_quando": "Classificar aqui quando a questão discute o Romantismo, menciona autores românticos, ou analisa as características do movimento em Portugal e no Brasil. Inclui subjetivismo, sentimentalismo, idealiza??o amorosa, nacionalismo/indianismo, mal do s?culo, liberdade formal e cr?tica ao racionalismo cl?ssico.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata do Realismo (usar 'Realismo e Naturalismo em Portugal e no Brasil') ou do Arcadismo (usar 'O Arcadismo em Portugal e no Brasil'). N?O classificar aqui quando o texto enfatizar conven??es ?rcades (bucolismo, pastoralismo, fugere urbem, aurea mediocritas), pois nesses casos o correto ? Arcadismo.",
+      "diferenciador": "Foco nas características e nos principais representantes do Romantismo em Portugal e no Brasil. Romantismo = centralidade do eu e da emo??o; Arcadismo = modera??o cl?ssica e ideal pastoril.",
       "palavras_chave": [
         "Romantismo",
         "poesia",
@@ -176,7 +176,7 @@
       "escopo": "Este módulo explora a literatura contemporânea em Portugal e no Brasil, incluindo poesia e prosa. Analisa as tendências atuais e como elas refletem as questões contemporâneas nos dois países.",
       "incluir_quando": "Classificar aqui quando a questão discute a literatura contemporânea, menciona autores atuais, ou analisa tendências literárias contemporâneas em Portugal e no Brasil.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de movimentos literários históricos, como o Modernismo (usar 'Modernismo em Portugal e no Brasil') ou o Romantismo (usar 'Romantismo em Portugal e no Brasil').",
-      "diferenciador": "Foco nas tendências e questões da literatura contemporânea em Portugal e no Brasil.",
+      "diferenciador": "Foco nas tendências e questões da literatura contemporânea em Portugal e no Brasil. Recorte topico: segunda metade do seculo XX em diante (sobretudo pos-1960), hibridismo de generos, metalinguagem, fragmentacao e temas urbanos contemporaneos.",
       "palavras_chave": [
         "contemporâneo",
         "tendências",

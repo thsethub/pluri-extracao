@@ -1,7 +1,7 @@
 {
   "disciplina": "Filosofia",
-  "instrucao_geral": "Classifique pelo conceito filosófico central abordado na questão, não pelo contexto histórico ou cultural secundário.",
-  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir genuinamente o conhecimento de duas áreas filosóficas distintas para ser respondida. Contextos históricos ou culturais não justificam a inclusão de um segundo módulo.",
+  "instrucao_geral": "Classifique pelo conceito filosófico central abordado na questão, não pelo contexto histórico ou cultural secundário. Regra de desempate: identifique o objeto pedido no comando da questao e escolha o modulo mais especifico para esse objeto, nao o tema de pano de fundo.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir genuinamente o conhecimento de duas áreas filosóficas distintas para ser respondida. Contextos históricos ou culturais não justificam a inclusão de um segundo módulo. Padrao: retornar apenas 1 modulo. So retorne 2 modulos quando a resolucao exigir, de forma explicita, dois eixos independentes e com justificativas distintas.",
   "modulos": [
     {
       "nome": "Estética e Filosofia da Arte",
@@ -21,8 +21,8 @@
       "nome": "Filosofia Política e Moral",
       "escopo": "Este módulo explora as teorias políticas e morais, incluindo contratualismo, liberalismo, e comunitarismo. Discute a justiça, direitos, igualdade, e a participação política, além de filosofias do poder e dominação.",
       "incluir_quando": "Classificar aqui quando a questão envolve teorias de justiça, debates sobre democracia e participação política, ou análises de poder e dominação.",
-      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos humanos específicos (usar 'Filosofia dos Direitos Humanos e Cidadania') ou de regimes políticos específicos como totalitarismo (usar 'Totalitarismo, Autoritarismo e Democracia').",
-      "diferenciador": "Análise das estruturas políticas e morais que fundamentam a sociedade.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos humanos específicos (usar 'Filosofia dos Direitos Humanos e Cidadania') ou de regimes políticos específicos como totalitarismo (usar 'Totalitarismo, Autoritarismo e Democracia'). Se o foco principal for caracterizar regimes autoritarios/totalitarios e suas praticas historicas, use 'Totalitarismo, Autoritarismo e Democracia'.",
+      "diferenciador": "Análise das estruturas políticas e morais que fundamentam a sociedade. Use para teoria politica geral (justica, poder, legitimidade, contrato social, bem comum), sem recorte principal em regime historico especifico.",
       "palavras_chave": [
         "justiça",
         "poder",
@@ -36,7 +36,7 @@
       "escopo": "Este módulo aborda os fundamentos dos direitos humanos, cidadania, e a história dos direitos civis e políticos. Explora lutas por reconhecimento e justiça social, além de movimentos sociais e ação coletiva.",
       "incluir_quando": "Classificar aqui quando a questão envolve a história dos direitos humanos, cidadania no Brasil, ou movimentos sociais em prol da justiça social.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias políticas gerais (usar 'Filosofia Política e Moral') ou de aspectos culturais da sociedade (usar 'Indústria Cultural e Cultura de Massa').",
-      "diferenciador": "Foco nos direitos humanos e cidadania como pilares da justiça social.",
+      "diferenciador": "Foco nos direitos humanos e cidadania como pilares da justiça social. Use quando o nucleo for direitos, cidadania, reconhecimento, dignidade, igualdade e garantias normativas/institucionais.",
       "palavras_chave": [
         "direitos humanos",
         "cidadania",
@@ -49,7 +49,7 @@
       "nome": "Filosofia e Tecnologia na Sociedade Contemporânea",
       "escopo": "Este módulo examina a relação entre filosofia e tecnologia, incluindo inteligência artificial, sociedade da informação, e tecnopolítica. Discute a influência da tecnologia na liberdade, vigilância, e transformações sociais.",
       "incluir_quando": "Classificar aqui quando a questão envolve a ética da tecnologia, impactos sociais da inteligência artificial, ou a relação entre tecnologia e democracia.",
-      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias do conhecimento (usar 'Teoria do Conhecimento e Epistemologia') ou de aspectos culturais da tecnologia (usar 'Indústria Cultural e Cultura de Massa').",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias do conhecimento (usar 'Teoria do Conhecimento e Epistemologia') ou de aspectos culturais da tecnologia (usar 'Indústria Cultural e Cultura de Massa'). Quando a discussao etica for geral (sem mediacao tecnologica), priorize 'etica e Filosofia Moral'.",
       "diferenciador": "Análise crítica da interação entre tecnologia e sociedade sob uma perspectiva filosófica.",
       "palavras_chave": [
         "tecnologia",
@@ -118,8 +118,8 @@
     {
       "nome": "História da Filosofia Moderna",
       "escopo": "Este módulo cobre o desenvolvimento do pensamento moderno, incluindo o racionalismo, empirismo, iluminismo, e a filosofia crítica de Kant. Explora também o humanismo e a antropologia filosófica moderna.",
-      "incluir_quando": "Classificar aqui quando a questão envolve o debate entre racionalismo e empirismo, ou a filosofia crítica de Kant.",
-      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofias contemporâneas (usar 'História da Filosofia Contemporânea') ou de questões políticas (usar 'Filosofia Política e Moral').",
+      "incluir_quando": "Classificar aqui quando a questão envolve o debate entre racionalismo e empirismo, ou a filosofia crítica de Kant. Inclui debates e autores modernos (Descartes, Bacon, Hobbes, Locke, Hume, Rousseau, Kant), racionalismo, empirismo e Iluminismo em perspectiva historica.",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofias contemporâneas (usar 'História da Filosofia Contemporânea') ou de questões políticas (usar 'Filosofia Política e Moral'). Se o nucleo da pergunta for validade do conhecimento, criterios de verdade e metodo cientifico sem recorte historico, use 'Teoria do Conhecimento e Epistemologia'.",
       "diferenciador": "Foco nas transformações filosóficas que definiram a modernidade.",
       "palavras_chave": [
         "racionalismo",
@@ -147,7 +147,7 @@
       "nome": "Teoria do Conhecimento e Epistemologia",
       "escopo": "Este módulo explora os conceitos fundamentais da epistemologia, incluindo ceticismo, empirismo, e racionalismo. Discute também a epistemologia da ciência e a síntese crítica de Kant.",
       "incluir_quando": "Classificar aqui quando a questão envolve debates sobre a natureza do conhecimento, ceticismo, ou a epistemologia da ciência.",
-      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofia moral (usar 'Ética e Filosofia Moral') ou de filosofia política (usar 'Filosofia Política e Moral').",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de filosofia moral (usar 'Ética e Filosofia Moral') ou de filosofia política (usar 'Filosofia Política e Moral'). Se a pergunta for de periodizacao historica ou identificacao de autor/corrente da modernidade sem debate epistemologico direto, use 'Historia da Filosofia Moderna'.",
       "diferenciador": "Foco na análise e compreensão dos fundamentos do conhecimento humano.",
       "palavras_chave": [
         "epistemologia",
@@ -160,9 +160,9 @@
     {
       "nome": "Totalitarismo, Autoritarismo e Democracia",
       "escopo": "Este módulo analisa regimes políticos, incluindo totalitarismo, autoritarismo, e democracia. Explora a resistência e defesa da democracia e os fundamentos dos regimes não democráticos.",
-      "incluir_quando": "Classificar aqui quando a questão envolve a análise de regimes totalitários, autoritarismo, ou a defesa da democracia.",
+      "incluir_quando": "Classificar aqui quando a questão envolve a análise de regimes totalitários, autoritarismo, ou a defesa da democracia. Inclui analise de regimes concretos (fascismo, nazismo, stalinismo, ditaduras, transicoes democraticas, erosao institucional e Estado de excecao).",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de teorias políticas gerais (usar 'Filosofia Política e Moral') ou de direitos humanos (usar 'Filosofia dos Direitos Humanos e Cidadania').",
-      "diferenciador": "Análise dos diferentes regimes políticos e suas implicações para a liberdade e democracia.",
+      "diferenciador": "Análise dos diferentes regimes políticos e suas implicações para a liberdade e democracia. Desempate: quando o enunciado trata de tipo de regime e funcionamento institucional concreto, este modulo tem prioridade sobre 'Filosofia Poletica e Moral'.",
       "palavras_chave": [
         "totalitarismo",
         "autoritarismo",
@@ -175,7 +175,7 @@
       "nome": "Ética e Filosofia Moral",
       "escopo": "Este módulo aborda os conceitos fundamentais da ética, incluindo bioética, utilitarismo, e ética kantiana. Explora também a ética aplicada e a justiça sob uma perspectiva ética.",
       "incluir_quando": "Classificar aqui quando a questão envolve dilemas éticos, teorias morais como o utilitarismo, ou a aplicação da ética em contextos específicos.",
-      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de estética (usar 'Estética e Filosofia da Arte') ou de direitos humanos (usar 'Filosofia dos Direitos Humanos e Cidadania').",
+      "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de estética (usar 'Estética e Filosofia da Arte') ou de direitos humanos (usar 'Filosofia dos Direitos Humanos e Cidadania'). Quando a discussao etica estiver centrada em tecnologia digital/IA, vigilancia algoritmica e impactos tecnossociais, priorize 'Filosofia e Tecnologia na Sociedade Contemporanea'.",
       "diferenciador": "Foco na análise e aplicação de princípios éticos e morais.",
       "palavras_chave": [
         "ética",
@@ -187,3 +187,4 @@
     }
   ]
 }
+

@@ -1,7 +1,6 @@
 """Modelos SQLAlchemy para tabelas de módulos e classificação no PostgreSQL"""
 
 from sqlalchemy import Column, Integer, String, Text, DateTime, func, UniqueConstraint
-from sqlalchemy.dialects.postgresql import JSONB
 from ..database import PgBase
 
 

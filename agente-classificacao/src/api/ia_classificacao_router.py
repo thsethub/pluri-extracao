@@ -14,20 +14,31 @@ Fluxo:
 """
 import os
 import json
+import csv
 import time
 import asyncio
 import traceback
 import re
+import ast
+import uuid
+import threading
+from datetime import datetime
+from collections import Counter, deque
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy import func, distinct
 from sqlalchemy.orm import Session, joinedload
 from loguru import logger
 from typing import List, Optional, Dict, Any
 
+from ..config import settings
 from ..database import get_pg_db, get_db, PgSessionLocal, SessionLocal
 from ..database.models import QuestaoModel, HabilidadeModel
 from ..database.pg_usuario_models import ClassificacaoUsuarioModel
-from ..database.pg_ia_models import ClassificacaoAgenteIaModel, QuestaoEmbeddingModel
+from ..database.pg_ia_models import (
+    ClassificacaoAgenteIaModel,
+    QuestaoEmbeddingModel,
+    ClassificacaoAgenteIaErroModel,
+)
 from ..database.pg_modulo_models import HabilidadeModuloModel
 from .ia_classificacao_schemas import IAClassificarRequest, IAClassificarResponse, IARetreinarResponse
 from ..services.openai_client import OpenAIClient
@@ -38,16 +49,53 @@ router = APIRouter(prefix="/classificacao-ia", tags=["Classificação IA"])
 # Cache de prompts e flags de controle
 # --------------------------------------------------------------------------- #
 _PROMPTS_CACHE: Dict[str, dict] = {}
+_HUMAN_PRIOR_CACHE: Dict[int, dict] = {}
 PROMPTS_DIR = os.path.join(os.getcwd(), "prompts")
+OUTPUT_DIR = os.path.join(os.getcwd(), "data", "output")
 CANCEL_VALIDATION = False
+
+# Worker paralelo para validacao em background (continua mesmo sem tela aberta)
+MAX_VALIDATION_LOGS = 12000
+VALIDATION_STATE_LOCK = threading.Lock()
+VALIDATION_QUEUE_LOCK = threading.Lock()
+VALIDATION_STOP_EVENT = threading.Event()
+VALIDATION_QUEUE: deque[int] = deque()
+VALIDATION_WORKER_THREADS: List[threading.Thread] = []
+VALIDATION_JOB_STATE: Dict[str, Any] = {
+    "job_id": None,
+    "status": "idle",  # idle|running|stopping|stopped|completed|error
+    "limit": 0,
+    "workers_requested": 0,
+    "workers_active": 0,
+    "total": 0,
+    "processed": 0,
+    "sucesso": 0,
+    "erros": 0,
+    "queue_remaining": 0,
+    "total_tokens": 0,
+    "total_cost": 0.0,
+    "last_questao_id": None,
+    "last_error": None,
+    "started_at": None,
+    "finished_at": None,
+    "backup_csv": None,
+    "ia_lote_csv": None,
+    "classificacoes_ia_removidas": 0,
+    "logs": [],
+}
 
 @router.post("/cancelar-validacao")
 def cancelar_validacao():
-    """Gatilho para interromper a execução massiva de classificação (SSE ou Background)"""
+    """Gatilho para interromper validacao massiva (SSE e workers paralelos)."""
     global CANCEL_VALIDATION
     CANCEL_VALIDATION = True
-    logger.warning("Sinal de CANCELAMENTO recebido. A validação será interrompida!")
-    return {"message": "Validação parada com sucesso."}
+    VALIDATION_STOP_EVENT.set()
+    with VALIDATION_STATE_LOCK:
+        if VALIDATION_JOB_STATE.get("status") == "running":
+            VALIDATION_JOB_STATE["status"] = "stopping"
+    logger.warning("Sinal de CANCELAMENTO recebido. A validacao sera interrompida!")
+    _append_validation_log("warning", "Sinal de cancelamento recebido")
+    return {"message": "Validacao parada com sucesso."}
 
 
 def slugify(s: str) -> str:
@@ -60,6 +108,563 @@ def slugify(s: str) -> str:
     s = re.sub(r'[ç]', 'c', s)
     s = re.sub(r'[^a-z0-9]+', '_', s)
     return s.strip('_')
+
+
+def extract_description_set(assuntos_sugeridos: Any) -> set[str]:
+    """Normaliza descrições em um set para comparação IA vs manual."""
+    if not assuntos_sugeridos:
+        return set()
+    if isinstance(assuntos_sugeridos, dict):
+        return {str(v) for v in assuntos_sugeridos.values() if v}
+    if isinstance(assuntos_sugeridos, list):
+        return {str(v) for v in assuntos_sugeridos if v}
+    return set()
+
+
+def calculate_estimated_cost_usd(input_tokens: int, output_tokens: int) -> float:
+    """Calcula custo estimado com tarifas por 1k tokens configuradas por ambiente."""
+    in_cost = (input_tokens / 1000.0) * settings.ia_cost_per_1k_input_tokens
+    out_cost = (output_tokens / 1000.0) * settings.ia_cost_per_1k_output_tokens
+    return in_cost + out_cost
+
+
+def parse_json_like_list(value: Any) -> List[str]:
+    """Normaliza campo JSON/lista legado em lista de strings."""
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return [str(v).strip() for v in value if v and str(v).strip()]
+    if isinstance(value, str):
+        raw = value.strip()
+        if not raw:
+            return []
+        for parser in (json.loads, ast.literal_eval):
+            try:
+                parsed = parser(raw)
+                if isinstance(parsed, list):
+                    return [str(v).strip() for v in parsed if v and str(v).strip()]
+            except Exception:
+                continue
+        return [raw]
+    return []
+
+
+def ensure_output_dir() -> str:
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    return OUTPUT_DIR
+
+
+def _json_cell(value: Any) -> str:
+    if value is None:
+        return ""
+    return json.dumps(value, ensure_ascii=False)
+
+
+def persist_classificacao_ia_error(
+    questao_id: Optional[int],
+    etapa: str,
+    erro: Any,
+    payload: Optional[Dict[str, Any]] = None,
+    modelo_utilizado: Optional[str] = None,
+    stacktrace: Optional[str] = None,
+) -> None:
+    """Persist errors to PostgreSQL using an isolated session."""
+    safe_payload = payload
+    if safe_payload is not None:
+        try:
+            json.dumps(safe_payload, ensure_ascii=False)
+        except Exception:
+            safe_payload = {"payload_repr": repr(safe_payload)}
+
+    session = PgSessionLocal()
+    try:
+        record = ClassificacaoAgenteIaErroModel(
+            questao_id=questao_id,
+            etapa=(etapa or "unknown")[:80],
+            erro=str(erro)[:4000],
+            stacktrace=(stacktrace or "")[:30000] if stacktrace else None,
+            payload=safe_payload,
+            modelo_utilizado=modelo_utilizado,
+            prompt_version=settings.ia_prompt_version,
+        )
+        session.add(record)
+        session.commit()
+    except Exception as persist_ex:
+        session.rollback()
+        logger.error(f"Falha ao persistir erro IA: {persist_ex}")
+    finally:
+        session.close()
+
+
+def export_classificacoes_ia_csv(file_path: str, rows: List[ClassificacaoAgenteIaModel]) -> int:
+    fieldnames = [
+        "id",
+        "questao_id",
+        "disciplina",
+        "modelo_utilizado",
+        "prompt_version",
+        "confianca_media",
+        "usou_llm",
+        "modulos_sugeridos",
+        "assuntos_sugeridos",
+        "modulos_possiveis",
+        "justificativas",
+        "habilidade_trieduc",
+        "categorias_preditas",
+        "enunciado",
+        "created_at",
+    ]
+    with open(file_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(
+                {
+                    "id": row.id,
+                    "questao_id": row.questao_id,
+                    "disciplina": row.disciplina or "",
+                    "modelo_utilizado": row.modelo_utilizado or "",
+                    "prompt_version": row.prompt_version or "",
+                    "confianca_media": row.confianca_media,
+                    "usou_llm": row.usou_llm,
+                    "modulos_sugeridos": _json_cell(row.modulos_sugeridos),
+                    "assuntos_sugeridos": _json_cell(row.assuntos_sugeridos),
+                    "modulos_possiveis": _json_cell(row.modulos_possiveis),
+                    "justificativas": _json_cell(row.justificativas),
+                    "habilidade_trieduc": _json_cell(row.habilidade_trieduc),
+                    "categorias_preditas": _json_cell(row.categorias_preditas),
+                    "enunciado": row.enunciado or "",
+                    "created_at": row.created_at.isoformat() if row.created_at else "",
+                }
+            )
+    return len(rows)
+
+
+def export_ia_lote_csv(file_path: str, questao_ids: List[int]) -> int:
+    with open(file_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["ordem", "questao_id"])
+        writer.writeheader()
+        for idx, qid in enumerate(questao_ids, start=1):
+            writer.writerow({"ordem": idx, "questao_id": qid})
+    return len(questao_ids)
+
+
+def prepare_lote_files(
+    pg_db: Session,
+    limit: int,
+    reset_classificacoes_ia: bool = True,
+) -> Dict[str, Any]:
+    """Exporta CSVs (backup + lote) e opcionalmente limpa tabela IA."""
+    ensure_output_dir()
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_file = os.path.join(
+        OUTPUT_DIR,
+        f"classificacoes_agente_ia_backup_{timestamp}.csv",
+    )
+    lote_file = os.path.join(
+        OUTPUT_DIR,
+        f"ia_lote_{limit}_{timestamp}.csv",
+    )
+
+    ia_rows = (
+        pg_db.query(ClassificacaoAgenteIaModel)
+        .order_by(ClassificacaoAgenteIaModel.questao_id)
+        .all()
+    )
+    backup_count = export_classificacoes_ia_csv(backup_file, ia_rows)
+
+    manual_ids = [
+        r[0]
+        for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.usuario_id != 0)
+        .distinct()
+        .order_by(ClassificacaoUsuarioModel.questao_id)
+        .limit(limit)
+        .all()
+    ]
+    lote_count = export_ia_lote_csv(lote_file, manual_ids)
+
+    deleted_count = 0
+    if reset_classificacoes_ia:
+        deleted_count = (
+            pg_db.query(ClassificacaoAgenteIaModel)
+            .delete(synchronize_session=False)
+        )
+        pg_db.commit()
+
+    return {
+        "backup_csv": backup_file,
+        "backup_rows": backup_count,
+        "ia_lote_csv": lote_file,
+        "ia_lote_rows": lote_count,
+        "reset_aplicado": reset_classificacoes_ia,
+        "classificacoes_ia_removidas": deleted_count,
+        "manual_ids": manual_ids,
+    }
+
+
+def _utc_now_iso() -> str:
+    return datetime.utcnow().isoformat() + "Z"
+
+
+def _append_validation_log(level: str, message: str) -> None:
+    entry = {"time": _utc_now_iso(), "level": level, "message": message}
+    with VALIDATION_STATE_LOCK:
+        logs = VALIDATION_JOB_STATE.get("logs", [])
+        logs.append(entry)
+        if len(logs) > MAX_VALIDATION_LOGS:
+            logs = logs[-MAX_VALIDATION_LOGS:]
+        VALIDATION_JOB_STATE["logs"] = logs
+
+
+def _get_validation_state_snapshot() -> Dict[str, Any]:
+    with VALIDATION_STATE_LOCK:
+        snapshot = dict(VALIDATION_JOB_STATE)
+        snapshot["logs"] = list(VALIDATION_JOB_STATE.get("logs", []))
+        return snapshot
+
+
+def _validation_worker_loop(job_id: str, worker_idx: int) -> None:
+    """Loop de um worker: consome fila unica, sem repetir questoes."""
+    pg_session = PgSessionLocal()
+    mysql_session = SessionLocal()
+    _append_validation_log("info", f"Worker-{worker_idx} iniciado")
+
+    try:
+        while True:
+            if VALIDATION_STOP_EVENT.is_set():
+                break
+
+            qid = None
+            remaining = 0
+            with VALIDATION_QUEUE_LOCK:
+                if VALIDATION_QUEUE:
+                    qid = VALIDATION_QUEUE.popleft()
+                    remaining = len(VALIDATION_QUEUE)
+
+            if qid is None:
+                break
+
+            with VALIDATION_STATE_LOCK:
+                if VALIDATION_JOB_STATE.get("job_id") != job_id:
+                    return
+                VALIDATION_JOB_STATE["queue_remaining"] = remaining
+                VALIDATION_JOB_STATE["last_questao_id"] = qid
+
+            try:
+                req = IAClassificarRequest(questao_id=qid, force_fallback_on_empty=True)
+                result = classificar_questao(req, pg_session, mysql_session)
+                processed_now = 0
+                total_now = 0
+                with VALIDATION_STATE_LOCK:
+                    if VALIDATION_JOB_STATE.get("job_id") != job_id:
+                        return
+                    VALIDATION_JOB_STATE["processed"] += 1
+                    VALIDATION_JOB_STATE["sucesso"] += 1
+                    VALIDATION_JOB_STATE["total_tokens"] += int(result.tokens_usados or 0)
+                    VALIDATION_JOB_STATE["total_cost"] = round(
+                        float(VALIDATION_JOB_STATE.get("total_cost", 0.0)) + float(result.custo_estimado_usd or 0.0),
+                        6,
+                    )
+                    processed_now = int(VALIDATION_JOB_STATE.get("processed", 0))
+                    total_now = int(VALIDATION_JOB_STATE.get("total", 0))
+                _append_validation_log(
+                    "info",
+                    (
+                        f"[{processed_now}/{total_now}] QID {qid} OK | "
+                        f"modulos={result.modulos_sugeridos} | "
+                        f"tokens={result.tokens_usados} | "
+                        f"custo=${(result.custo_estimado_usd or 0.0):.6f}"
+                    ),
+                )
+            except Exception as ex:
+                pg_session.rollback()
+                processed_now = 0
+                total_now = 0
+                with VALIDATION_STATE_LOCK:
+                    if VALIDATION_JOB_STATE.get("job_id") != job_id:
+                        return
+                    VALIDATION_JOB_STATE["processed"] += 1
+                    VALIDATION_JOB_STATE["erros"] += 1
+                    VALIDATION_JOB_STATE["last_error"] = str(ex)[:500]
+                    processed_now = int(VALIDATION_JOB_STATE.get("processed", 0))
+                    total_now = int(VALIDATION_JOB_STATE.get("total", 0))
+                persist_classificacao_ia_error(
+                    questao_id=qid,
+                    etapa="validar_workers_loop",
+                    erro=ex,
+                    payload={"worker": worker_idx},
+                    stacktrace=traceback.format_exc(),
+                )
+                _append_validation_log(
+                    "error",
+                    f"[{processed_now}/{total_now}] Worker-{worker_idx} erro na QID {qid}: {str(ex)[:180]}",
+                )
+
+            time.sleep(0.02)
+    finally:
+        pg_session.close()
+        mysql_session.close()
+        with VALIDATION_STATE_LOCK:
+            if VALIDATION_JOB_STATE.get("job_id") == job_id:
+                current = int(VALIDATION_JOB_STATE.get("workers_active", 0))
+                VALIDATION_JOB_STATE["workers_active"] = max(0, current - 1)
+        _append_validation_log("info", f"Worker-{worker_idx} finalizado")
+
+
+def _validation_monitor_loop(job_id: str, workers: List[threading.Thread]) -> None:
+    for t in workers:
+        t.join()
+
+    with VALIDATION_STATE_LOCK:
+        if VALIDATION_JOB_STATE.get("job_id") != job_id:
+            return
+
+        if VALIDATION_JOB_STATE.get("status") in {"running", "stopping"}:
+            VALIDATION_JOB_STATE["status"] = "stopped" if VALIDATION_STOP_EVENT.is_set() else "completed"
+
+        VALIDATION_JOB_STATE["workers_active"] = 0
+        VALIDATION_JOB_STATE["queue_remaining"] = 0
+        VALIDATION_JOB_STATE["finished_at"] = _utc_now_iso()
+
+    snapshot = _get_validation_state_snapshot()
+    _append_validation_log(
+        "success",
+        (
+            f"Job {job_id} finalizado com status={snapshot.get('status')} | "
+            f"sucesso={snapshot.get('sucesso')} erros={snapshot.get('erros')} "
+            f"processado={snapshot.get('processed')}/{snapshot.get('total')}"
+        ),
+    )
+
+
+def canonicalize_module_name(module_name: str, modulos_validos: List[str]) -> Optional[str]:
+    """Resolve nome de módulo com normalização leve (case/acentos/pontuação)."""
+    if not module_name:
+        return None
+
+    normalized = module_name.strip().lower()
+    for mv in modulos_validos:
+        if mv.strip().lower() == normalized:
+            return mv
+
+    target_slug = slugify(module_name)
+    for mv in modulos_validos:
+        if slugify(mv) == target_slug:
+            return mv
+
+    # Fuzzy leve para variações de singular/plural e pequenos sufixos.
+    for mv in modulos_validos:
+        mv_slug = slugify(mv)
+        if target_slug and (target_slug in mv_slug or mv_slug in target_slug):
+            return mv
+
+    return None
+
+
+def dedupe_preserve_order(items: List[str]) -> List[str]:
+    out = []
+    seen = set()
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+            out.append(item)
+    return out
+
+
+def build_module_subject_candidates(
+    modulos_habilidade: List[HabilidadeModuloModel],
+) -> Dict[str, List[str]]:
+    """
+    Gera mapa modulo -> lista de assuntos (descricoes) validos para a habilidade.
+    Preserva ordem e remove duplicatas.
+    """
+    subjects_by_module: Dict[str, List[str]] = {}
+    seen_pairs = set()
+
+    for row in modulos_habilidade:
+        modulo = (row.modulo or "").strip()
+        descricao = (row.descricao or "").strip()
+        if not modulo:
+            continue
+
+        if modulo not in subjects_by_module:
+            subjects_by_module[modulo] = []
+
+        if descricao:
+            key = (modulo, descricao)
+            if key not in seen_pairs:
+                seen_pairs.add(key)
+                subjects_by_module[modulo].append(descricao)
+
+    return subjects_by_module
+
+
+def canonicalize_subject_description(
+    descricao: str,
+    valid_descriptions: List[str],
+) -> Optional[str]:
+    """Resolve descricao de assunto para um valor valido da lista do modulo."""
+    if not descricao:
+        return None
+
+    raw = descricao.strip()
+    if not raw:
+        return None
+
+    normalized = raw.lower()
+    for d in valid_descriptions:
+        if d.strip().lower() == normalized:
+            return d
+
+    target_slug = slugify(raw)
+    for d in valid_descriptions:
+        if slugify(d) == target_slug:
+            return d
+
+    for d in valid_descriptions:
+        dslug = slugify(d)
+        if target_slug and (target_slug in dslug or dslug in target_slug):
+            return d
+
+    return None
+
+
+def build_subject_options_text(
+    modulos_validos: List[str],
+    subjects_by_module: Dict[str, List[str]],
+) -> str:
+    """Monta texto de opcoes de assunto por modulo para o prompt."""
+    chunks: List[str] = []
+    for modulo in modulos_validos:
+        descricoes = subjects_by_module.get(modulo, [])
+        if descricoes:
+            linhas = "\n".join(f"    - {d}" for d in descricoes)
+            chunks.append(f"- **{modulo}**:\n{linhas}")
+        else:
+            chunks.append(f"- **{modulo}**:\n    - (sem descricao cadastrada)")
+    return "\n\n".join(chunks)
+
+
+def build_question_context_text(q: QuestaoModel, texto_override: Optional[str]) -> str:
+    """Monta contexto completo para classificação: texto_base + enunciado + alternativas."""
+    parts: List[str] = []
+
+    if q.texto_base:
+        parts.append(f"TEXTO BASE:\n{q.texto_base}")
+
+    if texto_override:
+        parts.append(f"ENUNCIADO (REQUEST):\n{texto_override}")
+        if q.enunciado and q.enunciado.strip() != texto_override.strip():
+            parts.append(f"ENUNCIADO (DB):\n{q.enunciado}")
+    elif q.enunciado:
+        parts.append(f"ENUNCIADO:\n{q.enunciado}")
+
+    if q.tipo:
+        parts.append(f"TIPO DA QUESTAO: {q.tipo}")
+
+    if q.alternativas:
+        alternativas_ordenadas = sorted(
+            q.alternativas,
+            key=lambda a: (a.ordem if a.ordem is not None else 9999, a.id or 0),
+        )
+        alt_lines = []
+        for idx, alt in enumerate(alternativas_ordenadas, start=1):
+            conteudo = (alt.conteudo or "").strip()
+            if not conteudo:
+                continue
+            label = alt.ordem if alt.ordem is not None else idx
+            alt_lines.append(f"{label}) {conteudo}")
+        if alt_lines:
+            parts.append("ALTERNATIVAS:\n" + "\n".join(alt_lines))
+
+    return "\n\n".join(parts).strip()
+
+
+def extract_image_urls_from_text(raw_text: Optional[str]) -> List[str]:
+    """Extrai imagens base64 e URLs http(s) de tags <img src=...>."""
+    if not raw_text:
+        return []
+
+    urls = []
+    pattern = r'<img[^>]+src=["\']([^"\']+)["\'][^>]*>'
+    for match in re.finditer(pattern, raw_text, flags=re.IGNORECASE):
+        src = match.group(1).strip()
+        if src.startswith("data:image/") or src.startswith("http://") or src.startswith("https://"):
+            urls.append(src)
+    return dedupe_preserve_order(urls)
+
+
+def collect_question_image_urls(q: QuestaoModel, texto_contexto: str) -> List[str]:
+    """Coleta imagens do enunciado, texto base, alternativas e contexto montado."""
+    fragments = [texto_contexto, q.enunciado or "", q.texto_base or ""]
+    if q.alternativas:
+        fragments.extend((alt.conteudo or "") for alt in q.alternativas)
+
+    all_urls: List[str] = []
+    for fragment in fragments:
+        all_urls.extend(extract_image_urls_from_text(fragment))
+    return dedupe_preserve_order(all_urls)
+
+
+def get_human_module_priors(
+    pg_db: Session, habilidade_id: Optional[int]
+) -> Dict[str, Any]:
+    """
+    Retorna distribuição dos módulos escolhidos manualmente para a habilidade.
+    Estrutura:
+      {
+        "total_samples": int,
+        "items": [{"modulo": str, "count": int, "share": float}]
+      }
+    """
+    if not settings.ia_use_human_priors or not habilidade_id:
+        return {"total_samples": 0, "items": []}
+
+    if habilidade_id in _HUMAN_PRIOR_CACHE:
+        return _HUMAN_PRIOR_CACHE[habilidade_id]
+
+    rows = (
+        pg_db.query(
+            ClassificacaoUsuarioModel.modulo_escolhido,
+            ClassificacaoUsuarioModel.modulos_escolhidos,
+        )
+        .filter(ClassificacaoUsuarioModel.usuario_id != 0)
+        .filter(ClassificacaoUsuarioModel.habilidade_id == habilidade_id)
+        .all()
+    )
+
+    counter: Counter[str] = Counter()
+    total_samples = 0
+
+    for modulo_single, modulos_multi in rows:
+        modules = parse_json_like_list(modulos_multi)
+        if not modules and modulo_single:
+            modules = [str(modulo_single).strip()]
+
+        modules = dedupe_preserve_order([m for m in modules if m])
+        if not modules:
+            continue
+
+        total_samples += 1
+        for module_name in modules:
+            counter[module_name] += 1
+
+    top_k = max(1, settings.ia_human_prior_top_k)
+    items = []
+    for module_name, count in counter.most_common(top_k):
+        share = (count / total_samples) if total_samples else 0.0
+        items.append(
+            {
+                "modulo": module_name,
+                "count": count,
+                "share": round(share, 4),
+            }
+        )
+
+    result = {"total_samples": total_samples, "items": items}
+    _HUMAN_PRIOR_CACHE[habilidade_id] = result
+    return result
 
 
 def load_discipline_prompt(disciplina: str) -> Optional[dict]:
@@ -132,13 +737,119 @@ MÓDULOS POSSÍVEIS (com critérios de classificação):
 {modulos_text}
 
 TEXTO DA QUESTÃO:
-{texto_questao[:4000]}
+{texto_questao[:settings.ia_max_question_chars]}
 
 Responda APENAS com JSON no formato:
 {{
   "modulos": [
     {{"nome": "Nome Exato do Módulo", "justificativa": "Por que este módulo se aplica..."}}
   ]
+}}"""
+
+    return system_prompt, user_prompt
+
+
+def build_classification_prompt_v2(
+    prompt_data: dict,
+    modulos_validos: List[str],
+    subjects_by_module: Dict[str, List[str]],
+    texto_questao: str,
+    habilidade_info: str,
+    human_priors: Optional[Dict[str, Any]] = None,
+    has_images: bool = False,
+) -> tuple[str, str]:
+    """
+    Versao otimizada do prompt:
+    - privilegia single-label
+    - usa prior humano por habilidade (quando houver amostra suficiente)
+    """
+    modulos_com_criterios = []
+    modulos_dict = {m["nome"]: m for m in prompt_data.get("modulos", [])}
+
+    for mod_nome in modulos_validos:
+        if mod_nome in modulos_dict:
+            m = modulos_dict[mod_nome]
+            modulos_com_criterios.append(
+                f'- **{m["nome"]}**\n'
+                f'  Escopo: {m["escopo"]}\n'
+                f'  Incluir quando: {m["incluir_quando"]}\n'
+                f'  Nao incluir quando: {m["nao_incluir_quando"]}\n'
+                f'  Diferenciador: {m["diferenciador"]}'
+            )
+        else:
+            modulos_com_criterios.append(
+                f'- **{mod_nome}** (sem criterios detalhados disponiveis)'
+            )
+
+    modulos_text = "\n\n".join(modulos_com_criterios)
+    assuntos_text = build_subject_options_text(modulos_validos, subjects_by_module)
+    max_modules = max(1, settings.ia_max_output_modules)
+
+    prior_text = "Sem historico manual suficiente para esta habilidade."
+    if human_priors and human_priors.get("total_samples", 0) >= settings.ia_human_prior_min_samples:
+        prior_lines = [
+            f"- {item['modulo']} (freq={item['count']}, share={item['share']})"
+            for item in human_priors.get("items", [])
+        ]
+        if prior_lines:
+            prior_text = (
+                f"Base manual disponivel ({human_priors['total_samples']} amostras):\n"
+                + "\n".join(prior_lines)
+                + "\nUse como prior fraco: so desvie quando o enunciado indicar claramente outro modulo."
+            )
+
+    image_rule = (
+        "9. Se houver imagens, descreva de forma objetiva o que foi usado da imagem no campo `analise_imagem`."
+        if has_images
+        else "9. Se nao houver imagem relevante, retorne `analise_imagem` vazio."
+    )
+
+    system_prompt = f"""Voce e um especialista em classificacao de questoes educacionais da disciplina {prompt_data['disciplina']}.
+
+INSTRUCAO GERAL DA DISCIPLINA:
+{prompt_data.get('instrucao_geral', 'Classifique de acordo com o conteudo principal da questao.')}
+
+REGRAS PARA MULTIPLOS MODULOS:
+{prompt_data.get('regras_multi_modulo', 'Atribua multiplos modulos somente quando genuinamente necessario.')}
+
+REGRAS OBRIGATORIAS:
+1. Voce SO pode escolher modulos da lista abaixo. NUNCA invente modulos.
+2. Para CADA modulo escolhido, selecione TAMBEM a descricao de assunto EXATA da lista permitida para esse modulo.
+3. Para CADA modulo escolhido, forneca uma justificativa de 1-2 frases.
+4. As justificativas de modulos diferentes NAO DEVEM se interseccionar em escopo.
+5. Se dois modulos cobrem o mesmo aspecto, escolha o MAIS ESPECIFICO.
+6. Priorize classificacao SINGLE-LABEL (1 modulo) sempre que possivel.
+7. Use multiplos modulos somente quando a questao exigir, de forma inequivoca, mais de um foco independente.
+8. Escolha no MINIMO 1 modulo e no MAXIMO {max_modules} modulos.
+9. Responda APENAS com JSON valido no formato especificado.
+{image_rule}"""
+
+    user_prompt = f"""HABILIDADE TRIEDUC DA QUESTAO:
+{habilidade_info}
+
+HISTORICO HUMANO (apoio):
+{prior_text}
+
+MODULOS POSSIVEIS (com criterios de classificacao):
+
+{modulos_text}
+
+ASSUNTOS POSSIVEIS POR MODULO (escolha a descricao EXATA):
+{assuntos_text}
+
+CONTEXTO COMPLETO DA QUESTAO (texto base, enunciado e alternativas):
+{texto_questao[:settings.ia_max_question_chars]}
+
+Responda APENAS com JSON no formato:
+{{
+  "modulos": [
+    {{
+      "nome": "Nome Exato do Modulo",
+      "descricao": "Descricao Exata do Assunto para esse Modulo",
+      "justificativa": "Por que este modulo+assunto se aplica..."
+    }}
+  ],
+  "analise_imagem": "Texto curto descrevendo o que foi lido da imagem (se houver)"
 }}"""
 
     return system_prompt, user_prompt
@@ -158,21 +869,15 @@ def classificar_questao(
         
         # 1. Obter Questão no MySQL
         q = db.query(QuestaoModel).options(
-            joinedload(QuestaoModel.habilidade)
+            joinedload(QuestaoModel.habilidade),
+            joinedload(QuestaoModel.alternativas),
         ).filter(QuestaoModel.id == request.questao_id).first()
         
         if not q:
             raise HTTPException(status_code=404, detail="Questão não encontrada no MySQL")
         
-        # 2. Preparar Texto
-        texto_final = request.texto
-        if not texto_final:
-            partes = []
-            if q.texto_base:
-                partes.append(f"Texto Base: {q.texto_base}")
-            if q.enunciado:
-                partes.append(f"Enunciado: {q.enunciado}")
-            texto_final = "\n".join(partes)
+        # 2. Preparar contexto completo da questão
+        texto_final = build_question_context_text(q, request.texto)
         
         if not texto_final or len(texto_final.strip()) < 10:
             raise HTTPException(status_code=400, detail="Texto da questão muito curto ou ausente")
@@ -213,13 +918,22 @@ def classificar_questao(
         
         # 5. Identificar disciplina e módulos válidos
         disciplina = modulos_habilidade[0].disciplina
-        modulos_validos = list(set(m.modulo for m in modulos_habilidade))
-        descricoes_modulos = {m.modulo: m.descricao for m in modulos_habilidade}
+        subjects_by_module = build_module_subject_candidates(modulos_habilidade)
+        modulos_validos = list(subjects_by_module.keys())
         modulos_possiveis = modulos_validos.copy()
+        human_priors = get_human_module_priors(pg_db, habilidade_id)
+        if human_priors.get("items"):
+            logger.info(
+                f"QID {request.questao_id}: Priors humanos "
+                f"(n={human_priors.get('total_samples', 0)}) "
+                f"{human_priors['items']}"
+            )
         
         logger.info(
             f"QID {request.questao_id}: Disciplina={disciplina}, "
-            f"Módulos válidos={len(modulos_validos)}, Hab={habilidade_info[:50]}"
+            f"Módulos válidos={len(modulos_validos)}, "
+            f"Assuntos={sum(len(v) for v in subjects_by_module.values())}, "
+            f"Hab={habilidade_info[:50]}"
         )
         
         # 6. Carregar prompt da disciplina
@@ -230,35 +944,47 @@ def classificar_questao(
                 detail=f"Prompt não encontrado para disciplina '{disciplina}'"
             )
         
+        # Buscar imagens (base64 e URLs) em enunciado, texto base e alternativas
+        image_urls = collect_question_image_urls(q, texto_final)
+        max_images = 8
+        if len(image_urls) > max_images:
+            logger.info(
+                f"QID {request.questao_id}: {len(image_urls)} imagens encontradas; "
+                f"enviando apenas {max_images}"
+            )
+            image_urls = image_urls[:max_images]
+        elif image_urls:
+            logger.info(f"QID {request.questao_id}: imagens enviadas ao modelo = {len(image_urls)}")
+
         # 7. Classificar via LLM
-        system_prompt, user_prompt = build_classification_prompt(
-            prompt_data, modulos_validos, texto_final, habilidade_info
+        system_prompt, user_prompt = build_classification_prompt_v2(
+            prompt_data,
+            modulos_validos,
+            subjects_by_module,
+            texto_final,
+            habilidade_info,
+            human_priors,
+            bool(image_urls),
         )
-        
-        # Buscar imagens em base64 embutidas na questão
-        base64_images = []
-        if isinstance(texto_final, str):
-            pattern = r'<img[^>]+src=["\'](data:image/[a-zA-Z0-9]+;base64,[^"\']+)["\'][^>]*>'
-            import re
-            for m in re.finditer(pattern, texto_final):
-                base64_images.append(m.group(1))
 
         # Montar payload multimodal
         user_content = [{"type": "text", "text": user_prompt}]
-        for img_data in base64_images:
+        for img_data in image_urls:
             user_content.append({"type": "image_url", "image_url": {"url": img_data}})
 
         client = OpenAIClient()
         messages = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_content if base64_images else user_prompt}
+            {"role": "user", "content": user_content if image_urls else user_prompt}
         ]
         
-        response = client.create_completion(messages, model="gpt-5.2")
+        response = client.create_completion(messages, model=settings.ia_classification_model)
+        modelo_resposta = response.get("model", settings.ia_classification_model)
         tokens_used = response.get("tokens_used", 0)
+        input_tokens = response.get("input_tokens", 0)
+        output_tokens = response.get("output_tokens", 0)
         llm_time_ms = response.get("processing_time_ms", 0)
-        # GPT-5.2: custo médio estimado
-        custo_estimado = tokens_used * 0.00002  # custo em USD
+        custo_estimado = calculate_estimated_cost_usd(input_tokens, output_tokens)
         
         # 8. Parsear resposta
         try:
@@ -273,38 +999,91 @@ def classificar_questao(
             logger.error(f"QID {request.questao_id}: Erro ao parsear resposta LLM: {response.get('content', '')[:200]}")
             raise HTTPException(status_code=500, detail="Resposta inválida do LLM")
         
-        # 9. Validar módulos contra lista permitida
-        modulos_preditos = []
+        # 9. Validar módulos e assuntos contra lista permitida
+        modulos_sugeridos = []
+        descricoes_preditas: Dict[str, str] = {}
         justificativas = {}
+        analise_imagem = data.get("analise_imagem", "")
+        if not isinstance(analise_imagem, str):
+            analise_imagem = str(analise_imagem) if analise_imagem is not None else ""
+        analise_imagem = analise_imagem.strip()
         
         for mod in data.get("modulos", []):
             nome = mod.get("nome", "")
+            descricao = mod.get("descricao", "")
             justificativa = mod.get("justificativa", "")
             
-            if nome in modulos_validos:
-                modulos_preditos.append(nome)
-                justificativas[nome] = justificativa
+            canonical_name = canonicalize_module_name(nome, modulos_validos)
+            if canonical_name:
+                modulos_sugeridos.append(canonical_name)
+                justificativas[canonical_name] = justificativa
+
+                valid_subjects = subjects_by_module.get(canonical_name, [])
+                canonical_subject = canonicalize_subject_description(
+                    str(descricao) if descricao is not None else "",
+                    valid_subjects,
+                )
+                if canonical_subject:
+                    descricoes_preditas[canonical_name] = canonical_subject
+                elif len(valid_subjects) == 1:
+                    # Se houver assunto único para o módulo, faz autofill.
+                    descricoes_preditas[canonical_name] = valid_subjects[0]
+                elif valid_subjects:
+                    logger.warning(
+                        f"QID {request.questao_id}: assunto inválido/ausente para módulo "
+                        f"'{canonical_name}' (retornado='{descricao}')"
+                    )
             else:
-                # Tentar match aproximado (case-insensitive)
-                match_found = False
-                for mv in modulos_validos:
-                    if mv.lower().strip() == nome.lower().strip():
-                        modulos_preditos.append(mv)
-                        justificativas[mv] = justificativa
-                        match_found = True
-                        break
-                if not match_found:
-                    logger.warning(f"QID {request.questao_id}: Módulo inválido ignorado: '{nome}'")
+                logger.warning(f"QID {request.questao_id}: Módulo inválido ignorado: '{nome}'")
+
+        modulos_sugeridos = dedupe_preserve_order(modulos_sugeridos)
+        max_output_modules = max(1, settings.ia_max_output_modules)
+        if len(modulos_sugeridos) > max_output_modules:
+            dropped = modulos_sugeridos[max_output_modules:]
+            modulos_sugeridos = modulos_sugeridos[:max_output_modules]
+            justificativas = {m: justificativas.get(m, "") for m in modulos_sugeridos}
+            descricoes_preditas = {m: descricoes_preditas[m] for m in modulos_sugeridos if m in descricoes_preditas}
+            logger.info(
+                f"QID {request.questao_id}: truncado para {max_output_modules} módulo(s); "
+                f"descartados={dropped}"
+            )
         
-        if not modulos_preditos:
+        if not modulos_sugeridos:
             logger.error(f"QID {request.questao_id}: Nenhum módulo válido retornado pelo LLM")
-            # Fallback: usar o primeiro módulo válido
-            modulos_preditos = [modulos_validos[0]]
-            justificativas = {modulos_validos[0]: "Classificação padrão (fallback automático)"}
+            if settings.ia_enable_fallback_first_module or request.force_fallback_on_empty:
+                fallback_module = None
+                for item in human_priors.get("items", []):
+                    candidate = canonicalize_module_name(item.get("modulo", ""), modulos_validos)
+                    if candidate:
+                        fallback_module = candidate
+                        break
+
+                if fallback_module is None:
+                    fallback_module = modulos_validos[0]
+
+                modulos_sugeridos = [fallback_module]
+                justificativas = {fallback_module: "Classificação padrão (fallback automático)"}
+                fallback_subjects = subjects_by_module.get(fallback_module, [])
+                if len(fallback_subjects) == 1:
+                    descricoes_preditas = {fallback_module: fallback_subjects[0]}
+                else:
+                    descricoes_preditas = {}
+                logger.warning(
+                    f"QID {request.questao_id}: fallback automático ativado "
+                    f"({fallback_module})"
+                )
+            else:
+                raise HTTPException(
+                    status_code=422,
+                    detail="LLM não retornou nenhum módulo válido para esta questão"
+                )
+
+        if analise_imagem and image_urls:
+            justificativas["__analise_imagem__"] = analise_imagem
         
         # 10. Persistir resultado
         prompt_slug = slugify(disciplina)
-        modelo_nome = f"gpt-5.2_prompt_{prompt_slug}"
+        modelo_nome = f"{modelo_resposta}_prompt_{prompt_slug}"
         
         try:
             existing = pg_db.query(ClassificacaoAgenteIaModel).filter(
@@ -313,23 +1092,25 @@ def classificar_questao(
             
             record_data = {
                 "enunciado": (q.enunciado or "")[:1000],
-                "modulos_preditos": modulos_preditos,
+                "modulos_sugeridos": modulos_sugeridos,
                 "justificativas": justificativas,
                 "modulos_possiveis": modulos_possiveis,
-                "descricoes_modulos": descricoes_modulos,
+                "assuntos_sugeridos": descricoes_preditas,
                 "habilidade_trieduc": habilidade_trieduc_data,
                 "disciplina": disciplina,
                 "categorias_preditas": [],
                 "confianca_media": 1.0,
                 "modelo_utilizado": modelo_nome,
-                "prompt_version": "v1",
+                "prompt_version": settings.ia_prompt_version,
                 "usou_llm": True,
             }
             
             # Métricas de custo/tempo para logging
             logger.info(
                 f"QID {request.questao_id} METRICS: "
-                f"tokens={tokens_used} custo=${custo_estimado:.6f} "
+                f"model={modelo_resposta} input_tokens={input_tokens} "
+                f"output_tokens={output_tokens} total_tokens={tokens_used} "
+                f"custo=${custo_estimado:.6f} "
                 f"llm_time={llm_time_ms}ms"
             )
             
@@ -346,17 +1127,32 @@ def classificar_questao(
             pg_db.commit()
         except Exception as e:
             pg_db.rollback()
-            logger.error(f"Erro ao salvar resultado IA no DB: {e}")
+            stack = traceback.format_exc()
+            logger.error(f"Erro ao salvar resultado IA no DB: {e}\n{stack}")
+            persist_classificacao_ia_error(
+                questao_id=request.questao_id,
+                etapa="classificar_persistencia",
+                erro=e,
+                payload={
+                    "disciplina": disciplina,
+                    "modelo": modelo_nome,
+                    "modulos_sugeridos": modulos_sugeridos,
+                },
+                modelo_utilizado=modelo_nome,
+                stacktrace=stack,
+            )
+            raise HTTPException(status_code=500, detail="Erro ao salvar resultado IA")
 
         elapsed = time.time() - start_time
         logger.info(
-            f"QID {request.questao_id}: {modulos_preditos} "
+            f"QID {request.questao_id}: {modulos_sugeridos} "
+            f"assuntos={list(descricoes_preditas.values())} "
             f"({len(justificativas)} justificativas) em {elapsed:.2f}s"
         )
         
         return IAClassificarResponse(
             questao_id=request.questao_id,
-            modulos_preditos=modulos_preditos,
+            modulos_sugeridos=modulos_sugeridos,
             justificativas=justificativas,
             disciplina=disciplina,
             modulos_possiveis=modulos_possiveis,
@@ -369,10 +1165,24 @@ def classificar_questao(
             custo_estimado_usd=custo_estimado
         )
     
-    except HTTPException:
+    except HTTPException as e:
+        persist_classificacao_ia_error(
+            questao_id=request.questao_id,
+            etapa="classificar_http_exception",
+            erro=getattr(e, "detail", str(e)),
+            payload={"status_code": e.status_code},
+            stacktrace=traceback.format_exc(),
+        )
         raise
     except Exception as e:
-        logger.error(f"ERRO 500 no endpoint: {e}\n{traceback.format_exc()}")
+        stack = traceback.format_exc()
+        logger.error(f"ERRO 500 no endpoint: {e}\n{stack}")
+        persist_classificacao_ia_error(
+            questao_id=request.questao_id,
+            etapa="classificar_exception",
+            erro=e,
+            stacktrace=stack,
+        )
         raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -447,6 +1257,201 @@ async def get_ia_status(pg_db: Session = Depends(get_pg_db)):
         return {"error": str(e)}
 
 
+@router.post("/preparar-lote")
+async def preparar_lote(
+    limit: int = 5000,
+    reset_classificacoes_ia: bool = True,
+    pg_db: Session = Depends(get_pg_db),
+):
+    """
+    Prepara nova rodada de classificação:
+    1) Exporta CSV de backup da tabela classificacoes_agente_ia
+    2) Exporta CSV do ia_lote (questoes manuais alvo)
+    3) Opcionalmente limpa classificacoes_agente_ia
+    """
+    if limit <= 0:
+        raise HTTPException(status_code=400, detail="Parametro 'limit' deve ser maior que zero.")
+
+    try:
+        result = prepare_lote_files(
+            pg_db=pg_db,
+            limit=limit,
+            reset_classificacoes_ia=reset_classificacoes_ia,
+        )
+
+        return {
+            "message": "Lote preparado com sucesso.",
+            "backup_csv": result["backup_csv"],
+            "backup_rows": result["backup_rows"],
+            "ia_lote_csv": result["ia_lote_csv"],
+            "ia_lote_rows": result["ia_lote_rows"],
+            "reset_aplicado": result["reset_aplicado"],
+            "classificacoes_ia_removidas": result["classificacoes_ia_removidas"],
+        }
+    except Exception as e:
+        pg_db.rollback()
+        stack = traceback.format_exc()
+        logger.error(f"Erro ao preparar lote IA: {e}\n{stack}")
+        persist_classificacao_ia_error(
+            questao_id=None,
+            etapa="preparar_lote",
+            erro=e,
+            payload={"limit": limit, "reset_classificacoes_ia": reset_classificacoes_ia},
+            stacktrace=stack,
+        )
+        raise HTTPException(status_code=500, detail=f"Erro ao preparar lote IA: {str(e)}")
+
+
+@router.post("/validar-workers/start")
+async def validar_workers_start(
+    limit: int = 5000,
+    workers: int = 2,
+    prepare_lote_before_run: bool = True,
+    reset_before_run: bool = True,
+    pg_db: Session = Depends(get_pg_db),
+):
+    """
+    Inicia classificaÃ§Ã£o em paralelo com N workers.
+    Cada questao entra numa fila unica: nenhum worker pega a mesma questao.
+    """
+    global CANCEL_VALIDATION, VALIDATION_WORKER_THREADS
+
+    if limit <= 0:
+        raise HTTPException(status_code=400, detail="Parametro 'limit' deve ser maior que zero.")
+    if workers <= 0 or workers > 16:
+        raise HTTPException(status_code=400, detail="Parametro 'workers' deve estar entre 1 e 16.")
+
+    with VALIDATION_STATE_LOCK:
+        status = VALIDATION_JOB_STATE.get("status")
+        if status in {"running", "stopping"}:
+            raise HTTPException(
+                status_code=409,
+                detail="Ja existe um job de validacao em execucao.",
+            )
+
+    prepared = None
+    manual_ids: List[int] = []
+    if prepare_lote_before_run:
+        prepared = prepare_lote_files(
+            pg_db=pg_db,
+            limit=limit,
+            reset_classificacoes_ia=reset_before_run,
+        )
+        manual_ids = list(prepared.get("manual_ids", []))
+    else:
+        manual_ids = [
+            r[0]
+            for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+            .filter(ClassificacaoUsuarioModel.usuario_id != 0)
+            .distinct()
+            .order_by(ClassificacaoUsuarioModel.questao_id)
+            .limit(limit)
+            .all()
+        ]
+
+    if not manual_ids:
+        raise HTTPException(status_code=404, detail="Nenhuma questao manual encontrada para validar.")
+
+    CANCEL_VALIDATION = False
+    VALIDATION_STOP_EVENT.clear()
+    job_id = str(uuid.uuid4())
+
+    with VALIDATION_QUEUE_LOCK:
+        VALIDATION_QUEUE.clear()
+        VALIDATION_QUEUE.extend(manual_ids)
+
+    with VALIDATION_STATE_LOCK:
+        VALIDATION_JOB_STATE.update(
+            {
+                "job_id": job_id,
+                "status": "running",
+                "limit": limit,
+                "workers_requested": workers,
+                "workers_active": workers,
+                "total": len(manual_ids),
+                "processed": 0,
+                "sucesso": 0,
+                "erros": 0,
+                "queue_remaining": len(manual_ids),
+                "total_tokens": 0,
+                "total_cost": 0.0,
+                "last_questao_id": None,
+                "last_error": None,
+                "started_at": _utc_now_iso(),
+                "finished_at": None,
+                "logs": [],
+                "backup_csv": prepared.get("backup_csv") if prepared else None,
+                "ia_lote_csv": prepared.get("ia_lote_csv") if prepared else None,
+                "classificacoes_ia_removidas": (
+                    prepared.get("classificacoes_ia_removidas") if prepared else 0
+                ),
+            }
+        )
+
+    _append_validation_log(
+        "info",
+        f"Job {job_id} iniciado: total={len(manual_ids)} workers={workers}",
+    )
+    if prepared:
+        _append_validation_log(
+            "info",
+            (
+                f"Lote preparado: backup={prepared.get('backup_csv')} | "
+                f"lote={prepared.get('ia_lote_csv')} | "
+                f"removidas={prepared.get('classificacoes_ia_removidas')}"
+            ),
+        )
+
+    worker_threads: List[threading.Thread] = []
+    for idx in range(workers):
+        t = threading.Thread(
+            target=_validation_worker_loop,
+            args=(job_id, idx + 1),
+            daemon=True,
+            name=f"ia-validation-worker-{idx+1}",
+        )
+        worker_threads.append(t)
+        t.start()
+
+    VALIDATION_WORKER_THREADS = worker_threads
+
+    monitor = threading.Thread(
+        target=_validation_monitor_loop,
+        args=(job_id, worker_threads),
+        daemon=True,
+        name="ia-validation-monitor",
+    )
+    monitor.start()
+
+    return {
+        "message": "Validacao paralela iniciada.",
+        "prepare_lote_before_run": prepare_lote_before_run,
+        "reset_before_run": reset_before_run,
+        "backup_csv": prepared.get("backup_csv") if prepared else None,
+        "ia_lote_csv": prepared.get("ia_lote_csv") if prepared else None,
+        "job": _get_validation_state_snapshot(),
+    }
+
+
+@router.post("/validar-workers/stop")
+async def validar_workers_stop():
+    """Solicita parada graciosa do job paralelo atual."""
+    global CANCEL_VALIDATION
+    CANCEL_VALIDATION = True
+    VALIDATION_STOP_EVENT.set()
+    with VALIDATION_STATE_LOCK:
+        if VALIDATION_JOB_STATE.get("status") == "running":
+            VALIDATION_JOB_STATE["status"] = "stopping"
+    _append_validation_log("warning", "Parada solicitada pelo usuario")
+    return {"message": "Sinal de parada enviado.", "job": _get_validation_state_snapshot()}
+
+
+@router.get("/validar-workers/status")
+async def validar_workers_status():
+    """Retorna estado atual do job paralelo de validaÃ§Ã£o."""
+    return _get_validation_state_snapshot()
+
+
 @router.get("/validar-manual")
 async def validar_manual(background_tasks: BackgroundTasks):
     """Gatilho para classificar massivamente as questões classificadas por humanos"""
@@ -482,10 +1487,23 @@ async def validar_manual(background_tasks: BackgroundTasks):
                     pg_session.rollback()
                     erros += 1
                     logger.error(f"Erro QID {qid}: {ex}")
+                    persist_classificacao_ia_error(
+                        questao_id=qid,
+                        etapa="validar_manual_loop",
+                        erro=ex,
+                        payload={"index": i + 1, "total": len(manual_ids)},
+                        stacktrace=traceback.format_exc(),
+                    )
             
             logger.success(f"✅ Validação concluída: {sucesso} OK, {erros} erros de {len(manual_ids)} total")
         except Exception as e:
             logger.error(f"Erro na validação: {e}")
+            persist_classificacao_ia_error(
+                questao_id=None,
+                etapa="validar_manual_fatal",
+                erro=e,
+                stacktrace=traceback.format_exc(),
+            )
         finally:
             pg_session.close()
             mysql_session.close()
@@ -512,6 +1530,68 @@ async def reload_prompts():
 
 
 # --------------------------------------------------------------------------- #
+# Helpers de listagem
+# --------------------------------------------------------------------------- #
+def _compute_match_status(item: ClassificacaoAgenteIaModel, manual: Optional[ClassificacaoUsuarioModel]) -> str:
+    if manual is None:
+        return "pending"
+    manual_modulos = manual.modulos_escolhidos or ([manual.modulo_escolhido] if manual.modulo_escolhido else [])
+    manual_descricoes = manual.descricoes_assunto_list or ([manual.descricao_assunto] if manual.descricao_assunto else [])
+    ia_set = set(item.modulos_sugeridos or [])
+    ia_desc_set = extract_description_set(item.assuntos_sugeridos)
+    manual_set = set(manual_modulos) if manual_modulos else None
+    manual_desc_set = set([d for d in manual_descricoes if d]) if manual_descricoes else set()
+    if manual_set is None:
+        return "pending"
+    if ia_set == manual_set and ia_desc_set == manual_desc_set:
+        return "exact"
+    if ia_set & manual_set:
+        return "partial"
+    return "none"
+
+
+def _build_list_item(item: ClassificacaoAgenteIaModel, match_status: str) -> dict:
+    return {
+        "questao_id": item.questao_id,
+        "modulos_sugeridos": item.modulos_sugeridos,
+        "disciplina": item.disciplina,
+        "confianca_media": item.confianca_media,
+        "modelo_utilizado": item.modelo_utilizado,
+        "usou_llm": item.usou_llm,
+        "prompt_version": item.prompt_version,
+        "tem_justificativa": item.justificativas is not None,
+        "match_status": match_status,
+        "created_at": item.created_at.isoformat() if item.created_at else None,
+    }
+
+
+def _build_base_query(pg_db: Session, modelo_filter: Optional[str], disciplina_filter: Optional[str]):
+    query = pg_db.query(ClassificacaoAgenteIaModel)
+    if modelo_filter and modelo_filter not in ("", "all"):
+        if modelo_filter == "gpt-4o":
+            query = query.filter(ClassificacaoAgenteIaModel.modelo_utilizado.ilike("%gpt-4o_%"))
+        else:
+            query = query.filter(ClassificacaoAgenteIaModel.modelo_utilizado.ilike(f"%{modelo_filter}%"))
+    if disciplina_filter and disciplina_filter not in ("", "all"):
+        query = query.filter(ClassificacaoAgenteIaModel.disciplina == disciplina_filter)
+    return query
+
+
+def _fetch_manuals_for_ids(pg_db: Session, questao_ids: list) -> dict:
+    if not questao_ids:
+        return {}
+    rows = (
+        pg_db.query(ClassificacaoUsuarioModel)
+        .filter(
+            ClassificacaoUsuarioModel.questao_id.in_(questao_ids),
+            ClassificacaoUsuarioModel.usuario_id != 0,
+        )
+        .all()
+    )
+    return {m.questao_id: m for m in rows}
+
+
+# --------------------------------------------------------------------------- #
 # Listagem e Detalhes de Classificações
 # --------------------------------------------------------------------------- #
 @router.get("/classificacoes")
@@ -523,77 +1603,62 @@ async def list_classificacoes(
     match_filter: Optional[str] = None,
     pg_db: Session = Depends(get_pg_db)
 ):
-    """Lista classificações IA com paginação e filtros (calcula match em Python)"""
+    """Lista classificações IA com paginação e filtros.
+
+    Quando não há match_filter: pagina direto no SQL (rápido).
+    Quando há match_filter: carrega apenas os IDs IA filtrados e busca
+    manuals somente para esses IDs (evita full-table scan desnecessário).
+    """
     try:
-        query = pg_db.query(ClassificacaoAgenteIaModel)
-        
-        if modelo_filter and modelo_filter != "all":
-            if modelo_filter == "gpt-4o":
-                query = query.filter(ClassificacaoAgenteIaModel.modelo_utilizado.ilike(f"%gpt-4o\_%"))
-            else:
-                query = query.filter(ClassificacaoAgenteIaModel.modelo_utilizado.ilike(f"%{modelo_filter}%"))
-        if disciplina_filter and disciplina_filter != "all":
-            query = query.filter(ClassificacaoAgenteIaModel.disciplina == disciplina_filter)
-        
-        items = query.order_by(ClassificacaoAgenteIaModel.created_at.desc()).all()
-        
-        # Buscar todas as classificacoes manuais para fazer o match
-        manuals = pg_db.query(ClassificacaoUsuarioModel).filter(ClassificacaoUsuarioModel.usuario_id != 0).all()
-        manual_dict = {m.questao_id: m for m in manuals}
-        
-        filtered_items = []
-        for item in items:
-            manual = manual_dict.get(item.questao_id)
-            manual_modulos = None
-            manual_descricoes = None
-            if manual:
-                manual_modulos = manual.modulos_escolhidos or ([manual.modulo_escolhido] if manual.modulo_escolhido else [])
-                manual_descricoes = manual.descricoes_assunto_list or ([manual.descricao_assunto] if manual.descricao_assunto else [])
-            
-            ia_set = set(item.modulos_preditos or [])
-            ia_desc_set = set(item.descricoes_modulos or [])
-            manual_set = set(manual_modulos) if manual_modulos else None
-            manual_desc_set = set([d for d in manual_descricoes if d]) if manual_descricoes else set()
-            
-            match_status = "pending"
-            if manual_set is not None:
-                if ia_set == manual_set and ia_desc_set == manual_desc_set:
-                    match_status = "exact"
-                elif ia_set & manual_set:
-                    match_status = "partial"
-                else:
-                    match_status = "none"
-            
-            if match_filter and match_filter != "all" and match_status != match_filter:
-                continue
-                
-            filtered_items.append((item, match_status))
-        
-        total = len(filtered_items)
-        page_items = filtered_items[(page - 1) * per_page : page * per_page]
-        
-        results = []
-        for item, match in page_items:
-            results.append({
-                "questao_id": item.questao_id,
-                "modulos_preditos": item.modulos_preditos,
-                "disciplina": item.disciplina,
-                "confianca_media": item.confianca_media,
-                "modelo_utilizado": item.modelo_utilizado,
-                "usou_llm": item.usou_llm,
-                "prompt_version": item.prompt_version,
-                "tem_justificativa": item.justificativas is not None,
-                "match_status": match,
-                "created_at": item.created_at.isoformat() if item.created_at else None,
-            })
-        
+        needs_match_filter = bool(match_filter and match_filter not in ("", "all"))
+        base_query = _build_base_query(pg_db, modelo_filter, disciplina_filter)
+
+        if not needs_match_filter:
+            # Caminho rápido: SQL-level pagination — O(page_size) em memória
+            total = base_query.count()
+            page_items = (
+                base_query
+                .order_by(ClassificacaoAgenteIaModel.created_at.desc())
+                .offset((page - 1) * per_page)
+                .limit(per_page)
+                .all()
+            )
+            manual_dict = _fetch_manuals_for_ids(pg_db, [i.questao_id for i in page_items])
+            results = [
+                _build_list_item(item, _compute_match_status(item, manual_dict.get(item.questao_id)))
+                for item in page_items
+            ]
+            return {
+                "total": total,
+                "page": page,
+                "per_page": per_page,
+                "pages": (total + per_page - 1) // per_page if total else 0,
+                "items": results,
+            }
+
+        # Caminho com filtro de match: carrega todos os IDs IA filtrados,
+        # mas busca manuais apenas para esses IDs (não para toda a tabela).
+        all_items = base_query.order_by(ClassificacaoAgenteIaModel.created_at.desc()).all()
+        manual_dict = _fetch_manuals_for_ids(pg_db, [i.questao_id for i in all_items])
+
+        filtered: list[tuple] = []
+        for item in all_items:
+            status = _compute_match_status(item, manual_dict.get(item.questao_id))
+            if status == match_filter:
+                filtered.append((item, status))
+
+        total = len(filtered)
+        page_slice = filtered[(page - 1) * per_page: page * per_page]
+        results = [_build_list_item(item, match) for item, match in page_slice]
+
         return {
             "total": total,
             "page": page,
             "per_page": per_page,
-            "pages": (total + per_page - 1) // per_page,
-            "items": results
+            "pages": (total + per_page - 1) // per_page if total else 0,
+            "items": results,
         }
+
     except Exception as e:
         logger.error(f"Erro ao listar classificações: {e}")
         return {"total": 0, "items": [], "error": str(e)}
@@ -626,8 +1691,8 @@ async def get_classificacao_detail(
             manual_modulos = manual.modulos_escolhidos or ([manual.modulo_escolhido] if manual.modulo_escolhido else [])
             manual_descricoes = manual.descricoes_assunto_list or ([manual.descricao_assunto] if manual.descricao_assunto else [])
         
-        ia_set = set(ia.modulos_preditos or [])
-        ia_desc_set = set(ia.descricoes_modulos or [])
+        ia_set = set(ia.modulos_sugeridos or [])
+        ia_desc_set = extract_description_set(ia.assuntos_sugeridos)
         manual_set = set(manual_modulos) if manual_modulos else None
         manual_desc_set = set([d for d in manual_descricoes if d]) if manual_descricoes else set()
         
@@ -639,17 +1704,53 @@ async def get_classificacao_detail(
                 match_status = "partial"
             else:
                 match_status = "none"
+
+        questao = (
+            db.query(QuestaoModel)
+            .options(joinedload(QuestaoModel.alternativas))
+            .filter(QuestaoModel.id == questao_id)
+            .first()
+        )
+
+        alternativas = []
+        if questao and questao.alternativas:
+            ordenadas = sorted(
+                questao.alternativas,
+                key=lambda a: (a.ordem if a.ordem is not None else 9999, a.id or 0),
+            )
+            for idx, alt in enumerate(ordenadas, start=1):
+                if not (alt.conteudo or "").strip():
+                    continue
+                alternativas.append(
+                    {
+                        "ordem": alt.ordem if alt.ordem is not None else idx,
+                        "conteudo_html": alt.conteudo or "",
+                        "conteudo": re.sub(r"<[^>]+>", "", alt.conteudo or "").strip(),
+                    }
+                )
+
+        enunciado_html = questao.enunciado if questao and questao.enunciado else ia.enunciado
+        texto_base_html = questao.texto_base if questao else None
+        has_images = bool(collect_question_image_urls(questao, enunciado_html or "")) if questao else False
+        analise_imagem_ia = None
+        if isinstance(ia.justificativas, dict):
+            analise_imagem_ia = ia.justificativas.get("__analise_imagem__")
         
         return {
             "questao_id": questao_id,
-            "enunciado": ia.enunciado,
+            "enunciado": enunciado_html,
+            "enunciado_html": enunciado_html,
+            "texto_base_html": texto_base_html,
+            "alternativas": alternativas,
+            "has_images": has_images,
             "disciplina": ia.disciplina,
             "habilidade_trieduc": ia.habilidade_trieduc,
             "ia": {
-                "modulos_preditos": ia.modulos_preditos,
+                "modulos_sugeridos": ia.modulos_sugeridos,
                 "justificativas": ia.justificativas,
                 "modulos_possiveis": ia.modulos_possiveis,
-                "descricoes_modulos": ia.descricoes_modulos,
+                "assuntos_sugeridos": ia.assuntos_sugeridos,
+                "analise_imagem": analise_imagem_ia,
                 "confianca_media": ia.confianca_media,
                 "modelo_utilizado": ia.modelo_utilizado,
                 "prompt_version": ia.prompt_version,
@@ -679,7 +1780,7 @@ async def get_classificacao_detail(
 from starlette.responses import StreamingResponse
 
 @router.get("/validar-stream")
-async def validar_stream(limit: int = 1000):
+async def validar_stream(limit: int = 5000):
     """Classifica as primeiras N questões manuais com streaming SSE"""
     
     def event_generator():
@@ -725,12 +1826,18 @@ async def validar_stream(limit: int = 1000):
                         manual_mods = manual_q.modulos_escolhidos or ([manual_q.modulo_escolhido] if manual_q.modulo_escolhido else [])
                         manual_desc = manual_q.descricoes_assunto_list or ([manual_q.descricao_assunto] if manual_q.descricao_assunto else [])
                     
+                    ia_saved = pg_session.query(ClassificacaoAgenteIaModel).filter(
+                        ClassificacaoAgenteIaModel.questao_id == qid
+                    ).first()
+                    ia_desc_set = extract_description_set(ia_saved.assuntos_sugeridos if ia_saved else None)
+
                     match = "none"
                     if manual_mods:
-                        ia_mods_set = set(result.modulos_preditos or [])
+                        ia_mods_set = set(result.modulos_sugeridos or [])
                         m_mods_set = set(manual_mods)
+                        manual_desc_set = set([d for d in (manual_desc or []) if d])
                         
-                        if ia_mods_set == m_mods_set:
+                        if ia_mods_set == m_mods_set and ia_desc_set == manual_desc_set:
                             match = "exact"
                         elif ia_mods_set & m_mods_set:
                             match = "partial"
@@ -740,8 +1847,10 @@ async def validar_stream(limit: int = 1000):
                         "index": i + 1,
                         "total": total,
                         "questao_id": qid,
-                        "modulos_preditos": result.modulos_preditos,
+                        "modulos_sugeridos": result.modulos_sugeridos,
                         "manual": manual_mods,
+                        "ia_assuntos": sorted(list(ia_desc_set)),
+                        "manual_assuntos": manual_desc or [],
                         "match": match,
                         "disciplina": result.disciplina,
                         "tempo": round(result.tempo_processamento, 2),
@@ -757,11 +1866,24 @@ async def validar_stream(limit: int = 1000):
                 except Exception as ex:
                     pg_session.rollback()
                     erros += 1
+                    persist_classificacao_ia_error(
+                        questao_id=qid,
+                        etapa="validar_stream_loop",
+                        erro=ex,
+                        payload={"index": i + 1, "total": total},
+                        stacktrace=traceback.format_exc(),
+                    )
                     yield f"data: {json.dumps({'type': 'error', 'index': i+1, 'questao_id': qid, 'error': str(ex)[:200]})}\n\n"
             
             yield f"data: {json.dumps({'type': 'done', 'sucesso': sucesso, 'erros': erros, 'total_tokens': total_tokens, 'total_cost': round(total_cost, 4)})}\n\n"
             
         except Exception as e:
+            persist_classificacao_ia_error(
+                questao_id=None,
+                etapa="validar_stream_fatal",
+                erro=e,
+                stacktrace=traceback.format_exc(),
+            )
             yield f"data: {json.dumps({'type': 'fatal_error', 'error': str(e)})}\n\n"
         finally:
             pg_session.close()
@@ -776,4 +1898,5 @@ async def validar_stream(limit: int = 1000):
             "X-Accel-Buffering": "no",
         }
     )
+
 

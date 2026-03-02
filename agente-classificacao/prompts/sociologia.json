@@ -1,14 +1,14 @@
 {
   "disciplina": "Sociologia",
-  "instrucao_geral": "Classifique pelo fenômeno social principal abordado na questão, considerando o contexto sociológico específico e os conceitos centrais discutidos.",
-  "regras_multi_modulo": "Atribuir múltiplos módulos apenas quando a questão requer conhecimento de duas áreas distintas de sociologia para ser respondida. Contextos secundários ou exemplos não justificam a inclusão de um segundo módulo.",
+  "instrucao_geral": "Classifique pelo fenômeno social principal abordado na questão, considerando o contexto sociológico específico e os conceitos centrais discutidos. Regra de desempate: identifique o objeto pedido no comando da questao e escolha o modulo mais especifico para esse objeto, nao o tema de pano de fundo.",
+  "regras_multi_modulo": "Atribuir múltiplos módulos apenas quando a questão requer conhecimento de duas áreas distintas de sociologia para ser respondida. Contextos secundários ou exemplos não justificam a inclusão de um segundo módulo. Padrao: retornar apenas 1 modulo. So retorne 2 modulos quando a resolucao exigir, de forma explicita, dois eixos independentes e com justificativas distintas.",
   "modulos": [
     {
       "nome": "A Exclusão e a Inclusão como Questões Sociais",
       "escopo": "Este módulo aborda os diversos tipos de exclusão social, incluindo exclusão de gênero e étnico-racial, e as políticas públicas de inclusão. Discute também as populações em situação de vulnerabilidade e as estratégias para promover a inclusão social.",
       "incluir_quando": "Classificar aqui quando a questão aborda a exclusão de minorias, políticas de inclusão social, vulnerabilidade social, discriminação de gênero ou étnica, ou a análise de políticas públicas voltadas para inclusão.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos civis e políticos (usar módulo 'Cidadania e Direitos'), ou quando foca em movimentos sociais específicos (usar módulo 'Movimentos Sociais').",
-      "diferenciador": "Foco nas dinâmicas de exclusão e inclusão social e nas políticas públicas relacionadas.",
+      "diferenciador": "Foco nas dinâmicas de exclusão e inclusão social e nas políticas públicas relacionadas. Priorize quando o foco for condicao estrutural de desigualdade, vulnerabilidade e politicas de inclusao (e nao mobilizacao coletiva organizada).",
       "palavras_chave": [
         "exclusão social",
         "inclusão",
@@ -50,7 +50,7 @@
       "escopo": "Este módulo explora o conceito antropológico de cultura, a diversidade de gênero, raça e etnia, e a questão indígena. Analisa como a identidade cultural é formada e como a diversidade é tratada na sociedade.",
       "incluir_quando": "Classificar aqui quando a questão aborda diversidade cultural, identidade de gênero, questões raciais, ou a cultura indígena.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de ideologia e cultura de massa (usar módulo 'Cultura, Sociedade e Ideologia') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
-      "diferenciador": "Análise da diversidade cultural e das identidades sociais em suas múltiplas formas.",
+      "diferenciador": "Análise da diversidade cultural e das identidades sociais em suas múltiplas formas. Priorize quando o eixo principal for identidade, raca, genero, etnia, diferenca cultural e reconhecimento simbolico.",
       "palavras_chave": [
         "cultura",
         "identidade",
@@ -148,7 +148,7 @@
       "escopo": "Este módulo explora os movimentos em rede e os protestos contemporâneos, além das tipologias clássicas de movimentos sociais, incluindo os velhos e novos movimentos. Analisa como os movimentos sociais influenciam as mudanças sociais.",
       "incluir_quando": "Classificar aqui quando a questão aborda movimentos sociais, protestos, ativismo, ou mudanças sociais impulsionadas por movimentos.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos civis e políticos (usar módulo 'Cidadania e Direitos') ou de exclusão social (usar módulo 'A Exclusão e a Inclusão como Questões Sociais').",
-      "diferenciador": "Foco na análise dos movimentos sociais e seu impacto nas mudanças sociais.",
+      "diferenciador": "Foco na análise dos movimentos sociais e seu impacto nas mudanças sociais. Priorize quando houver acao coletiva organizada (atores, repertorios de protesto, mobilizacao, pauta, estrategia e efeito politico).",
       "palavras_chave": [
         "movimentos sociais",
         "protestos",
@@ -162,7 +162,7 @@
       "escopo": "Este módulo aborda a democracia e suas definições, os conceitos de poder, política e autoridade, além do papel do Estado e da soberania. Analisa como as estruturas políticas influenciam a sociedade.",
       "incluir_quando": "Classificar aqui quando a questão aborda democracia, poder político, autoridade, ou o papel do Estado.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de direitos civis e políticos (usar módulo 'Cidadania e Direitos') ou de movimentos sociais (usar módulo 'Movimentos Sociais').",
-      "diferenciador": "Análise das estruturas políticas e seu impacto na sociedade.",
+      "diferenciador": "Análise das estruturas políticas e seu impacto na sociedade. Priorize quando o foco estiver no funcionamento do Estado, instituicoes, representacao, legitimidade e regimes democraticos.",
       "palavras_chave": [
         "democracia",
         "poder",
@@ -246,7 +246,7 @@
       "escopo": "Este módulo aborda os direitos humanos e a proteção legal, problemas globais e perspectivas locais, segurança pública e criminalidade, além dos conceitos, tipos e impactos sociais da violência.",
       "incluir_quando": "Classificar aqui quando a questão aborda violência, direitos humanos, segurança pública, ou criminalidade.",
       "nao_incluir_quando": "NÃO classificar aqui quando a questão trata de movimentos sociais (usar módulo 'Movimentos Sociais') ou de exclusão social (usar módulo 'A Exclusão e a Inclusão como Questões Sociais').",
-      "diferenciador": "Análise dos conceitos de violência e direitos humanos em contextos globais e locais.",
+      "diferenciador": "Análise dos conceitos de violência e direitos humanos em contextos globais e locais. Priorize quando o foco for violencia, conflito, seguranca, criminalizacao, violacoes e garantias de direitos humanos.",
       "palavras_chave": [
         "violência",
         "direitos humanos",

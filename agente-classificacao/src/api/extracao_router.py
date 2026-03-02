@@ -560,12 +560,12 @@ async def listar_assuntos(
         if tem_classificacao:
             query = query.filter(
                 QuestaoAssuntoModel.classificacoes.isnot(None),
-                func.jsonb_array_length(QuestaoAssuntoModel.classificacoes) > 0
+                func.json_length(QuestaoAssuntoModel.classificacoes) > 0
             )
         else:
             query = query.filter(
                 (QuestaoAssuntoModel.classificacoes.is_(None)) | 
-                (func.jsonb_array_length(QuestaoAssuntoModel.classificacoes) == 0)
+                (func.json_length(QuestaoAssuntoModel.classificacoes) == 0)
             )
 
     total = query.count()

@@ -1,25 +1,6 @@
 version: "3.8"
 
 services:
-  # ── PostgreSQL ──────────────────────────────────────────────
-  postgres:
-    image: postgres:16-alpine
-    container_name: pluri-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: ${PG_USER:-pluri}
-      POSTGRES_PASSWORD: ${PG_PASSWORD:-pluri123}
-      POSTGRES_DB: ${PG_NAME:-pluri_assuntos}
-    ports:
-      - "${PG_PORT:-5434}:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-pluri}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   # ── API de Classificação (FastAPI - porta 8000) ─────────────
   api:
     image: ghcr.io/thsethub/pluri-extracao/api:latest
@@ -39,19 +20,29 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME:-trieduc}
-      - PG_HOST=postgres
-      - PG_PORT=5432
-      - PG_USER=${PG_USER:-pluri}
-      - PG_PASSWORD=${PG_PASSWORD:-pluri123}
-      - PG_NAME=${PG_NAME:-pluri_assuntos}
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT:-3306}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_NAME=${PG_NAME}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_ALGORITHM=${JWT_ALGORITHM:-HS256}
+      - JWT_EXPIRE_MINUTES=${JWT_EXPIRE_MINUTES:-480}
+      - IA_CLASSIFICATION_MODEL=${IA_CLASSIFICATION_MODEL:-gpt-5.2}
+      - IA_PROMPT_VERSION=${IA_PROMPT_VERSION:-v1}
+      - IA_MAX_QUESTION_CHARS=${IA_MAX_QUESTION_CHARS:-4000}
+      - IA_MAX_OUTPUT_MODULES=${IA_MAX_OUTPUT_MODULES:-1}
+      - IA_USE_HUMAN_PRIORS=${IA_USE_HUMAN_PRIORS:-true}
+      - IA_HUMAN_PRIOR_TOP_K=${IA_HUMAN_PRIOR_TOP_K:-3}
+      - IA_HUMAN_PRIOR_MIN_SAMPLES=${IA_HUMAN_PRIOR_MIN_SAMPLES:-5}
+      - IA_ENABLE_FALLBACK_FIRST_MODULE=${IA_ENABLE_FALLBACK_FIRST_MODULE:-false}
+      - IA_COST_PER_1K_INPUT_TOKENS=${IA_COST_PER_1K_INPUT_TOKENS:-0.00175}
+      - IA_COST_PER_1K_OUTPUT_TOKENS=${IA_COST_PER_1K_OUTPUT_TOKENS:-0.014}
     ports:
       - "${API_PORT:-8989}:8000"
     volumes:
       - api-logs:/app/logs
       - api-data:/app/data
-    depends_on:
-      postgres:
-        condition: service_healthy
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')"]
       interval: 30s
@@ -62,27 +53,27 @@ services:
       - "com.centurylinklabs.watchtower.scope=pluri"
 
   # ── Webscraping Agent (Painel Web - porta 8501) ─────────────
-  webscraping:
-    image: ghcr.io/thsethub/pluri-extracao/webscraping:latest
-    container_name: pluri-webscraping
-    restart: unless-stopped
-    shm_size: "2gb"
-    environment:
-      - API_BASE_URL=http://api:8000
-      - HEADLESS=true
-      - LOG_LEVEL=${LOG_LEVEL:-INFO}
-      - SUPERPRO_EMAIL=${SUPERPRO_EMAIL}
-      - SUPERPRO_PASSWORD=${SUPERPRO_PASSWORD}
-    ports:
-      - "${WS_PORT:-8501}:8501"
-    volumes:
-      - ws-logs:/app/logs
-      - ws-storage:/app/storage
-    depends_on:
-      api:
-        condition: service_healthy
-    labels:
-      - "com.centurylinklabs.watchtower.scope=pluri"
+  # webscraping:
+  #   image: ghcr.io/thsethub/pluri-extracao/webscraping:latest
+  #   container_name: pluri-webscraping
+  #   restart: unless-stopped
+  #   shm_size: "2gb"
+  #   environment:
+  #     - API_BASE_URL=http://api:8000
+  #     - HEADLESS=true
+  #     - LOG_LEVEL=${LOG_LEVEL:-INFO}
+  #     - SUPERPRO_EMAIL=${SUPERPRO_EMAIL}
+  #     - SUPERPRO_PASSWORD=${SUPERPRO_PASSWORD}
+  #   ports:
+  #     - "${WS_PORT:-8501}:8501"
+  #   volumes:
+  #     - ws-logs:/app/logs
+  #     - ws-storage:/app/storage
+  #   depends_on:
+  #     api:
+  #       condition: service_healthy
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.scope=pluri"
 
   # ── Classificacao Frontend (Porta 9595) ──────────────────────
   frontend:
@@ -90,7 +81,7 @@ services:
     container_name: pluri-frontend
     restart: unless-stopped
     environment:
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - API_URL=http://api:8000
     ports:
       - "9595:3000"
     depends_on:
@@ -116,7 +107,6 @@ services:
       - "com.centurylinklabs.watchtower.scope=pluri"
 
 volumes:
-  pgdata:
   api-logs:
   api-data:
   ws-logs:

@@ -1,7 +1,7 @@
 {
   "disciplina": "Redação",
-  "instrucao_geral": "Classifique pelo processo ou fenômeno textual principal abordado na questão, priorizando a habilidade central exigida para a produção ou análise textual.",
-  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de duas áreas distintas de produção ou análise textual para ser respondida. Contextos secundários ou superficiais não justificam a atribuição de um segundo módulo.",
+  "instrucao_geral": "Classifique pelo processo ou fenômeno textual principal abordado na questão, priorizando a habilidade central exigida para a produção ou análise textual. Regra de desempate: identifique o objeto pedido no comando da questao e escolha o modulo mais especifico para esse objeto, nao o tema de pano de fundo.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir conhecimento de duas áreas distintas de produção ou análise textual para ser respondida. Contextos secundários ou superficiais não justificam a atribuição de um segundo módulo. Padrao: retornar apenas 1 modulo. So retorne 2 modulos quando a resolucao exigir, de forma explicita, dois eixos independentes e com justificativas distintas.",
   "modulos": [
     {
       "nome": "Argumentação",

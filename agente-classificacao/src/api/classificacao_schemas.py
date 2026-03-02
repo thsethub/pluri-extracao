@@ -93,6 +93,16 @@ class AlternativaClassifSchema(BaseModel):
     correta: bool = False
 
 
+class ClassificacaoManualResumoSchema(BaseModel):
+    """Resumo da classificação salva em classificacao_usuario."""
+    usuario_id: int
+    tipo_acao: str
+    modulos: List[str] = []
+    descricoes: List[str] = []
+    observacao: Optional[str] = None
+    created_at: Optional[datetime] = None
+
+
 class QuestaoClassifResponse(BaseModel):
     """Questão para classificação/verificação pelo usuário"""
     id: int = Field(..., description="ID da questão no MySQL")
@@ -113,6 +123,7 @@ class QuestaoClassifResponse(BaseModel):
     classificacao_nao_enquadrada: Optional[List[str]] = None
     similaridade: Optional[float] = None
     tem_extracao: bool = False
+    classificacao_manual: Optional[ClassificacaoManualResumoSchema] = None
 
     # Módulos possíveis (via habilidade_modulos)
     modulos_possiveis: List[HabilidadeModuloSchema] = []

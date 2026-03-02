@@ -318,6 +318,92 @@
     border-left: 4px solid var(--primary);
 }
 
+.textoBaseBox {
+    background-color: #eef2ff;
+    color: #1a1a1a;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid #dbe3ff;
+    margin-bottom: 0.75rem;
+}
+
+.textoBaseBox * {
+    color: #1a1a1a !important;
+    background-color: transparent !important;
+    font-family: inherit !important;
+    line-height: inherit !important;
+}
+
+.imageAnalysisBox {
+    margin-top: 1rem;
+    background: #fff9e8;
+    border: 1px solid #ffe7a0;
+    border-left: 4px solid #f6b100;
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+}
+
+.imageAnalysisBox h5 {
+    margin: 0 0 0.4rem 0;
+    font-size: 0.95rem;
+    color: #8a5a00;
+}
+
+.imageAnalysisBox p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #4a3a10;
+    line-height: 1.45;
+}
+
+.alternativasBox {
+    margin-top: 1rem;
+}
+
+.alternativasBox h5 {
+    margin: 0 0 0.6rem 0;
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+.alternativasList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.alternativaItem {
+    display: flex;
+    gap: 0.55rem;
+    align-items: flex-start;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.altLabel {
+    font-weight: 700;
+    color: #1f2937;
+    min-width: 1.4rem;
+}
+
+.altConteudo {
+    color: #1f2937;
+    line-height: 1.45;
+    font-size: 0.9rem;
+}
+
+.altConteudo :global(img) {
+    max-width: 100%;
+    height: auto;
+    max-height: 220px;
+}
+
 /* Pagination */
 .pagination {
     display: flex;

@@ -1,7 +1,7 @@
 {
   "disciplina": "Inglês",
-  "instrucao_geral": "Classifique pelo foco principal da questão, seja ele a compreensão textual ou o uso gramatical, sem se deixar influenciar por contextos secundários.",
-  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir explicitamente a aplicação de conhecimentos de leitura e gramática simultaneamente para ser resolvida.",
+  "instrucao_geral": "Classifique pelo foco principal da questão, seja ele a compreensão textual ou o uso gramatical, sem se deixar influenciar por contextos secundários. Regra de desempate: identifique o objeto pedido no comando da questao e escolha o modulo mais especifico para esse objeto, nao o tema de pano de fundo.",
+  "regras_multi_modulo": "Atribua múltiplos módulos apenas quando a questão exigir explicitamente a aplicação de conhecimentos de leitura e gramática simultaneamente para ser resolvida. Padrao: retornar apenas 1 modulo. So retorne 2 modulos quando a resolucao exigir, de forma explicita, dois eixos independentes e com justificativas distintas.",
   "modulos": [
     {
       "nome": "Leitura e interpretação de textos",

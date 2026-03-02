@@ -16,6 +16,7 @@ from loguru import logger
 from jose import JWTError, jwt
 import bcrypt
 
+from ..config import settings
 from ..database import get_db, get_pg_db
 from ..database.models import QuestaoModel, HabilidadeModel, DisciplinaModel
 from ..database.pg_models import QuestaoAssuntoModel
@@ -33,6 +34,7 @@ from .classificacao_schemas import (
     HabilidadeFiltroSchema,
     HabilidadesFiltroResponse,
     AlternativaClassifSchema,
+    ClassificacaoManualResumoSchema,
     QuestaoClassifResponse,
     SalvarClassificacaoRequest,
     SalvarClassificacaoResponse,
@@ -63,9 +65,9 @@ def set_to_cache(key: str, val):
 # ========================
 # CONFIG
 # ========================
-SECRET_KEY = "pluri-classificacao-secret-key-2026"  # Em produção, usar variável de ambiente
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 480  # 8 horas
+SECRET_KEY = settings.jwt_secret_key
+ALGORITHM = settings.jwt_algorithm
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.jwt_expire_minutes
 
 # bcrypt 5.x — usar diretamente (passlib não compatível)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/classificacao/login")
@@ -298,34 +300,79 @@ async def listar_habilidades_filtro(
     
     counts_map = {}
     if hab_ids:
-        # Calcular pendentes no MySQL cruzando exclusão com o PG
-        ids_excluir = set()
-        for r in pg_db.query(ClassificacaoUsuarioModel.questao_id).filter(ClassificacaoUsuarioModel.usuario_id == usuario.id).all():
-            ids_excluir.add(r[0])
-            
-        for r in pg_db.query(QuestaoAssuntoModel.questao_id).filter(
-            (QuestaoAssuntoModel.classificado_manualmente == True) |
-            ((QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != [])) |
-            ((QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) & (func.jsonb_array_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0))
-        ).all():
-            ids_excluir.add(r[0])
-            
-        for r in pg_db.query(QuestaoPuladaModel.questao_id).filter(QuestaoPuladaModel.usuario_id == usuario.id).all():
-            ids_excluir.add(r[0])
-            
-        # Agrupar count mysql
-        mysql_q = db.query(
+        # —————————————————————————————————————————————————————————————
+        # ABORDAGEM EFICIENTE v2: dois GROUP BY no MySQL (sem carregar
+        # linhas individuais) + IDs excluídos do PG como set
+        #
+        # 1. MySQL  → SELECT habilidade_id, COUNT(*) GROUP BY  (29 linhas)
+        # 2. PG     → 3 queries para obter IDs excluídos como set
+        # 3. MySQL  → SELECT habilidade_id, COUNT(*) WHERE id IN(excluídos)
+        #             GROUP BY  (≤ 29 linhas agrupadas)
+        # 4. Python → total - excluído por habilidade
+        # —————————————————————————————————————————————————————————————
+
+        # Etapa 1: total de questões por habilidade (MySQL GROUP BY, 29 linhas)
+        rows_total = db.query(
             QuestaoModel.habilidade_id,
-            func.count(QuestaoModel.id).label("total")
+            func.count(QuestaoModel.id).label("total"),
         ).filter(
             QuestaoModel.habilidade_id.in_(hab_ids),
-            QuestaoModel.ano_id == 3
-        )
+            QuestaoModel.ano_id == 3,
+        ).group_by(QuestaoModel.habilidade_id).all()
+
+        if not rows_total:
+            habilidades = []
+            res = HabilidadesFiltroResponse(habilidades=habilidades, total=0)
+            set_to_cache(cache_key, res)
+            return res
+
+        total_por_hab: dict[int, int] = {r[0]: r[1] for r in rows_total}
+
+        # Etapa 2: IDs excluídos no PG (3 queries leves, sem IN gigante)
+        ids_excluir: set[int] = set()
+
+        # 2a. Já classificadas manualmente ou com low-match
+        for r in pg_db.query(QuestaoAssuntoModel.questao_id).filter(
+            (QuestaoAssuntoModel.classificado_manualmente == True) |
+            (
+                (QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) &
+                (func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0)
+            )
+        ).all():
+            ids_excluir.add(r[0])
+
+        # 2b. Já classificadas por este usuário
+        for r in pg_db.query(ClassificacaoUsuarioModel.questao_id).filter(
+            ClassificacaoUsuarioModel.usuario_id == usuario.id
+        ).all():
+            ids_excluir.add(r[0])
+
+        # 2c. Puladas por este usuário
+        for r in pg_db.query(QuestaoPuladaModel.questao_id).filter(
+            QuestaoPuladaModel.usuario_id == usuario.id
+        ).all():
+            ids_excluir.add(r[0])
+
+        # Etapa 3: contagem de excluídas por habilidade no MySQL
+        # (IN por PK é eficiente; resposta = ≤ 29 linhas agrupadas)
+        excluido_por_hab: dict[int, int] = {}
         if ids_excluir:
-            mysql_q = mysql_q.filter(~QuestaoModel.id.in_(list(ids_excluir)))
-            
-        counts = mysql_q.group_by(QuestaoModel.habilidade_id).all()
-        counts_map = {row[0]: row[1] for row in counts}
+            rows_excluido = db.query(
+                QuestaoModel.habilidade_id,
+                func.count(QuestaoModel.id).label("excluidos"),
+            ).filter(
+                QuestaoModel.id.in_(list(ids_excluir)),
+                QuestaoModel.habilidade_id.in_(hab_ids),
+                QuestaoModel.ano_id == 3,
+            ).group_by(QuestaoModel.habilidade_id).all()
+            excluido_por_hab = {r[0]: r[1] for r in rows_excluido}
+
+        # Etapa 4: calcular pendentes (Python puro, O(n) em hab_ids)
+        for hab_id, total in total_por_hab.items():
+            excluidos = excluido_por_hab.get(hab_id, 0)
+            pendentes = total - excluidos
+            if pendentes > 0:
+                counts_map[hab_id] = pendentes
 
     habilidades = []
     for r in results:
@@ -482,16 +529,15 @@ async def proxima_questao_classificar(
             .all()
         }
         
-        # 2. Already has manual or automatic classification in PG
-        # Excluir também as de baixa similaridade (classificacao_nao_enquadrada existe),
-        # pois essas devem ir exclusivamente para a tela de Verificar (/proxima-low-match).
+        # 2. Already has manual classification OR is a low-match question (goes to /proxima-verificar).
+        # NAO excluimos classificacoes != [] (path do Superpro): o professor ainda precisa
+        # classificar por modulo Trieduc mesmo que o Superpro ja tenha feito o path taxonomico.
         classified_in_system = {
             row[0] for row in pg_db.query(QuestaoAssuntoModel.questao_id)
             .filter(QuestaoAssuntoModel.questao_id.in_(candidate_ids))
             .filter(
                 (QuestaoAssuntoModel.classificado_manualmente == True) |
-                ((QuestaoAssuntoModel.classificacoes.isnot(None)) & (QuestaoAssuntoModel.classificacoes != [])) |
-                ((QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) & (func.jsonb_array_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0))
+                ((QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None)) & (func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0))
             )
             .all()
         }
@@ -630,6 +676,133 @@ async def proxima_questao_classificar(
         alternativas=alternativas,
         classificacao_extracao=extracao.classificacoes if extracao and extracao.extracao_feita else None,
         tem_extracao=bool(extracao and extracao.extracao_feita and extracao.classificacoes),
+        modulos_possiveis=modulos,
+    )
+
+
+@router.get(
+    "/consulta/{questao_id}",
+    response_model=QuestaoClassifResponse,
+    summary="Consultar questão por ID (admin)",
+)
+async def consultar_questao_por_id(
+    questao_id: int,
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna uma questão específica no mesmo formato da rota /proxima."""
+    if not usuario.is_admin:
+        raise HTTPException(status_code=403, detail="Acesso restrito a administradores")
+
+    questao = (
+        db.query(QuestaoModel)
+        .options(
+            joinedload(QuestaoModel.disciplina),
+            joinedload(QuestaoModel.habilidade),
+            joinedload(QuestaoModel.alternativas),
+        )
+        .filter(QuestaoModel.id == questao_id)
+        .first()
+    )
+    if not questao:
+        raise HTTPException(status_code=404, detail="Questão não encontrada")
+
+    enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
+
+    texto_base_tratado = None
+    if questao.texto_base:
+        texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
+
+    extracao = (
+        pg_db.query(QuestaoAssuntoModel)
+        .filter(QuestaoAssuntoModel.questao_id == questao.id)
+        .first()
+    )
+
+    classificacao_manual = (
+        pg_db.query(ClassificacaoUsuarioModel)
+        .filter(
+            ClassificacaoUsuarioModel.questao_id == questao.id,
+            ClassificacaoUsuarioModel.usuario_id != 0,
+        )
+        .order_by(ClassificacaoUsuarioModel.created_at.desc(), ClassificacaoUsuarioModel.id.desc())
+        .first()
+    )
+
+    hab_descricao = None
+    if questao.habilidade:
+        hab_descricao = questao.habilidade.descricao
+
+    modulos = []
+    if questao.habilidade_id:
+        modulos_q = (
+            pg_db.query(HabilidadeModuloModel)
+            .filter(HabilidadeModuloModel.habilidade_id == questao.habilidade_id)
+            .order_by(HabilidadeModuloModel.modulo)
+            .all()
+        )
+        modulos = [HabilidadeModuloSchema.model_validate(m) for m in modulos_q]
+
+        if not modulos and hab_descricao:
+            modulos_q = (
+                pg_db.query(HabilidadeModuloModel)
+                .filter(func.lower(HabilidadeModuloModel.habilidade_descricao) == hab_descricao.lower())
+                .order_by(HabilidadeModuloModel.modulo)
+                .all()
+            )
+            modulos = [HabilidadeModuloSchema.model_validate(m) for m in modulos_q]
+
+    alternativas = []
+    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+        for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
+            conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
+            alternativas.append(
+                AlternativaClassifSchema(
+                    ordem=alt.ordem or 0,
+                    conteudo=conteudo_limpo,
+                    conteudo_html=alt.conteudo,
+                    correta=bool(alt.correta),
+                )
+            )
+
+    disc_nome = questao.disciplina.descricao if questao.disciplina else None
+
+    manual_payload = None
+    if classificacao_manual:
+        manual_modulos = classificacao_manual.modulos_escolhidos or (
+            [classificacao_manual.modulo_escolhido] if classificacao_manual.modulo_escolhido else []
+        )
+        manual_descricoes = classificacao_manual.descricoes_assunto_list or (
+            [classificacao_manual.descricao_assunto] if classificacao_manual.descricao_assunto else []
+        )
+        manual_payload = ClassificacaoManualResumoSchema(
+            usuario_id=classificacao_manual.usuario_id,
+            tipo_acao=classificacao_manual.tipo_acao,
+            modulos=[m for m in manual_modulos if m],
+            descricoes=[d for d in manual_descricoes if d],
+            observacao=classificacao_manual.observacao,
+            created_at=classificacao_manual.created_at,
+        )
+
+    return QuestaoClassifResponse(
+        id=questao.id,
+        questao_id=questao.questao_id,
+        enunciado=enunciado_tratado or "",
+        enunciado_html=questao.enunciado,
+        texto_base=texto_base_tratado,
+        texto_base_html=questao.texto_base,
+        disciplina_id=questao.disciplina_id,
+        disciplina_nome=disc_nome,
+        habilidade_id=questao.habilidade_id,
+        habilidade_descricao=hab_descricao,
+        tipo=questao.tipo,
+        alternativas=alternativas,
+        classificacao_extracao=extracao.classificacoes if extracao and extracao.extracao_feita else None,
+        classificacao_nao_enquadrada=extracao.classificacao_nao_enquadrada if extracao and extracao.classificacao_nao_enquadrada else None,
+        similaridade=extracao.similaridade if extracao else None,
+        tem_extracao=bool(extracao and extracao.extracao_feita and extracao.classificacoes),
+        classificacao_manual=manual_payload,
         modulos_possiveis=modulos,
     )
 
@@ -866,7 +1039,7 @@ async def proxima_questao_low_match(
     # Query no PG: questões com classificacao_nao_enquadrada preenchida
     query_pg = pg_db.query(QuestaoAssuntoModel).filter(
         QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None),
-        func.jsonb_array_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0,
+        func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0,
         QuestaoAssuntoModel.classificado_manualmente == False,
     )
 

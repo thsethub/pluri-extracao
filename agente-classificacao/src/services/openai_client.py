@@ -63,6 +63,8 @@ class OpenAIClient:
                 "content": response.choices[0].message.content,
                 "model": response.model,
                 "tokens_used": response.usage.total_tokens,
+                "input_tokens": getattr(response.usage, "prompt_tokens", 0) or 0,
+                "output_tokens": getattr(response.usage, "completion_tokens", 0) or 0,
                 "processing_time_ms": processing_time,
                 "finish_reason": response.choices[0].finish_reason,
             }
