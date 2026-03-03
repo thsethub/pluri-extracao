@@ -4,9 +4,18 @@ import { useState, useEffect } from "react";
 import { apiRequest } from "@/lib/api";
 import AppLayout from "@/components/AppLayout";
 import FilterBar from "@/components/FilterBar";
-import { FastForward, Save, Info, AlertCircle, Clock, Pencil } from "lucide-react";
+import {
+  FastForward,
+  Save,
+  Info,
+  AlertCircle,
+  Clock,
+  Pencil,
+} from "lucide-react";
 import styles from "../classificar/Classificar.module.css";
-import CorrigirClassificacaoModal, { HabilidadeModulo } from "@/components/CorrigirClassificacaoModal";
+import CorrigirClassificacaoModal, {
+  HabilidadeModulo,
+} from "@/components/CorrigirClassificacaoModal";
 
 export default function PendentesPage() {
   const [questao, setQuestao] = useState<any>(null);
@@ -80,7 +89,9 @@ export default function PendentesPage() {
           questao_id: questao.id,
           habilidade_modulo_ids: modulosCorrecao.map((m) => m.id),
           modulos_escolhidos: modulosCorrecao.map((m) => m.modulo),
-          classificacoes_trieduc: modulosCorrecao.map((m) => m.habilidade_descricao),
+          classificacoes_trieduc: modulosCorrecao.map(
+            (m) => m.habilidade_descricao,
+          ),
           descricoes_assunto: modulosCorrecao.map((m) => m.descricao),
           habilidade_modulo_id: modulosCorrecao[0].id,
           modulo_escolhido: modulosCorrecao[0].modulo,
