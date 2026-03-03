@@ -9,9 +9,10 @@ import styles from './FilterBar.module.css';
 
 interface FilterBarProps {
     onFilterChange: (area: string, disciplinaId: string, habilidadeId: string) => void;
+    habilidadesUrl?: string;
 }
 
-export default function FilterBar({ onFilterChange }: FilterBarProps) {
+export default function FilterBar({ onFilterChange, habilidadesUrl = '/habilidades' }: FilterBarProps) {
     const [area, setArea] = useState('');
     const [disciplinaId, setDisciplinaId] = useState('');
     const [habilidadeId, setHabilidadeId] = useState('');
@@ -61,7 +62,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
                 if (area) params.append('area', area);
                 if (disciplinaId) params.append('disciplina', disciplinaId);
 
-                const data = await apiRequest(`/habilidades?${params.toString()}`);
+                const data = await apiRequest(`${habilidadesUrl}?${params.toString()}`);
                 setHabilidades(data.habilidades || []);
             } catch (err) {
                 console.error('Erro ao carregar habilidades:', err);
@@ -69,7 +70,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
             }
         }
         loadHabilidades();
-    }, [area, disciplinaId]);
+    }, [area, disciplinaId, habilidadesUrl]);
 
     // Notifica o pai quando os filtros mudam
     useEffect(() => {

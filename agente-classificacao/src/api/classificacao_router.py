@@ -8,7 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func
-from typing import Optional
+from typing import Optional, List
 from math import ceil
 from datetime import datetime, timedelta, timezone
 from loguru import logger
@@ -352,10 +352,8 @@ async def listar_habilidades_filtro(
         ).all():
             ids_excluir.add(r[0])
 
-        # 2c. Puladas por este usuário
-        for r in pg_db.query(QuestaoPuladaModel.questao_id).filter(
-            QuestaoPuladaModel.usuario_id == usuario.id
-        ).all():
+        # 2c. Puladas por qualquer usuário — só aparecem em Pendentes, nunca em /proxima
+        for r in pg_db.query(QuestaoPuladaModel.questao_id).all():
             ids_excluir.add(r[0])
 
         # Etapa 3: contagem de excluídas por habilidade no MySQL
@@ -396,8 +394,144 @@ async def listar_habilidades_filtro(
 
 
 # ========================
+# HABILIDADES PENDENTES (filtro da aba Pendentes)
+# ========================
+
+@router.get(
+    "/habilidades-pendentes",
+    response_model=HabilidadesFiltroResponse,
+    summary="🔍 Assuntos com questões pendentes (puladas)",
+)
+async def listar_habilidades_pendentes(
+    area: Optional[str] = Query(None, description="Filtrar por área"),
+    disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """
+    Retorna apenas os assuntos (habilidades) que possuem questões puladas (pendentes),
+    com a contagem de quantas existem. Respeita o filtro de área/disciplina do usuário.
+    """
+    effective_area = area or (usuario.disciplina if not usuario.is_admin else None)
+
+    # IDs já classificados por este usuário (excluir das contagens)
+    ids_classificadas: set[int] = {
+        row[0] for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.usuario_id == usuario.id)
+        .all()
+    }
+
+    # Base: questões puladas com habilidade definida
+    query_puladas = pg_db.query(
+        QuestaoPuladaModel.habilidade_id,
+        func.count(func.distinct(QuestaoPuladaModel.questao_id)).label("total"),
+    ).filter(QuestaoPuladaModel.habilidade_id.isnot(None))
+
+    if ids_classificadas:
+        query_puladas = query_puladas.filter(
+            ~QuestaoPuladaModel.questao_id.in_(list(ids_classificadas))
+        )
+
+    # Filtro de disciplina explícito
+    if disciplina:
+        mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina, disciplina)
+        if mysql_name:
+            disc_id_row = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao == mysql_name).first()
+            if disc_id_row:
+                query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id == disc_id_row[0])
+            else:
+                return HabilidadesFiltroResponse(habilidades=[], total=0)
+        else:
+            habilidade_ids_custom = [
+                row[0] for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
+                .filter(HabilidadeModuloModel.disciplina == disciplina)
+                .filter(HabilidadeModuloModel.habilidade_id.isnot(None))
+                .distinct().all()
+            ]
+            if habilidade_ids_custom:
+                query_puladas = query_puladas.filter(QuestaoPuladaModel.habilidade_id.in_(habilidade_ids_custom))
+            else:
+                return HabilidadesFiltroResponse(habilidades=[], total=0)
+    elif effective_area and effective_area in AREAS_DISCIPLINAS:
+        nomes = AREAS_DISCIPLINAS[effective_area]
+        discs_ids = [d[0] for d in db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao.in_(nomes)).all()]
+        if discs_ids:
+            query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id.in_(discs_ids))
+    elif effective_area:
+        query_puladas = query_puladas.filter(QuestaoPuladaModel.area == effective_area)
+
+    rows = query_puladas.group_by(QuestaoPuladaModel.habilidade_id).all()
+    if not rows:
+        return HabilidadesFiltroResponse(habilidades=[], total=0)
+
+    counts: dict[int, int] = {r[0]: r[1] for r in rows}
+    hab_ids = list(counts.keys())
+
+    # Buscar descrições no habilidade_modulos
+    desc_rows = (
+        pg_db.query(HabilidadeModuloModel.habilidade_id, HabilidadeModuloModel.habilidade_descricao)
+        .filter(HabilidadeModuloModel.habilidade_id.in_(hab_ids))
+        .distinct()
+        .all()
+    )
+    seen: set[int] = set()
+    habilidades = []
+    for r in sorted(desc_rows, key=lambda x: x.habilidade_descricao):
+        if r.habilidade_id not in seen:
+            seen.add(r.habilidade_id)
+            habilidades.append(HabilidadeFiltroSchema(
+                habilidade_id=r.habilidade_id,
+                habilidade_descricao=r.habilidade_descricao,
+                pendentes=counts[r.habilidade_id],
+            ))
+
+    return HabilidadesFiltroResponse(habilidades=habilidades, total=len(habilidades))
+
+
+# ========================
 # MÓDULOS (consulta)
 # ========================
+
+@router.get(
+    "/modulos",
+    response_model=List[HabilidadeModuloSchema],
+    summary="📦 Todos os módulos disponíveis para seleção manual",
+)
+async def listar_todos_modulos(
+    disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
+    area: Optional[str] = Query(None, description="Filtrar por área"),
+    pg_db: Session = Depends(get_pg_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna todos os módulos do TriEduc, opcionalmente filtrados por disciplina ou área.
+    Usado no modal de correção de classificação para permitir busca livre por qualquer módulo.
+    """
+    cache_key = f"todos_modulos_{area}_{disciplina}"
+    cached = get_from_cache(cache_key, ttl=600)
+    if cached is not None:
+        return cached
+
+    query = pg_db.query(HabilidadeModuloModel)
+    if area:
+        query = query.filter(HabilidadeModuloModel.area == area)
+    if disciplina:
+        query = query.filter(HabilidadeModuloModel.disciplina == disciplina)
+
+    modulos = (
+        query
+        .order_by(
+            HabilidadeModuloModel.area,
+            HabilidadeModuloModel.disciplina,
+            HabilidadeModuloModel.modulo,
+            HabilidadeModuloModel.descricao,
+        )
+        .all()
+    )
+    result = [HabilidadeModuloSchema.model_validate(m) for m in modulos]
+    set_to_cache(cache_key, result)
+    return result
+
 
 @router.get(
     "/modulos/{habilidade_id}",
@@ -547,15 +681,14 @@ async def proxima_questao_classificar(
             .all()
         }
 
-        # 3. Already skipped by this user (pendentes)
-        skipped_by_user = {
+        # 3. Puladas por qualquer usuário — só aparecem na aba Pendentes, nunca em /proxima
+        skipped_any_user = {
             row[0] for row in pg_db.query(QuestaoPuladaModel.questao_id)
             .filter(QuestaoPuladaModel.questao_id.in_(candidate_ids))
-            .filter(QuestaoPuladaModel.usuario_id == usuario.id)
             .all()
         }
-        
-        ids_excluir = classified_by_user.union(classified_in_system).union(skipped_by_user)
+
+        ids_excluir = classified_by_user.union(classified_in_system).union(skipped_any_user)
         
         # Find first candidate not in exclude set
         valid_id = None
@@ -1346,13 +1479,14 @@ async def proxima_questao_pendente(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna a próxima questão que foi pulada pelo usuário (da aba Pendentes).
-    Mesmos filtros do /proxima, mas restrito às questões puladas.
+    Retorna a próxima questão pendente (pulada por qualquer usuário).
+    Restrito à área/disciplina do usuário por padrão.
     """
-    # Base query: questões puladas por este usuário
-    query_puladas = pg_db.query(QuestaoPuladaModel).filter(
-        QuestaoPuladaModel.usuario_id == usuario.id,
-    )
+    # Base query: questões puladas por qualquer usuário
+    query_puladas = pg_db.query(QuestaoPuladaModel)
+
+    # Área efetiva: usa o filtro explícito, ou cai na disciplina do próprio usuário (não-admin)
+    effective_area = area or (usuario.disciplina if not usuario.is_admin else None)
 
     # Aplicar filtros
     if habilidade_id:
@@ -1385,15 +1519,18 @@ async def proxima_questao_pendente(
                     query_puladas = query_puladas.filter(QuestaoPuladaModel.habilidade_id.in_(habilidade_ids_custom))
                 else:
                     query_puladas = query_puladas.filter(QuestaoPuladaModel.id == -1)
-    elif area and area in AREAS_DISCIPLINAS:
-        nomes = AREAS_DISCIPLINAS[area]
+    elif effective_area and effective_area in AREAS_DISCIPLINAS:
+        nomes = AREAS_DISCIPLINAS[effective_area]
         discs_ids = db.query(DisciplinaModel.id).filter(DisciplinaModel.descricao.in_(nomes)).all()
         disciplina_ids_filtro = [d[0] for d in discs_ids]
         if disciplina_ids_filtro:
             query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id.in_(disciplina_ids_filtro))
+    elif effective_area:
+        # Fallback: filtrar diretamente pelo campo area salvo no momento do pulo
+        query_puladas = query_puladas.filter(QuestaoPuladaModel.area == effective_area)
 
     # LOG para depuração
-    logger.info(f"Filtro Pendentes: usuario={usuario.nome}, area={area}, disciplina={disciplina_id}")
+    logger.info(f"Filtro Pendentes: usuario={usuario.nome}, effective_area={effective_area}, disciplina={disciplina_id}")
     count_antes = query_puladas.count()
     logger.info(f"Total pendentes com filtros aplicados: {count_antes}")
 

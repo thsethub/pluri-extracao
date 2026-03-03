@@ -1,0 +1,608 @@
+/* CorrigirClassificacaoModal.module.css */
+
+/* ── Overlay ── */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: overlayIn 0.15s ease-out forwards;
+}
+
+@keyframes overlayIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ── Modal ── */
+.modal {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 680px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    animation: modalIn 0.2s ease-out forwards;
+    overflow: hidden;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.headerTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--primary);
+}
+
+.headerTitle h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.3rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.closeBtn:hover {
+    background: var(--background);
+    color: var(--text);
+}
+
+/* ── Search area ── */
+.searchArea {
+    padding: 1rem 1.5rem 0.75rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.searchWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 0.85rem;
+    color: var(--primary);
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 2.6rem;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    outline: none;
+    background: var(--primary-light);
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-weight: 500;
+}
+
+.searchInput:focus {
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+    background: #fff;
+}
+
+.searchInput::placeholder {
+    color: #93afd4;
+    font-weight: 400;
+}
+
+.clearSearch {
+    position: absolute;
+    right: 0.75rem;
+    background: var(--text-muted);
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.6;
+    padding: 0;
+}
+
+.clearSearch:hover {
+    opacity: 1;
+}
+
+.searchResultCount {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding-left: 0.3rem;
+}
+
+/* ── Selected banner ── */
+.selectedBanner {
+    margin: 0 1.5rem 0.5rem;
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.78rem;
+    color: #276749;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.selectedTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.selectedTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #c6f6d5;
+    color: #22543d;
+    padding: 0.15rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.removeTag {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #276749;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    opacity: 0.7;
+}
+
+.removeTag:hover {
+    opacity: 1;
+}
+
+/* ── Content (scrollable) ── */
+.content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem 1.5rem 0.75rem;
+    min-height: 0;
+}
+
+/* Loading & Empty states */
+.loadingState,
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--primary-light);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.emptyState p {
+    text-align: center;
+    max-width: 280px;
+}
+
+/* ── Disciplines list ── */
+.disciplinasList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.disciplinaGroup {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.disciplinaGroup:has(.disciplinaHeaderOpen) {
+    border-color: var(--primary);
+}
+
+.disciplinaHeader {
+    width: 100%;
+    background: var(--background);
+    border: none;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: inherit;
+}
+
+.disciplinaHeader:hover {
+    background: var(--primary-light);
+}
+
+.disciplinaHeaderOpen {
+    background: var(--primary-light);
+}
+
+.disciplinaLeft {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+}
+
+.disciplinaNome {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.disciplinaRight {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.countBadge {
+    background: var(--border);
+    color: var(--text-muted);
+    padding: 0.1rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.selectedBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: var(--success);
+    color: white;
+    padding: 0.1rem 0.45rem;
+    border-radius: 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+/* ── Module list (inside discipline) ── */
+.moduloList {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.moduloItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.moduloItem:last-child {
+    border-bottom: none;
+}
+
+.moduloItem:hover {
+    background: var(--primary-light);
+}
+
+.moduloSelected {
+    background: #ebf8ff;
+    border-left: 3px solid var(--primary);
+}
+
+.moduloItem input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 17px;
+    height: 17px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    background: white;
+    transition: all 0.15s;
+    position: relative;
+}
+
+.moduloItem:hover input[type="checkbox"] {
+    border-color: var(--primary);
+}
+
+.moduloSelected input[type="checkbox"] {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.moduloSelected input[type="checkbox"]::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+    display: block;
+}
+
+.moduloText {
+    flex: 1;
+    min-width: 0;
+}
+
+.moduloText strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-bottom: 0.15rem;
+    line-height: 1.3;
+}
+
+.moduloText span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    display: block;
+}
+
+/* ── Footer ── */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+}
+
+.cancelBtn {
+    background: none;
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+
+.cancelBtn:hover:not(:disabled) {
+    border-color: var(--text-muted);
+    color: var(--text);
+    background: var(--background);
+}
+
+.cancelBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.confirmBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.3rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    box-shadow: 0 2px 8px rgba(43, 108, 176, 0.25);
+}
+
+.confirmBtn:hover:not(:disabled) {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(43, 108, 176, 0.35);
+}
+
+.confirmBtn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ── Confirmation dialog ── */
+.confirmOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(3px);
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: overlayIn 0.15s ease-out forwards;
+}
+
+.confirmDialog {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    animation: modalIn 0.2s ease-out forwards;
+}
+
+.confirmIconWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: #fffbeb;
+    border: 2px solid #fcd34d;
+    border-radius: 50%;
+    color: #d97706;
+    margin-bottom: 1rem;
+}
+
+.confirmDialog h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+.confirmDialog p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.confirmModulosList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+.confirmModuloTag {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 0.25rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.73rem;
+    font-weight: 600;
+    border: 1px solid rgba(43, 108, 176, 0.2);
+}
+
+.confirmActions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.confirmCancelBtn {
+    flex: 1;
+    background: none;
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+
+.confirmCancelBtn:hover:not(:disabled) {
+    border-color: var(--text-muted);
+    color: var(--text);
+    background: var(--background);
+}
+
+.confirmCancelBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.confirmSaveBtn {
+    flex: 1;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    box-shadow: 0 2px 8px rgba(43, 108, 176, 0.25);
+}
+
+.confirmSaveBtn:hover:not(:disabled) {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
+}
+
+.confirmSaveBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}

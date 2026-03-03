@@ -406,3 +406,39 @@
     font-size: 0.85rem;
     font-weight: 600;
 }
+
+/* ── Botão Corrigir Classificação ── */
+.corrigirBtnWrap {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.corrigirBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1rem;
+    border: 1.5px solid var(--primary);
+    background: none;
+    color: var(--primary);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.corrigirBtn:hover:not(:disabled) {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(43, 108, 176, 0.12);
+}
+
+.corrigirBtn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}

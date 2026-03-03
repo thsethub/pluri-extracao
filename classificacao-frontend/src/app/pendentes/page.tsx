@@ -101,11 +101,13 @@ export default function PendentesPage() {
                 </div>
             </div>
 
-            <FilterBar onFilterChange={(a, d, h) => {
-                setArea(a);
-                setDisciplinaFiltro(d);
-                setHabilidadeFiltro(h);
-            }} />
+            <FilterBar
+                habilidadesUrl="/habilidades-pendentes"
+                onFilterChange={(a, d, h) => {
+                    setArea(a);
+                    setDisciplinaFiltro(d);
+                    setHabilidadeFiltro(h);
+                }} />
 
             {loading ? (
                 <div className={styles.loading}>

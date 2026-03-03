@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import { apiRequest } from '@/lib/api';
 import AppLayout from '@/components/AppLayout';
 import FilterBar from '@/components/FilterBar';
-import { FastForward, Save, Info, AlertCircle } from 'lucide-react';
+import { FastForward, Save, Info, AlertCircle, Pencil } from 'lucide-react';
 import styles from './Classificar.module.css';
+import CorrigirClassificacaoModal, { HabilidadeModulo } from '@/components/CorrigirClassificacaoModal';
 
 export default function ClassificarPage() {
     const [questao, setQuestao] = useState<any>(null);
@@ -19,6 +20,7 @@ export default function ClassificarPage() {
     const [skipping, setSkipping] = useState(false);
     const [observacao, setObservacao] = useState('');
     const [modulosSelecionados, setModulosSelecionados] = useState<any[]>([]);
+    const [showCorrigirModal, setShowCorrigirModal] = useState(false);
 
     const fetchProxima = async (areaFiltro?: string, discFiltro?: string, habFiltro?: string) => {
         setLoading(true);
@@ -81,6 +83,35 @@ export default function ClassificarPage() {
                     observacao
                 })
             });
+            fetchProxima(area, disciplinaFiltro, habilidadeFiltro);
+        } catch (err: any) {
+            alert(err.message);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const handleSalvarCorrecao = async (modulosCorrecao: HabilidadeModulo[]) => {
+        if (modulosCorrecao.length === 0) return;
+        setSaving(true);
+        try {
+            await apiRequest('/salvar', {
+                method: 'POST',
+                body: JSON.stringify({
+                    questao_id: questao.id,
+                    habilidade_modulo_ids: modulosCorrecao.map(m => m.id),
+                    modulos_escolhidos: modulosCorrecao.map(m => m.modulo),
+                    classificacoes_trieduc: modulosCorrecao.map(m => m.habilidade_descricao),
+                    descricoes_assunto: modulosCorrecao.map(m => m.descricao),
+                    habilidade_modulo_id: modulosCorrecao[0].id,
+                    modulo_escolhido: modulosCorrecao[0].modulo,
+                    classificacao_trieduc: modulosCorrecao[0].habilidade_descricao,
+                    descricao_assunto: modulosCorrecao[0].descricao,
+                    tipo_acao: 'correcao',
+                    observacao,
+                }),
+            });
+            setShowCorrigirModal(false);
             fetchProxima(area, disciplinaFiltro, habilidadeFiltro);
         } catch (err: any) {
             alert(err.message);
@@ -199,6 +230,17 @@ export default function ClassificarPage() {
                             ))}
                         </div>
 
+                        <div className={styles.corrigirBtnWrap}>
+                            <button
+                                className={styles.corrigirBtn}
+                                onClick={() => setShowCorrigirModal(true)}
+                                disabled={saving}
+                            >
+                                <Pencil size={15} />
+                                Corrigir classificação
+                            </button>
+                        </div>
+
                         <div className={styles.actionArea}>
                             <textarea
                                 placeholder="Descreva brevemente o motivo da classificação"
@@ -227,6 +269,12 @@ export default function ClassificarPage() {
                     </div>
                 </div>
             )}
+            <CorrigirClassificacaoModal
+                isOpen={showCorrigirModal}
+                onClose={() => setShowCorrigirModal(false)}
+                onConfirmar={handleSalvarCorrecao}
+                saving={saving}
+            />
         </AppLayout>
     );
 }
