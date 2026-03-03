@@ -33,6 +33,7 @@ export default function FilterBar({
       pendentes?: number;
     }[]
   >([]);
+  const [loadingHabilidades, setLoadingHabilidades] = useState(false);
   const usuario = getUsuario();
 
   useEffect(() => {
@@ -65,12 +66,17 @@ export default function FilterBar({
 
   // Carrega assuntos (habilidades) quando a disciplina muda
   useEffect(() => {
+    let cancelled = false;
+
     async function loadHabilidades() {
       if (!disciplinaId) {
         setHabilidades([]);
         setHabilidadeId("");
+        setLoadingHabilidades(false);
         return;
       }
+
+      setLoadingHabilidades(true);
 
       try {
         const params = new URLSearchParams();
@@ -78,13 +84,25 @@ export default function FilterBar({
         if (disciplinaId) params.append("disciplina", disciplinaId);
 
         const data = await apiRequest(`${habilidadesUrl}?${params.toString()}`);
-        setHabilidades(data.habilidades || []);
+        if (!cancelled) {
+          setHabilidades(data.habilidades || []);
+        }
       } catch (err) {
         console.error("Erro ao carregar habilidades:", err);
-        setHabilidades([]);
+        if (!cancelled) {
+          setHabilidades([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoadingHabilidades(false);
+        }
       }
     }
+
     loadHabilidades();
+    return () => {
+      cancelled = true;
+    };
   }, [area, disciplinaId, habilidadesUrl]);
 
   // Notifica o pai quando os filtros mudam
@@ -147,8 +165,12 @@ export default function FilterBar({
           }))}
           value={habilidadeId}
           onChange={(val: any) => setHabilidadeId(val)}
-          placeholder="Todos os assuntos"
-          disabled={!disciplinaId || habilidades.length === 0}
+          placeholder={
+            loadingHabilidades
+              ? "Carregando assuntos..."
+              : "Todos os assuntos"
+          }
+          disabled={!disciplinaId || loadingHabilidades}
           searchable={true}
         />
       </div>
