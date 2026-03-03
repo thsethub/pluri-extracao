@@ -166,9 +166,7 @@ export default function FilterBar({
           value={habilidadeId}
           onChange={(val: any) => setHabilidadeId(val)}
           placeholder={
-            loadingHabilidades
-              ? "Carregando assuntos..."
-              : "Todos os assuntos"
+            loadingHabilidades ? "Carregando assuntos..." : "Todos os assuntos"
           }
           disabled={!disciplinaId || loadingHabilidades}
           searchable={true}

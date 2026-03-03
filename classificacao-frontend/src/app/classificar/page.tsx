@@ -103,7 +103,7 @@ export default function ClassificarPage() {
   };
 
   const handleSalvarCorrecao = async (modulosCorrecao: HabilidadeModulo[]) => {
-    if (modulosCorrecao.length === 0) return;
+    if (modulosCorrecao.length === 0 || !questao) return;
     setSaving(true);
     try {
       await apiRequest("/salvar", {

@@ -61,8 +61,18 @@ export default function CorrigirClassificacaoModal({
   const fetchModulos = async () => {
     setLoadingModulos(true);
     try {
-      const data = await apiRequest("/modulos");
-      setModulos(data);
+      const data: HabilidadeModulo[] = await apiRequest("/modulos");
+      // Deduplicar: módulos com mesma (disciplina, modulo, descricao) aparecem
+      // múltiplas vezes por virem de habilidade_ids diferentes.
+      // Manter apenas 1 entrada por combinação visual para evitar confusão.
+      const seen = new Map<string, HabilidadeModulo>();
+      for (const m of data) {
+        const key = `${m.disciplina}||${m.modulo}||${m.descricao}`;
+        if (!seen.has(key)) {
+          seen.set(key, m);
+        }
+      }
+      setModulos(Array.from(seen.values()));
     } catch {
       // tratado pelo apiRequest
     } finally {
@@ -76,7 +86,8 @@ export default function CorrigirClassificacaoModal({
         (m) =>
           m.modulo.toLowerCase().includes(buscaLower) ||
           m.descricao.toLowerCase().includes(buscaLower) ||
-          m.disciplina.toLowerCase().includes(buscaLower),
+          m.disciplina.toLowerCase().includes(buscaLower) ||
+          m.habilidade_descricao.toLowerCase().includes(buscaLower),
       )
     : modulos;
 
@@ -250,6 +261,9 @@ export default function CorrigirClassificacaoModal({
                               <div className={styles.moduloText}>
                                 <strong>{m.modulo}</strong>
                                 <span>{m.descricao}</span>
+                                <span className={styles.habTag}>
+                                  {m.habilidade_descricao}
+                                </span>
                               </div>
                             </label>
                           );
