@@ -1,142 +1,164 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { apiRequest } from '@/lib/api';
-import { getUsuario } from '@/lib/auth';
-import { Filter, Layers } from 'lucide-react';
-import Dropdown from './Dropdown';
-import styles from './FilterBar.module.css';
+import { useState, useEffect } from "react";
+import { apiRequest } from "@/lib/api";
+import { getUsuario } from "@/lib/auth";
+import { Filter, Layers } from "lucide-react";
+import Dropdown from "./Dropdown";
+import styles from "./FilterBar.module.css";
 
 interface FilterBarProps {
-    onFilterChange: (area: string, disciplinaId: string, habilidadeId: string) => void;
-    habilidadesUrl?: string;
+  onFilterChange: (
+    area: string,
+    disciplinaId: string,
+    habilidadeId: string,
+  ) => void;
+  habilidadesUrl?: string;
 }
 
-export default function FilterBar({ onFilterChange, habilidadesUrl = '/habilidades' }: FilterBarProps) {
-    const [area, setArea] = useState('');
-    const [disciplinaId, setDisciplinaId] = useState('');
-    const [habilidadeId, setHabilidadeId] = useState('');
-    const [areasMapping, setAreasMapping] = useState<Record<string, string[]>>({});
-    const [habilidades, setHabilidades] = useState<{ habilidade_id: number, habilidade_descricao: string, pendentes?: number }[]>([]);
-    const usuario = getUsuario();
+export default function FilterBar({
+  onFilterChange,
+  habilidadesUrl = "/habilidades",
+}: FilterBarProps) {
+  const [area, setArea] = useState("");
+  const [disciplinaId, setDisciplinaId] = useState("");
+  const [habilidadeId, setHabilidadeId] = useState("");
+  const [areasMapping, setAreasMapping] = useState<Record<string, string[]>>(
+    {},
+  );
+  const [habilidades, setHabilidades] = useState<
+    {
+      habilidade_id: number;
+      habilidade_descricao: string;
+      pendentes?: number;
+    }[]
+  >([]);
+  const usuario = getUsuario();
 
-    useEffect(() => {
-        async function loadFilters() {
-            try {
-                const data = await apiRequest('/disciplinas');
-                setAreasMapping(data.areas);
+  useEffect(() => {
+    async function loadFilters() {
+      try {
+        const data = await apiRequest("/disciplinas");
+        setAreasMapping(data.areas);
 
-                // Se o usuário tem uma disciplina (que agora é área), descobrimos a área dele
-                if (usuario?.disciplina) {
-                    // No novo sistema, usuario.disciplina já é o nome da área
-                    if (data.areas[usuario.disciplina]) {
-                        setArea(usuario.disciplina);
-                    } else {
-                        // Caso legado ou erro, tenta encontrar em qual área a disciplina dele está
-                        for (const [areaName, discs] of Object.entries(data.areas) as any) {
-                            if (discs.includes(usuario.disciplina)) {
-                                setArea(areaName);
-                                break;
-                            }
-                        }
-                    }
-                }
-            } catch (err) {
-                console.error(err);
+        // Se o usuário tem uma disciplina (que agora é área), descobrimos a área dele
+        if (usuario?.disciplina) {
+          // No novo sistema, usuario.disciplina já é o nome da área
+          if (data.areas[usuario.disciplina]) {
+            setArea(usuario.disciplina);
+          } else {
+            // Caso legado ou erro, tenta encontrar em qual área a disciplina dele está
+            for (const [areaName, discs] of Object.entries(data.areas) as any) {
+              if (discs.includes(usuario.disciplina)) {
+                setArea(areaName);
+                break;
+              }
             }
+          }
         }
-        loadFilters();
-    }, []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    loadFilters();
+  }, []);
 
-    // Carrega assuntos (habilidades) quando a disciplina muda
-    useEffect(() => {
-        async function loadHabilidades() {
-            if (!disciplinaId) {
-                setHabilidades([]);
-                setHabilidadeId('');
-                return;
+  // Carrega assuntos (habilidades) quando a disciplina muda
+  useEffect(() => {
+    async function loadHabilidades() {
+      if (!disciplinaId) {
+        setHabilidades([]);
+        setHabilidadeId("");
+        return;
+      }
+
+      try {
+        const params = new URLSearchParams();
+        if (area) params.append("area", area);
+        if (disciplinaId) params.append("disciplina", disciplinaId);
+
+        const data = await apiRequest(`${habilidadesUrl}?${params.toString()}`);
+        setHabilidades(data.habilidades || []);
+      } catch (err) {
+        console.error("Erro ao carregar habilidades:", err);
+        setHabilidades([]);
+      }
+    }
+    loadHabilidades();
+  }, [area, disciplinaId, habilidadesUrl]);
+
+  // Notifica o pai quando os filtros mudam
+  useEffect(() => {
+    onFilterChange(area, disciplinaId, habilidadeId);
+  }, [area, disciplinaId, habilidadeId]);
+
+  // Disciplinas dentro da área atual
+  const disciplinasDaArea = area ? areasMapping[area] || [] : [];
+
+  // Se o usuário tem uma área definida, ele só pode ver essa área (exceto se for admin)
+  const areaOptions = Object.keys(areasMapping)
+    .filter((a) => !usuario?.disciplina || usuario.is_admin || a === area)
+    .map((a) => ({ value: a, label: a }));
+
+  const disciplinaOptions = disciplinasDaArea.map((d) => ({
+    value: d,
+    label: d,
+  }));
+
+  return (
+    <div className={`${styles.filterBar} glass fade-in`}>
+      <div className={styles.filterGroup}>
+        <Dropdown
+          label="Sua Área de Atuação"
+          options={areaOptions}
+          value={area}
+          onChange={(val: any) => {
+            if (!usuario?.disciplina || usuario.is_admin) {
+              setArea(val);
+              setDisciplinaId("");
+              setHabilidadeId("");
             }
+          }}
+          placeholder="Selecione a Área"
+        />
+      </div>
 
-            try {
-                const params = new URLSearchParams();
-                if (area) params.append('area', area);
-                if (disciplinaId) params.append('disciplina', disciplinaId);
+      <div className={styles.filterGroup}>
+        <Dropdown
+          label="Filtrar por Disciplina"
+          options={disciplinaOptions}
+          value={disciplinaId}
+          onChange={(val: any) => {
+            setDisciplinaId(val);
+            setHabilidadeId(""); // Reseta o assunto ao mudar disciplina
+          }}
+          placeholder="Todas as disciplinas da área"
+        />
+      </div>
 
-                const data = await apiRequest(`${habilidadesUrl}?${params.toString()}`);
-                setHabilidades(data.habilidades || []);
-            } catch (err) {
-                console.error('Erro ao carregar habilidades:', err);
-                setHabilidades([]);
-            }
-        }
-        loadHabilidades();
-    }, [area, disciplinaId, habilidadesUrl]);
+      <div className={styles.filterGroup}>
+        <Dropdown
+          label="Assunto"
+          options={habilidades.map((h) => ({
+            value: h.habilidade_id.toString(),
+            label: h.pendentes
+              ? `${h.habilidade_descricao} (${h.pendentes})`
+              : h.habilidade_descricao,
+          }))}
+          value={habilidadeId}
+          onChange={(val: any) => setHabilidadeId(val)}
+          placeholder="Todos os assuntos"
+          disabled={!disciplinaId || habilidades.length === 0}
+          searchable={true}
+        />
+      </div>
 
-    // Notifica o pai quando os filtros mudam
-    useEffect(() => {
-        onFilterChange(area, disciplinaId, habilidadeId);
-    }, [area, disciplinaId, habilidadeId]);
-
-    // Disciplinas dentro da área atual
-    const disciplinasDaArea = area ? (areasMapping[area] || []) : [];
-
-    // Se o usuário tem uma área definida, ele só pode ver essa área (exceto se for admin)
-    const areaOptions = Object.keys(areasMapping)
-        .filter(a => !usuario?.disciplina || usuario.is_admin || a === area)
-        .map(a => ({ value: a, label: a }));
-
-    const disciplinaOptions = disciplinasDaArea.map(d => ({ value: d, label: d }));
-
-    return (
-        <div className={`${styles.filterBar} glass fade-in`}>
-            <div className={styles.filterGroup}>
-                <Dropdown
-                    label="Sua Área de Atuação"
-                    options={areaOptions}
-                    value={area}
-                    onChange={(val: any) => {
-                        if (!usuario?.disciplina || usuario.is_admin) {
-                            setArea(val);
-                            setDisciplinaId('');
-                            setHabilidadeId('');
-                        }
-                    }}
-                    placeholder="Selecione a Área"
-                />
-            </div>
-
-            <div className={styles.filterGroup}>
-                <Dropdown
-                    label="Filtrar por Disciplina"
-                    options={disciplinaOptions}
-                    value={disciplinaId}
-                    onChange={(val: any) => {
-                        setDisciplinaId(val);
-                        setHabilidadeId(''); // Reseta o assunto ao mudar disciplina
-                    }}
-                    placeholder="Todas as disciplinas da área"
-                />
-            </div>
-
-            <div className={styles.filterGroup}>
-                <Dropdown
-                    label="Assunto"
-                    options={habilidades.map(h => ({
-                        value: h.habilidade_id.toString(),
-                        label: h.pendentes ? `${h.habilidade_descricao} (${h.pendentes})` : h.habilidade_descricao
-                    }))}
-                    value={habilidadeId}
-                    onChange={(val: any) => setHabilidadeId(val)}
-                    placeholder="Todos os assuntos"
-                    disabled={!disciplinaId || habilidades.length === 0}
-                    searchable={true}
-                />
-            </div>
-
-            <div className={styles.info}>
-                <p><strong>{area || 'Área não definida'}</strong></p>
-                <span>{disciplinaId || 'Todas as disciplinas'}</span>
-            </div>
-        </div>
-    );
+      <div className={styles.info}>
+        <p>
+          <strong>{area || "Área não definida"}</strong>
+        </p>
+        <span>{disciplinaId || "Todas as disciplinas"}</span>
+      </div>
+    </div>
+  );
 }
