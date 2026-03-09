@@ -7,9 +7,9 @@
     background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(4px);
     z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
+    overflow: auto;
     padding: 1rem;
     animation: overlayIn 0.15s ease-out forwards;
 }
@@ -23,14 +23,16 @@
 .modal {
     background: var(--surface);
     border-radius: var(--radius);
+    border: 1px solid var(--border);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 680px;
-    max-height: 88vh;
+    width: min(720px, calc(100vw - 2rem));
+    min-width: 320px;
+    max-height: min(90vh, 90svh);
     display: flex;
     flex-direction: column;
     animation: modalIn 0.2s ease-out forwards;
     overflow: hidden;
+    backdrop-filter: blur(1px);
 }
 
 @keyframes modalIn {
@@ -497,9 +499,9 @@
     background: rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(3px);
     z-index: 1100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
+    overflow: auto;
     padding: 1rem;
     animation: overlayIn 0.15s ease-out forwards;
 }
