@@ -45,3 +45,6 @@ storage/
 models/
 *.joblib
 *.pkl
+agente-classificacao/reports/dry_run_assuntos_modulos_thsethub_2026-03-05.json
+agente-classificacao/reports/dry_run_classificacoes_impactadas_2026-03-05.csv
+agente-classificacao/reports/execucao_atualizacao_assuntos_2026-03-05.json

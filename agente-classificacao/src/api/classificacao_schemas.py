@@ -68,6 +68,30 @@ class ModulosResponse(BaseModel):
     total: int
 
 
+class AssuntoVinculadoSchema(BaseModel):
+    """Schema de assunto vinculado a um módulo no banco compartilhados."""
+    id: Optional[int | str] = None
+    descricao: str
+
+
+class ModuloComAssuntosSchema(BaseModel):
+    """Schema de módulo com seus assuntos relacionados."""
+    id: int | str
+    disciplina: Optional[str] = None
+    nome: str
+    assuntos: List[AssuntoVinculadoSchema]
+    total_assuntos: int
+    fonte: str = "librostudio"
+    has_relacionamento_trieduc: bool = False
+
+
+class ModulosAssuntosResponse(BaseModel):
+    """Response com lista de módulos e seus assuntos válidos."""
+    modulos: List[ModuloComAssuntosSchema]
+    total_modulos: int
+    total_assuntos: int
+
+
 class HabilidadeFiltroSchema(BaseModel):
     """Schema para item no dropdown de filtro de assuntos"""
     habilidade_id: int

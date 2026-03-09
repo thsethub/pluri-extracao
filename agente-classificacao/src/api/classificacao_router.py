@@ -1,23 +1,24 @@
-"""Router com endpoints do sistema de classificação manual por usuários.
+﻿"""Router com endpoints do sistema de classificaÃ§Ã£o manual por usuÃ¡rios.
 
-Rotas separadas do sistema de extração/conferência.
-Protegidas por autenticação JWT.
+Rotas separadas do sistema de extraÃ§Ã£o/conferÃªncia.
+Protegidas por autenticaÃ§Ã£o JWT.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session, joinedload
-from sqlalchemy import func
+from sqlalchemy import func, inspect, text as sql_text
 from typing import Optional, List
 from math import ceil
 from datetime import datetime, timedelta, timezone
 from loguru import logger
+import re
 
 from jose import JWTError, jwt
 import bcrypt
 
 from ..config import settings
-from ..database import get_db, get_pg_db
+from ..database import get_db, get_pg_db, get_shared_db
 from ..database.models import QuestaoModel, HabilidadeModel, DisciplinaModel
 from ..database.pg_models import QuestaoAssuntoModel
 from ..database.pg_modulo_models import HabilidadeModuloModel
@@ -31,6 +32,9 @@ from .classificacao_schemas import (
     UsuarioSchema,
     HabilidadeModuloSchema,
     ModulosResponse,
+    AssuntoVinculadoSchema,
+    ModuloComAssuntosSchema,
+    ModulosAssuntosResponse,
     HabilidadeFiltroSchema,
     HabilidadesFiltroResponse,
     AlternativaClassifSchema,
@@ -48,7 +52,7 @@ from .classificacao_schemas import (
 import time
 
 # ========================
-# CACHE EM MEMÓRIA (TTL)
+# CACHE EM MEMÃ“RIA (TTL)
 # ========================
 _api_cache = {}
 
@@ -62,6 +66,36 @@ def get_from_cache(key: str, ttl: int = 300):
 def set_to_cache(key: str, val):
     _api_cache[key] = (val, time.time())
 
+
+def _pick_first_column(available: set[str], candidates: list[str]) -> Optional[str]:
+    """Retorna a primeira coluna existente na lista de candidatos."""
+    for col in candidates:
+        if col in available:
+            return col
+    return None
+
+
+def _sql_ident(name: str) -> str:
+    """Valida e escapa identificadores SQL simples (tabelas/colunas)."""
+    if not re.match(r"^[A-Za-z_][A-Za-z0-9_]*$", name):
+        raise HTTPException(status_code=500, detail=f"Nome de coluna invÃ¡lido detectado: {name}")
+    return f"`{name}`"
+
+
+def _normalize_text(value: Optional[str]) -> str:
+    return " ".join((value or "").strip().lower().split())
+
+
+def _normalize_disc_modu_id(value: Optional[object]) -> Optional[str]:
+    if value is None:
+        return None
+    normalized = str(value).strip().lower()
+    if not normalized:
+        return None
+    if normalized.endswith(".0"):
+        normalized = normalized[:-2]
+    return normalized
+
 # ========================
 # CONFIG
 # ========================
@@ -69,36 +103,36 @@ SECRET_KEY = settings.jwt_secret_key
 ALGORITHM = settings.jwt_algorithm
 ACCESS_TOKEN_EXPIRE_MINUTES = settings.jwt_expire_minutes
 
-# bcrypt 5.x — usar diretamente (passlib não compatível)
+# bcrypt 5.x â€” usar diretamente (passlib nÃ£o compatÃ­vel)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/classificacao/login")
 
-router = APIRouter(prefix="/classificacao", tags=["Classificação Manual"])
+router = APIRouter(prefix="/classificacao", tags=["ClassificaÃ§Ã£o Manual"])
 
-# Disciplinas válidas para cadastro (incluindo Áreas)
+# Disciplinas vÃ¡lidas para cadastro (incluindo Ãreas)
 DISCIPLINAS_VALIDAS = [
-    "Artes", "Biologia", "Ciências", "Educação Física", "Espanhol",
-    "Filosofia", "Física", "Geografia", "História", "Língua Inglesa",
-    "Língua Portuguesa", "Literatura", "Matemática", "Natureza e Sociedade", 
-    "Química", "Redação", "Sociologia",
-    # Áreas
+    "Artes", "Biologia", "CiÃªncias", "EducaÃ§Ã£o FÃ­sica", "Espanhol",
+    "Filosofia", "FÃ­sica", "Geografia", "HistÃ³ria", "LÃ­ngua Inglesa",
+    "LÃ­ngua Portuguesa", "Literatura", "MatemÃ¡tica", "Natureza e Sociedade", 
+    "QuÃ­mica", "RedaÃ§Ã£o", "Sociologia",
+    # Ãreas
     "Humanas", "Linguagens", "Natureza"
 ]
 
 # Mapeamento para o MySQL (onde os nomes podem ser diferentes do Postgres/Planilha)
 MAP_DISCIPLINAS_MYSQL = {
     "Artes": "Artes",
-    "Língua Inglesa": "Língua Inglesa",
-    "Língua Portuguesa": "Língua Portuguesa",
-    "Literatura": None, # Não existe no MySQL
-    "Redação": None,    # Não existe no MySQL
+    "LÃ­ngua Inglesa": "LÃ­ngua Inglesa",
+    "LÃ­ngua Portuguesa": "LÃ­ngua Portuguesa",
+    "Literatura": None, # NÃ£o existe no MySQL
+    "RedaÃ§Ã£o": None,    # NÃ£o existe no MySQL
 }
 
-# Mapeamento de áreas para filtro
+# Mapeamento de Ã¡reas para filtro
 AREAS_DISCIPLINAS = {
-    "Humanas": ["Filosofia", "Geografia", "História", "Sociologia"],
-    "Linguagens": ["Artes", "Educação Física", "Espanhol", "Língua Inglesa", "Língua Portuguesa", "Literatura", "Redação"],
-    "Matemática": ["Matemática"],
-    "Natureza": ["Biologia", "Ciências", "Física", "Natureza e Sociedade", "Química"],
+    "Humanas": ["Filosofia", "Geografia", "HistÃ³ria", "Sociologia"],
+    "Linguagens": ["Artes", "EducaÃ§Ã£o FÃ­sica", "Espanhol", "LÃ­ngua Inglesa", "LÃ­ngua Portuguesa", "Literatura", "RedaÃ§Ã£o"],
+    "MatemÃ¡tica": ["MatemÃ¡tica"],
+    "Natureza": ["Biologia", "CiÃªncias", "FÃ­sica", "Natureza e Sociedade", "QuÃ­mica"],
 }
 
 
@@ -133,10 +167,10 @@ async def get_usuario_atual(
     token: str = Depends(oauth2_scheme),
     pg_db: Session = Depends(get_pg_db),
 ) -> UsuarioModel:
-    """Dependency: extrai e valida o usuário do token JWT."""
+    """Dependency: extrai e valida o usuÃ¡rio do token JWT."""
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Token inválido ou expirado",
+        detail="Token invÃ¡lido ou expirado",
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
@@ -155,13 +189,13 @@ async def get_usuario_atual(
 
 
 # ========================
-# AUTENTICAÇÃO
+# AUTENTICAÃ‡ÃƒO
 # ========================
 
 @router.post(
     "/cadastro",
     response_model=TokenResponse,
-    summary="📝 Cadastrar novo usuário",
+    summary="ðŸ“ Cadastrar novo usuÃ¡rio",
     status_code=status.HTTP_201_CREATED,
 )
 async def cadastrar_usuario(
@@ -169,22 +203,22 @@ async def cadastrar_usuario(
     pg_db: Session = Depends(get_pg_db),
 ):
     """
-    Cadastra um novo usuário para classificação manual.
-    O campo `disciplina` deve ser uma das disciplinas válidas do sistema.
+    Cadastra um novo usuÃ¡rio para classificaÃ§Ã£o manual.
+    O campo `disciplina` deve ser uma das disciplinas vÃ¡lidas do sistema.
     """
     # Validar disciplina
     if request.disciplina not in DISCIPLINAS_VALIDAS:
         raise HTTPException(
             status_code=400,
-            detail=f"Disciplina inválida. Opções: {', '.join(DISCIPLINAS_VALIDAS)}",
+            detail=f"Disciplina invÃ¡lida. OpÃ§Ãµes: {', '.join(DISCIPLINAS_VALIDAS)}",
         )
 
     # Verificar email duplicado
     existente = pg_db.query(UsuarioModel).filter(UsuarioModel.email == request.email).first()
     if existente:
-        raise HTTPException(status_code=400, detail="Email já cadastrado")
+        raise HTTPException(status_code=400, detail="Email jÃ¡ cadastrado")
 
-    # Criar usuário
+    # Criar usuÃ¡rio
     usuario = UsuarioModel(
         nome=request.nome,
         email=request.email,
@@ -197,7 +231,7 @@ async def cadastrar_usuario(
 
     # Gerar token
     token = criar_token({"sub": usuario.id})
-    logger.info(f"Novo usuário cadastrado: {usuario.nome} ({usuario.disciplina})")
+    logger.info(f"Novo usuÃ¡rio cadastrado: {usuario.nome} ({usuario.disciplina})")
 
     return TokenResponse(
         access_token=token,
@@ -208,13 +242,13 @@ async def cadastrar_usuario(
 @router.post(
     "/login",
     response_model=TokenResponse,
-    summary="🔑 Login",
+    summary="ðŸ”‘ Login",
 )
 async def login(
     request: LoginRequest,
     pg_db: Session = Depends(get_pg_db),
 ):
-    """Autentica o usuário e retorna um token JWT."""
+    """Autentica o usuÃ¡rio e retorna um token JWT."""
     usuario = pg_db.query(UsuarioModel).filter(UsuarioModel.email == request.email).first()
     if not usuario or not verificar_senha(request.senha, usuario.senha_hash):
         raise HTTPException(
@@ -222,7 +256,7 @@ async def login(
             detail="Email ou senha incorretos",
         )
     if not usuario.ativo:
-        raise HTTPException(status_code=403, detail="Usuário desativado")
+        raise HTTPException(status_code=403, detail="UsuÃ¡rio desativado")
 
     token = criar_token({"sub": usuario.id})
     logger.info(f"Login: {usuario.nome}")
@@ -236,19 +270,19 @@ async def login(
 @router.get(
     "/me",
     response_model=UsuarioSchema,
-    summary="👤 Dados do usuário atual",
+    summary="ðŸ‘¤ Dados do usuÃ¡rio atual",
 )
 async def dados_usuario(usuario: UsuarioModel = Depends(get_usuario_atual)):
-    """Retorna os dados do usuário autenticado."""
+    """Retorna os dados do usuÃ¡rio autenticado."""
     return UsuarioSchema.model_validate(usuario)
 
 
 @router.get(
     "/disciplinas",
-    summary="📚 Disciplinas disponíveis",
+    summary="ðŸ“š Disciplinas disponÃ­veis",
 )
 async def listar_disciplinas():
-    """Retorna as disciplinas disponíveis para cadastro e as áreas para filtro."""
+    """Retorna as disciplinas disponÃ­veis para cadastro e as Ã¡reas para filtro."""
     return {
         "disciplinas": DISCIPLINAS_VALIDAS,
         "areas": AREAS_DISCIPLINAS,
@@ -258,17 +292,17 @@ async def listar_disciplinas():
 @router.get(
     "/habilidades",
     response_model=HabilidadesFiltroResponse,
-    summary="🔍 Listar assuntos (habilidades) para filtro",
+    summary="ðŸ” Listar assuntos (habilidades) para filtro",
 )
 async def listar_habilidades_filtro(
-    area: Optional[str] = Query(None, description="Filtrar por área"),
+    area: Optional[str] = Query(None, description="Filtrar por Ã¡rea"),
     disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
     pg_db: Session = Depends(get_pg_db),
     db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna a lista de assuntos únicos (habilidade_id + habilidade_descricao)
+    Retorna a lista de assuntos Ãºnicos (habilidade_id + habilidade_descricao)
     para popular o dropdown de filtros no frontend.
     Inclui quantidade de pendentes (cacheado por 5m).
     """
@@ -287,31 +321,31 @@ async def listar_habilidades_filtro(
     if disciplina:
         mapping = {
             "Artes": ["Artes", "Arte"],
-            "Língua Inglesa": ["Língua Inglesa", "Inglês"],
-            "Língua Portuguesa": ["Língua Portuguesa", "Lingua Portuguesa", "Literatura", "Redação"],
+            "LÃ­ngua Inglesa": ["LÃ­ngua Inglesa", "InglÃªs"],
+            "LÃ­ngua Portuguesa": ["LÃ­ngua Portuguesa", "Lingua Portuguesa", "Literatura", "RedaÃ§Ã£o"],
         }
         mapped_names = mapping.get(disciplina, [disciplina])
         query = query.filter(HabilidadeModuloModel.disciplina.in_(mapped_names))
 
     results = query.order_by(HabilidadeModuloModel.habilidade_descricao).all()
     
-    # Montar mapa de habilidades válidas
+    # Montar mapa de habilidades vÃ¡lidas
     hab_ids = [r.habilidade_id for r in results if r.habilidade_id is not None]
     
     counts_map = {}
     if hab_ids:
-        # —————————————————————————————————————————————————————————————
+        # â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
         # ABORDAGEM EFICIENTE v2: dois GROUP BY no MySQL (sem carregar
-        # linhas individuais) + IDs excluídos do PG como set
+        # linhas individuais) + IDs excluÃ­dos do PG como set
         #
-        # 1. MySQL  → SELECT habilidade_id, COUNT(*) GROUP BY  (29 linhas)
-        # 2. PG     → 3 queries para obter IDs excluídos como set
-        # 3. MySQL  → SELECT habilidade_id, COUNT(*) WHERE id IN(excluídos)
-        #             GROUP BY  (≤ 29 linhas agrupadas)
-        # 4. Python → total - excluído por habilidade
-        # —————————————————————————————————————————————————————————————
+        # 1. MySQL  â†’ SELECT habilidade_id, COUNT(*) GROUP BY  (29 linhas)
+        # 2. PG     â†’ 3 queries para obter IDs excluÃ­dos como set
+        # 3. MySQL  â†’ SELECT habilidade_id, COUNT(*) WHERE id IN(excluÃ­dos)
+        #             GROUP BY  (â‰¤ 29 linhas agrupadas)
+        # 4. Python â†’ total - excluÃ­do por habilidade
+        # â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 
-        # Etapa 1: total de questões por habilidade (MySQL GROUP BY, 29 linhas)
+        # Etapa 1: total de questÃµes por habilidade (MySQL GROUP BY, 29 linhas)
         rows_total = db.query(
             QuestaoModel.habilidade_id,
             func.count(QuestaoModel.id).label("total"),
@@ -328,10 +362,10 @@ async def listar_habilidades_filtro(
 
         total_por_hab: dict[int, int] = {r[0]: r[1] for r in rows_total}
 
-        # Etapa 2: IDs excluídos no PG (queries leves, sem IN gigante)
+        # Etapa 2: IDs excluÃ­dos no PG (queries leves, sem IN gigante)
         ids_excluir: set[int] = set()
 
-        # 2a. Já classificadas manualmente, com low-match, ou pelo SuperPro
+        # 2a. JÃ¡ classificadas manualmente, com low-match, ou pelo SuperPro
         for r in pg_db.query(QuestaoAssuntoModel.questao_id).filter(
             (QuestaoAssuntoModel.classificado_manualmente == True) |
             (
@@ -346,18 +380,18 @@ async def listar_habilidades_filtro(
         ).all():
             ids_excluir.add(r[0])
 
-        # 2b. Já classificadas por este usuário
+        # 2b. JÃ¡ classificadas por este usuÃ¡rio
         for r in pg_db.query(ClassificacaoUsuarioModel.questao_id).filter(
             ClassificacaoUsuarioModel.usuario_id == usuario.id
         ).all():
             ids_excluir.add(r[0])
 
-        # 2c. Puladas por qualquer usuário — só aparecem em Pendentes, nunca em /proxima
+        # 2c. Puladas por qualquer usuÃ¡rio â€” sÃ³ aparecem em Pendentes, nunca em /proxima
         for r in pg_db.query(QuestaoPuladaModel.questao_id).all():
             ids_excluir.add(r[0])
 
-        # Etapa 3: contagem de excluídas por habilidade no MySQL
-        # (IN por PK é eficiente; resposta = ≤ 29 linhas agrupadas)
+        # Etapa 3: contagem de excluÃ­das por habilidade no MySQL
+        # (IN por PK Ã© eficiente; resposta = â‰¤ 29 linhas agrupadas)
         excluido_por_hab: dict[int, int] = {}
         if ids_excluir:
             rows_excluido = db.query(
@@ -400,29 +434,29 @@ async def listar_habilidades_filtro(
 @router.get(
     "/habilidades-pendentes",
     response_model=HabilidadesFiltroResponse,
-    summary="🔍 Assuntos com questões pendentes (puladas)",
+    summary="ðŸ” Assuntos com questÃµes pendentes (puladas)",
 )
 async def listar_habilidades_pendentes(
-    area: Optional[str] = Query(None, description="Filtrar por área"),
+    area: Optional[str] = Query(None, description="Filtrar por Ã¡rea"),
     disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
     db: Session = Depends(get_db),
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna apenas os assuntos (habilidades) que possuem questões puladas (pendentes),
-    com a contagem de quantas existem. Respeita o filtro de área/disciplina do usuário.
+    Retorna apenas os assuntos (habilidades) que possuem questÃµes puladas (pendentes),
+    com a contagem de quantas existem. Respeita o filtro de Ã¡rea/disciplina do usuÃ¡rio.
     """
     effective_area = area or (usuario.disciplina if not usuario.is_admin else None)
 
-    # IDs já classificados por este usuário (excluir das contagens)
+    # IDs jÃ¡ classificados por este usuÃ¡rio (excluir das contagens)
     ids_classificadas: set[int] = {
         row[0] for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
         .filter(ClassificacaoUsuarioModel.usuario_id == usuario.id)
         .all()
     }
 
-    # Base: questões puladas com habilidade definida
+    # Base: questÃµes puladas com habilidade definida
     query_puladas = pg_db.query(
         QuestaoPuladaModel.habilidade_id,
         func.count(func.distinct(QuestaoPuladaModel.questao_id)).label("total"),
@@ -433,7 +467,7 @@ async def listar_habilidades_pendentes(
             ~QuestaoPuladaModel.questao_id.in_(list(ids_classificadas))
         )
 
-    # Filtro de disciplina explícito
+    # Filtro de disciplina explÃ­cito
     if disciplina:
         mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina, disciplina)
         if mysql_name:
@@ -468,7 +502,7 @@ async def listar_habilidades_pendentes(
     counts: dict[int, int] = {r[0]: r[1] for r in rows}
     hab_ids = list(counts.keys())
 
-    # Buscar descrições no habilidade_modulos
+    # Buscar descriÃ§Ãµes no habilidade_modulos
     desc_rows = (
         pg_db.query(HabilidadeModuloModel.habilidade_id, HabilidadeModuloModel.habilidade_descricao)
         .filter(HabilidadeModuloModel.habilidade_id.in_(hab_ids))
@@ -490,22 +524,22 @@ async def listar_habilidades_pendentes(
 
 
 # ========================
-# MÓDULOS (consulta)
+# MÃ“DULOS (consulta)
 # ========================
 
 @router.get(
     "/modulos",
     response_model=List[HabilidadeModuloSchema],
-    summary="📦 Todos os módulos disponíveis para seleção manual",
+    summary="ðŸ“¦ Todos os mÃ³dulos disponÃ­veis para seleÃ§Ã£o manual",
 )
 async def listar_todos_modulos(
     disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
-    area: Optional[str] = Query(None, description="Filtrar por área"),
+    area: Optional[str] = Query(None, description="Filtrar por Ã¡rea"),
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
-    """Retorna todos os módulos do TriEduc, opcionalmente filtrados por disciplina ou área.
-    Usado no modal de correção de classificação para permitir busca livre por qualquer módulo.
+    """Retorna todos os mÃ³dulos do TriEduc, opcionalmente filtrados por disciplina ou Ã¡rea.
+    Usado no modal de correÃ§Ã£o de classificaÃ§Ã£o para permitir busca livre por qualquer mÃ³dulo.
     """
     cache_key = f"todos_modulos_{area}_{disciplina}"
     cached = get_from_cache(cache_key, ttl=600)
@@ -534,16 +568,288 @@ async def listar_todos_modulos(
 
 
 @router.get(
+    "/modulos-assuntos",
+    response_model=ModulosAssuntosResponse,
+    summary="ðŸ“š MÃ³dulos com assuntos relacionados (sem prefixo [RM])",
+)
+async def listar_modulos_com_assuntos(
+    shared_db: Session = Depends(get_shared_db),
+    pg_db: Session = Depends(get_pg_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna mÃ³dulos do banco compartilhados com os assuntos relacionados vÃ¡lidos.
+
+    Retorna apenas os mÃ³dulos do LivroStudio sem relacionamento atual com o TriEduc.
+    """
+    cache_key = "modulos_assuntos_compartilhados_v2"
+    cached = get_from_cache(cache_key, ttl=600)
+    if cached is not None:
+        return cached
+
+    try:
+        inspector = inspect(shared_db.get_bind())
+        table_names = inspector.get_table_names()
+        table_names_lower = {t.lower(): t for t in table_names}
+
+        assuntos_table = None
+        for candidate in ["assuntos", "assunto"]:
+            if candidate in table_names_lower:
+                assuntos_table = table_names_lower[candidate]
+                break
+
+        modulos_table = None
+        for candidate in [
+            "disciplina_modulos",
+            "disciplinas_modulos",
+            "disciplina_modulo",
+            "disciplinas_modulo",
+            "modulos_disciplina",
+            "modulo_disciplina",
+        ]:
+            if candidate in table_names_lower:
+                modulos_table = table_names_lower[candidate]
+                break
+
+        if not modulos_table:
+            for t in table_names:
+                t_norm = t.lower()
+                if "modul" in t_norm and "disc" in t_norm:
+                    modulos_table = t
+                    break
+
+        if not assuntos_table:
+            raise HTTPException(status_code=500, detail="Tabela de assuntos nÃ£o encontrada em compartilhados.")
+        if not modulos_table:
+            raise HTTPException(status_code=500, detail="Tabela de mÃ³dulos de disciplina nÃ£o encontrada em compartilhados.")
+
+        assuntos_cols = {c["name"] for c in inspector.get_columns(assuntos_table)}
+        modulos_cols = {c["name"] for c in inspector.get_columns(modulos_table)}
+
+        assunto_desc_col = _pick_first_column(assuntos_cols, ["assu_descricao", "descricao", "nome"])
+        if not assunto_desc_col:
+            raise HTTPException(
+                status_code=500,
+                detail="Coluna de descriÃ§Ã£o de assunto nÃ£o encontrada na tabela 'assuntos'.",
+            )
+
+        assunto_id_col = _pick_first_column(assuntos_cols, ["assu_id", "id"])
+        modulo_nome_col = _pick_first_column(
+            modulos_cols,
+            [
+                "modulo",
+                "dimo_descricao",
+                "descricao",
+                "nome",
+                "disc_modu_descricao",
+                "disc_modulo_descricao",
+                "disc_modu_nome",
+                "disc_modulo_nome",
+                "dimo_nome",
+            ],
+        )
+        if not modulo_nome_col:
+            modulo_nome_col = next(
+                (
+                    c
+                    for c in modulos_cols
+                    if "modu" in c.lower()
+                    and (
+                        "descr" in c.lower()
+                        or "nome" in c.lower()
+                        or "titulo" in c.lower()
+                    )
+                ),
+                None,
+            )
+        if not modulo_nome_col:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Coluna de nome de mÃ³dulo nÃ£o encontrada. Colunas disponÃ­veis: {sorted(modulos_cols)}",
+            )
+
+        disciplina_nome_col = _pick_first_column(
+            modulos_cols,
+            [
+                "disciplina",
+                "disciplina_nome",
+                "disciplina_descricao",
+                "nome_disciplina",
+            ],
+        )
+        if not disciplina_nome_col:
+            disciplina_nome_col = next(
+                (
+                    c
+                    for c in modulos_cols
+                    if c != modulo_nome_col
+                    and "disc" in c.lower()
+                    and ("nome" in c.lower() or "desc" in c.lower())
+                ),
+                None,
+            )
+
+        join_candidates = [
+            ("disc_modu_id", "disc_modu_id"),
+            ("disciplina_modulo_id", "id"),
+            ("dimo_id", "dimo_id"),
+            ("dimo_id", "id"),
+            ("disc_modu_id", "id"),
+        ]
+        join_cols = next(
+            ((a_col, dm_col) for a_col, dm_col in join_candidates if a_col in assuntos_cols and dm_col in modulos_cols),
+            None,
+        )
+        if not join_cols:
+            raise HTTPException(
+                status_code=500,
+                detail="NÃ£o foi possÃ­vel identificar o relacionamento entre 'assuntos' e 'disciplina_modulos'.",
+            )
+
+        assunto_join_col, modulo_join_col = join_cols
+        modulo_id_col = _pick_first_column(modulos_cols, [modulo_join_col, "disc_modu_id", "dimo_id", "id"]) or modulo_join_col
+        modulo_disc_modu_col = _pick_first_column(modulos_cols, [modulo_join_col, "disc_modu_id", "dimo_id", "id"])
+        assunto_id_select = f", a.{_sql_ident(assunto_id_col)} AS assunto_id" if assunto_id_col else ""
+        disciplina_select = (
+            f", dm.{_sql_ident(disciplina_nome_col)} AS disciplina_nome"
+            if disciplina_nome_col
+            else ", NULL AS disciplina_nome"
+        )
+        modulo_disc_modu_select = (
+            f", dm.{_sql_ident(modulo_disc_modu_col)} AS modulo_disc_modu_id"
+            if modulo_disc_modu_col
+            else ""
+        )
+
+        trieduc_pairs = set()
+        trieduc_disc_modu_ids = set()
+        for disciplina, modulo, disc_modu_id in pg_db.query(
+            HabilidadeModuloModel.disciplina,
+            HabilidadeModuloModel.modulo,
+            HabilidadeModuloModel.disc_modu_id,
+        ).all():
+            disc_norm = _normalize_text(disciplina)
+            mod_norm = _normalize_text(modulo)
+            if disc_norm and mod_norm:
+                trieduc_pairs.add((disc_norm, mod_norm))
+
+            disc_modu_norm = _normalize_disc_modu_id(disc_modu_id)
+            if disc_modu_norm:
+                trieduc_disc_modu_ids.add(disc_modu_norm)
+
+        sql = f"""
+            SELECT
+                dm.{_sql_ident(modulo_id_col)} AS modulo_id,
+                dm.{_sql_ident(modulo_nome_col)} AS modulo_nome,
+                a.{_sql_ident(assunto_desc_col)} AS assunto_descricao
+                {assunto_id_select}
+                {disciplina_select}
+                {modulo_disc_modu_select}
+            FROM {_sql_ident(assuntos_table)} a
+            INNER JOIN {_sql_ident(modulos_table)} dm
+                ON a.{_sql_ident(assunto_join_col)} = dm.{_sql_ident(modulo_join_col)}
+            WHERE a.{_sql_ident(assunto_desc_col)} IS NOT NULL
+                AND TRIM(a.{_sql_ident(assunto_desc_col)}) <> ''
+                AND TRIM(a.{_sql_ident(assunto_desc_col)}) NOT LIKE :rm_prefix
+            ORDER BY dm.{_sql_ident(modulo_nome_col)}, a.{_sql_ident(assunto_desc_col)}
+        """
+
+        rows = shared_db.execute(sql_text(sql), {"rm_prefix": "[RM]%"}).mappings().all()
+
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Erro ao consultar mÃ³dulos/assuntos em compartilhados: {exc}",
+        ) from exc
+
+    grouped = {}
+    for row in rows:
+        modulo_nome = (row.get("modulo_nome") or "").strip()
+        if not modulo_nome:
+            continue
+
+        disciplina_nome = (row.get("disciplina_nome") or "").strip()
+        disciplina_norm = _normalize_text(disciplina_nome)
+        modulo_norm = _normalize_text(modulo_nome)
+
+        modulo_disc_modu_norm = _normalize_disc_modu_id(row.get("modulo_disc_modu_id"))
+
+        has_relacionamento_trieduc = False
+        if disciplina_norm and modulo_norm and (disciplina_norm, modulo_norm) in trieduc_pairs:
+            has_relacionamento_trieduc = True
+        elif modulo_disc_modu_norm and modulo_disc_modu_norm in trieduc_disc_modu_ids:
+            has_relacionamento_trieduc = True
+
+        if has_relacionamento_trieduc:
+            continue
+
+        modulo_id = row.get("modulo_id") if row.get("modulo_id") is not None else modulo_nome
+        group_key = f"{disciplina_norm}::{modulo_id}::{modulo_norm}"
+
+        if group_key not in grouped:
+            grouped[group_key] = {
+                "id": modulo_id,
+                "nome": modulo_nome,
+                "disciplina": disciplina_nome,
+                "assuntos": [],
+                "_seen": set(),
+            }
+
+        assunto_descricao = (row.get("assunto_descricao") or "").strip()
+        if not assunto_descricao:
+            continue
+
+        assunto_id = row.get("assunto_id")
+        assunto_key = (assunto_id, assunto_descricao)
+        if assunto_key in grouped[group_key]["_seen"]:
+            continue
+
+        grouped[group_key]["_seen"].add(assunto_key)
+        grouped[group_key]["assuntos"].append(
+            AssuntoVinculadoSchema(
+                id=assunto_id,
+                descricao=assunto_descricao,
+            )
+        )
+
+    modulos = []
+    total_assuntos = 0
+    for module_data in grouped.values():
+        assuntos = module_data["assuntos"]
+        total_assuntos += len(assuntos)
+        modulos.append(
+            ModuloComAssuntosSchema(
+                id=module_data["id"],
+                disciplina=module_data["disciplina"],
+                nome=module_data["nome"],
+                assuntos=assuntos,
+                total_assuntos=len(assuntos),
+                fonte="librostudio",
+                has_relacionamento_trieduc=False,
+            )
+        )
+
+    modulos.sort(key=lambda m: ((m.disciplina or "").lower(), m.nome.lower()))
+
+    response = ModulosAssuntosResponse(
+        modulos=modulos,
+        total_modulos=len(modulos),
+        total_assuntos=total_assuntos,
+    )
+    set_to_cache(cache_key, response)
+    return response
+@router.get(
     "/modulos/{habilidade_id}",
     response_model=ModulosResponse,
-    summary="📦 Módulos possíveis para uma habilidade",
+    summary="ðŸ“¦ MÃ³dulos possÃ­veis para uma habilidade",
 )
 async def listar_modulos_por_habilidade(
     habilidade_id: int,
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
-    """Retorna os módulos possíveis para um dado habilidade_id do TriEduc."""
+    """Retorna os mÃ³dulos possÃ­veis para um dado habilidade_id do TriEduc."""
     modulos = (
         pg_db.query(HabilidadeModuloModel)
         .filter(HabilidadeModuloModel.habilidade_id == habilidade_id)
@@ -559,16 +865,16 @@ async def listar_modulos_por_habilidade(
 
 
 # ========================
-# QUESTÕES PARA CLASSIFICAR
+# QUESTÃ•ES PARA CLASSIFICAR
 # ========================
 
 @router.get(
     "/proxima",
     response_model=QuestaoClassifResponse,
-    summary="🔍 Próxima questão para classificar",
+    summary="ðŸ” PrÃ³xima questÃ£o para classificar",
 )
 async def proxima_questao_classificar(
-    area: Optional[str] = Query(None, description="Filtrar por área (Humanas, Linguagens, Matemática, Natureza)"),
+    area: Optional[str] = Query(None, description="Filtrar por Ã¡rea (Humanas, Linguagens, MatemÃ¡tica, Natureza)"),
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
@@ -576,22 +882,22 @@ async def proxima_questao_classificar(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna a próxima questão que ainda NÃO foi classificada manualmente pelo usuário.
-    Prioriza questões sem extração automática.
+    Retorna a prÃ³xima questÃ£o que ainda NÃƒO foi classificada manualmente pelo usuÃ¡rio.
+    Prioriza questÃµes sem extraÃ§Ã£o automÃ¡tica.
 
     Filtros:
-    - **area**: "Humanas", "Linguagens", "Matemática", "Natureza"
-    - **disciplina_id**: ID numérico da disciplina
+    - **area**: "Humanas", "Linguagens", "MatemÃ¡tica", "Natureza"
+    - **disciplina_id**: ID numÃ©rico da disciplina
     - **habilidade_id**: ID da habilidade TRIEDUC
     """
-    # IDs a excluir (já classificadas por este usuário OU já possuem classificação no sistema)
-    # Forçar área do usuário se não enviada
+    # IDs a excluir (jÃ¡ classificadas por este usuÃ¡rio OU jÃ¡ possuem classificaÃ§Ã£o no sistema)
+    # ForÃ§ar Ã¡rea do usuÃ¡rio se nÃ£o enviada
     if not area:
         area = usuario.disciplina
 
-    logger.info(f"Busca Próxima: usuario={usuario.nome}, area={area}, disciplina={disciplina_id}, habilidade={habilidade_id}")
+    logger.info(f"Busca PrÃ³xima: usuario={usuario.nome}, area={area}, disciplina={disciplina_id}, habilidade={habilidade_id}")
 
-    # Resolver filtro de área → disciplinas (Otimizado: apenas IDs)
+    # Resolver filtro de Ã¡rea â†’ disciplinas (Otimizado: apenas IDs)
     disciplina_ids_filtro = None
     if area and area in AREAS_DISCIPLINAS:
         nomes = AREAS_DISCIPLINAS[area]
@@ -609,7 +915,7 @@ async def proxima_questao_classificar(
     candidate_query = (
         db.query(QuestaoModel.id)
         .filter(QuestaoModel.habilidade_id.isnot(None))
-        .filter(QuestaoModel.ano_id == 3) # Ensino Médio
+        .filter(QuestaoModel.ano_id == 3) # Ensino MÃ©dio
     )
     
     if habilidade_id:
@@ -627,10 +933,10 @@ async def proxima_questao_classificar(
                 if disc_id_row:
                     candidate_query = candidate_query.filter(QuestaoModel.disciplina_id == disc_id_row[0])
                 else:
-                    # Se nome exato não existe no MySQL, falhar para não mostrar tudo
+                    # Se nome exato nÃ£o existe no MySQL, falhar para nÃ£o mostrar tudo
                     candidate_query = candidate_query.filter(QuestaoModel.id == -1)
             else:
-                # Disciplina Virtual (Literatura/Redação): Buscar IDs de habilidade no Postgres
+                # Disciplina Virtual (Literatura/RedaÃ§Ã£o): Buscar IDs de habilidade no Postgres
                 habilidade_ids_custom = [
                     row[0] for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
                     .filter(HabilidadeModuloModel.disciplina == disciplina_id)
@@ -669,7 +975,7 @@ async def proxima_questao_classificar(
         }
         
         # 2. Already has any classification: manual, low-match, or SuperPro.
-        # Questões que já têm qualquer tipo de classificação não devem aparecer para classificar.
+        # QuestÃµes que jÃ¡ tÃªm qualquer tipo de classificaÃ§Ã£o nÃ£o devem aparecer para classificar.
         classified_in_system = {
             row[0] for row in pg_db.query(QuestaoAssuntoModel.questao_id)
             .filter(QuestaoAssuntoModel.questao_id.in_(candidate_ids))
@@ -681,7 +987,7 @@ async def proxima_questao_classificar(
             .all()
         }
 
-        # 3. Puladas por qualquer usuário — só aparecem na aba Pendentes, nunca em /proxima
+        # 3. Puladas por qualquer usuÃ¡rio â€” sÃ³ aparecem na aba Pendentes, nunca em /proxima
         skipped_any_user = {
             row[0] for row in pg_db.query(QuestaoPuladaModel.questao_id)
             .filter(QuestaoPuladaModel.questao_id.in_(candidate_ids))
@@ -739,7 +1045,7 @@ async def proxima_questao_classificar(
     if not questao_final:
         raise HTTPException(
             status_code=404,
-            detail="Nenhuma questão pendente para classificação encontrada.",
+            detail="Nenhuma questÃ£o pendente para classificaÃ§Ã£o encontrada.",
         )
 
     # Re-use details
@@ -761,7 +1067,7 @@ async def proxima_questao_classificar(
     if questao.habilidade:
         hab_descricao = questao.habilidade.descricao
 
-    # Módulos possíveis
+    # MÃ³dulos possÃ­veis
     modulos = []
     if questao.habilidade_id:
         from .classificacao_schemas import HabilidadeModuloSchema
@@ -774,7 +1080,7 @@ async def proxima_questao_classificar(
         )
         modulos = [HabilidadeModuloSchema.model_validate(m) for m in modulos_q]
 
-        # FALLBACK: Se não achou módulos por ID, tenta por descrição (Case Insensitive)
+        # FALLBACK: Se nÃ£o achou mÃ³dulos por ID, tenta por descriÃ§Ã£o (Case Insensitive)
         if not modulos and hab_descricao:
             modulos_q = (
                 pg_db.query(HabilidadeModuloModel)
@@ -785,7 +1091,7 @@ async def proxima_questao_classificar(
             modulos = [HabilidadeModuloSchema.model_validate(m) for m in modulos_q]
 
     alternativas = []
-    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+    if questao.tipo == "MÃºltipla Escolha" and questao.alternativas:
         for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
             conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
             alternativas.append(
@@ -821,7 +1127,7 @@ async def proxima_questao_classificar(
 @router.get(
     "/consulta/{questao_id}",
     response_model=QuestaoClassifResponse,
-    summary="Consultar questão por ID (admin)",
+    summary="Consultar questÃ£o por ID (admin)",
 )
 async def consultar_questao_por_id(
     questao_id: int,
@@ -829,7 +1135,7 @@ async def consultar_questao_por_id(
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
-    """Retorna uma questão específica no mesmo formato da rota /proxima."""
+    """Retorna uma questÃ£o especÃ­fica no mesmo formato da rota /proxima."""
     if not usuario.is_admin:
         raise HTTPException(status_code=403, detail="Acesso restrito a administradores")
 
@@ -844,7 +1150,7 @@ async def consultar_questao_por_id(
         .first()
     )
     if not questao:
-        raise HTTPException(status_code=404, detail="Questão não encontrada")
+        raise HTTPException(status_code=404, detail="QuestÃ£o nÃ£o encontrada")
 
     enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
 
@@ -892,7 +1198,7 @@ async def consultar_questao_por_id(
             modulos = [HabilidadeModuloSchema.model_validate(m) for m in modulos_q]
 
     alternativas = []
-    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+    if questao.tipo == "MÃºltipla Escolha" and questao.alternativas:
         for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
             conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
             alternativas.append(
@@ -948,10 +1254,10 @@ async def consultar_questao_por_id(
 @router.get(
     "/proxima-verificar",
     response_model=QuestaoClassifResponse,
-    summary="🔄 Próxima questão para verificar (já classificada)",
+    summary="ðŸ”„ PrÃ³xima questÃ£o para verificar (jÃ¡ classificada)",
 )
 async def proxima_questao_verificar(
-    area: Optional[str] = Query(None, description="Filtrar por área"),
+    area: Optional[str] = Query(None, description="Filtrar por Ã¡rea"),
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
@@ -959,10 +1265,10 @@ async def proxima_questao_verificar(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna a próxima questão que JÁ tem classificação automática
-    para o usuário verificar se está correta.
+    Retorna a prÃ³xima questÃ£o que JÃ tem classificaÃ§Ã£o automÃ¡tica
+    para o usuÃ¡rio verificar se estÃ¡ correta.
     """
-    # IDs já verificadas por este usuário
+    # IDs jÃ¡ verificadas por este usuÃ¡rio
     ids_verificadas = {
         row[0]
         for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
@@ -970,11 +1276,11 @@ async def proxima_questao_verificar(
         .all()
     }
 
-    # Forçar área do usuário se não enviada
+    # ForÃ§ar Ã¡rea do usuÃ¡rio se nÃ£o enviada
     if not area:
         area = usuario.disciplina
 
-    # Resolver filtro de área
+    # Resolver filtro de Ã¡rea
     disciplina_ids_filtro = None
     if area and area in AREAS_DISCIPLINAS:
         from ..database.models import DisciplinaModel
@@ -982,7 +1288,7 @@ async def proxima_questao_verificar(
         discs = db.query(DisciplinaModel).filter(DisciplinaModel.descricao.in_(nomes)).all()
         disciplina_ids_filtro = [d.id for d in discs]
 
-    # Query Base no PG: extraídas pelo Superpro com baixa similaridade (precisa verificação humana)
+    # Query Base no PG: extraÃ­das pelo Superpro com baixa similaridade (precisa verificaÃ§Ã£o humana)
     query_pg = pg_db.query(QuestaoAssuntoModel).filter(
         QuestaoAssuntoModel.extracao_feita == True,
         QuestaoAssuntoModel.classificacoes.isnot(None),
@@ -1012,7 +1318,7 @@ async def proxima_questao_verificar(
             if disc_target_id:
                 query_pg = query_pg.filter(QuestaoAssuntoModel.disciplina_id == disc_target_id)
             else:
-                # Disciplina Virtual (Literatura/Redação): Buscar IDs de habilidade no Postgres
+                # Disciplina Virtual (Literatura/RedaÃ§Ã£o): Buscar IDs de habilidade no Postgres
                 habilidade_ids_custom = [
                     row[0] for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
                     .filter(HabilidadeModuloModel.disciplina == disciplina_id)
@@ -1021,17 +1327,17 @@ async def proxima_questao_verificar(
                     .all()
                 ]
                 if habilidade_ids_custom:
-                    # No QuestaoAssuntoModel, habilidade_id pode não estar preenchido se veio do scraping
-                    # Mas se tivermos o ID TRIEDUC no MySQL (QuestaoModel), podemos filtrar lá.
-                    # No entanto, a query base é sobre QuestaoAssuntoModel. 
-                    # Se salvamos a extração, populamos habilidade_id? Geralmente sim.
+                    # No QuestaoAssuntoModel, habilidade_id pode nÃ£o estar preenchido se veio do scraping
+                    # Mas se tivermos o ID TRIEDUC no MySQL (QuestaoModel), podemos filtrar lÃ¡.
+                    # No entanto, a query base Ã© sobre QuestaoAssuntoModel. 
+                    # Se salvamos a extraÃ§Ã£o, populamos habilidade_id? Geralmente sim.
                     query_pg = query_pg.filter(QuestaoAssuntoModel.habilidade_id.in_(habilidade_ids_custom))
                 else:
                     query_pg = query_pg.filter(QuestaoAssuntoModel.id == -1)
     elif disciplina_ids_filtro:
         query_pg = query_pg.filter(QuestaoAssuntoModel.disciplina_id.in_(disciplina_ids_filtro))
 
-    # Tentar encontrar uma questão que seja efetivamente de Ensino Médio no MySQL
+    # Tentar encontrar uma questÃ£o que seja efetivamente de Ensino MÃ©dio no MySQL
     MAX_TENTATIVAS = 100
     for _ in range(MAX_TENTATIVAS):
         registro_pg = query_pg.order_by(QuestaoAssuntoModel.id).first()
@@ -1039,10 +1345,10 @@ async def proxima_questao_verificar(
         if not registro_pg:
             raise HTTPException(
                 status_code=404,
-                detail="Nenhuma questão pendente de verificação com os filtros aplicados",
+                detail="Nenhuma questÃ£o pendente de verificaÃ§Ã£o com os filtros aplicados",
             )
 
-        # Verificar nível no MySQL
+        # Verificar nÃ­vel no MySQL
         questao = (
             db.query(QuestaoModel)
             .options(
@@ -1055,15 +1361,15 @@ async def proxima_questao_verificar(
         )
 
         if not questao or questao.ano_id != 3:
-            # Pula esta e marca como "inválida para este fluxo" temporariamente na query
+            # Pula esta e marca como "invÃ¡lida para este fluxo" temporariamente na query
             ids_verificadas.add(registro_pg.questao_id)
             query_pg = query_pg.filter(QuestaoAssuntoModel.questao_id != registro_pg.questao_id)
             continue
 
-        # Se chegou aqui, temos a questão!
+        # Se chegou aqui, temos a questÃ£o!
         break
     else:
-        raise HTTPException(status_code=404, detail="Não foram encontradas questões de Ensino Médio para verificar.")
+        raise HTTPException(status_code=404, detail="NÃ£o foram encontradas questÃµes de Ensino MÃ©dio para verificar.")
 
     # Tratar enunciado
     enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
@@ -1072,7 +1378,7 @@ async def proxima_questao_verificar(
     if questao.texto_base:
         texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
 
-    # Módulos possíveis
+    # MÃ³dulos possÃ­veis
     modulos = []
     hab_descricao = None
     if questao.habilidade_id:
@@ -1089,7 +1395,7 @@ async def proxima_questao_verificar(
         if hab:
             hab_descricao = hab.descricao
 
-        # FALLBACK: Se não achou módulos por ID, tenta por descrição (Case Insensitive)
+        # FALLBACK: Se nÃ£o achou mÃ³dulos por ID, tenta por descriÃ§Ã£o (Case Insensitive)
         if not modulos and hab_descricao:
             from sqlalchemy import func
             modulos_q = (
@@ -1102,7 +1408,7 @@ async def proxima_questao_verificar(
 
     # Alternativas
     alternativas = []
-    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+    if questao.tipo == "MÃºltipla Escolha" and questao.alternativas:
         for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
             conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
             alternativas.append(
@@ -1136,16 +1442,16 @@ async def proxima_questao_verificar(
 
 
 # ========================
-# PRÓXIMA QUESTÃO LOW MATCH
+# PRÃ“XIMA QUESTÃƒO LOW MATCH
 # ========================
 
 @router.get(
     "/proxima-low-match",
     response_model=QuestaoClassifResponse,
-    summary="⚠️ Próxima questão com classificação de baixa similaridade",
+    summary="âš ï¸ PrÃ³xima questÃ£o com classificaÃ§Ã£o de baixa similaridade",
 )
 async def proxima_questao_low_match(
-    area: Optional[str] = Query(None, description="Filtrar por área"),
+    area: Optional[str] = Query(None, description="Filtrar por Ã¡rea"),
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
@@ -1153,10 +1459,10 @@ async def proxima_questao_low_match(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna a próxima questão que possui classificacao_nao_enquadrada
-    (match baixo do SuperProfessor) para revisão pelo professor.
+    Retorna a prÃ³xima questÃ£o que possui classificacao_nao_enquadrada
+    (match baixo do SuperProfessor) para revisÃ£o pelo professor.
     """
-    # IDs já verificadas por este usuário
+    # IDs jÃ¡ verificadas por este usuÃ¡rio
     ids_verificadas = {
         row[0]
         for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
@@ -1164,11 +1470,11 @@ async def proxima_questao_low_match(
         .all()
     }
 
-    # Forçar área do usuário se não enviada
+    # ForÃ§ar Ã¡rea do usuÃ¡rio se nÃ£o enviada
     if not area:
         area = usuario.disciplina
 
-    # Resolver filtro de área
+    # Resolver filtro de Ã¡rea
     disciplina_ids_filtro = None
     if area and area in AREAS_DISCIPLINAS:
         from ..database.models import DisciplinaModel
@@ -1176,7 +1482,7 @@ async def proxima_questao_low_match(
         discs = db.query(DisciplinaModel).filter(DisciplinaModel.descricao.in_(nomes)).all()
         disciplina_ids_filtro = [d.id for d in discs]
 
-    # Query no PG: questões com classificacao_nao_enquadrada preenchida
+    # Query no PG: questÃµes com classificacao_nao_enquadrada preenchida
     query_pg = pg_db.query(QuestaoAssuntoModel).filter(
         QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None),
         func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0,
@@ -1200,7 +1506,7 @@ async def proxima_questao_low_match(
     elif disciplina_ids_filtro:
         query_pg = query_pg.filter(QuestaoAssuntoModel.disciplina_id.in_(disciplina_ids_filtro))
 
-    # Tentar encontrar uma questão válida de Ensino Médio
+    # Tentar encontrar uma questÃ£o vÃ¡lida de Ensino MÃ©dio
     MAX_TENTATIVAS = 100
     for _ in range(MAX_TENTATIVAS):
         registro_pg = query_pg.order_by(QuestaoAssuntoModel.id).first()
@@ -1208,10 +1514,10 @@ async def proxima_questao_low_match(
         if not registro_pg:
             raise HTTPException(
                 status_code=404,
-                detail="Nenhuma questão de baixa similaridade pendente com os filtros aplicados",
+                detail="Nenhuma questÃ£o de baixa similaridade pendente com os filtros aplicados",
             )
 
-        # Verificar nível no MySQL
+        # Verificar nÃ­vel no MySQL
         questao = (
             db.query(QuestaoModel)
             .options(
@@ -1230,7 +1536,7 @@ async def proxima_questao_low_match(
 
         break
     else:
-        raise HTTPException(status_code=404, detail="Não foram encontradas questões de baixa similaridade para verificar.")
+        raise HTTPException(status_code=404, detail="NÃ£o foram encontradas questÃµes de baixa similaridade para verificar.")
 
     # Tratar enunciado
     enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
@@ -1239,7 +1545,7 @@ async def proxima_questao_low_match(
     if questao.texto_base:
         texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
 
-    # Módulos possíveis
+    # MÃ³dulos possÃ­veis
     modulos = []
     hab_descricao = None
     if questao.habilidade_id:
@@ -1268,7 +1574,7 @@ async def proxima_questao_low_match(
 
     # Alternativas
     alternativas = []
-    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+    if questao.tipo == "MÃºltipla Escolha" and questao.alternativas:
         for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
             conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
             alternativas.append(
@@ -1304,13 +1610,13 @@ async def proxima_questao_low_match(
 
 
 # ========================
-# SALVAR CLASSIFICAÇÃO
+# SALVAR CLASSIFICAÃ‡ÃƒO
 # ========================
 
 @router.post(
     "/salvar",
     response_model=SalvarClassificacaoResponse,
-    summary="💾 Salvar classificação do usuário",
+    summary="ðŸ’¾ Salvar classificaÃ§Ã£o do usuÃ¡rio",
 )
 async def salvar_classificacao(
     request: SalvarClassificacaoRequest,
@@ -1319,28 +1625,28 @@ async def salvar_classificacao(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Salva a decisão de classificação do usuário.
-    Tipos de ação:
-    - **classificacao_nova**: Questão que não tinha classificação
-    - **confirmacao**: Usuário confirmou classificação existente
-    - **correcao**: Usuário corrigiu classificação existente
+    Salva a decisÃ£o de classificaÃ§Ã£o do usuÃ¡rio.
+    Tipos de aÃ§Ã£o:
+    - **classificacao_nova**: QuestÃ£o que nÃ£o tinha classificaÃ§Ã£o
+    - **confirmacao**: UsuÃ¡rio confirmou classificaÃ§Ã£o existente
+    - **correcao**: UsuÃ¡rio corrigiu classificaÃ§Ã£o existente
     """
     if request.tipo_acao not in ("classificacao_nova", "confirmacao", "correcao"):
-        raise HTTPException(status_code=400, detail="tipo_acao inválido")
+        raise HTTPException(status_code=400, detail="tipo_acao invÃ¡lido")
 
-    # Buscar habilidade_id da questão (Apenas o necessário)
+    # Buscar habilidade_id da questÃ£o (Apenas o necessÃ¡rio)
     questao_data = db.query(QuestaoModel.id, QuestaoModel.habilidade_id, QuestaoModel.questao_id, QuestaoModel.disciplina_id).filter(QuestaoModel.id == request.questao_id).first()
     if not questao_data:
-        raise HTTPException(status_code=404, detail="Questão não encontrada")
+        raise HTTPException(status_code=404, detail="QuestÃ£o nÃ£o encontrada")
 
-    # Buscar classificação da extração (se existir)
+    # Buscar classificaÃ§Ã£o da extraÃ§Ã£o (se existir)
     extracao = (
         pg_db.query(QuestaoAssuntoModel)
         .filter(QuestaoAssuntoModel.questao_id == request.questao_id)
         .first()
     )
 
-    # 1. Atualizar flag de classificação manual na tabela questao_assuntos
+    # 1. Atualizar flag de classificaÃ§Ã£o manual na tabela questao_assuntos
     if not extracao:
         # Buscar nome da disciplina se for criar
         from ..database.models import DisciplinaModel
@@ -1349,7 +1655,7 @@ async def salvar_classificacao(
             disc_row = db.query(DisciplinaModel.descricao).filter(DisciplinaModel.id == questao_data.disciplina_id).first()
             disc_nome = disc_row[0] if disc_row else None
 
-        # Criar registro básico para marcar como manual
+        # Criar registro bÃ¡sico para marcar como manual
         extracao = QuestaoAssuntoModel(
             questao_id=questao_data.id,
             questao_id_str=questao_data.questao_id,
@@ -1362,7 +1668,7 @@ async def salvar_classificacao(
     else:
         extracao.classificado_manualmente = True
 
-    # Criar registro de histórico
+    # Criar registro de histÃ³rico
     classificacao = ClassificacaoUsuarioModel(
         usuario_id=usuario.id,
         questao_id=request.questao_id,
@@ -1372,20 +1678,20 @@ async def salvar_classificacao(
         classificacao_trieduc=request.classificacao_trieduc,
         descricao_assunto=request.descricao_assunto,
         habilidade_modulo_id=request.habilidade_modulo_id,
-        # Campos novos (múltiplos módulos JSONB)
+        # Campos novos (mÃºltiplos mÃ³dulos JSONB)
         modulos_escolhidos=request.modulos_escolhidos,
         classificacoes_trieduc_list=request.classificacoes_trieduc,
         descricoes_assunto_list=request.descricoes_assunto,
         habilidade_modulo_ids=request.habilidade_modulo_ids,
-        # Extração e metadados
+        # ExtraÃ§Ã£o e metadados
         classificacao_extracao=extracao.classificacoes if extracao else None,
         tipo_acao=request.tipo_acao,
         observacao=request.observacao,
     )
     pg_db.add(classificacao)
 
-    # Auto-remover da lista de questões puladas (se existir para qualquer usuário)
-    # Motivo: Se foi classificada, não está mais pendente para ninguém.
+    # Auto-remover da lista de questÃµes puladas (se existir para qualquer usuÃ¡rio)
+    # Motivo: Se foi classificada, nÃ£o estÃ¡ mais pendente para ninguÃ©m.
     pg_db.query(QuestaoPuladaModel).filter(
         QuestaoPuladaModel.questao_id == request.questao_id,
     ).delete()
@@ -1394,7 +1700,7 @@ async def salvar_classificacao(
 
     modulos_info = request.modulos_escolhidos or [request.modulo_escolhido] if request.modulo_escolhido else []
     logger.info(
-        f"Classificação salva: usuario={usuario.nome}, questao={request.questao_id}, "
+        f"ClassificaÃ§Ã£o salva: usuario={usuario.nome}, questao={request.questao_id}, "
         f"acao={request.tipo_acao}, modulos={modulos_info}"
     )
 
@@ -1403,18 +1709,18 @@ async def salvar_classificacao(
         id=classificacao.id,
         questao_id=request.questao_id,
         tipo_acao=request.tipo_acao,
-        message=f"Classificação ({request.tipo_acao}) salva com sucesso",
+        message=f"ClassificaÃ§Ã£o ({request.tipo_acao}) salva com sucesso",
     )
 
 
 # ========================
-# PULAR QUESTÃO (PENDENTES)
+# PULAR QUESTÃƒO (PENDENTES)
 # ========================
 
 @router.post(
     "/pular",
     response_model=PularQuestaoResponse,
-    summary="⏭️ Pular questão (marcar como pendente)",
+    summary="â­ï¸ Pular questÃ£o (marcar como pendente)",
 )
 async def pular_questao(
     request: PularQuestaoRequest,
@@ -1423,18 +1729,18 @@ async def pular_questao(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Marca uma questão como pulada pelo usuário.
-    A questão aparecerá na aba 'Pendentes' para classificação posterior.
+    Marca uma questÃ£o como pulada pelo usuÃ¡rio.
+    A questÃ£o aparecerÃ¡ na aba 'Pendentes' para classificaÃ§Ã£o posterior.
     """
-    # Verificar se a questão existe
+    # Verificar se a questÃ£o existe
     questao_data = db.query(
         QuestaoModel.id, QuestaoModel.disciplina_id, QuestaoModel.habilidade_id
     ).filter(QuestaoModel.id == request.questao_id).first()
 
     if not questao_data:
-        raise HTTPException(status_code=404, detail="Questão não encontrada")
+        raise HTTPException(status_code=404, detail="QuestÃ£o nÃ£o encontrada")
 
-    # Verificar se já foi pulada (evitar duplicata)
+    # Verificar se jÃ¡ foi pulada (evitar duplicata)
     existente = pg_db.query(QuestaoPuladaModel).filter(
         QuestaoPuladaModel.usuario_id == usuario.id,
         QuestaoPuladaModel.questao_id == request.questao_id,
@@ -1443,7 +1749,7 @@ async def pular_questao(
     if existente:
         return PularQuestaoResponse(
             success=True,
-            message="Questão já estava marcada como pendente",
+            message="QuestÃ£o jÃ¡ estava marcada como pendente",
         )
 
     # Registrar como pulada
@@ -1457,21 +1763,21 @@ async def pular_questao(
     pg_db.add(pulada)
     pg_db.commit()
 
-    logger.info(f"Questão pulada: usuario={usuario.nome}, questao={request.questao_id}")
+    logger.info(f"QuestÃ£o pulada: usuario={usuario.nome}, questao={request.questao_id}")
 
     return PularQuestaoResponse(
         success=True,
-        message="Questão marcada como pendente",
+        message="QuestÃ£o marcada como pendente",
     )
 
 
 @router.get(
     "/proxima-pendente",
     response_model=QuestaoClassifResponse,
-    summary="📋 Próxima questão pendente (pulada)",
+    summary="ðŸ“‹ PrÃ³xima questÃ£o pendente (pulada)",
 )
 async def proxima_questao_pendente(
-    area: Optional[str] = Query(None, description="Filtrar por área"),
+    area: Optional[str] = Query(None, description="Filtrar por Ã¡rea"),
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
@@ -1479,13 +1785,13 @@ async def proxima_questao_pendente(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna a próxima questão pendente (pulada por qualquer usuário).
-    Restrito à área/disciplina do usuário por padrão.
+    Retorna a prÃ³xima questÃ£o pendente (pulada por qualquer usuÃ¡rio).
+    Restrito Ã  Ã¡rea/disciplina do usuÃ¡rio por padrÃ£o.
     """
-    # Base query: questões puladas por qualquer usuário
+    # Base query: questÃµes puladas por qualquer usuÃ¡rio
     query_puladas = pg_db.query(QuestaoPuladaModel)
 
-    # Área efetiva: usa o filtro explícito, ou cai na disciplina do próprio usuário (não-admin)
+    # Ãrea efetiva: usa o filtro explÃ­cito, ou cai na disciplina do prÃ³prio usuÃ¡rio (nÃ£o-admin)
     effective_area = area or (usuario.disciplina if not usuario.is_admin else None)
 
     # Aplicar filtros
@@ -1504,10 +1810,10 @@ async def proxima_questao_pendente(
                 if disc_id_row:
                     query_puladas = query_puladas.filter(QuestaoPuladaModel.disciplina_id == disc_id_row[0])
                 else:
-                    # Se não existe no MySQL, falhar filtro
+                    # Se nÃ£o existe no MySQL, falhar filtro
                     query_puladas = query_puladas.filter(QuestaoPuladaModel.id == -1)
             else:
-                # Disciplina Virtual (Literatura/Redação): Buscar IDs de habilidade no Postgres
+                # Disciplina Virtual (Literatura/RedaÃ§Ã£o): Buscar IDs de habilidade no Postgres
                 habilidade_ids_custom = [
                     row[0] for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
                     .filter(HabilidadeModuloModel.disciplina == disciplina_id)
@@ -1529,12 +1835,12 @@ async def proxima_questao_pendente(
         # Fallback: filtrar diretamente pelo campo area salvo no momento do pulo
         query_puladas = query_puladas.filter(QuestaoPuladaModel.area == effective_area)
 
-    # LOG para depuração
+    # LOG para depuraÃ§Ã£o
     logger.info(f"Filtro Pendentes: usuario={usuario.nome}, effective_area={effective_area}, disciplina={disciplina_id}")
     count_antes = query_puladas.count()
     logger.info(f"Total pendentes com filtros aplicados: {count_antes}")
 
-    # IDs já classificadas por este usuário (excluir das pendentes)
+    # IDs jÃ¡ classificadas por este usuÃ¡rio (excluir das pendentes)
     ids_classificadas = {
         row[0] for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
         .filter(ClassificacaoUsuarioModel.usuario_id == usuario.id)
@@ -1544,16 +1850,16 @@ async def proxima_questao_pendente(
     if ids_classificadas:
         query_puladas = query_puladas.filter(~QuestaoPuladaModel.questao_id.in_(ids_classificadas))
 
-    # Buscar próxima pendente (ordem de inserção)
+    # Buscar prÃ³xima pendente (ordem de inserÃ§Ã£o)
     registro_pulado = query_puladas.order_by(QuestaoPuladaModel.id).first()
 
     if not registro_pulado:
         raise HTTPException(
             status_code=404,
-            detail="Nenhuma questão pendente encontrada com os filtros aplicados.",
+            detail="Nenhuma questÃ£o pendente encontrada com os filtros aplicados.",
         )
 
-    # Carregar detalhes completos da questão do MySQL
+    # Carregar detalhes completos da questÃ£o do MySQL
     questao = (
         db.query(QuestaoModel)
         .options(
@@ -1566,10 +1872,10 @@ async def proxima_questao_pendente(
     )
 
     if not questao:
-        # Questão não existe mais no MySQL, remover da lista de puladas
+        # QuestÃ£o nÃ£o existe mais no MySQL, remover da lista de puladas
         pg_db.delete(registro_pulado)
         pg_db.commit()
-        raise HTTPException(status_code=404, detail="Questão pendente não encontrada no banco de dados.")
+        raise HTTPException(status_code=404, detail="QuestÃ£o pendente nÃ£o encontrada no banco de dados.")
 
     # Tratar enunciado
     enunciado_tratado, contem_imagem, motivo_erro = tratar_enunciado(questao.enunciado)
@@ -1578,7 +1884,7 @@ async def proxima_questao_pendente(
     if questao.texto_base:
         texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
 
-    # Verificar classificação existente
+    # Verificar classificaÃ§Ã£o existente
     extracao = (
         pg_db.query(QuestaoAssuntoModel)
         .filter(QuestaoAssuntoModel.questao_id == questao.id)
@@ -1589,7 +1895,7 @@ async def proxima_questao_pendente(
     if questao.habilidade:
         hab_descricao = questao.habilidade.descricao
 
-    # Módulos possíveis
+    # MÃ³dulos possÃ­veis
     modulos = []
     if questao.habilidade_id:
         modulos_q = (
@@ -1600,7 +1906,7 @@ async def proxima_questao_pendente(
         )
         modulos = [HabilidadeModuloSchema.model_validate(m) for m in modulos_q]
 
-        # FALLBACK por descrição
+        # FALLBACK por descriÃ§Ã£o
         if not modulos and hab_descricao:
             from sqlalchemy import func as sqlfunc
             modulos_q = (
@@ -1613,7 +1919,7 @@ async def proxima_questao_pendente(
 
     # Alternativas
     alternativas = []
-    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+    if questao.tipo == "MÃºltipla Escolha" and questao.alternativas:
         for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
             conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
             alternativas.append(
@@ -1647,20 +1953,20 @@ async def proxima_questao_pendente(
 
 
 # ========================
-# ESTATÍSTICAS
+# ESTATÃSTICAS
 # ========================
 
 @router.get(
     "/stats",
     response_model=ClassificacaoStatsResponse,
-    summary="📊 Estatísticas de classificação manual",
+    summary="ðŸ“Š EstatÃ­sticas de classificaÃ§Ã£o manual",
 )
 async def estatisticas_classificacao(
     db: Session = Depends(get_db),
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
-    """Retorna estatísticas do sistema de classificação manual (Cache 5m)."""
+    """Retorna estatÃ­sticas do sistema de classificaÃ§Ã£o manual (Cache 5m)."""
     cache_key = "estatisticas_gerais"
     cached_data = get_from_cache(cache_key, ttl=300)
     if cached_data:
@@ -1678,8 +1984,8 @@ async def estatisticas_classificacao(
     ).count()
     usuarios_ativos = pg_db.query(UsuarioModel).filter(UsuarioModel.ativo == True).count()
 
-    # Filtro Base: Ensino Médio + Habilidade ID
-    # Join com DisciplinaModel para garantir integridade (opcional mas mantido para consistência)
+    # Filtro Base: Ensino MÃ©dio + Habilidade ID
+    # Join com DisciplinaModel para garantir integridade (opcional mas mantido para consistÃªncia)
     from ..database.models import DisciplinaModel
     
     em_query = db.query(QuestaoModel.id).filter(
@@ -1694,12 +2000,12 @@ async def estatisticas_classificacao(
         set_to_cache(cache_key, res)
         return res
 
-    # 1. Manual (Prioridade Máxima)
+    # 1. Manual (Prioridade MÃ¡xima)
     manuais_ids = {r[0] for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)\
                    .filter(ClassificacaoUsuarioModel.questao_id.in_(em_ids)).all()}
     total_manuais = len(manuais_ids)
 
-    # 2. Automáticas (Match >= 80% e que não foram tocadas manualmente)
+    # 2. AutomÃ¡ticas (Match >= 80% e que nÃ£o foram tocadas manualmente)
     auto_query = pg_db.query(QuestaoAssuntoModel.questao_id).filter(
         QuestaoAssuntoModel.questao_id.in_(em_ids),
         QuestaoAssuntoModel.similaridade >= 0.8
@@ -1707,7 +2013,7 @@ async def estatisticas_classificacao(
     auto_ids = {r[0] for r in auto_query} - manuais_ids
     total_auto_superpro = len(auto_ids)
 
-    # 3. Faltam Verificar (Match < 80% e que não foram tocadas nem são automáticas)
+    # 3. Faltam Verificar (Match < 80% e que nÃ£o foram tocadas nem sÃ£o automÃ¡ticas)
     verificar_query = pg_db.query(QuestaoAssuntoModel.questao_id).filter(
         QuestaoAssuntoModel.questao_id.in_(em_ids),
         QuestaoAssuntoModel.similaridade < 0.8,
@@ -1716,17 +2022,17 @@ async def estatisticas_classificacao(
     verificar_ids = {r[0] for r in verificar_query} - manuais_ids - auto_ids
     total_precisa_verificar = len(verificar_ids)
 
-    # 4. Puladas (Volume que não está em nenhum dos estados acima)
+    # 4. Puladas (Volume que nÃ£o estÃ¡ em nenhum dos estados acima)
     from ..database.pg_pular_models import QuestaoPuladaModel
     puladas_query = pg_db.query(QuestaoPuladaModel.questao_id).filter(
         QuestaoPuladaModel.questao_id.in_(em_ids)
     ).all()
-    # Para a matemática do Pendentes, usamos apenas as que não foram classificadas de outra forma
+    # Para a matemÃ¡tica do Pendentes, usamos apenas as que nÃ£o foram classificadas de outra forma
     all_puladas_ids = {r[0] for r in puladas_query}
     puladas_ids_disjoint = all_puladas_ids - manuais_ids - auto_ids - verificar_ids
-    total_puladas = len(puladas_ids_disjoint) # Agora usamos apenas as exclusivas para não estourar a soma do Total
+    total_puladas = len(puladas_ids_disjoint) # Agora usamos apenas as exclusivas para nÃ£o estourar a soma do Total
 
-    # 5. Pendentes (O resto matemático restrito)
+    # 5. Pendentes (O resto matemÃ¡tico restrito)
     # A soma de (manuais + auto + verificar + puladas + pendentes) = total_sistema
     total_pendentes = max(0, total_sistema - total_manuais - total_auto_superpro - total_precisa_verificar - total_puladas)
 
@@ -1736,7 +2042,7 @@ async def estatisticas_classificacao(
         .group_by(QuestaoModel.disciplina_id).all()
     mysql_counts = {r[0]: r[1] for r in mysql_rows}
     
-    # Contabilizamos como "feitas" para o progresso: Manual + Automática (Finalizadas)
+    # Contabilizamos como "feitas" para o progresso: Manual + AutomÃ¡tica (Finalizadas)
     ids_finalizados = manuais_ids | auto_ids
     pg_rows = pg_db.query(QuestaoAssuntoModel.disciplina_id, func.count(QuestaoAssuntoModel.questao_id))\
         .filter(QuestaoAssuntoModel.questao_id.in_(ids_finalizados))\
@@ -1756,7 +2062,7 @@ async def estatisticas_classificacao(
             "faltam": max(0, total_mysql - feitas)
         }
 
-    # Por usuário (Atividades Recentes)
+    # Por usuÃ¡rio (Atividades Recentes)
     por_usuario_rows = (
         pg_db.query(
             UsuarioModel.nome,
@@ -1788,25 +2094,25 @@ async def estatisticas_classificacao(
 
 
 # ========================
-# HISTÓRICO (para ML)
+# HISTÃ“RICO (para ML)
 # ========================
 
 @router.get(
     "/historico",
     response_model=HistoricoListResponse,
-    summary="📋 Histórico de classificações (dados para ML)",
+    summary="ðŸ“‹ HistÃ³rico de classificaÃ§Ãµes (dados para ML)",
 )
 async def historico_classificacoes(
-    page: int = Query(1, ge=1, description="Página"),
-    per_page: int = Query(50, ge=1, le=200, description="Itens por página"),
-    tipo_acao: Optional[str] = Query(None, description="Filtrar por tipo de ação"),
-    usuario_id: Optional[int] = Query(None, description="Filtrar por usuário"),
+    page: int = Query(1, ge=1, description="PÃ¡gina"),
+    per_page: int = Query(50, ge=1, le=200, description="Itens por pÃ¡gina"),
+    tipo_acao: Optional[str] = Query(None, description="Filtrar por tipo de aÃ§Ã£o"),
+    usuario_id: Optional[int] = Query(None, description="Filtrar por usuÃ¡rio"),
     pg_db: Session = Depends(get_pg_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna histórico paginado de todas as classificações feitas por usuários.
-    Usado para exportação de dados de treino ML.
+    Retorna histÃ³rico paginado de todas as classificaÃ§Ãµes feitas por usuÃ¡rios.
+    Usado para exportaÃ§Ã£o de dados de treino ML.
     """
     query = pg_db.query(ClassificacaoUsuarioModel)
 
@@ -1821,7 +2127,7 @@ async def historico_classificacoes(
 
     registros = query.order_by(ClassificacaoUsuarioModel.id).offset(offset).limit(per_page).all()
 
-    # Buscar nomes dos usuários
+    # Buscar nomes dos usuÃ¡rios
     usuario_ids = {r.usuario_id for r in registros}
     if usuario_ids:
         users = pg_db.query(UsuarioModel).filter(UsuarioModel.id.in_(usuario_ids)).all()
@@ -1854,3 +2160,4 @@ async def historico_classificacoes(
         per_page=per_page,
         pages=pages,
     )
+

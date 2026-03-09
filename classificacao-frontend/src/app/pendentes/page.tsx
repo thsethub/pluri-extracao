@@ -79,24 +79,45 @@ export default function PendentesPage() {
     });
   };
 
+  const mapPayloadCorrecao = (modulosCorrecao: HabilidadeModulo[]) => {
+    const trieducSelecionados = modulosCorrecao.filter(
+      (m) => m.fonte === "trieduc",
+    );
+    const habilidadeModuloIds = trieducSelecionados
+      .map((m) => Number(m.id))
+      .filter((m) => Number.isInteger(m));
+
+    const primeiroSelecionado = modulosCorrecao[0];
+
+    return {
+      habilidade_modulo_ids: habilidadeModuloIds.length
+        ? habilidadeModuloIds
+        : undefined,
+      modulos_escolhidos: modulosCorrecao.map((m) => m.modulo),
+      classificacoes_trieduc: modulosCorrecao.map((m) => m.habilidade_descricao),
+      descricoes_assunto: modulosCorrecao.map((m) => m.descricao),
+      habilidade_modulo_id: trieducSelecionados.length
+        ? Number(trieducSelecionados[0].id)
+        : undefined,
+      modulo_escolhido: primeiroSelecionado?.modulo,
+      classificacao_trieduc:
+        trieducSelecionados.length > 0
+          ? trieducSelecionados[0].habilidade_descricao
+          : "LibroStudio",
+      descricao_assunto: primeiroSelecionado?.descricao,
+    };
+  };
+
   const handleSalvarCorrecao = async (modulosCorrecao: HabilidadeModulo[]) => {
     if (modulosCorrecao.length === 0 || !questao) return;
     setSaving(true);
     try {
+      const payload = mapPayloadCorrecao(modulosCorrecao);
       await apiRequest("/salvar", {
         method: "POST",
         body: JSON.stringify({
           questao_id: questao.id,
-          habilidade_modulo_ids: modulosCorrecao.map((m) => m.id),
-          modulos_escolhidos: modulosCorrecao.map((m) => m.modulo),
-          classificacoes_trieduc: modulosCorrecao.map(
-            (m) => m.habilidade_descricao,
-          ),
-          descricoes_assunto: modulosCorrecao.map((m) => m.descricao),
-          habilidade_modulo_id: modulosCorrecao[0].id,
-          modulo_escolhido: modulosCorrecao[0].modulo,
-          classificacao_trieduc: modulosCorrecao[0].habilidade_descricao,
-          descricao_assunto: modulosCorrecao[0].descricao,
+          ...payload,
           tipo_acao: "correcao",
           observacao,
         }),

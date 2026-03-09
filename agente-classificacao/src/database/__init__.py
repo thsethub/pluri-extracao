@@ -52,6 +52,28 @@ def get_pg_db():
         db.close()
 
 
+# ========================
+# MySQL compartilhados (leitura - assuntos e disciplina_modulos)
+# ========================
+shared_engine = create_engine(
+    settings.shared_database_url,
+    pool_pre_ping=True,
+    pool_recycle=3600,
+    echo=False,
+)
+
+SharedSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=shared_engine)
+
+
+def get_shared_db():
+    """Dependency para injeção de sessão do banco MySQL compartilhados."""
+    db = SharedSessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
 def init_pg_tables():
     """Cria as tabelas no PostgreSQL se não existirem"""
     from .pg_models import QuestaoAssuntoModel  # noqa: F401

@@ -61,6 +61,13 @@ class Settings(BaseSettings):
     pg_password: str = ""
     pg_name: str = "thsethub"
 
+    # Database MySQL (compartilhados - assuntos/modulos)
+    shared_host: str = ""
+    shared_port: Optional[int] = None
+    shared_user: str = ""
+    shared_password: str = ""
+    shared_name: str = "compartilhados"
+
     @property
     def database_url(self) -> str:
         """Retorna a URL de conexão do banco MySQL (questões)"""
@@ -70,6 +77,16 @@ class Settings(BaseSettings):
     def pg_database_url(self) -> str:
         """Retorna a URL de conexão do banco MySQL RDS (assuntos)"""
         return f"mysql+pymysql://{self.pg_user}:{self.pg_password}@{self.pg_host}:{self.pg_port}/{self.pg_name}"
+
+    @property
+    def shared_database_url(self) -> str:
+        """Retorna a URL de conexão do banco MySQL compartilhados (assuntos/modulos)."""
+        host = self.shared_host or self.pg_host
+        port = self.shared_port or self.pg_port
+        user = self.shared_user or self.pg_user
+        password = self.shared_password if self.shared_password != "" else self.pg_password
+
+        return f"mysql+pymysql://{user}:{password}@{host}:{port}/{self.shared_name}"
 
     # Disciplinas disponíveis
     disciplines: str = (
