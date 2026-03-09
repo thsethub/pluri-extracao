@@ -1311,7 +1311,7 @@ async def validar_workers_start(
     pg_db: Session = Depends(get_pg_db),
 ):
     """
-    Inicia classificaÃ§Ã£o em paralelo com N workers.
+    Inicia classificação em paralelo com N workers.
     Cada questao entra numa fila unica: nenhum worker pega a mesma questao.
     """
     global CANCEL_VALIDATION, VALIDATION_WORKER_THREADS
@@ -1448,7 +1448,7 @@ async def validar_workers_stop():
 
 @router.get("/validar-workers/status")
 async def validar_workers_status():
-    """Retorna estado atual do job paralelo de validaÃ§Ã£o."""
+    """Retorna estado atual do job paralelo de validação."""
     return _get_validation_state_snapshot()
 
 
