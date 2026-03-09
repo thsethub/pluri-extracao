@@ -70,9 +70,21 @@ export default function CorrigirClassificacaoModal({
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const sections: Array<{ key: FonteModulo; title: string; className: string }> = [
-    { key: "trieduc", title: "TriEduc", className: styles.sectionSourceTrieduc },
-    { key: "librostudio", title: "LibroStudio", className: styles.sectionSourceLibro },
+  const sections: Array<{
+    key: FonteModulo;
+    title: string;
+    className: string;
+  }> = [
+    {
+      key: "trieduc",
+      title: "TriEduc",
+      className: styles.sectionSourceTrieduc,
+    },
+    {
+      key: "librostudio",
+      title: "LibroStudio",
+      className: styles.sectionSourceLibro,
+    },
   ];
 
   useEffect(() => {
@@ -148,10 +160,7 @@ export default function CorrigirClassificacaoModal({
         }
       }
 
-      setModulos([
-        ...dedupedTrieduc.values(),
-        ...dedupedLivro.values(),
-      ]);
+      setModulos([...dedupedTrieduc.values(), ...dedupedLivro.values()]);
     } catch {
       // tratado pelo apiRequest
     } finally {
@@ -252,7 +261,8 @@ export default function CorrigirClassificacaoModal({
           </div>
           {buscaLower && (
             <span className={styles.searchResultCount}>
-              {modulosFiltrados.length} resultado{modulosFiltrados.length !== 1 ? "s" : ""}
+              {modulosFiltrados.length} resultado
+              {modulosFiltrados.length !== 1 ? "s" : ""}
             </span>
           )}
         </div>
@@ -261,7 +271,8 @@ export default function CorrigirClassificacaoModal({
           <div className={styles.selectedBanner}>
             <CheckCircle size={14} />
             <span>
-              {selecionados.length} módulo{selecionados.length > 1 ? "s" : ""} selecionado
+              {selecionados.length} módulo{selecionados.length > 1 ? "s" : ""}{" "}
+              selecionado
               {selecionados.length > 1 ? "s" : ""}:
             </span>
             <div className={styles.selectedTags}>
@@ -308,24 +319,36 @@ export default function CorrigirClassificacaoModal({
 
                 return (
                   <div key={section.key} className={styles.sectionBlock}>
-                    <div className={`${styles.sectionHeader} ${section.className}`}>
+                    <div
+                      className={`${styles.sectionHeader} ${section.className}`}
+                    >
                       <h3>{section.title}</h3>
-                      <span className={styles.sectionCount}>{itens.length}</span>
+                      <span className={styles.sectionCount}>
+                        {itens.length}
+                      </span>
                     </div>
 
                     <div className={styles.disciplinasList}>
                       {disciplinas.map((disc) => {
                         const mods = itens.filter((m) => m.disciplina === disc);
-                        const expandido = isDisciplinaExpandida(section.key, disc);
+                        const expandido = isDisciplinaExpandida(
+                          section.key,
+                          disc,
+                        );
                         const selecionadosNaDisc = mods.filter((m) =>
                           selecionados.some((s) => s.key === m.key),
                         ).length;
 
                         return (
-                          <div key={`${section.key}::${disc}`} className={styles.disciplinaGroup}>
+                          <div
+                            key={`${section.key}::${disc}`}
+                            className={styles.disciplinaGroup}
+                          >
                             <button
                               className={`${styles.disciplinaHeader} ${expandido ? styles.disciplinaHeaderOpen : ""}`}
-                              onClick={() => toggleDisciplina(section.key, disc)}
+                              onClick={() =>
+                                toggleDisciplina(section.key, disc)
+                              }
                             >
                               <div className={styles.disciplinaLeft}>
                                 {expandido ? (
@@ -333,10 +356,14 @@ export default function CorrigirClassificacaoModal({
                                 ) : (
                                   <ChevronRight size={16} />
                                 )}
-                                <span className={styles.disciplinaNome}>{disc || "Sem disciplina"}</span>
+                                <span className={styles.disciplinaNome}>
+                                  {disc || "Sem disciplina"}
+                                </span>
                               </div>
                               <div className={styles.disciplinaRight}>
-                                <span className={styles.countBadge}>{mods.length}</span>
+                                <span className={styles.countBadge}>
+                                  {mods.length}
+                                </span>
                                 {selecionadosNaDisc > 0 && (
                                   <span className={styles.selectedBadge}>
                                     <CheckCircle size={11} />
@@ -349,7 +376,9 @@ export default function CorrigirClassificacaoModal({
                             {expandido && (
                               <div className={styles.moduloList}>
                                 {mods.map((m) => {
-                                  const isSel = selecionados.some((s) => s.key === m.key);
+                                  const isSel = selecionados.some(
+                                    (s) => s.key === m.key,
+                                  );
                                   return (
                                     <label
                                       key={m.key}
@@ -365,15 +394,20 @@ export default function CorrigirClassificacaoModal({
                                         <span>{m.descricao}</span>
                                         <div className={styles.moduloMeta}>
                                           {m.fonte === "librostudio" ? (
-                                            <span className={styles.libroTag}>LibroStudio</span>
+                                            <span className={styles.libroTag}>
+                                              LibroStudio
+                                            </span>
                                           ) : (
                                             <span className={styles.habTag}>
                                               {m.habilidade_descricao}
                                             </span>
                                           )}
-                                          {m.area && m.fonte !== "librostudio" && (
-                                            <span className={styles.areaTag}>{m.area}</span>
-                                          )}
+                                          {m.area &&
+                                            m.fonte !== "librostudio" && (
+                                              <span className={styles.areaTag}>
+                                                {m.area}
+                                              </span>
+                                            )}
                                         </div>
                                       </div>
                                     </label>
@@ -449,6 +483,6 @@ export default function CorrigirClassificacaoModal({
         </div>
       )}
     </div>,
-    document.body
+    document.body,
   );
 }
