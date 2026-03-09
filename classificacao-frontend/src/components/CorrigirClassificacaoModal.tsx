@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
+import { createPortal } from "react-dom";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import {
   Search,
@@ -210,7 +211,7 @@ export default function CorrigirClassificacaoModal({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.modal}>
         <div className={styles.header}>
@@ -447,6 +448,7 @@ export default function CorrigirClassificacaoModal({
           </div>
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 }
