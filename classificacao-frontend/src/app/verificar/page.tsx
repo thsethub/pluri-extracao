@@ -185,6 +185,7 @@ export default function VerificarPage() {
       </div>
 
       <FilterBar
+        habilidadesUrl='/habilidades-verificar'
         onFilterChange={(a, d, h) => {
           setArea(a);
           setDisciplinaFiltro(d);

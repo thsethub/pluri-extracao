@@ -61,17 +61,19 @@
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
 }
 
 .card {
+    position: relative;
     padding: 1rem;
     border-radius: var(--radius);
     background-color: var(--surface);
     box-shadow: var(--shadow);
     text-align: center;
+    cursor: default;
 }
 
 .cardLabel {
@@ -82,6 +84,79 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 0.25rem;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.cardLabelRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-bottom: 0.25rem;
+}
+
+.tooltipWrap {
+    display: inline-flex;
+    align-items: center;
+}
+
+.tooltipBtn {
+    width: 18px;
+    height: 18px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    color: var(--text-muted);
+    cursor: help;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.tooltipBtn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+.tooltipText {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    max-width: 280px;
+    padding: 0.5rem 0.6rem;
+    border-radius: 8px;
+    background: #1f2937;
+    color: #f9fafb;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.tooltipText::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #1f2937 transparent;
+}
+
+.card:hover .tooltipText,
+.card:focus-within .tooltipText {
+    opacity: 1;
+    visibility: visible;
 }
 
 .cardValue {
@@ -90,21 +165,171 @@
     color: var(--text);
 }
 
+/* ==============================
+   COMPOSIÇÃO POR DISCIPLINA
+   ============================== */
+
+.compCard {
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+}
+
+.compHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.compHeader h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.compSelect {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--surface);
+    cursor: pointer;
+    min-width: 0;
+    max-width: 180px;
+}
+
+.compSelect:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+.compBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.compSummary {
+    margin: 0 0 0.6rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.compPct {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.compPctDetail {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.chartWrap {
+    position: relative;
+}
+
+.waterfallSvg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.waterfallBar {
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.waterfallBar:hover {
+    opacity: 0.82;
+}
+
+.wfTooltip {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    background: #1f2937;
+    color: #f9fafb;
+    border-radius: 8px;
+    padding: 0.4rem 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 60;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.wfTooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #1f2937 transparent transparent transparent;
+}
+
+.wfTooltipDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.wfTooltipLabel {
+    font-weight: 600;
+}
+
+.wfTooltipVal {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.wfTooltipPct {
+    font-weight: 600;
+    color: #a0aec0;
+    font-variant-numeric: tabular-nums;
+}
+
 .bottomSection {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+}
+
+.chartEmpty {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    padding: 0.75rem 0;
 }
 
 @media (max-width: 1400px) {
     .cards {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 1024px) {
     .bottomSection {
         grid-template-columns: 1fr;
+    }
+
+    .tooltipText {
+        min-width: 200px;
+        max-width: 240px;
     }
 }
 

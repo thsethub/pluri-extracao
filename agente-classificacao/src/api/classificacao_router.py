@@ -523,6 +523,176 @@ async def listar_habilidades_pendentes(
     return HabilidadesFiltroResponse(habilidades=habilidades, total=len(habilidades))
 
 
+@router.get(
+    "/habilidades-verificar",
+    response_model=HabilidadesFiltroResponse,
+    summary="🔍 Assuntos com questões de baixa similaridade para verificar",
+)
+async def listar_habilidades_verificar(
+    area: Optional[str] = Query(None, description="Filtrar por área"),
+    disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_pg_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna apenas assuntos TRIEDUC com pendências de verificação (low-match)."""
+    cache_key = f"habilidades_verificar_{area}_{disciplina}_{usuario.id}"
+    cached_data = get_from_cache(cache_key, ttl=300)
+    if cached_data:
+        return cached_data
+
+    effective_area = area or (usuario.disciplina if not usuario.is_admin else None)
+
+    ids_verificadas_usuario: set[int] = {
+        row[0] for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.usuario_id == usuario.id)
+        .all()
+    }
+
+    query_low_match_ids = pg_db.query(QuestaoAssuntoModel.questao_id).filter(
+        QuestaoAssuntoModel.classificado_manualmente == False,
+        QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None),
+        func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0,
+        QuestaoAssuntoModel.similaridade.isnot(None),
+        QuestaoAssuntoModel.similaridade > 0,
+        QuestaoAssuntoModel.similaridade < 0.8,
+    )
+
+    if ids_verificadas_usuario:
+        query_low_match_ids = query_low_match_ids.filter(
+            ~QuestaoAssuntoModel.questao_id.in_(list(ids_verificadas_usuario))
+        )
+
+    questao_ids_candidatas = [r[0] for r in query_low_match_ids.all()]
+    if not questao_ids_candidatas:
+        empty_res = HabilidadesFiltroResponse(habilidades=[], total=0)
+        set_to_cache(cache_key, empty_res)
+        return empty_res
+
+    query_mysql = db.query(
+        QuestaoModel.habilidade_id,
+        func.count(func.distinct(QuestaoModel.id)).label("total"),
+    ).filter(
+        QuestaoModel.id.in_(questao_ids_candidatas),
+        QuestaoModel.ano_id == 3,
+        QuestaoModel.habilidade_id.isnot(None),
+    )
+
+    # Filtro por disciplina
+    if disciplina:
+        mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina, disciplina)
+        if mysql_name:
+            disc_id_row = (
+                db.query(DisciplinaModel.id)
+                .filter(DisciplinaModel.descricao == mysql_name)
+                .first()
+            )
+            if not disc_id_row:
+                empty_res = HabilidadesFiltroResponse(habilidades=[], total=0)
+                set_to_cache(cache_key, empty_res)
+                return empty_res
+            query_mysql = query_mysql.filter(
+                QuestaoModel.disciplina_id == disc_id_row[0]
+            )
+        else:
+            habilidade_ids_custom = [
+                row[0]
+                for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
+                .filter(HabilidadeModuloModel.disciplina == disciplina)
+                .filter(HabilidadeModuloModel.habilidade_id.isnot(None))
+                .distinct()
+                .all()
+            ]
+            if not habilidade_ids_custom:
+                empty_res = HabilidadesFiltroResponse(habilidades=[], total=0)
+                set_to_cache(cache_key, empty_res)
+                return empty_res
+            query_mysql = query_mysql.filter(
+                QuestaoModel.habilidade_id.in_(habilidade_ids_custom)
+            )
+    elif effective_area and effective_area in AREAS_DISCIPLINAS:
+        nomes = AREAS_DISCIPLINAS[effective_area]
+        disciplinas_ids = [
+            d[0]
+            for d in db.query(DisciplinaModel.id)
+            .filter(DisciplinaModel.descricao.in_(nomes))
+            .all()
+        ]
+        if not disciplinas_ids:
+            empty_res = HabilidadesFiltroResponse(habilidades=[], total=0)
+            set_to_cache(cache_key, empty_res)
+            return empty_res
+        query_mysql = query_mysql.filter(
+            QuestaoModel.disciplina_id.in_(disciplinas_ids)
+        )
+    elif effective_area:
+        habilidade_ids_area = [
+            row[0]
+            for row in pg_db.query(HabilidadeModuloModel.habilidade_id)
+            .filter(HabilidadeModuloModel.area == effective_area)
+            .filter(HabilidadeModuloModel.habilidade_id.isnot(None))
+            .distinct()
+            .all()
+        ]
+        if not habilidade_ids_area:
+            empty_res = HabilidadesFiltroResponse(habilidades=[], total=0)
+            set_to_cache(cache_key, empty_res)
+            return empty_res
+        query_mysql = query_mysql.filter(
+            QuestaoModel.habilidade_id.in_(habilidade_ids_area)
+        )
+
+    rows = query_mysql.group_by(QuestaoModel.habilidade_id).all()
+    if not rows:
+        empty_res = HabilidadesFiltroResponse(habilidades=[], total=0)
+        set_to_cache(cache_key, empty_res)
+        return empty_res
+
+    counts_map: dict[int, int] = {r[0]: int(r[1]) for r in rows if r[0] is not None}
+    hab_ids = list(counts_map.keys())
+
+    descricao_map: dict[int, str] = {}
+    descricao_rows = (
+        pg_db.query(
+            HabilidadeModuloModel.habilidade_id,
+            HabilidadeModuloModel.habilidade_descricao,
+        )
+        .filter(HabilidadeModuloModel.habilidade_id.in_(hab_ids))
+        .distinct()
+        .all()
+    )
+    for row in descricao_rows:
+        if row.habilidade_id not in descricao_map and row.habilidade_descricao:
+            descricao_map[row.habilidade_id] = row.habilidade_descricao
+
+    faltantes = [hid for hid in hab_ids if hid not in descricao_map]
+    if faltantes:
+        fallback_rows = (
+            db.query(HabilidadeModel.id, HabilidadeModel.descricao)
+            .filter(HabilidadeModel.id.in_(faltantes))
+            .all()
+        )
+        for hid, desc in fallback_rows:
+            if hid not in descricao_map and desc:
+                descricao_map[hid] = desc
+
+    habilidades = [
+        HabilidadeFiltroSchema(
+            habilidade_id=hid,
+            habilidade_descricao=descricao_map.get(hid, f"Habilidade {hid}"),
+            pendentes=counts_map[hid],
+        )
+        for hid in sorted(
+            hab_ids,
+            key=lambda h: descricao_map.get(h, f"Habilidade {h}").lower(),
+        )
+    ]
+
+    res = HabilidadesFiltroResponse(habilidades=habilidades, total=len(habilidades))
+    set_to_cache(cache_key, res)
+    return res
+
+
 # ========================
 # MÓDULOS (consulta)
 # ========================
@@ -1445,7 +1615,21 @@ async def proxima_questao_verificar(
     )
 
     if habilidade_id:
-        query_pg = query_pg.filter(QuestaoAssuntoModel.habilidade_id == habilidade_id)
+        questao_ids_habilidade = [
+            row[0]
+            for row in db.query(QuestaoModel.id)
+            .filter(
+                QuestaoModel.habilidade_id == habilidade_id,
+                QuestaoModel.ano_id == 3,
+            )
+            .all()
+        ]
+        if questao_ids_habilidade:
+            query_pg = query_pg.filter(
+                QuestaoAssuntoModel.questao_id.in_(questao_ids_habilidade)
+            )
+        else:
+            query_pg = query_pg.filter(QuestaoAssuntoModel.id == -1)
 
     if ids_verificadas:
         query_pg = query_pg.filter(~QuestaoAssuntoModel.questao_id.in_(ids_verificadas))
@@ -1479,7 +1663,21 @@ async def proxima_questao_verificar(
                     # Mas se tivermos o ID TRIEDUC no MySQL (QuestaoModel), podemos filtrar lá.
                     # No entanto, a query base é sobre QuestaoAssuntoModel. 
                     # Se salvamos a extração, populamos habilidade_id? Geralmente sim.
-                    query_pg = query_pg.filter(QuestaoAssuntoModel.habilidade_id.in_(habilidade_ids_custom))
+                    questao_ids_custom = [
+                        row[0]
+                        for row in db.query(QuestaoModel.id)
+                        .filter(
+                            QuestaoModel.habilidade_id.in_(habilidade_ids_custom),
+                            QuestaoModel.ano_id == 3,
+                        )
+                        .all()
+                    ]
+                    if questao_ids_custom:
+                        query_pg = query_pg.filter(
+                            QuestaoAssuntoModel.questao_id.in_(questao_ids_custom)
+                        )
+                    else:
+                        query_pg = query_pg.filter(QuestaoAssuntoModel.id == -1)
                 else:
                     query_pg = query_pg.filter(QuestaoAssuntoModel.id == -1)
     elif disciplina_ids_filtro:
@@ -1635,10 +1833,27 @@ async def proxima_questao_low_match(
         QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None),
         func.json_length(QuestaoAssuntoModel.classificacao_nao_enquadrada) > 0,
         QuestaoAssuntoModel.classificado_manualmente == False,
+        QuestaoAssuntoModel.similaridade.isnot(None),
+        QuestaoAssuntoModel.similaridade > 0,
+        QuestaoAssuntoModel.similaridade < 0.8,
     )
 
     if habilidade_id:
-        query_pg = query_pg.filter(QuestaoAssuntoModel.habilidade_id == habilidade_id)
+        questao_ids_habilidade = [
+            row[0]
+            for row in db.query(QuestaoModel.id)
+            .filter(
+                QuestaoModel.habilidade_id == habilidade_id,
+                QuestaoModel.ano_id == 3,
+            )
+            .all()
+        ]
+        if questao_ids_habilidade:
+            query_pg = query_pg.filter(
+                QuestaoAssuntoModel.questao_id.in_(questao_ids_habilidade)
+            )
+        else:
+            query_pg = query_pg.filter(QuestaoAssuntoModel.id == -1)
 
     if ids_verificadas:
         query_pg = query_pg.filter(~QuestaoAssuntoModel.questao_id.in_(ids_verificadas))
@@ -2192,22 +2407,38 @@ async def estatisticas_classificacao(
     
     # Contabilizamos como "feitas" para o progresso: Manual + Automática (Finalizadas)
     ids_finalizados = manuais_ids | auto_ids
-    pg_rows = pg_db.query(QuestaoAssuntoModel.disciplina_id, func.count(QuestaoAssuntoModel.questao_id))\
-        .filter(QuestaoAssuntoModel.questao_id.in_(ids_finalizados))\
-        .group_by(QuestaoAssuntoModel.disciplina_id).all()
-    pg_counts = {r[0]: r[1] for r in pg_rows}
-    
+
+    # Mapa questao_id → disciplina_id (MySQL) para detalhar por disciplina
+    q_disc_rows = db.query(QuestaoModel.id, QuestaoModel.disciplina_id)\
+        .filter(QuestaoModel.id.in_(em_ids)).all()
+    disc_ids_map: dict[int, set] = {}  # disciplina_id → set de questao_ids
+    for qid, did in q_disc_rows:
+        if did is None:
+            continue
+        disc_ids_map.setdefault(did, set()).add(qid)
+
     disc_names = {d.id: d.descricao for d in db.query(DisciplinaModel).all()}
     
     por_disciplina = {}
     for d_id, total_mysql in mysql_counts.items():
         if d_id is None: continue
         nome = disc_names.get(d_id, f"ID {d_id}")
-        feitas = pg_counts.get(d_id, 0)
+        d_set = disc_ids_map.get(d_id, set())
+        d_manuais = len(manuais_ids & d_set)
+        d_auto = len(auto_ids & d_set)
+        d_verificar = len(verificar_ids & d_set)
+        d_puladas = len(puladas_ids_disjoint & d_set)
+        d_feitas = d_manuais + d_auto
+        d_pendentes = max(0, total_mysql - d_manuais - d_auto - d_verificar - d_puladas)
         por_disciplina[nome] = {
             "total": total_mysql,
-            "feitas": feitas,
-            "faltam": max(0, total_mysql - feitas)
+            "feitas": d_feitas,
+            "faltam": max(0, total_mysql - d_feitas),
+            "manuais": d_manuais,
+            "auto": d_auto,
+            "verificar": d_verificar,
+            "pendentes": d_pendentes,
+            "puladas": d_puladas,
         }
 
     # Por usuário (Atividades Recentes)
