@@ -308,9 +308,17 @@ export default function StatsPage() {
                               setHoveredBar({
                                 label: bar.label,
                                 value: bar.value,
-                                pct: disc.total > 0 ? ((bar.value / disc.total) * 100).toFixed(1) : "0",
+                                pct:
+                                  disc.total > 0
+                                    ? ((bar.value / disc.total) * 100).toFixed(
+                                        1,
+                                      )
+                                    : "0",
                                 color: bar.color,
-                                x: svgRect.left - wrapRect.left + (x + barW / 2) * sx,
+                                x:
+                                  svgRect.left -
+                                  wrapRect.left +
+                                  (x + barW / 2) * sx,
                                 y: svgRect.top - wrapRect.top + yTop * sy - 8,
                               });
                             }}
