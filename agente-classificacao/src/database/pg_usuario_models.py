@@ -61,3 +61,6 @@ class ClassificacaoUsuarioModel(PgBase):
     )  # "classificacao_nova", "confirmacao", "correcao"
     observacao = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    # Controle de migração
+    migrada = Column(Boolean, nullable=False, default=False, server_default="0", index=True)
