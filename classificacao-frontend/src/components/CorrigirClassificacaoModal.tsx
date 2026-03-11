@@ -79,12 +79,12 @@ export default function CorrigirClassificacaoModal({
   }> = [
     {
       key: "trieduc",
-      title: "TriEduc",
+      title: "Módulos Libro com relacionamento na Trieduc",
       className: styles.sectionSourceTrieduc,
     },
     {
       key: "librostudio",
-      title: "LibroStudio",
+      title: "Módulos Libro",
       className: styles.sectionSourceLibro,
     },
   ];
