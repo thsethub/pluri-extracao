@@ -77,6 +77,7 @@ class AssuntoVinculadoSchema(BaseModel):
 class ModuloComAssuntosSchema(BaseModel):
     """Schema de módulo com seus assuntos relacionados."""
     id: int | str
+    disciplina_id: Optional[str | int] = None
     disciplina: Optional[str] = None
     nome: str
     assuntos: List[AssuntoVinculadoSchema]

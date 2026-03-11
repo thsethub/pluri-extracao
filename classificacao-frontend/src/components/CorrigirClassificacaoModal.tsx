@@ -21,6 +21,7 @@ export type HabilidadeModulo = {
   key: string;
   id: number | string;
   habilidade_id?: number;
+  disciplina_id?: number | string | null;
   habilidade_descricao: string;
   area: string;
   disciplina: string;
@@ -38,6 +39,7 @@ type AssuntoVinculado = {
 
 type ModuloComAssuntosResponse = {
   id: number | string;
+  disciplina_id?: number | string | null;
   disciplina?: string | null;
   nome: string;
   assuntos: AssuntoVinculado[];
@@ -124,7 +126,7 @@ export default function CorrigirClassificacaoModal({
 
       const dedupedTrieduc = new Map<string, HabilidadeModulo>();
       for (const item of trieducItens) {
-        const dedupKey = `${item.disciplina}||${item.modulo}||${item.descricao}||${item.habilidade_descricao}||${item.id}`;
+        const dedupKey = `${item.disciplina_id || "no-did"}||${item.disciplina}||${item.modulo}||${item.descricao}||${item.habilidade_descricao}||${item.id}`;
         if (!dedupedTrieduc.has(dedupKey)) {
           dedupedTrieduc.set(dedupKey, item);
         }
@@ -140,6 +142,7 @@ export default function CorrigirClassificacaoModal({
             .map((assunto: AssuntoVinculado, index: number) => ({
               key: `librostudio::${m.id}::${assunto.id ?? index}`,
               id: m.id,
+              disciplina_id: m.disciplina_id,
               area: disciplina || "LibroStudio",
               disciplina,
               modulo: toStringSafe(m.nome),
@@ -154,7 +157,7 @@ export default function CorrigirClassificacaoModal({
 
       const dedupedLivro = new Map<string, HabilidadeModulo>();
       for (const item of livroItens) {
-        const dedupKey = `${item.fonte}||${item.disciplina}||${item.modulo}||${item.id}||${item.assunto_id}||${item.descricao}`;
+        const dedupKey = `${item.fonte}||${item.disciplina_id || "no-did"}||${item.disciplina}||${item.modulo}||${item.id}||${item.assunto_id}||${item.descricao}`;
         if (!dedupedLivro.has(dedupKey)) {
           dedupedLivro.set(dedupKey, item);
         }
@@ -183,14 +186,19 @@ export default function CorrigirClassificacaoModal({
     });
   }, [modulos, buscaLower]);
 
+  const getDisciplinaKey = (item: HabilidadeModulo) =>
+    item.disciplina_id != null
+      ? `id:${item.disciplina_id}`
+      : `name:${toStringSafe(item.disciplina)}`;
+
   const getItensFonte = (fonte: FonteModulo) =>
     modulosFiltrados.filter((m) => m.fonte === fonte);
 
-  const isDisciplinaExpandida = (source: FonteModulo, disciplina: string) =>
-    buscaLower !== "" || expandidas.has(`${source}::${disciplina}`);
+  const isDisciplinaExpandida = (source: FonteModulo, disciplinaKey: string) =>
+    buscaLower !== "" || expandidas.has(`${source}::${disciplinaKey}`);
 
-  const toggleDisciplina = (source: FonteModulo, disciplina: string) => {
-    const id = `${source}::${disciplina}`;
+  const toggleDisciplina = (source: FonteModulo, disciplinaKey: string) => {
+    const id = `${source}::${disciplinaKey}`;
     setExpandidas((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
@@ -199,10 +207,19 @@ export default function CorrigirClassificacaoModal({
     });
   };
 
-  const getDisciplinasPorFonte = (itens: HabilidadeModulo[]) =>
-    Array.from(new Set(itens.map((m) => m.disciplina))).sort((a, b) =>
-      a.localeCompare(b, "pt-BR"),
-    );
+  const getDisciplinasPorFonte = (itens: HabilidadeModulo[]) => {
+    const disciplinaMap = new Map<string, string>();
+    for (const item of itens) {
+      const key = getDisciplinaKey(item);
+      if (!disciplinaMap.has(key)) {
+        disciplinaMap.set(key, toStringSafe(item.disciplina || "Sem disciplina"));
+      }
+    }
+
+    return Array.from(disciplinaMap.entries())
+      .map(([key, disciplina]) => ({ key, disciplina }))
+      .sort((a, b) => a.disciplina.localeCompare(b.disciplina, "pt-BR"));
+  };
 
   const toggleModulo = (modulo: HabilidadeModulo) => {
     setSelecionados((prev) => {
@@ -330,10 +347,12 @@ export default function CorrigirClassificacaoModal({
 
                     <div className={styles.disciplinasList}>
                       {disciplinas.map((disc) => {
-                        const mods = itens.filter((m) => m.disciplina === disc);
+                        const mods = itens.filter(
+                          (m) => getDisciplinaKey(m) === disc.key,
+                        );
                         const expandido = isDisciplinaExpandida(
                           section.key,
-                          disc,
+                          disc.key,
                         );
                         const selecionadosNaDisc = mods.filter((m) =>
                           selecionados.some((s) => s.key === m.key),
@@ -341,13 +360,13 @@ export default function CorrigirClassificacaoModal({
 
                         return (
                           <div
-                            key={`${section.key}::${disc}`}
+                            key={`${section.key}::${disc.key}`}
                             className={styles.disciplinaGroup}
                           >
                             <button
                               className={`${styles.disciplinaHeader} ${expandido ? styles.disciplinaHeaderOpen : ""}`}
                               onClick={() =>
-                                toggleDisciplina(section.key, disc)
+                                toggleDisciplina(section.key, disc.key)
                               }
                             >
                               <div className={styles.disciplinaLeft}>
@@ -357,7 +376,7 @@ export default function CorrigirClassificacaoModal({
                                   <ChevronRight size={16} />
                                 )}
                                 <span className={styles.disciplinaNome}>
-                                  {disc || "Sem disciplina"}
+                                  {disc.disciplina || "Sem disciplina"}
                                 </span>
                               </div>
                               <div className={styles.disciplinaRight}>

@@ -579,9 +579,9 @@ async def listar_modulos_com_assuntos(
 ):
     """Retorna módulos do banco compartilhados com os assuntos relacionados válidos.
 
-    Retorna apenas os módulos do LivroStudio sem relacionamento atual com o TriEduc.
+    Retorna apenas os módulos do LibroStudio sem relacionamento atual com o TriEduc.
     """
-    cache_key = "modulos_assuntos_compartilhados_v2"
+    cache_key = "modulos_assuntos_compartilhados_v4"
     cached = get_from_cache(cache_key, ttl=600)
     if cached is not None:
         return cached
@@ -617,15 +617,41 @@ async def listar_modulos_com_assuntos(
                     modulos_table = t
                     break
 
+        disciplinas_table = None
+        for candidate in ["disciplinas", "disciplina"]:
+            if candidate in table_names_lower:
+                disciplinas_table = table_names_lower[candidate]
+                break
+
+        if not disciplinas_table:
+            for t in table_names:
+                t_norm = t.lower()
+                if "disciplina" in t_norm and "modul" not in t_norm:
+                    disciplinas_table = t
+                    break
+
         if not assuntos_table:
-            raise HTTPException(status_code=500, detail="Tabela de assuntos não encontrada em compartilhados.")
+            raise HTTPException(
+                status_code=500,
+                detail="Tabela de assuntos não encontrada em compartilhados."
+            )
         if not modulos_table:
-            raise HTTPException(status_code=500, detail="Tabela de módulos de disciplina não encontrada em compartilhados.")
+            raise HTTPException(
+                status_code=500,
+                detail="Tabela de módulos de disciplina não encontrada em compartilhados."
+            )
 
         assuntos_cols = {c["name"] for c in inspector.get_columns(assuntos_table)}
         modulos_cols = {c["name"] for c in inspector.get_columns(modulos_table)}
+        disciplinas_cols = (
+            {c["name"] for c in inspector.get_columns(disciplinas_table)}
+            if disciplinas_table
+            else set()
+        )
 
-        assunto_desc_col = _pick_first_column(assuntos_cols, ["assu_descricao", "descricao", "nome"])
+        assunto_desc_col = _pick_first_column(
+            assuntos_cols, ["assu_descricao", "descricao", "nome"]
+        )
         if not assunto_desc_col:
             raise HTTPException(
                 status_code=500,
@@ -633,6 +659,7 @@ async def listar_modulos_com_assuntos(
             )
 
         assunto_id_col = _pick_first_column(assuntos_cols, ["assu_id", "id"])
+
         modulo_nome_col = _pick_first_column(
             modulos_cols,
             [
@@ -664,7 +691,10 @@ async def listar_modulos_com_assuntos(
         if not modulo_nome_col:
             raise HTTPException(
                 status_code=500,
-                detail=f"Coluna de nome de módulo não encontrada. Colunas disponíveis: {sorted(modulos_cols)}",
+                detail=(
+                    "Coluna de nome de módulo não encontrada. "
+                    f"Colunas disponíveis: {sorted(modulos_cols)}"
+                ),
             )
 
         disciplina_nome_col = _pick_first_column(
@@ -688,6 +718,68 @@ async def listar_modulos_com_assuntos(
                 None,
             )
 
+        disciplina_id_fk_col = _pick_first_column(
+            modulos_cols,
+            [
+                "disc_id",
+                "disciplina_id",
+                "id_disciplina",
+                "disciplinaid",
+                "id_disc",
+            ],
+        )
+        disciplina_id_col = _pick_first_column(
+            disciplinas_cols,
+            [
+                "disc_id",
+                "id",
+                "disciplina_id",
+                "id_disciplina",
+            ],
+        )
+        if not disciplina_id_col and disciplinas_cols:
+            disciplina_id_col = next(
+                (
+                    c
+                    for c in disciplinas_cols
+                    if "disc" in c.lower() and c.lower().endswith("id")
+                ),
+                None,
+            )
+        if not disciplina_id_col and disciplinas_cols:
+            disciplina_id_col = next(
+                (c for c in disciplinas_cols if c.lower().endswith("id")),
+                None,
+            )
+        disciplina_nome_from_table_col = _pick_first_column(
+            disciplinas_cols,
+            [
+                "disc_descricao",
+                "disc_nome",
+                "descricao",
+                "nome",
+                "disciplina_nome",
+                "nome_disciplina",
+            ],
+        ) if disciplinas_cols else None
+        if not disciplina_nome_from_table_col and disciplinas_cols:
+            disciplina_nome_from_table_col = next(
+                (
+                    c
+                    for c in disciplinas_cols
+                    if "disc" in c.lower()
+                    and ("desc" in c.lower() or "nome" in c.lower())
+                ),
+                None,
+            )
+
+        join_disciplinas = bool(
+            disciplinas_table
+            and disciplina_id_fk_col
+            and disciplina_id_col
+            and disciplina_nome_from_table_col
+        )
+
         join_candidates = [
             ("disc_modu_id", "disc_modu_id"),
             ("disciplina_modulo_id", "id"),
@@ -696,7 +788,11 @@ async def listar_modulos_com_assuntos(
             ("disc_modu_id", "id"),
         ]
         join_cols = next(
-            ((a_col, dm_col) for a_col, dm_col in join_candidates if a_col in assuntos_cols and dm_col in modulos_cols),
+            (
+                (a_col, dm_col)
+                for a_col, dm_col in join_candidates
+                if a_col in assuntos_cols and dm_col in modulos_cols
+            ),
             None,
         )
         if not join_cols:
@@ -706,19 +802,57 @@ async def listar_modulos_com_assuntos(
             )
 
         assunto_join_col, modulo_join_col = join_cols
-        modulo_id_col = _pick_first_column(modulos_cols, [modulo_join_col, "disc_modu_id", "dimo_id", "id"]) or modulo_join_col
-        modulo_disc_modu_col = _pick_first_column(modulos_cols, [modulo_join_col, "disc_modu_id", "dimo_id", "id"])
-        assunto_id_select = f", a.{_sql_ident(assunto_id_col)} AS assunto_id" if assunto_id_col else ""
-        disciplina_select = (
-            f", dm.{_sql_ident(disciplina_nome_col)} AS disciplina_nome"
-            if disciplina_nome_col
-            else ", NULL AS disciplina_nome"
+        modulo_id_col = (
+            _pick_first_column(
+                modulos_cols,
+                [
+                    modulo_join_col,
+                    "disc_modu_id",
+                    "dimo_id",
+                    "id",
+                ],
+            )
+            or modulo_join_col
+        )
+        modulo_disc_modu_col = _pick_first_column(
+            modulos_cols,
+            [
+                modulo_join_col,
+                "disc_modu_id",
+                "dimo_id",
+                "id",
+            ],
+        )
+
+        assunto_id_select = (
+            f", a.{_sql_ident(assunto_id_col)} AS assunto_id" if assunto_id_col else ""
         )
         modulo_disc_modu_select = (
             f", dm.{_sql_ident(modulo_disc_modu_col)} AS modulo_disc_modu_id"
             if modulo_disc_modu_col
             else ""
         )
+
+        disciplina_nome_select = ""
+        disciplina_id_select = ", NULL AS disciplina_id"
+        disciplina_join_sql = ""
+        if join_disciplinas:
+            disciplina_nome_select = (
+                f", d.{_sql_ident(disciplina_nome_from_table_col)} AS disciplina_nome"
+            )
+            disciplina_id_select = (
+                f", dm.{_sql_ident(disciplina_id_fk_col)} AS disciplina_id"
+            )
+            disciplina_join_sql = f"""
+                LEFT JOIN {_sql_ident(disciplinas_table)} d
+                    ON dm.{_sql_ident(disciplina_id_fk_col)} = d.{_sql_ident(disciplina_id_col)}
+            """
+        else:
+            disciplina_nome_select = (
+                f", dm.{_sql_ident(disciplina_nome_col)} AS disciplina_nome"
+                if disciplina_nome_col
+                else ", NULL AS disciplina_nome"
+            )
 
         trieduc_pairs = set()
         trieduc_disc_modu_ids = set()
@@ -742,11 +876,13 @@ async def listar_modulos_com_assuntos(
                 dm.{_sql_ident(modulo_nome_col)} AS modulo_nome,
                 a.{_sql_ident(assunto_desc_col)} AS assunto_descricao
                 {assunto_id_select}
-                {disciplina_select}
+                {disciplina_id_select}
+                {disciplina_nome_select}
                 {modulo_disc_modu_select}
             FROM {_sql_ident(assuntos_table)} a
             INNER JOIN {_sql_ident(modulos_table)} dm
                 ON a.{_sql_ident(assunto_join_col)} = dm.{_sql_ident(modulo_join_col)}
+            {disciplina_join_sql}
             WHERE a.{_sql_ident(assunto_desc_col)} IS NOT NULL
                 AND TRIM(a.{_sql_ident(assunto_desc_col)}) <> ''
                 AND TRIM(a.{_sql_ident(assunto_desc_col)}) NOT LIKE :rm_prefix
@@ -770,10 +906,13 @@ async def listar_modulos_com_assuntos(
             continue
 
         disciplina_nome = (row.get("disciplina_nome") or "").strip()
+        disciplina_id = row.get("disciplina_id")
         disciplina_norm = _normalize_text(disciplina_nome)
         modulo_norm = _normalize_text(modulo_nome)
 
-        modulo_disc_modu_norm = _normalize_disc_modu_id(row.get("modulo_disc_modu_id"))
+        modulo_disc_modu_norm = _normalize_disc_modu_id(
+            row.get("modulo_disc_modu_id")
+        )
 
         has_relacionamento_trieduc = False
         if disciplina_norm and modulo_norm and (disciplina_norm, modulo_norm) in trieduc_pairs:
@@ -785,11 +924,13 @@ async def listar_modulos_com_assuntos(
             continue
 
         modulo_id = row.get("modulo_id") if row.get("modulo_id") is not None else modulo_nome
-        group_key = f"{disciplina_norm}::{modulo_id}::{modulo_norm}"
+        disciplina_id_key = _normalize_disc_modu_id(disciplina_id)
+        group_key = f"{disciplina_id_key or disciplina_norm}::{modulo_id}::{modulo_norm}"
 
         if group_key not in grouped:
             grouped[group_key] = {
                 "id": modulo_id,
+                "disciplina_id": disciplina_id,
                 "nome": modulo_nome,
                 "disciplina": disciplina_nome,
                 "assuntos": [],
@@ -821,6 +962,7 @@ async def listar_modulos_com_assuntos(
         modulos.append(
             ModuloComAssuntosSchema(
                 id=module_data["id"],
+                disciplina_id=module_data["disciplina_id"],
                 disciplina=module_data["disciplina"],
                 nome=module_data["nome"],
                 assuntos=assuntos,
@@ -830,7 +972,13 @@ async def listar_modulos_com_assuntos(
             )
         )
 
-    modulos.sort(key=lambda m: ((m.disciplina or "").lower(), m.nome.lower()))
+    modulos.sort(
+        key=lambda m: (
+            str(m.disciplina_id or ""),
+            (m.disciplina or "").lower(),
+            m.nome.lower(),
+        )
+    )
 
     response = ModulosAssuntosResponse(
         modulos=modulos,
@@ -2160,4 +2308,5 @@ async def historico_classificacoes(
         per_page=per_page,
         pages=pages,
     )
+
 
