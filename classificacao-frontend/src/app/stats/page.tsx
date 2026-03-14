@@ -231,9 +231,7 @@ export default function StatsPage() {
                             style={{ width: `${pct}%` }}
                           />
                         </div>
-                        <span className={styles.progressBarLabel}>
-                          {pct}%
-                        </span>
+                        <span className={styles.progressBarLabel}>{pct}%</span>
                       </div>
                     </td>
                   </tr>
