@@ -6,10 +6,10 @@ from ..database import Base
 
 
 class AnoModel(Base):
-    """Tabela anos"""
+    """Tabela anos do banco trieduc"""
 
     __tablename__ = "anos"
-    __table_args__ = {"extend_existing": True}
+    __table_args__ = {"schema": "trieduc", "extend_existing": True}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     descricao = Column(String(100), nullable=True)
@@ -18,10 +18,10 @@ class AnoModel(Base):
 
 
 class DisciplinaModel(Base):
-    """Tabela disciplinas"""
+    """Tabela disciplinas do banco trieduc"""
 
     __tablename__ = "disciplinas"
-    __table_args__ = {"extend_existing": True}
+    __table_args__ = {"schema": "trieduc", "extend_existing": True}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     descricao = Column(String(100), nullable=True)
@@ -30,10 +30,10 @@ class DisciplinaModel(Base):
 
 
 class HabilidadeModel(Base):
-    """Tabela habilidades"""
+    """Tabela habilidades do banco trieduc"""
 
     __tablename__ = "habilidades"
-    __table_args__ = {"extend_existing": True}
+    __table_args__ = {"schema": "trieduc", "extend_existing": True}
 
     id = Column(Integer, primary_key=True, autoincrement=False)
     hab_id = Column(String(50), nullable=True)
@@ -45,19 +45,19 @@ class HabilidadeModel(Base):
 
 
 class QuestaoModel(Base):
-    """Tabela questoes"""
+    """Tabela questoes do banco trieduc"""
 
     __tablename__ = "questoes"
-    __table_args__ = {"extend_existing": True}
+    __table_args__ = {"schema": "trieduc", "extend_existing": True}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     questao_id = Column(String(100), unique=True, nullable=False)
     enunciado = Column(Text, nullable=True)
     texto_base = Column(Text, nullable=True)
     resolucao = Column(Text, nullable=True)
-    ano_id = Column(Integer, ForeignKey("anos.id"), nullable=True)
-    disciplina_id = Column(Integer, ForeignKey("disciplinas.id"), nullable=True)
-    habilidade_id = Column(Integer, ForeignKey("habilidades.id"), nullable=True)
+    ano_id = Column(Integer, ForeignKey("trieduc.anos.id"), nullable=True)
+    disciplina_id = Column(Integer, ForeignKey("trieduc.disciplinas.id"), nullable=True)
+    habilidade_id = Column(Integer, ForeignKey("trieduc.habilidades.id"), nullable=True)
     origem = Column(String(100), nullable=True)
     tipo = Column(String(100), nullable=True)
 
@@ -68,16 +68,16 @@ class QuestaoModel(Base):
 
 
 class QuestaoAlternativaModel(Base):
-    """Tabela questao_alternativas"""
+    """Tabela questao_alternativas do banco trieduc"""
 
     __tablename__ = "questao_alternativas"
-    __table_args__ = {"extend_existing": True}
+    __table_args__ = {"schema": "trieduc", "extend_existing": True}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     qa_id = Column(String(100), unique=True, nullable=False)
     ordem = Column(Integer, nullable=True)
     conteudo = Column(Text, nullable=True)
     correta = Column(Integer, nullable=True)
-    questao_id = Column(Integer, ForeignKey("questoes.id"), nullable=True)
+    questao_id = Column(Integer, ForeignKey("trieduc.questoes.id"), nullable=True)
 
     questao = relationship("QuestaoModel", back_populates="alternativas")

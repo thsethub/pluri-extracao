@@ -1,11 +1,12 @@
-"""Configuração do banco de dados com SQLAlchemy (MySQL + PostgreSQL)"""
+"""Configuração do banco de dados com SQLAlchemy (MySQL)"""
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from ..config import settings
 
 # ========================
-# MySQL (leitura - questões)
+# MySQL - Conexão única com usuário thsethub
+# Acessa múltiplos bancos: trieduc, thsethub, compartilhados, homologacao
 # ========================
 engine = create_engine(
     settings.database_url,
@@ -14,9 +15,15 @@ engine = create_engine(
     echo=False,
 )
 
+# Session padrão - acessa todos os bancos do usuário
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+# Aliases para compatibilidade com código legado
+PgSessionLocal = SessionLocal  # Antes era conexão separada, agora usa a mesma
+SharedSessionLocal = SessionLocal  # Antes era conexão separada, agora usa a mesma
+
 Base = declarative_base()
+PgBase = Base  # Alias para compatibilidade
 
 
 def get_db():
@@ -28,46 +35,18 @@ def get_db():
         db.close()
 
 
-# ========================
-# MySQL RDS (escrita - assuntos, ex-PostgreSQL)
-# ========================
-pg_engine = create_engine(
-    settings.pg_database_url,
-    pool_pre_ping=True,
-    pool_recycle=3600,
-    echo=False,
-)
-
-PgSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=pg_engine)
-
-PgBase = declarative_base()
-
-
 def get_pg_db():
-    """Dependency para injeção de sessão do banco MySQL RDS (assuntos)"""
-    db = PgSessionLocal()
+    """Dependency para injeção de sessão (compatibilidade - usa mesma conexão)"""
+    db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
 
 
-# ========================
-# MySQL compartilhados (leitura - assuntos e disciplina_modulos)
-# ========================
-shared_engine = create_engine(
-    settings.shared_database_url,
-    pool_pre_ping=True,
-    pool_recycle=3600,
-    echo=False,
-)
-
-SharedSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=shared_engine)
-
-
 def get_shared_db():
-    """Dependency para injeção de sessão do banco MySQL compartilhados."""
-    db = SharedSessionLocal()
+    """Dependency para injeção de sessão (compatibilidade - usa mesma conexão)"""
+    db = SessionLocal()
     try:
         yield db
     finally:
@@ -86,4 +65,4 @@ def init_pg_tables():
         ClassificacaoAgenteIaErroModel,
     )  # noqa: F401
 
-    PgBase.metadata.create_all(bind=pg_engine)
+    PgBase.metadata.create_all(bind=engine)

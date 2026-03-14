@@ -1,0 +1,90 @@
+{
+  "classificacao": {
+    "id": 13,
+    "usuario_id": 18,
+    "questao_id": 1683,
+    "habilidade_id": 104,
+    "tipo_acao": "classificacao_nova",
+    "modulos_escolhidos": [
+      "Estudo de textos"
+    ],
+    "classificacoes_trieduc_list": [
+      "Estudio del texto - Tipos de texto"
+    ],
+    "descricoes_assunto_list": [
+      "Compreensão de textos em espanhol"
+    ],
+    "habilidade_modulo_ids": [
+      773
+    ],
+    "modulos_assuntos_detalhados": [
+      {
+        "id": 773,
+        "modulo": "Estudo de textos",
+        "descricao_assunto": "Compreensão de textos em espanhol",
+        "habilidade_id": 104,
+        "habilidade_descricao": "Estudio del texto - Tipos de texto",
+        "area": "Linguagens",
+        "disciplina": "Espanhol"
+      }
+    ],
+    "classificacao_extracao": [],
+    "observacao": "",
+    "created_at": "2026-02-23 17:40:22",
+    "migrada": false
+  },
+  "questao": {
+    "id": 1683,
+    "questao_id": "803bea55-f27d-4693-bf89-2c1a34916cdc",
+    "enunciado": "<p class=\"ql-align-center\"><img src=\"https://files.trieduconline.com.br/trieduc/smartprova/itens/7e1a922c-cfd8-4fa1-8cae-511328a5bca9/803bea55-f27d-4693-bf89-2c1a34916cdc/03205cd9-5c4b-4e5e-b64d-d82aa4983aee\"></p><p class=\"ql-align-center\"><br></p><p>As marcas de primeira pessoa do plural no texto da campanha de amamentação têm como finalidade&nbsp;</p><p>&nbsp;</p>",
+    "texto_base": null,
+    "resolucao": "Na propaganda, o uso da primeira pessoa do plural tem como função promover a aproximação entre o enunciador e o leitor, a fim de fazer com que a comunicação seja mais efetiva.",
+    "origem": "TRIEduc",
+    "tipo": "Múltipla Escolha",
+    "tipo_imagem": "img_tag",
+    "ano_id": 3,
+    "ano_descricao": "Ensino Médio",
+    "disciplina_id": 5,
+    "disciplina_descricao": "Espanhol",
+    "habilidade_id": 104,
+    "habilidade_sigla": null,
+    "habilidade_descricao": "Estudio del texto - Tipos de texto",
+    "alternativas": [
+      {
+        "id": 8055,
+        "qa_id": "d2af51ef-1f92-41c5-8d09-cee8eeae2521",
+        "ordem": 1,
+        "conteudo": "<p>incluir o enunciador no discurso para expressar formalidade.</p>",
+        "correta": false
+      },
+      {
+        "id": 8056,
+        "qa_id": "2f451406-c632-4d6f-9def-578174c24a10",
+        "ordem": 2,
+        "conteudo": "<p>agregar diversas vozes para impor valores às lactantes.</p>",
+        "correta": false
+      },
+      {
+        "id": 8057,
+        "qa_id": "4e6bf94a-e662-4bc1-9606-6c47ccebe2d3",
+        "ordem": 3,
+        "conteudo": "<p>forjar uma voz coletiva para garantir adesão à campanha.</p>",
+        "correta": false
+      },
+      {
+        "id": 8058,
+        "qa_id": "98252823-f387-4024-a8fb-acbdbde4d4fa",
+        "ordem": 4,
+        "conteudo": "<p>promover uma identificação entre o enunciador e o leitor para aproximá-los.</p>",
+        "correta": true
+      },
+      {
+        "id": 8059,
+        "qa_id": "f635f8bc-2b11-4cc6-a1ca-35ae6b10df04",
+        "ordem": 5,
+        "conteudo": "<p>remeter à voz institucional promotora da campanha para conferir-lhe credibilidade.</p>",
+        "correta": false
+      }
+    ]
+  }
+}

@@ -5,9 +5,10 @@ from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func
 from typing import Optional
 from math import ceil
+from datetime import datetime
 from loguru import logger
 
-from ..database import get_db, get_pg_db
+from ..database import get_db
 from ..database.models import QuestaoModel, QuestaoAlternativaModel, DisciplinaModel, AnoModel
 from ..database.pg_models import QuestaoAssuntoModel
 from ..services.enunciado_cleaner import tratar_enunciado
@@ -183,7 +184,7 @@ async def proxima_questao(
         3, description="ID do ano/nível (3=Ensino Médio). None=todos"
     ),
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """
     Retorna a próxima questão que ainda não teve extração de assunto tentada.
@@ -310,7 +311,7 @@ async def proxima_questao(
 )
 async def proxima_questao_verificar(
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """
     Retorna a próxima questão que está marcada como `precisa_verificar=True`
@@ -401,7 +402,7 @@ async def proxima_questao_verificar(
 async def salvar_extracao(
     request: SalvarAssuntoRequest,
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """
     Salva o resultado da extração de assunto de uma questão.
@@ -523,7 +524,7 @@ async def listar_assuntos(
     superpro_id: Optional[int] = Query(None, description="Filtrar por ID SuperProfessor"),
     data_inicio: Optional[str] = Query(None, description="Data início (YYYY-MM-DD)"),
     data_fim: Optional[str] = Query(None, description="Data fim (YYYY-MM-DD)"),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """Lista os registros de assuntos com paginação e filtros."""
     query = pg_db.query(QuestaoAssuntoModel)
@@ -593,7 +594,7 @@ async def listar_assuntos(
     response_model=QuestaoAssuntoSchema,
     summary="🔎 Buscar assunto de uma questão",
 )
-async def buscar_assunto(questao_id: int, pg_db: Session = Depends(get_pg_db)):
+async def buscar_assunto(questao_id: int, pg_db: Session = Depends(get_db)):
     """Retorna o registro de assunto de uma questão específica."""
     registro = (
         pg_db.query(QuestaoAssuntoModel)
@@ -621,7 +622,7 @@ async def estatisticas_extracao(
         3, description="ID do ano/nível (3=Ensino Médio). None=todos"
     ),
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """
     Retorna estatísticas detalhadas do progresso de extração
@@ -697,7 +698,7 @@ async def estatisticas_extracao(
     response_description="Remove todos os registros de extração do PostgreSQL",
 )
 async def reset_extracao(
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """
     Remove TODOS os registros da tabela questao_assuntos no PostgreSQL.
@@ -712,3 +713,4 @@ async def reset_extracao(
         "deleted": count,
         "message": f"{count} registros removidos",
     }
+

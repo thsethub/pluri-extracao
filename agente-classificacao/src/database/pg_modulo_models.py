@@ -1,11 +1,11 @@
-"""Modelos SQLAlchemy para tabelas de módulos e classificação no PostgreSQL"""
+"""Modelos SQLAlchemy para tabelas de módulos e classificação no banco thsethub"""
 
 from sqlalchemy import Column, Integer, String, Text, DateTime, func, UniqueConstraint
 from ..database import PgBase
 
 
 class HabilidadeModuloModel(PgBase):
-    """Tabela habilidade_modulos (PostgreSQL local)
+    """Tabela habilidade_modulos do banco thsethub
 
     Mapeamento plano: cada linha = um par (habilidade TriEduc → módulo da planilha).
     Relacionamento N:N — uma habilidade pode ter vários módulos e vice-versa.
@@ -22,7 +22,7 @@ class HabilidadeModuloModel(PgBase):
             "habilidade_descricao", "area", "disciplina", "modulo", "descricao",
             name="uq_hab_modulo_descricao"
         ),
-        {"extend_existing": True},
+        {"schema": "thsethub", "extend_existing": True},
     )
 
     id = Column(Integer, primary_key=True, autoincrement=True)

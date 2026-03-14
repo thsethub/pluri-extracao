@@ -7,6 +7,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import BaseModel
 
 
+BASE_DIR = Path(__file__).resolve().parents[2]
+ENV_FILE = BASE_DIR / ".env"
+
+
 class Habilidade(BaseModel):
     """Modelo de uma habilidade"""
 
@@ -47,54 +51,42 @@ class Settings(BaseSettings):
     ia_cost_per_1k_input_tokens: float = 0.0
     ia_cost_per_1k_output_tokens: float = 0.0
 
-    # Database MySQL (leitura - questões)
+    # Database MySQL - Usuário thsethub com acesso a múltiplos bancos
+    # (trieduc, thsethub, compartilhados, homologacao)
     db_host: str = "localhost"
     db_port: int = 3306
-    db_user: str = "root"
+    db_user: str = "thsethub"
     db_password: str = ""
-    db_name: str = "trieduc"
-
-    # Database MySQL RDS (escrita - assuntos, ex-PostgreSQL)
-    pg_host: str = "localhost"
-    pg_port: int = 3306
-    pg_user: str = "root"
-    pg_password: str = ""
-    pg_name: str = "thsethub"
-
-    # Database MySQL (compartilhados - assuntos/modulos)
-    shared_host: str = ""
-    shared_port: Optional[int] = None
-    shared_user: str = ""
-    shared_password: str = ""
-    shared_name: str = "compartilhados"
+    # Deixar vazio para ter acesso a todos os bancos do usuário
+    db_name: str = ""
 
     @property
     def database_url(self) -> str:
-        """Retorna a URL de conexão do banco MySQL (questões)"""
-        return f"mysql+pymysql://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
-
-    @property
-    def pg_database_url(self) -> str:
-        """Retorna a URL de conexão do banco MySQL RDS (assuntos)"""
-        return f"mysql+pymysql://{self.pg_user}:{self.pg_password}@{self.pg_host}:{self.pg_port}/{self.pg_name}"
-
-    @property
-    def shared_database_url(self) -> str:
-        """Retorna a URL de conexão do banco MySQL compartilhados (assuntos/modulos)."""
-        host = self.shared_host or self.pg_host
-        port = self.shared_port or self.pg_port
-        user = self.shared_user or self.pg_user
-        password = self.shared_password if self.shared_password != "" else self.pg_password
-
-        return f"mysql+pymysql://{user}:{password}@{host}:{port}/{self.shared_name}"
+        """Retorna a URL de conexão do banco MySQL.
+        
+        Se db_name estiver vazio, permite acesso a todos os bancos do usuário.
+        Use prefixo nas queries: SELECT * FROM database_name.table_name
+        """
+        if self.db_name:
+            return f"mysql+pymysql://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
+        else:
+            # Sem banco específico - acesso a todos os bancos do usuário
+            return f"mysql+pymysql://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}"
 
     # Disciplinas disponíveis
     disciplines: str = (
         "Artes,Biologia,Ciências,Educação Física,Espanhol,Filosofia,Física,Geografia,História,Língua Inglesa,Língua Portuguesa,Matemática,Natureza e Sociedade,Química,Sociologia"
     )
 
+    # AWS S3
+    aws_access_key_id: Optional[str] = None
+    aws_secret_access_key: Optional[str] = None
+    aws_s3_bucket: str = "estudoplay-desenvolvimento-redacoes-simulados"
+    aws_s3_prefix: str = "sem_chamada/imagens_questoes/questoes-sync-teste"
+    aws_region: str = "us-east-1"
+
     model_config = SettingsConfigDict(
-        env_file=".env", env_file_encoding="utf-8", case_sensitive=False
+        env_file=ENV_FILE, env_file_encoding="utf-8", case_sensitive=False
     )
 
     _habilidades_cache: Optional[Dict[str, List[Habilidade]]] = None

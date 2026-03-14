@@ -1,18 +1,18 @@
-"""Modelo SQLAlchemy para autenticação e classificação manual de usuários no PostgreSQL"""
+"""Modelo SQLAlchemy para autenticação e classificação manual de usuários no banco thsethub"""
 
 from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, Float, JSON, func
 from ..database import PgBase
 
 
 class UsuarioModel(PgBase):
-    """Tabela usuarios (PostgreSQL local)
+    """Tabela usuarios do banco thsethub
 
     Armazena usuários do sistema de classificação manual.
     Cada usuário é professor de uma disciplina específica.
     """
 
     __tablename__ = "usuarios"
-    __table_args__ = {"extend_existing": True}
+    __table_args__ = {"schema": "thsethub", "extend_existing": True}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(200), nullable=False)
@@ -25,7 +25,7 @@ class UsuarioModel(PgBase):
 
 
 class ClassificacaoUsuarioModel(PgBase):
-    """Tabela classificacao_usuario (PostgreSQL local)
+    """Tabela classificacao_usuario do banco thsethub
 
     Armazena todas as decisões de classificação feitas por usuários.
     Cada registro = uma decisão (classificação nova, confirmação ou correção).
@@ -33,7 +33,7 @@ class ClassificacaoUsuarioModel(PgBase):
     """
 
     __tablename__ = "classificacao_usuario"
-    __table_args__ = {"extend_existing": True}
+    __table_args__ = {"schema": "thsethub", "extend_existing": True}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     usuario_id = Column(Integer, nullable=False, index=True)  # FK → usuarios.id

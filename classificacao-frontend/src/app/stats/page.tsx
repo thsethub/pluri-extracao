@@ -110,6 +110,9 @@ export default function StatsPage() {
       verificar: Number(d?.verificar || 0),
       pendentes: Number(d?.pendentes || 0),
       puladas: Number(d?.puladas || 0),
+      total_modulos: Number(d?.total_modulos || 0),
+      total_habilidades: Number(d?.total_habilidades || 0),
+      total_assuntos: Number(d?.total_assuntos || 0),
     }))
     .sort((a, b) => b.total - a.total);
 
@@ -163,6 +166,82 @@ export default function StatsPage() {
             </h2>
           </div>
         ))}
+      </div>
+
+      {/* Tabela de Progresso por Disciplina */}
+      <div className={styles.progressTable}>
+        <h3>Progresso por Disciplina</h3>
+        <div className={styles.tableContainer}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Disciplina</th>
+                <th style={{ textAlign: "right" }}>Módulos</th>
+                <th style={{ textAlign: "right" }}>Assuntos</th>
+                <th style={{ textAlign: "right" }}>Habilidades</th>
+                <th style={{ textAlign: "right" }}>Classificadas</th>
+                <th style={{ textAlign: "right" }}>Faltam</th>
+                <th style={{ width: "200px" }}>Progresso</th>
+              </tr>
+            </thead>
+            <tbody>
+              {disciplinasDetalhado.map((disc) => {
+                const pct =
+                  disc.total > 0
+                    ? Math.round((disc.feitas / disc.total) * 100)
+                    : 0;
+                return (
+                  <tr key={disc.nome}>
+                    <td className={styles.disciplineName}>{disc.nome}</td>
+                    <td
+                      className={styles.tableCount}
+                      style={{ textAlign: "right", color: "var(--text-muted)" }}
+                    >
+                      {disc.total_modulos?.toLocaleString() || 0}
+                    </td>
+                    <td
+                      className={styles.tableCount}
+                      style={{ textAlign: "right", color: "var(--text-muted)" }}
+                    >
+                      {disc.total_assuntos?.toLocaleString() || 0}
+                    </td>
+                    <td
+                      className={styles.tableCount}
+                      style={{ textAlign: "right", color: "var(--text-muted)" }}
+                    >
+                      {disc.total_habilidades?.toLocaleString() || 0}
+                    </td>
+                    <td
+                      className={styles.tableCount}
+                      style={{ textAlign: "right", color: "var(--success)" }}
+                    >
+                      {disc.feitas.toLocaleString()}
+                    </td>
+                    <td
+                      className={styles.tableCount}
+                      style={{ textAlign: "right", color: "var(--primary)" }}
+                    >
+                      {disc.faltam.toLocaleString()}
+                    </td>
+                    <td>
+                      <div className={styles.progressBarCell}>
+                        <div className={styles.progressBarContainer}>
+                          <div
+                            className={styles.progressBarFill}
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
+                        <span className={styles.progressBarLabel}>
+                          {pct}%
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Composição + Liderança lado a lado */}

@@ -31,7 +31,7 @@ from loguru import logger
 from typing import List, Optional, Dict, Any
 
 from ..config import settings
-from ..database import get_pg_db, get_db, PgSessionLocal, SessionLocal
+from ..database import get_db, SessionLocal
 from ..database.models import QuestaoModel, HabilidadeModel
 from ..database.pg_usuario_models import ClassificacaoUsuarioModel
 from ..database.pg_ia_models import (
@@ -176,7 +176,7 @@ def persist_classificacao_ia_error(
         except Exception:
             safe_payload = {"payload_repr": repr(safe_payload)}
 
-    session = PgSessionLocal()
+    session = SessionLocal()
     try:
         record = ClassificacaoAgenteIaErroModel(
             questao_id=questao_id,
@@ -326,7 +326,7 @@ def _get_validation_state_snapshot() -> Dict[str, Any]:
 
 def _validation_worker_loop(job_id: str, worker_idx: int) -> None:
     """Loop de um worker: consome fila unica, sem repetir questoes."""
-    pg_session = PgSessionLocal()
+    pg_session = SessionLocal()
     mysql_session = SessionLocal()
     _append_validation_log("info", f"Worker-{worker_idx} iniciado")
 
@@ -861,7 +861,7 @@ Responda APENAS com JSON no formato:
 @router.post("/classificar", response_model=IAClassificarResponse)
 def classificar_questao(
     request: IAClassificarRequest,
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     db: Session = Depends(get_db)
 ):
     try:
@@ -1230,7 +1230,7 @@ async def treinar_modelo(background_tasks: BackgroundTasks):
 
 
 @router.get("/status")
-async def get_ia_status(pg_db: Session = Depends(get_pg_db)):
+async def get_ia_status(pg_db: Session = Depends(get_db)):
     """Retorna estatísticas rápidas do Agente IA"""
     try:
         total_ia = pg_db.query(func.count(ClassificacaoAgenteIaModel.id)).scalar()
@@ -1261,7 +1261,7 @@ async def get_ia_status(pg_db: Session = Depends(get_pg_db)):
 async def preparar_lote(
     limit: int = 5000,
     reset_classificacoes_ia: bool = True,
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """
     Prepara nova rodada de classificação:
@@ -1308,7 +1308,7 @@ async def validar_workers_start(
     workers: int = 2,
     prepare_lote_before_run: bool = True,
     reset_before_run: bool = True,
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """
     Inicia classificação em paralelo com N workers.
@@ -1460,7 +1460,7 @@ async def validar_manual(background_tasks: BackgroundTasks):
         global CANCEL_VALIDATION
         CANCEL_VALIDATION = False
         logger.info("🎯 Iniciando Validação Massiva da IA contra base manual (LLM + Prompts)...")
-        pg_session = PgSessionLocal()
+        pg_session = SessionLocal()
         mysql_session = SessionLocal()
         
         try:
@@ -1601,7 +1601,7 @@ async def list_classificacoes(
     modelo_filter: Optional[str] = None,
     disciplina_filter: Optional[str] = None,
     match_filter: Optional[str] = None,
-    pg_db: Session = Depends(get_pg_db)
+    pg_db: Session = Depends(get_db)
 ):
     """Lista classificações IA com paginação e filtros.
 
@@ -1667,7 +1667,7 @@ async def list_classificacoes(
 @router.get("/classificacao/{questao_id}")
 async def get_classificacao_detail(
     questao_id: int,
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     db: Session = Depends(get_db)
 ):
     """Retorna detalhes completos de uma classificação IA vs Manual"""
@@ -1786,7 +1786,7 @@ async def validar_stream(limit: int = 5000):
     def event_generator():
         global CANCEL_VALIDATION
         CANCEL_VALIDATION = False
-        pg_session = PgSessionLocal()
+        pg_session = SessionLocal()
         mysql_session = SessionLocal()
         
         try:

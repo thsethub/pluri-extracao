@@ -18,7 +18,7 @@ from jose import JWTError, jwt
 import bcrypt
 
 from ..config import settings
-from ..database import get_db, get_pg_db, get_shared_db
+from ..database import get_db
 from ..database.models import QuestaoModel, HabilidadeModel, DisciplinaModel
 from ..database.pg_models import QuestaoAssuntoModel
 from ..database.pg_modulo_models import HabilidadeModuloModel
@@ -165,7 +165,7 @@ def hash_senha(senha: str) -> str:
 
 async def get_usuario_atual(
     token: str = Depends(oauth2_scheme),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ) -> UsuarioModel:
     """Dependency: extrai e valida o usuário do token JWT."""
     credentials_exception = HTTPException(
@@ -200,7 +200,7 @@ async def get_usuario_atual(
 )
 async def cadastrar_usuario(
     request: CadastroRequest,
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """
     Cadastra um novo usuário para classificação manual.
@@ -246,7 +246,7 @@ async def cadastrar_usuario(
 )
 async def login(
     request: LoginRequest,
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
 ):
     """Autentica o usuário e retorna um token JWT."""
     usuario = pg_db.query(UsuarioModel).filter(UsuarioModel.email == request.email).first()
@@ -297,7 +297,7 @@ async def listar_disciplinas():
 async def listar_habilidades_filtro(
     area: Optional[str] = Query(None, description="Filtrar por área"),
     disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
@@ -440,7 +440,7 @@ async def listar_habilidades_pendentes(
     area: Optional[str] = Query(None, description="Filtrar por área"),
     disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
@@ -532,7 +532,7 @@ async def listar_habilidades_verificar(
     area: Optional[str] = Query(None, description="Filtrar por área"),
     disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """Retorna apenas assuntos TRIEDUC com pendências de verificação (low-match)."""
@@ -705,7 +705,7 @@ async def listar_habilidades_verificar(
 async def listar_todos_modulos(
     disciplina: Optional[str] = Query(None, description="Filtrar por nome da disciplina"),
     area: Optional[str] = Query(None, description="Filtrar por área"),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """Retorna todos os módulos do TriEduc, opcionalmente filtrados por disciplina ou área.
@@ -743,8 +743,8 @@ async def listar_todos_modulos(
     summary="📚 Módulos com assuntos relacionados (sem prefixo [RM])",
 )
 async def listar_modulos_com_assuntos(
-    shared_db: Session = Depends(get_shared_db),
-    pg_db: Session = Depends(get_pg_db),
+    shared_db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """Retorna módulos do banco compartilhados com os assuntos relacionados válidos.
@@ -758,7 +758,7 @@ async def listar_modulos_com_assuntos(
 
     try:
         inspector = inspect(shared_db.get_bind())
-        table_names = inspector.get_table_names()
+        table_names = inspector.get_table_names(schema="compartilhados")
         table_names_lower = {t.lower(): t for t in table_names}
 
         assuntos_table = None
@@ -811,10 +811,10 @@ async def listar_modulos_com_assuntos(
                 detail="Tabela de módulos de disciplina não encontrada em compartilhados."
             )
 
-        assuntos_cols = {c["name"] for c in inspector.get_columns(assuntos_table)}
-        modulos_cols = {c["name"] for c in inspector.get_columns(modulos_table)}
+        assuntos_cols = {c["name"] for c in inspector.get_columns(assuntos_table, schema="compartilhados")}
+        modulos_cols = {c["name"] for c in inspector.get_columns(modulos_table, schema="compartilhados")}
         disciplinas_cols = (
-            {c["name"] for c in inspector.get_columns(disciplinas_table)}
+            {c["name"] for c in inspector.get_columns(disciplinas_table, schema="compartilhados")}
             if disciplinas_table
             else set()
         )
@@ -1014,7 +1014,7 @@ async def listar_modulos_com_assuntos(
                 f", dm.{_sql_ident(disciplina_id_fk_col)} AS disciplina_id"
             )
             disciplina_join_sql = f"""
-                LEFT JOIN {_sql_ident(disciplinas_table)} d
+                LEFT JOIN compartilhados.{_sql_ident(disciplinas_table)} d
                     ON dm.{_sql_ident(disciplina_id_fk_col)} = d.{_sql_ident(disciplina_id_col)}
             """
         else:
@@ -1026,15 +1026,23 @@ async def listar_modulos_com_assuntos(
 
         trieduc_pairs = set()
         trieduc_disc_modu_ids = set()
-        for disciplina, modulo, disc_modu_id in pg_db.query(
+        trieduc_triplets = set()  # (disciplina, modulo, assunto)
+        
+        for disciplina, modulo, disc_modu_id, assunto_descricao in pg_db.query(
             HabilidadeModuloModel.disciplina,
             HabilidadeModuloModel.modulo,
             HabilidadeModuloModel.disc_modu_id,
+            HabilidadeModuloModel.descricao,
         ).all():
             disc_norm = _normalize_text(disciplina)
             mod_norm = _normalize_text(modulo)
+            assunto_norm = _normalize_text(assunto_descricao)
+            
             if disc_norm and mod_norm:
                 trieduc_pairs.add((disc_norm, mod_norm))
+            
+            if disc_norm and mod_norm and assunto_norm:
+                trieduc_triplets.add((disc_norm, mod_norm, assunto_norm))
 
             disc_modu_norm = _normalize_disc_modu_id(disc_modu_id)
             if disc_modu_norm:
@@ -1049,8 +1057,8 @@ async def listar_modulos_com_assuntos(
                 {disciplina_id_select}
                 {disciplina_nome_select}
                 {modulo_disc_modu_select}
-            FROM {_sql_ident(assuntos_table)} a
-            INNER JOIN {_sql_ident(modulos_table)} dm
+            FROM compartilhados.{_sql_ident(assuntos_table)} a
+            INNER JOIN compartilhados.{_sql_ident(modulos_table)} dm
                 ON a.{_sql_ident(assunto_join_col)} = dm.{_sql_ident(modulo_join_col)}
             {disciplina_join_sql}
             WHERE a.{_sql_ident(assunto_desc_col)} IS NOT NULL
@@ -1084,14 +1092,15 @@ async def listar_modulos_com_assuntos(
             row.get("modulo_disc_modu_id")
         )
 
-        has_relacionamento_trieduc = False
-        if disciplina_norm and modulo_norm and (disciplina_norm, modulo_norm) in trieduc_pairs:
-            has_relacionamento_trieduc = True
-        elif modulo_disc_modu_norm and modulo_disc_modu_norm in trieduc_disc_modu_ids:
-            has_relacionamento_trieduc = True
-
-        if has_relacionamento_trieduc:
-            continue
+        # Não pular mais o módulo inteiro aqui
+        # has_relacionamento_trieduc = False
+        # if disciplina_norm and modulo_norm and (disciplina_norm, modulo_norm) in trieduc_pairs:
+        #     has_relacionamento_trieduc = True
+        # elif modulo_disc_modu_norm and modulo_disc_modu_norm in trieduc_disc_modu_ids:
+        #     has_relacionamento_trieduc = True
+        # 
+        # if has_relacionamento_trieduc:
+        #     continue
 
         modulo_id = row.get("modulo_id") if row.get("modulo_id") is not None else modulo_nome
         disciplina_id_key = _normalize_disc_modu_id(disciplina_id)
@@ -1111,6 +1120,14 @@ async def listar_modulos_com_assuntos(
         if not assunto_descricao:
             continue
 
+        # Verificar se este par (módulo + assunto) específico já existe no relacionamento trieduc
+        assunto_norm = _normalize_text(assunto_descricao)
+        triplet_exists = (disciplina_norm, modulo_norm, assunto_norm) in trieduc_triplets
+        
+        if triplet_exists:
+            # Pular apenas este assunto específico, não o módulo inteiro
+            continue
+
         assunto_id = row.get("assunto_id")
         assunto_key = (assunto_id, assunto_descricao)
         if assunto_key in grouped[group_key]["_seen"]:
@@ -1128,6 +1145,11 @@ async def listar_modulos_com_assuntos(
     total_assuntos = 0
     for module_data in grouped.values():
         assuntos = module_data["assuntos"]
+        
+        # Não incluir módulos que ficaram sem assuntos após filtrar
+        if not assuntos:
+            continue
+        
         total_assuntos += len(assuntos)
         modulos.append(
             ModuloComAssuntosSchema(
@@ -1164,7 +1186,7 @@ async def listar_modulos_com_assuntos(
 )
 async def listar_modulos_por_habilidade(
     habilidade_id: int,
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """Retorna os módulos possíveis para um dado habilidade_id do TriEduc."""
@@ -1196,7 +1218,7 @@ async def proxima_questao_classificar(
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
@@ -1450,7 +1472,7 @@ async def proxima_questao_classificar(
 async def consultar_questao_por_id(
     questao_id: int,
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """Retorna uma questão específica no mesmo formato da rota /proxima."""
@@ -1579,7 +1601,7 @@ async def proxima_questao_verificar(
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
@@ -1801,7 +1823,7 @@ async def proxima_questao_low_match(
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
@@ -1984,7 +2006,7 @@ async def proxima_questao_low_match(
 async def salvar_classificacao(
     request: SalvarClassificacaoRequest,
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
@@ -2088,7 +2110,7 @@ async def salvar_classificacao(
 async def pular_questao(
     request: PularQuestaoRequest,
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
@@ -2144,7 +2166,7 @@ async def proxima_questao_pendente(
     disciplina_id: Optional[str] = Query(None, description="ID ou Nome da disciplina"),
     habilidade_id: Optional[int] = Query(None, description="ID da habilidade TRIEDUC"),
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
@@ -2326,7 +2348,7 @@ async def proxima_questao_pendente(
 )
 async def estatisticas_classificacao(
     db: Session = Depends(get_db),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """Retorna estatísticas do sistema de classificação manual (Cache 5m)."""
@@ -2419,10 +2441,140 @@ async def estatisticas_classificacao(
 
     disc_names = {d.id: d.descricao for d in db.query(DisciplinaModel).all()}
     
+    # Contagem de módulos e assuntos por disciplina (banco compartilhados)
+    from sqlalchemy import text as sql_text
+    
+    try:
+        # Query SQL exata fornecida pelo usuário
+        sql = """
+            SELECT
+                d.disc_id,
+                d.disc_descricao,
+                COUNT(DISTINCT dm.disc_modu_id) AS total_modulos,
+                COUNT(a.assu_id) AS total_assuntos
+            FROM compartilhados.disciplinas d
+            INNER JOIN compartilhados.disciplinas_modulos dm
+                ON dm.disc_id = d.disc_id
+            LEFT JOIN compartilhados.assuntos a
+                ON a.disc_modu_id = dm.disc_modu_id
+               AND TRIM(a.assu_descricao) NOT LIKE '[RM]%%'
+            WHERE TRIM(dm.disc_modu_descricao) NOT LIKE '[RM]%%'
+            GROUP BY d.disc_id, d.disc_descricao
+            ORDER BY d.disc_id
+        """
+        
+        result = db.execute(sql_text(sql)).fetchall()
+        
+        logger.info(f"Total de linhas retornadas da query: {len(result)}")
+        
+        # Mapeamento de sinônimos entre bancos (case-insensitive)
+        nome_sinonimos = {
+            'inglês': 'Língua Inglesa',
+            'espanhol': 'Língua Espanhola',
+            'arte': 'Artes',
+        }
+        
+        # Processa resultados e soma Literatura + Redação com Língua Portuguesa
+        modulos_por_disc = {}
+        assuntos_por_disc = {}
+        
+        # Primeiro passo: coleta todos os valores
+        lingua_port_modulos = 0
+        lingua_port_assuntos = 0
+        
+        for row in result:
+            disc_descricao_orig = row[1]
+            disc_descricao = disc_descricao_orig.strip() if disc_descricao_orig else ""
+            total_modulos = row[2] or 0
+            total_assuntos = row[3] or 0
+            
+            logger.info(f"Linha: '{disc_descricao}' -> Módulos: {total_modulos}, Assuntos: {total_assuntos}")
+            
+            # Aplica mapeamento de sinônimos (case-insensitive)
+            disc_lower = disc_descricao.lower()
+            disc_nome_final = nome_sinonimos.get(disc_lower, disc_descricao)
+            
+            logger.info(f"  Mapeado: '{disc_descricao}' -> '{disc_nome_final}'")
+            
+            # Acumula Literatura, Redação e Língua Portuguesa
+            if disc_descricao in ['Literatura', 'Redação', 'Língua Portuguesa']:
+                lingua_port_modulos += total_modulos
+                lingua_port_assuntos += total_assuntos
+                logger.info(f"  Acumulado LP: módulos={lingua_port_modulos}, assuntos={lingua_port_assuntos}")
+            else:
+                # Armazena SEPARADAMENTE módulos e assuntos
+                modulos_por_disc[disc_nome_final] = total_modulos
+                assuntos_por_disc[disc_nome_final] = total_assuntos
+                logger.info(f"  Armazenado: ['{disc_nome_final}'] mod={total_modulos}, ass={total_assuntos}")
+        
+        # Segundo passo: atribui os valores consolidados para Língua Portuguesa
+        modulos_por_disc['Língua Portuguesa'] = lingua_port_modulos
+        assuntos_por_disc['Língua Portuguesa'] = lingua_port_assuntos
+        
+        logger.info(f"FINAL - Módulos por disciplina: {modulos_por_disc}")
+        logger.info(f"FINAL - Assuntos por disciplina: {assuntos_por_disc}")
+        
+    except Exception as e:
+        logger.error(f"Erro ao contar módulos/assuntos: {e}", exc_info=True)
+        modulos_por_disc = {}
+        assuntos_por_disc = {}
+    
+    # Contagem de habilidades únicas por disciplina (from questoes com habilidade_id)
+    try:
+        # Mapeamento de nomes de disciplinas do trieduc
+        nome_sinonimos_trieduc = {
+            'Inglês': 'Língua Inglesa',
+            'Espanhol': 'Língua Espanhola',
+            'Arte': 'Artes',
+        }
+        
+        hab_rows = db.query(
+            QuestaoModel.disciplina_id,
+            func.count(func.distinct(QuestaoModel.habilidade_id))
+        ).filter(
+            QuestaoModel.ano_id == 3,
+            QuestaoModel.habilidade_id.isnot(None)
+        ).group_by(QuestaoModel.disciplina_id).all()
+        
+        habs_por_disc = {}
+        lingua_port_habs = 0
+        
+        for d_id, count in hab_rows:
+            if d_id in disc_names:
+                nome_original = disc_names[d_id]
+                # Aplica mapeamento de sinônimos
+                nome_final = nome_sinonimos_trieduc.get(nome_original, nome_original)
+                
+                # Acumula Literatura, Redação e Língua Portuguesa
+                if nome_original in ['Literatura', 'Redação', 'Língua Portuguesa']:
+                    lingua_port_habs += count
+                else:
+                    habs_por_disc[nome_final] = count
+        
+        # Atribui o valor consolidado para Língua Portuguesa
+        habs_por_disc['Língua Portuguesa'] = lingua_port_habs
+        
+        logger.info(f"Habilidades por disciplina: {habs_por_disc}")
+    except Exception as e:
+        logger.warning(f"Erro ao contar habilidades: {e}")
+        habs_por_disc = {}
+    
     por_disciplina = {}
+    
+    # Mapeamento para padronizar nomes entre bancos
+    nome_padrao_map = {
+        'Inglês': 'Língua Inglesa',
+        'Espanhol': 'Língua Espanhola',
+        'Arte': 'Artes',
+    }
+    
     for d_id, total_mysql in mysql_counts.items():
         if d_id is None: continue
-        nome = disc_names.get(d_id, f"ID {d_id}")
+        nome_original = disc_names.get(d_id, f"ID {d_id}")
+        
+        # Aplica mapeamento de padronização
+        nome = nome_padrao_map.get(nome_original, nome_original)
+        
         d_set = disc_ids_map.get(d_id, set())
         d_manuais = len(manuais_ids & d_set)
         d_auto = len(auto_ids & d_set)
@@ -2439,6 +2591,9 @@ async def estatisticas_classificacao(
             "verificar": d_verificar,
             "pendentes": d_pendentes,
             "puladas": d_puladas,
+            "total_modulos": modulos_por_disc.get(nome, 0),
+            "total_habilidades": habs_por_disc.get(nome, 0),
+            "total_assuntos": assuntos_por_disc.get(nome, 0),
         }
 
     # Por usuário (Atividades Recentes)
@@ -2486,7 +2641,7 @@ async def historico_classificacoes(
     per_page: int = Query(50, ge=1, le=200, description="Itens por página"),
     tipo_acao: Optional[str] = Query(None, description="Filtrar por tipo de ação"),
     usuario_id: Optional[int] = Query(None, description="Filtrar por usuário"),
-    pg_db: Session = Depends(get_pg_db),
+    pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
@@ -2539,5 +2694,6 @@ async def historico_classificacoes(
         per_page=per_page,
         pages=pages,
     )
+
 
 

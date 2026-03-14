@@ -19,7 +19,7 @@ class QuestaoAssuntoModel(PgBase):
     """
 
     __tablename__ = "questao_assuntos"
-    __table_args__ = {"extend_existing": True}
+    __table_args__ = {"schema": "thsethub", "extend_existing": True}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     questao_id = Column(Integer, nullable=False, unique=True, index=True)

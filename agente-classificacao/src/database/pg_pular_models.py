@@ -10,7 +10,7 @@ class QuestaoPuladaModel(PgBase):
     __tablename__ = "questoes_puladas"
     __table_args__ = (
         UniqueConstraint('usuario_id', 'questao_id', name='uq_usuario_questao_pulo'),
-        {"extend_existing": True}
+        {"schema": "thsethub", "extend_existing": True}
     )
 
     id = Column(Integer, primary_key=True, autoincrement=True)
