@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { apiRequest } from '@/lib/api';
+import { pickRenderableHtml } from '@/lib/html-content';
 import AppLayout from '@/components/AppLayout';
 import FilterBar from '@/components/FilterBar';
 import CorrigirClassificacaoModal, {
@@ -172,6 +173,14 @@ export default function VerificarPage() {
   };
 
   const lowMatchTags = questao?.classificacao_nao_enquadrada || [];
+  const textoBaseHtml = pickRenderableHtml(
+    questao?.texto_base_html,
+    questao?.texto_base,
+  );
+  const enunciadoHtml = pickRenderableHtml(
+    questao?.enunciado_html,
+    questao?.enunciado,
+  );
 
   return (
     <AppLayout>
@@ -218,11 +227,11 @@ export default function VerificarPage() {
                 <span className={styles.idTag}>ID: {questao.id}</span>
               </div>
 
-              {questao.texto_base && (
+              {textoBaseHtml && (
                 <div
                   className={styles.textoBase}
                   dangerouslySetInnerHTML={{
-                    __html: questao.texto_base_html || questao.texto_base,
+                    __html: textoBaseHtml,
                   }}
                 />
               )}
@@ -230,7 +239,7 @@ export default function VerificarPage() {
               <div
                 className={styles.enunciado}
                 dangerouslySetInnerHTML={{
-                  __html: questao.enunciado_html || questao.enunciado,
+                  __html: enunciadoHtml,
                 }}
               />
 
@@ -246,7 +255,10 @@ export default function VerificarPage() {
                       </span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: alt.conteudo_html || alt.conteudo,
+                          __html: pickRenderableHtml(
+                            alt.conteudo_html,
+                            alt.conteudo,
+                          ),
                         }}
                       />
                     </div>

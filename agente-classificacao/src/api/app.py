@@ -23,6 +23,7 @@ from .db_router import router as db_router
 from .extracao_router import router as extracao_router
 from .classificacao_router import router as classificacao_router
 from .ia_classificacao_router import router as ia_classificacao_router
+from .importacao_sql_router import router as importacao_sql_router
 
 # Setup do logger
 setup_logger(settings.log_level)
@@ -109,6 +110,10 @@ app = FastAPI(
             "name": "Classificação Manual",
             "description": "Sistema de classificação manual por professores com autenticação JWT",
         },
+        {
+            "name": "Importação SQL",
+            "description": "Ingestão de CSV binário (n8n) com autenticação Bearer e geração de SQL MySQL otimizada",
+        },
     ],
 )
 
@@ -127,6 +132,7 @@ app.include_router(db_router)
 app.include_router(extracao_router)
 app.include_router(classificacao_router)
 app.include_router(ia_classificacao_router)
+app.include_router(importacao_sql_router)
 
 # Inicializa o classificador (singleton)
 classifier = QuestionClassifier()
@@ -603,14 +609,16 @@ async def startup_event():
     logger.info(f"📚 Disciplinas configuradas: {len(settings.get_disciplines_list())}")
     logger.info(f"🤖 Modelo OpenAI: {settings.openai_model}")
 
-    # Inicializa tabelas no PostgreSQL local
-    from ..database import init_pg_tables
+    if settings.db_auto_create_tables:
+        from ..database import init_pg_tables
 
-    try:
-        init_pg_tables()
-        logger.info("🗃️ Tabelas PostgreSQL inicializadas com sucesso")
-    except Exception as e:
-        logger.warning(f"⚠️ Falha ao inicializar PostgreSQL: {e}")
+        try:
+            init_pg_tables()
+            logger.info("🗃️ Tabelas inicializadas com sucesso")
+        except Exception as e:
+            logger.warning(f"⚠️ Falha ao inicializar tabelas automaticamente: {e}")
+    else:
+        logger.info("🧩 Criação automática de tabelas desabilitada (DB_AUTO_CREATE_TABLES=false)")
 
 
 @app.on_event("shutdown")

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import AppLayout from '@/components/AppLayout';
 import { apiRequest } from '@/lib/api';
 import { getUsuario } from '@/lib/auth';
+import { pickRenderableHtml } from '@/lib/html-content';
 import { Search, AlertCircle, Info } from 'lucide-react';
 import styles from './Consulta.module.css';
 
@@ -92,6 +93,9 @@ export default function ConsultaPage() {
         );
     };
 
+    const textoBaseHtml = pickRenderableHtml(questao?.texto_base_html, questao?.texto_base);
+    const enunciadoHtml = pickRenderableHtml(questao?.enunciado_html, questao?.enunciado);
+
     if (!isAuthorized) return null;
 
     return (
@@ -137,16 +141,16 @@ export default function ConsultaPage() {
                                     <span className={styles.idTag}>ID: {questao.id}</span>
                                 </div>
 
-                                {questao.texto_base && (
+                                {textoBaseHtml && (
                                     <div
                                         className={styles.textoBase}
-                                        dangerouslySetInnerHTML={{ __html: questao.texto_base_html || questao.texto_base }}
+                                        dangerouslySetInnerHTML={{ __html: textoBaseHtml }}
                                     />
                                 )}
 
                                 <div
                                     className={styles.enunciado}
-                                    dangerouslySetInnerHTML={{ __html: questao.enunciado_html || questao.enunciado }}
+                                    dangerouslySetInnerHTML={{ __html: enunciadoHtml }}
                                 />
 
                                 {questao.alternativas && questao.alternativas.length > 0 && (
@@ -154,7 +158,7 @@ export default function ConsultaPage() {
                                         {questao.alternativas.map((alt, index) => (
                                             <div key={`${alt.ordem}-${index}`} className={`${styles.altItem} ${alt.correta ? styles.altCorreta : ''}`}>
                                                 <span className={styles.altLetra}>{String.fromCharCode(97 + index)})</span>
-                                                <span dangerouslySetInnerHTML={{ __html: alt.conteudo_html || alt.conteudo }} />
+                                                <span dangerouslySetInnerHTML={{ __html: pickRenderableHtml(alt.conteudo_html, alt.conteudo) }} />
                                             </div>
                                         ))}
                                     </div>

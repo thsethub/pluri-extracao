@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { apiRequest } from "@/lib/api";
+import { pickRenderableHtml } from "@/lib/html-content";
 import AppLayout from "@/components/AppLayout";
 import FilterBar from "@/components/FilterBar";
 import {
@@ -164,6 +165,15 @@ export default function PendentesPage() {
     }
   };
 
+  const textoBaseHtml = pickRenderableHtml(
+    questao?.texto_base_html,
+    questao?.texto_base,
+  );
+  const enunciadoHtml = pickRenderableHtml(
+    questao?.enunciado_html,
+    questao?.enunciado,
+  );
+
   return (
     <AppLayout>
       <div className={styles.header}>
@@ -211,11 +221,11 @@ export default function PendentesPage() {
                 <span className={styles.idTag}>ID: {questao.id}</span>
               </div>
 
-              {questao.texto_base && (
+              {textoBaseHtml && (
                 <div
                   className={styles.textoBase}
                   dangerouslySetInnerHTML={{
-                    __html: questao.texto_base_html || questao.texto_base,
+                    __html: textoBaseHtml,
                   }}
                 />
               )}
@@ -223,7 +233,7 @@ export default function PendentesPage() {
               <div
                 className={styles.enunciado}
                 dangerouslySetInnerHTML={{
-                  __html: questao.enunciado_html || questao.enunciado,
+                  __html: enunciadoHtml,
                 }}
               />
 
@@ -239,7 +249,10 @@ export default function PendentesPage() {
                       </span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: alt.conteudo_html || alt.conteudo,
+                          __html: pickRenderableHtml(
+                            alt.conteudo_html,
+                            alt.conteudo,
+                          ),
                         }}
                       />
                     </div>

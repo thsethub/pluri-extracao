@@ -39,6 +39,9 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 480
 
+    # Token Bearer para integrações de ingestão (n8n)
+    n8n_bearer_token: str = ""
+
     # IA Classificação (pipeline por prompts)
     ia_classification_model: str = "gpt-5.2"
     ia_prompt_version: str = "v1"
@@ -59,6 +62,7 @@ class Settings(BaseSettings):
     db_password: str = ""
     # Deixar vazio para ter acesso a todos os bancos do usuário
     db_name: str = ""
+    db_auto_create_tables: bool = False
 
     @property
     def database_url(self) -> str:

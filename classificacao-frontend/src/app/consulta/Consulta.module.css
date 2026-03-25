@@ -143,9 +143,27 @@
     color: var(--text);
 }
 
+.textoBase img {
+    max-width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    display: block;
+    margin: 0.75rem auto;
+    border-radius: 6px;
+}
+
 .enunciado {
     color: var(--text);
     line-height: 1.6;
+}
+
+.enunciado img {
+    max-width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    display: block;
+    margin: 0.75rem auto;
+    border-radius: 6px;
 }
 
 .alternativas {
@@ -172,6 +190,14 @@
 .altLetra {
     font-weight: 700;
     color: var(--text-muted);
+}
+
+.altItem img {
+    max-width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    display: block;
+    margin: 0.5rem 0;
 }
 
 .sideHeader {

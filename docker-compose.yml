@@ -17,14 +17,9 @@ services:
       - DISCIPLINES=${DISCIPLINES:-Artes,Biologia,Ciências,Educação Física,Espanhol,Filosofia,Física,Geografia,História,Língua Inglesa,Língua Portuguesa,Matemática,Natureza e Sociedade,Química,Sociologia}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT:-3306}
-      - DB_USER=${DB_USER}
+      - DB_USER=${DB_USER:-thsethub}
       - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME:-trieduc}
-      - PG_HOST=${PG_HOST}
-      - PG_PORT=${PG_PORT:-3306}
-      - PG_USER=${PG_USER}
-      - PG_PASSWORD=${PG_PASSWORD}
-      - PG_NAME=${PG_NAME}
+      - DB_NAME=${DB_NAME:-}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - JWT_ALGORITHM=${JWT_ALGORITHM:-HS256}
       - JWT_EXPIRE_MINUTES=${JWT_EXPIRE_MINUTES:-480}
