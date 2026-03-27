@@ -368,84 +368,102 @@ async def listar_habilidades_filtro(
     # Montar mapa de habilidades válidas
     hab_ids = [r.habilidade_id for r in results if r.habilidade_id is not None]
 
-    counts_map = {}
-    if hab_ids:
-        # —————————————————————————————————————————————————————————————
-        # ABORDAGEM EFICIENTE v2: dois GROUP BY no MySQL (sem carregar
-        # linhas individuais) + IDs excluídos do PG como set
-        #
-        # 1. MySQL  → SELECT habilidade_id, COUNT(*) GROUP BY  (29 linhas)
-        # 2. PG     → 3 queries para obter IDs excluídos como set
-        # 3. MySQL  → SELECT habilidade_id, COUNT(*) WHERE id IN(excluídos)
-        #             GROUP BY  (≤ 29 linhas agrupadas)
-        # 4. Python → total - excluído por habilidade
-        # —————————————————————————————————————————————————————————————
+    # Mapa descrição (lowercase) → habilidade_id TRIEDUC
+    desc_lower_to_trieduc: dict[str, int] = {}
+    for r in results:
+        if r.habilidade_id is not None and r.habilidade_descricao:
+            desc_lower_to_trieduc[r.habilidade_descricao.lower()] = r.habilidade_id
 
-        # Etapa 1: total de questões por habilidade (MySQL GROUP BY, 29 linhas)
+    # Bridge: buscar IDs MySQL correspondentes via descrição (case-insensitive)
+    # habilidade_modulos usa IDs TRIEDUC; questoes usa IDs MySQL — sistemas diferentes
+    mysql_to_trieduc: dict[int, int] = {}
+    if desc_lower_to_trieduc:
+        mysql_hab_rows = (
+            db.query(HabilidadeModel.id, HabilidadeModel.descricao)
+            .filter(
+                func.lower(HabilidadeModel.descricao).in_(
+                    list(desc_lower_to_trieduc.keys())
+                )
+            )
+            .all()
+        )
+        for mysql_id, mysql_desc in mysql_hab_rows:
+            if mysql_desc:
+                trieduc_id = desc_lower_to_trieduc.get(mysql_desc.lower())
+                if trieduc_id:
+                    mysql_to_trieduc[mysql_id] = trieduc_id
+
+    # Fallback: incluir os próprios hab_ids (para habilidades onde TRIEDUC ID == MySQL ID)
+    for trieduc_id in hab_ids:
+        mysql_to_trieduc.setdefault(trieduc_id, trieduc_id)
+
+    mysql_hab_ids = list(mysql_to_trieduc.keys())
+
+    # IDs excluídos no PG (queries leves, sem IN gigante)
+    ids_excluir: set[int] = set()
+
+    # 2a. Já classificadas manualmente, com low-match, ou pelo SuperPro
+    for r in (
+        pg_db.query(QuestaoAssuntoModel.questao_id)
+        .filter(
+            (QuestaoAssuntoModel.classificado_manualmente == True)
+            | (
+                (QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None))
+                & (
+                    func.json_length(
+                        QuestaoAssuntoModel.classificacao_nao_enquadrada
+                    )
+                    > 0
+                )
+            )
+            | (
+                (QuestaoAssuntoModel.extracao_feita == True)
+                & (QuestaoAssuntoModel.classificacoes.isnot(None))
+                & (func.json_length(QuestaoAssuntoModel.classificacoes) > 0)
+            )
+        )
+        .all()
+    ):
+        ids_excluir.add(r[0])
+
+    # 2b. Já classificadas por este usuário
+    for r in (
+        pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.usuario_id == usuario.id)
+        .all()
+    ):
+        ids_excluir.add(r[0])
+
+    # 2c. Puladas por qualquer usuário — só aparecem em Pendentes, nunca em /proxima
+    for r in pg_db.query(QuestaoPuladaModel.questao_id).all():
+        ids_excluir.add(r[0])
+
+    counts_map: dict[int, int] = {}  # trieduc_id → pendentes
+    if mysql_hab_ids:
+        # Etapa 1: total de questões por habilidade MySQL (GROUP BY)
         rows_total = (
             db.query(
                 QuestaoModel.habilidade_id,
                 func.count(QuestaoModel.id).label("total"),
             )
             .filter(
-                QuestaoModel.habilidade_id.in_(hab_ids),
+                QuestaoModel.habilidade_id.in_(mysql_hab_ids),
                 QuestaoModel.ano_id == 3,
             )
             .group_by(QuestaoModel.habilidade_id)
             .all()
         )
 
-        if not rows_total:
-            habilidades = []
-            res = HabilidadesFiltroResponse(habilidades=habilidades, total=0)
-            set_to_cache(cache_key, res)
-            return res
+        # Agrupar por trieduc_id (vários MySQL IDs podem mapear para o mesmo)
+        total_por_trieduc: dict[int, int] = {}
+        for mysql_id, count in rows_total:
+            trieduc_id = mysql_to_trieduc.get(mysql_id)
+            if trieduc_id:
+                total_por_trieduc[trieduc_id] = total_por_trieduc.get(trieduc_id, 0) + count
 
-        total_por_hab: dict[int, int] = {r[0]: r[1] for r in rows_total}
-
-        # Etapa 2: IDs excluídos no PG (queries leves, sem IN gigante)
-        ids_excluir: set[int] = set()
-
-        # 2a. Já classificadas manualmente, com low-match, ou pelo SuperPro
-        for r in (
-            pg_db.query(QuestaoAssuntoModel.questao_id)
-            .filter(
-                (QuestaoAssuntoModel.classificado_manualmente == True)
-                | (
-                    (QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None))
-                    & (
-                        func.json_length(
-                            QuestaoAssuntoModel.classificacao_nao_enquadrada
-                        )
-                        > 0
-                    )
-                )
-                | (
-                    (QuestaoAssuntoModel.extracao_feita == True)
-                    & (QuestaoAssuntoModel.classificacoes.isnot(None))
-                    & (func.json_length(QuestaoAssuntoModel.classificacoes) > 0)
-                )
-            )
-            .all()
-        ):
-            ids_excluir.add(r[0])
-
-        # 2b. Já classificadas por este usuário
-        for r in (
-            pg_db.query(ClassificacaoUsuarioModel.questao_id)
-            .filter(ClassificacaoUsuarioModel.usuario_id == usuario.id)
-            .all()
-        ):
-            ids_excluir.add(r[0])
-
-        # 2c. Puladas por qualquer usuário — só aparecem em Pendentes, nunca em /proxima
-        for r in pg_db.query(QuestaoPuladaModel.questao_id).all():
-            ids_excluir.add(r[0])
-
-        # Etapa 3: contagem de excluídas por habilidade no MySQL
-        # (IN por PK é eficiente; resposta = ≤ 29 linhas agrupadas)
-        excluido_por_hab: dict[int, int] = {}
-        if ids_excluir:
+        # Etapa 2: contagem de excluídas por habilidade no MySQL
+        excluido_por_trieduc: dict[int, int] = {}
+        if ids_excluir and total_por_trieduc:
             rows_excluido = (
                 db.query(
                     QuestaoModel.habilidade_id,
@@ -453,20 +471,28 @@ async def listar_habilidades_filtro(
                 )
                 .filter(
                     QuestaoModel.id.in_(list(ids_excluir)),
-                    QuestaoModel.habilidade_id.in_(hab_ids),
+                    QuestaoModel.habilidade_id.in_(mysql_hab_ids),
                     QuestaoModel.ano_id == 3,
                 )
                 .group_by(QuestaoModel.habilidade_id)
                 .all()
             )
-            excluido_por_hab = {r[0]: r[1] for r in rows_excluido}
+            for mysql_id, count in rows_excluido:
+                trieduc_id = mysql_to_trieduc.get(mysql_id)
+                if trieduc_id:
+                    excluido_por_trieduc[trieduc_id] = excluido_por_trieduc.get(trieduc_id, 0) + count
 
-        # Etapa 4: calcular pendentes (Python puro, O(n) em hab_ids)
-        for hab_id, total in total_por_hab.items():
-            excluidos = excluido_por_hab.get(hab_id, 0)
+        # Etapa 3: calcular pendentes (Python puro, O(n))
+        for trieduc_id, total in total_por_trieduc.items():
+            excluidos = excluido_por_trieduc.get(trieduc_id, 0)
             pendentes = total - excluidos
             if pendentes > 0:
-                counts_map[hab_id] = pendentes
+                counts_map[trieduc_id] = pendentes
+
+    if not counts_map:
+        res = HabilidadesFiltroResponse(habilidades=[], total=0)
+        set_to_cache(cache_key, res)
+        return res
 
     habilidades = []
     for r in results:

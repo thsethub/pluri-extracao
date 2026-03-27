@@ -1,13 +1,13 @@
 ﻿"use client";
 
-import { useState, useEffect } from 'react';
-import { apiRequest } from '@/lib/api';
-import { pickRenderableHtml } from '@/lib/html-content';
-import AppLayout from '@/components/AppLayout';
-import FilterBar from '@/components/FilterBar';
+import { useState, useEffect } from "react";
+import { apiRequest } from "@/lib/api";
+import { pickRenderableHtml } from "@/lib/html-content";
+import AppLayout from "@/components/AppLayout";
+import FilterBar from "@/components/FilterBar";
 import CorrigirClassificacaoModal, {
   HabilidadeModulo,
-} from '@/components/CorrigirClassificacaoModal';
+} from "@/components/CorrigirClassificacaoModal";
 import {
   CheckCircle,
   Pencil,
@@ -15,34 +15,34 @@ import {
   AlertTriangle,
   Bot,
   Zap,
-} from 'lucide-react';
-import styles from '../classificar/Classificar.module.css';
+} from "lucide-react";
+import styles from "../classificar/Classificar.module.css";
 
 function MatchBadge({ score }: { score: number | null | undefined }) {
   if (score == null) return null;
   const pct = Math.round(score * 100);
-  let color = '#991b1b';
-  let bg = '#fecaca';
-  let borderColor = '#f87171';
+  let color = "#991b1b";
+  let bg = "#fecaca";
+  let borderColor = "#f87171";
   if (pct >= 80) {
-    color = '#166534';
-    bg = '#bbf7d0';
-    borderColor = '#4ade80';
+    color = "#166534";
+    bg = "#bbf7d0";
+    borderColor = "#4ade80";
   } else if (pct >= 60) {
-    color = '#854d0e';
-    bg = '#fef08a';
-    borderColor = '#facc15';
+    color = "#854d0e";
+    bg = "#fef08a";
+    borderColor = "#facc15";
   }
 
   return (
     <span
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '0.3rem',
-        padding: '0.3rem 0.7rem',
-        borderRadius: '12px',
-        fontSize: '0.8rem',
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "0.3rem",
+        padding: "0.3rem 0.7rem",
+        borderRadius: "12px",
+        fontSize: "0.8rem",
         fontWeight: 700,
         color,
         background: bg,
@@ -58,16 +58,16 @@ function MatchBadge({ score }: { score: number | null | undefined }) {
 export default function VerificarPage() {
   const [questao, setQuestao] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const usuario =
-    typeof window !== 'undefined'
-      ? JSON.parse(localStorage.getItem('usuario') || '{}')
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("usuario") || "{}")
       : null;
-  const [area, setArea] = useState(usuario?.disciplina || '');
-  const [disciplinaFiltro, setDisciplinaFiltro] = useState('');
-  const [habilidadeFiltro, setHabilidadeFiltro] = useState('');
+  const [area, setArea] = useState(usuario?.disciplina || "");
+  const [disciplinaFiltro, setDisciplinaFiltro] = useState("");
+  const [habilidadeFiltro, setHabilidadeFiltro] = useState("");
   const [saving, setSaving] = useState(false);
-  const [observacao, setObservacao] = useState('');
+  const [observacao, setObservacao] = useState("");
   const [showCorrigirModal, setShowCorrigirModal] = useState(false);
 
   const fetchProxima = async (
@@ -76,22 +76,24 @@ export default function VerificarPage() {
     habFiltro?: string,
   ) => {
     setLoading(true);
-    setError('');
+    setError("");
     setQuestao(null);
-    setObservacao('');
+    setObservacao("");
     setShowCorrigirModal(false);
 
     try {
       const query = new URLSearchParams();
-      if (areaFiltro) query.append('area', areaFiltro);
-      if (discFiltro) query.append('disciplina_id', discFiltro);
-      if (habFiltro) query.append('habilidade_id', habFiltro);
+      if (areaFiltro) query.append("area", areaFiltro);
+      if (discFiltro) query.append("disciplina_id", discFiltro);
+      if (habFiltro) query.append("habilidade_id", habFiltro);
 
-      const params = query.toString() ? `?${query.toString()}` : '';
+      const params = query.toString() ? `?${query.toString()}` : "";
       const data = await apiRequest(`/proxima-low-match${params}`);
       setQuestao(data);
     } catch (err: any) {
-      setError(err.message || 'Nenhuma questão de baixa similaridade pendente.');
+      setError(
+        err.message || "Nenhuma questão de baixa similaridade pendente.",
+      );
     } finally {
       setLoading(false);
     }
@@ -104,11 +106,11 @@ export default function VerificarPage() {
   const handleConfirmar = async () => {
     setSaving(true);
     try {
-      await apiRequest('/salvar', {
-        method: 'POST',
+      await apiRequest("/salvar", {
+        method: "POST",
         body: JSON.stringify({
           questao_id: questao.id,
-          tipo_acao: 'confirmacao',
+          tipo_acao: "confirmacao",
           observacao,
         }),
       });
@@ -122,7 +124,7 @@ export default function VerificarPage() {
 
   const mapPayloadCorrecao = (modulosCorrecao: HabilidadeModulo[]) => {
     const trieducSelecionados = modulosCorrecao.filter(
-      (m) => m.fonte === 'trieduc',
+      (m) => m.fonte === "trieduc",
     );
     const habilidadeModuloIds = trieducSelecionados
       .map((m) => Number(m.id))
@@ -135,7 +137,9 @@ export default function VerificarPage() {
         ? habilidadeModuloIds
         : undefined,
       modulos_escolhidos: modulosCorrecao.map((m) => m.modulo),
-      classificacoes_trieduc: modulosCorrecao.map((m) => m.habilidade_descricao),
+      classificacoes_trieduc: modulosCorrecao.map(
+        (m) => m.habilidade_descricao,
+      ),
       descricoes_assunto: modulosCorrecao.map((m) => m.descricao),
       habilidade_modulo_id: trieducSelecionados.length
         ? Number(trieducSelecionados[0].id)
@@ -144,7 +148,7 @@ export default function VerificarPage() {
       classificacao_trieduc:
         trieducSelecionados.length > 0
           ? trieducSelecionados[0].habilidade_descricao
-          : 'LibroStudio',
+          : "LibroStudio",
       descricao_assunto: primeiroSelecionado?.descricao,
     };
   };
@@ -154,12 +158,12 @@ export default function VerificarPage() {
     setSaving(true);
     try {
       const payload = mapPayloadCorrecao(modulosCorrecao);
-      await apiRequest('/salvar', {
-        method: 'POST',
+      await apiRequest("/salvar", {
+        method: "POST",
         body: JSON.stringify({
           questao_id: questao.id,
           ...payload,
-          tipo_acao: 'correcao',
+          tipo_acao: "correcao",
           observacao,
         }),
       });
@@ -194,7 +198,7 @@ export default function VerificarPage() {
       </div>
 
       <FilterBar
-        habilidadesUrl='/habilidades-verificar'
+        habilidadesUrl="/habilidades-verificar"
         onFilterChange={(a, d, h) => {
           setArea(a);
           setDisciplinaFiltro(d);
@@ -209,9 +213,13 @@ export default function VerificarPage() {
         </div>
       ) : error ? (
         <div className={styles.empty}>
-          <CheckCircle size={48} color='var(--success)' />
+          <CheckCircle size={48} color="var(--success)" />
           <p>{error}</p>
-          <button onClick={() => fetchProxima(area, disciplinaFiltro, habilidadeFiltro)}>
+          <button
+            onClick={() =>
+              fetchProxima(area, disciplinaFiltro, habilidadeFiltro)
+            }
+          >
             Tentar Novamente
           </button>
         </div>
@@ -248,7 +256,7 @@ export default function VerificarPage() {
                   {questao.alternativas.map((alt: any, index: number) => (
                     <div
                       key={index}
-                      className={`${styles.altItem} ${alt.correta ? styles.altCorreta : ''}`}
+                      className={`${styles.altItem} ${alt.correta ? styles.altCorreta : ""}`}
                     >
                       <span className={styles.altLetra}>
                         {String.fromCharCode(97 + index)})
@@ -273,18 +281,18 @@ export default function VerificarPage() {
                 <h3>Validação Necessária</h3>
               </div>
 
-              <div className='superpro-banner'>
-                <div className='superpro-header'>
-                  <div className='superpro-title'>
+              <div className="superpro-banner">
+                <div className="superpro-header">
+                  <div className="superpro-title">
                     <Bot size={16} />
                     <strong>Classificação SuperProfessor</strong>
                   </div>
                   <MatchBadge score={questao.similaridade} />
                 </div>
                 {lowMatchTags.length > 0 && (
-                  <div className='superpro-tags'>
+                  <div className="superpro-tags">
                     {lowMatchTags.map((tag: string, i: number) => (
-                      <span key={i} className='low-match-tag'>
+                      <span key={i} className="low-match-tag">
                         {tag}
                       </span>
                     ))}
@@ -293,21 +301,22 @@ export default function VerificarPage() {
               </div>
 
               <p className={styles.moduloHint}>
-                A classificação do SuperProfessor está correta para esta questão?
+                A classificação do SuperProfessor está correta para esta
+                questão?
               </p>
 
-              <div className='confirm-actions'>
+              <div className="confirm-actions">
                 <button
                   onClick={handleConfirmar}
                   disabled={saving}
-                  className='confirm-btn'
+                  className="confirm-btn"
                 >
                   <CheckCircle size={20} />
-                  {saving ? 'Confirmando...' : 'Sim, está correta'}
+                  {saving ? "Confirmando..." : "Sim, está correta"}
                 </button>
                 <button
                   onClick={() => setShowCorrigirModal(true)}
-                  className='correct-btn'
+                  className="correct-btn"
                 >
                   <Pencil size={18} />
                   Não, quero corrigir
@@ -316,13 +325,15 @@ export default function VerificarPage() {
 
               <div className={styles.actionArea}>
                 <textarea
-                  placeholder='Descreva brevemente o motivo da confirmação ou correção'
+                  placeholder="Descreva brevemente o motivo da confirmação ou correção"
                   value={observacao}
                   onChange={(e) => setObservacao(e.target.value)}
                 />
                 <div className={styles.buttons}>
                   <button
-                    onClick={() => fetchProxima(area, disciplinaFiltro, habilidadeFiltro)}
+                    onClick={() =>
+                      fetchProxima(area, disciplinaFiltro, habilidadeFiltro)
+                    }
                     className={styles.skipBtn}
                   >
                     <FastForward size={18} />
