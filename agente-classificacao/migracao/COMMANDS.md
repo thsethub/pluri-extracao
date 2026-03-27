@@ -117,8 +117,11 @@ python -m migracao --tipo-acao classificacao_nova --disciplina Matemática
 
 # Verificações de História em PRODUÇÃO
 python -m migracao --tipo-acao verificacao --disciplina História --producao
-```
 
+# Subir questões globais
+python -m migracao --global --limit None
+```
+python -m migracao --global --limit None
 ---
 
 ## 5. Controlando o limite de questões
