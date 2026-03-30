@@ -101,6 +101,34 @@ def _normalize_disc_modu_id(value: Optional[object]) -> Optional[str]:
     return normalized
 
 
+def _resolver_habilidade_mysql_ids(
+    trieduc_habilidade_id: int,
+    pg_db: Session,
+    db: Session,
+) -> list[int]:
+    """Resolve um habilidade_id TRIEDUC para os IDs correspondentes no MySQL.
+
+    Os dois sistemas (PostgreSQL/TRIEDUC e MySQL) usam IDs independentes para a
+    mesma habilidade. O /habilidades usa mapeamento via descrição para contar
+    corretamente; este helper aplica a mesma lógica nos endpoints /proxima.
+    """
+    hab_desc_row = (
+        pg_db.query(HabilidadeModuloModel.habilidade_descricao)
+        .filter(HabilidadeModuloModel.habilidade_id == trieduc_habilidade_id)
+        .first()
+    )
+    if not hab_desc_row or not hab_desc_row[0]:
+        return [trieduc_habilidade_id]
+
+    mysql_ids = [
+        r[0]
+        for r in db.query(HabilidadeModel.id)
+        .filter(func.lower(HabilidadeModel.descricao) == hab_desc_row[0].lower())
+        .all()
+    ]
+    return mysql_ids if mysql_ids else [trieduc_habilidade_id]
+
+
 # ========================
 # CONFIG
 # ========================
@@ -393,9 +421,13 @@ async def listar_habilidades_filtro(
                 if trieduc_id:
                     mysql_to_trieduc[mysql_id] = trieduc_id
 
-    # Fallback: incluir os próprios hab_ids (para habilidades onde TRIEDUC ID == MySQL ID)
+    # Fallback: só usar TRIEDUC ID como MySQL ID quando não houve mapeamento via descrição.
+    # Se já existe um MySQL ID mapeado para este TRIEDUC ID, não adicionar o TRIEDUC ID
+    # como MySQL ID extra (evita dupla contagem de questões com IDs distintos).
+    trieduc_ids_ja_mapeados = set(mysql_to_trieduc.values())
     for trieduc_id in hab_ids:
-        mysql_to_trieduc.setdefault(trieduc_id, trieduc_id)
+        if trieduc_id not in trieduc_ids_ja_mapeados:
+            mysql_to_trieduc[trieduc_id] = trieduc_id
 
     mysql_hab_ids = list(mysql_to_trieduc.keys())
 
@@ -1424,8 +1456,12 @@ async def proxima_questao_classificar(
     )
 
     if habilidade_id:
+        # Resolver TRIEDUC habilidade_id → MySQL habilidade_id(s) via descrição.
+        # Os dois sistemas usam IDs diferentes; sem esta resolução o filtro retorna
+        # zero questões mesmo quando o dropdown mostra pendentes.
+        resolved_mysql_ids = _resolver_habilidade_mysql_ids(habilidade_id, pg_db, db)
         candidate_query = candidate_query.filter(
-            QuestaoModel.habilidade_id == habilidade_id
+            QuestaoModel.habilidade_id.in_(resolved_mysql_ids)
         )
 
     if disciplina_id:
@@ -1872,11 +1908,13 @@ async def proxima_questao_verificar(
     )
 
     if habilidade_id:
+        # Resolver TRIEDUC habilidade_id → MySQL habilidade_id(s)
+        resolved_mysql_ids = _resolver_habilidade_mysql_ids(habilidade_id, pg_db, db)
         questao_ids_habilidade = [
             row[0]
             for row in db.query(QuestaoModel.id)
             .filter(
-                QuestaoModel.habilidade_id == habilidade_id,
+                QuestaoModel.habilidade_id.in_(resolved_mysql_ids),
                 QuestaoModel.ano_id == 3,
             )
             .all()
@@ -2125,11 +2163,13 @@ async def proxima_questao_low_match(
     )
 
     if habilidade_id:
+        # Resolver TRIEDUC habilidade_id → MySQL habilidade_id(s)
+        resolved_mysql_ids = _resolver_habilidade_mysql_ids(habilidade_id, pg_db, db)
         questao_ids_habilidade = [
             row[0]
             for row in db.query(QuestaoModel.id)
             .filter(
-                QuestaoModel.habilidade_id == habilidade_id,
+                QuestaoModel.habilidade_id.in_(resolved_mysql_ids),
                 QuestaoModel.ano_id == 3,
             )
             .all()

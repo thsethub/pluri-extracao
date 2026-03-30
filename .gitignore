@@ -61,3 +61,6 @@ agente-classificacao/classificacao_superpro_libro.drawio
 
 # Módulo de importação de alunos (projeto separado)
 pluri-import-base-alunos/
+
+# Módulo de importação de alunos (projeto separado)
+migracao/

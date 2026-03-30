@@ -56,6 +56,11 @@ Exemplos de uso:
         action="store_true",
         help="Excluir questões da lista QUESTOES_QUIMICA_ID (questoes já migradas/separadas)",
     )
+    parser.add_argument(
+        "--global",
+        action="store_true",
+        help="Ignorar filtros de tipo de ação e disciplina, migrando todas as classificações",
+    )
 
     args = parser.parse_args()
 
