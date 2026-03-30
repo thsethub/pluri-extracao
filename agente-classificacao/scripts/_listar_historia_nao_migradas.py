@@ -17,7 +17,8 @@ with engine.connect() as db:
             cu.questao_id,
             d.descricao           AS disciplina,
             cu.tipo_acao,
-            cu.migrada,
+            cu.migrada_desenvolvimento,
+            cu.migrada_producao,
             (
                 SELECT COUNT(*)
                 FROM trieduc.questao_alternativas qa
@@ -30,7 +31,7 @@ with engine.connect() as db:
           AND d.descricao LIKE '%Historia%'
           AND cu.modulos_escolhidos IS NOT NULL
           AND cu.modulos_escolhidos != '[]'
-          AND (cu.migrada IS NULL OR cu.migrada = FALSE)
+          AND (cu.migrada_desenvolvimento IS NULL OR cu.migrada_desenvolvimento = FALSE)
         ORDER BY cu.id
     """))
     rows = result.fetchall()
@@ -38,22 +39,23 @@ with engine.connect() as db:
 print(f"Total questoes nao migradas (Historia / classificacao_nova): {len(rows)}")
 print()
 
-header = f"{'classificacao_id':>16} | {'questao_id':>10} | {'migrada':>7} | {'num_alt':>7} | disciplina"
+header = f"{'classificacao_id':>16} | {'questao_id':>10} | {'migrada_dev':>11} | {'migrada_prod':>12} | {'num_alt':>7} | disciplina"
 print(header)
 print("-" * len(header))
 
 for r in rows:
-    migrada_val = str(r.migrada) if r.migrada is not None else "NULL"
-    print(f"{r.classificacao_id:>16} | {r.questao_id:>10} | {migrada_val:>7} | {int(r.num_alternativas):>7} | {r.disciplina}")
+    migrada_dev_val = str(r.migrada_desenvolvimento) if r.migrada_desenvolvimento is not None else "NULL"
+    migrada_prod_val = str(r.migrada_producao) if r.migrada_producao is not None else "NULL"
+    print(f"{r.classificacao_id:>16} | {r.questao_id:>10} | {migrada_dev_val:>11} | {migrada_prod_val:>12} | {int(r.num_alternativas):>7} | {r.disciplina}")
 
 # Exporta CSV
 csv_path = "data/output/_historia_classificacao_nova_nao_migradas.csv"
 with open(csv_path, "w", newline="", encoding="utf-8") as f:
     writer = csv.writer(f)
-    writer.writerow(["classificacao_id", "questao_id", "disciplina", "tipo_acao", "migrada", "num_alternativas"])
+    writer.writerow(["classificacao_id", "questao_id", "disciplina", "tipo_acao", "migrada_desenvolvimento", "migrada_producao", "num_alternativas"])
     for r in rows:
         writer.writerow([r.classificacao_id, r.questao_id, r.disciplina, r.tipo_acao,
-                         r.migrada, int(r.num_alternativas)])
+                         r.migrada_desenvolvimento, r.migrada_producao, int(r.num_alternativas)])
 
 print(f"\nCSV exportado: {csv_path}")
 

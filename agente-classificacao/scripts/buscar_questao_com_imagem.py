@@ -14,7 +14,7 @@ result = db.execute(text("""
     JOIN trieduc.disciplinas d ON q.disciplina_id = d.id
     WHERE d.descricao LIKE '%História%'
       AND cu.tipo_acao = 'classificacao_nova'
-      AND (cu.migrada IS NULL OR cu.migrada = FALSE)
+      AND (cu.migrada_desenvolvimento IS NULL OR cu.migrada_desenvolvimento = FALSE)
       AND cu.modulos_escolhidos IS NOT NULL
       AND cu.modulos_escolhidos != '[]'
       AND q.enunciado LIKE '%<img%'
