@@ -16,8 +16,10 @@ with engine.connect() as db:
             d.descricao           AS disciplina,
             cu.tipo_acao,
             COUNT(*)              AS total,
-            SUM(CASE WHEN cu.migrada = TRUE THEN 1 ELSE 0 END)  AS migradas,
-            SUM(CASE WHEN cu.migrada IS NULL OR cu.migrada = FALSE THEN 1 ELSE 0 END) AS pendentes
+            SUM(CASE WHEN cu.migrada_desenvolvimento = TRUE THEN 1 ELSE 0 END)  AS migradas_dev,
+            SUM(CASE WHEN cu.migrada_desenvolvimento IS NULL OR cu.migrada_desenvolvimento = FALSE THEN 1 ELSE 0 END) AS pendentes_dev,
+            SUM(CASE WHEN cu.migrada_producao = TRUE THEN 1 ELSE 0 END)  AS migradas_prod,
+            SUM(CASE WHEN cu.migrada_producao IS NULL OR cu.migrada_producao = FALSE THEN 1 ELSE 0 END) AS pendentes_prod
         FROM thsethub.classificacao_usuario cu
         JOIN trieduc.questoes q    ON cu.questao_id = q.id
         JOIN trieduc.disciplinas d ON q.disciplina_id = d.id

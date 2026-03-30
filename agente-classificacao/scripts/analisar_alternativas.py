@@ -18,7 +18,7 @@ result = db.execute(text("""
     LEFT JOIN trieduc.questao_alternativas qa ON q.id = qa.questao_id
     WHERE d.descricao LIKE '%História%'
       AND cu.tipo_acao = 'classificacao_nova'
-      AND (cu.migrada IS NULL OR cu.migrada = FALSE)
+      AND (cu.migrada_desenvolvimento IS NULL OR cu.migrada_desenvolvimento = FALSE)
       AND cu.modulos_escolhidos IS NOT NULL
       AND cu.modulos_escolhidos != '[]'
     GROUP BY cu.id, cu.questao_id

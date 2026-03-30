@@ -259,7 +259,7 @@ def buscar_questoes(tipo_acao: str = None, disciplina: str = None, limite: int =
     db = PgSessionLocal()
     try:
         query = db.query(ClassificacaoUsuarioModel).filter(
-            ClassificacaoUsuarioModel.migrada == False  # Somente registros não migrados
+            ClassificacaoUsuarioModel.migrada_desenvolvimento == False  # Somente registros não migrados
         )
         
         # Filtra por tipo de ação, se fornecido
@@ -415,7 +415,7 @@ def buscar_registro_classificacao_com_questao(registro_id: int = None, questao_i
         elif questao_id:
             registro = db_thsethub.query(ClassificacaoUsuarioModel).filter(
                 ClassificacaoUsuarioModel.questao_id == questao_id,
-                ClassificacaoUsuarioModel.migrada == False
+                ClassificacaoUsuarioModel.migrada_desenvolvimento == False
             ).first()
         else:
             print("Informe registro_id ou questao_id")
@@ -452,7 +452,8 @@ def buscar_registro_classificacao_com_questao(registro_id: int = None, questao_i
                 "classificacao_extracao": registro.classificacao_extracao,
                 "observacao": registro.observacao,
                 "created_at": registro.created_at,
-                "migrada": registro.migrada,
+                "migrada_desenvolvimento": registro.migrada_desenvolvimento,
+                "migrada_producao": registro.migrada_producao,
             },
             "questao": dados_questao
         }

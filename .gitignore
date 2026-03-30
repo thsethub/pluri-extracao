@@ -64,3 +64,7 @@ pluri-import-base-alunos/
 
 # Módulo de importação de alunos (projeto separado)
 migracao/
+
+# Csv de teste
+classificacoes_por_assunto.csv
+export_classificacoes.py
