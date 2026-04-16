@@ -53,6 +53,7 @@ interface CorrigirClassificacaoModalProps {
   onClose: () => void;
   onConfirmar: (selecionados: HabilidadeModulo[]) => void;
   saving?: boolean;
+  apenasLibrostudio?: boolean;
 }
 
 const toStringSafe = (value: string | null | undefined): string =>
@@ -63,6 +64,7 @@ export default function CorrigirClassificacaoModal({
   onClose,
   onConfirmar,
   saving = false,
+  apenasLibrostudio = false,
 }: CorrigirClassificacaoModalProps) {
   const [modulos, setModulos] = useState<HabilidadeModulo[]>([]);
   const [loadingModulos, setLoadingModulos] = useState(false);
@@ -77,11 +79,15 @@ export default function CorrigirClassificacaoModal({
     title: string;
     className: string;
   }> = [
-    {
-      key: "trieduc",
-      title: "Módulos Libro com relacionamento na Trieduc",
-      className: styles.sectionSourceTrieduc,
-    },
+    ...(!apenasLibrostudio
+      ? [
+          {
+            key: "trieduc" as FonteModulo,
+            title: "Módulos Libro com relacionamento na Trieduc",
+            className: styles.sectionSourceTrieduc,
+          },
+        ]
+      : []),
     {
       key: "librostudio",
       title: "Módulos Libro",
@@ -133,7 +139,7 @@ export default function CorrigirClassificacaoModal({
       }
 
       const livroItens = (librostudioData.modulos || [])
-        .filter((m: ModuloComAssuntosResponse) => !m.has_relacionamento_trieduc)
+        .filter((m: ModuloComAssuntosResponse) => apenasLibrostudio || !m.has_relacionamento_trieduc)
         .flatMap((m: ModuloComAssuntosResponse) => {
           const disciplina = toStringSafe(m.disciplina);
           const assuntos = m.assuntos || [];
@@ -243,7 +249,7 @@ export default function CorrigirClassificacaoModal({
         <div className={styles.header}>
           <div className={styles.headerTitle}>
             <Pencil size={18} />
-            <h2>Corrigir Classificação</h2>
+            <h2>{apenasLibrostudio ? "Classificar" : "Corrigir Classificação"}</h2>
           </div>
           <button
             className={styles.closeBtn}

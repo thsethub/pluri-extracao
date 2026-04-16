@@ -1,0 +1,226 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Cabeçalho */
+.header h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.1rem;
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Card de filtros */
+.filtrosCard {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filtrosGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.field label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.field input {
+    height: 38px;
+    padding: 0 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--background);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.field input:focus {
+    border-color: var(--primary);
+}
+
+.btnBuscar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: flex-start;
+    padding: 0.55rem 1.25rem;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.15s;
+}
+
+.btnBuscar:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+
+.btnBuscar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Erro */
+.erro {
+    padding: 0.9rem 1.25rem;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: var(--radius);
+    color: var(--error);
+    font-size: 0.9rem;
+}
+
+/* Cards de status (3 colunas) */
+.statusGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.statusCard {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.statusCard h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.statusNumeros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.statusItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.statusItem span:first-child {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+}
+
+.statusItem span:last-child {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.destaque {
+    color: var(--primary) !important;
+}
+
+/* Tabela de revisores */
+.tabelaCard {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.tabelaCard h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.tabela th {
+    text-align: left;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid var(--border);
+}
+
+.tabela td {
+    padding: 0.6rem 0.75rem;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+}
+
+.tabela tbody tr:nth-child(even) {
+    background: var(--background);
+}
+
+.tabela tbody tr:hover {
+    background: color-mix(in srgb, var(--primary) 5%, var(--surface));
+}
+
+.totalRow td {
+    font-weight: 700;
+    border-top: 2px solid var(--border);
+    border-bottom: none;
+    color: var(--text);
+}
+
+.semDados {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

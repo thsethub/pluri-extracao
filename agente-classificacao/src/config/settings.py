@@ -6,7 +6,6 @@ import json
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import BaseModel
 
-
 BASE_DIR = Path(__file__).resolve().parents[2]
 ENV_FILE = BASE_DIR / ".env"
 
@@ -22,7 +21,7 @@ class Habilidade(BaseModel):
 
 class Settings(BaseSettings):
     """Configurações globais da aplicação"""
-    
+
     # OpenAI
     openai_api_key: str
     openai_model: str = "gpt-3.5-turbo"
@@ -64,10 +63,17 @@ class Settings(BaseSettings):
     db_name: str = ""
     db_auto_create_tables: bool = False
 
+    # Database OCR - Conexão separada para módulo de validação OCR
+    ocr_db_host: str = ""
+    ocr_db_port: int = 3306
+    ocr_db_user: str = ""
+    ocr_db_password: str = ""
+    ocr_db_name: str = ""
+
     @property
     def database_url(self) -> str:
         """Retorna a URL de conexão do banco MySQL.
-        
+
         Se db_name estiver vazio, permite acesso a todos os bancos do usuário.
         Use prefixo nas queries: SELECT * FROM database_name.table_name
         """
@@ -77,9 +83,22 @@ class Settings(BaseSettings):
             # Sem banco específico - acesso a todos os bancos do usuário
             return f"mysql+pymysql://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}"
 
+    @property
+    def ocr_database_url(self) -> str:
+        """Retorna a URL de conexão do banco OCR.
+
+        Se ocr_db_host estiver vazio, faz fallback para o banco principal.
+        """
+        if not self.ocr_db_host:
+            return self.database_url
+        if self.ocr_db_name:
+            return f"mysql+pymysql://{self.ocr_db_user}:{self.ocr_db_password}@{self.ocr_db_host}:{self.ocr_db_port}/{self.ocr_db_name}"
+        else:
+            return f"mysql+pymysql://{self.ocr_db_user}:{self.ocr_db_password}@{self.ocr_db_host}:{self.ocr_db_port}"
+
     # Disciplinas disponíveis
     disciplines: str = (
-        "Artes,Biologia,Ciências,Educação Física,Espanhol,Filosofia,Física,Geografia,História,Língua Inglesa,Língua Portuguesa,Matemática,Natureza e Sociedade,Química,Sociologia"
+        "Artes,Biologia,Ciências,Educação Física,Espanhol,Filosofia,Física,Geografia,História,Língua Inglesa,Língua Portuguesa,Matemática,Natureza e Sociedade,Química,Redação,Sociologia"
     )
 
     # AWS S3

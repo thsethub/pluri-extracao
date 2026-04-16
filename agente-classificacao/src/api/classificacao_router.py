@@ -856,6 +856,572 @@ async def listar_habilidades_verificar(
 
 
 # ========================
+# CONTAGEM POR DISCIPLINA (filas alta sim + confirmações)
+# ========================
+
+
+@router.get(
+    "/contagem-filas",
+    summary="📊 Contagem de pendentes por disciplina (alta similaridade e confirmações)",
+)
+async def contagem_filas_por_disciplina(
+    db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna contagem de questões pendentes por disciplina para as duas filas:
+    alta_similaridade (similaridade >= 0.8, não classificadas, sem 4 alt) e
+    confirmacoes (tipo_acao='confirmacao' sem reclassificação posterior, sem 4 alt).
+    """
+    cache_key = "contagem_filas_v1"
+    cached = get_from_cache(cache_key, ttl=120)
+    if cached is not None:
+        return cached
+
+    rows_sim = db.execute(sql_text("""
+        SELECT d.descricao, COUNT(*) AS total
+        FROM thsethub.questao_assuntos qa
+        JOIN trieduc.questoes q ON q.id = qa.questao_id
+        JOIN trieduc.disciplinas d ON d.id = q.disciplina_id
+        LEFT JOIN (
+            SELECT questao_id, COUNT(*) AS n
+            FROM trieduc.questao_alternativas GROUP BY questao_id
+        ) alt ON alt.questao_id = q.id
+        WHERE qa.similaridade >= 0.8
+          AND qa.extracao_feita = 1
+          AND qa.classificado_manualmente = 0
+          AND (alt.n IS NULL OR alt.n != 4)
+        GROUP BY d.descricao
+    """)).fetchall()
+
+    rows_conf = db.execute(sql_text("""
+        SELECT d.descricao, COUNT(DISTINCT cu.questao_id) AS total
+        FROM thsethub.classificacao_usuario cu
+        JOIN trieduc.questoes q ON q.id = cu.questao_id
+        JOIN trieduc.disciplinas d ON d.id = q.disciplina_id
+        LEFT JOIN (
+            SELECT questao_id, COUNT(*) AS n
+            FROM trieduc.questao_alternativas GROUP BY questao_id
+        ) alt ON alt.questao_id = q.id
+        WHERE cu.tipo_acao = 'confirmacao'
+          AND cu.questao_id NOT IN (
+              SELECT questao_id FROM thsethub.classificacao_usuario
+              WHERE tipo_acao IN ('classificacao_nova', 'correcao')
+          )
+          AND (alt.n IS NULL OR alt.n != 4)
+        GROUP BY d.descricao
+    """)).fetchall()
+
+    result = {
+        "alta_similaridade": {r[0]: r[1] for r in rows_sim},
+        "confirmacoes": {r[0]: r[1] for r in rows_conf},
+    }
+    set_to_cache(cache_key, result)
+    return result
+
+
+# ========================
+# MÓDULOS LIBRO DIRETO (compartilhados)
+# ========================
+
+
+@router.get(
+    "/modulos-libro-direto",
+    summary="📚 Módulos Libro com assuntos direto do banco compartilhados",
+)
+async def listar_modulos_libro_direto(
+    db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna todos os módulos Libro com seus assuntos, diretamente das tabelas
+    compartilhados.disciplinas_modulos e compartilhados.assuntos.
+    Exclui itens prefixados com [RM]. Usado na classificação de alta similaridade.
+    """
+    cache_key = "modulos_libro_direto_v1"
+    cached = get_from_cache(cache_key, ttl=600)
+    if cached is not None:
+        return cached
+
+    rows = db.execute(sql_text("""
+        SELECT
+            d.disc_id,
+            d.disc_descricao AS disciplina,
+            dm.disc_modu_id,
+            dm.disc_modu_descricao AS modulo,
+            a.assu_id,
+            a.assu_descricao AS assunto
+        FROM compartilhados.disciplinas_modulos dm
+        JOIN compartilhados.disciplinas d ON d.disc_id = dm.disc_id
+        JOIN compartilhados.assuntos a ON a.disc_modu_id = dm.disc_modu_id
+        WHERE dm.disc_modu_descricao NOT LIKE '[RM]%'
+          AND a.assu_descricao NOT LIKE '[RM]%'
+        ORDER BY d.disc_descricao, dm.disc_modu_descricao, a.assu_descricao
+    """)).fetchall()
+
+    # Montar estrutura: disciplina → módulos → assuntos
+    disc_map: dict = {}
+    for row in rows:
+        disc_id = row[0]
+        disciplina = row[1]
+        disc_modu_id = row[2]
+        modulo = row[3]
+        assu_id = row[4]
+        assunto = row[5]
+
+        if disc_id not in disc_map:
+            disc_map[disc_id] = {"disc_id": disc_id, "disciplina": disciplina, "modulos": {}}
+
+        if disc_modu_id not in disc_map[disc_id]["modulos"]:
+            disc_map[disc_id]["modulos"][disc_modu_id] = {
+                "disc_modu_id": disc_modu_id,
+                "modulo": modulo,
+                "assuntos": [],
+            }
+
+        disc_map[disc_id]["modulos"][disc_modu_id]["assuntos"].append({
+            "assu_id": assu_id,
+            "assunto": assunto,
+        })
+
+    result = [
+        {
+            "disc_id": d["disc_id"],
+            "disciplina": d["disciplina"],
+            "modulos": list(d["modulos"].values()),
+        }
+        for d in disc_map.values()
+    ]
+
+    set_to_cache(cache_key, result)
+    return result
+
+
+# ========================
+# ALTA SIMILARIDADE (>= 0.8)
+# ========================
+
+
+@router.get(
+    "/assuntos-superpro",
+    summary="📋 Assuntos SuperProfessor disponíveis (similaridade >= 0.8)",
+)
+async def listar_assuntos_superpro(
+    disciplina_id: Optional[str] = Query(None, description="Nome da disciplina para filtrar"),
+    pg_db: Session = Depends(get_db),
+    db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna assuntos únicos (primeiro elemento de classificacoes[]) das questões
+    com similaridade >= 0.8, não classificadas manualmente, sem 4 alternativas.
+    Usado para popular o dropdown de filtros na página de alta similaridade.
+    """
+    cache_key = f"assuntos_superpro_{disciplina_id}"
+    cached = get_from_cache(cache_key, ttl=300)
+    if cached is not None:
+        return cached
+
+    disc_mysql_id = None
+    if disciplina_id:
+        if str(disciplina_id).isdigit():
+            disc_mysql_id = int(disciplina_id)
+        else:
+            mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina_id, disciplina_id)
+            if mysql_name:
+                disc_row = (
+                    db.query(DisciplinaModel.id)
+                    .filter(DisciplinaModel.descricao == mysql_name)
+                    .first()
+                )
+                disc_mysql_id = disc_row[0] if disc_row else None
+
+    disc_filter = f"AND q.disciplina_id = {disc_mysql_id}" if disc_mysql_id else ""
+
+    raw_sql = sql_text(f"""
+        SELECT
+            JSON_UNQUOTE(JSON_EXTRACT(qa.classificacoes, '$[0]')) AS assunto,
+            COUNT(*) AS total
+        FROM thsethub.questao_assuntos qa
+        JOIN trieduc.questoes q ON q.id = qa.questao_id
+        LEFT JOIN (
+            SELECT questao_id, COUNT(*) AS n_alt
+            FROM trieduc.questao_alternativas
+            GROUP BY questao_id
+        ) alt_cnt ON alt_cnt.questao_id = qa.questao_id
+        WHERE qa.similaridade >= 0.8
+          AND qa.extracao_feita = 1
+          AND qa.classificado_manualmente = 0
+          AND JSON_LENGTH(qa.classificacoes) > 0
+          AND (alt_cnt.n_alt IS NULL OR alt_cnt.n_alt != 4)
+          {disc_filter}
+        GROUP BY assunto
+        HAVING assunto IS NOT NULL AND assunto != 'null'
+        ORDER BY total DESC
+        LIMIT 500
+    """)
+
+    rows = db.execute(raw_sql).fetchall()
+    result = [{"assunto": r[0], "total": r[1]} for r in rows]
+    set_to_cache(cache_key, result)
+    return result
+
+
+@router.get(
+    "/proxima-alta-similaridade",
+    response_model=QuestaoClassifResponse,
+    summary="🔍 Próxima questão com similaridade >= 0.8 para classificar",
+)
+async def proxima_questao_alta_similaridade(
+    assunto_superpro: Optional[str] = Query(None, description="Filtrar pelo primeiro assunto superprofessor"),
+    disciplina_id: Optional[str] = Query(None, description="Nome ou ID da disciplina"),
+    last_questao_id: Optional[int] = Query(0, description="Último questao_id visto (seek)"),
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna a próxima questão com similaridade >= 0.8 ainda não classificada manualmente.
+    Exclui questões com 4 alternativas (múltipla escolha com 4 opções).
+    """
+    LIMIT_CANDIDATES = 100
+    MAX_LOOP_TRIES = 50
+
+    disc_mysql_id = None
+    if disciplina_id:
+        if str(disciplina_id).isdigit():
+            disc_mysql_id = int(disciplina_id)
+        else:
+            mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina_id, disciplina_id)
+            if mysql_name:
+                disc_row = (
+                    db.query(DisciplinaModel.id)
+                    .filter(DisciplinaModel.descricao == mysql_name)
+                    .first()
+                )
+                disc_mysql_id = disc_row[0] if disc_row else None
+
+    last_id = last_questao_id or 0
+
+    # IDs que o usuário atual já pulou — serão ignorados na fila
+    puladas_usuario = {
+        r[0]
+        for r in pg_db.query(QuestaoPuladaModel.questao_id)
+        .filter(QuestaoPuladaModel.usuario_id == usuario.id)
+        .all()
+    }
+
+    qa_query = (
+        pg_db.query(QuestaoAssuntoModel.questao_id)
+        .filter(QuestaoAssuntoModel.similaridade >= 0.8)
+        .filter(QuestaoAssuntoModel.extracao_feita == True)
+        .filter(QuestaoAssuntoModel.classificado_manualmente == False)
+        .filter(QuestaoAssuntoModel.classificacoes.isnot(None))
+        .filter(func.json_length(QuestaoAssuntoModel.classificacoes) > 0)
+    )
+
+    if assunto_superpro:
+        qa_query = qa_query.filter(
+            func.json_unquote(
+                func.json_extract(QuestaoAssuntoModel.classificacoes, "$[0]")
+            ) == assunto_superpro
+        )
+
+    qa_query = qa_query.order_by(QuestaoAssuntoModel.questao_id)
+
+    questao_final = None
+
+    for _ in range(MAX_LOOP_TRIES):
+        candidates_qa = (
+            qa_query.filter(QuestaoAssuntoModel.questao_id > last_id)
+            .limit(LIMIT_CANDIDATES)
+            .all()
+        )
+        if not candidates_qa:
+            break
+
+        candidate_ids = [c[0] for c in candidates_qa]
+        last_id = candidate_ids[-1]
+
+        # Filtrar por disciplina no MySQL
+        if disc_mysql_id:
+            valid_mysql = {
+                r[0]
+                for r in db.query(QuestaoModel.id)
+                .filter(QuestaoModel.id.in_(candidate_ids))
+                .filter(QuestaoModel.disciplina_id == disc_mysql_id)
+                .all()
+            }
+            candidate_ids = [c for c in candidate_ids if c in valid_mysql]
+
+        if not candidate_ids:
+            continue
+
+        # Excluir questões com 4 alternativas
+        from ..database.models import QuestaoAlternativaModel
+        alt_counts = {
+            r[0]: r[1]
+            for r in db.query(QuestaoAlternativaModel.questao_id, func.count(QuestaoAlternativaModel.id))
+            .filter(QuestaoAlternativaModel.questao_id.in_(candidate_ids))
+            .group_by(QuestaoAlternativaModel.questao_id)
+            .all()
+        }
+        candidate_ids = [c for c in candidate_ids if alt_counts.get(c, 0) != 4]
+
+        # Excluir questões que o usuário já pulou
+        if puladas_usuario:
+            candidate_ids = [c for c in candidate_ids if c not in puladas_usuario]
+
+        if not candidate_ids:
+            continue
+
+        valid_id = candidate_ids[0]
+
+        questao_final = (
+            db.query(QuestaoModel)
+            .options(
+                joinedload(QuestaoModel.disciplina),
+                joinedload(QuestaoModel.habilidade),
+                joinedload(QuestaoModel.alternativas),
+            )
+            .filter(QuestaoModel.id == valid_id)
+            .first()
+        )
+
+        if questao_final:
+            break
+
+    if not questao_final:
+        raise HTTPException(
+            status_code=404,
+            detail="Nenhuma questão de alta similaridade pendente encontrada.",
+        )
+
+    questao = questao_final
+    enunciado_tratado, _, _ = tratar_enunciado(questao.enunciado)
+    texto_base_tratado = None
+    if questao.texto_base:
+        texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
+
+    extracao = (
+        pg_db.query(QuestaoAssuntoModel)
+        .filter(QuestaoAssuntoModel.questao_id == questao.id)
+        .first()
+    )
+
+    alternativas = []
+    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+        for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
+            conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
+            alternativas.append(
+                AlternativaClassifSchema(
+                    ordem=alt.ordem or 0,
+                    conteudo=conteudo_limpo,
+                    conteudo_html=alt.conteudo,
+                    correta=bool(alt.correta),
+                )
+            )
+
+    disc_nome = questao.disciplina.descricao if questao.disciplina else None
+    hab_descricao = questao.habilidade.descricao if questao.habilidade else None
+
+    return QuestaoClassifResponse(
+        id=questao.id,
+        questao_id=questao.questao_id,
+        enunciado=enunciado_tratado,
+        enunciado_html=questao.enunciado,
+        texto_base=texto_base_tratado,
+        texto_base_html=questao.texto_base,
+        disciplina_id=questao.disciplina_id,
+        disciplina_nome=disc_nome,
+        habilidade_id=questao.habilidade_id,
+        habilidade_descricao=hab_descricao,
+        tipo=questao.tipo,
+        alternativas=alternativas,
+        classificacao_extracao=extracao.classificacoes if extracao else None,
+        classificacao_nao_enquadrada=extracao.classificacao_nao_enquadrada if extracao else None,
+        similaridade=extracao.similaridade if extracao else None,
+        tem_extracao=bool(extracao and extracao.extracao_feita),
+        modulos_possiveis=[],
+    )
+
+
+@router.get(
+    "/proxima-confirmacao",
+    response_model=QuestaoClassifResponse,
+    summary="🔁 Próxima questão com apenas confirmação (sem módulos libro)",
+)
+async def proxima_questao_confirmacao(
+    disciplina_id: Optional[str] = Query(None, description="Nome ou ID da disciplina"),
+    last_questao_id: Optional[int] = Query(0, description="Último questao_id visto (seek)"),
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna questões que foram apenas 'confirmadas' sem módulos libro selecionados,
+    e que não tiveram reclassificação posterior (classificacao_nova ou correcao).
+    Exclui questões com 4 alternativas.
+    """
+    LIMIT_CANDIDATES = 100
+    MAX_LOOP_TRIES = 50
+
+    disc_mysql_id = None
+    if disciplina_id:
+        if str(disciplina_id).isdigit():
+            disc_mysql_id = int(disciplina_id)
+        else:
+            mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina_id, disciplina_id)
+            if mysql_name:
+                disc_row = (
+                    db.query(DisciplinaModel.id)
+                    .filter(DisciplinaModel.descricao == mysql_name)
+                    .first()
+                )
+                disc_mysql_id = disc_row[0] if disc_row else None
+
+    # IDs com reclassificação posterior (excluir) — inclui classificacao_libro
+    reclassificados = {
+        r[0]
+        for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.tipo_acao.in_(
+            ["classificacao_nova", "correcao", "classificacao_libro"]
+        ))
+        .all()
+    }
+
+    # IDs que o usuário atual já pulou — serão ignorados na fila
+    puladas_usuario = {
+        r[0]
+        for r in pg_db.query(QuestaoPuladaModel.questao_id)
+        .filter(QuestaoPuladaModel.usuario_id == usuario.id)
+        .all()
+    }
+
+    # IDs confirmados (candidatos)
+    confirmados_query = (
+        pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "confirmacao")
+        .filter(ClassificacaoUsuarioModel.questao_id.notin_(reclassificados))
+        .distinct()
+        .order_by(ClassificacaoUsuarioModel.questao_id)
+    )
+
+    last_id = last_questao_id or 0
+    questao_final = None
+
+    for _ in range(MAX_LOOP_TRIES):
+        candidates = (
+            confirmados_query
+            .filter(ClassificacaoUsuarioModel.questao_id > last_id)
+            .limit(LIMIT_CANDIDATES)
+            .all()
+        )
+        if not candidates:
+            break
+
+        candidate_ids = [c[0] for c in candidates]
+        last_id = candidate_ids[-1]
+
+        # Filtrar por disciplina no MySQL
+        if disc_mysql_id:
+            valid_mysql = {
+                r[0]
+                for r in db.query(QuestaoModel.id)
+                .filter(QuestaoModel.id.in_(candidate_ids))
+                .filter(QuestaoModel.disciplina_id == disc_mysql_id)
+                .all()
+            }
+            candidate_ids = [c for c in candidate_ids if c in valid_mysql]
+
+        if not candidate_ids:
+            continue
+
+        # Excluir questões com 4 alternativas
+        from ..database.models import QuestaoAlternativaModel
+        alt_counts = {
+            r[0]: r[1]
+            for r in db.query(QuestaoAlternativaModel.questao_id, func.count(QuestaoAlternativaModel.id))
+            .filter(QuestaoAlternativaModel.questao_id.in_(candidate_ids))
+            .group_by(QuestaoAlternativaModel.questao_id)
+            .all()
+        }
+        candidate_ids = [c for c in candidate_ids if alt_counts.get(c, 0) != 4]
+
+        # Excluir questões que o usuário já pulou
+        if puladas_usuario:
+            candidate_ids = [c for c in candidate_ids if c not in puladas_usuario]
+
+        if not candidate_ids:
+            continue
+
+        valid_id = candidate_ids[0]
+
+        questao_final = (
+            db.query(QuestaoModel)
+            .options(
+                joinedload(QuestaoModel.disciplina),
+                joinedload(QuestaoModel.habilidade),
+                joinedload(QuestaoModel.alternativas),
+            )
+            .filter(QuestaoModel.id == valid_id)
+            .first()
+        )
+
+        if questao_final:
+            break
+
+    if not questao_final:
+        raise HTTPException(
+            status_code=404,
+            detail="Nenhuma questão de confirmação pendente encontrada.",
+        )
+
+    questao = questao_final
+    enunciado_tratado, _, _ = tratar_enunciado(questao.enunciado)
+    texto_base_tratado = None
+    if questao.texto_base:
+        texto_base_tratado, _, _ = tratar_enunciado(questao.texto_base)
+
+    extracao = (
+        pg_db.query(QuestaoAssuntoModel)
+        .filter(QuestaoAssuntoModel.questao_id == questao.id)
+        .first()
+    )
+
+    alternativas = []
+    if questao.tipo == "Múltipla Escolha" and questao.alternativas:
+        for alt in sorted(questao.alternativas, key=lambda a: a.ordem or 0):
+            conteudo_limpo, _, _ = tratar_enunciado(alt.conteudo or "")
+            alternativas.append(
+                AlternativaClassifSchema(
+                    ordem=alt.ordem or 0,
+                    conteudo=conteudo_limpo,
+                    conteudo_html=alt.conteudo,
+                    correta=bool(alt.correta),
+                )
+            )
+
+    disc_nome = questao.disciplina.descricao if questao.disciplina else None
+    hab_descricao = questao.habilidade.descricao if questao.habilidade else None
+
+    return QuestaoClassifResponse(
+        id=questao.id,
+        questao_id=questao.questao_id,
+        enunciado=enunciado_tratado,
+        enunciado_html=questao.enunciado,
+        texto_base=texto_base_tratado,
+        texto_base_html=questao.texto_base,
+        disciplina_id=questao.disciplina_id,
+        disciplina_nome=disc_nome,
+        habilidade_id=questao.habilidade_id,
+        habilidade_descricao=hab_descricao,
+        tipo=questao.tipo,
+        alternativas=alternativas,
+        classificacao_extracao=extracao.classificacoes if extracao else None,
+        classificacao_nao_enquadrada=extracao.classificacao_nao_enquadrada if extracao else None,
+        similaridade=extracao.similaridade if extracao else None,
+        tem_extracao=bool(extracao and extracao.extracao_feita),
+        modulos_possiveis=[],
+    )
+
+
+# ========================
 # MÓDULOS (consulta)
 # ========================
 
@@ -1507,6 +2073,26 @@ async def proxima_questao_classificar(
             QuestaoModel.disciplina_id.in_(disciplina_ids_filtro)
         )
 
+    # Pre-filter: exclui questões já processadas no sistema usando NOT EXISTS cross-schema.
+    # Evita o loop de 50 iterações quando todas as questões já estão em questao_assuntos.
+    # pg_db e db usam o mesmo servidor MySQL (thsethub e trieduc são schemas diferentes).
+    candidate_query = candidate_query.filter(
+        sql_text(
+            "NOT EXISTS ("
+            "  SELECT 1 FROM thsethub.questao_assuntos qa_pre"
+            "  WHERE qa_pre.questao_id = questoes.id"
+            "  AND ("
+            "    qa_pre.classificado_manualmente = 1"
+            "    OR (qa_pre.classificacao_nao_enquadrada IS NOT NULL"
+            "        AND JSON_LENGTH(qa_pre.classificacao_nao_enquadrada) > 0)"
+            "    OR (qa_pre.extracao_feita = 1"
+            "        AND qa_pre.classificacoes IS NOT NULL"
+            "        AND JSON_LENGTH(qa_pre.classificacoes) > 0)"
+            "  )"
+            ")"
+        )
+    )
+
     candidate_query = candidate_query.order_by(QuestaoModel.id)
 
     last_id = 0
@@ -1535,31 +2121,8 @@ async def proxima_questao_classificar(
             .all()
         }
 
-        # 2. Already has any classification: manual, low-match, or SuperPro.
-        # Questões que já têm qualquer tipo de classificação não devem aparecer para classificar.
-        classified_in_system = {
-            row[0]
-            for row in pg_db.query(QuestaoAssuntoModel.questao_id)
-            .filter(QuestaoAssuntoModel.questao_id.in_(candidate_ids))
-            .filter(
-                (QuestaoAssuntoModel.classificado_manualmente == True)
-                | (
-                    (QuestaoAssuntoModel.classificacao_nao_enquadrada.isnot(None))
-                    & (
-                        func.json_length(
-                            QuestaoAssuntoModel.classificacao_nao_enquadrada
-                        )
-                        > 0
-                    )
-                )
-                | (
-                    (QuestaoAssuntoModel.extracao_feita == True)
-                    & (QuestaoAssuntoModel.classificacoes.isnot(None))
-                    & (func.json_length(QuestaoAssuntoModel.classificacoes) > 0)
-                )
-            )
-            .all()
-        }
+        # classified_in_system: substituído pelo NOT EXISTS pre-filter na candidate_query.
+        classified_in_system = set()
 
         # 3. Puladas por qualquer usuário — só aparecem na aba Pendentes, nunca em /proxima
         skipped_any_user = {
@@ -2784,62 +3347,77 @@ async def estatisticas_classificacao(
         set_to_cache(cache_key, res)
         return res
 
+    # 0. Questões com 4 alternativas — excluídas do funil de classificação
+    from ..database.models import QuestaoAlternativaModel as _QAlt
+
+    quatro_alt_ids = {
+        r[0]
+        for r in db.query(_QAlt.questao_id)
+        .filter(_QAlt.questao_id.in_(em_ids))
+        .group_by(_QAlt.questao_id)
+        .having(func.count(_QAlt.id) == 4)
+        .all()
+    }
+    total_4_alternativas = len(quatro_alt_ids)
+
+    # Funil elegível = EM com habilidade, sem 4 alternativas
+    eligible_ids = list(set(em_ids) - quatro_alt_ids)
+    total_sistema = len(eligible_ids)
+
     # 1. Manual (Prioridade Máxima)
     manuais_ids = {
         r[0]
         for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)
-        .filter(ClassificacaoUsuarioModel.questao_id.in_(em_ids))
+        .filter(ClassificacaoUsuarioModel.questao_id.in_(eligible_ids))
         .all()
     }
     total_manuais = len(manuais_ids)
 
-    # 2. Automáticas (Match >= 80% e que não foram tocadas manualmente)
-    auto_query = (
+    # 2. Alta Similaridade Pendente (sim >= 0.8, ainda sem ação manual)
+    #    Estas questões NÃO estão classificadas — aguardam módulos libro.
+    alta_sim_query = (
         pg_db.query(QuestaoAssuntoModel.questao_id)
         .filter(
-            QuestaoAssuntoModel.questao_id.in_(em_ids),
+            QuestaoAssuntoModel.questao_id.in_(eligible_ids),
             QuestaoAssuntoModel.similaridade >= 0.8,
         )
         .all()
     )
-    auto_ids = {r[0] for r in auto_query} - manuais_ids
-    total_auto_superpro = len(auto_ids)
+    alta_sim_ids = {r[0] for r in alta_sim_query} - manuais_ids
+    total_alta_similaridade = len(alta_sim_ids)
+    total_auto_superpro = 0  # mantido por retrocompatibilidade, agora sempre 0
 
-    # 3. Faltam Verificar (Match < 80% e que não foram tocadas nem são automáticas)
+    # 3. Faltam Verificar (0 < sim < 80%, não tocadas)
     verificar_query = (
         pg_db.query(QuestaoAssuntoModel.questao_id)
         .filter(
-            QuestaoAssuntoModel.questao_id.in_(em_ids),
+            QuestaoAssuntoModel.questao_id.in_(eligible_ids),
             QuestaoAssuntoModel.similaridade < 0.8,
             QuestaoAssuntoModel.similaridade > 0,
         )
         .all()
     )
-    verificar_ids = {r[0] for r in verificar_query} - manuais_ids - auto_ids
+    verificar_ids = {r[0] for r in verificar_query} - manuais_ids - alta_sim_ids
     total_precisa_verificar = len(verificar_ids)
 
-    # 4. Puladas (Volume que não está em nenhum dos estados acima)
+    # 4. Puladas
     from ..database.pg_pular_models import QuestaoPuladaModel
 
     puladas_query = (
         pg_db.query(QuestaoPuladaModel.questao_id)
-        .filter(QuestaoPuladaModel.questao_id.in_(em_ids))
+        .filter(QuestaoPuladaModel.questao_id.in_(eligible_ids))
         .all()
     )
-    # Para a matemática do Pendentes, usamos apenas as que não foram classificadas de outra forma
     all_puladas_ids = {r[0] for r in puladas_query}
-    puladas_ids_disjoint = all_puladas_ids - manuais_ids - auto_ids - verificar_ids
-    total_puladas = len(
-        puladas_ids_disjoint
-    )  # Agora usamos apenas as exclusivas para não estourar a soma do Total
+    puladas_ids_disjoint = all_puladas_ids - manuais_ids - alta_sim_ids - verificar_ids
+    total_puladas = len(puladas_ids_disjoint)
 
-    # 5. Pendentes (O resto matemático restrito)
-    # A soma de (manuais + auto + verificar + puladas + pendentes) = total_sistema
+    # 5. Pendentes (resto matemático)
     total_pendentes = max(
         0,
         total_sistema
         - total_manuais
-        - total_auto_superpro
+        - total_alta_similaridade
         - total_precisa_verificar
         - total_puladas,
     )
@@ -2853,8 +3431,8 @@ async def estatisticas_classificacao(
     )
     mysql_counts = {r[0]: r[1] for r in mysql_rows}
 
-    # Contabilizamos como "feitas" para o progresso: Manual + Automática (Finalizadas)
-    ids_finalizados = manuais_ids | auto_ids
+    # Feitas = apenas as classificadas manualmente (alta sim pendente não conta como feita)
+    ids_finalizados = manuais_ids
 
     # Mapa questao_id → disciplina_id (MySQL) para detalhar por disciplina
     q_disc_rows = (
@@ -3014,18 +3592,21 @@ async def estatisticas_classificacao(
         nome = nome_padrao_map.get(nome_original, nome_original)
 
         d_set = disc_ids_map.get(d_id, set())
+        d_quatro_alt = len(quatro_alt_ids & d_set)
+        total_disc = max(0, total_mysql - d_quatro_alt)
         d_manuais = len(manuais_ids & d_set)
-        d_auto = len(auto_ids & d_set)
+        d_alta_sim = len(alta_sim_ids & d_set)
         d_verificar = len(verificar_ids & d_set)
         d_puladas = len(puladas_ids_disjoint & d_set)
-        d_feitas = d_manuais + d_auto
-        d_pendentes = max(0, total_mysql - d_manuais - d_auto - d_verificar - d_puladas)
+        d_feitas = d_manuais
+        d_pendentes = max(0, total_disc - d_manuais - d_alta_sim - d_verificar - d_puladas)
         por_disciplina[nome] = {
-            "total": total_mysql,
+            "total": total_disc,
             "feitas": d_feitas,
-            "faltam": max(0, total_mysql - d_feitas),
+            "faltam": max(0, total_disc - d_feitas),
             "manuais": d_manuais,
-            "auto": d_auto,
+            "auto": d_alta_sim,
+            "alta_sim": d_alta_sim,
             "verificar": d_verificar,
             "pendentes": d_pendentes,
             "puladas": d_puladas,
@@ -3057,6 +3638,8 @@ async def estatisticas_classificacao(
         total_sistema=total_sistema,
         total_precisa_verificar=total_precisa_verificar,
         total_auto_superpro=total_auto_superpro,
+        total_alta_similaridade=total_alta_similaridade,
+        total_4_alternativas=total_4_alternativas,
         total_puladas=total_puladas,
         por_disciplina=por_disciplina,
         por_usuario=por_usuario,

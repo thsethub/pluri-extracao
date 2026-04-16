@@ -49,16 +49,16 @@ export default function StatsPage() {
       color: "var(--success)",
       borderLeft: undefined,
       tooltip:
-        "Quantidade de questões de Ensino Médio com assunto que já receberam alguma ação manual de usuário (classificação nova, auto-classificação, confirmação ou correção).",
+        "Questões que já receberam alguma ação manual (classificação nova, confirmação ou correção).",
     },
     {
-      key: "sistema",
-      label: "Classificadas (Sistemas)",
-      value: stats?.total_auto_superpro?.toLocaleString() || 0,
+      key: "alta_sim",
+      label: "Alta Similaridade",
+      value: stats?.total_alta_similaridade?.toLocaleString() || 0,
       color: "var(--yellow)",
       borderLeft: undefined,
       tooltip:
-        "Quantidade classificada automaticamente pelo sistema com similaridade maior ou igual a 80%, excluindo as que já tiveram ação manual. Origem: Superprofessor",
+        "Questões com similaridade ≥ 80% que ainda aguardam classificação manual com módulos libro. Não são consideradas concluídas.",
     },
     {
       key: "pendentes",
@@ -67,7 +67,7 @@ export default function StatsPage() {
       color: "var(--primary)",
       borderLeft: undefined,
       tooltip:
-        "Quantidade restante no funil de questões que ainda não receberam alguma classificação.",
+        "Questões sem nenhuma extração de similaridade — aguardam classificação.",
     },
     {
       key: "verificar",
@@ -76,7 +76,7 @@ export default function StatsPage() {
       color: "var(--orange)",
       borderLeft: undefined,
       tooltip:
-        "Questões com classificação automática de baixa similaridade (maior que 0 e menor que 80%) que ainda não foram validadas. Origem: Superprofessor",
+        "Questões com similaridade entre 0% e 80% — precisam de validação manual.",
     },
     {
       key: "puladas",
@@ -86,7 +86,17 @@ export default function StatsPage() {
       borderLeft: undefined,
       opacity: 0.7,
       tooltip:
-        "Questões que foram puladas pelo especialista por possuirem classificação incorreta Trieduc.",
+        "Questões puladas pelo especialista por possuírem classificação Trieduc incorreta.",
+    },
+    {
+      key: "quatro_alt",
+      label: "4 Alternativas",
+      value: stats?.total_4_alternativas?.toLocaleString() || 0,
+      color: "var(--text-muted)",
+      borderLeft: undefined,
+      opacity: 0.7,
+      tooltip:
+        "Questões com exatamente 4 alternativas — excluídas do funil de classificação e não contabilizadas no Total do Sistema.",
     },
     {
       key: "total",
@@ -95,7 +105,7 @@ export default function StatsPage() {
       color: "var(--text)",
       borderLeft: "4px solid var(--text-muted)",
       tooltip:
-        "Total de questões do recorte atual: somente Ensino Médio com habilidade/assunto definido.",
+        "Total elegível: Ensino Médio com habilidade definida, excluindo questões com 4 alternativas.",
     },
   ];
 
@@ -106,7 +116,7 @@ export default function StatsPage() {
       feitas: Number(d?.feitas || 0),
       faltam: Number(d?.faltam || 0),
       manuais: Number(d?.manuais || 0),
-      auto: Number(d?.auto || 0),
+      alta_sim: Number(d?.alta_sim || d?.auto || 0),
       verificar: Number(d?.verificar || 0),
       pendentes: Number(d?.pendentes || 0),
       puladas: Number(d?.puladas || 0),
@@ -118,7 +128,7 @@ export default function StatsPage() {
 
   const statusSegments = [
     { key: "manuais", label: "Manual", color: "#38a169" },
-    { key: "auto", label: "Auto", color: "#ecc94b" },
+    { key: "alta_sim", label: "Alta Sim.", color: "#ecc94b" },
     { key: "verificar", label: "Verificar", color: "#ed8936" },
     { key: "pendentes", label: "Pendentes", color: "#2b6cb0" },
     { key: "puladas", label: "Puladas", color: "#a0aec0" },

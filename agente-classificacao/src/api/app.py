@@ -24,6 +24,7 @@ from .extracao_router import router as extracao_router
 from .classificacao_router import router as classificacao_router
 from .ia_classificacao_router import router as ia_classificacao_router
 from .importacao_sql_router import router as importacao_sql_router
+from .ocr_confianca_router import router as ocr_confianca_router
 
 # Setup do logger
 setup_logger(settings.log_level)
@@ -114,6 +115,10 @@ app = FastAPI(
             "name": "Importação SQL",
             "description": "Ingestão de CSV binário (n8n) com autenticação Bearer e geração de SQL MySQL otimizada",
         },
+        {
+            "name": "OCR Confiança",
+            "description": "Avaliação de confiança OCR em redações por teste de prova",
+        },
     ],
 )
 
@@ -133,6 +138,7 @@ app.include_router(extracao_router)
 app.include_router(classificacao_router)
 app.include_router(ia_classificacao_router)
 app.include_router(importacao_sql_router)
+app.include_router(ocr_confianca_router)
 
 # Inicializa o classificador (singleton)
 classifier = QuestionClassifier()
