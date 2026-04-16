@@ -225,6 +225,8 @@ class ClassificacaoStatsResponse(BaseModel):
     total_sistema: int = 0
     total_precisa_verificar: int = 0
     total_auto_superpro: int = 0
+    total_alta_similaridade: int = 0
+    total_4_alternativas: int = 0
     total_puladas: int = 0
     por_disciplina: dict = {}
     por_usuario: dict = {}

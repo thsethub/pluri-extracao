@@ -25,10 +25,31 @@ SharedSessionLocal = SessionLocal  # Antes era conexão separada, agora usa a me
 Base = declarative_base()
 PgBase = Base  # Alias para compatibilidade
 
+# ========================
+# MySQL OCR - Conexão separada para módulo de validação OCR
+# Se OCR_DB_HOST não estiver configurado, usa o banco principal (fallback)
+# ========================
+ocr_engine = create_engine(
+    settings.ocr_database_url,
+    pool_pre_ping=True,
+    pool_recycle=3600,
+    echo=False,
+)
+OcrSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=ocr_engine)
+
 
 def get_db():
     """Dependency para injeção de sessão do banco MySQL"""
     db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def get_ocr_db():
+    """Dependency para injeção de sessão do banco OCR"""
+    db = OcrSessionLocal()
     try:
         yield db
     finally:

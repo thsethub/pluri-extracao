@@ -9,7 +9,8 @@ import {
     Clock,
     User as UserIcon,
     Cpu,
-    Search
+    Search,
+    Zap,
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { type ReactNode } from 'react';
@@ -32,6 +33,7 @@ export default function Sidebar() {
 
     const plataformaItems: MenuItem[] = [
         { name: 'Classificar', path: '/classificar', icon: <PencilLine size={20} /> },
+        { name: 'Alta Similaridade', path: '/classificar-similaridade', icon: <Zap size={20} /> },
         { name: 'Verificar', path: '/verificar', icon: <CheckCircle2 size={20} /> },
         { name: 'Pendentes', path: '/pendentes', icon: <Clock size={20} /> },
         { name: 'Estatisticas', path: '/stats', icon: <BarChart3 size={20} /> },

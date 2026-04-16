@@ -1,5 +1,6 @@
 import { showToast } from "@/components/Toast";
 
+// export const API_BASE_URL = "/classificacao";
 export const API_BASE_URL = "/api-proxy/classificacao";
 
 export async function apiRequest(
@@ -51,4 +52,42 @@ export async function apiRequest(
     }
     throw error;
   }
+}
+
+export async function getContagemFilas(): Promise<{
+  alta_similaridade: Record<string, number>;
+  confirmacoes: Record<string, number>;
+}> {
+  return apiRequest("/contagem-filas");
+}
+
+export async function getAssuntosSuperpro(disciplinaId?: string) {
+  const params = new URLSearchParams();
+  if (disciplinaId) params.append("disciplina_id", disciplinaId);
+  const qs = params.toString() ? `?${params.toString()}` : "";
+  return apiRequest(`/assuntos-superpro${qs}`);
+}
+
+export async function getProximaAltaSimilaridade(opts: {
+  assuntoSuperpro?: string;
+  disciplinaId?: string;
+  lastQuestaoId?: number;
+}) {
+  const params = new URLSearchParams();
+  if (opts.assuntoSuperpro) params.append("assunto_superpro", opts.assuntoSuperpro);
+  if (opts.disciplinaId) params.append("disciplina_id", opts.disciplinaId);
+  if (opts.lastQuestaoId) params.append("last_questao_id", String(opts.lastQuestaoId));
+  const qs = params.toString() ? `?${params.toString()}` : "";
+  return apiRequest(`/proxima-alta-similaridade${qs}`);
+}
+
+export async function getProximaConfirmacao(opts: {
+  disciplinaId?: string;
+  lastQuestaoId?: number;
+}) {
+  const params = new URLSearchParams();
+  if (opts.disciplinaId) params.append("disciplina_id", opts.disciplinaId);
+  if (opts.lastQuestaoId) params.append("last_questao_id", String(opts.lastQuestaoId));
+  const qs = params.toString() ? `?${params.toString()}` : "";
+  return apiRequest(`/proxima-confirmacao${qs}`);
 }
