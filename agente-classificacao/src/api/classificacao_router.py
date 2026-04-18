@@ -2906,8 +2906,9 @@ async def salvar_classificacao(
     - **classificacao_nova**: Questão que não tinha classificação
     - **confirmacao**: Usuário confirmou classificação existente
     - **correcao**: Usuário corrigiu classificação existente
+    - **classificacao_libro**: Classificação realizada pelo sistema Libro
     """
-    if request.tipo_acao not in ("classificacao_nova", "confirmacao", "correcao"):
+    if request.tipo_acao not in ("classificacao_nova", "confirmacao", "correcao", "classificacao_libro"):
         raise HTTPException(status_code=400, detail="tipo_acao inválido")
 
     # Buscar habilidade_id da questão (Apenas o necessário)
