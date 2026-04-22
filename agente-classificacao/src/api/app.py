@@ -25,6 +25,7 @@ from .classificacao_router import router as classificacao_router
 from .ia_classificacao_router import router as ia_classificacao_router
 from .importacao_sql_router import router as importacao_sql_router
 from .ocr_confianca_router import router as ocr_confianca_router
+from .questoes_novas_router import router as questoes_novas_router
 
 # Setup do logger
 setup_logger(settings.log_level)
@@ -139,6 +140,7 @@ app.include_router(classificacao_router)
 app.include_router(ia_classificacao_router)
 app.include_router(importacao_sql_router)
 app.include_router(ocr_confianca_router)
+app.include_router(questoes_novas_router)
 
 # Inicializa o classificador (singleton)
 classifier = QuestionClassifier()
@@ -624,7 +626,9 @@ async def startup_event():
         except Exception as e:
             logger.warning(f"⚠️ Falha ao inicializar tabelas automaticamente: {e}")
     else:
-        logger.info("🧩 Criação automática de tabelas desabilitada (DB_AUTO_CREATE_TABLES=false)")
+        logger.info(
+            "🧩 Criação automática de tabelas desabilitada (DB_AUTO_CREATE_TABLES=false)"
+        )
 
 
 @app.on_event("shutdown")

@@ -40,10 +40,10 @@ export default function FilterBar({
     async function loadFilters() {
       try {
         const data = await apiRequest("/disciplinas");
-        setAreasMapping(data.areas);
+        setAreasMapping(data.areas || {});
 
         // Se o usuário tem uma disciplina (que agora é área), descobrimos a área dele
-        if (usuario?.disciplina) {
+        if (usuario?.disciplina && data.areas) {
           // No novo sistema, usuario.disciplina já é o nome da área
           if (data.areas[usuario.disciplina]) {
             setArea(usuario.disciplina);
@@ -111,10 +111,12 @@ export default function FilterBar({
   }, [area, disciplinaId, habilidadeId]);
 
   // Disciplinas dentro da área atual
-  const disciplinasDaArea = area ? areasMapping[area] || [] : [];
+  const disciplinasDaArea = area
+    ? (areasMapping && areasMapping[area]) || []
+    : [];
 
   // Se o usuário tem uma área definida, ele só pode ver essa área (exceto se for admin)
-  const areaOptions = Object.keys(areasMapping)
+  const areaOptions = Object.keys(areasMapping || {})
     .filter((a) => !usuario?.disciplina || usuario.is_admin || a === area)
     .map((a) => ({ value: a, label: a }));
 

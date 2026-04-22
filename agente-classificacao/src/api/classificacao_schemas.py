@@ -198,6 +198,62 @@ class SalvarClassificacaoResponse(BaseModel):
     message: str
 
 
+# ========================
+# SUPERPROFESSOR
+# ========================
+
+class AlternativaSuperprofessorSchema(BaseModel):
+    """Alternativa de questão do superprofessor"""
+    letra: Optional[str] = None
+    texto: str = ""
+    correta: bool = False
+
+
+class QuestaoSuperprofessorResponse(BaseModel):
+    """Questão do superprofessor para revisão/correção de classificação libro"""
+    id: int  # questoes_novas.id
+    sp_id: int  # ID original no superprofessor (usado como questao_id em classificacao_usuario)
+    enunciado: str
+    disciplina_sp: Optional[str] = None
+    classif_sp_breadcrumb: Optional[str] = None
+    assunto_sp: Optional[str] = None
+    disciplinas_libro: Optional[List[str]] = None
+    assuntos_libro: Optional[List[str]] = None
+    alternativas: List[AlternativaSuperprofessorSchema] = []
+    gabarito: Optional[str] = None
+    modulos_possiveis: List[HabilidadeModuloSchema] = []
+    total_pendentes: Optional[int] = None
+
+
+class SuperprofessorStatsResponse(BaseModel):
+    """Estatísticas do módulo superprofessor"""
+    total_questoes: int = 0
+    total_classificadas: int = 0
+    total_puladas: int = 0
+    total_pendentes: int = 0
+    por_disciplina: dict = {}
+    por_usuario: dict = {}
+
+
+class SalvarSuperprofessorRequest(BaseModel):
+    """Request para salvar correção/confirmação de classificação superprofessor"""
+    questao_nova_id: int = Field(..., description="ID em questoes_novas")
+    habilidade_modulo_id: Optional[int] = None
+    modulo_escolhido: Optional[str] = None
+    classificacao_trieduc: Optional[str] = None
+    descricao_assunto: Optional[str] = None
+    habilidade_modulo_ids: Optional[List[int]] = None
+    modulos_escolhidos: Optional[List[str]] = None
+    classificacoes_trieduc: Optional[List[str]] = None
+    descricoes_assunto: Optional[List[str]] = None
+    observacao: Optional[str] = None
+
+
+class PularSuperprofessorRequest(BaseModel):
+    """Request para pular questão superprofessor"""
+    questao_nova_id: int = Field(..., description="ID em questoes_novas")
+
+
 class PularQuestaoRequest(BaseModel):
     """Request para pular/marcar questão como pendente"""
     questao_id: int = Field(..., description="ID da questão no MySQL")
