@@ -13,7 +13,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import styles from "../classificar/Classificar.module.css";
+import styles from "../../classificar/Classificar.module.css";
 import spStyles from "../Superprofessor.module.css";
 
 export default function PendentesPage() {
