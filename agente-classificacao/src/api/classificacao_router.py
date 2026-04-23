@@ -3954,16 +3954,16 @@ async def proxima_questao_superprofessor(
     Retorna a próxima questão do superprofessor que ainda não foi revisada pelo usuário.
     Mostra a classificação SP original e o mapeamento libro já feito.
     """
-    # sp_id já tratados por este usuário neste fluxo
+    # sp_ids já classificados por QUALQUER usuário (progresso compartilhado)
     classificados_sp_ids: set[int] = {
         row[0]
         for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
         .filter(
-            ClassificacaoUsuarioModel.usuario_id == usuario.id,
             ClassificacaoUsuarioModel.tipo_acao.in_(
                 ["classificacao_superprofessor", "pular_superprofessor"]
             ),
         )
+        .distinct()
         .all()
     }
 
@@ -4166,3 +4166,129 @@ async def pular_superprofessor(
     pg_db.commit()
 
     return {"success": True, "message": "Questão pulada"}
+
+
+@router.get(
+    "/superprofessor/pendentes",
+    response_model=list[QuestaoSuperprofessorResponse],
+    summary="Listar questoes superprofessor puladas",
+)
+async def listar_pendentes_superprofessor(
+    disciplina: Optional[str] = Query(None, description="Filtrar por disciplina SP"),
+    assunto_sp: Optional[str] = Query(None, description="Filtrar por assunto SP"),
+    pg_db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """
+    Retorna todas as questões superprofessor que foram puladas por este usuário.
+    Estas são questões que o usuário escolheu "pular" e pode revisitar para classificar.
+    """
+    # Buscar sp_ids pulados por este usuário
+    pulados_sp_ids: set[int] = {
+        row[0]
+        for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(
+            ClassificacaoUsuarioModel.usuario_id == usuario.id,
+            ClassificacaoUsuarioModel.tipo_acao == "pular_superprofessor",
+        )
+        .all()
+    }
+
+    if not pulados_sp_ids:
+        return []
+
+    query = pg_db.query(QuestaoSuperprofessorModel).filter(
+        QuestaoSuperprofessorModel.sp_id.in_(list(pulados_sp_ids))
+    )
+
+    if disciplina:
+        query = query.filter(QuestaoSuperprofessorModel.disciplina_sp == disciplina)
+
+    if assunto_sp:
+        query = query.filter(QuestaoSuperprofessorModel.assunto_sp == assunto_sp)
+
+    questoes = query.order_by(QuestaoSuperprofessorModel.sp_id.asc()).all()
+
+    resultado = []
+    for questao in questoes:
+        # Buscar módulos
+        modulos_possiveis = []
+        disciplinas_libro = questao.disciplinas_libro or []
+
+        if disciplinas_libro:
+            disciplinas_expandidas = []
+            for disc in disciplinas_libro:
+                disciplinas_expandidas.append(disc)
+                if disc == "Língua Portuguesa":
+                    disciplinas_expandidas.extend(["Literatura", "Redação"])
+
+            disciplinas_expandidas = list(dict.fromkeys(disciplinas_expandidas))
+
+            placeholders = ", ".join(f":{f'disc{i}'}" for i in range(len(disciplinas_expandidas)))
+            params = {f"disc{i}": v for i, v in enumerate(disciplinas_expandidas)}
+            sql = sql_text(f"""
+                SELECT
+                    a.assu_id AS id,
+                    d.disc_descricao AS disciplina,
+                    dm.disc_modu_descricao AS modulo,
+                    a.assu_descricao AS descricao
+                FROM compartilhados.disciplinas d
+                JOIN compartilhados.disciplinas_modulos dm ON dm.disc_id = d.disc_id
+                JOIN compartilhados.assuntos a ON a.disc_modu_id = dm.disc_modu_id
+                WHERE d.disc_descricao IN ({placeholders})
+                  AND TRIM(dm.disc_modu_descricao) NOT LIKE '[RM]%%'
+                  AND TRIM(a.assu_descricao) NOT LIKE '[RM]%%'
+                ORDER BY d.disc_descricao, dm.disc_modu_descricao, a.assu_descricao
+            """)
+            rows = pg_db.execute(sql, params).fetchall()
+            modulos_possiveis = [
+                HabilidadeModuloSchema(
+                    id=row.id,
+                    habilidade_id=None,
+                    habilidade_descricao="",
+                    area="",
+                    disciplina=row.disciplina,
+                    modulo=row.modulo,
+                    descricao=row.descricao,
+                    ordenacao=None,
+                )
+                for row in rows
+            ]
+
+        # Buscar alternativas
+        alternativas = []
+        alt_rows = (
+            pg_db.query(AlternativaSuperprofessorModel)
+            .filter(AlternativaSuperprofessorModel.sp_id == questao.sp_id)
+            .order_by(AlternativaSuperprofessorModel.letra)
+            .all()
+        )
+        gabarito = (questao.gabarito or "").strip().upper()
+        for alt in alt_rows:
+            letra = (alt.letra or "").strip().upper()
+            alternativas.append(
+                AlternativaSuperprofessorSchema(
+                    letra=alt.letra,
+                    texto=alt.texto or "",
+                    correta=bool(gabarito and letra == gabarito),
+                )
+            )
+
+        resultado.append(
+            QuestaoSuperprofessorResponse(
+                id=questao.sp_id,
+                sp_id=questao.sp_id,
+                enunciado=questao.enunciado,
+                disciplina_sp=questao.disciplina_sp,
+                classif_sp_breadcrumb=questao.classif_sp_breadcrumb,
+                assunto_sp=questao.assunto_sp,
+                disciplinas_libro=disciplinas_libro,
+                assuntos_libro=questao.assuntos_libro,
+                alternativas=alternativas,
+                gabarito=questao.gabarito,
+                modulos_possiveis=modulos_possiveis,
+                total_pendentes=len(questoes),
+            )
+        )
+
+    return resultado
