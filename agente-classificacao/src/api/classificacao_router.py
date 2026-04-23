@@ -3997,8 +3997,18 @@ async def proxima_questao_superprofessor(
     disciplinas_libro = questao.disciplinas_libro or []
 
     if disciplinas_libro:
-        placeholders = ", ".join(f":{f'disc{i}'}" for i in range(len(disciplinas_libro)))
-        params = {f"disc{i}": v for i, v in enumerate(disciplinas_libro)}
+        # Expandir "Língua Portuguesa" para incluir Literatura e Redação
+        disciplinas_expandidas = []
+        for disc in disciplinas_libro:
+            disciplinas_expandidas.append(disc)
+            if disc == "Língua Portuguesa":
+                disciplinas_expandidas.extend(["Literatura", "Redação"])
+
+        # Remover duplicatas e manter ordem
+        disciplinas_expandidas = list(dict.fromkeys(disciplinas_expandidas))
+
+        placeholders = ", ".join(f":{f'disc{i}'}" for i in range(len(disciplinas_expandidas)))
+        params = {f"disc{i}": v for i, v in enumerate(disciplinas_expandidas)}
         sql = sql_text(f"""
             SELECT
                 a.assu_id          AS id,
