@@ -3992,29 +3992,42 @@ async def proxima_questao_superprofessor(
             status_code=404, detail="Nenhuma questão pendente encontrada"
         )
 
-    # Buscar módulos possíveis com base nas disciplinas_libro
+    # Buscar módulos e assuntos de compartilhados, filtrados pelas disciplinas_libro
     modulos_possiveis = []
     disciplinas_libro = questao.disciplinas_libro or []
 
     if disciplinas_libro:
-        modulos_rows = (
-            pg_db.query(HabilidadeModuloModel)
-            .filter(HabilidadeModuloModel.disciplina.in_(disciplinas_libro))
-            .order_by(HabilidadeModuloModel.disciplina, HabilidadeModuloModel.modulo)
-            .all()
-        )
+        placeholders = ", ".join(f":{f'disc{i}'}" for i in range(len(disciplinas_libro)))
+        params = {f"disc{i}": v for i, v in enumerate(disciplinas_libro)}
+        sql = sql_text(f"""
+            SELECT
+                a.assu_id          AS id,
+                d.disc_descricao   AS disciplina,
+                dm.disc_modu_descricao AS modulo,
+                a.assu_descricao   AS descricao
+            FROM compartilhados.disciplinas d
+            JOIN compartilhados.disciplinas_modulos dm
+                ON dm.disc_id = d.disc_id
+            JOIN compartilhados.assuntos a
+                ON a.disc_modu_id = dm.disc_modu_id
+            WHERE d.disc_descricao IN ({placeholders})
+              AND TRIM(dm.disc_modu_descricao) NOT LIKE '[RM]%%'
+              AND TRIM(a.assu_descricao) NOT LIKE '[RM]%%'
+            ORDER BY d.disc_descricao, dm.disc_modu_descricao, a.assu_descricao
+        """)
+        rows = pg_db.execute(sql, params).fetchall()
         modulos_possiveis = [
             HabilidadeModuloSchema(
-                id=m.id,
-                habilidade_id=m.habilidade_id,
-                habilidade_descricao=m.habilidade_descricao,
-                area=m.area,
-                disciplina=m.disciplina,
-                modulo=m.modulo,
-                descricao=m.descricao,
-                ordenacao=m.ordenacao,
+                id=row.id,
+                habilidade_id=None,
+                habilidade_descricao="",
+                area="",
+                disciplina=row.disciplina,
+                modulo=row.modulo,
+                descricao=row.descricao,
+                ordenacao=None,
             )
-            for m in modulos_rows
+            for row in rows
         ]
 
     # Buscar alternativas
