@@ -80,6 +80,26 @@
     flex-direction: column;
     gap: 1rem;
     flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 0.5rem;
+}
+
+.nav::-webkit-scrollbar {
+    width: 6px;
+}
+
+.nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.nav::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+
+.nav::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
 }
 
 .section {

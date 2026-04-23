@@ -37,6 +37,7 @@ export default function Sidebar() {
         { name: 'Alta Similaridade', path: '/classificar-similaridade', icon: <Zap size={20} /> },
         { name: 'Superprofessor', path: '/superprofessor', icon: <GraduationCap size={20} /> },
         { name: 'Stats SP', path: '/superprofessor/stats', icon: <BarChart3 size={20} /> },
+        { name: 'Pendentes SP', path: '/superprofessor/pendentes', icon: <Clock size={20} /> },
         { name: 'Verificar', path: '/verificar', icon: <CheckCircle2 size={20} /> },
         { name: 'Pendentes', path: '/pendentes', icon: <Clock size={20} /> },
         { name: 'Estatisticas', path: '/stats', icon: <BarChart3 size={20} /> },
