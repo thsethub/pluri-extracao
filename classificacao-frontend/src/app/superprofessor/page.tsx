@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import styles from "../classificar/Classificar.module.css";
 import spStyles from "./Superprofessor.module.css";
+import { sanitizeEnunciado } from "@/lib/sanitizeHtml";
 
 export default function SuperprofessorPage() {
   const [questao, setQuestao] = useState<any>(null);
@@ -274,7 +275,7 @@ export default function SuperprofessorPage() {
 
               <div
                 className={styles.enunciado}
-                dangerouslySetInnerHTML={{ __html: questao.enunciado }}
+                dangerouslySetInnerHTML={{ __html: sanitizeEnunciado(questao.enunciado) }}
               />
 
               {questao.alternativas && questao.alternativas.length > 0 && (
@@ -299,7 +300,7 @@ export default function SuperprofessorPage() {
                 <Info size={18} />
                 <h3>Módulos Libro</h3>
               </div>
-              
+
               <div className={spStyles.searchContainer}>
                 <input
                   type="text"

@@ -45,6 +45,48 @@
     padding: 1rem 0;
 }
 
+.pendentesContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.expandedLayout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 1.2rem;
+    align-items: start;
+    padding: 1rem;
+    padding-top: 0;
+}
+
+.expandedQuestao {
+    min-width: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.expandedQuestao :global(img) {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0.75rem auto;
+    border-radius: 4px;
+}
+
+.expandedModulos {
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+    position: sticky;
+    top: 1rem;
+    background-color: var(--background);
+    border-radius: var(--radius);
+    padding: 1rem;
+    border: 1px solid var(--border);
+}
+
 .filterBar {
     display: flex;
     gap: 1rem;

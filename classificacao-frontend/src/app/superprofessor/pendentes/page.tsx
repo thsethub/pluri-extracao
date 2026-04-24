@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import styles from "../../classificar/Classificar.module.css";
 import spStyles from "../Superprofessor.module.css";
+import { sanitizeEnunciado } from "@/lib/sanitizeHtml";
 
 export default function PendentesPage() {
   const [questoes, setQuestoes] = useState<any[]>([]);
@@ -30,6 +31,7 @@ export default function PendentesPage() {
   const [loadingFiltros, setLoadingFiltros] = useState(false);
 
   const [modulosSelecionados, setModulosSelecionados] = useState<{[key: number]: any[]}>({});
+  const [searchTerms, setSearchTerms] = useState<{[key: number]: string}>({});
 
   useEffect(() => {
     async function loadDisciplinas() {
@@ -206,8 +208,7 @@ export default function PendentesPage() {
           <p>Nenhuma questão pendente para classificar</p>
         </div>
       ) : (
-        <div className={styles.content}>
-          <div className={spStyles.pendentesContainer}>
+        <div className={spStyles.pendentesContainer}>
             {questoes.map((questao) => (
               <div
                 key={questao.id}
@@ -240,7 +241,7 @@ export default function PendentesPage() {
                         marginTop: "0.5rem",
                       }}
                     >
-                      {questao.enunciado.substring(0, 100)}...
+                      {questao.enunciado.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().substring(0, 120)}...
                     </div>
                   </div>
                   {expandedId === questao.id ? (
@@ -251,55 +252,70 @@ export default function PendentesPage() {
                 </div>
 
                 {expandedId === questao.id && (
-                  <div style={{ paddingLeft: "1rem", paddingRight: "1rem", paddingBottom: "1rem" }}>
-                    <div className={spStyles.spClassif}>
-                      <div className={spStyles.spClassifRow}>
-                        <BookOpen size={14} />
-                        <span className={spStyles.spLabel}>Classificação SP:</span>
-                        <span className={spStyles.spValue}>
-                          {questao.classif_sp_breadcrumb || questao.assunto_sp || "—"}
-                        </span>
+                  <div className={spStyles.expandedLayout}>
+                    {/* Coluna esquerda: questão */}
+                    <div className={spStyles.expandedQuestao}>
+                      <div className={spStyles.spClassif}>
+                        <div className={spStyles.spClassifRow}>
+                          <BookOpen size={14} />
+                          <span className={spStyles.spLabel}>Classificação SP:</span>
+                          <span className={spStyles.spValue}>
+                            {questao.classif_sp_breadcrumb || questao.assunto_sp || "—"}
+                          </span>
+                        </div>
+                        {questao.disciplinas_libro && questao.disciplinas_libro.length > 0 && (
+                          <div className={spStyles.spClassifRow}>
+                            <Tag size={14} />
+                            <span className={spStyles.spLabel}>Mapeamento libro:</span>
+                            <span className={spStyles.spValue}>
+                              {questao.disciplinas_libro.join(", ")}
+                              {questao.assuntos_libro && questao.assuntos_libro.length > 0 && (
+                                <> › {questao.assuntos_libro.join(", ")}</>
+                              )}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
-                      {questao.disciplinas_libro && questao.disciplinas_libro.length > 0 && (
-                        <div className={spStyles.spClassifRow}>
-                          <Tag size={14} />
-                          <span className={spStyles.spLabel}>Mapeamento libro:</span>
-                          <span className={spStyles.spValue}>
-                            {questao.disciplinas_libro.join(", ")}
-                            {questao.assuntos_libro && questao.assuntos_libro.length > 0 && (
-                              <> › {questao.assuntos_libro.join(", ")}</>
-                            )}
-                          </span>
+                      <div
+                        className={styles.enunciado}
+                        dangerouslySetInnerHTML={{ __html: sanitizeEnunciado(questao.enunciado) }}
+                      />
+
+                      {questao.alternativas && questao.alternativas.length > 0 && (
+                        <div className={styles.alternativas}>
+                          {questao.alternativas.map((alt: any, index: number) => (
+                            <div
+                              key={index}
+                              className={`${styles.altItem} ${alt.correta ? styles.altCorreta : ""}`}
+                            >
+                              <span className={styles.altLetra}>
+                                {alt.letra ? `${alt.letra})` : `${String.fromCharCode(97 + index)})`}
+                              </span>
+                              <span dangerouslySetInnerHTML={{ __html: alt.texto }} />
+                            </div>
+                          ))}
                         </div>
                       )}
                     </div>
 
-                    <div
-                      className={styles.enunciado}
-                      dangerouslySetInnerHTML={{ __html: questao.enunciado }}
-                    />
-
-                    {questao.alternativas && questao.alternativas.length > 0 && (
-                      <div className={styles.alternativas}>
-                        {questao.alternativas.map((alt: any, index: number) => (
-                          <div
-                            key={index}
-                            className={`${styles.altItem} ${alt.correta ? styles.altCorreta : ""}`}
-                          >
-                            <span className={styles.altLetra}>
-                              {alt.letra ? `${alt.letra})` : `${String.fromCharCode(97 + index)})`}
-                            </span>
-                            <span dangerouslySetInnerHTML={{ __html: alt.texto }} />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className={`${styles.moduloCard}`}>
+                    {/* Coluna direita: módulos */}
+                    <div className={spStyles.expandedModulos}>
                       <div className={styles.moduloHeader}>
                         <Info size={18} />
                         <h3>Módulos Libro</h3>
+                      </div>
+
+                      <div className={spStyles.searchContainer}>
+                        <input
+                          type="text"
+                          placeholder="Buscar módulo ou assunto..."
+                          value={searchTerms[questao.id] || ""}
+                          onChange={(e) =>
+                            setSearchTerms((prev) => ({ ...prev, [questao.id]: e.target.value }))
+                          }
+                          className={spStyles.searchInput}
+                        />
                       </div>
 
                       {questao.modulos_possiveis.length === 0 ? (
@@ -308,29 +324,37 @@ export default function PendentesPage() {
                         </p>
                       ) : (
                         <div className={styles.moduloList}>
-                          {questao.modulos_possiveis.map((m: any) => (
-                            <label
-                              key={m.id}
-                              className={`${styles.moduloItem} ${
-                                (modulosSelecionados[questao.id] || []).some((s) => s.id === m.id)
-                                  ? styles.moduloSelected
-                                  : ""
-                              }`}
-                            >
-                              <input
-                                type="checkbox"
-                                name="modulo"
-                                checked={(modulosSelecionados[questao.id] || []).some(
-                                  (s) => s.id === m.id,
-                                )}
-                                onChange={() => toggleModulo(questao.id, m)}
-                              />
-                              <div className={styles.moduloText}>
-                                <strong>{m.modulo}</strong>
-                                <span>{m.descricao}</span>
-                              </div>
-                            </label>
-                          ))}
+                          {questao.modulos_possiveis
+                            .filter((m: any) => {
+                              const term = (searchTerms[questao.id] || "").toLowerCase();
+                              return (
+                                m.modulo.toLowerCase().includes(term) ||
+                                m.descricao.toLowerCase().includes(term)
+                              );
+                            })
+                            .map((m: any) => (
+                              <label
+                                key={m.id}
+                                className={`${styles.moduloItem} ${
+                                  (modulosSelecionados[questao.id] || []).some((s) => s.id === m.id)
+                                    ? styles.moduloSelected
+                                    : ""
+                                }`}
+                              >
+                                <input
+                                  type="checkbox"
+                                  name="modulo"
+                                  checked={(modulosSelecionados[questao.id] || []).some(
+                                    (s) => s.id === m.id,
+                                  )}
+                                  onChange={() => toggleModulo(questao.id, m)}
+                                />
+                                <div className={styles.moduloText}>
+                                  <strong>{m.modulo}</strong>
+                                  <span>{m.descricao}</span>
+                                </div>
+                              </label>
+                            ))}
                         </div>
                       )}
 
@@ -350,7 +374,6 @@ export default function PendentesPage() {
                 )}
               </div>
             ))}
-          </div>
         </div>
       )}
     </AppLayout>
