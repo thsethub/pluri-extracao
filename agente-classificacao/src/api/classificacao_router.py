@@ -3784,15 +3784,31 @@ async def listar_disciplinas_superprofessor(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna a lista de disciplinas do superprofessor com contagem de questões.
+    Retorna a lista de disciplinas do superprofessor com contagem de questões pendentes (não classificadas).
     """
-    rows = (
+    classificados_sp_ids = {
+        row[0]
+        for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "classificacao_superprofessor")
+        .distinct()
+        .all()
+    }
+
+    query = (
         pg_db.query(
             QuestaoSuperprofessorModel.disciplina_sp,
             func.count(QuestaoSuperprofessorModel.sp_id)
         )
         .filter(QuestaoSuperprofessorModel.disciplina_sp.isnot(None))
-        .group_by(QuestaoSuperprofessorModel.disciplina_sp)
+    )
+
+    if classificados_sp_ids:
+        query = query.filter(
+            ~QuestaoSuperprofessorModel.sp_id.in_(list(classificados_sp_ids))
+        )
+
+    rows = (
+        query.group_by(QuestaoSuperprofessorModel.disciplina_sp)
         .order_by(QuestaoSuperprofessorModel.disciplina_sp)
         .all()
     )
@@ -3815,8 +3831,16 @@ async def listar_assuntos_superprofessor(
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
     """
-    Retorna a lista de assuntos (assunto_sp) do superprofessor com contagem.
+    Retorna a lista de assuntos (assunto_sp) do superprofessor com contagem de questões pendentes (não classificadas).
     """
+    classificados_sp_ids = {
+        row[0]
+        for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "classificacao_superprofessor")
+        .distinct()
+        .all()
+    }
+
     query = pg_db.query(
         QuestaoSuperprofessorModel.assunto_sp,
         func.count(QuestaoSuperprofessorModel.sp_id)
@@ -3824,6 +3848,12 @@ async def listar_assuntos_superprofessor(
         QuestaoSuperprofessorModel.assunto_sp.isnot(None),
         QuestaoSuperprofessorModel.assunto_sp != "",
     )
+
+    if classificados_sp_ids:
+        query = query.filter(
+            ~QuestaoSuperprofessorModel.sp_id.in_(list(classificados_sp_ids))
+        )
+
     if disciplina:
         query = query.filter(
             QuestaoSuperprofessorModel.disciplina_sp == disciplina
@@ -3997,12 +4027,16 @@ async def proxima_questao_superprofessor(
     disciplinas_libro = questao.disciplinas_libro or []
 
     if disciplinas_libro:
-        # Expandir "Língua Portuguesa" para incluir Literatura e Redação
+        # Expandir disciplinas que possuem aliases no banco compartilhados
+        _aliases_disciplinas = {
+            "Língua Portuguesa": ["Literatura", "Redação"],
+            "Artes": ["Arte"],
+            "Língua Inglesa": ["Inglês"],
+        }
         disciplinas_expandidas = []
         for disc in disciplinas_libro:
             disciplinas_expandidas.append(disc)
-            if disc == "Língua Portuguesa":
-                disciplinas_expandidas.extend(["Literatura", "Redação"])
+            disciplinas_expandidas.extend(_aliases_disciplinas.get(disc, []))
 
         # Remover duplicatas e manter ordem
         disciplinas_expandidas = list(dict.fromkeys(disciplinas_expandidas))
@@ -4100,6 +4134,12 @@ async def salvar_superprofessor(
     if not questao:
         raise HTTPException(status_code=404, detail="Questão não encontrada")
 
+    # Remover registros de pular desta questão (de qualquer usuário) antes de classificar
+    pg_db.query(ClassificacaoUsuarioModel).filter(
+        ClassificacaoUsuarioModel.questao_id == questao.sp_id,
+        ClassificacaoUsuarioModel.tipo_acao == "pular_superprofessor",
+    ).delete(synchronize_session=False)
+
     classificacao = ClassificacaoUsuarioModel(
         usuario_id=usuario.id,
         questao_id=questao.sp_id,
@@ -4183,16 +4223,27 @@ async def listar_pendentes_superprofessor(
     Retorna todas as questões superprofessor que foram puladas por este usuário.
     Estas são questões que o usuário escolheu "pular" e pode revisitar para classificar.
     """
-    # Buscar sp_ids pulados por este usuário
+    # Buscar sp_ids pulados por qualquer usuário
     pulados_sp_ids: set[int] = {
         row[0]
         for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
-        .filter(
-            ClassificacaoUsuarioModel.usuario_id == usuario.id,
-            ClassificacaoUsuarioModel.tipo_acao == "pular_superprofessor",
-        )
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "pular_superprofessor")
+        .distinct()
         .all()
     }
+
+    if not pulados_sp_ids:
+        return []
+
+    # Excluir questões que já foram classificadas por qualquer usuário
+    classificados_sp_ids: set[int] = {
+        row[0]
+        for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "classificacao_superprofessor")
+        .distinct()
+        .all()
+    }
+    pulados_sp_ids -= classificados_sp_ids
 
     if not pulados_sp_ids:
         return []
@@ -4216,11 +4267,15 @@ async def listar_pendentes_superprofessor(
         disciplinas_libro = questao.disciplinas_libro or []
 
         if disciplinas_libro:
+            _aliases_disciplinas = {
+                "Língua Portuguesa": ["Literatura", "Redação"],
+                "Artes": ["Arte"],
+                "Língua Inglesa": ["Inglês"],
+            }
             disciplinas_expandidas = []
             for disc in disciplinas_libro:
                 disciplinas_expandidas.append(disc)
-                if disc == "Língua Portuguesa":
-                    disciplinas_expandidas.extend(["Literatura", "Redação"])
+                disciplinas_expandidas.extend(_aliases_disciplinas.get(disc, []))
 
             disciplinas_expandidas = list(dict.fromkeys(disciplinas_expandidas))
 
@@ -4292,3 +4347,39 @@ async def listar_pendentes_superprofessor(
         )
 
     return resultado
+
+
+@router.post(
+    "/superprofessor/limpar-duplicados",
+    summary="Remove registros pular duplicados para questoes ja classificadas",
+)
+async def limpar_duplicados_superprofessor(
+    pg_db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """
+    Remove registros pular_superprofessor de questões que já possuem
+    um registro classificacao_superprofessor. Mantém apenas a classificação.
+    """
+    classificados_sp_ids = {
+        row[0]
+        for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "classificacao_superprofessor")
+        .distinct()
+        .all()
+    }
+
+    if not classificados_sp_ids:
+        return {"removidos": 0, "mensagem": "Nenhum duplicado encontrado"}
+
+    deletados = (
+        pg_db.query(ClassificacaoUsuarioModel)
+        .filter(
+            ClassificacaoUsuarioModel.questao_id.in_(list(classificados_sp_ids)),
+            ClassificacaoUsuarioModel.tipo_acao == "pular_superprofessor",
+        )
+        .delete(synchronize_session=False)
+    )
+    pg_db.commit()
+
+    return {"removidos": deletados, "mensagem": f"{deletados} registros de pular removidos"}
