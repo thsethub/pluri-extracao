@@ -3789,7 +3789,7 @@ async def listar_disciplinas_superprofessor(
     classificados_sp_ids = {
         row[0]
         for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
-        .filter(ClassificacaoUsuarioModel.tipo_acao == "classificacao_superprofessor")
+        .filter(ClassificacaoUsuarioModel.tipo_acao.in_(["classificacao_superprofessor", "pular_superprofessor"]))
         .distinct()
         .all()
     }
@@ -3836,7 +3836,7 @@ async def listar_assuntos_superprofessor(
     classificados_sp_ids = {
         row[0]
         for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
-        .filter(ClassificacaoUsuarioModel.tipo_acao == "classificacao_superprofessor")
+        .filter(ClassificacaoUsuarioModel.tipo_acao.in_(["classificacao_superprofessor", "pular_superprofessor"]))
         .distinct()
         .all()
     }
