@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { apiRequest } from "@/lib/api";
 import AppLayout from "@/components/AppLayout";
 import Dropdown from "@/components/Dropdown";
+import ClassificarSuperprofessorModal, {
+  ModuloSuperprofessor,
+} from "@/components/ClassificarSuperprofessorModal";
 import {
   Save,
   Info,
@@ -12,13 +15,18 @@ import {
   Tag,
   ChevronDown,
   ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  Pencil,
 } from "lucide-react";
 import styles from "../../classificar/Classificar.module.css";
 import spStyles from "../Superprofessor.module.css";
 import { sanitizeEnunciado } from "@/lib/sanitizeHtml";
 
+const ITEMS_PER_PAGE = 10;
+
 export default function PendentesPage() {
-  const [questoes, setQuestoes] = useState<any[]>([]);
+  const [todasQuestoes, setTodasQuestoes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
@@ -26,75 +34,77 @@ export default function PendentesPage() {
 
   const [disciplinaFiltro, setDisciplinaFiltro] = useState("");
   const [assuntoFiltro, setAssuntoFiltro] = useState("");
-  const [disciplinasDisponiveis, setDisciplinasDisponiveis] = useState<{value: string, label: string}[]>([]);
-  const [assuntosDisponiveis, setAssuntosDisponiveis] = useState<{value: string, label: string}[]>([]);
-  const [loadingFiltros, setLoadingFiltros] = useState(false);
+  const [paginaAtual, setPaginaAtual] = useState(1);
 
-  const [modulosSelecionados, setModulosSelecionados] = useState<{[key: number]: any[]}>({});
-  const [searchTerms, setSearchTerms] = useState<{[key: number]: string}>({});
+  const [modulosSelecionados, setModulosSelecionados] = useState<{ [key: number]: any[] }>({});
+  const [searchTerms, setSearchTerms] = useState<{ [key: number]: string }>({});
 
-  useEffect(() => {
-    async function loadDisciplinas() {
-      try {
-        const data = await apiRequest("/superprofessor/disciplinas");
-        const list = (data.disciplinas || []).map((d: any) => {
-          if (typeof d === "string") return { value: d, label: d };
-          const nome = d.nome || d.disciplina_sp || "Desconhecido";
-          const total = d.total !== undefined ? ` (${d.total})` : "";
-          return { value: nome, label: `${nome}${total}` };
-        });
-        setDisciplinasDisponiveis(list);
-      } catch (err) {
-        console.error("Erro ao carregar disciplinas:", err);
-      }
-    }
-    loadDisciplinas();
-  }, []);
-
-  useEffect(() => {
-    async function loadAssuntos() {
-      setLoadingFiltros(true);
-      try {
-        const params = new URLSearchParams();
-        if (disciplinaFiltro) params.append("disciplina", disciplinaFiltro);
-        const data = await apiRequest(`/superprofessor/assuntos?${params.toString()}`);
-
-        const list = (data.assuntos || []).map((a: any) => {
-          if (typeof a === "string") return { value: a, label: a };
-          const nome = a.nome || a.assunto_sp || "Desconhecido";
-          const total = a.total !== undefined ? ` (${a.total})` : "";
-          return { value: nome, label: `${nome}${total}` };
-        });
-        setAssuntosDisponiveis(list);
-      } catch (err) {
-        console.error("Erro ao carregar assuntos:", err);
-      } finally {
-        setLoadingFiltros(false);
-      }
-    }
-    loadAssuntos();
-  }, [disciplinaFiltro]);
+  const [questaoModal, setQuestaoModal] = useState<any | null>(null);
 
   useEffect(() => {
     loadPendentes();
-  }, [disciplinaFiltro, assuntoFiltro]);
+  }, []);
 
   const loadPendentes = async () => {
     setLoading(true);
     setError("");
-    setQuestoes([]);
-
+    setTodasQuestoes([]);
     try {
-      const params = new URLSearchParams();
-      if (disciplinaFiltro) params.append("disciplina", disciplinaFiltro);
-      if (assuntoFiltro) params.append("assunto_sp", assuntoFiltro);
-      const qs = params.toString() ? `?${params.toString()}` : "";
-      const data = await apiRequest(`/superprofessor/pendentes${qs}`);
-      setQuestoes(data);
+      const data = await apiRequest("/superprofessor/pendentes");
+      setTodasQuestoes(data);
     } catch (err: any) {
       setError(err.message || "Nenhuma questão pendente encontrada");
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Contagens para os labels dos dropdowns
+  const disciplinasDisponiveis = useMemo(() => {
+    const contagem: Record<string, number> = {};
+    todasQuestoes.forEach((q) => {
+      if (q.disciplina_sp) contagem[q.disciplina_sp] = (contagem[q.disciplina_sp] || 0) + 1;
+    });
+    return Object.entries(contagem)
+      .sort(([a], [b]) => a.localeCompare(b, "pt-BR"))
+      .map(([d, total]) => ({ value: d, label: `${d} (${total})` }));
+  }, [todasQuestoes]);
+
+  const assuntosDisponiveis = useMemo(() => {
+    const contagem: Record<string, number> = {};
+    todasQuestoes
+      .filter((q) => !disciplinaFiltro || q.disciplina_sp === disciplinaFiltro)
+      .forEach((q) => {
+        if (q.assunto_sp) contagem[q.assunto_sp] = (contagem[q.assunto_sp] || 0) + 1;
+      });
+    return Object.entries(contagem)
+      .sort(([a], [b]) => a.localeCompare(b, "pt-BR"))
+      .map(([a, total]) => ({ value: a, label: `${a} (${total})` }));
+  }, [todasQuestoes, disciplinaFiltro]);
+
+  const questoesFiltradas = useMemo(() => {
+    return todasQuestoes.filter((q) => {
+      if (disciplinaFiltro && q.disciplina_sp !== disciplinaFiltro) return false;
+      if (assuntoFiltro && q.assunto_sp !== assuntoFiltro) return false;
+      return true;
+    });
+  }, [todasQuestoes, disciplinaFiltro, assuntoFiltro]);
+
+  const totalPaginas = Math.max(1, Math.ceil(questoesFiltradas.length / ITEMS_PER_PAGE));
+
+  const questoesPagina = useMemo(() => {
+    const inicio = (paginaAtual - 1) * ITEMS_PER_PAGE;
+    return questoesFiltradas.slice(inicio, inicio + ITEMS_PER_PAGE);
+  }, [questoesFiltradas, paginaAtual]);
+
+  const handleFiltroChange = (tipo: "disciplina" | "assunto", valor: string) => {
+    setPaginaAtual(1);
+    setExpandedId(null);
+    if (tipo === "disciplina") {
+      setDisciplinaFiltro(valor);
+      setAssuntoFiltro("");
+    } else {
+      setAssuntoFiltro(valor);
     }
   };
 
@@ -111,36 +121,46 @@ export default function PendentesPage() {
     });
   };
 
+  const buildPayload = (questaoId: number, selectedModulos: any[]) => {
+    return {
+      questao_nova_id: questaoId,
+      modulos_escolhidos: selectedModulos.map((m) => m.modulo ?? ""),
+      descricoes_assunto: selectedModulos.map((m) => m.descricao ?? ""),
+      modulo_escolhido: selectedModulos[0]?.modulo ?? null,
+      descricao_assunto: selectedModulos[0]?.descricao ?? null,
+      observacao: "",
+    };
+  };
+
   const handleSalvar = async (questao: any) => {
     const selectedModulos = modulosSelecionados[questao.id] || [];
     if (selectedModulos.length === 0) return;
-
     setSaving(true);
-    const trieducSelecionados = selectedModulos.filter(
-      (m) => m.habilidade_id != null,
-    );
-
     try {
       await apiRequest("/superprofessor/salvar", {
         method: "POST",
-        body: JSON.stringify({
-          questao_nova_id: questao.id,
-          habilidade_modulo_ids: trieducSelecionados.map((m) => m.id),
-          modulos_escolhidos: selectedModulos.map((m) => m.modulo),
-          classificacoes_trieduc: selectedModulos.map(
-            (m) => m.habilidade_descricao,
-          ),
-          descricoes_assunto: selectedModulos.map((m) => m.descricao),
-          habilidade_modulo_id: trieducSelecionados[0]?.id ?? null,
-          modulo_escolhido: selectedModulos[0]?.modulo ?? null,
-          classificacao_trieduc:
-            selectedModulos[0]?.habilidade_descricao ?? null,
-          descricao_assunto: selectedModulos[0]?.descricao ?? null,
-          observacao: "",
-        }),
+        body: JSON.stringify(buildPayload(questao.id, selectedModulos)),
       });
-      loadPendentes();
+      setTodasQuestoes((prev) => prev.filter((q) => q.id !== questao.id));
       setModulosSelecionados({});
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleSalvarModal = async (selecionados: ModuloSuperprofessor[]) => {
+    if (!questaoModal || selecionados.length === 0) return;
+    setSaving(true);
+    try {
+      await apiRequest("/superprofessor/salvar", {
+        method: "POST",
+        body: JSON.stringify(buildPayload(questaoModal.id, selecionados)),
+      });
+      setTodasQuestoes((prev) => prev.filter((q) => q.id !== questaoModal.id));
+      setModulosSelecionados({});
+      setQuestaoModal(null);
     } catch (err: any) {
       alert(err.message);
     } finally {
@@ -155,9 +175,9 @@ export default function PendentesPage() {
           <h1>Pendentes Superprofessor</h1>
           <p>
             Questões que foram puladas e podem ser reclassificadas
-            {questoes.length > 0 && (
+            {questoesFiltradas.length > 0 && (
               <span className={spStyles.pendentesTag}>
-                {questoes.length} questão{questoes.length !== 1 ? "s" : ""}
+                {questoesFiltradas.length} questão{questoesFiltradas.length !== 1 ? "s" : ""}
               </span>
             )}
           </p>
@@ -170,10 +190,7 @@ export default function PendentesPage() {
             label="Disciplina SP"
             options={disciplinasDisponiveis}
             value={disciplinaFiltro}
-            onChange={(val: any) => {
-              setDisciplinaFiltro(val);
-              setAssuntoFiltro("");
-            }}
+            onChange={(val: any) => handleFiltroChange("disciplina", val)}
             placeholder="Todas as disciplinas"
             searchable
           />
@@ -183,10 +200,9 @@ export default function PendentesPage() {
             label="Assunto SP"
             options={assuntosDisponiveis}
             value={assuntoFiltro}
-            onChange={(val: any) => setAssuntoFiltro(val)}
-            placeholder={loadingFiltros ? "Carregando..." : "Todos os assuntos"}
+            onChange={(val: any) => handleFiltroChange("assunto", val)}
+            placeholder="Todos os assuntos"
             searchable
-            disabled={loadingFiltros}
           />
         </div>
       </div>
@@ -202,14 +218,15 @@ export default function PendentesPage() {
           <p>{error}</p>
           <button onClick={() => loadPendentes()}>Tentar Novamente</button>
         </div>
-      ) : questoes.length === 0 ? (
+      ) : questoesFiltradas.length === 0 ? (
         <div className={styles.empty}>
           <AlertCircle size={48} color="var(--primary)" />
           <p>Nenhuma questão pendente para classificar</p>
         </div>
       ) : (
-        <div className={spStyles.pendentesContainer}>
-            {questoes.map((questao) => (
+        <>
+          <div className={spStyles.pendentesContainer}>
+            {questoesPagina.map((questao) => (
               <div
                 key={questao.id}
                 className={`${styles.questaoCard} glass fade-in`}
@@ -232,6 +249,11 @@ export default function PendentesPage() {
                       {questao.disciplina_sp && (
                         <span className={styles.tag}>{questao.disciplina_sp}</span>
                       )}
+                      {questao.assunto_sp && (
+                        <span className={styles.tag} style={{ opacity: 0.75 }}>
+                          {questao.assunto_sp}
+                        </span>
+                      )}
                       <span className={styles.idTag}>SP ID: {questao.sp_id}</span>
                     </div>
                     <div
@@ -241,7 +263,12 @@ export default function PendentesPage() {
                         marginTop: "0.5rem",
                       }}
                     >
-                      {questao.enunciado.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().substring(0, 120)}...
+                      {questao.enunciado
+                        .replace(/<[^>]*>/g, " ")
+                        .replace(/\s+/g, " ")
+                        .trim()
+                        .substring(0, 120)}
+                      ...
                     </div>
                   </div>
                   {expandedId === questao.id ? (
@@ -279,7 +306,9 @@ export default function PendentesPage() {
 
                       <div
                         className={styles.enunciado}
-                        dangerouslySetInnerHTML={{ __html: sanitizeEnunciado(questao.enunciado) }}
+                        dangerouslySetInnerHTML={{
+                          __html: sanitizeEnunciado(questao.enunciado),
+                        }}
                       />
 
                       {questao.alternativas && questao.alternativas.length > 0 && (
@@ -290,7 +319,9 @@ export default function PendentesPage() {
                               className={`${styles.altItem} ${alt.correta ? styles.altCorreta : ""}`}
                             >
                               <span className={styles.altLetra}>
-                                {alt.letra ? `${alt.letra})` : `${String.fromCharCode(97 + index)})`}
+                                {alt.letra
+                                  ? `${alt.letra})`
+                                  : `${String.fromCharCode(97 + index)})`}
                               </span>
                               <span dangerouslySetInnerHTML={{ __html: alt.texto }} />
                             </div>
@@ -312,7 +343,10 @@ export default function PendentesPage() {
                           placeholder="Buscar módulo ou assunto..."
                           value={searchTerms[questao.id] || ""}
                           onChange={(e) =>
-                            setSearchTerms((prev) => ({ ...prev, [questao.id]: e.target.value }))
+                            setSearchTerms((prev) => ({
+                              ...prev,
+                              [questao.id]: e.target.value,
+                            }))
                           }
                           className={spStyles.searchInput}
                         />
@@ -326,7 +360,9 @@ export default function PendentesPage() {
                         <div className={styles.moduloList}>
                           {questao.modulos_possiveis
                             .filter((m: any) => {
-                              const term = (searchTerms[questao.id] || "").toLowerCase();
+                              const term = (
+                                searchTerms[questao.id] || ""
+                              ).toLowerCase();
                               return (
                                 m.modulo.toLowerCase().includes(term) ||
                                 m.descricao.toLowerCase().includes(term)
@@ -336,7 +372,9 @@ export default function PendentesPage() {
                               <label
                                 key={m.id}
                                 className={`${styles.moduloItem} ${
-                                  (modulosSelecionados[questao.id] || []).some((s) => s.id === m.id)
+                                  (modulosSelecionados[questao.id] || []).some(
+                                    (s) => s.id === m.id,
+                                  )
                                     ? styles.moduloSelected
                                     : ""
                                 }`}
@@ -344,9 +382,9 @@ export default function PendentesPage() {
                                 <input
                                   type="checkbox"
                                   name="modulo"
-                                  checked={(modulosSelecionados[questao.id] || []).some(
-                                    (s) => s.id === m.id,
-                                  )}
+                                  checked={(
+                                    modulosSelecionados[questao.id] || []
+                                  ).some((s) => s.id === m.id)}
                                   onChange={() => toggleModulo(questao.id, m)}
                                 />
                                 <div className={styles.moduloText}>
@@ -361,21 +399,70 @@ export default function PendentesPage() {
                       <div className={styles.actionArea}>
                         <button
                           onClick={() => handleSalvar(questao)}
-                          disabled={(modulosSelecionados[questao.id] || []).length === 0 || saving}
+                          disabled={
+                            (modulosSelecionados[questao.id] || []).length === 0 ||
+                            saving
+                          }
                           className={styles.saveBtn}
                           style={{ width: "100%" }}
                         >
                           <Save size={18} />
                           {saving ? "Gravando..." : "Salvar Classificação"}
                         </button>
+                        <div className={styles.corrigirBtnWrap}>
+                          <button
+                            className={styles.corrigirBtn}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setQuestaoModal(questao);
+                            }}
+                          >
+                            <Pencil size={15} />
+                            Corrigir classificação
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
             ))}
-        </div>
+          </div>
+
+          {/* Paginação */}
+          {totalPaginas > 1 && (
+            <div className={spStyles.paginacao}>
+              <button
+                className={spStyles.paginacaoBtn}
+                onClick={() => setPaginaAtual((p) => Math.max(1, p - 1))}
+                disabled={paginaAtual === 1}
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <span className={spStyles.paginacaoInfo}>
+                Página {paginaAtual} de {totalPaginas}
+                <span className={spStyles.paginacaoTotal}>
+                  &nbsp;({questoesFiltradas.length} questões)
+                </span>
+              </span>
+              <button
+                className={spStyles.paginacaoBtn}
+                onClick={() => setPaginaAtual((p) => Math.min(totalPaginas, p + 1))}
+                disabled={paginaAtual === totalPaginas}
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          )}
+        </>
       )}
+
+      <ClassificarSuperprofessorModal
+        isOpen={questaoModal !== null}
+        onClose={() => setQuestaoModal(null)}
+        onConfirmar={handleSalvarModal}
+        saving={saving}
+      />
     </AppLayout>
   );
 }
