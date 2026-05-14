@@ -102,7 +102,11 @@ export default function SuperprofessorPage() {
       const data = await apiRequest(`/superprofessor/proxima${qs}`);
       setQuestao(data);
 
-      if (data.assuntos_libro && data.modulos_possiveis) {
+      const isMundoContemporaneo =
+        data.assunto_sp?.toLowerCase().includes("mundo contemporâneo") ||
+        data.classif_sp_breadcrumb?.toLowerCase().includes("mundo contemporâneo");
+
+      if (!isMundoContemporaneo && data.assuntos_libro && data.modulos_possiveis) {
         const assuntosLower = (data.assuntos_libro as string[]).map((a) =>
           a.toLowerCase().trim(),
         );
