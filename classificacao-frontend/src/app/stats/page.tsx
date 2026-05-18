@@ -41,71 +41,94 @@ export default function StatsPage() {
       </AppLayout>
     );
 
+  // Totais globais (trieduc + Superprofessor)
+  const totalSistema = Number(stats?.total_sistema || 0);
+  const totalManuais = Number(stats?.total_manuais || 0);
+  const totalPendentes = Number(stats?.total_pendentes || 0);
+  const totalPuladas = Number(stats?.total_puladas || 0);
+
+  // Breakdown trieduc vs SP
+  const tTrieduc = Number(stats?.total_trieduc || 0);
+  const tTrieducClass = Number(stats?.total_trieduc_classificadas || 0);
+  const tTrieducPend = Number(stats?.total_trieduc_pendentes || 0);
+  const tTrieducPuladas = Number(stats?.total_trieduc_puladas || 0);
+  const tSP = Number(stats?.total_superprofessor || 0);
+  const tSPClass = Number(stats?.total_superprofessor_classificadas || 0);
+  const tSPPend = Number(stats?.total_superprofessor_pendentes || 0);
+  const tSPPuladas = Number(stats?.total_superprofessor_puladas || 0);
+
+  const fmt = (n: number) => n.toLocaleString("pt-BR");
+
   const cards = [
     {
       key: "manual",
       label: "Classificadas (Manual)",
-      value: stats?.total_manuais?.toLocaleString() || 0,
+      value: fmt(totalManuais),
       color: "var(--success)",
       borderLeft: undefined,
-      tooltip:
-        "Questões que já receberam alguma ação manual (classificação nova, confirmação ou correção).",
+      tooltip: `Questões finalizadas (trieduc + Superprofessor). Contribuição por base:\n• Trieduc: ${fmt(tTrieducClass)} (nova, correção, libro, auto)\n• Superprofessor: ${fmt(tSPClass)} (classificacao_superprofessor)\n\nConfirmações sem libro NÃO entram aqui.`,
     },
     {
       key: "alta_sim",
       label: "Alta Similaridade",
-      value: stats?.total_alta_similaridade?.toLocaleString() || 0,
+      value: fmt(Number(stats?.total_alta_similaridade || 0)),
       color: "var(--yellow)",
       borderLeft: undefined,
       tooltip:
-        "Questões com similaridade ≥ 80% que ainda aguardam classificação manual com módulos libro. Não são consideradas concluídas.",
+        "Questões trieduc com similaridade ≥ 80% com o banco SuperProfessor, sem nenhuma ação ainda. Acessíveis na aba 'Alta Similaridade' da tela de classificação por similaridade.\n\n(SuperProfessor não tem este conceito.)",
     },
     {
-      key: "pendentes",
-      label: "Pendentes",
-      value: stats?.total_pendentes?.toLocaleString() || 0,
+      key: "confirmacoes",
+      label: "Confirmações Pendentes",
+      value: fmt(Number(stats?.total_confirmacoes_pendentes || 0)),
       color: "var(--primary)",
       borderLeft: undefined,
       tooltip:
-        "Questões sem nenhuma extração de similaridade — aguardam classificação.",
+        "Questões trieduc cujo assunto foi confirmado no fluxo Verificar, mas que ainda aguardam seleção de módulos libro. Acessíveis na aba 'Confirmações' da tela de classificação por similaridade.\n\n(SuperProfessor não tem este conceito.)",
     },
     {
       key: "verificar",
       label: "Faltam Verificar",
-      value: stats?.total_precisa_verificar?.toLocaleString() || 0,
+      value: fmt(Number(stats?.total_precisa_verificar || 0)),
       color: "var(--orange)",
       borderLeft: undefined,
       tooltip:
-        "Questões com similaridade entre 0% e 80% — precisam de validação manual.",
+        "Questões trieduc com similaridade entre 1% e 79% com o SuperProfessor, sem ação nem confirmação. Acessíveis na tela Verificar (exigem classificacao_nao_enquadrada preenchida pelo agente).\n\n(SuperProfessor não tem este conceito.)",
+    },
+    {
+      key: "pendentes",
+      label: "Pendentes",
+      value: fmt(totalPendentes),
+      color: "var(--text-muted)",
+      borderLeft: undefined,
+      tooltip: `Questões sem ação alguma (trieduc + Superprofessor). Contribuição por base:\n• Trieduc: ${fmt(tTrieducPend)} (sem registro de similaridade)\n• Superprofessor: ${fmt(tSPPend)} (aguardam classificação no fluxo SP)`,
     },
     {
       key: "puladas",
       label: "Puladas",
-      value: stats?.total_puladas?.toLocaleString() || 0,
+      value: fmt(totalPuladas),
       color: "var(--text-muted)",
       borderLeft: undefined,
       opacity: 0.7,
-      tooltip:
-        "Questões puladas pelo especialista por possuírem classificação Trieduc incorreta.",
+      tooltip: `Questões puladas (trieduc + Superprofessor). Contribuição por base:\n• Trieduc: ${fmt(tTrieducPuladas)}\n• Superprofessor: ${fmt(tSPPuladas)}`,
     },
     {
       key: "quatro_alt",
       label: "4 Alternativas",
-      value: stats?.total_4_alternativas?.toLocaleString() || 0,
+      value: fmt(Number(stats?.total_4_alternativas || 0)),
       color: "var(--text-muted)",
       borderLeft: undefined,
       opacity: 0.7,
       tooltip:
-        "Questões com exatamente 4 alternativas — excluídas do funil de classificação e não contabilizadas no Total do Sistema.",
+        "Questões trieduc com exatamente 4 alternativas — excluídas do funil de classificação e não contabilizadas no Total do Sistema.",
     },
     {
       key: "total",
       label: "Total do Sistema",
-      value: stats?.total_sistema?.toLocaleString() || 0,
+      value: fmt(totalSistema),
       color: "var(--text)",
       borderLeft: "4px solid var(--text-muted)",
-      tooltip:
-        "Total elegível: Ensino Médio com habilidade definida, excluindo questões com 4 alternativas.",
+      tooltip: `Total global elegível para classificação. Contribuição por base:\n• Trieduc: ${fmt(tTrieduc)} questões (Ensino Médio com habilidade, sem 4-alt)\n• Superprofessor: ${fmt(tSP)} questões (universo independente)\n\nA soma de Classificadas + Alta Sim + Confirmações + Verificar + Puladas + Pendentes deve igualar este valor.`,
     },
   ];
 
@@ -116,21 +139,48 @@ export default function StatsPage() {
       feitas: Number(d?.feitas || 0),
       faltam: Number(d?.faltam || 0),
       manuais: Number(d?.manuais || 0),
+      confirmacoes: Number(d?.confirmacoes || 0),
       alta_sim: Number(d?.alta_sim || d?.auto || 0),
       verificar: Number(d?.verificar || 0),
       pendentes: Number(d?.pendentes || 0),
       puladas: Number(d?.puladas || 0),
+      // Breakdown por base
+      trieduc_total: Number(d?.trieduc_total || 0),
+      trieduc_classificadas: Number(d?.trieduc_classificadas || 0),
+      trieduc_pendentes: Number(d?.trieduc_pendentes || 0),
+      trieduc_puladas: Number(d?.trieduc_puladas || 0),
+      sp_total: Number(d?.sp_total || 0),
+      sp_classificadas: Number(d?.sp_classificadas || 0),
+      sp_pendentes: Number(d?.sp_pendentes || 0),
+      sp_puladas: Number(d?.sp_puladas || 0),
       total_modulos: Number(d?.total_modulos || 0),
       total_habilidades: Number(d?.total_habilidades || 0),
       total_assuntos: Number(d?.total_assuntos || 0),
     }))
     .sort((a, b) => b.total - a.total);
 
+  // Progresso preciso: TRUNCA (Math.floor) em vez de arredondar para nunca
+  // exibir 100% quando ainda faltam questões. Se < 1% restante mas > 0, mostra
+  // com 1 decimal (também truncado, não arredondado).
+  const calcPct = (feitas: number, total: number): string => {
+    if (total <= 0) return "0";
+    if (feitas >= total) return "100";
+    const raw = (feitas / total) * 100;
+    // Quando raw > 99 e < 100, mostra com 1 decimal truncado (ex: 99.95 → 99.9)
+    if (raw >= 99) {
+      const truncated = Math.floor(raw * 10) / 10;
+      // Garante que nunca mostre "100.0" se ainda falta algo
+      return truncated >= 100 ? "99.9" : truncated.toFixed(1);
+    }
+    return String(Math.floor(raw));
+  };
+
   const statusSegments = [
     { key: "manuais", label: "Manual", color: "#38a169" },
     { key: "alta_sim", label: "Alta Sim.", color: "#ecc94b" },
+    { key: "confirmacoes", label: "Confirmações", color: "#3182ce" },
     { key: "verificar", label: "Verificar", color: "#ed8936" },
-    { key: "pendentes", label: "Pendentes", color: "#2b6cb0" },
+    { key: "pendentes", label: "Pendentes", color: "#718096" },
     { key: "puladas", label: "Puladas", color: "#a0aec0" },
   ] as const;
 
@@ -178,6 +228,7 @@ export default function StatsPage() {
         ))}
       </div>
 
+
       {/* Tabela de Progresso por Disciplina */}
       <div className={styles.progressTable}>
         <h3>Progresso por Disciplina</h3>
@@ -186,62 +237,119 @@ export default function StatsPage() {
             <thead>
               <tr>
                 <th>Disciplina</th>
-                <th style={{ textAlign: "right" }}>Módulos</th>
-                <th style={{ textAlign: "right" }}>Assuntos</th>
-                <th style={{ textAlign: "right" }}>Habilidades</th>
-                <th style={{ textAlign: "right" }}>Classificadas</th>
-                <th style={{ textAlign: "right" }}>Faltam</th>
-                <th style={{ width: "200px" }}>Progresso</th>
+                <th style={{ textAlign: "right" }}>Total</th>
+                <th
+                  style={{ textAlign: "right", color: "var(--success)" }}
+                  title="Questões com classificação finalizada"
+                >
+                  Classif.
+                </th>
+                <th
+                  style={{ textAlign: "right", color: "#ecc94b" }}
+                  title="Aguardando ação na fila de Alta Similaridade"
+                >
+                  Alta Sim.
+                </th>
+                <th
+                  style={{ textAlign: "right", color: "#3182ce" }}
+                  title="Confirmadas mas sem módulos libro selecionados"
+                >
+                  Confirm.
+                </th>
+                <th
+                  style={{ textAlign: "right", color: "var(--orange)" }}
+                  title="Baixa similaridade aguardando verificação"
+                >
+                  Verificar
+                </th>
+                <th
+                  style={{ textAlign: "right", color: "var(--text-muted)" }}
+                  title="Sem dados de similaridade (agente não processou)"
+                >
+                  Pendentes
+                </th>
+                <th style={{ width: "180px" }}>Progresso</th>
               </tr>
             </thead>
             <tbody>
               {disciplinasDetalhado.map((disc) => {
-                const pct =
-                  disc.total > 0
-                    ? Math.round((disc.feitas / disc.total) * 100)
-                    : 0;
+                const pct = calcPct(disc.feitas, disc.total);
+                const pctNum = parseFloat(pct);
+                const totalTooltip =
+                  disc.sp_total > 0
+                    ? `Trieduc: ${fmt(disc.trieduc_total)} • Superpro: ${fmt(disc.sp_total)}`
+                    : `Trieduc: ${fmt(disc.trieduc_total)}`;
+                const feitasTooltip =
+                  disc.sp_classificadas > 0
+                    ? `Trieduc: ${fmt(disc.trieduc_classificadas)} • Superpro: ${fmt(disc.sp_classificadas)}`
+                    : `Trieduc: ${fmt(disc.trieduc_classificadas)}`;
+                const pendentesTooltip =
+                  disc.sp_pendentes > 0
+                    ? `Trieduc: ${fmt(disc.trieduc_pendentes)} • Superpro: ${fmt(disc.sp_pendentes)}`
+                    : `Trieduc: ${fmt(disc.trieduc_pendentes)}`;
                 return (
                   <tr key={disc.nome}>
                     <td className={styles.disciplineName}>{disc.nome}</td>
                     <td
                       className={styles.tableCount}
-                      style={{ textAlign: "right", color: "var(--text-muted)" }}
+                      style={{
+                        textAlign: "right",
+                        color: "var(--text)",
+                        fontWeight: 600,
+                      }}
+                      title={totalTooltip}
                     >
-                      {disc.total_modulos?.toLocaleString() || 0}
-                    </td>
-                    <td
-                      className={styles.tableCount}
-                      style={{ textAlign: "right", color: "var(--text-muted)" }}
-                    >
-                      {disc.total_assuntos?.toLocaleString() || 0}
-                    </td>
-                    <td
-                      className={styles.tableCount}
-                      style={{ textAlign: "right", color: "var(--text-muted)" }}
-                    >
-                      {disc.total_habilidades?.toLocaleString() || 0}
+                      {disc.total.toLocaleString()}
                     </td>
                     <td
                       className={styles.tableCount}
                       style={{ textAlign: "right", color: "var(--success)" }}
+                      title={feitasTooltip}
                     >
                       {disc.feitas.toLocaleString()}
                     </td>
                     <td
                       className={styles.tableCount}
-                      style={{ textAlign: "right", color: "var(--primary)" }}
+                      style={{ textAlign: "right", color: "#ecc94b" }}
+                      title="Aguardando ação na fila de Alta Similaridade (trieduc)"
                     >
-                      {disc.faltam.toLocaleString()}
+                      {disc.alta_sim.toLocaleString()}
+                    </td>
+                    <td
+                      className={styles.tableCount}
+                      style={{ textAlign: "right", color: "#3182ce" }}
+                      title="Confirmadas sem módulos libro (aba Confirmações)"
+                    >
+                      {disc.confirmacoes.toLocaleString()}
+                    </td>
+                    <td
+                      className={styles.tableCount}
+                      style={{ textAlign: "right", color: "var(--orange)" }}
+                      title="Baixa similaridade aguardando verificação"
+                    >
+                      {disc.verificar.toLocaleString()}
+                    </td>
+                    <td
+                      className={styles.tableCount}
+                      style={{
+                        textAlign: "right",
+                        color: "var(--text-muted)",
+                      }}
+                      title={pendentesTooltip}
+                    >
+                      {disc.pendentes.toLocaleString()}
                     </td>
                     <td>
                       <div className={styles.progressBarCell}>
                         <div className={styles.progressBarContainer}>
                           <div
                             className={styles.progressBarFill}
-                            style={{ width: `${pct}%` }}
+                            style={{ width: `${Math.min(pctNum, 100)}%` }}
                           />
                         </div>
-                        <span className={styles.progressBarLabel}>{pct}%</span>
+                        <span className={styles.progressBarLabel}>
+                          {pct}%
+                        </span>
                       </div>
                     </td>
                   </tr>

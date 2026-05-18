@@ -282,8 +282,18 @@ class ClassificacaoStatsResponse(BaseModel):
     total_precisa_verificar: int = 0
     total_auto_superpro: int = 0
     total_alta_similaridade: int = 0
+    total_confirmacoes_pendentes: int = 0
     total_4_alternativas: int = 0
     total_puladas: int = 0
+    # Breakdown trieduc vs SP (todos os totais acima são GLOBAIS = trieduc + SP)
+    total_trieduc: int = 0
+    total_trieduc_classificadas: int = 0
+    total_trieduc_pendentes: int = 0
+    total_trieduc_puladas: int = 0
+    total_superprofessor: int = 0
+    total_superprofessor_classificadas: int = 0
+    total_superprofessor_pendentes: int = 0
+    total_superprofessor_puladas: int = 0
     por_disciplina: dict = {}
     por_usuario: dict = {}
 
