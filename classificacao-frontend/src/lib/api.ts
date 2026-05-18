@@ -68,6 +68,13 @@ export async function getAssuntosSuperpro(disciplinaId?: string) {
   return apiRequest(`/assuntos-superpro${qs}`);
 }
 
+export async function getAssuntosSuproConfirmacoes(disciplinaId?: string) {
+  const params = new URLSearchParams();
+  if (disciplinaId) params.append("disciplina_id", disciplinaId);
+  const qs = params.toString() ? `?${params.toString()}` : "";
+  return apiRequest(`/assuntos-superpro-confirmacoes${qs}`);
+}
+
 export async function getProximaAltaSimilaridade(opts: {
   assuntoSuperpro?: string;
   disciplinaId?: string;
@@ -83,10 +90,12 @@ export async function getProximaAltaSimilaridade(opts: {
 
 export async function getProximaConfirmacao(opts: {
   disciplinaId?: string;
+  assuntoSuperpro?: string;
   lastQuestaoId?: number;
 }) {
   const params = new URLSearchParams();
   if (opts.disciplinaId) params.append("disciplina_id", opts.disciplinaId);
+  if (opts.assuntoSuperpro) params.append("assunto_superpro", opts.assuntoSuperpro);
   if (opts.lastQuestaoId) params.append("last_questao_id", String(opts.lastQuestaoId));
   const qs = params.toString() ? `?${params.toString()}` : "";
   return apiRequest(`/proxima-confirmacao${qs}`);

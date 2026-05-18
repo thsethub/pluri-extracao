@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   getAssuntosSuperpro,
+  getAssuntosSuproConfirmacoes,
   getProximaAltaSimilaridade,
   getProximaConfirmacao,
   getContagemFilas,
@@ -114,16 +115,20 @@ export default function ClassificarSimilaridadePage() {
     return { value: d, label: n != null ? `${d} (${n})` : d };
   });
 
-  // Carrega assuntos superpro quando disciplina muda (só na aba alta-similaridade)
+  // Carrega assuntos superpro quando disciplina ou aba muda
   useEffect(() => {
-    if (tab !== "alta-similaridade") return;
     setAssuntoSuperpro("");
     setAssuntosDisponiveis([]);
     if (!disciplina) return;
 
     let cancelled = false;
     setLoadingAssuntos(true);
-    getAssuntosSuperpro(disciplina)
+    const fetchFn =
+      tab === "alta-similaridade"
+        ? getAssuntosSuperpro(disciplina)
+        : getAssuntosSuproConfirmacoes(disciplina);
+
+    fetchFn
       .then((data: { assunto: string; total: number }[]) => {
         if (!cancelled) setAssuntosDisponiveis(data || []);
       })
@@ -151,6 +156,7 @@ export default function ClassificarSimilaridadePage() {
       } else {
         data = await getProximaConfirmacao({
           disciplinaId: disciplina || undefined,
+          assuntoSuperpro: assuntoSuperpro || undefined,
         });
       }
       setQuestao(data);
@@ -301,28 +307,26 @@ export default function ClassificarSimilaridadePage() {
             placeholder="Todas as disciplinas da área"
           />
         </div>
-        {tab === "alta-similaridade" && (
-          <div className={filterStyles.filterGroup}>
-            <Dropdown
-              label="Assunto SuperProfessor"
-              options={assuntosDisponiveis.map((a) => ({
-                value: a.assunto,
-                label: `${a.assunto} (${a.total})`,
-              }))}
-              value={assuntoSuperpro}
-              onChange={(val: string) => setAssuntoSuperpro(val)}
-              placeholder={
-                loadingAssuntos
-                  ? "Carregando assuntos..."
-                  : disciplina
-                    ? "Todos os assuntos"
-                    : "Selecione a disciplina primeiro"
-              }
-              disabled={!disciplina || loadingAssuntos}
-              searchable={true}
-            />
-          </div>
-        )}
+        <div className={filterStyles.filterGroup}>
+          <Dropdown
+            label="Assunto SuperProfessor"
+            options={assuntosDisponiveis.map((a) => ({
+              value: a.assunto,
+              label: `${a.assunto} (${a.total})`,
+            }))}
+            value={assuntoSuperpro}
+            onChange={(val: string) => setAssuntoSuperpro(val)}
+            placeholder={
+              loadingAssuntos
+                ? "Carregando assuntos..."
+                : disciplina
+                  ? "Todos os assuntos"
+                  : "Selecione a disciplina primeiro"
+            }
+            disabled={!disciplina || loadingAssuntos}
+            searchable={true}
+          />
+        </div>
         <div className={filterStyles.info}>
           <p><strong>{area || "Área não definida"}</strong></p>
           <span>{disciplina || "Todas as disciplinas"}</span>
