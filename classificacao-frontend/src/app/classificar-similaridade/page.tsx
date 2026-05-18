@@ -101,20 +101,29 @@ export default function ClassificarSimilaridadePage() {
       .catch(() => {});
   }, []);
 
-  // Dropdown de áreas e disciplinas com contagem
-  const areaOptions = Object.keys(AREAS_DISCIPLINAS)
-    .filter((a) => !usuario?.disciplina || usuario.is_admin || a === area)
-    .map((a) => ({ value: a, label: a }));
-
   const contagemAtual = tab === "alta-similaridade"
     ? contagem.alta_similaridade
     : contagem.confirmacoes;
 
-  const disciplinaOptions = (area ? AREAS_DISCIPLINAS[area] || [] : []).map((d) => {
-    const n = contagemAtual[d];
-    return { value: d, label: n != null ? `${d} (${n})` : d };
-  });
+  // Dropdown de áreas e disciplinas com contagem
+  const areaOptions = Object.keys(AREAS_DISCIPLINAS)
+    .filter((a) => !usuario?.disciplina || usuario.is_admin || a === area)
+    .map((a) => {
+      const total = (AREAS_DISCIPLINAS[a] || []).reduce(
+        (sum, d) => sum + (contagemAtual[d] ?? 0),
+        0,
+      );
+      return { value: a, label: total > 0 ? `${a} (${total})` : a, _total: total };
+    })
+    .filter((a) => tab !== "confirmacoes" || a._total > 0)
+    .map(({ value, label }) => ({ value, label }));
 
+  const disciplinaOptions = (area ? AREAS_DISCIPLINAS[area] || [] : [])
+    .filter((d) => tab !== "confirmacoes" || (contagemAtual[d] ?? 0) > 0)
+    .map((d) => {
+      const n = contagemAtual[d];
+      return { value: d, label: n != null ? `${d} (${n})` : d };
+    });
   // Carrega assuntos superpro quando disciplina ou aba muda
   useEffect(() => {
     setAssuntoSuperpro("");
