@@ -888,6 +888,10 @@ async def contagem_filas_por_disciplina(
     if cached is not None:
         return cached
 
+    # Alta sim: usa classificado_manualmente=0 (flag setado pelo fluxo trieduc),
+    # excluindo adicionalmente os tipos genuinamente trieduc que não atualizam o flag.
+    # NÃO exclui classificacao_superprofessor: esse tipo usa sp_id como questao_id,
+    # que colide numericamente com trieduc IDs — seria exclusão indevida.
     rows_sim = db.execute(sql_text("""
         SELECT d.descricao, COUNT(*) AS total
         FROM thsethub.questao_assuntos qa
@@ -897,10 +901,16 @@ async def contagem_filas_por_disciplina(
             SELECT questao_id, COUNT(*) AS n
             FROM trieduc.questao_alternativas GROUP BY questao_id
         ) alt ON alt.questao_id = q.id
-        WHERE qa.similaridade >= 0.8
-          AND qa.extracao_feita = 1
+        WHERE q.ano_id = 3
+          AND q.habilidade_id IS NOT NULL
+          AND qa.similaridade >= 0.8
           AND qa.classificado_manualmente = 0
           AND (alt.n IS NULL OR alt.n != 4)
+          AND qa.questao_id NOT IN (
+              SELECT questao_id FROM thsethub.classificacao_usuario
+              WHERE tipo_acao IN ('classificacao_nova', 'correcao', 'classificacao_libro',
+                                  'auto_classificacao')
+          )
         GROUP BY d.descricao
     """)).fetchall()
 
@@ -913,10 +923,13 @@ async def contagem_filas_por_disciplina(
             SELECT questao_id, COUNT(*) AS n
             FROM trieduc.questao_alternativas GROUP BY questao_id
         ) alt ON alt.questao_id = q.id
-        WHERE cu.tipo_acao = 'confirmacao'
+        WHERE q.ano_id = 3
+          AND q.habilidade_id IS NOT NULL
+          AND cu.tipo_acao = 'confirmacao'
           AND cu.questao_id NOT IN (
               SELECT questao_id FROM thsethub.classificacao_usuario
-              WHERE tipo_acao IN ('classificacao_nova', 'correcao')
+              WHERE tipo_acao IN ('classificacao_nova', 'correcao', 'classificacao_libro',
+                                  'auto_classificacao')
           )
           AND (alt.n IS NULL OR alt.n != 4)
         GROUP BY d.descricao
@@ -1068,6 +1081,75 @@ async def listar_assuntos_superpro(
         WHERE qa.similaridade >= 0.8
           AND qa.extracao_feita = 1
           AND qa.classificado_manualmente = 0
+          AND JSON_LENGTH(qa.classificacoes) > 0
+          AND (alt_cnt.n_alt IS NULL OR alt_cnt.n_alt != 4)
+          {disc_filter}
+        GROUP BY assunto
+        HAVING assunto IS NOT NULL AND assunto != 'null'
+        ORDER BY total DESC
+        LIMIT 500
+    """)
+
+    rows = db.execute(raw_sql).fetchall()
+    result = [{"assunto": r[0], "total": r[1]} for r in rows]
+    set_to_cache(cache_key, result)
+    return result
+
+
+@router.get(
+    "/assuntos-superpro-confirmacoes",
+    summary="📋 Assuntos SuperProfessor disponíveis na fila de confirmações",
+)
+async def listar_assuntos_superpro_confirmacoes(
+    disciplina_id: Optional[str] = Query(
+        None, description="Nome da disciplina para filtrar"
+    ),
+    db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna assuntos únicos (primeiro elemento de classificacoes[]) das questões
+    que estão na fila de confirmações (confirmadas sem módulos libro).
+    """
+    cache_key = f"assuntos_superpro_confirmacoes_{disciplina_id}"
+    cached = get_from_cache(cache_key, ttl=300)
+    if cached is not None:
+        return cached
+
+    disc_mysql_id = None
+    if disciplina_id:
+        if str(disciplina_id).isdigit():
+            disc_mysql_id = int(disciplina_id)
+        else:
+            mysql_name = MAP_DISCIPLINAS_MYSQL.get(disciplina_id, disciplina_id)
+            if mysql_name:
+                disc_row = (
+                    db.query(DisciplinaModel.id)
+                    .filter(DisciplinaModel.descricao == mysql_name)
+                    .first()
+                )
+                disc_mysql_id = disc_row[0] if disc_row else None
+
+    disc_filter = f"AND q.disciplina_id = {disc_mysql_id}" if disc_mysql_id else ""
+
+    from sqlalchemy import text as sql_text
+
+    raw_sql = sql_text(f"""
+        SELECT
+            JSON_UNQUOTE(JSON_EXTRACT(qa.classificacoes, '$[0]')) AS assunto,
+            COUNT(DISTINCT cu.questao_id) AS total
+        FROM thsethub.classificacao_usuario cu
+        JOIN thsethub.questao_assuntos qa ON qa.questao_id = cu.questao_id
+        JOIN trieduc.questoes q ON q.id = cu.questao_id
+        LEFT JOIN (
+            SELECT questao_id, COUNT(*) AS n_alt
+            FROM trieduc.questao_alternativas
+            GROUP BY questao_id
+        ) alt_cnt ON alt_cnt.questao_id = cu.questao_id
+        WHERE cu.tipo_acao = 'confirmacao'
+          AND cu.questao_id NOT IN (
+              SELECT questao_id FROM thsethub.classificacao_usuario
+              WHERE tipo_acao IN ('classificacao_nova', 'correcao', 'classificacao_libro')
+          )
           AND JSON_LENGTH(qa.classificacoes) > 0
           AND (alt_cnt.n_alt IS NULL OR alt_cnt.n_alt != 4)
           {disc_filter}
@@ -1279,6 +1361,9 @@ async def proxima_questao_alta_similaridade(
 )
 async def proxima_questao_confirmacao(
     disciplina_id: Optional[str] = Query(None, description="Nome ou ID da disciplina"),
+    assunto_superpro: Optional[str] = Query(
+        None, description="Filtrar pelo primeiro assunto superprofessor"
+    ),
     last_questao_id: Optional[int] = Query(
         0, description="Último questao_id visto (seek)"
     ),
@@ -1327,6 +1412,21 @@ async def proxima_questao_confirmacao(
         .all()
     }
 
+    # Pré-filtro por assunto superpro (primeiro elemento de classificacoes[])
+    assunto_ids_filter = None
+    if assunto_superpro:
+        assunto_rows = (
+            pg_db.query(QuestaoAssuntoModel.questao_id)
+            .filter(
+                func.json_unquote(
+                    func.json_extract(QuestaoAssuntoModel.classificacoes, "$[0]")
+                )
+                == assunto_superpro
+            )
+            .all()
+        )
+        assunto_ids_filter = {r[0] for r in assunto_rows}
+
     # IDs confirmados (candidatos)
     confirmados_query = (
         pg_db.query(ClassificacaoUsuarioModel.questao_id)
@@ -1335,6 +1435,11 @@ async def proxima_questao_confirmacao(
         .distinct()
         .order_by(ClassificacaoUsuarioModel.questao_id)
     )
+
+    if assunto_ids_filter is not None:
+        confirmados_query = confirmados_query.filter(
+            ClassificacaoUsuarioModel.questao_id.in_(list(assunto_ids_filter))
+        )
 
     last_id = last_questao_id or 0
     questao_final = None
@@ -3350,11 +3455,7 @@ async def estatisticas_classificacao(
     pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
 ):
-    """Retorna estatísticas do sistema de classificação manual (Cache 5m)."""
-    cache_key = "estatisticas_gerais"
-    cached_data = get_from_cache(cache_key, ttl=300)
-    if cached_data:
-        return cached_data
+    """Retorna estatísticas do sistema de classificação manual (sem cache)."""
 
     total = pg_db.query(ClassificacaoUsuarioModel).count()
     novas = (
@@ -3390,7 +3491,6 @@ async def estatisticas_classificacao(
         res = ClassificacaoStatsResponse(
             total_sistema=0, por_usuario={}, por_disciplina={}
         )
-        set_to_cache(cache_key, res)
         return res
 
     # 0. Questões com 4 alternativas — excluídas do funil de classificação
@@ -3410,62 +3510,176 @@ async def estatisticas_classificacao(
     eligible_ids = list(set(em_ids) - quatro_alt_ids)
     total_sistema = len(eligible_ids)
 
-    # 1. Manual (Prioridade Máxima)
-    manuais_ids = {
-        r[0]
-        for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)
-        .filter(ClassificacaoUsuarioModel.questao_id.in_(eligible_ids))
-        .all()
-    }
-    total_manuais = len(manuais_ids)
+    # ================================================================
+    # CLASSIFICAÇÃO EM BUCKETS MUTUAMENTE EXCLUSIVOS
+    # ================================================================
+    # Ordem de prioridade (uma vez em um bucket, não entra em outro):
+    #   1. MANUAIS (classificadas/finalizadas)
+    #   2. CONFIRMAÇÕES (confirmadas sem libro — aguardam módulos)
+    #   3. ALTA SIMILARIDADE (sim ≥ 80% sem ação)
+    #   4. FALTAM VERIFICAR (0 < sim < 80% sem ação)
+    #   5. PULADAS
+    #   6. PENDENTES (resto: sem dados de similaridade)
+    # ================================================================
+    eligible_set = set(eligible_ids)
 
-    # 2. Alta Similaridade Pendente (sim >= 0.8, ainda sem ação manual)
-    #    Estas questões NÃO estão classificadas — aguardam módulos libro.
-    alta_sim_query = (
-        pg_db.query(QuestaoAssuntoModel.questao_id)
+    TIPO_ACAO_FINALIZADO = [
+        "classificacao_nova",
+        "correcao",
+        "classificacao_libro",
+        "auto_classificacao",
+    ]
+
+    # Pré-carrega ações por questão (uma query, sem IN gigante)
+    # IMPORTANTE: classificacao_superprofessor / pular_superprofessor usam sp_id
+    # (base questoes_superprofessor — universo separado), e são processadas
+    # separadamente abaixo. Aqui filtramos apenas ações do fluxo trieduc.
+    acoes_por_questao: dict[int, set[str]] = {}
+    for qid, ta in (
+        pg_db.query(
+            ClassificacaoUsuarioModel.questao_id, ClassificacaoUsuarioModel.tipo_acao
+        )
         .filter(
-            QuestaoAssuntoModel.questao_id.in_(eligible_ids),
-            QuestaoAssuntoModel.similaridade >= 0.8,
+            ClassificacaoUsuarioModel.tipo_acao.notin_(
+                ["classificacao_superprofessor", "pular_superprofessor"]
+            )
         )
         .all()
-    )
-    alta_sim_ids = {r[0] for r in alta_sim_query} - manuais_ids
-    total_alta_similaridade = len(alta_sim_ids)
-    total_auto_superpro = 0  # mantido por retrocompatibilidade, agora sempre 0
+    ):
+        if qid in eligible_set:
+            acoes_por_questao.setdefault(qid, set()).add(ta)
 
-    # 3. Faltam Verificar (0 < sim < 80%, não tocadas)
-    verificar_query = (
-        pg_db.query(QuestaoAssuntoModel.questao_id)
+    # 1. MANUAIS — questão finalizada no fluxo trieduc
+    manuais_via_acao: set[int] = {
+        qid
+        for qid, acoes in acoes_por_questao.items()
+        if acoes & set(TIPO_ACAO_FINALIZADO)
+    }
+    # Captura questões com classificado_manualmente=1 cujo tipo_acao registrado
+    # não está em TIPO_ACAO_FINALIZADO (tipicamente colisões com sp_id classificadas
+    # via SP). Excluímos as que têm confirmacao (essas devem ir para a fila de
+    # confirmações pendentes, não para manuais).
+    confirmacao_ids_raw = {
+        qid for qid, acoes in acoes_por_questao.items() if "confirmacao" in acoes
+    }
+    manuais_via_flag = {
+        r[0]
+        for r in pg_db.query(QuestaoAssuntoModel.questao_id)
+        .filter(QuestaoAssuntoModel.classificado_manualmente == True)
+        .all()
+    } & eligible_set
+    manuais_via_flag -= confirmacao_ids_raw
+    manuais_ids = manuais_via_acao | manuais_via_flag
+    total_manuais = len(manuais_ids)
+
+    # 2. CONFIRMAÇÕES PENDENTES — tem tipo_acao='confirmacao' mas não é manuais
+    confirmacoes_ids = {
+        qid for qid, acoes in acoes_por_questao.items() if "confirmacao" in acoes
+    } - manuais_ids
+    total_confirmacoes_pendentes = len(confirmacoes_ids)
+
+    # 3. ALTA SIMILARIDADE — sim ≥ 0.8 sem ação finalizadora nem confirmação
+    alta_sim_raw = {
+        r[0]
+        for r in pg_db.query(QuestaoAssuntoModel.questao_id)
+        .filter(QuestaoAssuntoModel.similaridade >= 0.8)
+        .all()
+    } & eligible_set
+    alta_sim_ids = alta_sim_raw - manuais_ids - confirmacoes_ids
+    total_alta_similaridade = len(alta_sim_ids)
+    total_auto_superpro = 0  # retrocompat
+
+    # 4. FALTAM VERIFICAR — 0 < sim < 0.8 sem ação nem confirmação nem alta_sim
+    verificar_raw = {
+        r[0]
+        for r in pg_db.query(QuestaoAssuntoModel.questao_id)
         .filter(
-            QuestaoAssuntoModel.questao_id.in_(eligible_ids),
             QuestaoAssuntoModel.similaridade < 0.8,
             QuestaoAssuntoModel.similaridade > 0,
         )
         .all()
-    )
-    verificar_ids = {r[0] for r in verificar_query} - manuais_ids - alta_sim_ids
+    } & eligible_set
+    verificar_ids = verificar_raw - manuais_ids - confirmacoes_ids - alta_sim_ids
     total_precisa_verificar = len(verificar_ids)
 
-    # 4. Puladas
+    # 5. PULADAS
     from ..database.pg_pular_models import QuestaoPuladaModel
 
-    puladas_query = (
-        pg_db.query(QuestaoPuladaModel.questao_id)
-        .filter(QuestaoPuladaModel.questao_id.in_(eligible_ids))
-        .all()
+    puladas_raw = {
+        r[0] for r in pg_db.query(QuestaoPuladaModel.questao_id).all()
+    } & eligible_set
+    puladas_ids_disjoint = (
+        puladas_raw - manuais_ids - confirmacoes_ids - alta_sim_ids - verificar_ids
     )
-    all_puladas_ids = {r[0] for r in puladas_query}
-    puladas_ids_disjoint = all_puladas_ids - manuais_ids - alta_sim_ids - verificar_ids
     total_puladas = len(puladas_ids_disjoint)
 
-    # 5. Pendentes (resto matemático)
+    # 6. PENDENTES (resto matemático — garantido ≥ 0 pela construção disjunta)
     total_pendentes = max(
         0,
         total_sistema
         - total_manuais
+        - total_confirmacoes_pendentes
         - total_alta_similaridade
         - total_precisa_verificar
         - total_puladas,
+    )
+
+    # ================================================================
+    # BASE SUPERPROFESSOR (universo separado em thsethub.questoes_superprofessor)
+    # IDs (sp_id) são independentes dos IDs trieduc — somamos no total global
+    # e o tooltip explica a contribuição de cada base.
+    # ================================================================
+    from ..database.pg_usuario_models import QuestaoSuperprofessorModel as _QSP
+
+    # Mapeamento dos nomes SP → nomes consolidados (trieduc)
+    sp_nome_map = {
+        "Inglês": "Língua Inglesa",
+        "Espanhol": "Espanhol",
+        "Arte": "Artes",
+        "Literatura": "Língua Portuguesa",
+        "Redação": "Língua Portuguesa",
+    }
+
+    # SP por disciplina: total, classificadas, puladas
+    sp_rows = pg_db.query(_QSP.sp_id, _QSP.disciplina_sp).all()
+    sp_por_disc_total: dict[str, int] = {}
+    sp_id_to_disc: dict[int, str] = {}
+    for sp_id, disc_sp in sp_rows:
+        disc_norm = sp_nome_map.get(disc_sp, disc_sp) if disc_sp else "—"
+        sp_por_disc_total[disc_norm] = sp_por_disc_total.get(disc_norm, 0) + 1
+        sp_id_to_disc[sp_id] = disc_norm
+
+    sp_classif_ids = {
+        r[0]
+        for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "classificacao_superprofessor")
+        .distinct()
+        .all()
+    }
+    sp_pulada_ids = {
+        r[0]
+        for r in pg_db.query(ClassificacaoUsuarioModel.questao_id)
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "pular_superprofessor")
+        .distinct()
+        .all()
+    }
+
+    sp_por_disc_classif: dict[str, int] = {}
+    sp_por_disc_pulada: dict[str, int] = {}
+    for sp_id, disc in sp_id_to_disc.items():
+        if sp_id in sp_classif_ids:
+            sp_por_disc_classif[disc] = sp_por_disc_classif.get(disc, 0) + 1
+        elif sp_id in sp_pulada_ids:
+            sp_por_disc_pulada[disc] = sp_por_disc_pulada.get(disc, 0) + 1
+
+    total_superprofessor = len(sp_id_to_disc)
+    total_superprofessor_classificadas = sum(sp_por_disc_classif.values())
+    total_superprofessor_puladas = sum(sp_por_disc_pulada.values())
+    total_superprofessor_pendentes = max(
+        0,
+        total_superprofessor
+        - total_superprofessor_classificadas
+        - total_superprofessor_puladas,
     )
 
     # Por disciplina (Dashboard style)
@@ -3641,26 +3855,88 @@ async def estatisticas_classificacao(
         d_quatro_alt = len(quatro_alt_ids & d_set)
         total_disc = max(0, total_mysql - d_quatro_alt)
         d_manuais = len(manuais_ids & d_set)
+        d_confirmacoes = len(confirmacoes_ids & d_set)
         d_alta_sim = len(alta_sim_ids & d_set)
         d_verificar = len(verificar_ids & d_set)
-        d_puladas = len(puladas_ids_disjoint & d_set)
-        d_feitas = d_manuais
-        d_pendentes = max(
-            0, total_disc - d_manuais - d_alta_sim - d_verificar - d_puladas
+        d_puladas_trieduc = len(puladas_ids_disjoint & d_set)
+        d_pendentes_trieduc = max(
+            0,
+            total_disc
+            - d_manuais
+            - d_confirmacoes
+            - d_alta_sim
+            - d_verificar
+            - d_puladas_trieduc,
         )
+
+        # Contribuição da base Superprofessor para essa disciplina
+        d_sp_total = sp_por_disc_total.get(nome, 0)
+        d_sp_classif = sp_por_disc_classif.get(nome, 0)
+        d_sp_pulada = sp_por_disc_pulada.get(nome, 0)
+        d_sp_pendentes = max(0, d_sp_total - d_sp_classif - d_sp_pulada)
+
+        # Totais GLOBAIS (trieduc + SP)
+        g_total = total_disc + d_sp_total
+        g_classificadas = d_manuais + d_sp_classif
+        g_pendentes = d_pendentes_trieduc + d_sp_pendentes
+        g_puladas = d_puladas_trieduc + d_sp_pulada
+        g_faltam = max(0, g_total - g_classificadas)
+
         por_disciplina[nome] = {
-            "total": total_disc,
-            "feitas": d_feitas,
-            "faltam": max(0, total_disc - d_feitas),
-            "manuais": d_manuais,
-            "auto": d_alta_sim,
-            "alta_sim": d_alta_sim,
-            "verificar": d_verificar,
-            "pendentes": d_pendentes,
-            "puladas": d_puladas,
+            # globais (trieduc + SP)
+            "total": g_total,
+            "feitas": g_classificadas,
+            "faltam": g_faltam,
+            "manuais": g_classificadas,
+            "alta_sim": d_alta_sim,  # SP não tem alta_sim
+            "auto": d_alta_sim,  # retrocompat
+            "confirmacoes": d_confirmacoes,  # SP não tem
+            "verificar": d_verificar,  # SP não tem
+            "pendentes": g_pendentes,
+            "puladas": g_puladas,
+            # breakdown por base (tooltip)
+            "trieduc_total": total_disc,
+            "trieduc_classificadas": d_manuais,
+            "trieduc_pendentes": d_pendentes_trieduc,
+            "trieduc_puladas": d_puladas_trieduc,
+            "sp_total": d_sp_total,
+            "sp_classificadas": d_sp_classif,
+            "sp_pendentes": d_sp_pendentes,
+            "sp_puladas": d_sp_pulada,
             "total_modulos": modulos_por_disc.get(nome, 0),
             "total_habilidades": habs_por_disc.get(nome, 0),
             "total_assuntos": assuntos_por_disc.get(nome, 0),
+        }
+
+    # Adiciona disciplinas que existem só na base SP (não tem questão trieduc)
+    for nome_sp, sp_total in sp_por_disc_total.items():
+        if nome_sp in por_disciplina or nome_sp == "—":
+            continue
+        sp_classif = sp_por_disc_classif.get(nome_sp, 0)
+        sp_pulada = sp_por_disc_pulada.get(nome_sp, 0)
+        sp_pend = max(0, sp_total - sp_classif - sp_pulada)
+        por_disciplina[nome_sp] = {
+            "total": sp_total,
+            "feitas": sp_classif,
+            "faltam": max(0, sp_total - sp_classif),
+            "manuais": sp_classif,
+            "alta_sim": 0,
+            "auto": 0,
+            "confirmacoes": 0,
+            "verificar": 0,
+            "pendentes": sp_pend,
+            "puladas": sp_pulada,
+            "trieduc_total": 0,
+            "trieduc_classificadas": 0,
+            "trieduc_pendentes": 0,
+            "trieduc_puladas": 0,
+            "sp_total": sp_total,
+            "sp_classificadas": sp_classif,
+            "sp_pendentes": sp_pend,
+            "sp_puladas": sp_pulada,
+            "total_modulos": 0,
+            "total_habilidades": 0,
+            "total_assuntos": 0,
         }
 
     # Por usuário (Atividades Recentes)
@@ -3675,24 +3951,42 @@ async def estatisticas_classificacao(
     )
     por_usuario = {row[0]: row[1] for row in por_usuario_rows}
 
+    # ================================================================
+    # TOTAIS GLOBAIS (trieduc + Superprofessor)
+    # ================================================================
+    total_sistema_global = total_sistema + total_superprofessor
+    total_manuais_global = total_manuais + total_superprofessor_classificadas
+    total_pendentes_global = total_pendentes + total_superprofessor_pendentes
+    total_puladas_global = total_puladas + total_superprofessor_puladas
+
     res = ClassificacaoStatsResponse(
-        total_classificacoes=total_sistema,
+        total_classificacoes=total_sistema_global,
         classificacoes_novas=novas,
         confirmacoes=confirmacoes,
         correcoes=correcoes,
         usuarios_ativos=usuarios_ativos,
-        total_manuais=total_manuais,
-        total_pendentes=total_pendentes,
-        total_sistema=total_sistema,
+        total_manuais=total_manuais_global,
+        total_pendentes=total_pendentes_global,
+        total_sistema=total_sistema_global,
         total_precisa_verificar=total_precisa_verificar,
         total_auto_superpro=total_auto_superpro,
         total_alta_similaridade=total_alta_similaridade,
+        total_confirmacoes_pendentes=total_confirmacoes_pendentes,
         total_4_alternativas=total_4_alternativas,
-        total_puladas=total_puladas,
+        total_puladas=total_puladas_global,
+        # Breakdown trieduc
+        total_trieduc=total_sistema,
+        total_trieduc_classificadas=total_manuais,
+        total_trieduc_pendentes=total_pendentes,
+        total_trieduc_puladas=total_puladas,
+        # Breakdown SP
+        total_superprofessor=total_superprofessor,
+        total_superprofessor_classificadas=total_superprofessor_classificadas,
+        total_superprofessor_pendentes=total_superprofessor_pendentes,
+        total_superprofessor_puladas=total_superprofessor_puladas,
         por_disciplina=por_disciplina,
         por_usuario=por_usuario,
     )
-    set_to_cache(cache_key, res)
     return res
 
 
@@ -3789,18 +4083,19 @@ async def listar_disciplinas_superprofessor(
     classificados_sp_ids = {
         row[0]
         for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
-        .filter(ClassificacaoUsuarioModel.tipo_acao.in_(["classificacao_superprofessor", "pular_superprofessor"]))
+        .filter(
+            ClassificacaoUsuarioModel.tipo_acao.in_(
+                ["classificacao_superprofessor", "pular_superprofessor"]
+            )
+        )
         .distinct()
         .all()
     }
 
-    query = (
-        pg_db.query(
-            QuestaoSuperprofessorModel.disciplina_sp,
-            func.count(QuestaoSuperprofessorModel.sp_id)
-        )
-        .filter(QuestaoSuperprofessorModel.disciplina_sp.isnot(None))
-    )
+    query = pg_db.query(
+        QuestaoSuperprofessorModel.disciplina_sp,
+        func.count(QuestaoSuperprofessorModel.sp_id),
+    ).filter(QuestaoSuperprofessorModel.disciplina_sp.isnot(None))
 
     if classificados_sp_ids:
         query = query.filter(
@@ -3812,19 +4107,13 @@ async def listar_disciplinas_superprofessor(
         .order_by(QuestaoSuperprofessorModel.disciplina_sp)
         .all()
     )
-    return {
-        "disciplinas": [
-            {"nome": r[0], "total": r[1]} for r in rows if r[0]
-        ]
-    }
-
+    return {"disciplinas": [{"nome": r[0], "total": r[1]} for r in rows if r[0]]}
 
 
 @router.get(
     "/superprofessor/assuntos",
     summary="Assuntos SP disponiveis",
 )
-
 async def listar_assuntos_superprofessor(
     disciplina: Optional[str] = Query(None, description="Filtrar por disciplina SP"),
     pg_db: Session = Depends(get_db),
@@ -3836,14 +4125,18 @@ async def listar_assuntos_superprofessor(
     classificados_sp_ids = {
         row[0]
         for row in pg_db.query(ClassificacaoUsuarioModel.questao_id)
-        .filter(ClassificacaoUsuarioModel.tipo_acao.in_(["classificacao_superprofessor", "pular_superprofessor"]))
+        .filter(
+            ClassificacaoUsuarioModel.tipo_acao.in_(
+                ["classificacao_superprofessor", "pular_superprofessor"]
+            )
+        )
         .distinct()
         .all()
     }
 
     query = pg_db.query(
         QuestaoSuperprofessorModel.assunto_sp,
-        func.count(QuestaoSuperprofessorModel.sp_id)
+        func.count(QuestaoSuperprofessorModel.sp_id),
     ).filter(
         QuestaoSuperprofessorModel.assunto_sp.isnot(None),
         QuestaoSuperprofessorModel.assunto_sp != "",
@@ -3855,20 +4148,13 @@ async def listar_assuntos_superprofessor(
         )
 
     if disciplina:
-        query = query.filter(
-            QuestaoSuperprofessorModel.disciplina_sp == disciplina
-        )
+        query = query.filter(QuestaoSuperprofessorModel.disciplina_sp == disciplina)
     rows = (
         query.group_by(QuestaoSuperprofessorModel.assunto_sp)
         .order_by(QuestaoSuperprofessorModel.assunto_sp)
         .all()
     )
-    return {
-        "assuntos": [
-            {"nome": r[0], "total": r[1]} for r in rows if r[0]
-        ]
-    }
-
+    return {"assuntos": [{"nome": r[0], "total": r[1]} for r in rows if r[0]]}
 
 
 @router.get(
@@ -3876,7 +4162,6 @@ async def listar_assuntos_superprofessor(
     response_model=SuperprofessorStatsResponse,
     summary="Estatisticas do superprofessor",
 )
-
 async def stats_superprofessor(
     pg_db: Session = Depends(get_db),
     usuario: UsuarioModel = Depends(get_usuario_atual),
@@ -3918,12 +4203,10 @@ async def stats_superprofessor(
     )
 
     # Mapa sp_id → disciplina_sp para contagens
-    sp_disc_rows = (
-        pg_db.query(
-            QuestaoSuperprofessorModel.sp_id,
-            QuestaoSuperprofessorModel.disciplina_sp,
-        ).all()
-    )
+    sp_disc_rows = pg_db.query(
+        QuestaoSuperprofessorModel.sp_id,
+        QuestaoSuperprofessorModel.disciplina_sp,
+    ).all()
     sp_disc_map: dict[int, str] = {r[0]: r[1] for r in sp_disc_rows if r[1]}
 
     por_disciplina = {}
@@ -3969,11 +4252,328 @@ async def stats_superprofessor(
 
 
 @router.get(
+    "/superprofessor/cobertura-assuntos",
+    summary="📊 Cobertura de questões por assunto (CSV mapeamento)",
+)
+async def cobertura_assuntos_superpro(
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna, para cada (disc_modu_id, assu_id) do CSV mapeamento_modulos_assuntos.csv,
+    quantas classificações superprofessor existem para aquele assunto.
+
+    Útil para identificar assuntos sem cobertura (gaps) na base SP.
+    """
+    import csv as _csv
+    import os
+    from pathlib import Path
+    from sqlalchemy import text as sql_text
+
+    cache_key = "cobertura_assuntos_sp_v1"
+    cached = get_from_cache(cache_key, ttl=300)
+    if cached is not None:
+        return cached
+
+    # CSV está na raiz do projeto (um nível acima do agente-classificacao)
+    project_root = Path(__file__).resolve().parents[3]
+    csv_path = project_root / "mapeamento_modulos_assuntos.csv"
+    if not csv_path.exists():
+        raise HTTPException(
+            status_code=500,
+            detail=f"Arquivo de mapeamento não encontrado em {csv_path}",
+        )
+
+    pairs: list[tuple[int, int]] = []
+    with open(csv_path, "r", encoding="utf-8") as f:
+        reader = _csv.DictReader(f)
+        for row in reader:
+            try:
+                pairs.append((int(row["disc_modu_id"]), int(row["assu_id"])))
+            except (ValueError, KeyError):
+                continue
+
+    if not pairs:
+        return {
+            "totais": {
+                "total_assuntos_csv": 0,
+                "assuntos_com_questoes": 0,
+                "assuntos_sem_questoes": 0,
+            },
+            "items": [],
+        }
+
+    modu_ids = list({p[0] for p in pairs})
+    assu_ids = list({p[1] for p in pairs})
+
+    # Lookup descricoes (módulos + disciplinas + assuntos)
+    modu_info: dict[int, dict] = {}
+    BATCH = 1000
+    for i in range(0, len(modu_ids), BATCH):
+        chunk = modu_ids[i : i + BATCH]
+        ids_str = ",".join(str(x) for x in chunk)
+        rows = db.execute(sql_text(f"""
+            SELECT dm.disc_modu_id, dm.disc_modu_descricao, d.disc_descricao
+            FROM compartilhados.disciplinas_modulos dm
+            JOIN compartilhados.disciplinas d ON d.disc_id = dm.disc_id
+            WHERE dm.disc_modu_id IN ({ids_str})
+        """)).fetchall()
+        for r in rows:
+            modu_info[r[0]] = {"modulo": r[1] or "?", "disciplina": r[2] or "?"}
+
+    assu_info: dict[int, str] = {}
+    for i in range(0, len(assu_ids), BATCH):
+        chunk = assu_ids[i : i + BATCH]
+        ids_str = ",".join(str(x) for x in chunk)
+        rows = db.execute(sql_text(f"""
+            SELECT assu_id, assu_descricao
+            FROM compartilhados.assuntos
+            WHERE assu_id IN ({ids_str})
+        """)).fetchall()
+        for r in rows:
+            assu_info[r[0]] = r[1] or f"assu_id={r[0]}"
+
+    # Pré-computar contagem de classificações SP por (módulo, assunto) descrição.
+    # Cada classificação tem listas paralelas modulos_escolhidos[] e descricoes_assunto_list[];
+    # contamos pares (modulo, assunto) em todas as classificações SP.
+    sp_classifs = (
+        pg_db.query(
+            ClassificacaoUsuarioModel.descricao_assunto,
+            ClassificacaoUsuarioModel.descricoes_assunto_list,
+            ClassificacaoUsuarioModel.modulo_escolhido,
+            ClassificacaoUsuarioModel.modulos_escolhidos,
+        )
+        .filter(ClassificacaoUsuarioModel.tipo_acao == "classificacao_superprofessor")
+        .all()
+    )
+
+    # Conta por par (modulo_desc, assunto_desc) — case-insensitive trim
+    contagem_pares: dict[tuple[str, str], int] = {}
+    contagem_assunto_so: dict[str, int] = {}
+    for desc_a, desc_list, modulo, modulos in sp_classifs:
+        pares_locais: set[tuple[str, str]] = set()
+        if desc_list and modulos and len(desc_list) == len(modulos):
+            for m, a in zip(modulos, desc_list):
+                if a and m:
+                    pares_locais.add((str(m).strip().lower(), str(a).strip().lower()))
+        elif desc_a and modulo:
+            pares_locais.add((str(modulo).strip().lower(), str(desc_a).strip().lower()))
+        # Também contagem só por assunto (fallback caso modulo não bata)
+        assuntos_locais = set()
+        if desc_list:
+            for a in desc_list:
+                if a:
+                    assuntos_locais.add(str(a).strip().lower())
+        elif desc_a:
+            assuntos_locais.add(str(desc_a).strip().lower())
+
+        for par in pares_locais:
+            contagem_pares[par] = contagem_pares.get(par, 0) + 1
+        for a in assuntos_locais:
+            contagem_assunto_so[a] = contagem_assunto_so.get(a, 0) + 1
+
+    items = []
+    com_questoes = 0
+    for disc_modu_id, assu_id in pairs:
+        modu = modu_info.get(disc_modu_id, {"modulo": "?", "disciplina": "?"})
+        assunto_desc = assu_info.get(assu_id, f"assu_id={assu_id}")
+        key_par = (
+            str(modu["modulo"]).strip().lower(),
+            str(assunto_desc).strip().lower(),
+        )
+        # Tentativa 1: contagem por par (módulo, assunto)
+        n_par = contagem_pares.get(key_par, 0)
+        # Tentativa 2 (fallback): contagem só por assunto
+        n_assunto = contagem_assunto_so.get(key_par[1], 0)
+        n_final = n_par if n_par > 0 else n_assunto
+        if n_final > 0:
+            com_questoes += 1
+        items.append(
+            {
+                "disciplina": modu["disciplina"],
+                "disc_modu_id": disc_modu_id,
+                "modulo": modu["modulo"],
+                "assu_id": assu_id,
+                "assunto": assunto_desc,
+                "questoes_classificadas": n_final,
+                "matched_by": (
+                    "par" if n_par > 0 else ("assunto" if n_assunto > 0 else "nenhum")
+                ),
+            }
+        )
+
+    # Ordena por disciplina → módulo → quantidade (asc para gaps no topo) → assunto
+    items.sort(
+        key=lambda x: (
+            x["disciplina"],
+            x["modulo"],
+            x["questoes_classificadas"],
+            x["assunto"],
+        )
+    )
+
+    result = {
+        "totais": {
+            "total_assuntos_csv": len(pairs),
+            "assuntos_com_questoes": com_questoes,
+            "assuntos_sem_questoes": len(pairs) - com_questoes,
+            "modulos_unicos": len(modu_ids),
+        },
+        "items": items,
+    }
+    set_to_cache(cache_key, result)
+    return result
+
+
+@router.get(
+    "/superprofessor/cobertura-libro",
+    summary="📊 Cobertura de questões por assunto Libro (total geral + SP)",
+)
+async def cobertura_assuntos_libro(
+    db: Session = Depends(get_db),
+    pg_db: Session = Depends(get_db),
+    usuario: UsuarioModel = Depends(get_usuario_atual),
+):
+    """Retorna todos os pares (módulo, assunto) do banco compartilhados (excluindo [RM]).
+
+    Para cada par retorna:
+    - total_classificacoes: contagem de TODAS as classificações (qualquer tipo_acao) para aquele assunto
+    - total_sp: contagem apenas das classificações_superprofessor
+    - no_csv: se o par estava no mapeamento_modulos_assuntos.csv (targetado por ter poucas questões)
+
+    O filtro "apenas mapeados SP" no frontend usa no_csv=True para mostrar só os pares
+    que foram trabalhados — revelando o volume real mesmo somando todos os tipos.
+    """
+    import csv as _csv
+    from pathlib import Path
+    from sqlalchemy import text as sql_text
+
+    cache_key = "cobertura_assuntos_libro_v3"
+    cached = get_from_cache(cache_key, ttl=300)
+    if cached is not None:
+        return cached
+
+    # 1. Pares do CSV de mapeamento (os que foram targetados via SP)
+    csv_pairs: set[tuple[int, int]] = set()
+    project_root = Path(__file__).resolve().parents[3]
+    csv_path = project_root / "mapeamento_modulos_assuntos.csv"
+    if csv_path.exists():
+        with open(csv_path, "r", encoding="utf-8") as f:
+            for row in _csv.DictReader(f):
+                try:
+                    csv_pairs.add((int(row["disc_modu_id"]), int(row["assu_id"])))
+                except (ValueError, KeyError):
+                    continue
+
+    # 2. Buscar todos os pares (módulo, assunto) do banco compartilhados
+    rows = db.execute(sql_text("""
+        SELECT
+            d.disc_id,
+            d.disc_descricao AS disciplina,
+            dm.disc_modu_id,
+            dm.disc_modu_descricao AS modulo,
+            a.assu_id,
+            a.assu_descricao AS assunto
+        FROM compartilhados.disciplinas_modulos dm
+        JOIN compartilhados.disciplinas d ON d.disc_id = dm.disc_id
+        JOIN compartilhados.assuntos a ON a.disc_modu_id = dm.disc_modu_id
+        WHERE dm.disc_modu_descricao NOT LIKE '[RM]%'
+          AND a.assu_descricao NOT LIKE '[RM]%'
+        ORDER BY d.disc_descricao, dm.disc_modu_descricao, a.assu_descricao
+    """)).fetchall()
+
+    # 3. Pré-computar contagem de classificações por (modulo_desc, assunto_desc)
+    #    — separado: total geral e apenas SP
+    def _build_contagens(tipo_acao_filter=None):
+        q = pg_db.query(
+            ClassificacaoUsuarioModel.descricao_assunto,
+            ClassificacaoUsuarioModel.descricoes_assunto_list,
+            ClassificacaoUsuarioModel.modulo_escolhido,
+            ClassificacaoUsuarioModel.modulos_escolhidos,
+        )
+        if tipo_acao_filter:
+            q = q.filter(ClassificacaoUsuarioModel.tipo_acao == tipo_acao_filter)
+        classifs = q.all()
+
+        pares: dict[tuple[str, str], int] = {}
+        assunto_so: dict[str, int] = {}
+        for desc_a, desc_list, modulo, modulos in classifs:
+            pares_locais: set[tuple[str, str]] = set()
+            if desc_list and modulos and len(desc_list) == len(modulos):
+                for m, a in zip(modulos, desc_list):
+                    if a and m:
+                        pares_locais.add(
+                            (str(m).strip().lower(), str(a).strip().lower())
+                        )
+            elif desc_a and modulo:
+                pares_locais.add(
+                    (str(modulo).strip().lower(), str(desc_a).strip().lower())
+                )
+            assuntos_locais: set[str] = set()
+            if desc_list:
+                for a in desc_list:
+                    if a:
+                        assuntos_locais.add(str(a).strip().lower())
+            elif desc_a:
+                assuntos_locais.add(str(desc_a).strip().lower())
+            for par in pares_locais:
+                pares[par] = pares.get(par, 0) + 1
+            for a in assuntos_locais:
+                assunto_so[a] = assunto_so.get(a, 0) + 1
+        return pares, assunto_so
+
+    pares_total, assunto_total = _build_contagens(tipo_acao_filter=None)
+    pares_sp, assunto_sp = _build_contagens(
+        tipo_acao_filter="classificacao_superprofessor"
+    )
+
+    def _lookup(pares, assunto_so, key_par):
+        n = pares.get(key_par, 0)
+        if n == 0:
+            n = assunto_so.get(key_par[1], 0)
+        return n
+
+    # 4. Montar items
+    items = []
+    for row in rows:
+        disc_id, disciplina, disc_modu_id, modulo, assu_id, assunto = row
+        key_par = (str(modulo).strip().lower(), str(assunto).strip().lower())
+        n_total = _lookup(pares_total, assunto_total, key_par)
+        n_sp = _lookup(pares_sp, assunto_sp, key_par)
+        no_csv = (disc_modu_id, assu_id) in csv_pairs
+        items.append(
+            {
+                "disc_id": disc_id,
+                "disciplina": disciplina,
+                "disc_modu_id": disc_modu_id,
+                "modulo": modulo,
+                "assu_id": assu_id,
+                "assunto": assunto,
+                "total_classificacoes": n_total,
+                "total_sp": n_sp,
+                "no_csv": no_csv,
+            }
+        )
+
+    csv_items = [i for i in items if i["no_csv"]]
+    result = {
+        "totais": {
+            "total_assuntos": len(csv_items),
+            "com_classificacoes_sp": sum(1 for i in csv_items if i["total_sp"] > 0),
+            "sem_classificacoes_sp": sum(1 for i in csv_items if i["total_sp"] == 0),
+            "abaixo_5_sp": sum(1 for i in csv_items if 0 < i["total_sp"] < 5),
+        },
+        "items": csv_items,
+    }
+    set_to_cache(cache_key, result)
+    return result
+
+
+@router.get(
     "/superprofessor/proxima",
     response_model=QuestaoSuperprofessorResponse,
     summary="Proxima questao superprofessor",
 )
-
 async def proxima_questao_superprofessor(
     disciplina: Optional[str] = Query(None, description="Filtrar por disciplina SP"),
     assunto_sp: Optional[str] = Query(None, description="Filtrar por assunto SP"),
@@ -4000,14 +4600,10 @@ async def proxima_questao_superprofessor(
     query = pg_db.query(QuestaoSuperprofessorModel)
 
     if disciplina:
-        query = query.filter(
-            QuestaoSuperprofessorModel.disciplina_sp == disciplina
-        )
+        query = query.filter(QuestaoSuperprofessorModel.disciplina_sp == disciplina)
 
     if assunto_sp:
-        query = query.filter(
-            QuestaoSuperprofessorModel.assunto_sp == assunto_sp
-        )
+        query = query.filter(QuestaoSuperprofessorModel.assunto_sp == assunto_sp)
 
     if classificados_sp_ids:
         query = query.filter(
@@ -4041,7 +4637,9 @@ async def proxima_questao_superprofessor(
         # Remover duplicatas e manter ordem
         disciplinas_expandidas = list(dict.fromkeys(disciplinas_expandidas))
 
-        placeholders = ", ".join(f":{f'disc{i}'}" for i in range(len(disciplinas_expandidas)))
+        placeholders = ", ".join(
+            f":{f'disc{i}'}" for i in range(len(disciplinas_expandidas))
+        )
         params = {f"disc{i}": v for i, v in enumerate(disciplinas_expandidas)}
         sql = sql_text(f"""
             SELECT
@@ -4114,7 +4712,6 @@ async def proxima_questao_superprofessor(
     response_model=SalvarClassificacaoResponse,
     summary="Salvar revisao superprofessor",
 )
-
 async def salvar_superprofessor(
     request: SalvarSuperprofessorRequest,
     pg_db: Session = Depends(get_db),
@@ -4177,7 +4774,6 @@ async def salvar_superprofessor(
     "/superprofessor/pular",
     summary="Pular questao superprofessor",
 )
-
 async def pular_superprofessor(
     request: PularSuperprofessorRequest,
     pg_db: Session = Depends(get_db),
@@ -4279,7 +4875,9 @@ async def listar_pendentes_superprofessor(
 
             disciplinas_expandidas = list(dict.fromkeys(disciplinas_expandidas))
 
-            placeholders = ", ".join(f":{f'disc{i}'}" for i in range(len(disciplinas_expandidas)))
+            placeholders = ", ".join(
+                f":{f'disc{i}'}" for i in range(len(disciplinas_expandidas))
+            )
             params = {f"disc{i}": v for i, v in enumerate(disciplinas_expandidas)}
             sql = sql_text(f"""
                 SELECT
@@ -4382,4 +4980,7 @@ async def limpar_duplicados_superprofessor(
     )
     pg_db.commit()
 
-    return {"removidos": deletados, "mensagem": f"{deletados} registros de pular removidos"}
+    return {
+        "removidos": deletados,
+        "mensagem": f"{deletados} registros de pular removidos",
+    }
