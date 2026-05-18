@@ -1110,7 +1110,7 @@ async def listar_assuntos_superpro_confirmacoes(
     """Retorna assuntos únicos (primeiro elemento de classificacoes[]) das questões
     que estão na fila de confirmações (confirmadas sem módulos libro).
     """
-    cache_key = f"assuntos_superpro_confirmacoes_{disciplina_id}"
+    cache_key = f"assuntos_confirmacoes_v2_{disciplina_id}"
     cached = get_from_cache(cache_key, ttl=300)
     if cached is not None:
         return cached
@@ -1135,11 +1135,15 @@ async def listar_assuntos_superpro_confirmacoes(
 
     raw_sql = sql_text(f"""
         SELECT
-            JSON_UNQUOTE(JSON_EXTRACT(qa.classificacoes, '$[0]')) AS assunto,
+            COALESCE(
+                NULLIF(JSON_UNQUOTE(JSON_EXTRACT(qa.classificacoes, '$[0]')), 'null'),
+                h.descricao
+            ) AS assunto,
             COUNT(DISTINCT cu.questao_id) AS total
         FROM thsethub.classificacao_usuario cu
-        JOIN thsethub.questao_assuntos qa ON qa.questao_id = cu.questao_id
         JOIN trieduc.questoes q ON q.id = cu.questao_id
+        LEFT JOIN thsethub.questao_assuntos qa ON qa.questao_id = cu.questao_id
+        LEFT JOIN trieduc.habilidades h ON h.id = q.habilidade_id
         LEFT JOIN (
             SELECT questao_id, COUNT(*) AS n_alt
             FROM trieduc.questao_alternativas
@@ -1148,13 +1152,12 @@ async def listar_assuntos_superpro_confirmacoes(
         WHERE cu.tipo_acao = 'confirmacao'
           AND cu.questao_id NOT IN (
               SELECT questao_id FROM thsethub.classificacao_usuario
-              WHERE tipo_acao IN ('classificacao_nova', 'correcao', 'classificacao_libro')
+              WHERE tipo_acao IN ('classificacao_nova', 'correcao', 'classificacao_libro', 'auto_classificacao')
           )
-          AND JSON_LENGTH(qa.classificacoes) > 0
           AND (alt_cnt.n_alt IS NULL OR alt_cnt.n_alt != 4)
           {disc_filter}
         GROUP BY assunto
-        HAVING assunto IS NOT NULL AND assunto != 'null'
+        HAVING assunto IS NOT NULL AND assunto != ''
         ORDER BY total DESC
         LIMIT 500
     """)
@@ -1412,11 +1415,13 @@ async def proxima_questao_confirmacao(
         .all()
     }
 
-    # Pré-filtro por assunto superpro (primeiro elemento de classificacoes[])
+    # Pré-filtro por assunto — tenta classificacoes[0] e fallback por habilidade.descricao
     assunto_ids_filter = None
     if assunto_superpro:
-        assunto_rows = (
-            pg_db.query(QuestaoAssuntoModel.questao_id)
+        # Via classificacoes[0] em questao_assuntos
+        ids_via_classificacoes = {
+            r[0]
+            for r in pg_db.query(QuestaoAssuntoModel.questao_id)
             .filter(
                 func.json_unquote(
                     func.json_extract(QuestaoAssuntoModel.classificacoes, "$[0]")
@@ -1424,8 +1429,23 @@ async def proxima_questao_confirmacao(
                 == assunto_superpro
             )
             .all()
+        }
+        # Via habilidade.descricao (para questões sem classificacao SP)
+        hab_rows = (
+            db.query(HabilidadeModel.id)
+            .filter(HabilidadeModel.descricao == assunto_superpro)
+            .all()
         )
-        assunto_ids_filter = {r[0] for r in assunto_rows}
+        ids_via_habilidade: set[int] = set()
+        if hab_rows:
+            hab_ids = [r[0] for r in hab_rows]
+            ids_via_habilidade = {
+                r[0]
+                for r in db.query(QuestaoModel.id)
+                .filter(QuestaoModel.habilidade_id.in_(hab_ids))
+                .all()
+            }
+        assunto_ids_filter = ids_via_classificacoes | ids_via_habilidade
 
     # IDs confirmados (candidatos)
     confirmados_query = (
@@ -4265,8 +4285,7 @@ async def cobertura_assuntos_superpro(
 
     Útil para identificar assuntos sem cobertura (gaps) na base SP.
     """
-    import csv as _csv
-    import os
+    import json as _json
     from pathlib import Path
     from sqlalchemy import text as sql_text
 
@@ -4275,23 +4294,16 @@ async def cobertura_assuntos_superpro(
     if cached is not None:
         return cached
 
-    # CSV está na raiz do projeto (um nível acima do agente-classificacao)
     project_root = Path(__file__).resolve().parents[3]
-    csv_path = project_root / "mapeamento_modulos_assuntos.csv"
-    if not csv_path.exists():
+    json_path = project_root / "mapeamento_modulos_assuntos.json"
+    if not json_path.exists():
         raise HTTPException(
             status_code=500,
-            detail=f"Arquivo de mapeamento não encontrado em {csv_path}",
+            detail=f"Arquivo de mapeamento não encontrado em {json_path}",
         )
 
-    pairs: list[tuple[int, int]] = []
-    with open(csv_path, "r", encoding="utf-8") as f:
-        reader = _csv.DictReader(f)
-        for row in reader:
-            try:
-                pairs.append((int(row["disc_modu_id"]), int(row["assu_id"])))
-            except (ValueError, KeyError):
-                continue
+    raw = _json.loads(json_path.read_text(encoding="utf-8"))
+    pairs: list[tuple[int, int]] = [(r["disc_modu_id"], r["assu_id"]) for r in raw]
 
     if not pairs:
         return {
@@ -4444,7 +4456,7 @@ async def cobertura_assuntos_libro(
     O filtro "apenas mapeados SP" no frontend usa no_csv=True para mostrar só os pares
     que foram trabalhados — revelando o volume real mesmo somando todos os tipos.
     """
-    import csv as _csv
+    import json as _json
     from pathlib import Path
     from sqlalchemy import text as sql_text
 
@@ -4453,17 +4465,13 @@ async def cobertura_assuntos_libro(
     if cached is not None:
         return cached
 
-    # 1. Pares do CSV de mapeamento (os que foram targetados via SP)
+    # 1. Pares do JSON de mapeamento (os que foram targetados via SP)
     csv_pairs: set[tuple[int, int]] = set()
     project_root = Path(__file__).resolve().parents[3]
-    csv_path = project_root / "mapeamento_modulos_assuntos.csv"
-    if csv_path.exists():
-        with open(csv_path, "r", encoding="utf-8") as f:
-            for row in _csv.DictReader(f):
-                try:
-                    csv_pairs.add((int(row["disc_modu_id"]), int(row["assu_id"])))
-                except (ValueError, KeyError):
-                    continue
+    json_path = project_root / "mapeamento_modulos_assuntos.json"
+    if json_path.exists():
+        raw = _json.loads(json_path.read_text(encoding="utf-8"))
+        csv_pairs = {(r["disc_modu_id"], r["assu_id"]) for r in raw}
 
     # 2. Buscar todos os pares (módulo, assunto) do banco compartilhados
     rows = db.execute(sql_text("""
