@@ -124,7 +124,6 @@ export default function ClassificarSimilaridadePage() {
       const n = contagemAtual[d];
       return { value: d, label: n != null ? `${d} (${n})` : d };
     });
-
   // Carrega assuntos superpro quando disciplina ou aba muda
   useEffect(() => {
     setAssuntoSuperpro("");
